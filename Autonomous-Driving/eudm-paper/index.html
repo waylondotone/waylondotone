@@ -1,0 +1,1483 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+<!-- waylon's adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6129496365361356"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Weekly Blogs,Robotics,Autonomous Driving," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] 本文是香港科技大学的研究结果，发表于 ICRA 2020。 作为一个自动驾驶的研发人员，通篇读下来认为这篇论文研究在实际工程应用中价值比较低。如果非学术原因，不建议深度研究。 其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是 spatial-temporal planner 方案； 其二，原本吸引我的 POMDP 和 多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解读 Efficient Uncertainty-aware Decision-making for Automated Driving Using Guided Branching">
+<meta property="og:url" content="http://www.waylon.one/Autonomous-Driving/eudm-paper/index.html">
+<meta property="og:site_name" content="One&#39;s Way">
+<meta property="og:description" content="[toc] 本文是香港科技大学的研究结果，发表于 ICRA 2020。 作为一个自动驾驶的研发人员，通篇读下来认为这篇论文研究在实际工程应用中价值比较低。如果非学术原因，不建议深度研究。 其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是 spatial-temporal planner 方案； 其二，原本吸引我的 POMDP 和 多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.waylon.one/downloads/images/EUDM_POMDP.png">
+<meta property="og:image" content="http://www.waylon.one/downloads/images/EUDM_framework.jpg">
+<meta property="og:image" content="http://www.waylon.one/downloads/images/EUDM_algorithm.jpg">
+<meta property="article:published_time" content="2022-03-01T23:37:48.000Z">
+<meta property="article:modified_time" content="2023-05-16T14:34:59.447Z">
+<meta property="article:author" content="Nobody">
+<meta property="article:tag" content="Weekly Blogs">
+<meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="Autonomous Driving">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.waylon.one/downloads/images/EUDM_POMDP.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.waylon.one/Autonomous-Driving/eudm-paper/"/>
+
+
+
+
+
+  <title>解读 Efficient Uncertainty-aware Decision-making for Automated Driving Using Guided Branching | One's Way</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">One's Way</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Dare to create</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Autonomous-Driving/eudm-paper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">解读 Efficient Uncertainty-aware Decision-making for Automated Driving Using Guided Branching</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-02T07:37:48+08:00">
+                2022-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Autonomous-Driving/" itemprop="url" rel="index">
+                    <span itemprop="name">Autonomous Driving</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  12k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  45 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<p>本文是香港科技大学的研究结果，发表于 <a
+target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9197302">ICRA
+2020</a>。</p>
+<p>作为一个自动驾驶的研发人员，通篇读下来认为这篇论文研究在实际工程应用中价值比较低。如果非学术原因，不建议深度研究。</p>
+<p>其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是
+spatial-temporal planner 方案；</p>
+<p>其二，原本吸引我的 POMDP 和
+多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到自车未来行为决策影响的，所以存在一定的不确定性，如何评估这部分不确定性，如何判断对方车是否有合作意图，这部分难点问题也没有深入研究。</p>
+<p>因为后续的精力有限，自己不会再对阅读的论文进行整理，但是我会逐渐整理并分享一个自动驾驶进阶学习资料。</p>
+<span id="more"></span>
+<h1 id="abstract">Abstract</h1>
+<blockquote>
+<p>In this paper, we present an efficient uncertainty-aware
+decision-making (EUDM) framework, which generates long-term lateral and
+longitudinal behaviors in complex driving environments in real-time.</p>
+</blockquote>
+<p>本文从纵向和横向两个维度规划自动驾驶未来 8s
+的决策，优点在于决策的生成实时性。</p>
+<blockquote>
+<p>The computation complexity is controlled to an appropriate level by
+two novel techniques, namely, the domain-specific closed-loop policy
+tree (DCP-Tree) structure and conditional focused branching (CFB)
+mechanism.</p>
+<p>The key idea is utilizing domain-specific expert knowledge to guide
+the branching in both action and intention space.</p>
+</blockquote>
+<p>基于领域专业知识和经验，在行为和意图空间中引导和限制自车行为扩展(branching)。</p>
+<blockquote>
+<p>We also release the code of our framework to accommodate
+benchmarking.</p>
+</blockquote>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/HKUST-Aerial-Robotics/eudm_planner">https://github.com/HKUST-Aerial-Robotics/eudm_planner</a>
+现在可以访问，但是目前代码没有继续维护，参考意义不大，可以作为其他算法的比较基准。</p>
+<h1 id="introduction">INTRODUCTION</h1>
+<blockquote>
+<p>Reasoning about hidden intentions of other agents is the key
+capability for a safe and robust automated driving system. However, even
+given perfect perception, it is still challenging to make safe and
+efficient decisions due to uncertain and sometimes unpredictable
+intentions of other agents.</p>
+</blockquote>
+<p>自动驾驶研究领域的核心难点之一—推理其他交通参与者的意图。这一部分的不确定性一方面是车辆行为不确定，另一方面车辆的行为受自车行为影响，存在不确定性。</p>
+<p>Note：自动驾驶的不确定性是客观存在的，无法彻底消除，但是可以尽量限制不确定性。这一部分的不确定性如果在上游不能解决，在行为决策层就需要对多种意图考虑(decision-making
+under uncertainty)，导致自车行为保守。</p>
+<blockquote>
+<p>Partially observable Markov decision process (POMDP) provides a
+general and principled mathematical framework for planning in partially
+observable stochastic environments. However, due to the curse of
+dimensionality, POMDP quickly becomes computationally intractable when
+the problem size scales.</p>
+</blockquote>
+<p>POMDP 知识，希望大家花时间详细了解一下，这是除 ML / RL
+方法外，处理交互的一种做法。</p>
+<h2 id="算法实现">算法实现</h2>
+<blockquote>
+<p>In this paper, we present an efficient uncertainty-aware
+decision-making (EUDM) framework.</p>
+<p>First, EUDM uses a domain-specific closed-loop policy tree (DCP-Tree)
+to construct a semantic-level action space. Each node in the policy tree
+is a finite-horizon semantic behavior of the ego vehicle.</p>
+</blockquote>
+<p>第一步：DCP-Tree
+可以确定自车的初步决策，那么可以确定下来自车的行为空间。注意，其他车辆的意图还不确定。</p>
+<blockquote>
+<p>EUDM uses the conditional focused branching (CFB) mechanism to pick
+out the potentially risky scenarios using open-loop safety assessment
+conditioning on the ego action sequence.</p>
+</blockquote>
+<p>第二步：CFB
+可以基于自车的初步决策，识别并过滤其他车辆的危险场景。</p>
+<blockquote>
+<p>EUDM is highly parallelizable, and can produce long-term (up to 8 s)
+lateral and longitudinal fine-grained behavior plans in real-time (20
+Hz).</p>
+</blockquote>
+<p>规划时常是 8s，计算性能表现为 50ms，这组参数基本满足驾驶需求。</p>
+<h1 id="related-work">RELATED WORK</h1>
+<blockquote>
+<p>POMDP is a powerful tool to handle various uncertainties in the
+driving task using a general probabilistic framework. However, due to
+the curse of dimensionality, POMDP quickly becomes computationally
+intractable when the problem size scales.</p>
+</blockquote>
+<p>POMDP 理论在不确定性决策中广泛应用，但是存在计算复杂度大的缺陷。</p>
+<blockquote>
+<p>Hubmann et al. proposed POMDP-based decision-making methods for urban
+intersection and merging scenarios.</p>
+</blockquote>
+<p>TODO: 后续可以研究一下这篇论文。</p>
+<blockquote>
+<p>In this paper, we follow the idea of semantic-level closed-loop
+policies from MPDM. However, there are two major differences.</p>
+</blockquote>
+<p>本文是在已有研究基础上
+(MPDM)，发现研究的缺陷，提出两个改进做法，属于对已有工作的创新。</p>
+<h1 id="system-overview">SYSTEM OVERVIEW</h1>
+<blockquote>
+<p>In EUDM, DCP-Tree is used to guide the branching in the action domain
+and update the semantic-level policy tree based on the previous best
+policy.</p>
+</blockquote>
+<blockquote>
+<p>For each ego action sequence, the CFB mechanism is applied to pick
+out risky hidden intentions of nearby vehicles and achieves guided
+branching in intention space.</p>
+</blockquote>
+<blockquote>
+<p>The output of the CFB process is a set of scenarios containing
+different hidden intentions combinations of nearby vehicles.</p>
+</blockquote>
+<p>TODO: 附上示意图</p>
+<h1 id="decision-making-via-guided-branching">DECISION-MAKING VIA GUIDED
+BRANCHING</h1>
+<p>The key feature of MPDM is using semantic-level policies instead of
+traditional “state”-level actions (e.g., discretized accelerations or
+velocities).</p>
+<ul>
+<li>one major limitation of MPDM is that the semantic-level policy of
+the ego vehicle is not allowed to change in the planning horizon.
+<ul>
+<li>As a result, the decision of MPDM tends to be local and may not be
+suitable for long-term decision-making</li>
+</ul></li>
+</ul>
+<p>用车辆语意信息来描述车辆未来行为，比如跟随前方车辆，让行横向车辆等，这要比单纯的车辆状态要好用，容易理解。</p>
+<h2 id="preliminaries-on-pomdp">Preliminaries on POMDP</h2>
+<p><img src="/downloads/images/EUDM_POMDP.png" alt="POMDP" style="zoom:50%;" /></p>
+<blockquote>
+<p>The optimal policy is often pursued using a multi-step look-ahead
+search starting from the current belief.</p>
+</blockquote>
+<p>POMDP 可以扩展，但是非常容易陷入爆炸问题中。</p>
+<blockquote>
+<p>State-of-the-art online POMDP planners use Monte-Carlo sampling to
+deal with the Curse of Dimensionality and Curse of History. Meanwhile,
+generic heuristic searches such as branch-and-bound and reachability
+analysis can be used to accelerate the search.</p>
+</blockquote>
+<h2
+id="domain-specific-closed-loop-policy-tree-dcp-tree">Domain-specific
+Closed-loop Policy Tree (DCP-Tree)</h2>
+<p>以论文图 4 为例，讲解 DCP-Tree 的步骤：</p>
+<ul>
+<li><p>The nodes of DCP-Tree are pre-defined semantic-level actions
+associated with a certain time duration.</p></li>
+<li><p>The directed edges of the tree represent the execution order in
+time.</p></li>
+<li><p>DCP-Tree origins from an ongoing action a, which is the executing
+semantic-level action from the best policy in the last planning
+cycle.</p></li>
+<li><p>DCP-Tree is expanded by a pre-defined strategy: from the ongoing
+action, each policy sequence will contain at most one change of action
+in one planning cycle.</p>
+<ul>
+<li>Results: Compared to MPDM, DCP-Tree has much larger decision space
+resulting in more flexible maneuvers.</li>
+</ul></li>
+</ul>
+<h2 id="conditional-focused-branching-cfb">Conditional Focused Branching
+(CFB)</h2>
+<ul>
+<li>其他研究的缺陷: In the case of MPDM, the intention of the nearby
+vehicles is fixed for the whole planning horizon, and the initial
+intention is sampled according to a behavior prediction algorithm. The
+limitation of MPDM is that, with a limited number of samples,
+influential risky outcomes may not be rolled out, especially when the
+initial intention prediction is inaccurate.</li>
+<li>本文改进：As a result, by conditioning on the ego policy sequence,
+we can pick out a set of relevant vehicles w.r.t. the ego future
+actions. The selection process is currently based on rule-based expert
+knowledge as detailed in Sec. V.
+<ul>
+<li>Instead of enumerating all the possible intentions for this subset
+of vehicles, we introduce a preliminary safety check to pick out the
+vehicles to which we should pay special attention.
+<ul>
+<li>As a result, the branching in intention space is guided to
+potentially risky scenarios.</li>
+<li>And for the vehicles which pass the assessment, we use maximum a
+posteriori (MAP) from initial belief.</li>
+</ul></li>
+<li>即，通过对物体的所有意图仿真，筛选出来危险的场景，然后重点关注。</li>
+</ul></li>
+</ul>
+<p>NOTE：辅助算法流程，方便理清楚算法实现，这就是一个 ST Planner
+的简化版本，新意不足，核心内容避而不谈。</p>
+<h1 id="implementation-details">IMPLEMENTATION DETAILS</h1>
+<p><img src="/downloads/images/EUDM_framework.jpg" alt="EUDM framework" style="zoom:50%;" /></p>
+<h2 id="semantic-level-actions">Semantic-level Actions</h2>
+<ul>
+<li>We consider both lateral and longitudinal actions to ensure the
+diversity of the driving policy.</li>
+<li>The depth of the DCP-Tree is set as 4, thereby we obtain a planning
+horizon up to 8 s.
+<ul>
+<li>8s 的规划周期，满足大家的基本做法。</li>
+</ul></li>
+</ul>
+<h2 id="forward-simulation">Forward Simulation</h2>
+<ul>
+<li>The goal of the closed-loop simulation is to push the state of the
+multi-agent system forward while considering the potential interaction.
+<ul>
+<li>如何考虑，如何实现，文章没有展开讨论，这恰恰是当前实践的难点内容。</li>
+</ul></li>
+<li>We adopt the intelligent driving model and pure pursuit controller
+as the longitudinal and lateral simulation models, respectively.
+<ul>
+<li>后续做研究，可以基于此模型</li>
+</ul></li>
+</ul>
+<h2 id="belief-update">Belief Update</h2>
+<ul>
+<li>The belief over these intentions of agent vehicles are updated
+during the forward simulation as shown in Fig. 2.
+<ul>
+<li>如何考虑，如何实现，文章没有展开讨论，这恰恰是当前实践的难点内容。</li>
+</ul></li>
+<li>In this work, we adopt a rule-based lightweight belief tracking
+module that takes a set of features and metrics including velocity
+difference, distance w.r.t. the leading and following agents on the
+current and neighboring lanes, responsibility-sensitive safety (RSS),
+and lane-changing model as input2. The belief tracker generates a
+probability distribution over the intentions (i.e., LK, LCL, LCR).
+<ul>
+<li>TODO: 看源码理解一下，这是自己关心的内容。</li>
+</ul></li>
+<li>Currently, we are exploring using learning-based belief trackers for
+intention tracking which will be incorporated into the EUDM framework.
+<ul>
+<li>学习研究画大饼的做法，大概率没有后续进展。</li>
+</ul></li>
+</ul>
+<h2 id="cfb-mechanism">CFB Mechanism</h2>
+<ul>
+<li>The first step of CFB is the key vehicle selection.</li>
+<li>The second step is uncertain vehicle selection according to the
+initial belief.
+<ul>
+<li>Specifically, we pick out the vehicles, whose probabilities for the
+three intentions are close to each other, as uncertain vehicles.
+<ul>
+<li>three intentions 是指 {LK, LCL, LCR}.</li>
+</ul></li>
+<li>Note that for the vehicles with confident prediction, we select the
+MAP intention and marginalize the intention probabilities using the MAP
+selection result.</li>
+</ul></li>
+<li>The third step is using the open-loop forward simulation for safety
+assessment.
+<ul>
+<li>For the vehicles which fail the assessment, we enumerate all the
+possible combinations of their intentions. Each combination becomes a
+CFB-selected scenario and the probability of scenario is
+calculated.</li>
+</ul></li>
+<li>The fourth step is picking out top k scenarios according to
+user-preference, and we further marginalize the probabilities among the
+top-k scenarios.</li>
+</ul>
+<h2 id="policy-evaluation">Policy Evaluation</h2>
+<ul>
+<li>The overall reward for a policy sequence is calculated by the
+weighted summation of the reward for each CFB-selected scenario.
+<ul>
+<li>The reward function consists of a linear combination of multiple
+user-defined metrics including efficiency (measured by the difference
+between current velocity and desired velocity), safety (measured by the
+distance between our vehicle and surrounding vehicles) and consistency
+(measured by the difference between the last best policy and the policy
+to be evaluated).</li>
+<li>难道所有的问题，都要化解为一个优化问题吗？策略的一致性，我们一般没有考虑到，这也是一个重要的维度。</li>
+</ul></li>
+</ul>
+<h2 id="trajectory-generation">Trajectory Generation</h2>
+<ul>
+<li>The behavior plan is fed to the motion planner proposed in our
+previous work, which utilizes a <strong>spatio-temporal corridor
+structure</strong> to generate safe and dynamically feasible
+trajectories.</li>
+</ul>
+<p><img src="/downloads/images/EUDM_algorithm.jpg" alt="EUDM algorithm" style="zoom:50%;" /><img
+src="" /></p>
+<h1 id="experimental-results">EXPERIMENTAL RESULTS</h1>
+<h2 id="simulation-platform-and-environment">Simulation Platform and
+Environment</h2>
+<ul>
+<li>The experiment is conducted in <strong>an interactive multi-agent
+simulation platform</strong> as introduced in Sect.III. All agents can
+interact with each other without knowing the driving model of other
+vehicles.</li>
+</ul>
+<h2 id="qualitative-results">Qualitative Results</h2>
+<h3 id="metrics">Metrics</h3>
+<ul>
+<li>We introduce three major metrics to evaluate the performance of two
+methods, namely, safety, efficiency, and comfort.
+<ul>
+<li>The efficiency is represented by the average velocity of the ego
+vehicle.</li>
+</ul></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
+          
+            <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+          
+            <a href="/tags/Autonomous-Driving/" rel="tag"># Autonomous Driving</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Finance/convertible-bond/" rel="next" title="什么是可转债打新?">
+                <i class="fa fa-chevron-left"></i> 什么是可转债打新?
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Linux/linux-mount-disk/" rel="prev" title="Linux 18.04挂载硬盘">
+                Linux 18.04挂载硬盘 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wylloong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yanlong.wangchn@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">RELATED WORK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#system-overview"><span class="nav-number">4.</span> <span class="nav-text">SYSTEM OVERVIEW</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decision-making-via-guided-branching"><span class="nav-number">5.</span> <span class="nav-text">DECISION-MAKING VIA GUIDED
+BRANCHING</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries-on-pomdp"><span class="nav-number">5.1.</span> <span class="nav-text">Preliminaries on POMDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domain-specific-closed-loop-policy-tree-dcp-tree"><span class="nav-number">5.2.</span> <span class="nav-text">Domain-specific
+Closed-loop Policy Tree (DCP-Tree)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conditional-focused-branching-cfb"><span class="nav-number">5.3.</span> <span class="nav-text">Conditional Focused Branching
+(CFB)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#implementation-details"><span class="nav-number">6.</span> <span class="nav-text">IMPLEMENTATION DETAILS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#semantic-level-actions"><span class="nav-number">6.1.</span> <span class="nav-text">Semantic-level Actions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#forward-simulation"><span class="nav-number">6.2.</span> <span class="nav-text">Forward Simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#belief-update"><span class="nav-number">6.3.</span> <span class="nav-text">Belief Update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cfb-mechanism"><span class="nav-number">6.4.</span> <span class="nav-text">CFB Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#policy-evaluation"><span class="nav-number">6.5.</span> <span class="nav-text">Policy Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trajectory-generation"><span class="nav-number">6.6.</span> <span class="nav-text">Trajectory Generation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experimental-results"><span class="nav-number">7.</span> <span class="nav-text">EXPERIMENTAL RESULTS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#simulation-platform-and-environment"><span class="nav-number">7.1.</span> <span class="nav-text">Simulation Platform and
+Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qualitative-results"><span class="nav-number">7.2.</span> <span class="nav-text">Qualitative Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#metrics"><span class="nav-number">7.2.1.</span> <span class="nav-text">Metrics</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nobody</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+<!-- waylon's adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6129496365361356"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Weekly Blogs,Robotics,Paper," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc]   Socially Aware Motion Planning with Deep Reinforcement Learning Paper download link  简评：之前的方法使用特征匹配 (feature-matching techniques) 的做法来描述和模仿行人的轨迹，但是人和人之间的特征是有差异的(vary from person to person)，所以生">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解读 Socially Aware Motion Planning with Deep Reinforcement Learning">
+<meta property="og:url" content="http://www.waylon.one/paper/paper-MIT-SACADRL/index.html">
+<meta property="og:site_name" content="One&#39;s Way">
+<meta property="og:description" content="[toc]   Socially Aware Motion Planning with Deep Reinforcement Learning Paper download link  简评：之前的方法使用特征匹配 (feature-matching techniques) 的做法来描述和模仿行人的轨迹，但是人和人之间的特征是有差异的(vary from person to person)，所以生">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.waylon.one/downloads/images/blog/SACADRL_1.jpg">
+<meta property="og:image" content="http://www.waylon.one/downloads/images/blog/SACADRL_2.jpg">
+<meta property="article:published_time" content="2019-09-20T04:13:39.000Z">
+<meta property="article:modified_time" content="2023-05-16T14:34:59.459Z">
+<meta property="article:author" content="Nobody">
+<meta property="article:tag" content="Weekly Blogs">
+<meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="Paper">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.waylon.one/downloads/images/blog/SACADRL_1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.waylon.one/paper/paper-MIT-SACADRL/"/>
+
+
+
+
+
+  <title>解读 Socially Aware Motion Planning with Deep Reinforcement Learning | One's Way</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">One's Way</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Dare to create</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/paper/paper-MIT-SACADRL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">解读 Socially Aware Motion Planning with Deep Reinforcement Learning</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-20T12:13:39+08:00">
+                2019-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index">
+                    <span itemprop="name">paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  18k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1:05
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<!--
+- 和USV的规则很类似，可以引入到USV的避障应用中。如何建立函数和表达式，是难点所在。
+- norms, these policies are further evaluated on randomly generated test cases
+- at human walking speed
+-->
+<!--
+好句子，可以组合起来成为自己的句子
+
+A key to resolving this problem is to account for cooperation, that is, to model/anticipate the impact of the robot’s motion on the nearby pedestrians
+
+ Reciprocity implicitly encodes a model of the other agents’ behavior, which is the key for enabling cooperation without explicit communication. While no behavioral rules were imposed in the problem formulation, CADRL policy exhibits certain navigation conventions.
+
+ Existing works have reported that human navigation (or teleoperation of a robot) tends to be cooperative and time- efficient. This work notes that these two properties are encoded in the CADRL formulation through using the min-time reward function and the reciprocity assumption.
+
+ We first describe a strategy for shaping normative behaviors for a two-agent system in the RL framework, and then generalize the method to multiagent scenarios.
+
+ Human-robot coexistence navigation tends to be cooperative and time-efficient, these two properties could encodes a model of Reciprocity implicitly behavior and shaping normative behaviors for a robot in the RL framework.
+
+ A multiagent collision avoidance problem can be formulated as a sequential decision making problem in a reinforcement learning framework.
+
+ The navigation problem can be formulated as a sequential decision making problem in a reinforcement learning framewor
+
+ **social norms are the emergent behaviors from a time-efficient, reciprocal collision avoidance mechanism**
+
+-->
+<p>Socially Aware Motion Planning with Deep Reinforcement Learning</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.08862.pdf">Paper download
+link</a></p>
+<hr />
+<p>简评：之前的方法使用特征匹配 (feature-matching techniques)
+的做法来描述和模仿行人的轨迹，但是人和人之间的特征是有差异的(vary from
+person to
+person)，所以生成的行人轨迹并不理想。这篇文献指出，尽管导航时指明机器人什么应该和人类交互做是比较困难的(精确的行人导航机制)，但是却可以简单地指明，什么是不应该做的(违反社交规范)。尤其是，本文使用深度强化学习，提出一种时间高效
+(time-efficient) 的遵守社会规范的导航策略。</p>
+<blockquote>
+<p>This work notes that while it is challenging to directly specify the
+details of what to do (precise mechanisms of human navigation), it is
+straightforward to specify what not to do (violations of social norms).
+Specifically, using deep reinforcement learning, this work develops a
+time-efficient navigation policy that respects common social norms.</p>
+</blockquote>
+<p>此外，本文是在作者基于深度强化学习的多智能体避障的研究基础上，在多智能体系统中引入具有社交意识的行为，本文的主要贡献是如何在CADRL中引入和融合社交行为。所以，可以简单认为，SA-CADRL
+= SA (socially aware) + CADRL(collision avoidance with deep
+reinforcement learning)。</p>
+<blockquote>
+<p>This work extends the collision avoidance with deep reinforcement
+learning framework (CADRL) to characterize and induce socially aware
+behaviors in multiagent systems.</p>
+</blockquote>
+<p>多平台维护不易，内容实时更新于 <a
+href="http://www.waylon.one/paper/paper-MIT-SACADRL/">个人网站</a>，请移步阅读最新内容。</p>
+
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+<iframe src="//player.bilibili.com/player.html?aid=327568946&bvid=BV1DA41187qB&cid=172392972&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;" ></iframe></div>
+
+<h1 id="introduction">INTRODUCTION</h1>
+<!--
+provide personal mobility services and luggage carrying support
+airports and shopping malls
+
+require the robots to be capable of navigating efficiently and safely in close proximity of people
+-->
+<h2 id="人机交互方法演进">人机交互方法演进</h2>
+<ol type="1">
+<li><p>将行人视为具有简单动力学的动态障碍物，执行特定的反应式避障行为。</p>
+<blockquote>
+<p>A common approach treats pedestrians as dynamic obstacles with simple
+kinematics, and employs specific reactive rules for avoiding
+collision.</p>
+</blockquote>
+<ul>
+<li>缺陷：这种方法没有观察人类的行为，会产生不安全、不自然的行为，尤其当机器人的速度和人类行走速度比较靠近时。</li>
+</ul>
+<blockquote>
+<p>Since these methods do not capture human behaviors, they sometimes
+generate unsafe/unnatural movements, particularly when the robot
+operates near human walking speed.</p>
+</blockquote></li>
+<li><p>使用更精致的运动模型来推理附近行人的运动意图(hidden
+intents)，产生一系列预测轨迹。然后，使用传统的路径规划算法为机器人生成无碰撞(collision-free)的路径。</p>
+<blockquote>
+<p>More sophisticated motion models have been proposed, which would
+reason about the nearby pedestrians’ hidden intents to generate a set of
+predicted paths. Subsequently, classical path planning algorithms would
+be employed to generate a collision-free path for the robot.</p>
+</blockquote>
+<ul>
+<li>缺陷：导航问题分割为不关联的预测和路径规划，可能导致机器人冻结问题(the
+freezing robot
+problem)，机器人无法找到任何可行的行为，因为预测的轨迹让大部分的空间不可通行。</li>
+</ul>
+<blockquote>
+<p>Separating the navigation problem into disjoint prediction and
+planning steps can lead to the freezing robot problem, in which the
+robot fails to find any feasible action because the predicted paths
+could mark a large portion of the space untraversable.</p>
+</blockquote></li>
+</ol>
+<ul>
+<li>My comment
+(MC):虽然作者认为这种做法不合理，但是这是在目前工业界比较流行的做法。导航问题分割为多个层次模块，上下游之间透明，容易迁移和调试。</li>
+</ul>
+<ol start="3" type="1">
+<li>合作(cooperation)</li>
+</ol>
+<p>基于上述研究的问题，作者提出一种做法，合作(cooperation)，建模(model)/预测(anticipate)机器人对周围行人的影响。</p>
+<blockquote>
+<p>A key to resolving this problem is to account for cooperation, that
+is, to model/anticipate the impact of the robot’s motion on the nearby
+pedestrians.</p>
+</blockquote>
+<ul>
+<li><p>现阶段，基于合作的社交导航研究，主要分为基于模型(model-based)的做法和基于学习(learning-based)的做法。</p>
+<blockquote>
+<p>Existing work on cooperative, socially compliant navigation can be
+broadly classified into two categories, namely model-based and
+learning-based.</p>
+</blockquote>
+<ul>
+<li>基于模型的做法，是一种典型的多智能体避障(multiagent collision
+avoidance
+algorithm)的扩展，通过增加参数来引入对社交交互行为的考虑。</li>
+</ul>
+<blockquote>
+<p>Model-based approaches are typically extensions of multiagent
+collision avoidance algorithms, with additional parameters introduced to
+account for social interactions.</p>
+</blockquote>
+<p>模型方法的缺陷：不确定行人是否会遵循预设的几何模型；势力场需要针对不同的行人，调节参数；可能导致规划轨迹震荡(oscillatory)。</p>
+<ul>
+<li>基于学习的做法，旨在通过匹配特征统计来开发一种策略。</li>
+</ul>
+<blockquote>
+<p>Learning-based approaches aim to develop a policy that emulates human
+behaviors by matching feature statistics. In particular, Inverse
+Reinforcement Learning (IRL) has been applied to learn a cost function
+from human demonstration (teleoperation), and a probability distribution
+over the set of joint trajectories with nearby pedestrians.</p>
+</blockquote>
+<p>学习方法比模型方法更贴近人类的行为，但是同时需要更高的计算代价(computational
+cost)。同时，特征统计在人和人之间变化明显(vary
+significantl)，也引起其在不同场景下的泛化能力的担忧。</p></li>
+</ul>
+<p>简而言之，存在的方法试图建模或复制详细的社交行为机制(mechanisms of
+social
+compliance)，因为行人行为的随机性(stochasticity)，仍然很难去量化(quantify)。</p>
+<blockquote>
+<p>In short, existing works are mostly focused on modeling and
+replicating the detailed mechanisms of social compliance, which remains
+difficult to quantify due to the stochasticity in people’s
+behaviors.</p>
+</blockquote>
+<p>作者认为人类会遵循一系列简单的社交规范，比如从右侧通过(passing on the
+right)。所以在强化学习框架中描述(characterize)这些行为的特征，发现通过解决合作避障的问题可以生成(emerge)类人的导航惯例。</p>
+<blockquote>
+<p>Building on a recent paper, we characterize these properties in a
+reinforcement learning framework, and show that human-like navigation
+conventions emerge from solving a cooperative collision avoidance
+problem.</p>
+</blockquote>
+<figure>
+<img src="/downloads/images/blog/SACADRL_1.jpg"
+alt="Symmetries in multiagent collision avoidance" />
+<figcaption aria-hidden="true">Symmetries in multiagent collision
+avoidance</figcaption>
+</figure>
+<!--
+- Respects a set of simple social norms:
+  * passing on the right
+  * human navigation conventions are not unique, as the strength (e.g., separation distance) and passing direction vary in different countries
+  -->
+<h1 id="background">BACKGROUND</h1>
+<h2 id="collision-avoidance-with-deep-reinforcement-learning">Collision
+Avoidance with Deep Reinforcement Learning</h2>
+<p>首先，多智能体的避障，可以表述为在强化学习下的一系列行为决策(a
+sequential decision making)问题。</p>
+<blockquote>
+<p>A multiagent collision avoidance problem can be formulated as a
+sequential decision making problem in a reinforcement learning
+framework.</p>
+</blockquote>
+<ul>
+<li>强化学习问题建模</li>
+</ul>
+<p>这部分理论分析非常精彩，建议多阅读几次，理解深意。</p>
+<ol type="1">
+<li><p>为了刻画附近行人意图的不确定性(uncertainty)，将状态矢量分为可观察部分(observable)和不可观察部分(unobservable)。其中，可观察部分包括行人的速度，位置和大小；不可观察部分，包括行人的目标位置，偏好速度和方向。</p></li>
+<li><p>所以，模型的目标是开发一种策略，在避开和附近行人碰撞的基础上，最小化抵达目标的时间。</p></li>
+<li><p>在此模型基础上，这个问题可以在强化学习框架下表述为和邻近行人的关联配置(joint
+configuration)。另外，引入奖励函数，奖励那些抵达目标的智能体，惩罚那些发生碰撞的智能体。</p>
+<blockquote>
+<p>In particular, a reward function can be specified to reward the agent
+for reaching its goal and penalize the agent for colliding with
+others.</p>
+</blockquote></li>
+</ol>
+<ul>
+<li><p><strong>状态转移函数模型，因为考虑了其他智能体的隐藏意图(hidden
+intents)，所以也简介考虑了其他智能体的行为不确定性</strong>。</p>
+<blockquote>
+<p>The unknown state-transition model takes into account the uncertainty
+in the other agent’s motion due to its hidden intents.</p>
+</blockquote></li>
+</ul>
+<ol start="4" type="1">
+<li>随后，解决这个RL问题就是找到表达到达目标点的预估时间的最优值函数(the
+optimal value function)，然后可以由值函数回溯得到最优策略(optimal
+policy)。</li>
+</ol>
+<blockquote>
+<p>Solving the RL problem amounts to finding the optimal value function
+that encodes an estimate of the expected time to goal.</p>
+</blockquote>
+<p>然后，找到最优值函数的主要的挑战是，关联状态是连续的、高维的矢量，使得离散化和枚举状态空间不可行。</p>
+<blockquote>
+<p>A major challenge in finding the optimal value function is that the
+joint state sjn is a continuous, high-dimensional vector, making it
+impractical to discretize and enumerate the state space.</p>
+</blockquote>
+<p>最近，可以使用深度神经网络来解决这个强化学习的问题，去表示高维空间的值函数，并且具有人类水平的表现。
+Recent advances in reinforcement learning address this issue by using
+deep neural networks to represent value functions in high-dimensional
+spaces, and have demonstrated human-level performance on various complex
+tasks.</p>
+<p>MC: 到目前为止，作者是在介绍自己已有的研究，the collision avoidance
+with deep reinforcement learning framework
+(CADRL)，接下来会在这个基础上，引入多智能体间具有社交意识的行为。</p>
+<p>最后，作者公开的实现代码 <a
+target="_blank" rel="noopener" href="https://github.com/mit-acl/cadrl_ros">mit-acl/cadrl_ros</a> 。</p>
+<!--
+In contrast, this work extends  [14] to characterize and induce socially aware behaviors in multiagent systems.
+B.
+
+> 主要讲述之前的研究成果，CADRL的模型，以及目前在行人交互中的缺陷，引出下文
+-->
+<h2 id="characterization-of-social-norms">Characterization of Social
+Norms</h2>
+<p>与其直接去量化人类行为，本文认为复杂的规范行为模式，是由一系列简单的局部交互组成的。MC:
+我赞同这个观点，可以把复杂的问题拆分为小问题，容易解决。</p>
+<blockquote>
+<p>Rather than trying to quantify human behaviors directly, this work
+notes that the complex normative motion patterns can be a consequence of
+simple local interactions.</p>
+</blockquote>
+<p>因此，本文进一步猜想，相比于一系列精确定义的规则(a set of precisely
+defined procedural rules)，社交规范是从相互避免碰撞的机制中新生的。</p>
+<blockquote>
+<p>Thus, we conjecture that rather than a set of precisely defined
+procedural rules, <strong>social norms are the emergent behaviors from a
+time-efficient, reciprocal collision avoidance mechanism</strong>.</p>
+</blockquote>
+<blockquote>
+<p>Reciprocity implicitly encodes a model of the other agents’ behavior,
+which is the key for enabling cooperation without explicit
+communication.</p>
+</blockquote>
+<p>有点哲学感:
+局部避免碰撞中的互惠原则，衍生出来了所谓的社交行为规范。作者进一步实验表明，无规则的CADRL也可以展示出一定的导航规范。(可以作为research
+hypothesis)</p>
+<blockquote>
+<p>Reciprocity implicitly encodes a model of the other agents’ behavior,
+which is the key for enabling cooperation without explicit
+communication. While no behavioral rules were imposed in the problem
+formulation, CADRL policy exhibits certain navigation conventions.</p>
+</blockquote>
+<p>所以，作者在这个基础上认为，通过多智能体的避碰学习，可以习得人类现在的行为规范。</p>
+<p>已有的文献报道，人类导航趋向于合作和时间最优。所以，作者在CADRL基础上，通过引入最小时间奖励函数和互惠假设(学习到的最优行为，智能体基本都会采用)。</p>
+<blockquote>
+<p>Existing works have reported that human navigation (or teleoperation
+of a robot) tends to be cooperative and time- efficient. This work notes
+that these two properties are encoded in the CADRL formulation through
+using the min-time reward function and the reciprocity assumption.</p>
+</blockquote>
+<p>同时，作者指出，从CADRL
+衍生的合作行为，和人类现有的理解是不同的。所以，作者会进一步解决这个问题。</p>
+<blockquote>
+<p>However, the cooperative behaviors emerging from a CADRL solution are
+not consistent with human interpretation. The next section will address
+this issue and present a method to induce behaviors that respect human
+social norms.</p>
+</blockquote>
+<h1 id="approach">APPROACH</h1>
+<blockquote>
+<p>本章首先描述两个智能体如何在RL框架中塑造规范行为，然后将这一方法推广到多智能体场景。</p>
+</blockquote>
+<p>We first describe a strategy for shaping normative behaviors for a
+two-agent system in the RL framework, and then generalize the method to
+multiagent scenarios.</p>
+<h2 id="inducing-social-norms">Inducing Social Norms</h2>
+<blockquote>
+<p>和自己的解法基本是一致的，只不过没有使用神经网络罢了</p>
+</blockquote>
+<p>现有的社交行为是众多解决对称避障的方法之一。为了引入一个特定的行为，就需要向RL中引入一点偏爱(bias)，更偏向于一组行为。</p>
+<blockquote>
+<p>This work notes that social norms are one of the many ways to resolve
+a symmetrical collision avoidance scenario. To induce a particular norm,
+a small bias can be introduced in the RL training process in favor of
+one set of behaviors over others.</p>
+</blockquote>
+<p>如作者所说，这一方法的优点在于，违背特定性为的做法一般容易被识别，并且这一规范不需要精确。这是因为新增的惩罚打破了避碰的平衡和对称，所以会偏向于遵守社会规则的行为。</p>
+<blockquote>
+<p>The advantage of this approach is that violations of a particular
+social norm are usually easy to specify; and this specification need not
+be precise. This is because the addition of a penalty breaks the
+symmetry in the collision avoidance problem, thereby favoring behaviors
+respecting the desired social norm.</p>
+</blockquote>
+<!--
+Also note that training is performed on randomly generated test cases, and not on the validation test cases.
+B.
+-->
+<!-- 作者自信满满，不愧是MIT出品方 -->
+<p>最后，训练的结果表明学到了和人类行为类似的策略，比如 left-handed and
+right-handed norms。</p>
+<blockquote>
+<p>As long as training converges, the penalty sets’ size does not have a
+major effect on the learned policy. This is expected because the desired
+behaviors are not in the penalty set.</p>
+</blockquote>
+<h2 id="training-a-multiagent-value-network">Training a Multiagent Value
+Network</h2>
+<p>因为上文的训练只是在两个智能体之间，所以很难引入到更高阶的行为，比如多智能体环境。这部分主要讲述如何训练多智能体。</p>
+<blockquote>
+<p>Since training was solely performed on a two-agent system, it was
+difficult to encode/induce higher order behaviors, such as accounting
+for the relations between nearby agents. This work addresses this
+problem by developing a method that allows for training on multiagent
+scenarios directly.</p>
+</blockquote>
+<p>为了刻画多智能体对称的特性，本文使用了权重共享(weight-sharing)和最大池(max-pooling
+layers)的神经网络。该网络涉及4个智能体，其中附近三个智能体的状态可以互换而不影响训练结果。</p>
+<p>网络结构的详细设计，可以阅读原文。</p>
+<blockquote>
+<p>To capture the multiagent system’s symmetrical structure, a neural
+network with weight-sharing and max-pooling layers is employed,</p>
+</blockquote>
+<figure>
+<img src="/downloads/images/blog/SACADRL_2.jpg"
+alt="Network structure for multiagent scenarios" />
+<figcaption aria-hidden="true">Network structure for multiagent
+scenarios</figcaption>
+</figure>
+<p>在训练中，会先生成轨迹，然后将轨迹转化为经验集。
+<!--这和自己的研究计划类似，轨迹转化为经验值，只不过自己属于模仿学习的范畴，从行人已有的轨迹中提取策略-->
+&gt; The trajectories are then turned into state-value pairs and
+assimilated into the experience sets.</p>
+<p>CADRL和SA-CADRL的训练区别 - Two experience sets are used to
+distinguish between trajectories that reached the goals and those that
+ended in a collision. - During the training process, trajectories
+generated by SA-CADRL are reflected in the x-axis with probability. *
+This procedure exploits symmetry in the problem to explore different
+topologies more efficiently.</p>
+<p>作者在网络训练时已经设置开关(a binary flag indicating whether the
+other agent is real or virtual (details)，所以n-智能体的网络也可以用于p
+(p&lt;=n) 个智能体的场景。</p>
+<blockquote>
+<p>An n-agent network can be used to generate trajectories for scenarios
+with fewer agents.</p>
+</blockquote>
+<h1 id="results">RESULTS</h1>
+<h2
+id="computational-details-online-performance-and-offline-training">Computational
+Details (online performance and offline training)</h2>
+<p>模型具有比较优秀的实时和收敛(convergence and
+time-efficient)表现。</p>
+<blockquote>
+<p>The size and connections in the multiagent network are tuned to
+obtain good performance (ensure convergence and produce time-efficient
+paths) while achieving real-time performance.</p>
+</blockquote>
+<!--
+没有探讨agent扩多后，训练效率的问题，担心会指数级增加
+-->
+<h2 id="simulation-results">Simulation Results</h2>
+<p>三组对比试验：一组没有社交行为奖励函数，另外两组是偏向左和右的行为奖励函数。</p>
+<blockquote>
+<p>Three copies of four-agent SA-CADRL policies were trained, one
+without the norm inducing reward, one with the left-handed, and the
+other with the right-handed.</p>
+</blockquote>
+<h2 id="hardware-experiment">Hardware Experiment</h2>
+<p>硬件设备</p>
+<ul>
+<li>The differential-drive vehicle is outfitted with a Lidar for
+localization, three Intel Realsenses for free space detection, and four
+webcams for pedestrian detection.</li>
+</ul>
+<p>A hardware demonstration video can be found at <a
+target="_blank" rel="noopener" href="https://youtu.be/CK1szio7PyA">here</a>.</p>
+<!--
+navigate fully autonomously in a dynamic indoor environment
+-->
+<h1 id="conclusion">CONCLUSION</h1>
+<h3 id="contribution">Contribution</h3>
+<ul>
+<li>In a reinforcement learning framework, a pair of simulated agents
+navigate around each other to learn a policy that respect human
+navigation norms, such as passing on the right and overtaking on the
+left in a right-handed system.</li>
+<li>This approach is further generalized to multiagent (n &gt; 2)
+scenarios through the use of a symmetrical neural network
+structure.</li>
+<li>Moreover, SA-CADRL is implemented on robotic hardware, which enabled
+fully autonomous navigation at human walking speed in a dynamic
+environment with many pedestrians.</li>
+</ul>
+<h3 id="future-work">Future work</h3>
+<ul>
+<li>Consider the relationships between nearby pedestrians, such as a
+group of people who walk together.
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.yanlongwang.net/Paper/paper-group-surfing/">Group
+surfing</a></li>
+</ul></li>
+<li>MC:可以迁移到其他具有规则学习的场景，比如水面无人艇中COLREGS规则和人类的行为类似。
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.yanlongwang.net/USV/colregs-paper/">A
+COLREGs-based obstacle avoidance approach for unmanned surface
+vehicles</a></li>
+</ul></li>
+<li>网络模型训练的效率，文章只是训练4个智能体，如果场景复杂，进一步扩展呢？</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
+          
+            <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+          
+            <a href="/tags/Paper/" rel="tag"># Paper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/paper/paper-group-surfing/" rel="next" title="Group Surfing A Pedestrian-based Approach to Sidewalk Robot Navigation / 解读 Group Surfing paper">
+                <i class="fa fa-chevron-left"></i> Group Surfing A Pedestrian-based Approach to Sidewalk Robot Navigation / 解读 Group Surfing paper
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Ubuntu/how-to-create-gif/" rel="prev" title="how to create gif in Ubuntu / 如何在 Ubuntu 系统上录制 gif">
+                how to create gif in Ubuntu / 如何在 Ubuntu 系统上录制 gif <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wylloong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yanlong.wangchn@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%BA%E6%9C%BA%E4%BA%A4%E4%BA%92%E6%96%B9%E6%B3%95%E6%BC%94%E8%BF%9B"><span class="nav-number">1.1.</span> <span class="nav-text">人机交互方法演进</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background"><span class="nav-number">2.</span> <span class="nav-text">BACKGROUND</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#collision-avoidance-with-deep-reinforcement-learning"><span class="nav-number">2.1.</span> <span class="nav-text">Collision
+Avoidance with Deep Reinforcement Learning</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#characterization-of-social-norms"><span class="nav-number">2.2.</span> <span class="nav-text">Characterization of Social
+Norms</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#approach"><span class="nav-number">3.</span> <span class="nav-text">APPROACH</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inducing-social-norms"><span class="nav-number">3.1.</span> <span class="nav-text">Inducing Social Norms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#training-a-multiagent-value-network"><span class="nav-number">3.2.</span> <span class="nav-text">Training a Multiagent Value
+Network</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#results"><span class="nav-number">4.</span> <span class="nav-text">RESULTS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#computational-details-online-performance-and-offline-training"><span class="nav-number">4.1.</span> <span class="nav-text">Computational
+Details (online performance and offline training)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simulation-results"><span class="nav-number">4.2.</span> <span class="nav-text">Simulation Results</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hardware-experiment"><span class="nav-number">4.3.</span> <span class="nav-text">Hardware Experiment</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">5.</span> <span class="nav-text">CONCLUSION</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#contribution"><span class="nav-number">5.0.1.</span> <span class="nav-text">Contribution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#future-work"><span class="nav-number">5.0.2.</span> <span class="nav-text">Future work</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nobody</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
