@@ -12458,7 +12458,7 @@ them in our navigation module.</p>
 <p>按照 github 官方教程 -- <a href="https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain">配置子域</a> 自定义域名。</p>
 <p>如果你使用静态站点生成器在本地构建站点并将生成的文件推送到 GitHub，请将添加 CNAME 文件的提交拉取到本地存储库。否则，每一次推送，会把 GitHub 上的 CNAME 文件删除掉，无法正确定位。</p>
 <h1 id="参">参</h1>
-<p>考内容 - <a href="http://masikkk.com/article/hexo-24-vps-deploy/">VPS中部署Hexo</a> - <a href="https://hexo.io/zh-cn/">Hexo-快速、简洁且高效的博客框架</a> - <a href="https://zhuanlan.zhihu.com/p/54194453">GitHub 私有仓库免费开启 GitHub Pages 的可行性方案</a> - <a href="https://suiyan.cc/2023/20230404212258.html">解决Github Pages自定义域名失效的问题</a></p>
+<p>考内容 - <a href="http://masikkk.com/article/hexo-24-vps-deploy/">VPS中部署Hexo</a> - <a href="https://hexo.io/zh-cn/">Hexo-快速、简洁且高效的博客框架</a> - <a href="https://zhuanlan.zhihu.com/p/54194453">GitHub 私有仓库免费开启 GitHub Pages 的可行性方案</a> - <a href="https://suiyan.cc/2023/20230404212258.html">解决Github Pages自定义域名失效的问题</a> - <a href="https://zhuanlan.zhihu.com/p/508457566">从私有代码库自动部署Hexo站到GitHub Pages</a></p>
 <p>2023.05.19 文章第一版本，缺乏域名申请和域名解析内容。</p>
 ]]></content>
       <categories>
