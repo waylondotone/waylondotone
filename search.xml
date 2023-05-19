@@ -12375,43 +12375,17 @@ them in our navigation module.</p>
     <title>VPS部署Hexo环境</title>
     <url>/website/hexo/rebuild_website_in_vps/</url>
     <content><![CDATA[<p>[toc]</p>
-<p>目前手上有一台国外 VPS，我在 19 年开始在 VPS
-上部署个人网站。之前利用这个 VPS 部署本地编译好的静态网页，流程大概是 -
-本地电脑配置 hexo 环境，在本地编辑并生成静态网页； - 通过 git hook
-等方式把本地生成的静态网页同步到远端服务器上； - 服务器通过 nginx
-支持访问静态网页内容。 <img src="" /></p>
-<p>这种部署方式对多终端用户不友好，比如 -
-有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo
-环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。
-- 如果有多台电脑，只能在配备有 hexo 环境的电脑上编辑；即使多台电脑配备有
-hexo 内容，也容易有数据不同步的问题。</p>
-<p>本文介绍一种方式， - 网站原始数据保存在
-github，支持多终端访问和数据管理。 - 远程 VPS 上部署整套 hexo
-环境，支持生成静态网页结果。 - VPS 上获取网站数据(通常是 source
-下面的数据)，生成博客内容，启动 hexo 内置的 web 服务器（或使用 nginx
-指向生成的 public 目录），对外提供访问。 - 对于生成好的内容，部署到
-Github （用作备份）上</p>
-<p>这种方法可以在多终端实时更新网站内容，摆脱对单一终端的依赖，能够支持
-- VPS 上部署 hexo 环境，支持跨平台、多终端的网站内容编辑和更新。 - 引入
-git 管理网站原始数据，支持数据统一和备份。 - 支持在 github 和 VPS
-等多地同时部署个人网站，不必局限于 VPS。</p>
+<p>目前手上有一台国外 VPS，我在 19 年开始在 VPS 上部署个人网站。之前利用这个 VPS 部署本地编译好的静态网页，流程大概是 - 本地电脑配置 hexo 环境，在本地编辑并生成静态网页； - 通过 git hook 等方式把本地生成的静态网页同步到远端服务器上； - 服务器通过 nginx 支持访问静态网页内容。 <img src="" /></p>
+<p>这种部署方式对多终端用户不友好，比如 - 有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo 环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。 - 如果有多台电脑，只能在配备有 hexo 环境的电脑上编辑；即使多台电脑配备有 hexo 内容，也容易有数据不同步的问题。</p>
+<p>本文介绍一种方式， - 网站原始数据保存在 github，支持多终端访问和数据管理。 - 远程 VPS 上部署整套 hexo 环境，支持生成静态网页结果。 - VPS 上获取网站数据(通常是 source 下面的数据)，生成博客内容，启动 hexo 内置的 web 服务器（或使用 nginx 指向生成的 public 目录），对外提供访问。 - 对于生成好的内容，部署到 Github （用作备份）上</p>
+<p>这种方法可以在多终端实时更新网站内容，摆脱对单一终端的依赖，能够支持 - VPS 上部署 hexo 环境，支持跨平台、多终端的网站内容编辑和更新。 - 引入 git 管理网站原始数据，支持数据统一和备份。 - 支持在 github 和 VPS 等多地同时部署个人网站，不必局限于 VPS。</p>
 <!--我们可以使用 Markdown（或其他语言）编写文章，可以方便的生成静态网页托管在GitHub上。-->
-<p>上述方法的硬件要求是，具备一台稳定连接的 VPS，要求有固定 IP
-地址。</p>
+<p>上述方法的硬件要求是，具备一台稳定连接的 VPS，要求有固定 IP 地址。</p>
 <h1 id="为什么选择-hexo">为什么选择 Hexo</h1>
-<p>我的网站主要用于分享一些技术文章和个人生活感想，网站内容主要是简单的文字、代码和图片，通常以
-Markdown
-来组织内容。我希望网站框架能够在满足自己需求的情况下，一键部署少折腾，免费开源有插件，让我能够<strong>更专注于内容的输出</strong>。</p>
-<p>Hexo 框架非常适合我的需求, 是一个快速、简洁且高效的博客框架。Hexo
-使用
-Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
-<p>另外，作者是 tw
-人，官网支持中文，官方文档有详细的使用说明，国内使用方便；拥有丰富的插件，比如为网站添加后台
-UI 界面, 为 Hexo 添加哔哩哔哩番剧页面等；它还有丰富的主题，官网收录 300
-多个优秀主题，更换网站界面容易。</p>
-<p>之前调研网络上<a
-href="https://juejin.cn/post/7002911266385707022">常用的网站框架</a>，比如
-wordpress，基于PHP和MySQL的免费开源，这个框架有点重。</p>
+<p>我的网站主要用于分享一些技术文章和个人生活感想，网站内容主要是简单的文字、代码和图片，通常以 Markdown 来组织内容。我希望网站框架能够在满足自己需求的情况下，一键部署少折腾，免费开源有插件，让我能够<strong>更专注于内容的输出</strong>。</p>
+<p>Hexo 框架非常适合我的需求, 是一个快速、简洁且高效的博客框架。Hexo 使用 Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>另外，作者是 tw 人，官网支持中文，官方文档有详细的使用说明，国内使用方便；拥有丰富的插件，比如为网站添加后台 UI 界面, 为 Hexo 添加哔哩哔哩番剧页面等；它还有丰富的主题，官网收录 300 多个优秀主题，更换网站界面容易。</p>
+<p>之前调研网络上<a href="https://juejin.cn/post/7002911266385707022">常用的网站框架</a>，比如 wordpress，基于PHP和MySQL的免费开源，这个框架有点重。</p>
 <h1 id="环境配置">环境配置</h1>
 <h2 id="vps-环境配置">VPS 环境配置</h2>
 <ul>
@@ -12422,37 +12396,24 @@ wordpress，基于PHP和MySQL的免费开源，这个框架有点重。</p>
 <!-- TODO 附加 VPS 的邀请信息 -->
 <h1 id="hexo-配置">Hexo 配置</h1>
 <h2 id="环境配置-1">环境配置</h2>
-<p>如下步骤可以参考<a href="https://hexo.io/zh-cn/docs/">官方教程</a>
-的建站部分。 - 在 VPS 上先配置好 git 和 Node.js (建议 Node.js 12.0
-及以上版本) 环境，安装步骤见官网 -- <a
-href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90">安装前提</a>
-。</p>
-<p>本机安装后的环境如下。 ''' $ git --version git version 2.17.1 $ node
--v v14.21.3 '''</p>
+<p>如下步骤可以参考<a href="https://hexo.io/zh-cn/docs/">官方教程</a> 的建站部分。 - 在 VPS 上先配置好 git 和 Node.js (建议 Node.js 12.0 及以上版本) 环境，安装步骤见官网 -- <a href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90">安装前提</a> 。</p>
+<p>本机安装后的环境如下。 ''' $ git --version git version 2.17.1 $ node -v v14.21.3 '''</p>
 <h2 id="安装-hexo">安装 Hexo</h2>
-<p>''' # 使用 npm 安装 Hexo npm install hexo-cli -g # 新建网站。<folder>
-是指定的文件夹 hexo init <folder> cd <folder> npm install '''</p>
-<p>详见官网 -- <a
-href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo">安装
-Hexo</a></p>
+<p>''' # 使用 npm 安装 Hexo npm install hexo-cli -g # 新建网站。<folder> 是指定的文件夹 hexo init <folder> cd <folder> npm install '''</p>
+<p>详见官网 -- <a href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo">安装 Hexo</a></p>
 <h2 id="部署-hexo-博客">部署 Hexo 博客</h2>
 <h3 id="新建一篇文章">新建一篇文章</h3>
 <figure class="highlight plaintext"><figcaption><span>hexo-new</span><a href="https://hexo.io/zh-cn/docs/commands#new">hexo.io</a></figcaption><table><tr><td class="code"><pre><span class="line">hexo new \[layout\] &lt;title&gt;</span><br><span class="line"># 路径是 source/\_posts</span><br><span class="line">hexo new post &lt;title&gt;</span><br><span class="line"># 路</span><br><span class="line">径是 source/_drafts, 文件夹内的文章不会被渲染</span><br><span class="line">hexo new draft &lt;title&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="生成静态文件">生成静态文件</h3>
-<p>''' # 在 VPS 本地生成 html 文件 hexo generate # 强制重新生成文件,
-效果接近 hexo clean &amp;&amp; hexo generate hexo g -f '''</p>
+<p>''' # 在 VPS 本地生成 html 文件 hexo generate # 强制重新生成文件, 效果接近 hexo clean &amp;&amp; hexo generate hexo g -f '''</p>
 <h3 id="部署网站">部署网站</h3>
 <p>''' hexo deploy '''</p>
 <h2 id="启动服务器">启动服务器</h2>
-<p>''' # 启动服务器。默认情况下，访问网址为： http://localhost:4000/
-hexo server '''</p>
+<p>''' # 启动服务器。默认情况下，访问网址为： http://localhost:4000/ hexo server '''</p>
 <p>现在，直接用 vps 的公网 ip:4000 就可以访问博客。</p>
 <h1 id="nginx-配置">Nginx 配置</h1>
 <p>上面网站部署中，容易泄露 VPS IP 地址，并且网站链接看起来不美观。</p>
-<p>一般有两种优化方法： - VPS 上执行 hexo serve，配置 Nginx
-反向代理，域名指向 http://localhost:4000 - 因为 VPS
-上已经有静态文件，把通过域名 xx.com 的访问转发到 hexo 的 public
-目录，不用另外再启动一个 hexo 服务。</p>
+<p>一般有两种优化方法： - VPS 上执行 hexo serve，配置 Nginx 反向代理，域名指向 http://localhost:4000 - 因为 VPS 上已经有静态文件，把通过域名 xx.com 的访问转发到 hexo 的 public 目录，不用另外再启动一个 hexo 服务。</p>
 <p>我选择第二种方式，简单的 nginx 配置方式如下。</p>
 <p>'''</p>
 <p>'''</p>
@@ -12461,94 +12422,43 @@ hexo server '''</p>
 <h3 id="config.yml">_config.yml</h3>
 <p>网站的 <strong>配置</strong> 信息，您可以在此配置大部分的参数。</p>
 <h3 id="source">source</h3>
-<p><strong>资源</strong> 文件夹是存放用户资源的地方。除 _posts
-文件夹之外，开头命名为 _ (下划线)的文件 /
-文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public
-文件夹，而其他文件会被拷贝过去。</p>
-<p>在 source 目录下建立 _draft
-文件夹，这个文件夹中的内容会暂时不渲染，可以缓存没有写完的临时文件。</p>
+<p><strong>资源</strong> 文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p>
+<p>在 source 目录下建立 _draft 文件夹，这个文件夹中的内容会暂时不渲染，可以缓存没有写完的临时文件。</p>
 <h3 id="themes">themes</h3>
 <p><strong>主题</strong> 文件夹。Hexo 会根据主题来生成静态页面。</p>
 <h2 id="hexo-cmd">Hexo cmd</h2>
 <h3 id="生成文件后部署">生成文件后部署</h3>
 <p>''' hexo generate --deploy # 简写为 hexo g -d '''</p>
-<h3 id="front-matter"><a
-href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a></h3>
+<h3 id="front-matter"><a href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a></h3>
 <ul>
-<li>在 Hexo 中 <strong>分类</strong> 和 <strong>标签</strong>
-有着明显的差别：分类具有顺序性和层次性，也就是说 Foo, Bar 不等于 Bar,
-Foo；而标签没有顺序和层次。</li>
+<li>在 Hexo 中 <strong>分类</strong> 和 <strong>标签</strong> 有着明显的差别：分类具有顺序性和层次性，也就是说 Foo, Bar 不等于 Bar, Foo；而标签没有顺序和层次。</li>
 </ul>
 <h2 id="github-部署网站">github 部署网站</h2>
 <h3 id="通过本地部署">通过本地部署</h3>
 <ul>
-<li><p>安装一键部署插件 ''' npm install hexo-deployer-git --save
-'''</p></li>
-<li><p>修改_config.yml文件 ‘‘‘ deploy: type: git # 目前仅支持 ssh
-方式访问。根据你的信息，更新 your_account_name 和 your_repository_name
-路径 repo:
-git@github.com:your_account_name/your_repository_name.github.io.git #
-branch 可选，默认是 main branch: master ’’’</p></li>
+<li><p>安装一键部署插件 ''' npm install hexo-deployer-git --save '''</p></li>
+<li><p>修改_config.yml文件 ‘‘‘ deploy: type: git # 目前仅支持 ssh 方式访问。根据你的信息，更新 your_account_name 和 your_repository_name 路径 repo: git@github.com:your_account_name/your_repository_name.github.io.git # branch 可选，默认是 main branch: master ’’’</p></li>
 </ul>
-<p><a
-href="https://blog.csdn.net/hello_cmy/article/details/104658452">将hexo个人博客部署到github上公开使用</a></p>
+<p><a href="https://blog.csdn.net/hello_cmy/article/details/104658452">将hexo个人博客部署到github上公开使用</a></p>
 <h3 id="通过-github-action-部署">通过 GitHub Action 部署</h3>
-<p>方式一：公开源文件。登录自己的
-github，创建一个仓库。如果你希望你的站点能通过
-<你的 GitHub 用户名>.github.io 域名访问，你的 repository 应该直接命名为
-<你的 GitHub 用户名>.github.io。repository 需要加上后缀 .github.io 。
-方式二：隐藏源文件。使用两个仓库，一个私有仓库存放 Hexo
-博客的源程序，一个公开仓库存放生成的静态网站。当我们向私有仓库 push
-时，GitHub Actions
-自动生成静态页面并推送到公开仓库，实现博客的自动化部署。</p>
+<p>方式一：公开源文件。登录自己的 github，创建一个仓库。如果你希望你的站点能通过 <你的 GitHub 用户名>.github.io 域名访问，你的 repository 应该直接命名为 <你的 GitHub 用户名>.github.io。repository 需要加上后缀 .github.io 。 方式二：隐藏源文件。使用两个仓库，一个私有仓库存放 Hexo 博客的源程序，一个公开仓库存放生成的静态网站。当我们向私有仓库 push 时，GitHub Actions 自动生成静态页面并推送到公开仓库，实现博客的自动化部署。</p>
 <p>本文采用方式二。</p>
-<h4 id="github-私有仓库免费开启-github-pages">GitHub 私有仓库免费开启
-GitHub Pages</h4>
+<h4 id="github-私有仓库免费开启-github-pages">GitHub 私有仓库免费开启 GitHub Pages</h4>
 <h5 id="私有仓库">私有仓库</h5>
-<p>参考官网配置教程 -- <a
-href="https://hexo.io/zh-cn/docs/github-pages">在 GitHub Pages 上部署
-Hexo</a>，区别在于储存库名称不能和公有库重复，.github/workflows/pages.yml的设置有差异，待会会讲到。</p>
-<p>pages.yml 借助 <a
-href="https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository">GitHub
-Pages action</a> 实现，代码配置如下。</p>
-<p>其中，<a
-href="https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository">Deploy
-to external repository external_repository</a>
-方法支持将静态网页部署到公有库，其中需要设置 $
-并指定所要推送到的仓库 external_repository
-以及其默认分支。PERSONAL_TOKEN 需要自己生成配置一下。 参考 <a
-href="https://www.nuke666.cn/2021/03/deploy-hexo-using-github-actions/">使用
-GitHub Actions 部署 Hexo 博客</a>。</p>
-<p>报错处理 - “pandoc exited with code null” 通过 <a
-href="https://github.com/pandoc/pandoc-action-example">Using pandoc with
-GitHub Actions</a> 介绍的方法，在使用 pandoc 的地方引用
-“docker://pandoc/core:2.9”，代码如下。</p>
+<p>参考官网配置教程 -- <a href="https://hexo.io/zh-cn/docs/github-pages">在 GitHub Pages 上部署 Hexo</a>，区别在于储存库名称不能和公有库重复，.github/workflows/pages.yml的设置有差异，待会会讲到。</p>
+<p>pages.yml 借助 <a href="https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository">GitHub Pages action</a> 实现，代码配置如下。</p>
+<p>其中，<a href="https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository">Deploy to external repository external_repository</a> 方法支持将静态网页部署到公有库，其中需要设置 $ 并指定所要推送到的仓库 external_repository 以及其默认分支。PERSONAL_TOKEN 需要自己生成配置一下。 参考 <a href="https://www.nuke666.cn/2021/03/deploy-hexo-using-github-actions/">使用 GitHub Actions 部署 Hexo 博客</a>。</p>
+<p>报错处理 - “pandoc exited with code null” 通过 <a href="https://github.com/pandoc/pandoc-action-example">Using pandoc with GitHub Actions</a> 介绍的方法，在使用 pandoc 的地方引用 “docker://pandoc/core:2.9”，代码如下。</p>
 <h5 id="公有仓库">公有仓库</h5>
-<p>创建一个仓库。这个仓库通过站点能通过 <你的 GitHub 用户名>.github.io
-域名访问，你的 repository 应该直接命名为
-<你的 GitHub 用户名>.github.io。repository 需要加上后缀 .github.io
-。</p>
+<p>创建一个仓库。这个仓库通过站点能通过 <你的 GitHub 用户名>.github.io 域名访问，你的 repository 应该直接命名为 <你的 GitHub 用户名>.github.io。repository 需要加上后缀 .github.io 。</p>
 <p>''' # 部署配置</p>
 <p>'''</p>
 <h1 id="申请域名及域名解析">申请域名及域名解析</h1>
 <h2 id="github-pages-自定义域名">github pages 自定义域名</h2>
-<p>按照 github 官方教程 -- <a
-href="https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain">配置子域</a>
-自定义域名。</p>
-<p>如果你使用静态站点生成器在本地构建站点并将生成的文件推送到
-GitHub，请将添加 CNAME
-文件的提交拉取到本地存储库。否则，每一次推送，会把 GitHub 上的 CNAME
-文件删除掉，无法正确定位。</p>
+<p>按照 github 官方教程 -- <a href="https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain">配置子域</a> 自定义域名。</p>
+<p>如果你使用静态站点生成器在本地构建站点并将生成的文件推送到 GitHub，请将添加 CNAME 文件的提交拉取到本地存储库。否则，每一次推送，会把 GitHub 上的 CNAME 文件删除掉，无法正确定位。</p>
 <h1 id="参">参</h1>
-<p>考内容 - <a
-href="http://masikkk.com/article/hexo-24-vps-deploy/">VPS中部署Hexo</a>
-- <a href="https://hexo.io/zh-cn/">Hexo-快速、简洁且高效的博客框架</a> -
-<a href="https://zhuanlan.zhihu.com/p/54194453">GitHub 私有仓库免费开启
-GitHub Pages 的可行性方案</a> - <a
-href="https://suiyan.cc/2023/20230404212258.html">解决Github
-Pages自定义域名失效的问题</a> - <a
-href="https://zhuanlan.zhihu.com/p/508457566">从私有代码库自动部署Hexo站到GitHub
-Pages</a></p>
+<p>考内容 - <a href="http://masikkk.com/article/hexo-24-vps-deploy/">VPS中部署Hexo</a> - <a href="https://hexo.io/zh-cn/">Hexo-快速、简洁且高效的博客框架</a> - <a href="https://zhuanlan.zhihu.com/p/54194453">GitHub 私有仓库免费开启 GitHub Pages 的可行性方案</a> - <a href="https://suiyan.cc/2023/20230404212258.html">解决Github Pages自定义域名失效的问题</a> - <a href="https://zhuanlan.zhihu.com/p/508457566">从私有代码库自动部署Hexo站到GitHub Pages</a> - <a href="https://blog.csdn.net/weixin_43195662/article/details/106366897">Linux定时每天自动拉取一次git代码</a></p>
 <p>2023.05.19 文章第一版本，缺乏域名申请和域名解析内容。</p>
 ]]></content>
       <categories>
