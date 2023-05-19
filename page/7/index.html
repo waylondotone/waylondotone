@@ -280,6 +280,235 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/USV/Mercator-projection/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/USV/Mercator-projection/" itemprop="url">简明版墨卡托投影坐标系(原理到实现)</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-08T16:49:10+08:00">
+                2020-02-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/USV/" itemprop="url" rel="index">
+                    <span itemprop="name">USV</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  6.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  25 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1 id="前言">前言</h1>
+<p>FYI 本博客初稿完成于2017年，内容更新于 <a
+href="http://www.waylon.one/USV/Mercator-projection/">个人网站 -
+简明版墨卡托投影坐标系</a>，请移步阅读最新内容。</p>
+<p>本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。</p>
+<h1 id="墨卡托投影坐标系">墨卡托投影坐标系</h1>
+<p>墨卡托投影(Mercator
+Projection)是一种“等角正切圆柱投影”，荷兰地图学家墨卡托(Mercator)在1569年拟定：假设地球被围在一个中空的圆柱里，其赤道与圆柱相接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅标准纬线为零度（即赤道）的“墨卡托投影”绘制出的世界地图。<br />
+墨卡托投影在今天对于航海事业起着极为重要的作用，目前世界各国绘制海洋地图时仍广泛使用墨卡托投影，国际水路局(IHB)规定：“除特殊情况外，各国都要用墨卡托投影绘制海图”。国际水路局发行的《大洋水深总图》是把全世界分成24幅编辑的，在南北纬72度之间就是使用墨卡托投影绘成的。</p>
+<h1 id="墨卡托投影性质">墨卡托投影性质</h1>
+<p>由于墨卡托投影的经纬线离开赤道逐渐以相同倍数伸长，所以又称为渐长投影，由于它是具有等角性质的圆筒投影，所以也叫做等角圆筒投影。<strong>注意：这种投影不适合高纬地区，通常纬度60度以上区域，不用此投影</strong>。</p>
+<p><img src="/downloads/images/blog/Mercator_1.png" /></p>
+<p><img src="/downloads/images/blog/Mercator_2.png" /></p>
+<p>墨卡托投影有一个特别的特性：所有罗盘等角线，或称斜航线（就是与所经过的所有经线形成相同角度的航线，也称恒向航线）在墨卡托投影下都是直线。这使得在航海领域这个投影非常重要。
+注意：经纬线的伸长与纬线的正割成比例变化，随纬度增高极具拉伸，到极点成为无穷大；面积的扩大更为明显，在60度的地方面积要扩大四倍。如下图所示，地理上等半径圆在高纬度面积明显扩大。</p>
+<p><img src="/downloads/images/blog/Mercator_3.png" /></p>
+<p>墨卡托投影是按等角条件修改透视圆筒投影而得到的投影，等角（也称为保形）
+是指当地图上任何一点的各方向具有相同的比例，称为局部保形，透视圆筒投影如图1所示。从墨卡托投影图上可以看出，经线间隔的经度如果相等，则经线是等距平行的直线，
+纬线也是平行的直线，而且经纬线是相互垂直的。墨卡托投影对透视圆筒投影改造点：要使圆筒投影称为等角的性质，必须使由赤道向两极经线逐渐伸长的倍数与经线上各点相应的纬度扩大的倍数相同。</p>
+<p><img src="/downloads/images/blog/Mercator_4.png" /></p>
+<p><img src="/downloads/images/blog/Mercator_5.png" /></p>
+<p>透视圆筒投影</p>
+<p><img src="/downloads/images/blog/Mercator_6.png" /></p>
+<h1 id="墨卡托投影方程式">墨卡托投影方程式</h1>
+<p>墨卡托投影以整个世界范围，赤道作为标准纬线，本初子午线作为中央经线，两者交点为坐标原点，向东向北为正，向西向南为负。南北极在地图的正下、上方，而东西方向处于地图的正右、左。由于墨卡托投影在两极附近是趋于无限值，因此它并没完整展现了整个世界，地图上最高纬度是85.05度（通过纬度取值范围ys反解计算可得到纬度值为85.05112877980659）。为了简化计算，我们采用球形映射，而不是椭球体形状。</p>
+<p>公式推导具体见文献 <a
+target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
+<p><img src="/downloads/images/blog/Mercator_7.png" /> <img
+src="/downloads/images/blog/Mercator_8.png" /></p>
+<p>利用等角条件m=n来讨论具体公式，具体分为三步： 1.
+根据m=n得到地球表面投影到平面上的微积线段的关系式。<br />
+2. 把地球视为球体：
+设地球表面A点经纬坐标为（λ，Φ），对应的投影坐标为（x,y）,基准纬线设置为赤道，则R为地球半径；</p>
+<p>墨卡托投影方程式为：</p>
+<p><img src="/downloads/images/blog/Mercator_9.png" /></p>
+<ol start="3" type="1">
+<li>把地球视为旋转椭球体</li>
+</ol>
+<p>墨卡托投影正反解公式：</p>
+<p><img src="/downloads/images/blog/Mercator_10.png" /></p>
+<p><img src="/downloads/images/blog/Mercator_11.png" /></p>
+<p>公式推导具体见文献 <a
+target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
+<h1 id="程序实现">程序实现</h1>
+<p>最新版见 <a
+target="_blank" rel="noopener" href="https://github.com/wylloong/-GeographyCoordinateTransform/blob/master/Mercator">Geography
+Coordinate Transform Lite/Mercator</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Lite版，仅适用于初步验证</span></span><br><span class="line"><span class="comment">//把地球视为球体实现经纬度和墨卡托投影的函数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">double</span> x;</span><br><span class="line">	<span class="type">double</span> y;</span><br><span class="line">&#125;WayPoint;</span><br><span class="line"></span><br><span class="line"><span class="comment">//经纬度转墨卡托</span></span><br><span class="line">WayPoint <span class="title function_">lonLat2Mercator</span><span class="params">(WayPoint lonLat)</span></span><br><span class="line">&#123;</span><br><span class="line">	WayPoint mercator;</span><br><span class="line">	<span class="type">double</span> x = lonLat.x * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = <span class="built_in">log</span>(<span class="built_in">tan</span>((<span class="number">90</span> + lonLat.y) * Pi / <span class="number">360</span>))/(Pi / <span class="number">180</span>);  </span><br><span class="line">	y = y * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	mercator.x = x;</span><br><span class="line">	mercator.y = y;</span><br><span class="line">	<span class="keyword">return</span> mercator;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//墨卡托转经纬度</span></span><br><span class="line">WayPoint <span class="title function_">Mercator2lonLat</span><span class="params">(WayPoint mercator)</span></span><br><span class="line">&#123;</span><br><span class="line">	WayPoint lonLat;</span><br><span class="line">	<span class="type">double</span> x = mercator.x / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = mercator.y / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	y = <span class="number">180</span> / Pi * (<span class="number">2</span> * <span class="built_in">atan</span>(<span class="built_in">exp</span>(y * Pi / <span class="number">180</span>)) - Pi / <span class="number">2</span>);</span><br><span class="line">	lonLat.x = x;</span><br><span class="line">	lonLat.y = y;</span><br><span class="line">	<span class="keyword">return</span> lonLat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="reference">Reference</h1>
+<ul>
+<li>程光举.
+墨卡托投影与大圆投影的构成及其在确定航线、计算航程与航向方面的应用[J].
+辽宁师院学报(自然科学版),1980(01):13-28.</li>
+<li><a
+target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/9813502">墨卡托投影与经纬度转换源代码及原理文献</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Python/python-interactive-mode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2471,211 +2700,6 @@ target="_blank" rel="noopener" href="https://wenku.baidu.com/view/06ad08d6360cba
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Ubuntu/how-to-install-zoom-in-linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Ubuntu/how-to-install-zoom-in-linux/" itemprop="url">Install zoom client in Ubuntu 18.04</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-06T12:21:22+08:00">
-                2020-01-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Ubuntu/" itemprop="url" rel="index">
-                    <span itemprop="name">Ubuntu</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  3.1k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  11 mins.
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <!--date: 2020-02-06 12:21:22-->
-<p>[toc]</p>
-<h1 id="whats-zoom">What's zoom</h1>
-<blockquote>
-<p>Zoom offers communications software that combines video conferencing,
-online meetings, chat, and mobile collaboration. Zoom can be installed
-on Windows and Linux desktops and mobile devices.</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://zoom.com.cn/download?os=linux">Zoom's Linux
-client</a> allows you to start or join Zoom meetings on Ubuntu, Fedora
-and many other Linux distributions.</p>
-<h1 id="how-to-install-zoom">How to install zoom</h1>
-<p>The following commands would download the Zoom package for Debian
-system and install it using the apt package manager.</p>
-<ol type="1">
-<li><p>Install wget if not installed <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt -y install wget</span><br></pre></td></tr></table></figure></p></li>
-<li><p>Download the latest Zoom package <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://zoom.us/client/latest/zoom_amd64.deb</span><br></pre></td></tr></table></figure></p></li>
-<li><p>Install the zoom package <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ./zoom_amd64.deb</span><br></pre></td></tr></table></figure></p></li>
-<li><p>Check zoom is installed successfully <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache policy zoom</span><br></pre></td></tr></table></figure></p></li>
-</ol>
-<!--copy from apt-cache policy --help-->
-<p>apt-cache queries and displays available information about installed
-and installable packages, in which policy shows policy settings. The
-output information has demonstrated the downloaded package has installed
-successfully. <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zoom:</span><br><span class="line">  Installed: 3.5.352596.0119</span><br><span class="line">  Candidate: 3.5.352596.0119</span><br><span class="line">  Version table:</span><br><span class="line"> *** 3.5.352596.0119 100</span><br><span class="line">        100 /var/lib/dpkg/status</span><br></pre></td></tr></table></figure></p>
-<ol start="5" type="1">
-<li>Set up zoom in command line <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zoom</span><br></pre></td></tr></table></figure></li>
-</ol>
-<h1 id="reference">Reference</h1>
-<p>None.</p>
-<!--
-[在Ubuntu 19.04/18.04、Debian 10/9上安装Zoom的方法](https://ywnz.com/linuxrj/5400.html)
--->
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2726,7 +2750,7 @@ successfully. <figure class="highlight html"><table><tr><td class="gutter"><pre>
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2737,7 +2761,7 @@ successfully. <figure class="highlight html"><table><tr><td class="gutter"><pre>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

@@ -280,6 +280,304 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/coding/UML-diagram/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/coding/UML-diagram/" itemprop="url">UML 类图</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-16T22:09:02+08:00">
+                2020-06-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/coding/" itemprop="url" rel="index">
+                    <span itemprop="name">coding</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  9k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  33 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1 id="uml">UML</h1>
+<h1 id="类的uml画法">类的UML画法</h1>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> String name = <span class="string">&quot;Jack&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="type">void</span> <span class="title">setName</span><span class="params">(String name)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="type">void</span> <span class="title">playBasketball</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">pass</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="type">void</span> <span class="title">pass</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此类对应的UML为</p>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160526213237522-1915677228.png" /></p>
+<p>该图分为三层：最顶层的为类名，中间层的为属性，最底层的为方法。</p>
+<ul>
+<li>属性的表示方式为：【可见性】【属性名称】：【类型】={缺省值，可选}</li>
+<li>方法的表示方式为：【可见性】【方法名称】（【参数列表】）：【类型】</li>
+<li>可见性都是一样的，"-"表示private、"+"表示public、"#"表示protected。</li>
+</ul>
+<h1 id="类和类的关系">类和类的关系</h1>
+<h2 id="依赖关系dependency">依赖关系(Dependency)</h2>
+<blockquote>
+<p>依赖关系是一种使用关系，特定事物的改变有可能会影响到使用该事物的其他事物，在需要表示一个事物使用另一个事物时使用依赖关系，大多数情况下依赖关系体现在某个类的方法使用另一个类的对象作为参数。</p>
+</blockquote>
+<ul>
+<li>在UML中，依赖关系用带箭头的虚线表示，由依赖的一方指向被依赖的一方。</li>
+</ul>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160527111442944-1797116461.png" /></p>
+<p>依赖关系通常通过三种方式来实现： -
+将一个类的对象作为另一个类中方法的参数. -
+在一个类的方法中将另一个类的对象作为其对象的局部变量. -
+在一个类的方法中调用另一个类的静态方法.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">	public void doSomething()&#123;</span><br><span class="line">		Card card = new Card();//局部变量</span><br><span class="line">		....</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">	public void doSomething(Card card)&#123;//方法参数</span><br><span class="line">		....</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">	public void doSomething()&#123;</span><br><span class="line">		int id = Card.getId();//静态方法调用</span><br><span class="line">		...</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关联关系association">关联关系(Association)</h2>
+<blockquote>
+<p>关联关系是类与类之间最常见的一种关系，它是一种结构化的关系，表示一类对象与另一类对象之间有联系。</p>
+</blockquote>
+<ul>
+<li>在UML类图中，用实线连接有关联关系的对象所对应的类。</li>
+</ul>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160526224208881-211185502.png" /></p>
+<p>关联关系分单向关联、双向关联、自关联。 -
+单向关联：单向关联指的是关联只有一个方向，比如顾客（Customer）拥有地址（Address）。
+-
+双向关联关系：默认情况下的关联都是双向的，比如顾客（Customer）购买商品（Product），反之，卖出去的商品总是与某个顾客与之相关联，这就是双向关联。
+-
+自关联：指的就是对象中的属性为对象本身，这在链表中非常常见，单向链表Node中会维护一个它的前驱Node，双向链表Node中会维护一个它的前驱Node和一个它的后继Node。</p>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160526225654053-2061511983.png" /></p>
+<h2 id="聚合关系aggregation">聚合关系(Aggregation)</h2>
+<blockquote>
+<p>聚合（Aggregation）关系表示整体与部分的关系。在聚合关系中，成员对象是整体的一部分，但是成员对象可以脱离整体对象独立存在。</p>
+</blockquote>
+<ul>
+<li>在UML中，聚合关系用带空心菱形的直线表示。</li>
+</ul>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160527101106975-1990587882.png" /></p>
+<!--
+> 单向，关联关系的一种，与关联关系之间的区别是语义上的，关联的两个对象通常是平等的，聚合则一般不平等，有一种整体和局部的感觉，实现上区别不大。
+-->
+<p>代码实现聚合关系，成员对象通常以构造方法、Setter方法的方式注入到整体对象之中。</p>
+<h2 id="组合关系composition">组合关系(Composition)</h2>
+<blockquote>
+<p>组合关系也表示的是一种整体和部分的关系，但是在组合关系中整体对象可以控制成员对象的生命周期，一旦整体对象不存在，成员对象也不存在，整体对象和成员对象之间具有同生共死的关系。</p>
+</blockquote>
+<ul>
+<li>在UML中组合关系用带实心菱形的直线表示。</li>
+</ul>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160527102348788-2073210568.png" /></p>
+<p>代码实现组合关系，通常在整体类的构造方法中直接实例化成员类，这是因为组合关系的整体和部分是共生关系。</p>
+<p>和聚合关系相比，如果通过外部注入，那么即使整体不存在，那么部分还是存在的，这就相当于变成了一种聚合关系。</p>
+<h2 id="继承关系inheritance">继承关系(Inheritance)</h2>
+<blockquote>
+<p>类实现接口，类继承抽象类，类继承父类都属于这种关系。</p>
+</blockquote>
+<h3 id="实现realization">实现（Realization）</h3>
+<blockquote>
+<p>在接口中通常没有属性，而且所有的操作都是抽象的，只有操作的声明没有操作的实现。</p>
+</blockquote>
+<ul>
+<li>在UML中，实现关系用带空心三角形的实线来表示。</li>
+</ul>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160526222227334-1295693913.png" /></p>
+<blockquote>
+<p>类实现接口属于这种关系</p>
+</blockquote>
+<h3 id="泛化generalization">泛化（Generalization）</h3>
+<blockquote>
+<p>泛化也叫作继承，用于描述父子类之间的关系，父类又称为基类，子类又称作派生类。</p>
+</blockquote>
+<ul>
+<li>在 UML 中，泛化关系用带空心三角形的实线来表示。</li>
+</ul>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/801753-20160526215931522-1646286150.png" /></p>
+<h2
+id="关联关系聚合关系组合关系之间的区别">关联关系、聚合关系、组合关系之间的区别</h2>
+<ol type="1">
+<li>关联和聚合的区别主要在于语义上：关联的两个对象之间一般是平等的，聚合则一般是不平等的。</li>
+<li>聚合和组合的区别则在语义和实现上都有差别：组合的两个对象之间生命周期有很大的关联，被组合的对象在组合对象创建的同时或者创建之后创建，在组合对象销毁之前销毁，一般来说被组合对象不能脱离组合对象独立存在，而且也只能属于一个组合对象；聚合则不一样，被聚合的对象可以属于多个聚合对象。</li>
+</ol>
+<h1 id="绘制-uml-工具">绘制 UML 工具</h1>
+<h2 id="ubuntu">Ubuntu</h2>
+<blockquote>
+<p>Dia is an editor for diagrams, graphs, charts etc. There is support
+for UML static structure diagrams (class diagrams), Entity-Relationship
+diagrams, network diagrams and much more. Diagrams can be exported to
+postscript and many other formats.</p>
+</blockquote>
+<p>Dia 是可视化的图形化界面，可以在 Linux 环境下绘制 UML
+类图，普通功能免费，可以满足正常的使用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install dia</span><br></pre></td></tr></table></figure>
+<h1 id="references">References</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/a19881029/article/details/8957441">类与类之间的关系及表示方式</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/xrq730/p/5527115.html">类、继承和实现</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/xrq730/p/5533019.html">关联、聚合、组合、依赖</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.howtoinstall.me/ubuntu/18-04/dia/">How to
+Install dia in Ubuntu 18.04</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://www.cnblogs.com/vincent0928/p/6568070.html">UML类图是描述类之间的关系</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.waylon.one/life/outlook-link-163/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3311,235 +3609,6 @@ id="把精力集中在你知道的能做的和拥有的东西上">把精力集�
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/USV/Mercator-projection/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/USV/Mercator-projection/" itemprop="url">简明版墨卡托投影坐标系(原理到实现)</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-02-08T16:49:10+08:00">
-                2020-02-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/USV/" itemprop="url" rel="index">
-                    <span itemprop="name">USV</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  6.8k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  25 mins.
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<h1 id="前言">前言</h1>
-<p>FYI 本博客初稿完成于2017年，内容更新于 <a
-href="http://www.waylon.one/USV/Mercator-projection/">个人网站 -
-简明版墨卡托投影坐标系</a>，请移步阅读最新内容。</p>
-<p>本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。</p>
-<h1 id="墨卡托投影坐标系">墨卡托投影坐标系</h1>
-<p>墨卡托投影(Mercator
-Projection)是一种“等角正切圆柱投影”，荷兰地图学家墨卡托(Mercator)在1569年拟定：假设地球被围在一个中空的圆柱里，其赤道与圆柱相接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅标准纬线为零度（即赤道）的“墨卡托投影”绘制出的世界地图。<br />
-墨卡托投影在今天对于航海事业起着极为重要的作用，目前世界各国绘制海洋地图时仍广泛使用墨卡托投影，国际水路局(IHB)规定：“除特殊情况外，各国都要用墨卡托投影绘制海图”。国际水路局发行的《大洋水深总图》是把全世界分成24幅编辑的，在南北纬72度之间就是使用墨卡托投影绘成的。</p>
-<h1 id="墨卡托投影性质">墨卡托投影性质</h1>
-<p>由于墨卡托投影的经纬线离开赤道逐渐以相同倍数伸长，所以又称为渐长投影，由于它是具有等角性质的圆筒投影，所以也叫做等角圆筒投影。<strong>注意：这种投影不适合高纬地区，通常纬度60度以上区域，不用此投影</strong>。</p>
-<p><img src="/downloads/images/blog/Mercator_1.png" /></p>
-<p><img src="/downloads/images/blog/Mercator_2.png" /></p>
-<p>墨卡托投影有一个特别的特性：所有罗盘等角线，或称斜航线（就是与所经过的所有经线形成相同角度的航线，也称恒向航线）在墨卡托投影下都是直线。这使得在航海领域这个投影非常重要。
-注意：经纬线的伸长与纬线的正割成比例变化，随纬度增高极具拉伸，到极点成为无穷大；面积的扩大更为明显，在60度的地方面积要扩大四倍。如下图所示，地理上等半径圆在高纬度面积明显扩大。</p>
-<p><img src="/downloads/images/blog/Mercator_3.png" /></p>
-<p>墨卡托投影是按等角条件修改透视圆筒投影而得到的投影，等角（也称为保形）
-是指当地图上任何一点的各方向具有相同的比例，称为局部保形，透视圆筒投影如图1所示。从墨卡托投影图上可以看出，经线间隔的经度如果相等，则经线是等距平行的直线，
-纬线也是平行的直线，而且经纬线是相互垂直的。墨卡托投影对透视圆筒投影改造点：要使圆筒投影称为等角的性质，必须使由赤道向两极经线逐渐伸长的倍数与经线上各点相应的纬度扩大的倍数相同。</p>
-<p><img src="/downloads/images/blog/Mercator_4.png" /></p>
-<p><img src="/downloads/images/blog/Mercator_5.png" /></p>
-<p>透视圆筒投影</p>
-<p><img src="/downloads/images/blog/Mercator_6.png" /></p>
-<h1 id="墨卡托投影方程式">墨卡托投影方程式</h1>
-<p>墨卡托投影以整个世界范围，赤道作为标准纬线，本初子午线作为中央经线，两者交点为坐标原点，向东向北为正，向西向南为负。南北极在地图的正下、上方，而东西方向处于地图的正右、左。由于墨卡托投影在两极附近是趋于无限值，因此它并没完整展现了整个世界，地图上最高纬度是85.05度（通过纬度取值范围ys反解计算可得到纬度值为85.05112877980659）。为了简化计算，我们采用球形映射，而不是椭球体形状。</p>
-<p>公式推导具体见文献 <a
-target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
-<p><img src="/downloads/images/blog/Mercator_7.png" /> <img
-src="/downloads/images/blog/Mercator_8.png" /></p>
-<p>利用等角条件m=n来讨论具体公式，具体分为三步： 1.
-根据m=n得到地球表面投影到平面上的微积线段的关系式。<br />
-2. 把地球视为球体：
-设地球表面A点经纬坐标为（λ，Φ），对应的投影坐标为（x,y）,基准纬线设置为赤道，则R为地球半径；</p>
-<p>墨卡托投影方程式为：</p>
-<p><img src="/downloads/images/blog/Mercator_9.png" /></p>
-<ol start="3" type="1">
-<li>把地球视为旋转椭球体</li>
-</ol>
-<p>墨卡托投影正反解公式：</p>
-<p><img src="/downloads/images/blog/Mercator_10.png" /></p>
-<p><img src="/downloads/images/blog/Mercator_11.png" /></p>
-<p>公式推导具体见文献 <a
-target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
-<h1 id="程序实现">程序实现</h1>
-<p>最新版见 <a
-target="_blank" rel="noopener" href="https://github.com/wylloong/-GeographyCoordinateTransform/blob/master/Mercator">Geography
-Coordinate Transform Lite/Mercator</a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Lite版，仅适用于初步验证</span></span><br><span class="line"><span class="comment">//把地球视为球体实现经纬度和墨卡托投影的函数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">double</span> x;</span><br><span class="line">	<span class="type">double</span> y;</span><br><span class="line">&#125;WayPoint;</span><br><span class="line"></span><br><span class="line"><span class="comment">//经纬度转墨卡托</span></span><br><span class="line">WayPoint <span class="title function_">lonLat2Mercator</span><span class="params">(WayPoint lonLat)</span></span><br><span class="line">&#123;</span><br><span class="line">	WayPoint mercator;</span><br><span class="line">	<span class="type">double</span> x = lonLat.x * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = <span class="built_in">log</span>(<span class="built_in">tan</span>((<span class="number">90</span> + lonLat.y) * Pi / <span class="number">360</span>))/(Pi / <span class="number">180</span>);  </span><br><span class="line">	y = y * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	mercator.x = x;</span><br><span class="line">	mercator.y = y;</span><br><span class="line">	<span class="keyword">return</span> mercator;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//墨卡托转经纬度</span></span><br><span class="line">WayPoint <span class="title function_">Mercator2lonLat</span><span class="params">(WayPoint mercator)</span></span><br><span class="line">&#123;</span><br><span class="line">	WayPoint lonLat;</span><br><span class="line">	<span class="type">double</span> x = mercator.x / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = mercator.y / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	y = <span class="number">180</span> / Pi * (<span class="number">2</span> * <span class="built_in">atan</span>(<span class="built_in">exp</span>(y * Pi / <span class="number">180</span>)) - Pi / <span class="number">2</span>);</span><br><span class="line">	lonLat.x = x;</span><br><span class="line">	lonLat.y = y;</span><br><span class="line">	<span class="keyword">return</span> lonLat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="reference">Reference</h1>
-<ul>
-<li>程光举.
-墨卡托投影与大圆投影的构成及其在确定航线、计算航程与航向方面的应用[J].
-辽宁师院学报(自然科学版),1980(01):13-28.</li>
-<li><a
-target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/9813502">墨卡托投影与经纬度转换源代码及原理文献</a></li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3590,7 +3659,7 @@ target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/98
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -3601,7 +3670,7 @@ target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/98
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>

@@ -280,6 +280,211 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Linux/iptables/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Linux/iptables/" itemprop="url">使用 iptables 阻止特定地区和国家的IP访问</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-10-28T08:41:15+08:00">
+                2020-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  14 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<!--
+网站屏蔽和阻止特定地区和国家的IP访问
+-->
+<h1 id="前言">前言</h1>
+<p>无论是出于什么原因，屏蔽和阻止特定地区和国家的IP访问都是我们日常建站中经常要用到的。</p>
+<!--因为自己之前在网站的about页面展露太多消息，被美研同事发现我的踪迹，网站经常被访问，所以决定封掉某IP段，避免被访问-->
+<p>如果网站是 Nginx，则可以直接使用 Nginx-ngx_http_geoip_module
+模块，该模块可以精确到国家、省、市等一级的 IP，并且全部由 Nginx
+执行识别和阻止访问，所以相对于 PHP 来说比较省资源，但是 Nginx
+编译起来比较费事。</p>
+<p>如果网站是搭建在 VPS 或者独立服务器上，那么可以直接使用 Linux
+防火墙，利用 iptables 规则来阻止特定国家和省份的 IP 访问。</p>
+<h1 id="iptables-规则来阻止特定-ip-访问">iptables 规则来阻止特定 IP
+访问</h1>
+<ol type="1">
+<li>安装 iptables 防火墙</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CentOS</span><br><span class="line">yum install iptables</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li><p>清除已有 iptables 规则 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></table></figure></p></li>
+<li><p>屏蔽指定 IP <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#屏蔽单个IP的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP</span><br><span class="line">#封IP段即从123.45.6.1到123.45.6.254的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP</span><br></pre></td></tr></table></figure> <!--66.249.90.xx-->
+<!--66.249.90.184--></p></li>
+<li><p>查看已添加的iptables规则 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n</span><br><span class="line">v：显示详细信息，包括每条规则的匹配包数量和匹配字节数</span><br><span class="line">x：在 v 的基础上，禁止自动单位换算（K、M）</span><br><span class="line">n：只显示IP地址和端口号，不将ip解析为域名</span><br></pre></td></tr></table></figure></p></li>
+<li><p>iptables的开机启动及规则保存 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chkconfig –level 345 iptables on</span><br><span class="line">systemctl enable iptables.service</span><br><span class="line"># 如果配置文件里面设置了开机启动，systemctl enable命令相当于激活开机启动。</span><br><span class="line"># CentOS</span><br><span class="line">service iptables save &lt;--保存规则</span><br></pre></td></tr></table></figure></p></li>
+<li><p>重启后生效 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启：chkconfig iptables on</span><br><span class="line">关闭：chkconfig iptables off</span><br></pre></td></tr></table></figure></p></li>
+<li><p>即时生效，重启后失效 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启：service iptables start</span><br><span class="line">关闭：service iptables stop</span><br></pre></td></tr></table></figure></p></li>
+</ol>
+<!--
+# References
+- [网站屏蔽和阻止特定地区和国家的IP访问设置方法-PHP代码/Nginx/WordPress设置](https://wzfou.com/zuzhi-ip/)
+- [centos服务器 屏蔽ip](https://blog.csdn.net/u013939884/article/details/55803118)
+-->
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Programming/hole-for-c-plus-plus/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -3773,223 +3978,6 @@ target="_blank" rel="noopener" href="https://m.ctrip.com/webapp/you/journeys/tra
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Google/chrome-developer-tools/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Google/chrome-developer-tools/" itemprop="url">Chrome 开发者工具高级使用技巧</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-26T21:56:26+08:00">
-                2020-08-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Google/" itemprop="url" rel="index">
-                    <span itemprop="name">Google</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Words count in article&#58;</span>
-                
-                <span title="Words count in article">
-                  2.2k
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Reading time &asymp;</span>
-                
-                <span title="Reading time">
-                  8 mins.
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>[toc]</p>
-<p>在开始之前，我想介绍一下 Chrome 的命令菜单。命令菜单之于 Chrome，就像
-Shell 之于 Linux 一样。你可以在键盘敲入相应命令来操作 Chrome。</p>
-<h1 id="打开命令菜单">打开命令菜单</h1>
-<ol type="1">
-<li>打开 Chrome 开发者工具</li>
-<li>使用以下快捷键打开命令菜单：</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">windows：Ctrl + Shift + P</span><br><span class="line">macOS：Cmd + Shift + P</span><br></pre></td></tr></table></figure>
-<p><img
-src="http://www.waylon.one/downloads/images/blog/chrome_cmds.gif" /></p>
-<h1 id="chrome-屏幕截图">Chrome 屏幕截图</h1>
-<p>捕获屏幕内容是一个常见的功能需求，你当前的计算机上已经有了非常方便的截图工具了。但是，你可以完成以下任务吗？</p>
-<ol type="1">
-<li>截取网页上所有内容的屏幕快照，包括可视窗口中未显示的所有内容。</li>
-<li>精确捕获 DOM 元素的内容</li>
-</ol>
-<blockquote>
-<p>HTML DOM 是 HTML Document Object Model (文档对象模型)的缩写，HTML DOM
-则是专门适用于 HTML/XHTML 的文档对象模型。熟悉软件开发的人员可以将 HTML
-DOM 理解为网页的
-API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。</p>
-</blockquote>
-<p>这是两个很普通的要求，但是使用操作系统随附的屏幕截图工具不太容易解决。这个时候，我们可以在
-Chrome 使用相关命令来帮助我们完成此要求。</p>
-<h2 id="截取网页上所有内容的屏幕快照">截取网页上所有内容的屏幕快照</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Screenshot Capture full size screenshot</span><br></pre></td></tr></table></figure>
-<h2 id="精确捕获-dom-元素的内容">精确捕获 DOM 元素的内容</h2>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Screenshot Capture node screenshot</span><br></pre></td></tr></table></figure>
-<p><img
-src="http://www.waylon.one/downloads/images/blog/chrome_cmds_capture.gif" /></p>
-<!--
-![](https://mmbiz.qpic.cn/mmbiz_gif/XIibZ0YbvibkWhLNU78h5gmN3j6h6VXfuWlIiavPIDY9gWzMymQicQUreeU0jFZIbbdloZBYwe1pRkeBMbNH5M97GA/640?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1)
-
--->
-<h1 id="监控页面加载状态">监控页面加载状态</h1>
-<p>从开始到完全加载页面可能需要十秒钟以上的时间。我们有时需要监控页面在不同的时间点相关资源的加载行为。</p>
-<p>在 Chrome 开发者工具中，我们可以使用“网络”面板下的 Capture
-Screenshots 功能来捕获页面加载时的屏幕截图。</p>
-<p><img
-src="http://www.waylon.one/downloads/images/blog/chrome_cmds_loading.gif" /></p>
-<h1 id="trace-viewer">Trace Viewer</h1>
-<!--
-[了解](chrome://tracing/)
--->
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -4040,7 +4028,7 @@ src="http://www.waylon.one/downloads/images/blog/chrome_cmds_loading.gif" /></p>
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -4051,7 +4039,7 @@ src="http://www.waylon.one/downloads/images/blog/chrome_cmds_loading.gif" /></p>
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-count">28</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
