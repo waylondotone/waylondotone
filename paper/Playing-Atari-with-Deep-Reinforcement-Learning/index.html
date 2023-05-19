@@ -1,0 +1,1689 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+<!-- waylon's adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6129496365361356"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Weekly Blogs,paper,Robotics," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[toc] Playing Atari with Deep Reinforcement Learning Paper download link 多平台维护不易，内容实时更新于 个人网站，请移步阅读最新内容。 Abstract 文章提出第一个深度学习模型，能够使用强化学习算法从高维的感知输入(high-dimensional sensory input)中学习到控制策略(control polic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解读 Playing Atari with Deep Reinforcement Learning">
+<meta property="og:url" content="http://www.waylon.one/paper/Playing-Atari-with-Deep-Reinforcement-Learning/index.html">
+<meta property="og:site_name" content="One&#39;s Way">
+<meta property="og:description" content="[toc] Playing Atari with Deep Reinforcement Learning Paper download link 多平台维护不易，内容实时更新于 个人网站，请移步阅读最新内容。 Abstract 文章提出第一个深度学习模型，能够使用强化学习算法从高维的感知输入(high-dimensional sensory input)中学习到控制策略(control polic">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-06-04T01:23:17.000Z">
+<meta property="article:modified_time" content="2023-05-16T14:34:59.439Z">
+<meta property="article:author" content="Nobody">
+<meta property="article:tag" content="Weekly Blogs">
+<meta property="article:tag" content="paper">
+<meta property="article:tag" content="Robotics">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.waylon.one/paper/Playing-Atari-with-Deep-Reinforcement-Learning/"/>
+
+
+
+
+
+  <title>解读 Playing Atari with Deep Reinforcement Learning | One's Way</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">One's Way</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Dare to create</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/paper/Playing-Atari-with-Deep-Reinforcement-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">解读 Playing Atari with Deep Reinforcement Learning</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-06-04T09:23:17+08:00">
+                2020-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/paper/" itemprop="url" rel="index">
+                    <span itemprop="name">paper</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  22k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1:20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[toc]</p>
+<p>Playing Atari with Deep Reinforcement Learning</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1312.5602v1.pdf">Paper download
+link</a></p>
+<p>多平台维护不易，内容实时更新于 <a
+href="http://www.waylon.one/paper/Playing-Atari-with-Deep-Reinforcement-Learning/">个人网站</a>，请移步阅读最新内容。</p>
+<h1 id="abstract">Abstract</h1>
+<p>文章提出第一个深度学习模型，能够使用强化学习算法从高维的感知输入(high-dimensional
+sensory input)中学习到控制策略(control
+policies)。这个模型是一个卷积神经网络(convolutional neural
+network)，使用Q-learning的变种进行训练，可以直接输入像素，然后输出评估未来奖励的值函数(a
+value function estimating future rewards)。</p>
+<blockquote>
+<p>The deep learning model is a convolutional neural network, trained
+with a variant of Q-learning, whose input is raw pixels and whose output
+is a value function estimating future rewards.</p>
+</blockquote>
+<h1 id="introduction">Introduction</h1>
+<ul>
+<li><p>研究现状：很多RL应用依赖于人工制定的特征，其性能表现严重依赖特征表示的质量，不具备自学习能力。
+&gt; Most successful RL applica- tions that operate on these domains
+have relied on <strong>hand-crafted features combined with linear value
+functions or policy representations</strong>. Clearly, the performance
+of such systems heavily relies on the quality of the <strong>feature
+representation</strong>.</p></li>
+<li><p>从深度学习DL在计算机视觉和语音识别上取得进步的现状，思考类似的方法能否应用到通过强化学习RL来控制智能体。
+&gt; Recent advances in deep learning have made it possible to
+<strong>extract high-level features from raw sensory data</strong>,
+leading to breakthroughs in computer vision and speech recognition.</p>
+<ul>
+<li>DL --&gt; extract high-level features</li>
+</ul>
+<blockquote>
+<p>It seems natural to ask whether similar techniques could also be
+beneficial for RL with sensory data.</p>
+</blockquote></li>
+<li><p>从DL的视角，讨论RL面临的挑战。</p></li>
+</ul>
+<!--
+阅读原始和权威论文后，对DL和RL的区别和联系，理解的更透彻，不再像是阅读公众号那样，浮于表面。
+- 正如学敏所言，公众号的写作者的水平，可能连自己都不如，自己谈何去学习和进步呢？不要把公众号作为认真学习的渠道。
+-->
+<ul>
+<li>比较DL和RL
+<ul>
+<li>RL有一些问题，DL依然无法解决。</li>
+</ul></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Deep Learning</th>
+<th>Reinforcement Learning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data source</td>
+<td>required large amounts of hand-labelled training data</td>
+<td>learn from a scalar reward signal that is frequently sparse, noisy
+and delayed (actions and rewards)</td>
+</tr>
+<tr class="even">
+<td>数据来源</td>
+<td>从大量人工标注的数据中学习</td>
+<td>只能从稀少、噪声和延迟的奖励中学习</td>
+</tr>
+<tr class="odd">
+<td>Data features</td>
+<td>assume the data samples to be independent</td>
+<td>typically sequences of highly correlated states</td>
+</tr>
+<tr class="even">
+<td>数据特点</td>
+<td>采样数据独立</td>
+<td>一系列高度关联的状态</td>
+</tr>
+<tr class="odd">
+<td>Data distribution</td>
+<td>a fixed underlying distribution</td>
+<td>data distribution changes as the algorithm learns new
+behaviours</td>
+</tr>
+<tr class="even">
+<td>数据分布</td>
+<td>固定的数据分布</td>
+<td>学习新行为后，数据分布会调整</td>
+</tr>
+</tbody>
+</table>
+<h2 id="本文贡献">本文贡献</h2>
+<ul>
+<li><p>卷积神经网络可以在复杂的RL环境中从视频输入数据中学习控制策略。</p>
+<blockquote>
+<p>This paper demonstrates that a convolutional neural network can
+overcome these challenges to learn successful control policies from raw
+video data in complex RL environments.</p>
+</blockquote>
+<ul>
+<li>使用Q-learning的变种训练
+<ul>
+<li>The network is trained with a variant of the Q-learning algorithm,
+with stochastic gradient descent to update the weights.</li>
+</ul></li>
+<li>为了缓和关联数据和非平稳分布，使用经验回放机制(an experience replay
+mechanism)，随机采样之前的转换，所以可以平滑过去行为的训练分布。
+<ul>
+<li>To alleviate the problems of correlated data and non-stationary
+distributions, we use an experience replay mechanism which randomly
+samples previous transitions, and thereby smooths the training
+distribution over many past behaviors.</li>
+</ul></li>
+</ul></li>
+</ul>
+<!--
+自己的研究，是十年磨一剑，还是总是在模仿，从未在超越呢。
+-->
+<h1 id="background">Background</h1>
+<h2 id="任务描述">任务描述</h2>
+<ul>
+<li><p>环境(environment) &gt; We consider tasks in which an agent
+interacts with an environment E, in this case the Atari emulator, in a
+sequence of actions, observations and rewards.</p></li>
+<li><p>行动(actions):通过合法的行为来进一步改变模拟器的内部状态和游戏得分。
+&gt; At each time-step the agent selects an action at from the set of
+legal game actions, A = {1, . . . ,K}.</p>
+<blockquote>
+<p>The action is passed to the emulator and modifies its internal state
+and the game score.</p>
+</blockquote></li>
+<li><p>观察(observations)：屏幕像素 &gt; The emulator’s internal state
+is not observed by the agent; instead it observes an image rom the
+emulator, which is a vector of raw pixel values representing the current
+screen.</p></li>
+<li><p>奖励(rewards)：游戏得分 &gt; In addition it receives a reward
+representing the change in game score.</p></li>
+<li><p>交互特征</p>
+<ul>
+<li><p>行动和奖励的延时性(feedback delay) &gt; Note that in general the
+game score may depend on the whole prior sequence of actions and
+observations; feedback about an action may only be received after many
+thousands of time-steps have elapsed.</p></li>
+<li><p>智能体最大化得分 &gt; The goal of the agent is to interact with
+the emulator by selecting actions in a way that maximises future
+rewards.</p></li>
+</ul></li>
+</ul>
+<h2 id="问题抽象">问题抽象</h2>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/DQN_simplify_model.jpg" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">A[Question &amp; Model]--&gt;B(the optimal action-value function)</span><br><span class="line">A--&gt;I(learn game strategies from sequences of actions and observations)</span><br><span class="line">B--&gt;C(Intuition)</span><br><span class="line">B--&gt;J(the maximum expected reward achievable by following any strategy)</span><br><span class="line">C--&gt;D(Bellman equation)</span><br><span class="line">C--&gt;K(current reward plus the optimal value of the sequence at the next time-step)</span><br><span class="line">D--&gt;E(generalisation)</span><br><span class="line">D--&gt;L(estimate the action-value function by using the Bellman equation as an iterative update)</span><br><span class="line">E--&gt;M(the above action-value function is without any generalisation)</span><br><span class="line">E--&gt;N(function approximator)</span><br><span class="line">N--&gt;F(linear function approximator)</span><br><span class="line">N--&gt;G(non-linear function approximator)</span><br><span class="line">G--&gt;H(neural network)</span><br><span class="line">H--&gt;O(Q-network)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从一系列的行动和观察中学习 &gt; We therefore consider sequences of
+actions and observations, st = x1, a1, x2, ..., at−1, xt, and learn game
+strategies that depend upon these sequences.
+<ul>
+<li>有效时间内终结 &gt; All sequences in the emulator are assumed to
+terminate in a finite number of time-steps.</li>
+<li>转化为MDP问题 &gt; This formalism gives rise to a large but finite
+Markov decision process (MDP) in which each sequence is a distinct
+state.</li>
+<li>使用强化学习来处理 MDPs 问题 &gt; We can apply standard
+reinforcement learning methods for MDPs, simply by using the complete
+sequence st as the state representation at time t.</li>
+</ul></li>
+<li>Optimal action-value function：在确定初始状态后(st, at,
+pi)后，在规定的迭代时间内，不同的policy值返回的奖励是不同的；选择序列中最大的奖励，那么对于的policy就是最优的。
+<img
+src="http://www.waylon.one/downloads/images/blog/Atari_problem_background.jpg"
+alt="Problem goal and model" />
+<ul>
+<li>We define the optimal action-value function Q∗(s, a) as the maximum
+expected return achievable by following any strategy, after seeing some
+sequence s and then taking some action a, Q∗(s, a) = maxπ E [Rt|st = s,
+at = a, π], where π is a policy mapping sequences to actions (or
+distributions over actions).</li>
+</ul></li>
+<li>Bellman equation
+<ul>
+<li>The optimal action-value function obeys an important identity known
+as the Bellman equation.</li>
+<li>Intuition : 转化问题为寻找当前最优 <img
+src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_1.jpg" />
+<img
+src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_2.jpg" /></li>
+<li>因为the optimal value Q∗(s?, a?) of the sequence s? at the next
+time-step 不可知，所以进一步简化问题。 &gt; The basic idea behind many
+reinforcement learning algorithms is to estimate the action- value
+function, by using the Bellman equation as an iterative update, Qi+1(s,
+a) = E [r + γ maxa?Qi(s?, a?)|s, a]. Such value
+<ul>
+<li>证明收敛性： &gt; Such value iteration algorithms converge to the
+optimal action-value function.</li>
+</ul></li>
+</ul></li>
+<li>泛化能力
+<ul>
+<li><p>实践中，原模型严重依赖当前的s，缺乏泛化能力。 &gt; In practice,
+this basic approach is totally impractical, because the action-value
+function is estimated separately for each sequence, without any
+generalisation.</p></li>
+<li><p>我们希望使用一个近似函数来估计行为-值函数 &gt; It is common to
+use a function approximator to estimate the action-value function.</p>
+<ul>
+<li>近似函数可以使用线性函数，或者非线性函数，比如神经网络。 &gt; In the
+reinforcement learning community this is typically a linear function
+approximator, but sometimes a non-linear function approximator is used
+instead, such as a neural network.</li>
+</ul></li>
+<li><p>问题转换：把一个复杂的数学模型，通过 Bellman equation 转换为
+Q-learning 的问题。</p></li>
+</ul></li>
+<li>Training -- Q-network
+<ul>
+<li>A Q-network can be trained by minimising a sequence of loss
+functions that changes at each iteration.</li>
+<li>Note that the targets depend on the network weights; this is in
+contrast with the targets used for supervised learning, which are fixed
+before learning begins.</li>
+<li>Differentiating the loss function with respect to the weights at the
+gradient.</li>
+<li>[又一次简化问题] Rather than computing the full expectations in the
+above gradient, it is often computationally expe- dient to optimise the
+loss function by stochastic gradient descent.</li>
+</ul></li>
+</ul>
+<!--
+- 把问题用数学的公式表达出来，但是如何实现又是一件事情；
+- 通过简化的方式，让问题看起来虽然不是最优，但是有解；
+- 把问题转化到已解的问题，那么问题基本就是解决了。比如本文，现阶段转化到 Q-learning.
+- 证明问题的收敛性，比如趋向最优。
+-->
+<ul>
+<li>Summary
+<ul>
+<li>model-free: it solves the reinforcement learning task directly using
+samples from the emulator E, without explicitly constructing an estimate
+of E.</li>
+<li>off-policy: it learns about the greedy strategy a = maxa Q(s, a; θ),
+while following a behaviour distribution that ensures adequate
+exploration of the state space.</li>
+</ul></li>
+</ul>
+<!--
+思考方法：把一个新问题，经过变换处理等，转换为已知且已解的问题，那么问题难度迎刃而解，
+-->
+<h1 id="related-work">Related Work</h1>
+<!--
+ 
+ 已有的研究现状，自己读起来有点费劲，看来作者读过的文章量还是不少的。没有足够的阅读和经历，研究可能会有局限。
+
+通过绘制研究发展的时间轴，自己可以理解项目的发展，对算法的演进脉络更清晰。
+
+-->
+<h2 id="timeline">Timeline</h2>
+<ul>
+<li><p>1995: TD-gammon used a model-free reinforcement learning
+algorithm similar to Q-learning, and approximated the value function
+using <strong>a multi-layer perceptron with one hidden
+layer</strong>.</p>
+<ul>
+<li>Early attempts to follow up on TD-gammon were less successful.</li>
+<li>1997: It was shown that combining model-free reinforcement learning
+algorithms such as Q-learning with <strong>non-linear function
+approximators</strong>, or indeed with off-policy learning could cause
+the Q-network to diverge.</li>
+</ul></li>
+<li><p>Subsequently, the majority of work in reinforcement learning
+focused on <strong>linear function approximators</strong> with better
+convergence guarantees.</p></li>
+<li><p>More recently, there has been a revival of interest in combining
+deep learning with reinforcement learning.</p>
+<ul>
+<li>Deep neural networks have been used to estimate the environment;
+restricted Boltzmann machines have been used to estimate the value
+function [2004]; or the policy [2012].</li>
+<li>The divergence issues with Q-learning have been partially addressed
+by gradient temporal-difference methods.</li>
+<li>Pros
+<ul>
+<li>These methods are proven to converge when evaluating a <strong>fixed
+policy</strong> with a nonlinear function approximator [2009]; or when
+learning a control policy with linear function approximation using a
+restricted variant of Q-learning [2010].</li>
+</ul></li>
+<li>Cons
+<ul>
+<li>However, these methods have not yet been extended to nonlinear
+control.</li>
+</ul></li>
+</ul></li>
+<li><p>2005: NFQ optimises the sequence of loss functions, using the
+RPROP algorithm to update the parameters of the Q-network.</p>
+<ul>
+<li>NFQ has also been successfully applied to simple real-world control
+tasks using purely visual input, by <strong>first using deep
+autoencoders to learn a low dimensional representation of the
+task</strong>, and then applying NFQ to this representation.
+<ul>
+<li>Our approach applies reinforcement learning
+<strong>end-to-end</strong>, directly from the visual inputs; as a
+result it may <strong>learn features</strong> that are directly relevant
+to discriminating.</li>
+</ul></li>
+<li>Cons
+<ul>
+<li>It uses a batch update that has a computational cost per iteration
+that is proportional to the size of the data set, whereas we consider
+stochastic gradient updates that have a low constant cost per iteration
+and scale to large data-sets.</li>
+</ul></li>
+</ul></li>
+<li><p>1993: Q-learning has also previously been combined with
+experience replay and a simple neural network.</p>
+<ul>
+<li>But again starting with <strong>a low-dimensional state</strong>
+rather than raw visual inputs.
+<!--+ 本文简化了问题，反而是创新。有本事简化问题，让复杂的问题不再复杂，为什么人不是一种本事呢？--></li>
+</ul></li>
+<li><p>2013: The use of the Atari 2600 emulator as a reinforcement
+learning platform, who applied standard reinforcement learning
+algorithms with linear function approximation and generic visual
+features.</p>
+<ul>
+<li>The HyperNEAT evolutionary architecture has also been applied to the
+Atari platform, where it was used to evolve (separately, for each
+distinct game) a neural network representing a strategy for that game.
+<!--* 本文发表于2013，感觉距离伟大理论的提出就是一步之遥。当然，提出的训练方法，还是帮助了伟大理论的提出。--></li>
+</ul></li>
+</ul>
+<h1 id="deep-reinforcement-learning">Deep Reinforcement Learning</h1>
+<ul>
+<li><p>现有的基于深度学习在视觉和声音上的研究，激发作者的本文研究。 &gt;
+Recent breakthroughs in computer vision and speech recognition have
+relied on efficiently training deep neural networks on very large
+training sets. The most successful approaches are trained directly from
+the raw inputs, using lightweight updates based on <strong>stochastic
+gradient descent</strong>. By feeding sufficient data into deep neural
+networks, it is often possible to <strong>learn better representations
+than handcrafted features</strong>.</p></li>
+<li><p>本文的研究目标，连接RL和DNN。 &gt; Our goal is to connect a
+reinforcement learning algorithm to a deep neural network which operates
+directly on RGB images and efficiently process training data by using
+stochastic gradient updates.</p></li>
+</ul>
+<hr />
+<ul>
+<li><p>Deep Q-learning with Experience Replay</p>
+<ol type="1">
+<li>We store the agent’s experiences at each time-step.</li>
+<li>We apply Q-learning updates, or minibatch updates, to samples of
+experience, drawn at random from the pool of stored samples.</li>
+<li>After performing experience replay, the agent selects and executes
+an action according to an ?-greedy policy.</li>
+</ol></li>
+</ul>
+<p><img
+src="http://www.waylon.one/downloads/images/blog/deep_Q_learning_algorithm.jpg" /></p>
+<ul>
+<li>DQN (off-policy) vs online Q-learning
+<ul>
+<li>Each step of experience is potentially used in many weight updates,
+which allows for greater data efficiency.</li>
+<li>Learning directly from consecutive samples is inefficient, due to
+the strong correlations between the samples; randomizing the samples
+breaks these correlations and therefore reduces the variance of the
+updates.</li>
+<li>When learning on-policy the current parameters determine the next
+data sample that the parameters are trained on.
+<ul>
+<li>It is easy to see how unwanted feedback loops may arise and the
+parameters could get stuck in a poor local minimum, or even diverge
+catastrophically.</li>
+<li>Note that when learning by experience replay, it is necessary to
+learn off-policy (because our current parameters are different to those
+used to generate the sample), which motivates the choice of
+Q-learning.</li>
+</ul></li>
+<li>By using experience replay the behavior distribution is averaged
+over many of its previous states, smoothing out learning and avoiding
+oscillations or divergence in the parameters.</li>
+<li>In practice, our algorithm only stores <strong>the last N experience
+tuples</strong> in the replay memory, and samples uniformly at random
+from D when performing updates.
+<ul>
+<li>A more sophisticated sampling strategy might emphasize transitions
+from which we can learn the most, similar to prioritized sweeping.</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<h2 id="preprocessing-and-model-architecture">Preprocessing and Model
+Architecture</h2>
+<ul>
+<li>降低输入数据的维度
+<ul>
+<li>Reduce the input dimensionality
+<ul>
+<li>[降采样和灰度化] The raw frames are preprocessed by first converting
+their RGB representation to gray-scale and down-sampling it to a 110×84
+image.</li>
+</ul></li>
+</ul></li>
+<li>How to parameterize Q using a neural network?
+<ul>
+<li>We instead use an architecture in which there is <strong>a separate
+output uni</strong>t for each possible action, and only <strong>the
+state representation is an input to the neural network</strong>.
+<ul>
+<li>The outputs correspond to the predicted Q-values of the individual
+action for the input state.</li>
+</ul></li>
+<li>The main advantage of this type of architecture is the ability to
+compute Q-values for all possible actions in a given state with only a
+single forward pass through the network.</li>
+</ul></li>
+<li>Deep Q-Networks
+<ul>
+<li>Input: state representation &gt; The input to the neural network
+consists is an 84 × 84 × 4 image.</li>
+<li>Three hidden layers, followed by a rectifier nonlinearity.</li>
+<li>Output: Q-values for actions &gt; The output layer is a fully-
+connected linear layer with a single output for each valid action.</li>
+<li>We refer to convolutional networks trained with our approach as
+<strong>Deep Q-Networks</strong> (DQN).</li>
+</ul></li>
+</ul>
+<h1 id="experiments">Experiments</h1>
+<ul>
+<li><p>方法的通用性和鲁棒性：不需要根据游戏定制信息。 &gt; We use the
+same network architecture, learning algorithm and hyperparameters
+settings across all seven games, showing that our approach is robust
+enough to work on a variety of games without incorporating game-specific
+information.</p></li>
+<li><p>适应游戏的做法</p>
+<ul>
+<li>[修改分数比值] Since the scale of scores varies greatly from game to
+game, we fixed all positive rewards to be 1 and all negative rewards to
+be −1, leaving 0 rewards unchanged.</li>
+<li>[frame-skipping technique] The agent sees and selects actions on
+every kth frame instead of every frame, and its last action is repeated
+on skipped frames.</li>
+</ul></li>
+</ul>
+<h2 id="training-and-stability">Training and Stability</h2>
+<ul>
+<li>如何评估训练 &gt; Since our evaluation metric is the <strong>total
+reward</strong> the agent collects in an episode or game averaged over a
+number of games, we periodically compute it during training.
+<ul>
+<li>The <strong>average total reward</strong> evolves during training
+are indeed quite noisy, giving one the impression that the learning
+algorithm is not making steady progress.</li>
+<li>More stable, metric is the policy’s <strong>estimated action-value
+function Q</strong>, which provides an estimate of how much discounted
+reward the agent can obtain by following its policy from any given
+state.</li>
+<li>收敛性缺乏理论依据保证 &gt; This suggests that, <strong>despite
+lacking any theoretical convergence guarantees</strong>, our method is
+able to train large neural networks using a reinforcement learning
+signal and stochastic gradient descent in a stable manner.
+<!-- - 问题使用不同的语言描述，显示的结果是不一样的。 这样子就证明了算法的收敛性吗？--></li>
+</ul></li>
+</ul>
+<h2 id="visualizing-the-value-function">Visualizing the Value
+Function</h2>
+<ul>
+<li>尽管理论依据少，但通过 predicted value function
+和实际游戏界面的比较和关联，来证明算法的有效性。 &gt; Figure 3
+demonstrates that our method is able to learn how the value function
+evolves for a reasonably complex sequence of events.</li>
+</ul>
+<h2 id="main-evaluation">Main Evaluation</h2>
+<ul>
+<li><p>和现有的算法、做法比较（理论和实际） &gt; We compare our results
+with the best performing methods from the RL literature.</p>
+<ul>
+<li>找出其他算法的缺陷，或者验证算法提高点。 &gt; Note that both of
+these methods <strong>incorporate significant prior knowledge</strong>
+about the visual problem by using background sub- traction and treating
+each of the 128 colors as a separate channel. In contrast, our agents
+only receive <strong>the raw RGB screenshots</strong> as input and must
+learn to detect objects on their own. &gt; Our approach (labeled DQN)
+outperforms the other learning methods by a substantial margin on all
+seven games despite incorporating almost no prior knowledge about the
+inputs.</li>
+</ul></li>
+<li><p>人机比较 &gt; In addition to the learned agents, we also report
+scores for an expert human game player and a policy that selects actions
+uniformly at random.</p></li>
+<li><p>和 evolutionary policy search 比较 &gt; We also include a
+comparison to the evolutionary policy search approach from [8] in the
+last three rows of table.</p></li>
+</ul>
+<!-- 如果算法在某方面表现不好，找出相关的理由，最好和算法无关，或者可以避免 -->
+<h1 id="conclusion">Conclusion</h1>
+<ul>
+<li>贡献 &gt; This paper introduced a new deep learning model for
+reinforcement learning, and demonstrated its ability to master difficult
+control policies for Atari 2600 computer games, using only raw pixels as
+input.<br />
+&gt; We also presented a variant of online Q-learning that combines
+stochastic minibatch up- dates with experience replay memory to ease the
+training of deep networks for RL.</li>
+</ul>
+<h1 id="references">References</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/caozixuan98724/article/details/99219462">其他人的解读</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
+          
+            <a href="/tags/paper/" rel="tag"># paper</a>
+          
+            <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/html/html5-ruby/" rel="next" title="如何在文字上方添加拼音或英文标注">
+                <i class="fa fa-chevron-left"></i> 如何在文字上方添加拼音或英文标注
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/English/linguaskill-introduction/" rel="prev" title="剑桥领思介绍">
+                剑桥领思介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/wylloong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:yanlong.wangchn@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.1.</span> <span class="nav-text">本文贡献</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background"><span class="nav-number">3.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">任务描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8A%BD%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">问题抽象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">4.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#timeline"><span class="nav-number">4.1.</span> <span class="nav-text">Timeline</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#deep-reinforcement-learning"><span class="nav-number">5.</span> <span class="nav-text">Deep Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#preprocessing-and-model-architecture"><span class="nav-number">5.1.</span> <span class="nav-text">Preprocessing and Model
+Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experiments"><span class="nav-number">6.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#training-and-stability"><span class="nav-number">6.1.</span> <span class="nav-text">Training and Stability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#visualizing-the-value-function"><span class="nav-number">6.2.</span> <span class="nav-text">Visualizing the Value
+Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-evaluation"><span class="nav-number">6.3.</span> <span class="nav-text">Main Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">8.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nobody</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
