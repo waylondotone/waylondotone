@@ -376,7 +376,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  7.5k
+                  11k
                 </span>
               
 
@@ -392,7 +392,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  27 mins.
+                  38 mins.
                 </span>
               
             </div>
@@ -417,25 +417,36 @@
           
             <p>[toc]</p>
 <p>目前手上有一台国外 VPS，我在 19 年开始在 VPS
-上部署个人网站。之前利用这个 VPS 部署本地编译好的静态网页，流程大概是 -
-本地电脑配置 hexo 环境，在本地编辑并生成静态网页； - 通过 git hook
-等方式把本地生成的静态网页同步到远端服务器上； - 服务器通过 nginx
-支持访问静态网页内容。 <img src="/downloads/images/website_scheme.png" class="" title="网站架构设计"></p>
-<p>这种部署方式对多终端用户不友好，比如 -
-有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo
-环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。
-- 如果有多台电脑，只能在配备有 hexo 环境的电脑上编辑；即使多台电脑配备有
-hexo 内容，也容易有数据不同步的问题。</p>
-<p>本文介绍一种方式， - 网站原始数据保存在
-github，支持多终端访问和数据管理。 - 远程 VPS 上部署整套 hexo
-环境，支持生成静态网页结果。 - VPS 上获取网站数据(通常是 source
-下面的数据)，生成博客内容，启动 hexo 内置的 web 服务器（或使用 nginx
-指向生成的 public 目录），对外提供访问。 - 对于生成好的内容，部署到
-Github （用作备份）上</p>
-<p>这种方法可以在多终端实时更新网站内容，摆脱对单一终端的依赖，能够支持
-- VPS 上部署 hexo 环境，支持跨平台、多终端的网站内容编辑和更新。 - 引入
-git 管理网站原始数据，支持数据统一和备份。 - 支持在 github 和 VPS
-等多地同时部署个人网站，不必局限于 VPS。</p>
+上部署个人网站。之前利用这个 VPS
+部署本地编译好的静态网页，流程大概是</p>
+<ul>
+<li>本地电脑配置 hexo 环境，在本地编辑并生成静态网页；</li>
+<li>通过 git hook 等方式把本地生成的静态网页同步到远端服务器上；</li>
+<li>服务器通过 nginx 支持访问静态网页内容。 <img src="/downloads/images/website_scheme.png" class="" title="网站架构设计"></li>
+</ul>
+<p>这种部署方式对多终端用户不友好，比如</p>
+<ul>
+<li>有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo
+环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。</li>
+<li>如果有多台电脑，只能在配备有 hexo
+环境的电脑上编辑；即使多台电脑配备有 hexo
+内容，也容易有数据不同步的问题。</li>
+</ul>
+<p>本文介绍一种方式，</p>
+<ul>
+<li>网站原始数据保存在 github，支持多终端访问和数据管理。</li>
+<li>远程 VPS 上部署整套 hexo 环境，支持生成静态网页结果。</li>
+<li>VPS 上获取网站数据(通常是 source 下面的数据)，生成博客内容，启动
+hexo 内置的 web 服务器（或使用 nginx 指向生成的 public
+目录），对外提供访问。</li>
+<li>对于生成好的内容，部署到 Github （用作备份）上</li>
+</ul>
+<p>这种方法可以在多终端实时更新网站内容，摆脱对单一终端的依赖，能够支持</p>
+<ul>
+<li>VPS 上部署 hexo 环境，支持跨平台、多终端的网站内容编辑和更新。</li>
+<li>引入 git 管理网站原始数据，支持数据统一和备份。</li>
+<li>支持在 github 和 VPS 等多地同时部署个人网站，不必局限于 VPS。</li>
+</ul>
 <!--我们可以使用 Markdown（或其他语言）编写文章，可以方便的生成静态网页托管在GitHub上。-->
 <p>上述方法的硬件要求是，具备一台稳定连接的 VPS，要求有固定 IP
 地址。</p>
@@ -457,8 +468,8 @@ wordpress，基于PHP和MySQL的免费开源，这个框架有点重。</p>
 <h2 id="vps-环境配置">VPS 环境配置</h2>
 <ul>
 <li>固定 IP 地址</li>
-<li>CPU:</li>
-<li>RAM:</li>
+<li>Disk: 10G</li>
+<li>RAM: 512M</li>
 </ul>
 <!-- TODO 附加 VPS 的邀请信息 -->
 <h1 id="hexo-配置">Hexo 配置</h1>
@@ -468,11 +479,9 @@ wordpress，基于PHP和MySQL的免费开源，这个框架有点重。</p>
 及以上版本) 环境，安装步骤见官网 -- <a
 target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90">安装前提</a>
 。</p>
-<p>本机安装后的环境如下。 ''' $ git --version git version 2.17.1 $ node
--v v14.21.3 '''</p>
+<p>本机安装后的环境如下。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.17.1</span><br><span class="line">$ node -v</span><br><span class="line">v14.21.3</span><br></pre></td></tr></table></figure></p>
 <h2 id="安装-hexo">安装 Hexo</h2>
-<p>''' # 使用 npm 安装 Hexo npm install hexo-cli -g # 新建网站。<folder>
-是指定的文件夹 hexo init <folder> cd <folder> npm install '''</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 使用 npm 安装 Hexo</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"># 新建网站。&lt;folder&gt; 是指定的文件夹</span><br><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 <p>详见官网 -- <a
 target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo">安装
 Hexo</a></p>
@@ -480,13 +489,11 @@ Hexo</a></p>
 <h3 id="新建一篇文章">新建一篇文章</h3>
 <figure class="highlight plaintext"><figcaption><span>hexo-new</span><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands#new">hexo.io</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo new \[layout\] &lt;title&gt;</span><br><span class="line"># 路径是 source/\_posts</span><br><span class="line">hexo new post &lt;title&gt;</span><br><span class="line"># 路</span><br><span class="line">径是 source/_drafts, 文件夹内的文章不会被渲染</span><br><span class="line">hexo new draft &lt;title&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="生成静态文件">生成静态文件</h3>
-<p>''' # 在 VPS 本地生成 html 文件 hexo generate # 强制重新生成文件,
-效果接近 hexo clean &amp;&amp; hexo generate hexo g -f '''</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 在 VPS 本地生成 html 文件</span><br><span class="line">hexo generate</span><br><span class="line"># 强制重新生成文件, 效果接近 hexo clean &amp;&amp; hexo generate</span><br><span class="line">hexo g -f</span><br></pre></td></tr></table></figure>
 <h3 id="部署网站">部署网站</h3>
-<p>''' hexo deploy '''</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
 <h2 id="启动服务器">启动服务器</h2>
-<p>''' # 启动服务器。默认情况下，访问网址为： http://localhost:4000/
-hexo server '''</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 启动服务器。默认情况下，访问网址为： http://localhost:4000/</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
 <p>现在，直接用 vps 的公网 ip:4000 就可以访问博客。</p>
 <h1 id="nginx-配置">Nginx 配置</h1>
 <p>上面网站部署中，容易泄露 VPS IP 地址，并且网站链接看起来不美观。</p>
@@ -512,7 +519,7 @@ hexo server '''</p>
 <p><strong>主题</strong> 文件夹。Hexo 会根据主题来生成静态页面。</p>
 <h2 id="hexo-cmd">Hexo cmd</h2>
 <h3 id="生成文件后部署">生成文件后部署</h3>
-<p>''' hexo generate --deploy # 简写为 hexo g -d '''</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo generate --deploy</span><br><span class="line"># 简写为</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
 <h3 id="front-matter"><a
 target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a></h3>
 <ul>
@@ -523,13 +530,8 @@ Foo；而标签没有顺序和层次。</li>
 <h2 id="github-部署网站">github 部署网站</h2>
 <h3 id="通过本地部署">通过本地部署</h3>
 <ul>
-<li><p>安装一键部署插件 ''' npm install hexo-deployer-git --save
-'''</p></li>
-<li><p>修改_config.yml文件 ‘‘‘ deploy: type: git # 目前仅支持 ssh
-方式访问。根据你的信息，更新 your_account_name 和 your_repository_name
-路径 repo:
-git@github.com:your_account_name/your_repository_name.github.io.git #
-branch 可选，默认是 main branch: master ’’’</p></li>
+<li><p>安装一键部署插件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p></li>
+<li><p>修改_config.yml文件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # 目前仅支持 ssh 方式访问。根据你的信息，更新 your_account_name 和 your_repository_name 路径</span><br><span class="line">  repo: git@github.com:your_account_name/your_repository_name.github.io.git</span><br><span class="line">  # branch 可选，默认是 main</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p></li>
 </ul>
 <p><a
 target="_blank" rel="noopener" href="https://blog.csdn.net/hello_cmy/article/details/104658452">将hexo个人博客部署到github上公开使用</a></p>
@@ -569,8 +571,7 @@ GitHub Actions</a> 介绍的方法，在使用 pandoc 的地方引用
 域名访问，你的 repository 应该直接命名为
 <你的 GitHub 用户名>.github.io。repository 需要加上后缀 .github.io
 。</p>
-<p>''' # 部署配置</p>
-<p>'''</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 部署配置</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h1 id="申请域名及域名解析">申请域名及域名解析</h1>
 <h2 id="github-pages-自定义域名">github pages 自定义域名</h2>
 <p>按照 github 官方教程 -- <a
@@ -2367,13 +2368,13 @@ ETF
             <div class="links-of-author motion-element">
                 
                   <span class="links-of-author-item">
-                    <a href="https://github.com/wylloong" target="_blank" title="GitHub">
+                    <a href="https://github.com/waylondotone" target="_blank" title="GitHub">
                       
                         <i class="fa fa-fw fa-github"></i>GitHub</a>
                   </span>
                 
                   <span class="links-of-author-item">
-                    <a href="mailto:yanlong.wangchn@gmail.com" target="_blank" title="E-Mail">
+                    <a href="mailto:me@waylon.one" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
                   </span>

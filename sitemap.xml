@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.waylon.one/Linux/advanced-git/</loc>
+    
+    <lastmod>2023-05-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/website/hexo/rebuild_website_in_vps/</loc>
     
     <lastmod>2023-05-20</lastmod>
@@ -101,15 +110,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/English/second-linguaskill/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/monthly-skills/rule-engine/</loc>
     
     <lastmod>2023-05-19</lastmod>
@@ -119,7 +119,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/website/site-indexed/</loc>
+    <loc>http://www.waylon.one/English/second-linguaskill/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Trip/tenggeli-desert-pedestrianism/</loc>
+    <loc>http://www.waylon.one/website/site-indexed/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/website/nslookup/</loc>
+    <loc>http://www.waylon.one/Trip/tenggeli-desert-pedestrianism/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -164,15 +164,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/life/outlook-link-163/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/Online/online-gadgets/</loc>
     
     <lastmod>2023-05-19</lastmod>
@@ -182,7 +173,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/paper/paper-group-surfing/</loc>
+    <loc>http://www.waylon.one/website/nslookup/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -192,6 +183,24 @@
   
   <url>
     <loc>http://www.waylon.one/paper/paper-MIT-SACADRL/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/life/outlook-link-163/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/paper/paper-group-surfing/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -218,7 +227,25 @@
   </url>
   
   <url>
+    <loc>http://www.waylon.one/English/linguaskill-introduction/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/Linux/linux-mount-disk/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/Linux/linux-interminal-shortcut-cmd/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -245,7 +272,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Linux/linux-interminal-shortcut-cmd/</loc>
+    <loc>http://www.waylon.one/Weekly-Blogs/how-to-use-Mendeley/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -254,7 +281,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/English/linguaskill-introduction/</loc>
+    <loc>http://www.waylon.one/Trip/huangshan-one-day/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -272,24 +299,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Weekly-Blogs/how-to-use-Mendeley/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/Ubuntu/install-sogou-ubuntu-18/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/Ubuntu/install-rtags-vim-ubuntu-18/</loc>
     
     <lastmod>2023-05-19</lastmod>
@@ -299,7 +308,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Trip/huangshan-one-day/</loc>
+    <loc>http://www.waylon.one/Insurrance/insurrance-issue/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -326,7 +335,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Insurrance/insurrance-issue/</loc>
+    <loc>http://www.waylon.one/Ubuntu/install-sogou-ubuntu-18/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -398,7 +407,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/English/first-linguaskill/</loc>
+    <loc>http://www.waylon.one/English/fifth-linguaskill/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -407,7 +416,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/English/fifth-linguaskill/</loc>
+    <loc>http://www.waylon.one/English/first-linguaskill/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -452,15 +461,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Autonomous-Driving/eudm-paper/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/website/dynadot-buy-domain/</loc>
     
     <lastmod>2023-05-19</lastmod>
@@ -488,6 +488,15 @@
   </url>
   
   <url>
+    <loc>http://www.waylon.one/Autonomous-Driving/eudm-paper/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/Reading/expression-on-feed-on-poor/</loc>
     
     <lastmod>2023-05-19</lastmod>
@@ -498,6 +507,15 @@
   
   <url>
     <loc>http://www.waylon.one/Programming/boost-library/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/Trip/chengdu-aba-trip-2021/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -524,34 +542,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/website/commonweal-404-page/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/USV/colregs-paper/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/Trip/chengdu-aba-trip-2021/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/Finance/convertible-bond/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -569,7 +560,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Markdown/advanced-markdown/</loc>
+    <loc>http://www.waylon.one/website/commonweal-404-page/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -578,7 +569,16 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Linux/advanced-git/</loc>
+    <loc>http://www.waylon.one/Finance/convertible-bond/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/Markdown/advanced-markdown/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -659,7 +659,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/website/add-video-in-blog/</loc>
+    <loc>http://www.waylon.one/website/Website-FAQ/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -668,7 +668,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/website/Website-FAQ/</loc>
+    <loc>http://www.waylon.one/website/add-video-in-blog/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -704,6 +704,15 @@
   </url>
   
   <url>
+    <loc>http://www.waylon.one/website/Introduce-AdSense-to-website/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/Trip/Jinan-Taishan-trip/</loc>
     
     <lastmod>2023-05-19</lastmod>
@@ -722,7 +731,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/website/Introduce-AdSense-to-website/</loc>
+    <loc>http://www.waylon.one/Trip/Datong-trip-2020/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -740,25 +749,16 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Trip/Datong-trip-2020/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/USV/ENC-analysis-store/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/AI/Getting-started-with-machine-learning/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/Ubuntu/Python/Getting-started-with-pip/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -776,7 +776,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Ubuntu/Python/Getting-started-with-pip/</loc>
+    <loc>http://www.waylon.one/USV/ENC-analysis-store/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -803,6 +803,15 @@
   </url>
   
   <url>
+    <loc>http://www.waylon.one/paper/A-Hopping-Robot-for-Planetary-Exploration/</loc>
+    
+    <lastmod>2023-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/Reading/A-Gentleman-in-Moscow/</loc>
     
     <lastmod>2023-05-19</lastmod>
@@ -813,15 +822,6 @@
   
   <url>
     <loc>http://www.waylon.one/BTC/A-Peer-to-Peer-Electronic-Cash-System/</loc>
-    
-    <lastmod>2023-05-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/paper/A-Hopping-Robot-for-Planetary-Exploration/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -848,7 +848,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Linux/tmux/</loc>
+    <loc>http://www.waylon.one/Linux/vim-configuration/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -857,7 +857,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/Linux/vim-configuration/</loc>
+    <loc>http://www.waylon.one/Linux/tmux/</loc>
     
     <lastmod>2023-05-19</lastmod>
     
@@ -875,7 +875,35 @@
 
   
   <url>
+    <loc>http://www.waylon.one/tags/website/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/tags/History/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/tags/Weekly-Blogs/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/tags/paper/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/tags/Robotics/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -896,27 +924,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/tags/Autonomous-Driving/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/tags/Weekly-Blogs/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/tags/Robotics/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/tags/Journey/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -924,14 +931,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/tags/C-Plus-Plus/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/tags/USV/</loc>
+    <loc>http://www.waylon.one/tags/Autonomous-Driving/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -959,6 +959,20 @@
   </url>
   
   <url>
+    <loc>http://www.waylon.one/tags/Python/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/tags/USV/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/tags/Path-Planning/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -966,7 +980,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/tags/Python/</loc>
+    <loc>http://www.waylon.one/tags/C-Plus-Plus/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -994,13 +1008,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/tags/paper/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/tags/C-plus-plus/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -1015,14 +1022,14 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/tags/Markdown/</loc>
+    <loc>http://www.waylon.one/tags/git/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://www.waylon.one/tags/git/</loc>
+    <loc>http://www.waylon.one/tags/Markdown/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1051,13 +1058,6 @@
   
   <url>
     <loc>http://www.waylon.one/tags/Google/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/tags/website/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1120,6 +1120,13 @@
   </url>
   
   <url>
+    <loc>http://www.waylon.one/tags/Cool-Skills/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://www.waylon.one/tags/email/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -1133,17 +1140,24 @@
     <priority>0.2</priority>
   </url>
   
+
+  
   <url>
-    <loc>http://www.waylon.one/tags/Cool-Skills/</loc>
+    <loc>http://www.waylon.one/categories/website/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
-
-  
   <url>
     <loc>http://www.waylon.one/categories/Reading/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/categories/paper/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1157,13 +1171,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/categories/Autonomous-Driving/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/categories/Trip/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -1171,7 +1178,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/categories/USV/</loc>
+    <loc>http://www.waylon.one/categories/Autonomous-Driving/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1186,6 +1193,13 @@
   
   <url>
     <loc>http://www.waylon.one/categories/Ubuntu/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/categories/USV/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1207,20 +1221,6 @@
   
   <url>
     <loc>http://www.waylon.one/categories/Robotics/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/categories/website/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://www.waylon.one/categories/paper/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1290,13 +1290,6 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/categories/html/</loc>
-    <lastmod>2023-05-20</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://www.waylon.one/categories/Weekly-Blogs/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
@@ -1304,7 +1297,7 @@
   </url>
   
   <url>
-    <loc>http://www.waylon.one/categories/life/</loc>
+    <loc>http://www.waylon.one/categories/html/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1312,6 +1305,13 @@
   
   <url>
     <loc>http://www.waylon.one/categories/Insurrance/</loc>
+    <lastmod>2023-05-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://www.waylon.one/categories/life/</loc>
     <lastmod>2023-05-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
