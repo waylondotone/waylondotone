@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+<!-- waylon's adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6129496365361356"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="VPS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ps. 本文实时更新于 个人网站，请移步阅读。 国内的网盘虽然免费，但总让人对隐私不太放心，毕竟“免费的永远是最贵的”。 自己之前购买了一个VPS，搭建自己的网站后，感觉没有充分利用 VPS 的流量和性能，于是琢磨搭建一个私人的云服务，随后就发现了 Nextcloud 这一开源云服务。   通过 链接 注册并购买搬瓦工VPS，就可以按下面的教程安装 NextCloud 私人云盘啦，我也可以得到新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Docker 在 Linux 上安装 NextCloud 私有云盘">
+<meta property="og:url" content="http://www.waylon.one/Linux/Install-nextcloud-in-docker/index.html">
+<meta property="og:site_name" content="One&#39;s Way">
+<meta property="og:description" content="ps. 本文实时更新于 个人网站，请移步阅读。 国内的网盘虽然免费，但总让人对隐私不太放心，毕竟“免费的永远是最贵的”。 自己之前购买了一个VPS，搭建自己的网站后，感觉没有充分利用 VPS 的流量和性能，于是琢磨搭建一个私人的云服务，随后就发现了 Nextcloud 这一开源云服务。   通过 链接 注册并购买搬瓦工VPS，就可以按下面的教程安装 NextCloud 私人云盘啦，我也可以得到新">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://www.waylon.one/downloads/images/nextcloud_web.png">
+<meta property="article:published_time" content="2019-09-21T08:47:58.000Z">
+<meta property="article:modified_time" content="2023-05-19T12:12:32.157Z">
+<meta property="article:author" content="Nobody">
+<meta property="article:tag" content="VPS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://www.waylon.one/downloads/images/nextcloud_web.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.waylon.one/Linux/Install-nextcloud-in-docker/"/>
+
+
+
+
+
+  <title>使用 Docker 在 Linux 上安装 NextCloud 私有云盘 | One's Way</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">One's Way</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Dare to create</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Linux/Install-nextcloud-in-docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">使用 Docker 在 Linux 上安装 NextCloud 私有云盘</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-21T16:47:58+08:00">
+                2019-09-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  12k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  45 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!--
+[Nextcloud 搭建私人云服务教程](https://blog.itswincer.com/posts/bf0413ac/)
+[使用Docker快速安装NextCloud个人私有云盘](https://www.moerats.com/archives/420/)
+[docker容器开机自启](https://www.cnblogs.com/gcgc/p/10494615.html)
+-->
+<p>ps. 本文实时更新于 <a
+href="http://www.waylon.one/Linux/Install-nextcloud-in-docker/">个人网站</a>，请移步阅读。</p>
+<p>国内的网盘虽然免费，但总让人对隐私不太放心，毕竟“免费的永远是最贵的”。</p>
+<p>自己之前购买了一个VPS，搭建自己的网站后，感觉没有充分利用 VPS
+的流量和性能，于是琢磨搭建一个私人的云服务，随后就发现了 Nextcloud
+这一开源云服务。</p>
+<p><img
+src="http://www.waylon.one/downloads/images/Baidu_to_private.JPG" /></p>
+<blockquote>
+<p>通过 <a target="_blank" rel="noopener" href="https://bandwagonhost.com/aff.php?aff=60653">链接</a>
+注册并购买搬瓦工VPS，就可以按下面的教程安装 NextCloud
+私人云盘啦，我也可以得到新客注册的返现。</p>
+</blockquote>
+<h1 id="about-nextcloud">About NextCloud</h1>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://nextcloud.com/">Nextcloud</a> is the <strong>open
+source file sync and share software</strong> for everyone from
+individuals to large enterprises and service providers. Nextcloud
+provides a safe, secure and compliant file sync and share solution on
+servers you control.<br />
+With Nextcloud you can share one or more folders on your PC, and sync
+them with your Nextcloud server. <strong>Place files in your local
+shared directories, and those files are immediately synced to the
+server, and then to other PCs via the desktop client.</strong> Not near
+a desktop client? No problem, simply log in with the web client and
+manage your files there. <strong>The Android and iOS mobile apps allow
+you to browse, download and upload photos and videos.</strong><br />
+Whether using a mobile device, a workstation, or a web client, Nextcloud
+provides the ability to put the right files in the right hands at the
+right time on any device in one simple-to-use, secure, private and
+controlled solution.</p>
+</blockquote>
+<p><img
+src="http://www.waylon.one/downloads/images/Nextcloud.png" /></p>
+<p>简而言之，Nextcloud
+是一个自由及开放源代码的私有云网盘，每个人都可以在私人服务器上安装并运行它，能够快速同步你的文件到你的私有服务器，方便你跨平台(现在支持PC、Android和iOS)
+同步和分享文件，功能和百度云不差多少，优点是隐私好，同步下载速度取决于服务器带宽。</p>
+<p>与 Dropbox 等专有服务相比，Nextcloud
+的开放架构让用户可以利用应用程序的方式在服务器上新增额外的功能，并让用户可以完全掌控自己的数据。同时，Nextcloud
+可与在 Windows、macOS 或是多种 Linux 发布版上运行的客户端同步。</p>
+<p>Nextcloud
+用户可以管理日历、联系人、计划工作与流媒体。此外，用户也可以在 Nextcloud
+上使用基于浏览器的文本编辑器、书签服务、缩略网址服务、相册、RSS阅读器与文件查看器。因为有良好的扩展性，Nextcloud可以透过鼠标点一下即可完成安装的应用程序强化其功能，并可连线至
+Dropbox、Google 云端硬盘与 Amazon S3 等产品。</p>
+<h1 id="安装简介">安装简介</h1>
+<p>Nextcloud 虽然这么好用，但是安装依赖却非常复杂，需要安装 LNMP
+集成环境(i.e. Linux + Nginx + MySql +
+PHP)，在搭建过程中或多或少都会出点问题。</p>
+<p>本文推荐一个很方便的安装方法 <a
+target="_blank" rel="noopener" href="https://github.com/chrootLogin/docker-nextcloud">docker-nextcloud</a>，使用纯命令形式在
+Docker 上安装 NextCloud (Docker file
+会帮你把负责的依赖都配置好)，并探讨如何配置反向代理，适合尝鲜的新手。</p>
+<p>安装 Docker 后，需要安装两个容器：mysql 和 nextcloud。其中，mysql
+用于存储用户的数据，nextcloud 通过向 mysql
+容器读写数据，从而实现数据的存储和访问。</p>
+<h1 id="安装docker">安装Docker</h1>
+<blockquote>
+<p>Docker
+是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的
+Linux 或 Windows
+机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># CentOS 7、Debian、Ubuntu</span><br><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+<h2 id="复习知识点">复习知识点</h2>
+<ul>
+<li>curl 是一个工具，用于传输来自服务器或者到服务器的数据。</li>
+<li>systemctl 是一个系统管理守护进程、工具和库的集合，用于取代 system
+V、service 和 chkconfig 命令，初始进程主要负责控制 systemd
+系统和服务管理器。</li>
+<li>systemctl start 启动服务</li>
+<li>systemctl enable 激活服务并在开机时启用</li>
+</ul>
+<!--
+[Centos7中systemctl命令详解](https://www.cnblogs.com/zhming26/p/6155201.html)
+-->
+<h1 id="安装-nextcloud-服务器">安装 Nextcloud 服务器</h1>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 拉取 Mysql 镜像和 Nextcloud 镜像</span><br><span class="line">docker pull rootlogin/nextcloud &amp;&amp; docker pull mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 mysql 容器，注意修改数据库信息</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 nextcloud 容器，添加链接到 mysql 容器；ip 是浏览器访问云盘的端口号。使用镜像 rootlogin/nextcloud，以后台模式启动一个容器, 容器命名为 nextcloud，将容器的 80 端口映射到主机的 3000 端口,主机的目录 /var/nextcloud/data 映射到容器的 /data，并添加链接到上述的 nextcloud_db 容器。</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br></pre></td></tr></table></figure>
+<!--
+密码 supersecretpassword
+-->
+<!--
+docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10
+-->
+<!--
+docker run -d --name nextcloud --restart=always --link nextcloud_db:nextcloud_db -v /var/nextcloud/data:/data -p 3000:80 rootlogin/nextcloud
+-->
+<blockquote>
+<p>MariaDB 和 MySQL 的关系：<strong>MariaDB 数据库管理系统是 MySQL
+的一个分支</strong>。开发这个分支的原因之一是：甲骨文公司收购了 MySQL
+后，有将 MySQL
+闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br />
+MariaDB 的目的是完全兼容 MySQL，包括 API 和命令行，使之能轻松成为 MySQL
+的代替品。</p>
+</blockquote>
+<p>  <img
+src="http://www.waylon.one/downloads/images/next_cloud_container.png" /></p>
+<p>恭喜你，现在初级版的云服务器已经搭建成功。访问地址为
+http://your_ip:3000。<br />
+启动命令里的 3000
+端口可自行替换，不过后面有关端口的命令都可自行修改，/var/nextcloud/data为网盘的数据库，可以自行修改。</p>
+<h2 id="复习知识点-1">复习知识点</h2>
+<ul>
+<li>docker pull 是从镜像仓库拉取镜像。</li>
+<li><a
+target="_blank" rel="noopener" href="https://www.runoob.com/docker/docker-run-command.html">docker
+run</a> 是创建一个新的容器并运行一个命令。</li>
+<li>--restart=always，设置开机重启</li>
+</ul>
+<h1 id="防火墙开启端口">防火墙开启端口</h1>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#CentOS 7</span><br><span class="line">firewall-cmd --zone=public --add-port=3000/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<h1 id="初始设置">初始设置</h1>
+<ul>
+<li>访问 http://your_ip:3000。</li>
+<li>创建管理员帐号和密码</li>
+<li>数据库选择 MySQL/MariaDB，如果配置不成功，可以选择 SQLite
+(性能差点，但是可以满足个人基本的需求)。</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>用户名</td>
+<td>test</td>
+</tr>
+<tr class="even">
+<td>密码</td>
+<td>test</td>
+</tr>
+<tr class="odd">
+<td>数据库名</td>
+<td>test</td>
+</tr>
+<tr class="even">
+<td>地址</td>
+<td>nextcloud_db:3306</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>mysql数据库默认端口是3306。</p>
+</blockquote>
+<p><img
+src="http://www.waylon.one/downloads/images/nextcloud_initialize.png" /></p>
+<ul>
+<li>恭喜你，进入自己的网盘界面。</li>
+</ul>
+<p><img src="/downloads/images/nextcloud_web.png" /></p>
+<h1 id="域名访问">域名访问</h1>
+<p>IP 访问会直接把云盘的 IP
+和端口暴露出来，感觉不太妥。如果要<!--像上面示例 [点击访问](http://drive.waylon.one/)，-->通过域名访问自己的网盘，就需要反代了。</p>
+<p>反代可以用 Nginx、Apache、Caddy，本文讲述如何使用 Nginx。</p>
+<blockquote>
+<p>Nginx是一款轻量级的 Web
+服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在 BSD-like
+协议下发行。其特点是占有内存少，并发能力强，</p>
+</blockquote>
+<p>默认用户已经完成购买域名、安装 Nginx
+的前序步骤，鼓励折腾一下，有问题欢迎下面留言交流。</p>
+<h2 id="certbot-生成-https-证书">certbot 生成 https 证书</h2>
+<p>Let's
+Encrypt是很火的一个免费SSL证书发行项目，自动化发行证书，证书有90天的有效期。适合个人使用或者临时使用，不用再忍受自签发证书不受浏览器信赖的提示。<br />
+附上CentOS 7.2的 <a
+target="_blank" rel="noopener" href="https://www.vpser.net/build/letsencrypt-certbot.html">免费SSL证书Let's
+Encrypt</a> 流程。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./certbot-auto certonly --email your_mail --agree-tos --no-eff-email --webroot -w /var/nextcloud -d drive.example.com</span><br></pre></td></tr></table></figure>
+<h2 id="配置-nginx-配置文件">配置 Nginx 配置文件</h2>
+<p>在/etc/nginx/conf.d/下的配置文件里添加如下配置。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line">    # enforce https</span><br><span class="line">    return 301 https://$server_name$request_uri;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">server &#123;</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    listen [::]:443 ssl http2;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate  /etc/letsencrypt/live/drive.example.com/fullchain.pem;</span><br><span class="line">    ssl_certificate_key  /etc/letsencrypt/live/drive.example.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    add_header Strict-Transport-Security &quot;max-age=63072000; includeSubdomains; preload&quot;;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">     proxy_pass http://your_ip:3000;</span><br><span class="line">     proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，重启 nginx，就可以通过网址访问自己的云盘啦！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure>
+<h1 id="安装中可能遇到的问题-fqa">安装中可能遇到的问题 FQA</h1>
+<ul>
+<li>Q:
+初始化时，提示“看起来您正在尝试重新安装您的Nextcloud。但您的config文件夹中没有CAN_INSTALL文件。请在您的config文件夹中创建CAN_INSTALL文件以继续。”</li>
+<li>A: 运行如下命令。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /var/nextcloud/data/config &amp;&amp; touch CAN_INSTALL</span><br></pre></td></tr></table></figure>
+<p>其中，/var/nextcloud/data为网盘的数据库，请自行修改。</p>
+<hr />
+<ul>
+<li>Q: 反向代理后，网址无法直接访问，比如提示403。</li>
+<li>A：请先定位问题，可以在 /var/log/nginx/error.log 查看代理错误。</li>
+</ul>
+<hr />
+<ul>
+<li>Q:关机重启后，原来配置好的网盘无法访问。</li>
+<li>A:在使用docker
+run启动容器时，已经使用--restart参数来设置容器开机自启。如果发现服务器重启后，无法访问网盘，可以尝试
+update 命令设置 --restart=always。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker update --restart=always 容器名称</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Docker 提供了 restart policy 机制，可以在容器退出或者 Docker
+重启时控制容器能够自启动。这种 Restart policy
+可以保证相关容器按照正确顺序启动。</p>
+</blockquote>
+<hr />
+<ul>
+<li>Q: 通过 IP 方式 登录时，没有出现登录界面，显示 "HTTP ERROR
+500".</li>
+<li>A: 根据 <a
+target="_blank" rel="noopener" href="https://help.nextcloud.com/t/solved-nextcloud-12-http-error-500/21577">Nextcloud
+12 HTTP Error 500</a> 提供的方法，更新PHP模块可以解决问题。
+<ul>
+<li>我使用 apt-get upgrade 升级了所有软件的版本，然后问题得到修复。</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>HTTP 500 错误，全称为 HTTP 500 Internal Server Error，即 HTTP 500
+内部服务器错误。<strong>HTTP 500
+内部服务器错误表示服务器遇到意外情况，导致其无法履行请求</strong>，但它无法说明具体错误或发生错误的根本原因。当发生错误时，访问的网站会显示发生错误。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VPS/" rel="tag"># VPS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Ubuntu/how-to-create-gif/" rel="next" title="how to create gif in Ubuntu / 如何在 Ubuntu 系统上录制 gif">
+                <i class="fa fa-chevron-left"></i> how to create gif in Ubuntu / 如何在 Ubuntu 系统上录制 gif
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Trip/Jinan-Taishan-trip/" rel="prev" title="北京出发夜爬泰山攻略">
+                北京出发夜爬泰山攻略 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/waylondotone" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:me@waylon.one" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#about-nextcloud"><span class="nav-number">1.</span> <span class="nav-text">About NextCloud</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">安装简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85docker"><span class="nav-number">3.</span> <span class="nav-text">安装Docker</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">复习知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-nextcloud-%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">安装 Nextcloud 服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%8D%E4%B9%A0%E7%9F%A5%E8%AF%86%E7%82%B9-1"><span class="nav-number">4.1.</span> <span class="nav-text">复习知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%98%B2%E7%81%AB%E5%A2%99%E5%BC%80%E5%90%AF%E7%AB%AF%E5%8F%A3"><span class="nav-number">5.</span> <span class="nav-text">防火墙开启端口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">初始设置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%9F%E5%90%8D%E8%AE%BF%E9%97%AE"><span class="nav-number">7.</span> <span class="nav-text">域名访问</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#certbot-%E7%94%9F%E6%88%90-https-%E8%AF%81%E4%B9%A6"><span class="nav-number">7.1.</span> <span class="nav-text">certbot 生成 https 证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-nginx-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">7.2.</span> <span class="nav-text">配置 Nginx 配置文件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%B8%AD%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98-fqa"><span class="nav-number">8.</span> <span class="nav-text">安装中可能遇到的问题 FQA</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nobody</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

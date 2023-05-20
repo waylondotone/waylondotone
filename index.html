@@ -1,0 +1,2954 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+<!-- waylon's adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6129496365361356"
+     crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="sharing daily progress and life">
+<meta property="og:type" content="website">
+<meta property="og:title" content="One&#39;s Way">
+<meta property="og:url" content="http://www.waylon.one/index.html">
+<meta property="og:site_name" content="One&#39;s Way">
+<meta property="og:description" content="sharing daily progress and life">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="Nobody">
+<meta property="article:tag" content="Autonomous Driving &amp; Robotic">
+<meta name="twitter:card" content="summary">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.waylon.one/"/>
+
+
+
+
+
+  <title>One's Way</title>
+  
+
+
+
+
+
+
+
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">One's Way</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Dare to create</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/website/hexo/rebuild_website_in_vps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/website/hexo/rebuild_website_in_vps/" itemprop="url">VPS部署Hexo环境</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-05-19T14:55:57+08:00">
+                2023-05-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/website/" itemprop="url" rel="index">
+                    <span itemprop="name">website</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/website/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  11k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  38 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<p>目前手上有一台国外 VPS，我在 19 年开始在 VPS
+上部署个人网站。之前利用这个 VPS
+部署本地编译好的静态网页，流程大概是</p>
+<ul>
+<li>本地电脑配置 hexo 环境，在本地编辑并生成静态网页；</li>
+<li>通过 git hook 等方式把本地生成的静态网页同步到远端服务器上；</li>
+<li>服务器通过 nginx 支持访问静态网页内容。 <img src="/downloads/images/website_scheme.png" class="" title="网站架构设计"></li>
+</ul>
+<p>这种部署方式对多终端用户不友好，比如</p>
+<ul>
+<li>有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo
+环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。</li>
+<li>如果有多台电脑，只能在配备有 hexo
+环境的电脑上编辑；即使多台电脑配备有 hexo
+内容，也容易有数据不同步的问题。</li>
+</ul>
+<p>本文介绍一种方式，</p>
+<ul>
+<li>网站原始数据保存在 github，支持多终端访问和数据管理。</li>
+<li>远程 VPS 上部署整套 hexo 环境，支持生成静态网页结果。</li>
+<li>VPS 上获取网站数据(通常是 source 下面的数据)，生成博客内容，启动
+hexo 内置的 web 服务器（或使用 nginx 指向生成的 public
+目录），对外提供访问。</li>
+<li>对于生成好的内容，部署到 Github （用作备份）上</li>
+</ul>
+<p>这种方法可以在多终端实时更新网站内容，摆脱对单一终端的依赖，能够支持</p>
+<ul>
+<li>VPS 上部署 hexo 环境，支持跨平台、多终端的网站内容编辑和更新。</li>
+<li>引入 git 管理网站原始数据，支持数据统一和备份。</li>
+<li>支持在 github 和 VPS 等多地同时部署个人网站，不必局限于 VPS。</li>
+</ul>
+<!--我们可以使用 Markdown（或其他语言）编写文章，可以方便的生成静态网页托管在GitHub上。-->
+<p>上述方法的硬件要求是，具备一台稳定连接的 VPS，要求有固定 IP
+地址。</p>
+<h1 id="为什么选择-hexo">为什么选择 Hexo</h1>
+<p>我的网站主要用于分享一些技术文章和个人生活感想，网站内容主要是简单的文字、代码和图片，通常以
+Markdown
+来组织内容。我希望网站框架能够在满足自己需求的情况下，一键部署少折腾，免费开源有插件，让我能够<strong>更专注于内容的输出</strong>。</p>
+<p>Hexo 框架非常适合我的需求, 是一个快速、简洁且高效的博客框架。Hexo
+使用
+Markdown（或其他渲染引擎）解析文章，在几秒内，即可利用靓丽的主题生成静态网页。</p>
+<p>另外，作者是 tw
+人，官网支持中文，官方文档有详细的使用说明，国内使用方便；拥有丰富的插件，比如为网站添加后台
+UI 界面, 为 Hexo 添加哔哩哔哩番剧页面等；它还有丰富的主题，官网收录 300
+多个优秀主题，更换网站界面容易。</p>
+<p>之前调研网络上<a
+target="_blank" rel="noopener" href="https://juejin.cn/post/7002911266385707022">常用的网站框架</a>，比如
+wordpress，基于PHP和MySQL的免费开源，这个框架有点重。</p>
+<h1 id="环境配置">环境配置</h1>
+<h2 id="vps-环境配置">VPS 环境配置</h2>
+<ul>
+<li>固定 IP 地址</li>
+<li>Disk: 10G</li>
+<li>RAM: 512M</li>
+</ul>
+<!-- TODO 附加 VPS 的邀请信息 -->
+<h1 id="hexo-配置">Hexo 配置</h1>
+<h2 id="环境配置-1">环境配置</h2>
+<p>如下步骤可以参考<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官方教程</a>
+的建站部分。 - 在 VPS 上先配置好 git 和 Node.js (建议 Node.js 12.0
+及以上版本) 环境，安装步骤见官网 -- <a
+target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85%E5%89%8D%E6%8F%90">安装前提</a>
+。</p>
+<p>本机安装后的环境如下。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.17.1</span><br><span class="line">$ node -v</span><br><span class="line">v14.21.3</span><br></pre></td></tr></table></figure></p>
+<h2 id="安装-hexo">安装 Hexo</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 使用 npm 安装 Hexo</span><br><span class="line">npm install hexo-cli -g</span><br><span class="line"># 新建网站。&lt;folder&gt; 是指定的文件夹</span><br><span class="line">hexo init &lt;folder&gt;</span><br><span class="line">cd &lt;folder&gt;</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<p>详见官网 -- <a
+target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/#%E5%AE%89%E8%A3%85-Hexo">安装
+Hexo</a></p>
+<h2 id="部署-hexo-博客">部署 Hexo 博客</h2>
+<h3 id="新建一篇文章">新建一篇文章</h3>
+<figure class="highlight plaintext"><figcaption><span>hexo-new</span><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/commands#new">hexo.io</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">hexo new \[layout\] &lt;title&gt;</span><br><span class="line"># 路径是 source/\_posts</span><br><span class="line">hexo new post &lt;title&gt;</span><br><span class="line"># 路</span><br><span class="line">径是 source/_drafts, 文件夹内的文章不会被渲染</span><br><span class="line">hexo new draft &lt;title&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="生成静态文件">生成静态文件</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 在 VPS 本地生成 html 文件</span><br><span class="line">hexo generate</span><br><span class="line"># 强制重新生成文件, 效果接近 hexo clean &amp;&amp; hexo generate</span><br><span class="line">hexo g -f</span><br></pre></td></tr></table></figure>
+<h3 id="部署网站">部署网站</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<h2 id="启动服务器">启动服务器</h2>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 启动服务器。默认情况下，访问网址为： http://localhost:4000/</span><br><span class="line">hexo server</span><br></pre></td></tr></table></figure>
+<p>现在，直接用 vps 的公网 ip:4000 就可以访问博客。</p>
+<h1 id="nginx-配置">Nginx 配置</h1>
+<p>上面网站部署中，容易泄露 VPS IP 地址，并且网站链接看起来不美观。</p>
+<p>一般有两种优化方法： - VPS 上执行 hexo serve，配置 Nginx
+反向代理，域名指向 http://localhost:4000 - 因为 VPS
+上已经有静态文件，把通过域名 xx.com 的访问转发到 hexo 的 public
+目录，不用另外再启动一个 hexo 服务。</p>
+<p>我选择第二种方式，简单的 nginx 配置方式如下。</p>
+<p>'''</p>
+<p>'''</p>
+<h1 id="hexo-学习">Hexo 学习</h1>
+<h2 id="hexo-文件夹">Hexo 文件夹</h2>
+<h3 id="config.yml">_config.yml</h3>
+<p>网站的 <strong>配置</strong> 信息，您可以在此配置大部分的参数。</p>
+<h3 id="source">source</h3>
+<p><strong>资源</strong> 文件夹是存放用户资源的地方。除 _posts
+文件夹之外，开头命名为 _ (下划线)的文件 /
+文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public
+文件夹，而其他文件会被拷贝过去。</p>
+<p>在 source 目录下建立 _draft
+文件夹，这个文件夹中的内容会暂时不渲染，可以缓存没有写完的临时文件。</p>
+<h3 id="themes">themes</h3>
+<p><strong>主题</strong> 文件夹。Hexo 会根据主题来生成静态页面。</p>
+<h2 id="hexo-cmd">Hexo cmd</h2>
+<h3 id="生成文件后部署">生成文件后部署</h3>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo generate --deploy</span><br><span class="line"># 简写为</span><br><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<h3 id="front-matter"><a
+target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/front-matter">Front-matter</a></h3>
+<ul>
+<li>在 Hexo 中 <strong>分类</strong> 和 <strong>标签</strong>
+有着明显的差别：分类具有顺序性和层次性，也就是说 Foo, Bar 不等于 Bar,
+Foo；而标签没有顺序和层次。</li>
+</ul>
+<h2 id="github-部署网站">github 部署网站</h2>
+<h3 id="通过本地部署">通过本地部署</h3>
+<ul>
+<li><p>安装一键部署插件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p></li>
+<li><p>修改_config.yml文件 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  # 目前仅支持 ssh 方式访问。根据你的信息，更新 your_account_name 和 your_repository_name 路径</span><br><span class="line">  repo: git@github.com:your_account_name/your_repository_name.github.io.git</span><br><span class="line">  # branch 可选，默认是 main</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<p><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/hello_cmy/article/details/104658452">将hexo个人博客部署到github上公开使用</a></p>
+<h3 id="通过-github-action-部署">通过 GitHub Action 部署</h3>
+<p>方式一：公开源文件。登录自己的
+github，创建一个仓库。如果你希望你的站点能通过
+<你的 GitHub 用户名>.github.io 域名访问，你的 repository 应该直接命名为
+<你的 GitHub 用户名>.github.io。repository 需要加上后缀 .github.io 。
+方式二：隐藏源文件。使用两个仓库，一个私有仓库存放 Hexo
+博客的源程序，一个公开仓库存放生成的静态网站。当我们向私有仓库 push
+时，GitHub Actions
+自动生成静态页面并推送到公开仓库，实现博客的自动化部署。</p>
+<p>本文采用方式二。</p>
+<h4 id="github-私有仓库免费开启-github-pages">GitHub 私有仓库免费开启
+GitHub Pages</h4>
+<h5 id="私有仓库">私有仓库</h5>
+<p>参考官网配置教程 -- <a
+target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/github-pages">在 GitHub Pages 上部署
+Hexo</a>，区别在于储存库名称不能和公有库重复，.github/workflows/pages.yml的设置有差异，待会会讲到。</p>
+<p>pages.yml 借助 <a
+target="_blank" rel="noopener" href="https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository">GitHub
+Pages action</a> 实现，代码配置如下。</p>
+<p>其中，<a
+target="_blank" rel="noopener" href="https://github.com/marketplace/actions/github-pages-action#%EF%B8%8F-deploy-to-external-repository-external_repository">Deploy
+to external repository external_repository</a>
+方法支持将静态网页部署到公有库，其中需要设置 $
+并指定所要推送到的仓库 external_repository
+以及其默认分支。PERSONAL_TOKEN 需要自己生成配置一下。 参考 <a
+target="_blank" rel="noopener" href="https://www.nuke666.cn/2021/03/deploy-hexo-using-github-actions/">使用
+GitHub Actions 部署 Hexo 博客</a>。</p>
+<p>报错处理 - “pandoc exited with code null” 通过 <a
+target="_blank" rel="noopener" href="https://github.com/pandoc/pandoc-action-example">Using pandoc with
+GitHub Actions</a> 介绍的方法，在使用 pandoc 的地方引用
+“docker://pandoc/core:2.9”，代码如下。</p>
+<h5 id="公有仓库">公有仓库</h5>
+<p>创建一个仓库。这个仓库通过站点能通过 <你的 GitHub 用户名>.github.io
+域名访问，你的 repository 应该直接命名为
+<你的 GitHub 用户名>.github.io。repository 需要加上后缀 .github.io
+。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 部署配置</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h1 id="申请域名及域名解析">申请域名及域名解析</h1>
+<h2 id="github-pages-自定义域名">github pages 自定义域名</h2>
+<p>按照 github 官方教程 -- <a
+target="_blank" rel="noopener" href="https://docs.github.com/zh/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-a-subdomain">配置子域</a>
+自定义域名。</p>
+<p>如果你使用静态站点生成器在本地构建站点并将生成的文件推送到
+GitHub，请将添加 CNAME
+文件的提交拉取到本地存储库。否则，每一次推送，会把 GitHub 上的 CNAME
+文件删除掉，无法正确定位。</p>
+<h1 id="参考内容">参考内容</h1>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="http://masikkk.com/article/hexo-24-vps-deploy/">VPS中部署Hexo</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo-快速、简洁且高效的博客框架</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/54194453">GitHub
+私有仓库免费开启 GitHub Pages 的可行性方案</a></li>
+<li><a target="_blank" rel="noopener" href="https://suiyan.cc/2023/20230404212258.html">解决Github
+Pages自定义域名失效的问题</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/508457566">从私有代码库自动部署Hexo站到GitHub
+Pages</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43195662/article/details/106366897">Linux定时每天自动拉取一次git代码</a></li>
+</ul>
+<p>2023.05.19 文章第一版本，缺乏域名申请和域名解析内容。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Programming/cpp-heap-via-container/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Programming/cpp-heap-via-container/" itemprop="url">巧用 STL 容器构建堆</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-04-02T15:50:16+08:00">
+                2023-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  29 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<h1 id="红黑树">红黑树</h1>
+<h2 id="什么是红黑树">什么是红黑树</h2>
+<h1 id="setmultiset-实现最大堆">set/multiset 实现最大堆</h1>
+<p>在 STL 中，set 和 multiset 是基于红黑树实现的。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/set">Sets</a>
+are usually implemented as <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Red–black_tree">red-black
+trees</a>.</li>
+<li>Sorting is done using the key comparison function <em><a
+target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/Compare">Compare</a></em>.
+Search, removal, and insertion operations have logarithmic
+complexity.</li>
+</ul>
+<h2 id="code-example">Code Example</h2>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Initialize a set.</span></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::less&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>&gt; min_s;</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;min value of set container is &quot;</span> &lt;&lt; *min_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;max value of set container is &quot;</span> &lt;&lt; *min_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::greater&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_s;</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;max value of set container is &quot;</span> &lt;&lt; *max_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;min value of set container is &quot;</span> &lt;&lt; *max_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize a multiset.</span></span><br><span class="line">  std::multiset&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_ms;</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;max value of multiset container is &quot;</span> &lt;&lt; *max_ms.<span class="built_in">begin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;min value of multiset container is &quot;</span> &lt;&lt; *max_ms.<span class="built_in">rbegin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">min value of set container is -1</span><br><span class="line">max value of set container is 5</span><br><span class="line">max value of set container is 5</span><br><span class="line">min value of set container is -1</span><br><span class="line">max value of multiset container is 5</span><br><span class="line">min value of multiset container is -1</span><br></pre></td></tr></table></figure>
+<p>参考 <剑指offer> 面试题 40 — 最小的k个数</p>
+<h1 id="基于-stl-的函数-push_heappop_heap-和-vector-实现堆">基于 STL
+的函数 push_heap、pop_heap 和 vector 实现堆</h1>
+<p>参考 <剑指offer> 面试题 41 — 数据流中的中位数</p>
+<h1 id="更改记录">更改记录</h1>
+<p>2023.04.02 搭建架子，写出 set 版本。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Programming/advanced-python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Programming/advanced-python/" itemprop="url">Python 进阶</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-03-19T17:41:38+08:00">
+                2023-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Programming</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  177
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  1 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[toc]</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html">The Python
+Standard Library</a>
+<ul>
+<li><em>keep this under your pillow</em></li>
+</ul></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Trip/xian-trip-2023/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Trip/xian-trip-2023/" itemprop="url">西安三日行</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2023-02-20T20:22:40+08:00">
+                2023-02-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Trip/" itemprop="url" rel="index">
+                    <span itemprop="name">Trip</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  6.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  23 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>[toc]</p>
+<p>2023 年元旦假期，新冠疫情刚刚肆虐过，疫情的恐惧还没有消散。</p>
+<p>作为率先走出家门的人，我们在西安逗游三天。我们去西安的初衷，是希望可以尽可能多地了解华夏五千年的历史，所以我们整个旅行的侧重点是历史遗迹和文物欣赏。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Trip/xian-trip-2023/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Reading/how-to-read-a-book-summary/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Reading/how-to-read-a-book-summary/" itemprop="url">如何阅读一本书 读后感</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-12-05T11:43:06+08:00">
+                2022-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading/" itemprop="url" rel="index">
+                    <span itemprop="name">Reading</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  15k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  53 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>[toc]</p>
+<p>2022 年 11
+月末，北京疫情变得严重起来，我开始居家办公。这段时间省下来数个小时的通勤时间，使得自己能够利用晚上的时间，捧起《如何阅读一本书》。我的初步想法是希望阅读这本书可以教会自己如何更加高效读书，如何更好地理解和整理一本书，以及纠正自己阅读的一些坏习惯。</p>
+<p><img
+src="/downloads/images/how_to_read_a_book_front_cover.jpeg" /></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Reading/how-to-read-a-book-summary/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Finance/exchange-otc-etf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Finance/exchange-otc-etf/" itemprop="url">比较场内和场外交易ETF基金</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-11-06T22:20:46+08:00">
+                2022-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Finance/" itemprop="url" rel="index">
+                    <span itemprop="name">Finance</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.8k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  14 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>[toc]</p>
+<h2 id="etf-简介">ETF 简介</h2>
+<h3 id="什么是-etf">什么是 ETF ？</h3>
+<p>ETF 是英文 “Exchange Traded Funds”
+的简称，常被译为“<strong>交易所交易基金</strong>”。ETF
+是一种在<strong>交易所上市交易</strong>的、<strong>基金份额可变</strong>的基金。ETF
+结合了封闭式基金与开放式基金的运作特点，一方面，基金份额可以像封闭式基金一样在交易所二级市场进行买卖；另一方面，可以像开放式基金一样申购、赎回。
+ETF
+通常是以某一选定的指数所包含的成分证券为投资对象，依据构成指数的证券种类和比例，采用<strong>完全复制</strong>或抽样复制的方法进行被动投资的指数型基金。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Finance/exchange-otc-etf/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Reading/wo-xiang-he-zhe-ge/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Reading/wo-xiang-he-zhe-ge/" itemprop="url">《我想和这个世界不一样》摘录</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-06-18T15:47:13+08:00">
+                2022-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Reading/" itemprop="url" rel="index">
+                    <span itemprop="name">Reading</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  5.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  19 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          这是一本 Kindle 上偏游记的快消书，我已经不记得阅读动机了。作者的辞藻华丽，文字优美，但是言语中透漏出年轻人固有的阅历尚浅，对生活的体验不深刻，仅仅是城市的过客。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Reading/wo-xiang-he-zhe-ge/">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/AV/autonomous-vehicle-basic-concepts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/AV/autonomous-vehicle-basic-concepts/" itemprop="url">自动驾驶初级概念</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-06-05T13:52:28+08:00">
+                2022-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/AV/" itemprop="url" rel="index">
+                    <span itemprop="name">AV</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  15k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  56 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          自动驾驶是一个大工程，概念定义繁多，这篇文章做一下收集和整理。文中部分概念摘录自百度 Apollo 系统公众号，并以 Apollo 系统为例进行概念讲解。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/AV/autonomous-vehicle-basic-concepts/">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Linux/compiler-killed-swap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Linux/compiler-killed-swap/" itemprop="url">增加交换分区 swap 解决编译时内存不足问题</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-05-09T20:51:26+08:00">
+                2022-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  4.7k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  17 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <!-- compiler_killed_swap -->
+<h1 id="背景">背景</h1>
+<p>在 Linux 系统上编译大型程序时，可能遇到如下编译错误：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c++: internal compiler error: <span class="built_in">Killed</span> (program cc1plus)</span><br><span class="line">Please submit a full bug report</span><br></pre></td></tr></table></figure>
+<p>经过查资料，大概率是编译时内存不够导致的，除了增加物理内存外
+(花银子)，短期可以通过增加交换分区 swap 来解决 (时间换空间)。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/Linux/compiler-killed-swap/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Linux/linux-mount-disk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Linux/linux-mount-disk/" itemprop="url">Linux 18.04挂载硬盘</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2022-03-18T22:11:44+08:00">
+                2022-03-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3.5k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  13 mins.
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <!--linux_mount_disk-->
+<p>[toc]</p>
+<h1 id="挂载点与设备的关系">挂载点与设备的关系</h1>
+<p>linux 下面所有的文件、目录、设备都有一个路径，这个路径永远以 /
+开头，用 / 分隔。</p>
+<p>通过mount，可以设置当前的路径与设备的对应关系。每个设备会设置一个挂载点，挂载点是一个空目录。一般来说必须有一个设备挂载在
+/ 这个根路径下面，叫做 rootfs。其他挂载点可以是 /tmp，/boot，/dev
+等等，通过在 rootfs 上面创建一个空目录，然后用 mount
+命令就可以将设备挂载到这个目录上。挂载之后，这个目录下的子路径，就会映射到被挂载的设备里面。同一个设备可以有多个挂载点，同一个挂载点同时只能加载一个设备。</p>
+<p>文件系统挂载时有覆盖（/遮盖）关系，如果你所要挂载的挂载点（/目录）下面有文件或已挂载的文件系统，那么新挂载的文件系统会遮盖其下面的内容。这也就是挂载点为什么必须是空目录的原因了。</p>
+<h1 id="设备挂载">设备挂载</h1>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 查询磁盘信息</span><br><span class="line"># <span class="attr">fdisk</span>: <span class="title class_">Display</span> or manipulate a disk partition table</span><br><span class="line">sudo fdisk -l</span><br><span class="line"># 创建挂载点</span><br><span class="line">cd /home/用户名</span><br><span class="line">mkdir 文件夹名称</span><br><span class="line"># 查询挂载硬盘(以 /dev/sda 为例，后面的 /dev/sda 均指想挂载的硬盘)的 <span class="variable constant_">UUID</span>、type 等信息</span><br><span class="line">sudo blkid /dev/sda</span><br><span class="line">  # 通常返回如下格式</span><br><span class="line">    /dev/<span class="attr">sda</span>: <span class="variable constant_">UUID</span>=<span class="string">&quot;8e33e89c-xxx-7a3f08ed0db6&quot;</span> <span class="variable constant_">TYPE</span>=<span class="string">&quot;ext4&quot;</span></span><br><span class="line">  # 如果在使用 blkid 没有返回结果，或者未显示 <span class="variable constant_">TYPE</span>=<span class="string">&quot;ext4&quot;</span>，表示这个硬盘还没有分区或者没有格式化</span><br><span class="line"># 如果未格式化需要先格式化分区（使用ext4文件系统，mkfs.<span class="property">exe4</span> 的命令对分区进行格式化）</span><br><span class="line">sudo mkfs.<span class="property">ext4</span> /dev/sda</span><br><span class="line"># 修改开机挂载硬盘文件</span><br><span class="line">sudo vi /etc/fstab</span><br><span class="line"># 在 /etc/fstab 文件最后新增：</span><br><span class="line"># 第一列为 <span class="variable constant_">UUID</span>, 第二列为挂载目录（该目录必须为一个空白目录），第三列为文件系统类型，第四列为参数，第五列<span class="number">0</span>表示不备份，最后一列必须为２或<span class="number">0</span>(除非引导分区为<span class="number">1</span>)</span><br><span class="line"><span class="variable constant_">UUID</span>=<span class="string">&quot;f652d9d2e-02&quot;</span>（上面查询的<span class="variable constant_">UUID</span>） /home/用户名/文件夹名称(上面创建的挂载点) ext4 defaults <span class="number">0</span> <span class="number">2</span></span><br><span class="line"># 执行命令进行挂载</span><br><span class="line">sudo mount -a</span><br><span class="line"># 查看硬盘是否正常挂载。</span><br><span class="line">df -h</span><br></pre></td></tr></table></figure>
+<h1 id="异常情况">异常情况</h1>
+<p>如果挂载硬盘后，重启系统后异常，比如在登录界面循环登录，无法进入可视化界面；这可能是
+/etc/fstab 文件配置错误，删除刚才添加的内容可以恢复正常。</p>
+<ul>
+<li>shift+alt+F2 可以进入 tty2 命令行界面，通过命令行方式操作。</li>
+</ul>
+<!--shift 或 ESC 进入 reconery mode-->
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/waylondotone" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:me@waylon.one" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2019 &mdash; <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Nobody</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
