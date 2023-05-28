@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,14 +18,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc]   git 原理图  git command   git 命令大集合  git add 1git add -h  查看更详细的帮助内容 1git add .    不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到git系统的暂存区，注意不包括删除文件。 1git add -u .   -u &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括新增">
+    <meta name="description" content="[toc]   git 原理图  git command   git 命令大集合  git add 1git add -h  查看更详细的帮助内容 1git add .    不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。 1git add -u .   -u &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 高阶命令">
 <meta property="og:url" content="http://www.waylon.one/Linux/advanced-git/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc]   git 原理图  git command   git 命令大集合  git add 1git add -h  查看更详细的帮助内容 1git add .    不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到git系统的暂存区，注意不包括删除文件。 1git add -u .   -u &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括新增">
+<meta property="og:description" content="[toc]   git 原理图  git command   git 命令大集合  git add 1git add -h  查看更详细的帮助内容 1git add .    不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。 1git add -u .   -u &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/git_command_architecture.png">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/git.png">
@@ -81,7 +82,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -160,7 +160,7 @@ commit 信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -179,9 +179,6 @@ commit 信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -255,6 +252,13 @@ commit 信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -280,28 +284,27 @@ commit 信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <figure>
-<img data-src="/downloads/images/blog/git_command_architecture.png"
-alt="git 原理图" />
+<img data-src="/downloads/images/blog/git_command_architecture.png" alt="git 原理图">
 <figcaption aria-hidden="true">git 原理图</figcaption>
 </figure>
 <h1 id="git-command">git command</h1>
 <figure>
-<img data-src="/downloads/images/blog/git.png" alt="git 命令大集合" />
+<img data-src="/downloads/images/blog/git.png" alt="git 命令大集合">
 <figcaption aria-hidden="true">git 命令大集合</figcaption>
 </figure>
 <h2 id="git-add">git add</h2>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -h</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -h</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>查看更详细的帮助内容 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></table></figure></p>
+<p>查看更详细的帮助内容 </p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></tbody></table></figure><p></p>
 </blockquote>
 <blockquote>
-<p>不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到git系统的暂存区，注意不包括删除文件。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -u .</span><br></pre></td></tr></table></figure></p>
+<p>不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。
+</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -u .</span><br></pre></td></tr></tbody></table></figure><p></p>
 </blockquote>
 <blockquote>
 <p>-u ==
 --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括新增加的文件。
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A .</span><br></pre></td></tr></table></figure></p>
+</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A .</span><br></pre></td></tr></tbody></table></figure><p></p>
 </blockquote>
 <blockquote>
 <p>-A ==
@@ -310,18 +313,18 @@ alt="git 原理图" />
 <h2 id="stash-local-changes">stash local changes</h2>
 <ul>
 <li><p>If you want remove all local changes from your working copy,
-simply stash them. <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash save --keep-index  </span><br></pre></td></tr></table></figure></p></li>
+simply stash them. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash save --keep-index  </span><br></pre></td></tr></tbody></table></figure><p></p></li>
 <li><p>If you don't need them anymore, you now can drop that stash.
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop</span><br></pre></td></tr></table></figure></p></li>
+</p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop</span><br></pre></td></tr></tbody></table></figure><p></p></li>
 </ul>
 <h2 id="git-pull">git pull</h2>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin target_branch_name</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin target_branch_name</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>下载指定分支代码合并到当前分支：相当于指定分支的代码与当前分支的代码合并到了一起)。</p>
 </blockquote>
 <blockquote>
-<p>每次使用该命令前，需要保证本地工作区是没有任何修改代码的，也就是说需要将本地工作区编辑过的文件添加到暂存区(git
-add .)，或提交到本地仓库中(git
+<p>每次使用该命令前，需要保证本地工作区是没有任何修改代码的，也就是说需要将本地工作区编辑过的文件添加到暂存区 (git
+add .)，或提交到本地仓库中 (git
 commit)，才可以使用该命令拉取指定分支的代码合并到当前分支中。</p>
 </blockquote>
 <blockquote>
@@ -329,33 +332,32 @@ commit)，才可以使用该命令拉取指定分支的代码合并到当前分�
 分支代码，保持本地正在开发功能逻辑的代码分支代码是最新的，避免后续在提交时冲突过多或覆盖掉其他人的代码的问题出现。</p>
 </blockquote>
 <h2 id="git-brach">git brach</h2>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>加上-a参数可以查看远程分支，远程分支会用红色表示出来</p>
+<p>加上 - a 参数可以查看远程分支，远程分支会用红色表示出来</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>查看分支合并图</p>
 </blockquote>
 <h2 id="git-log">git log</h2>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline --author=git_name</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline --author=git_name</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>git log中根据author过滤</p>
+<p>git log 中根据 author 过滤</p>
 </blockquote>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=one</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=one</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>显示git提交记录的第一行，方便检索和管理提交记录</p>
+<p>显示 git 提交记录的第一行，方便检索和管理提交记录</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline --after=&quot;2020-05-21 00:00:00&quot;  | grep &quot;region&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --oneline --after="2020-05-21 00:00:00"  | grep "region"</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>查询某段时间的提交记录关键字</p>
 </blockquote>
 <!--
 - [git log查看符合条件的日志](https://blog.csdn.net/xhqiang/article/details/82182342)
 -->
-<h2 id="git-cherry-pick">git <a
-target="_blank" rel="noopener" href="https://git-scm.com/docs/git-cherry-pick">cherry-pick</a></h2>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nothing to commit, working directory clean</span><br><span class="line">The previous cherry-pick is now empty, possibly due to conflict resolution.</span><br><span class="line">If you wish to commit it anyway, use:</span><br><span class="line"></span><br><span class="line">git commit –allow-empty</span><br></pre></td></tr></table></figure>
+<h2 id="git-cherry-pick">git <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-cherry-pick">cherry-pick</a></h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nothing to commit, working directory clean</span><br><span class="line">The previous cherry-pick is now empty, possibly due to conflict resolution.</span><br><span class="line">If you wish to commit it anyway, use:</span><br><span class="line"></span><br><span class="line">git commit –allow-empty</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>It’s exactly what it says: the changes you’re trying to cherry-pick
 are already wholly already integrated/cherry-picked in the branch you’re
@@ -364,27 +366,24 @@ empty commit with the --allow-empty flag to indicate that you attempted
 to cherry-pick, but there were no changes to pull in.</p>
 </blockquote>
 <!-- [why is git-cherrypick saying nothing to commit](https://config9.com/apps/git/why-is-git-cherrypick-saying-nothing-to-commit/) -->
-<h2 id="git-shortlog">git <a
-target="_blank" rel="noopener" href="https://git-scm.com/docs/git-shortlog">shortlog</a></h2>
+<h2 id="git-shortlog">git <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-shortlog">shortlog</a></h2>
 <h3 id="查找-commit-description-包含某些字符的-log-日志">查找 commit
 description 包含某些字符的 log 日志</h3>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git shortlog --format=&#x27;%H|%cn|%s&#x27; | grep &#x27;your_search_info&#x27;</span><br><span class="line"></span><br><span class="line">%H: commit hash</span><br><span class="line">%cn: committer name</span><br><span class="line">%s: subject</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git shortlog --format='%H|%cn|%s' | grep 'your_search_info'</span><br><span class="line"></span><br><span class="line">%H: commit hash</span><br><span class="line">%cn: committer name</span><br><span class="line">%s: subject</span><br></pre></td></tr></tbody></table></figure>
 <!-- [git log查找特定commit](https://blog.csdn.net/zhezhebie/article/details/94546790)  -->
 <h2 id="git-commit">git commit</h2>
-<h3 id="修改-commit-信息"><a
-target="_blank" rel="noopener" href="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---amend">修改
+<h3 id="修改-commit-信息"><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---amend">修改
 commit 信息</a></h3>
 <p>用一条新的 commit 信息修订现有的 commit，这会覆盖原始
 commit。请勿在已推送的 commit 中使用它。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m &quot;&lt;new commit message&gt;&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m "&lt;new commit message&gt;"</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="恢复指定-diff">恢复指定 diff</h2>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// You can specifically apply an out-of-date diff or a diff which was never attached to a revision by using this flag.</span><br><span class="line">arc patch --diff diff_id --nobranch</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// You can specifically apply an out-of-date diff or a diff which was never attached to a revision by using this flag.</span><br><span class="line">arc patch --diff diff_id --nobranch</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="删除多个本地-branches">删除多个本地 branches</h2>
 <ul>
-<li><a
-target="_blank" rel="noopener" href="https://blog.csdn.net/huuinn/article/details/78167873">本地删除除master以外所有分支</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/huuinn/article/details/78167873">本地删除除 master 以外所有分支</a></li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 执行前需要切换到master分支执行</span><br><span class="line">git branch | grep -v &quot;master&quot; | xargs git branch -D</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 执行前需要切换到master分支执行</span><br><span class="line">git branch | grep -v "master" | xargs git branch -D</span><br></pre></td></tr></tbody></table></figure>
 <!--
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash &amp;&amp; git checkout master &amp;&amp; git branch | grep -v &quot;master&quot; | xargs git branch -D</span><br></pre></td></tr></table></figure>
 <p>--&gt;</p>
@@ -417,16 +416,15 @@ of them.</li>
 <!--
 - [git 对比两个分支差异](https://blog.csdn.net/u011240877/article/details/52586664)
 -->
-<h3
-id="如何把分支比较结果输入到指定文件">如何把分支比较结果输入到指定文件</h3>
+<h3 id="如何把分支比较结果输入到指定文件">如何把分支比较结果输入到指定文件</h3>
 <ul>
-<li>Linux 输出重定向</li>
+<li>Linux 输出重定向 </li>
 </ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输出重定向：会将原来的文件内容覆盖。</span><br><span class="line">&gt;&gt; 追加：不会覆盖原来文件的内容，而是追加到文件的尾部。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; 输出重定向：会将原来的文件内容覆盖。</span><br><span class="line">&gt;&gt; 追加：不会覆盖原来文件的内容，而是追加到文件的尾部。</span><br></pre></td></tr></tbody></table></figure>
 <!--
 [Linux 重定向和追加](https://blog.csdn.net/qq_36761831/article/details/89847015)
 -->
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 使用 Linux 重定向命令</span><br><span class="line">git diff [branchA] [branchB] &gt;&gt;d:/diff/exportname.diff # 追加</span><br><span class="line"></span><br><span class="line">git diff [branchA] [branchB] &gt;d:/diff/exportname.diff # 覆盖</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 使用 Linux 重定向命令</span><br><span class="line">git diff [branchA] [branchB] &gt;&gt;d:/diff/exportname.diff # 追加</span><br><span class="line"></span><br><span class="line">git diff [branchA] [branchB] &gt;d:/diff/exportname.diff # 覆盖</span><br></pre></td></tr></tbody></table></figure>
 <!--
 - [git diff 查看两个分支的区别，如何将结果输出到指定文件](https://segmentfault.com/q/1010000005033288)
 -->
@@ -442,12 +440,12 @@ id="如何把分支比较结果输入到指定文件">如何把分支比较结�
 文件。 * 一个 commit 对应一个 patch 文件。 * 生成的文件含有 commmit
 信息。</p>
 <h3 id="git-format-patch">git format-patch</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 当前分支所有超前 master 的提交</span><br><span class="line">git format-patch -M master</span><br><span class="line"></span><br><span class="line"># 某次提交以后的所有 patch。[commit id] 指的是 commit name，可以通过 git log 查看。</span><br><span class="line">git format-patch [commit id]</span><br><span class="line"></span><br><span class="line"># 某两次提交之间的所有patch:</span><br><span class="line">git format-patch [commit sha1 id..[commit sha2 id]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 当前分支所有超前 master 的提交</span><br><span class="line">git format-patch -M master</span><br><span class="line"></span><br><span class="line"># 某次提交以后的所有 patch。[commit id] 指的是 commit name，可以通过 git log 查看。</span><br><span class="line">git format-patch [commit id]</span><br><span class="line"></span><br><span class="line"># 某两次提交之间的所有patch:</span><br><span class="line">git format-patch [commit sha1 id..[commit sha2 id]</span><br></pre></td></tr></tbody></table></figure>
 <p>git format-patch 命令中，一个 commit 对应一个 patch
 文件，所以生成的补丁文件默认从 1
 开始顺序编号，并使用对应提交信息中的第一行作为文件名。</p>
 <h3 id="apply-patch">apply patch</h3>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 先检查 patch 文件</span><br><span class="line">git apply --stat   xxx.patch</span><br><span class="line"></span><br><span class="line"># 检查能否应用成功</span><br><span class="line">git apply --check xxx.patch</span><br><span class="line"></span><br><span class="line"># 打补丁。使用 -s 或 –-signoff 选项，可以 commit 信息中加入 signed-off-by 信息。</span><br><span class="line">git am --signoff &lt; xxx.patch</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 先检查 patch 文件</span><br><span class="line">git apply --stat   xxx.patch</span><br><span class="line"></span><br><span class="line"># 检查能否应用成功</span><br><span class="line">git apply --check xxx.patch</span><br><span class="line"></span><br><span class="line"># 打补丁。使用 -s 或 –-signoff 选项，可以 commit 信息中加入 signed-off-by 信息。</span><br><span class="line">git am --signoff &lt; xxx.patch</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>branch 中修改文件所在目录，git 是可以跟踪这个变化的。</li>
 </ul>
@@ -459,19 +457,15 @@ id="如何把分支比较结果输入到指定文件">如何把分支比较结�
 Git 仓库的子目录。
 它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。</p>
 <p>在配置网站的 gitHun Actions 中，主题 Next 是一个 submodule。我将 Next
-submodule 转化为普通文件夹，步骤如下所示。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p><a
-target="_blank" rel="noopener" href="https://www.littlezhang.com/2020/01/%E5%A6%82%E4%BD%95%E6%8A%8A-git-submodule-%E5%8F%98%E6%88%90%E6%99%AE%E9%80%9A%E6%96%87%E4%BB%B6%E5%A4%B9/">如何把
+submodule 转化为普通文件夹，步骤如下所示。 </p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><a target="_blank" rel="noopener" href="https://www.littlezhang.com/2020/01/%E5%A6%82%E4%BD%95%E6%8A%8A-git-submodule-%E5%8F%98%E6%88%90%E6%99%AE%E9%80%9A%E6%96%87%E4%BB%B6%E5%A4%B9/">如何把
 Git Submodule 变成普通文件夹</a></p>
 <h1 id="references">References</h1>
 <ul>
-<li><p><a
-target="_blank" rel="noopener" href="http://way.xiaojukeji.com/article/9850?from=mail">Git学习笔记</a></p></li>
-<li><p><a
-target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&amp;mid=2652061065&amp;idx=4&amp;sn=d5b14894b191ee3bfc1d1cdfa3f5b022&amp;chksm=f1204978c657c06e3fb9be73283effe256e8ba2d194115a77c010026cd85b972d4abd951e5a0&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1577523609386&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">Git内部原理揭秘</a>
+<li><p><a target="_blank" rel="noopener" href="http://way.xiaojukeji.com/article/9850?from=mail">Git 学习笔记</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&amp;mid=2652061065&amp;idx=4&amp;sn=d5b14894b191ee3bfc1d1cdfa3f5b022&amp;chksm=f1204978c657c06e3fb9be73283effe256e8ba2d194115a77c010026cd85b972d4abd951e5a0&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1577523609386&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">Git 内部原理揭秘</a>
 <!--解释从文件更改到代码储存，Git究竟是怎么实现的 --></p></li>
-<li><p><a
-target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;mid=2651024610&amp;idx=4&amp;sn=fedf2d0fb61d6b6a2b9ce3759fb980b5&amp;chksm=bdbe94b18ac91da70ca978004222310c9052316610941a8515eb1915aeebc4eda8943f9cef1d&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1583164743137&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">10个节省时间和改善工作流的Git技巧</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;mid=2651024610&amp;idx=4&amp;sn=fedf2d0fb61d6b6a2b9ce3759fb980b5&amp;chksm=bdbe94b18ac91da70ca978004222310c9052316610941a8515eb1915aeebc4eda8943f9cef1d&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1583164743137&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">10 个节省时间和改善工作流的 Git 技巧</a></p></li>
 </ul>
 
     </div>
@@ -537,8 +531,26 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mj
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -561,6 +573,7 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mj
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -572,6 +585,7 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mj
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

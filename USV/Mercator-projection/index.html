@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,14 +18,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc] 前言 FYI 本博客初稿完成于2017年，内容更新于 个人网站 - 简明版墨卡托投影坐标系，请移步阅读最新内容。 本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。 墨卡托投影坐标系 墨卡托投影(Mercator Projection)是一种“等角正切圆柱投影”，荷兰地图学家墨卡托(Mercato">
+    <meta name="description" content="[toc] 前言 FYI 本博客初稿完成于 2017 年，内容更新于 个人网站 - 简明版墨卡托投影坐标系，请移步阅读最新内容。 本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。 墨卡托投影坐标系 墨卡托投影 (Mercator Projection) 是一种 “等角正切圆柱投影”，荷兰地图学家墨卡托 (M">
 <meta property="og:type" content="article">
-<meta property="og:title" content="简明版墨卡托投影坐标系(原理到实现)">
+<meta property="og:title" content="简明版墨卡托投影坐标系 (原理到实现)">
 <meta property="og:url" content="http://www.waylon.one/USV/Mercator-projection/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc] 前言 FYI 本博客初稿完成于2017年，内容更新于 个人网站 - 简明版墨卡托投影坐标系，请移步阅读最新内容。 本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。 墨卡托投影坐标系 墨卡托投影(Mercator Projection)是一种“等角正切圆柱投影”，荷兰地图学家墨卡托(Mercato">
+<meta property="og:description" content="[toc] 前言 FYI 本博客初稿完成于 2017 年，内容更新于 个人网站 - 简明版墨卡托投影坐标系，请移步阅读最新内容。 本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。 墨卡托投影坐标系 墨卡托投影 (Mercator Projection) 是一种 “等角正切圆柱投影”，荷兰地图学家墨卡托 (M">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/Mercator_1.png">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/Mercator_2.png">
@@ -50,10 +51,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://www.waylon.one/USV/Mercator-projection/","path":"USV/Mercator-projection/","title":"简明版墨卡托投影坐标系(原理到实现)"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://www.waylon.one/USV/Mercator-projection/","path":"USV/Mercator-projection/","title":"简明版墨卡托投影坐标系 (原理到实现)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>简明版墨卡托投影坐标系(原理到实现) | One's Way</title>
+<title>简明版墨卡托投影坐标系 (原理到实现) | One's Way</title>
   
 
 
@@ -89,7 +90,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -166,7 +166,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -185,9 +185,6 @@
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -225,12 +222,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="简明版墨卡托投影坐标系(原理到实现) | One's Way">
+      <meta itemprop="name" content="简明版墨卡托投影坐标系 (原理到实现) | One's Way">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          简明版墨卡托投影坐标系(原理到实现)<a href="https://github.com/waylondotone/private_hexo/tree/main/source/_posts/Mercator-projection.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          简明版墨卡托投影坐标系 (原理到实现)<a href="https://github.com/waylondotone/private_hexo/tree/main/source/_posts/Mercator-projection.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -261,6 +258,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -286,59 +290,54 @@
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <h1 id="前言">前言</h1>
-<p>FYI 本博客初稿完成于2017年，内容更新于 <a
-href="http://www.waylon.one/USV/Mercator-projection/">个人网站 -
+<p>FYI 本博客初稿完成于 2017 年，内容更新于 <a href="http://www.waylon.one/USV/Mercator-projection/">个人网站 -
 简明版墨卡托投影坐标系</a>，请移步阅读最新内容。</p>
 <p>本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。</p>
 <h1 id="墨卡托投影坐标系">墨卡托投影坐标系</h1>
-<p>墨卡托投影(Mercator
-Projection)是一种“等角正切圆柱投影”，荷兰地图学家墨卡托(Mercator)在1569年拟定：假设地球被围在一个中空的圆柱里，其赤道与圆柱相接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅标准纬线为零度（即赤道）的“墨卡托投影”绘制出的世界地图。<br />
-墨卡托投影在今天对于航海事业起着极为重要的作用，目前世界各国绘制海洋地图时仍广泛使用墨卡托投影，国际水路局(IHB)规定：“除特殊情况外，各国都要用墨卡托投影绘制海图”。国际水路局发行的《大洋水深总图》是把全世界分成24幅编辑的，在南北纬72度之间就是使用墨卡托投影绘成的。</p>
+<p>墨卡托投影 (Mercator
+Projection) 是一种 “等角正切圆柱投影”，荷兰地图学家墨卡托 (Mercator) 在 1569 年拟定：假设地球被围在一个中空的圆柱里，其赤道与圆柱相接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅标准纬线为零度（即赤道）的 “墨卡托投影” 绘制出的世界地图。<br>
+墨卡托投影在今天对于航海事业起着极为重要的作用，目前世界各国绘制海洋地图时仍广泛使用墨卡托投影，国际水路局 (IHB) 规定：“除特殊情况外，各国都要用墨卡托投影绘制海图”。国际水路局发行的《大洋水深总图》是把全世界分成 24 幅编辑的，在南北纬 72 度之间就是使用墨卡托投影绘成的。</p>
 <h1 id="墨卡托投影性质">墨卡托投影性质</h1>
-<p>由于墨卡托投影的经纬线离开赤道逐渐以相同倍数伸长，所以又称为渐长投影，由于它是具有等角性质的圆筒投影，所以也叫做等角圆筒投影。<strong>注意：这种投影不适合高纬地区，通常纬度60度以上区域，不用此投影</strong>。</p>
-<p><img data-src="/downloads/images/blog/Mercator_1.png" /></p>
-<p><img data-src="/downloads/images/blog/Mercator_2.png" /></p>
+<p>由于墨卡托投影的经纬线离开赤道逐渐以相同倍数伸长，所以又称为渐长投影，由于它是具有等角性质的圆筒投影，所以也叫做等角圆筒投影。<strong>注意：这种投影不适合高纬地区，通常纬度 60 度以上区域，不用此投影</strong>。</p>
+<p><img data-src="/downloads/images/blog/Mercator_1.png"></p>
+<p><img data-src="/downloads/images/blog/Mercator_2.png"></p>
 <p>墨卡托投影有一个特别的特性：所有罗盘等角线，或称斜航线（就是与所经过的所有经线形成相同角度的航线，也称恒向航线）在墨卡托投影下都是直线。这使得在航海领域这个投影非常重要。
-注意：经纬线的伸长与纬线的正割成比例变化，随纬度增高极具拉伸，到极点成为无穷大；面积的扩大更为明显，在60度的地方面积要扩大四倍。如下图所示，地理上等半径圆在高纬度面积明显扩大。</p>
-<p><img data-src="/downloads/images/blog/Mercator_3.png" /></p>
+注意：经纬线的伸长与纬线的正割成比例变化，随纬度增高极具拉伸，到极点成为无穷大；面积的扩大更为明显，在 60 度的地方面积要扩大四倍。如下图所示，地理上等半径圆在高纬度面积明显扩大。</p>
+<p><img data-src="/downloads/images/blog/Mercator_3.png"></p>
 <p>墨卡托投影是按等角条件修改透视圆筒投影而得到的投影，等角（也称为保形）
-是指当地图上任何一点的各方向具有相同的比例，称为局部保形，透视圆筒投影如图1所示。从墨卡托投影图上可以看出，经线间隔的经度如果相等，则经线是等距平行的直线，
+是指当地图上任何一点的各方向具有相同的比例，称为局部保形，透视圆筒投影如图 1 所示。从墨卡托投影图上可以看出，经线间隔的经度如果相等，则经线是等距平行的直线，
 纬线也是平行的直线，而且经纬线是相互垂直的。墨卡托投影对透视圆筒投影改造点：要使圆筒投影称为等角的性质，必须使由赤道向两极经线逐渐伸长的倍数与经线上各点相应的纬度扩大的倍数相同。</p>
-<p><img data-src="/downloads/images/blog/Mercator_4.png" /></p>
-<p><img data-src="/downloads/images/blog/Mercator_5.png" /></p>
+<p><img data-src="/downloads/images/blog/Mercator_4.png"></p>
+<p><img data-src="/downloads/images/blog/Mercator_5.png"></p>
 <p>透视圆筒投影</p>
-<p><img data-src="/downloads/images/blog/Mercator_6.png" /></p>
+<p><img data-src="/downloads/images/blog/Mercator_6.png"></p>
 <h1 id="墨卡托投影方程式">墨卡托投影方程式</h1>
-<p>墨卡托投影以整个世界范围，赤道作为标准纬线，本初子午线作为中央经线，两者交点为坐标原点，向东向北为正，向西向南为负。南北极在地图的正下、上方，而东西方向处于地图的正右、左。由于墨卡托投影在两极附近是趋于无限值，因此它并没完整展现了整个世界，地图上最高纬度是85.05度（通过纬度取值范围ys反解计算可得到纬度值为85.05112877980659）。为了简化计算，我们采用球形映射，而不是椭球体形状。</p>
-<p>公式推导具体见文献 <a
-target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
-<p><img data-src="/downloads/images/blog/Mercator_7.png" /> <img data-src="/downloads/images/blog/Mercator_8.png" /></p>
-<p>利用等角条件m=n来讨论具体公式，具体分为三步： 1.
-根据m=n得到地球表面投影到平面上的微积线段的关系式。<br />
+<p>墨卡托投影以整个世界范围，赤道作为标准纬线，本初子午线作为中央经线，两者交点为坐标原点，向东向北为正，向西向南为负。南北极在地图的正下、上方，而东西方向处于地图的正右、左。由于墨卡托投影在两极附近是趋于无限值，因此它并没完整展现了整个世界，地图上最高纬度是 85.05 度（通过纬度取值范围 ys 反解计算可得到纬度值为 85.05112877980659）。为了简化计算，我们采用球形映射，而不是椭球体形状。</p>
+<p>公式推导具体见文献 <a target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
+<p><img data-src="/downloads/images/blog/Mercator_7.png"> <img data-src="/downloads/images/blog/Mercator_8.png"></p>
+<p>利用等角条件 m=n 来讨论具体公式，具体分为三步： 1.
+根据 m=n 得到地球表面投影到平面上的微积线段的关系式。<br>
 2. 把地球视为球体：
-设地球表面A点经纬坐标为（λ，Φ），对应的投影坐标为（x,y）,基准纬线设置为赤道，则R为地球半径；</p>
+设地球表面 A 点经纬坐标为（λ，Φ），对应的投影坐标为（x,y）, 基准纬线设置为赤道，则 R 为地球半径；</p>
 <p>墨卡托投影方程式为：</p>
-<p><img data-src="/downloads/images/blog/Mercator_9.png" /></p>
+<p><img data-src="/downloads/images/blog/Mercator_9.png"></p>
 <ol start="3" type="1">
 <li>把地球视为旋转椭球体</li>
 </ol>
 <p>墨卡托投影正反解公式：</p>
-<p><img data-src="/downloads/images/blog/Mercator_10.png" /></p>
-<p><img data-src="/downloads/images/blog/Mercator_11.png" /></p>
-<p>公式推导具体见文献 <a
-target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
+<p><img data-src="/downloads/images/blog/Mercator_10.png"></p>
+<p><img data-src="/downloads/images/blog/Mercator_11.png"></p>
+<p>公式推导具体见文献 <a target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
 <h1 id="程序实现">程序实现</h1>
-<p>最新版见 <a
-target="_blank" rel="noopener" href="https://github.com/wylloong/-GeographyCoordinateTransform/blob/master/Mercator">Geography
+<p>最新版见 <a target="_blank" rel="noopener" href="https://github.com/wylloong/-GeographyCoordinateTransform/blob/master/Mercator">Geography
 Coordinate Transform Lite/Mercator</a></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Lite版，仅适用于初步验证</span></span><br><span class="line"><span class="comment">//把地球视为球体实现经纬度和墨卡托投影的函数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="type">double</span> x;</span><br><span class="line">	<span class="type">double</span> y;</span><br><span class="line">&#125;WayPoint;</span><br><span class="line"></span><br><span class="line"><span class="comment">//经纬度转墨卡托</span></span><br><span class="line">WayPoint <span class="title function_">lonLat2Mercator</span><span class="params">(WayPoint lonLat)</span></span><br><span class="line">&#123;</span><br><span class="line">	WayPoint mercator;</span><br><span class="line">	<span class="type">double</span> x = lonLat.x * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = <span class="built_in">log</span>(<span class="built_in">tan</span>((<span class="number">90</span> + lonLat.y) * Pi / <span class="number">360</span>))/(Pi / <span class="number">180</span>);  </span><br><span class="line">	y = y * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	mercator.x = x;</span><br><span class="line">	mercator.y = y;</span><br><span class="line">	<span class="keyword">return</span> mercator;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//墨卡托转经纬度</span></span><br><span class="line">WayPoint <span class="title function_">Mercator2lonLat</span><span class="params">(WayPoint mercator)</span></span><br><span class="line">&#123;</span><br><span class="line">	WayPoint lonLat;</span><br><span class="line">	<span class="type">double</span> x = mercator.x / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = mercator.y / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	y = <span class="number">180</span> / Pi * (<span class="number">2</span> * <span class="built_in">atan</span>(<span class="built_in">exp</span>(y * Pi / <span class="number">180</span>)) - Pi / <span class="number">2</span>);</span><br><span class="line">	lonLat.x = x;</span><br><span class="line">	lonLat.y = y;</span><br><span class="line">	<span class="keyword">return</span> lonLat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Lite版，仅适用于初步验证</span></span><br><span class="line"><span class="comment">//把地球视为球体实现经纬度和墨卡托投影的函数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="type">double</span> x;</span><br><span class="line">	<span class="type">double</span> y;</span><br><span class="line">}WayPoint;</span><br><span class="line"></span><br><span class="line"><span class="comment">//经纬度转墨卡托</span></span><br><span class="line">WayPoint <span class="title function_">lonLat2Mercator</span><span class="params">(WayPoint lonLat)</span></span><br><span class="line">{</span><br><span class="line">	WayPoint mercator;</span><br><span class="line">	<span class="type">double</span> x = lonLat.x * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = <span class="built_in">log</span>(<span class="built_in">tan</span>((<span class="number">90</span> + lonLat.y) * Pi / <span class="number">360</span>))/(Pi / <span class="number">180</span>);  </span><br><span class="line">	y = y * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	mercator.x = x;</span><br><span class="line">	mercator.y = y;</span><br><span class="line">	<span class="keyword">return</span> mercator;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//墨卡托转经纬度</span></span><br><span class="line">WayPoint <span class="title function_">Mercator2lonLat</span><span class="params">(WayPoint mercator)</span></span><br><span class="line">{</span><br><span class="line">	WayPoint lonLat;</span><br><span class="line">	<span class="type">double</span> x = mercator.x / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = mercator.y / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	y = <span class="number">180</span> / Pi * (<span class="number">2</span> * <span class="built_in">atan</span>(<span class="built_in">exp</span>(y * Pi / <span class="number">180</span>)) - Pi / <span class="number">2</span>);</span><br><span class="line">	lonLat.x = x;</span><br><span class="line">	lonLat.y = y;</span><br><span class="line">	<span class="keyword">return</span> lonLat;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <h1 id="reference">Reference</h1>
 <ul>
 <li>程光举.
-墨卡托投影与大圆投影的构成及其在确定航线、计算航程与航向方面的应用[J].
-辽宁师院学报(自然科学版),1980(01):13-28.</li>
-<li><a
-target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/9813502">墨卡托投影与经纬度转换源代码及原理文献</a></li>
+墨卡托投影与大圆投影的构成及其在确定航线、计算航程与航向方面的应用 [J].
+辽宁师院学报 (自然科学版),1980 (01):13-28. </li>
+<li><a target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/9813502">墨卡托投影与经纬度转换源代码及原理文献</a></li>
 </ul>
 
     </div>
@@ -357,13 +356,13 @@ target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/98
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Python/python-interactive-mode/" rel="prev" title="基于 interactive mode 实现 matplotlib 动态更新图片(交互式绘图)">
-                  <i class="fa fa-chevron-left"></i> 基于 interactive mode 实现 matplotlib 动态更新图片(交互式绘图)
+                <a href="/Python/python-interactive-mode/" rel="prev" title="基于 interactive mode 实现 matplotlib 动态更新图片 (交互式绘图)">
+                  <i class="fa fa-chevron-left"></i> 基于 interactive mode 实现 matplotlib 动态更新图片 (交互式绘图)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Reading/reprinte-impression-of-Ein-Hund-namens-Money/" rel="next" title="转载-小狗钱钱读后感-不只是理财">
-                  转载-小狗钱钱读后感-不只是理财 <i class="fa fa-chevron-right"></i>
+                <a href="/Reading/reprinte-impression-of-Ein-Hund-namens-Money/" rel="next" title="转载 - 小狗钱钱读后感 - 不只是理财">
+                  转载 - 小狗钱钱读后感 - 不只是理财 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -403,8 +402,26 @@ target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/98
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -427,6 +444,7 @@ target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/98
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -438,6 +456,7 @@ target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/98
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,14 +18,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="基于电子海图的水面无人艇全局路径规划 该论文已经在ICMIR2017会议上发表，附上springer的文献地址 Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart，以及arXiv上的 文献地址。本文接下来主要对论文的实现原理进行分析，在">
+    <meta name="description" content="基于电子海图的水面无人艇全局路径规划 该论文已经在 ICMIR2017 会议上发表，附上 springer 的文献地址 Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart，以及 arXiv 上的 文献地址。本文接下来主要对论文的实现原理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart">
 <meta property="og:url" content="http://www.waylon.one/USV/Global-path-planning-based-on-electronic-chart/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="基于电子海图的水面无人艇全局路径规划 该论文已经在ICMIR2017会议上发表，附上springer的文献地址 Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart，以及arXiv上的 文献地址。本文接下来主要对论文的实现原理进行分析，在">
+<meta property="og:description" content="基于电子海图的水面无人艇全局路径规划 该论文已经在 ICMIR2017 会议上发表，附上 springer 的文献地址 Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart，以及 arXiv 上的 文献地址。本文接下来主要对论文的实现原理">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/ICMIR_Struct.png">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/ICMIR2017.png">
@@ -82,7 +83,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -159,7 +159,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -178,9 +178,6 @@
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -206,7 +203,7 @@
       <a class="popular-posts-link" href="/USV/ENC-analysis-store/" rel="bookmark">
         <time class="popular-posts-time">2020-01-30</time>
         <br>
-      解析和读取S-57电子海图的数据
+      解析和读取 S-57 电子海图的数据
       </a>
     </li>
     <li class="popular-posts-item">
@@ -285,6 +282,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -309,19 +313,16 @@
     
     
     <div class="post-body" itemprop="articleBody"><!--2019-03-12 23:56:31-->
-<h1
-id="基于电子海图的水面无人艇全局路径规划">基于电子海图的水面无人艇全局路径规划</h1>
-<p>该论文已经在ICMIR2017会议上发表，附上springer的文献地址 <a
-target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-319-65978-7_80#citeas">Research
+<h1 id="基于电子海图的水面无人艇全局路径规划">基于电子海图的水面无人艇全局路径规划</h1>
+<p>该论文已经在 ICMIR2017 会议上发表，附上 springer 的文献地址 <a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-319-65978-7_80#citeas">Research
 and Implementation of Global Path Planning for Unmanned Surface Vehicle
-Based on Electronic Chart</a>，以及arXiv上的 <a
-target="_blank" rel="noopener" href="http://arxiv.org/abs/1802.03221">文献地址</a>。本文接下来主要对论文的实现原理进行分析，在最后给出程序代码，方便后来者研究和参考。</p>
+Based on Electronic Chart</a>，以及 arXiv 上的 <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1802.03221">文献地址</a>。本文接下来主要对论文的实现原理进行分析，在最后给出程序代码，方便后来者研究和参考。</p>
 <h1 id="摘要">摘要</h1>
 <p>英文在中文之后 / English follows Chinese</p>
-<p>水面无人艇(Unmanned Surface Vehicles,
-USVs)是一种新型的水面智能载具，其中全局路径规划是USV研究的关键技术，它可以反映出USV的智能程度。为了解决USV的全局路径规划问题，本文基于电子海图提出航行代价寻优(sailing
+<p>水面无人艇 (Unmanned Surface Vehicles,
+USVs) 是一种新型的水面智能载具，其中全局路径规划是 USV 研究的关键技术，它可以反映出 USV 的智能程度。为了解决 USV 的全局路径规划问题，本文基于电子海图提出航行代价寻优 (sailing
 cost
-optimization)的改进A*算法。我们使用S-57电子海图实现八叉树网格的环境模型建立，并基于航行安全权重、引导量和路径曲线平滑处理，提出优化的A*算法来实现规划路径航行安全，减少规划时间，提高路径平滑度。仿真结果表明，环境建模方法和改进A*算法可以规划出安全合理的全局路径。</p>
+optimization) 的改进 A * 算法。我们使用 S-57 电子海图实现八叉树网格的环境模型建立，并基于航行安全权重、引导量和路径曲线平滑处理，提出优化的 A * 算法来实现规划路径航行安全，减少规划时间，提高路径平滑度。仿真结果表明，环境建模方法和改进 A * 算法可以规划出安全合理的全局路径。</p>
 <p>Unmanned Surface Vehicle (USV) is a new type of intelligent surface
 boat, and global path planning is the key technology of USV research,
 which can reflect the intelligent level of USV. In order to solve the
@@ -336,30 +337,26 @@ environmental model construction method and the improved A* algorithm
 can generate safe and reasonable global path.</p>
 <h1 id="论文实现原理">论文实现原理</h1>
 <p>水面无人艇的全局路径规划，是指在存在障碍物的复杂环境下，给定起始点和目标点，根据任务要求自主规划出一条能够安全避开环境中静态障碍物的最优路径。</p>
-<p>本文提出基于电子海图的USV全局路径规划方案，分为电子海图解析、全局环境模型建立和路径搜索算法三部分。通过解析电子海图文件，提取其中的海域地理信息及碍航物等信息，将海图信息渲染成为自主航路规划系统能够识别的信息模式，建立由可航行网格和不可航行网格组成的环境模型。在此基础上，本文综合考虑航行安全性、航行距离、路径平滑度等因素，采用基于航行代价寻优的改进A*算法来搜索环境模型中的最优路径，实现水面无人艇的全局航路自主规划，提高水面无人艇的自主决策能力和智能化水平。</p>
+<p>本文提出基于电子海图的 USV 全局路径规划方案，分为电子海图解析、全局环境模型建立和路径搜索算法三部分。通过解析电子海图文件，提取其中的海域地理信息及碍航物等信息，将海图信息渲染成为自主航路规划系统能够识别的信息模式，建立由可航行网格和不可航行网格组成的环境模型。在此基础上，本文综合考虑航行安全性、航行距离、路径平滑度等因素，采用基于航行代价寻优的改进 A * 算法来搜索环境模型中的最优路径，实现水面无人艇的全局航路自主规划，提高水面无人艇的自主决策能力和智能化水平。</p>
 <p><img data-src="http://www.waylon.one/downloads/images/blog/ICMIR_Struct.png" width="600" height="120"></p>
-<p>水面无人艇全局路径规划系统无法直接利用电子海图进行自主路径规划，所以需要研究矢量电子海图S-57数据结构，提取出全局路径规划需要的海洋环境信息，裁剪无关数据，将电子海图转换为全局航路规划系统能够直接使用的信息。其中，利用开源的TinyXML库保存到xml文件中，供路径规划系统的后续分析和处理。</p>
-<p>在提取得到电子海图xml文件后，通过网格化的方法把感兴趣区域划分为若干块大小相等的矩形网格，然后利用Shapely开源地理库依次判断网格中是否存在从电子海图中解析的静态障碍物（如陆地、海岛、浅滩），从而将网格环境地图划分为可航区域和不可航区域。</p>
-<p>在实现环境建模后，全局路径搜索算法优化的目标是在确保航行安全性的前提下，尽可能使规划的路径航行代价最小，最大程度地减小与最短路径、最小航行代价无关的计算量。其中，Hart等使用启发式函数来评估从初始点到目标点的代价，在Dijkstra算法基础上，结合启发式函数形成新的路径搜索策略--A*算法，通过减少搜索空间来提高搜索效率，所以更适合网格情形下的全局路径规划。本文对传统的A*算法进行改进，实现全局路径的初步搜索。</p>
-<p>网格环境下，如果直接把A*算法搜索得到的节点顺序连接起来作为水面无人艇的全局规划路径，通常会出现阶梯或者锯齿状路径的情况，很明显规划的路径并不是两点间的期望路径。所以，本文提出去除多余航点的曲线平滑算法，在保证安全的前提下减少路径中不必要的航点，使多段折线化为直线，增加路径的光滑度，规划的路径会更加符合起止点之间的期望路径，符合水面无人艇的运动学特性。</p>
+<p>水面无人艇全局路径规划系统无法直接利用电子海图进行自主路径规划，所以需要研究矢量电子海图 S-57 数据结构，提取出全局路径规划需要的海洋环境信息，裁剪无关数据，将电子海图转换为全局航路规划系统能够直接使用的信息。其中，利用开源的 TinyXML 库保存到 xml 文件中，供路径规划系统的后续分析和处理。</p>
+<p>在提取得到电子海图 xml 文件后，通过网格化的方法把感兴趣区域划分为若干块大小相等的矩形网格，然后利用 Shapely 开源地理库依次判断网格中是否存在从电子海图中解析的静态障碍物（如陆地、海岛、浅滩），从而将网格环境地图划分为可航区域和不可航区域。</p>
+<p>在实现环境建模后，全局路径搜索算法优化的目标是在确保航行安全性的前提下，尽可能使规划的路径航行代价最小，最大程度地减小与最短路径、最小航行代价无关的计算量。其中，Hart 等使用启发式函数来评估从初始点到目标点的代价，在 Dijkstra 算法基础上，结合启发式函数形成新的路径搜索策略 --A * 算法，通过减少搜索空间来提高搜索效率，所以更适合网格情形下的全局路径规划。本文对传统的 A * 算法进行改进，实现全局路径的初步搜索。</p>
+<p>网格环境下，如果直接把 A * 算法搜索得到的节点顺序连接起来作为水面无人艇的全局规划路径，通常会出现阶梯或者锯齿状路径的情况，很明显规划的路径并不是两点间的期望路径。所以，本文提出去除多余航点的曲线平滑算法，在保证安全的前提下减少路径中不必要的航点，使多段折线化为直线，增加路径的光滑度，规划的路径会更加符合起止点之间的期望路径，符合水面无人艇的运动学特性。</p>
 <h1 id="实现程序">实现程序</h1>
-<p>因为程序是2017年4月份实现的，仍然不够完善，可能存在bug或者性能优化点，欢迎交流和改善。程序最新代码请参考本人github
+<p>因为程序是 2017 年 4 月份实现的，仍然不够完善，可能存在 bug 或者性能优化点，欢迎交流和改善。程序最新代码请参考本人 github
 <a target="_blank" rel="noopener" href="https://github.com/wylloong">wylloong</a>。</p>
 <h2 id="电子海图解析">电子海图解析</h2>
-<p>S-57电子海图解析中，本文在之前文章中已经进行详细的分析和讲解，并给出源代码，可以参见
-<a
-target="_blank" rel="noopener" href="https://github.com/wylloong/S57-Electronic-Chart-Reading-and-Storing">S57-Electronic-Chart-Reading-and-Storing</a>
-和 <a
-href="http://www.waylon.one/USV/ENC-analysis-store/">基于8211lib库对s57电子海图的解析和存储</a>。</p>
+<p>S-57 电子海图解析中，本文在之前文章中已经进行详细的分析和讲解，并给出源代码，可以参见
+<a target="_blank" rel="noopener" href="https://github.com/wylloong/S57-Electronic-Chart-Reading-and-Storing">S57-Electronic-Chart-Reading-and-Storing</a>
+和 <a href="http://www.waylon.one/USV/ENC-analysis-store/">基于 8211lib 库对 s57 电子海图的解析和存储</a>。</p>
 <h2 id="建立环境模型">建立环境模型</h2>
-<p>该部分代码可详见github <a
-target="_blank" rel="noopener" href="https://github.com/wylloong/GlobalPathPlanningforUSV/blob/master/GlobalEnviStructWithSquare.py">GlobalEnviStructWithSquare</a>，如有需要请备份，可能后期会删除掉部分程序。
-### 改进A*算法和路径平滑处理</p>
-<p>该部分代码可详见github <a
-target="_blank" rel="noopener" href="https://github.com/wylloong/GlobalPathPlanningforUSV/blob/master/GlobalPathPlanWithSquare.py">GlobalPathPlanWithSquare</a>，如有需要请备份，可能后期会删除掉部分程序。</p>
+<p>该部分代码可详见 github <a target="_blank" rel="noopener" href="https://github.com/wylloong/GlobalPathPlanningforUSV/blob/master/GlobalEnviStructWithSquare.py">GlobalEnviStructWithSquare</a>，如有需要请备份，可能后期会删除掉部分程序。
+### 改进 A * 算法和路径平滑处理</p>
+<p>该部分代码可详见 github <a target="_blank" rel="noopener" href="https://github.com/wylloong/GlobalPathPlanningforUSV/blob/master/GlobalPathPlanWithSquare.py">GlobalPathPlanWithSquare</a>，如有需要请备份，可能后期会删除掉部分程序。</p>
 <h2 id="程序示例">程序示例</h2>
 <p>程序的全局路径规划示意图如下所示：</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/ICMIR2017.png" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/ICMIR2017.png"></p>
 <p>Note: It's been years since I last wrote electronic chart, all
 examples may not be syntactically valid but the idea should be
 correct.</p>
@@ -428,8 +425,26 @@ correct.</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -452,6 +467,7 @@ correct.</p>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -463,6 +479,7 @@ correct.</p>
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

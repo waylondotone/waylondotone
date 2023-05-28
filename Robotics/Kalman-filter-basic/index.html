@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="[toc]  周末查看其它资料做了解  卡尔曼滤波 (Kalman filter) 是在存在不确定下做信息融合 (combining information) 的通用工具。  It is such a general and powerful tool for combining information in the presence of uncertainty.  What is it? Yo">
 <meta property="og:type" content="article">
@@ -80,7 +81,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -161,7 +161,7 @@ with measurements</span></a></li><li class="nav-item nav-level-1"><a class="nav-
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,9 +180,6 @@ with measurements</span></a></li><li class="nav-item nav-level-1"><a class="nav-
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -256,6 +253,13 @@ with measurements</span></a></li><li class="nav-item nav-level-1"><a class="nav-
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -308,7 +312,7 @@ systems.</p>
 Kalman filter?</h1>
 <p>卡尔曼的一个应用举例：测量坦克的油量，汽车引擎的温度，用户在触摸板上的手指位置，甚至所有你可以跟踪
 (track)
-的物体。概括的讲，只要用“跟踪”这个词来形容的算法，即tracking、Tracker等这种词描述的算法，基本都要用kalman滤波处理下数据。</p>
+的物体。概括的讲，只要用 “跟踪” 这个词来形容的算法，即 tracking、Tracker 等这种词描述的算法，基本都要用 kalman 滤波处理下数据。</p>
 <blockquote>
 <p>It could be data about the amount of fluid in a tank, the temperature
 of a car engine, the position of a user’s finger on a touchpad, or any
@@ -321,10 +325,9 @@ distributed. Each variable has a mean value 𝜇, which is the center of
 the random distribution (and its most likely state), and a variance 𝜎2,
 which is the uncertainty.</p>
 <figure>
-<img data-src="https://note.youdao.com/src/WEBRESOURCE46298a0ddeb2a342957c6f2da3a270c0"
-alt="截屏2021-03-23 下午8.36.39.png" />
-<figcaption aria-hidden="true">截屏2021-03-23
-下午8.36.39.png</figcaption>
+<img data-src="https://note.youdao.com/src/WEBRESOURCE46298a0ddeb2a342957c6f2da3a270c0" alt="截屏2021-03-23 下午8.36.39.png">
+<figcaption aria-hidden="true">截屏 2021-03-23
+下午 8.36.39.png</figcaption>
 </figure>
 <p>从参数之间的关联发掘更多信息：比如机器人的速度和位置，如果速度快，那么位置可能就比较远。</p>
 <p>This kind of relationship is really important to keep track of,
@@ -351,13 +354,12 @@ original estimate and moves it to a new predicted location, which is
 <strong>where the system would move if that original estimate was the
 right one</strong>.</p>
 <figure>
-<img data-src="" alt="图片" />
+<img data-src="" alt="图片">
 <figcaption aria-hidden="true">图片</figcaption>
 </figure>
 <p>不太理解这个公示是如何推导出来的，数学的理论知识不够踏实。</p>
 <figure>
-<img data-src="https://note.youdao.com/src/WEBRESOURCEc20ab959f47d05d994f3ad7065fd17aa"
-alt="screen shot 2021-03-24 at 20.14.01.png" />
+<img data-src="https://note.youdao.com/src/WEBRESOURCEc20ab959f47d05d994f3ad7065fd17aa" alt="screen shot 2021-03-24 at 20.14.01.png">
 <figcaption aria-hidden="true">screen shot 2021-03-24 at
 20.14.01.png</figcaption>
 </figure>
@@ -421,7 +423,7 @@ are true, we just multiply them together.</p>
 information we have.</p>
 <h1 id="combining-gaussians">Combining Gaussians</h1>
 <figure>
-<img data-src="" alt="Kalman Filter Information Flow" />
+<img data-src="" alt="Kalman Filter Information Flow">
 <figcaption aria-hidden="true">Kalman Filter Information
 Flow</figcaption>
 </figure>
@@ -435,15 +437,13 @@ measurements about their mean.</p>
 </blockquote>
 <h1 id="references">References</h1>
 <ul>
-<li><a
-target="_blank" rel="noopener" href="https://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/">How
+<li><a target="_blank" rel="noopener" href="https://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/">How
 a Kalman filter works, in pictures</a>
 <ul>
-<li>使用 chrome 打开有些公式显示是错误的，可以使用 safari
+<li> 使用 chrome 打开有些公式显示是错误的，可以使用 safari
 打开，公示显示正常。</li>
 </ul></li>
-<li><a
-target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7XJvxPRCFhdUP15mo1b89A">一文详解卡尔曼滤波器的原理与应用</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7XJvxPRCFhdUP15mo1b89A">一文详解卡尔曼滤波器的原理与应用</a></li>
 </ul>
 
     </div>
@@ -462,8 +462,8 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7XJvxPRCFhdUP15m
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/monthly-skills/rule-engine/" rel="prev" title="手把手搭建业务规则引擎(Rule Engine)">
-                  <i class="fa fa-chevron-left"></i> 手把手搭建业务规则引擎(Rule Engine)
+                <a href="/monthly-skills/rule-engine/" rel="prev" title="手把手搭建业务规则引擎 (Rule Engine)">
+                  <i class="fa fa-chevron-left"></i> 手把手搭建业务规则引擎 (Rule Engine)
                 </a>
             </div>
             <div class="post-nav-item">
@@ -508,8 +508,26 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7XJvxPRCFhdUP15m
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -532,6 +550,7 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7XJvxPRCFhdUP15m
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -543,6 +562,7 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7XJvxPRCFhdUP15m
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

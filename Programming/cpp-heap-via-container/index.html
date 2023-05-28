@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="[toc] 红黑树 什么是红黑树 set&#x2F;multiset 实现最大堆 在 STL 中，set 和 multiset 是基于红黑树实现的。  Sets are usually implemented as red-black trees. Sorting is done using the key comparison function Compare. Search, removal, and">
 <meta property="og:type" content="article">
@@ -76,7 +77,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -174,9 +174,6 @@
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
       </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
   </div>
 
         </div>
@@ -194,7 +191,7 @@
       <a class="popular-posts-link" href="/Ubuntu/install-sogou-ubuntu-18/" rel="bookmark">
         <time class="popular-posts-time">2019-08-09</time>
         <br>
-      How to install Sogou Pinyin in non-Chinese versions of Ubuntu 18.04 / 如何在非中文版的Ubuntu 18.04安搜狗拼音输入法
+      How to install Sogou Pinyin in non-Chinese versions of Ubuntu 18.04 / 如何在非中文版的 Ubuntu 18.04 安搜狗拼音输入法
       </a>
     </li>
   </ul>
@@ -266,6 +263,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -296,22 +300,20 @@
 <p>在 STL 中，set 和 multiset 是基于红黑树实现的。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/set">Sets</a>
-are usually implemented as <a
-target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Red–black_tree">red-black
+are usually implemented as <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Red–black_tree">red-black
 trees</a>.</li>
-<li>Sorting is done using the key comparison function <em><a
-target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/Compare">Compare</a></em>.
+<li>Sorting is done using the key comparison function <em><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/Compare">Compare</a></em>.
 Search, removal, and insertion operations have logarithmic
 complexity.</li>
 </ul>
 <h2 id="code-example">Code Example</h2>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="comment">// Initialize a set.</span></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::less&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>&gt; min_s;</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;min value of set container is &quot;</span> &lt;&lt; *min_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;max value of set container is &quot;</span> &lt;&lt; *min_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::greater&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_s;</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;max value of set container is &quot;</span> &lt;&lt; *max_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;min value of set container is &quot;</span> &lt;&lt; *max_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize a multiset.</span></span><br><span class="line">  std::multiset&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_ms;</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;max value of multiset container is &quot;</span> &lt;&lt; *max_ms.<span class="built_in">begin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;min value of multiset container is &quot;</span> &lt;&lt; *max_ms.<span class="built_in">rbegin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="comment">// Initialize a set.</span></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::less&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>&gt; min_s;</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of set container is "</span> &lt;&lt; *min_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of set container is "</span> &lt;&lt; *min_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::greater&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_s;</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of set container is "</span> &lt;&lt; *max_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of set container is "</span> &lt;&lt; *max_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize a multiset.</span></span><br><span class="line">  std::multiset&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_ms;</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of multiset container is "</span> &lt;&lt; *max_ms.<span class="built_in">begin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of multiset container is "</span> &lt;&lt; *max_ms.<span class="built_in">rbegin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>输出结果如下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">min value of set container is -1</span><br><span class="line">max value of set container is 5</span><br><span class="line">max value of set container is 5</span><br><span class="line">min value of set container is -1</span><br><span class="line">max value of multiset container is 5</span><br><span class="line">min value of multiset container is -1</span><br></pre></td></tr></table></figure>
-<p>参考 <剑指offer> 面试题 40 — 最小的k个数</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">min value of set container is -1</span><br><span class="line">max value of set container is 5</span><br><span class="line">max value of set container is 5</span><br><span class="line">min value of set container is -1</span><br><span class="line">max value of multiset container is 5</span><br><span class="line">min value of multiset container is -1</span><br></pre></td></tr></tbody></table></figure>
+<p>参考 &lt;剑指 offer&gt; 面试题 40 — 最小的 k 个数</p>
 <h1 id="基于-stl-的函数-push_heappop_heap-和-vector-实现堆">基于 STL
 的函数 push_heap、pop_heap 和 vector 实现堆</h1>
-<p>参考 <剑指offer> 面试题 41 — 数据流中的中位数</p>
+<p>参考 &lt;剑指 offer&gt; 面试题 41 — 数据流中的中位数</p>
 <h1 id="更改记录">更改记录</h1>
 <p>2023.04.02 搭建架子，写出 set 版本。</p>
 
@@ -335,8 +337,8 @@ complexity.</li>
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/website/hexo/rebuild_website_in_vps/" rel="next" title="VPS部署Hexo环境">
-                  VPS部署Hexo环境 <i class="fa fa-chevron-right"></i>
+                <a href="/website/hexo/rebuild_website_in_vps/" rel="next" title="VPS 部署 Hexo 环境">
+                  VPS 部署 Hexo 环境 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -376,8 +378,26 @@ complexity.</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -400,6 +420,7 @@ complexity.</li>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -411,6 +432,7 @@ complexity.</li>
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,14 +18,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc] 解读 Baidu Apollo EM Motion Planner 论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 文章链接。 现在看来 (2021年)，这篇论文属于 Apollo 系统规划与决策模块的白皮书，文章介绍的方法和思想，在现阶段 L4 级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。 我目前就职">
+    <meta name="description" content="[toc] 解读 Baidu Apollo EM Motion Planner 论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 文章链接。 现在看来 (2021 年)，这篇论文属于 Apollo 系统规划与决策模块的白皮书，文章介绍的方法和思想，在现阶段 L4 级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。 我目前就">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解读 Baidu Apollo EM Motion Planner">
 <meta property="og:url" content="http://www.waylon.one/Autonomous-Driving/Baidu-Apollo-EM-Motion-Planner/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc] 解读 Baidu Apollo EM Motion Planner 论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 文章链接。 现在看来 (2021年)，这篇论文属于 Apollo 系统规划与决策模块的白皮书，文章介绍的方法和思想，在现阶段 L4 级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。 我目前就职">
+<meta property="og:description" content="[toc] 解读 Baidu Apollo EM Motion Planner 论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 文章链接。 现在看来 (2021 年)，这篇论文属于 Apollo 系统规划与决策模块的白皮书，文章介绍的方法和思想，在现阶段 L4 级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。 我目前就">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/onboard_module_of_Apollo.JPG">
@@ -91,7 +92,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -174,7 +174,7 @@ Non-convex Optimization With DP and QP</span></a></li></ol></li><li class="nav-i
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -193,9 +193,6 @@ Non-convex Optimization With DP and QP</span></a></li></ol></li><li class="nav-i
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -293,6 +290,13 @@ Non-convex Optimization With DP and QP</span></a></li></ol></li><li class="nav-i
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -318,9 +322,8 @@ Non-convex Optimization With DP and QP</span></a></li></ol></li><li class="nav-i
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p><strong>解读 Baidu Apollo EM Motion Planner</strong></p>
-<p>论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 <a
-target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.08048">文章链接</a>。</p>
-<p>现在看来 (2021年)，这篇论文属于 Apollo
+<p>论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.08048">文章链接</a>。</p>
+<p>现在看来 (2021 年)，这篇论文属于 Apollo
 系统<strong>规划与决策模块</strong>的白皮书，文章介绍的方法和思想，在现阶段
 L4
 级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。</p>
@@ -329,7 +332,7 @@ L4
 <p>我在研读论文多次的基础上，基于目前的工作经验和设计实践，对文章的设计做一些个人的粗浅解读和评价，行家轻拍。欢迎大家在文章下留言赐教。</p>
 <p>对于新手，建议在读论文前，先阅读 Case Study
 这一章，了解文章在解决什么问题，以及大概是如何解决这个问题，这对文章的整体理解有帮助。</p>
-<hr />
+<hr>
 <h1 id="abstract">ABSTRACT</h1>
 <p>Apollo 系统目标：工业级的 L4
 自动驾驶系统，注重安全性、舒适度和可扩展性。</p>
@@ -337,11 +340,10 @@ L4
 <p>The developed system aims to address the industrial level-4 motion
 planning problem while considering safety, comfort and scalability.</p>
 </blockquote>
-<p>Apollo 开源代码地址：<a
-target="_blank" rel="noopener" href="https://github.com/ApolloAuto/apollo">Apollo open source
+<p>Apollo 开源代码地址：<a target="_blank" rel="noopener" href="https://github.com/ApolloAuto/apollo">Apollo open source
 autonomous driving platform</a>。</p>
 <p>注意：Apollo
-是一个“伪开源”，公布出来的代码逻辑简单，更像是一个自动驾驶系统的空架子，和官方实际路测的代码是不一样的。</p>
+是一个 “伪开源”，公布出来的代码逻辑简单，更像是一个自动驾驶系统的空架子，和官方实际路测的代码是不一样的。</p>
 <h1 id="introduction">INTRODUCTION</h1>
 <p>The system covers multilane and single-lane autonomous driving in a
 hierarchical manner: - 第一级：变道选择。The <strong>top layer</strong>
@@ -362,24 +364,24 @@ construct a scalable and easy-to-tune framework to handle traffic rules,
 obstacle decisions and smoothness simultaneously.</li>
 </ul></li>
 </ul>
-<hr />
+<hr>
 <p>补充知识点：什么是 Frenet frame？</p>
 <p>Frenet
 坐标系通常使用道路的中心线作为参考线，使用参考线的<strong>切线向量</strong>和<strong>法线向量</strong>建立坐标系。</p>
 <p>如下图所示，这个 S-D 坐标系即为 Frenet
 坐标系，它以车辆自身为原点，坐标轴相互垂直，分为： 纵向
 S：沿着参考线的方向； 横向 D：参考线的法向。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg"></p>
 <p>相比于笛卡尔坐标系，Frenet
-坐标系可明显地简化问题。因为车辆在行驶中，自车基于参考线(道路中心线)的位置，就可以使用纵向距离和横向距离来描述，同时纵向和横向的速度、加速度、加加速度等信息直接和道路相关；在车道保持和换道过程中都具有很强的实用性。</p>
+坐标系可明显地简化问题。因为车辆在行驶中，自车基于参考线 (道路中心线) 的位置，就可以使用纵向距离和横向距离来描述，同时纵向和横向的速度、加速度、加加速度等信息直接和道路相关；在车道保持和换道过程中都具有很强的实用性。</p>
 <!--
 From http://blog.sina.com.cn/s/blog_86186c970102yhrh.html
 -->
-<hr />
+<hr>
 <!--
 ![系统架构设计](WEBRESOURCE53447e28972063eb3a12a0cf9e17d4e1)
 -->
-<p><img data-src="http://www.waylon.one/downloads/images/blog/onboard_module_of_Apollo.JPG" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/onboard_module_of_Apollo.JPG"></p>
 <blockquote>
 <p>In the figure, the HD map module provides a high-definition map that
 can be accessed by every on-line module. Perception and localization
@@ -389,8 +391,8 @@ module. The motion planning module considers all information to generate
 a safe and smooth trajectory to feed into the vehicle control
 module.</p>
 </blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[safety]--&gt;B(traffic regulations)</span><br><span class="line">A--&gt;C(range coverage)</span><br><span class="line">A--&gt;D(cycle time efficiency)</span><br><span class="line">A--&gt;E(emergency safety)</span><br><span class="line">C--&gt;F(we aim to provide a trajectory with at least an eight second or two hundred meter motion planning trajectory)</span><br></pre></td></tr></table></figure>
-<p><img data-src="" /></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[safety]--&gt;B(traffic regulations)</span><br><span class="line">A--&gt;C(range coverage)</span><br><span class="line">A--&gt;D(cycle time efficiency)</span><br><span class="line">A--&gt;E(emergency safety)</span><br><span class="line">C--&gt;F(we aim to provide a trajectory with at least an eight second or two hundred meter motion planning trajectory)</span><br></pre></td></tr></tbody></table></figure>
+<p><img data-src=""></p>
 <p>在运动规划中，最重要的两个指标是安全 (safety) 和乘坐体验 (ride
 experience)。</p>
 <p>关于安全性，主要从交通规则 (traffic regulations)，场景覆盖范围 (range
@@ -408,7 +410,7 @@ safety.</p>
 > In the case of an emergency, the system could react within 100 ms, compared with a 300 ms reaction time for a normal human driver.
 -->
 <p>关于乘坐体验，主要从场景覆盖 (scenario coverage)，交通规则 (traffic
-regulation) 和舒适度 (comfort，比如自车加速度和Jerk) 三方面着手。</p>
+regulation) 和舒适度 (comfort，比如自车加速度和 Jerk) 三方面着手。</p>
 <blockquote>
 <p>In addition to safety, passengers’ ride experience is also important.
 The measurement of ride experience includes, but is not limited to,
@@ -423,7 +425,7 @@ it is not easy to apply traffic regulations under the same frame.
 
 -->
 <h2 id="multilane-strategy">Multilane Strategy</h2>
-<p>运动规划的注意点之一：自车的决策应该尽量稳定，以方便其他交通参与者预测自车的意图。如果自车在正常行驶过程中，和其他车辆交互决策不稳定(如障碍物误感)带来的急刹车，容易造成后方车辆制动不及时而发生追尾。</p>
+<p>运动规划的注意点之一：自车的决策应该尽量稳定，以方便其他交通参与者预测自车的意图。如果自车在正常行驶过程中，和其他车辆交互决策不稳定 (如障碍物误感) 带来的急刹车，容易造成后方车辆制动不及时而发生追尾。</p>
 <!--
 ABC 公司的设计中，曾发生自车急刹，被后方车辆追尾的情况。
 -->
@@ -432,8 +434,8 @@ ABC 公司的设计中，曾发生自车急刹，被后方车辆追尾的情况�
 inform other drivers of the intention of the autonomous driving
 vehicle.</p>
 </blockquote>
-<p>变道策略需要能处理主动变道( routing
-规划)和被动变道(道路前方被堵塞)两种情况，通常变道成功率 (success rate)
+<p>变道策略需要能处理主动变道 ( routing
+规划) 和被动变道 (道路前方被堵塞) 两种情况，通常变道成功率 (success rate)
 会作为变道质量的一个重要衡量指标。</p>
 <blockquote>
 <p>Typically, a multilane strategy should cover both nonpassive and
@@ -443,7 +445,7 @@ the final destination. * A passive lane change is defined as an ego car
 maneuver when the default lane is blocked by the dynamic
 environment.</p>
 </blockquote>
-<p>文中提到的做法是对主动变道和被动变道进行并行计算(parallel
+<p>文中提到的做法是对主动变道和被动变道进行并行计算 (parallel
 framework)。 * 对所有的候选车道，以车道级别 (lane-level)
 进行交通规则、车道内障碍物的分析，那么每个车道都会生成一个最可行的轨迹
 (best-possible trajectory)。最后，一个 cross-lane trajectory decider
@@ -563,7 +565,7 @@ The consideration of multi- agent interactions will benefit both prediction and 
 -->
 <p>Targeting level-4 autonomous driving, a decision module shall include
 both <strong>scalability</strong> and
-<strong>feasibility</strong>.<br />
+<strong>feasibility</strong>.<br>
 * Scalability is the scenario expression ability (i.e., the autonomous
 driving cases that can be explained). + 不要过拟合 (over-fit) 一个
 issue，适用性差。 * For feasibility, we mean that the generated decision
@@ -573,7 +575,7 @@ model-based decisions do not generate a collision-free trajectory to
 verify the feasibility. * 同意，decision
 层并不会考虑是否能够生成轨迹，所以有些决策是无效的。</p>
 <p>划重点：EM planner
-的做法是先生成初略的轨迹来表示交互意图(不受限于障碍物数量)；然后，生成一个有约束的凸走廊
+的做法是先生成初略的轨迹来表示交互意图 (不受限于障碍物数量)；然后，生成一个有约束的凸走廊
 (a convex feasible
 space)，用<strong>凸优化</strong>的方法来求解优化轨迹。 * 目前，ABC
 是先生成决策，然后决策作为约束，在 ST planner 中搜索粗略的轨迹，和 EM
@@ -595,13 +597,13 @@ solution.</p>
 FRAMEWORK WITH MULTILANE STRATEGY</h1>
 <p>除了 lane-level motion planning 的具体实现方法不同，这章节数据流和
 ABC 的实现非常类似，设计架构在工业界领先，可以重点参考。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_framework.JPG" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_framework.JPG"></p>
 <ol type="1">
 <li><p>在 Data Center 接受并同步数据。 &gt; all sources of information
 are collected and synced at the <strong>data center
 module</strong>.</p></li>
-<li><p>基于道路中心线，选择几条可行
-lane，然后生成基于其中心线的障碍物投影信息(SL 坐标描述)。</p></li>
+<li><p> 基于道路中心线，选择几条可行
+lane，然后生成基于其中心线的障碍物投影信息 (SL 坐标描述)。</p></li>
 </ol>
 <blockquote>
 <p>The reference line generator will produce some candidate lane-level
@@ -615,7 +617,7 @@ obstacles.</p>
 <p>The iteration includes two E-steps and two M-steps <strong>in one
 planning cycle</strong>. The trajectory information will iterate between
 planning cycles.</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_Iteration.JPG" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_Iteration.JPG"></p>
 <p>在两个 M-steps 中，通过 DP 和 QP 来生成 path 和 speed
 profiles。请注意，在一个规划间隔内，planning
 规划出一条可行的轨迹，需要迭代多次 EM planner，也就是运行多次 E-steps 和
@@ -624,7 +626,7 @@ M-steps.</p>
 <p>In two M-steps, path and speed profiles are generated by a
 combination of dynamic programming and quadratic programming.</p>
 </blockquote>
-<hr />
+<hr>
 <p>在第一步 E-step 中，静态和动态障碍物投影到车道的 Frenet
 frame，准备进行 SL 的 path 规划。</p>
 <blockquote>
@@ -633,7 +635,7 @@ Frenet frame</strong>. This projection includes both static obstacle
 projection and dynamic obstacle projection. *
 静态障碍物的投影：<strong>Static obstacles</strong> will be projected
 directly based on a Cartesian-Frenet frame transformation. *
-动态障碍物的投影(负责)：Considering the previous cycle planning
+动态障碍物的投影 (负责)：Considering the previous cycle planning
 trajectory, we can evaluate the estimated dynamic obstacle and ego car
 positions <strong>at each time point</strong>. + The overlap of dynamic
 obstacles and the ego car at each time point will be mapped in the
@@ -642,7 +644,7 @@ Frenet frame.</p>
 <!--    
 在下一次规划中，使用了上一次的轨迹；这违背了自己对上次轨迹不能用到当前帧的信仰。下次可以和面试者讨论下。如果这一帧，自车的轨迹突变，怎么解决呢？这种依赖上一次的轨迹，可以解决吗？
 -->
-<p>出于安全考虑(目前技术处理这类场景的安全性把握不大)，在 SL
+<p>出于安全考虑 (目前技术处理这类场景的安全性把握不大)，在 SL
 投影中，只对低速 (low-speed traffic) 和对向 (oncoming)
 动态障碍物使用；高速物体通过变道来解决。</p>
 <blockquote>
@@ -651,8 +653,7 @@ will only consider low-speed traffic and oncoming obstacles. For
 high-speed traffic, EM planner’s parallel lane-change strategy will
 cover the scenario.</p>
 </blockquote>
-<h3
-id="如何把非凸问题转变为凸优化问题">如何把非凸问题转变为凸优化问题？</h3>
+<h3 id="如何把非凸问题转变为凸优化问题">如何把非凸问题转变为凸优化问题？</h3>
 <ol type="1">
 <li>DP 可以在障碍物投影后的非凸空间 (SL) 中找到一个初略 path
 解，然后从这个初略解中得到针对障碍物的决策，比如 nudge，yield 还是
@@ -682,13 +683,12 @@ quadratic-programming-based spline optimizer.</p>
 <blockquote>
 <p>The optimizer can find solutions within the convex hull.</p>
 </blockquote>
-<hr />
+<hr>
 <p>待补充知识点：什么是非凸优化问题呢？</p>
 <p>如何把一个非凸问题转变为可解问题呢？此处引用 Pony 的一篇技术分析文章
--- <a
-target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a>
+-- <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a>
 。</p>
-<hr />
+<hr>
 <h3 id="sl-and-st-mapping-e-step">SL and ST Mapping (E-step)</h3>
 <!--
 待补充知识点：ST 和 SL 投影是什么呢？
@@ -698,7 +698,7 @@ target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2ND
 G2 算法。</p>
 <p>The SL projection is based on a G2 (continuous curvature derivative)
 smooth reference line.</p>
-<p>如何把动态障碍物转化到SL中？</p>
+<p>如何把动态障碍物转化到 SL 中？</p>
 <p>参考上一次的自车规划轨迹 (last cycle
 trajectory)，可以得到自车在指定时间上位于 S
 方向上的位置，来预估和障碍物预测轨迹的相交处 (interactions)。 &gt; For
@@ -721,7 +721,7 @@ remaining region is the speed profile feasible region.</p>
 </blockquote>
 <h3 id="m-step-dp-path">M-Step DP Path</h3>
 <p>M-step path 的目标是找到优化的 path 轮廓，分为基于 DP 的决策和 QP
-的路线规划, i.e. DP 得到决策，QP 进行轨迹规划。</p>
+的路线规划，i.e. DP 得到决策，QP 进行轨迹规划。</p>
 <blockquote>
 <p>The M-step path optimizer optimizes the path profile in the Frenet
 frame. * This is represented as finding an optimal function of lateral
@@ -740,7 +740,7 @@ nudge 决策。注意，生成的 path 轮廓是采样点连接起来的，不�
 <strong>feasible tunnels</strong> and <strong>obstacle nudge
 decisions</strong>.</p>
 </blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_structure_Fig_6.JPG" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_structure_Fig_6.JPG"></p>
 <p>The step includes a lattice sampler, cost function and dynamic
 programming search. + Lattice Sampler: The <strong>lattice
 sampler</strong> is based on a Frenet frame. Multiple rows of points are
@@ -750,8 +750,8 @@ are smoothly connected by quintic polynomial edges. +
 Function: <strong>Each graph edge</strong> is evaluated by the summation
 of cost functionals. We use information from the SL projection, traffic
 regulations and vehicle dynamics to construct the functional. +
-从障碍物，交通规则和车辆动力学三方面来计算每个连接边(两个 lattice point
-的连接线)的代价。此处略过 cost 函数的设计。 + Dynamic Programming
+从障碍物，交通规则和车辆动力学三方面来计算每个连接边 (两个 lattice point
+的连接线) 的代价。此处略过 cost 函数的设计。 + Dynamic Programming
 Search: Edge costs are used to select a candidate path with the
 <strong>lowest cost</strong> through a dynamic programming search. The
 candidate path will also <strong>determine the obstacle
@@ -759,7 +759,7 @@ decisions</strong>.</p>
 <h3 id="m-step-spline-qp-path">M-Step Spline QP Path</h3>
 <p>Spline QP path 是上面 dynamic programming path 的进一步优化
 (refinement)。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Path.JPG" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Path.JPG"></p>
 <p>在 dynamic programming path 中，基于选择路线的可行通道 (feasible
 tunnel) 被确定下来就是一个凸优化问题，spline QP path
 是在可行通道中产生一条平滑的路线。</p>
@@ -788,7 +788,7 @@ provides an estimate of the obstacle nudging distance</strong>.</p>
 <!--
 ![QP_path_objective_function](E3D91C46ED8648009D9B758630BC1510)
 -->
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Path_QP_cost_function.JPG" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Path_QP_cost_function.JPG"></p>
 <p>上述目标函数在 nudge 障碍物的距离和平滑性中做了平衡和取舍。</p>
 <blockquote>
 <p>The objective function describes the balance between nudging
@@ -810,12 +810,11 @@ f’’(s) at <strong>a sequence of station coordinates</strong> s0, s1,
 model.</p>
 </blockquote>
 <figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/left_corner.jpg"
-alt="左上角约束推导图" />
+<img data-src="http://www.waylon.one/downloads/images/blog/left_corner.jpg" alt="左上角约束推导图">
 <figcaption aria-hidden="true">左上角约束推导图</figcaption>
 </figure>
 <p>上面的操作和近似转换是做什么呢？在横向 (lateral direction)
-约束求解中，l = f(s)，因为 sin 不是线性的函数，所以使用 f(s)
+约束求解中，l = f (s)，因为 sin 不是线性的函数，所以使用 f (s)
 的导数来替代 sin
 函数。在允许一定误差的情况下，把一个非线性函数，转化为线性约束 (linear
 constraints) 问题。</p>
@@ -838,7 +837,7 @@ the ego car’s initial lateral position and derivatives. +
 (和 ABC 的 ST planner 比较通用)
 -->
 <p>在 ST 图中，使用 DP 算法生成一个速度轮廓 (speed profile)，即 v =
-S(t)。</p>
+S (t)。</p>
 <blockquote>
 <p>The speed optimizer generates a speed profile in the ST graph, which
 is represented as a station function with respect to time S(t).</p>
@@ -859,7 +858,7 @@ dynamic programming search. The generated result includes a
 <strong>piecewise</strong> linear speed profile, a feasible tunnel and
 <strong>obstacle speed decisions</strong>.</p>
 <p>待补充，obstacle speed decisions 是什么形式的决策呢？</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_Speed_Optimizer.JPG" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_Speed_Optimizer.JPG"></p>
 <p>首先，对整个 ST 图进行网格化处理，包括对障碍物进行网格化分割。 &gt;
 obstacle information is first discretized into grids on the ST
 graph.</p>
@@ -887,11 +886,11 @@ trajectories do not perform backing maneuvers when driving on the road.
 * Some necessary pruning based on vehicle dynamic constraints is also
 applied to accelerate the process.</p>
 </blockquote>
-<hr />
+<hr>
 <p>知识点，如何把导数问题简化为有限差分问题。</p>
 <p>ai = ((si-si-1)/dt - (si-1 - si-2)/dt)/dt。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/finite_difference_method.JPG" /></p>
-<hr />
+<p><img data-src="http://www.waylon.one/downloads/images/blog/finite_difference_method.JPG"></p>
+<hr>
 <h2 id="m-step-qp-speed-optimizer">M-Step QP Speed Optimizer</h2>
 <p>因为锯齿形的线性速度轮廓不能满足运动学特性，所以使用 spline QP step
 去填补这个空缺 (fill this gap)。</p>
@@ -901,20 +900,18 @@ requirements, the spline QP step is needed to fill this gap.</p>
 </blockquote>
 <h3 id="spline-qp-speed-框架">Spline QP Speed 框架</h3>
 <p>如下图所示，spline QP speed 是在满足路径单调性 (monotonicity
-evaluated at designated points，不倒车), 交通规则(traffic regulations,
+evaluated at designated points，不倒车), 交通规则 (traffic regulations,
 可行通道) 和车辆运动学约束 (vehicle dynamic constraints)
 的线性约束情况下，通过 cost
 的方式获取最优的速度，同时考虑了速度平滑性和参考速度。</p>
 <figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Speed_Optimizer.JPG"
-alt="Fig. 13" />
+<img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Speed_Optimizer.JPG" alt="Fig. 13">
 <figcaption aria-hidden="true">Fig. 13</figcaption>
 </figure>
 <p>The spline QP speed step includes three parts: cost functional,
 linearized constraint and spline QP solver.</p>
 <figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/Speed_QP_cost.jpg"
-alt="cost function" />
+<img data-src="http://www.waylon.one/downloads/images/blog/Speed_QP_cost.jpg" alt="cost function">
 <figcaption aria-hidden="true">cost function</figcaption>
 </figure>
 <p>The objective function is a balance between following the guidance
@@ -1044,7 +1041,7 @@ of EM planner has been significantly decreased, and thus, this planner
 is very efficient. <strong>It takes less than 100 ms on
 average</strong>.</p>
 </blockquote>
-<p>从问题复杂度 O(n(M+N))
+<p>从问题复杂度 O (n (M+N))
 来分析求解效率，可以应用到论文中，具有学术的感觉。但是，为什么是 M
 (后续车道) + N (障碍物数量) 呢？</p>
 <blockquote>
@@ -1075,7 +1072,7 @@ twodimensional station-lateral/station-speed problems. It could
 significantly reduce the processing time and therefore increase the
 interaction ability of the whole system.</p>
 </blockquote>
-<hr />
+<hr>
 <p>最后，APPENDIX 2 中的 CONSTRAINED SMOOTHING SPLINE AND QUADRATIC
 PROGRAMMING 一节，应用到了复杂的再生核希尔伯特空间 ( Reproducing kernel
 Hilbert
@@ -1089,8 +1086,7 @@ linearized constraints can be rapidly and stably solved.</p>
 </blockquote>
 <h1 id="references">References</h1>
 <ul>
-<li><a
-target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a></li>
 </ul>
 <h1 id="表达学习">表达学习</h1>
 <ul>
@@ -1122,8 +1118,8 @@ optimal trajectory.</li>
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/monthly-skills/rule-engine/" rel="next" title="手把手搭建业务规则引擎(Rule Engine)">
-                  手把手搭建业务规则引擎(Rule Engine) <i class="fa fa-chevron-right"></i>
+                <a href="/monthly-skills/rule-engine/" rel="next" title="手把手搭建业务规则引擎 (Rule Engine)">
+                  手把手搭建业务规则引擎 (Rule Engine) <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -1163,8 +1159,26 @@ optimal trajectory.</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -1187,6 +1201,7 @@ optimal trajectory.</li>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -1198,6 +1213,7 @@ optimal trajectory.</li>
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

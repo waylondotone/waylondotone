@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="[toc] 背景   针对多任务点的全局路径规划，是指在存在静态障碍物的环境中，给定水面无人艇起始点、目标点以及多个任务点的情况下，设计从起始点出发，安全地遍历各个任务点，最终返回目标点的全局路径，要求行驶的航路代价总和最小。 多平台维护不易，最新文章更新于 个人网站，欢迎访问和留言。   本文主要解决水面无人艇在对多个任务点进行全局路径规划时的设计和实现算方法，相关研究和设计已在 Intern">
 <meta property="og:type" content="article">
@@ -83,7 +84,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -160,7 +160,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -179,9 +179,6 @@
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -214,7 +211,7 @@
       <a class="popular-posts-link" href="/USV/ENC-analysis-store/" rel="bookmark">
         <time class="popular-posts-time">2020-01-30</time>
         <br>
-      解析和读取S-57电子海图的数据
+      解析和读取 S-57 电子海图的数据
       </a>
     </li>
   </ul>
@@ -286,6 +283,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -313,20 +317,16 @@
 <p>[toc]</p>
 <h1 id="背景">背景</h1>
 <p>  针对多任务点的全局路径规划，是指在存在静态障碍物的环境中，给定水面无人艇起始点、目标点以及多个任务点的情况下，设计从起始点出发，安全地遍历各个任务点，最终返回目标点的全局路径，要求行驶的航路代价总和最小。</p>
-<p>多平台维护不易，最新文章更新于 <a
-href="http://www.waylon.one/USV/IJVAS-USV-GlobalPathPlanning/">个人网站</a>，欢迎访问和留言。</p>
+<p>多平台维护不易，最新文章更新于 <a href="http://www.waylon.one/USV/IJVAS-USV-GlobalPathPlanning/">个人网站</a>，欢迎访问和留言。</p>
 <p>  本文主要解决水面无人艇在对多个任务点进行全局路径规划时的设计和实现算方法，相关研究和设计已在
-<a
-target="_blank" rel="noopener" href="http://www.inderscience.com/jhome.php?jcode=ijvas">International
+<a target="_blank" rel="noopener" href="http://www.inderscience.com/jhome.php?jcode=ijvas">International
 Journal of Vehicle Autonomous Systems (IJVAS)</a>
-EI期刊发表。附InderScience Publiers - IJVAS的官方文献下载链接 <a
-target="_blank" rel="noopener" href="http://www.inderscience.com/offer.php?id=93119">Design and
+EI 期刊发表。附 InderScience Publiers - IJVAS 的官方文献下载链接 <a target="_blank" rel="noopener" href="http://www.inderscience.com/offer.php?id=93119">Design and
 Implementation of Global Path Planning System for Unmanned Surface
-Vehicle among Multiple Task Points</a>，以及arXiv的<a
-target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.08106">下载链接</a>。官方文献下载链接需要科学上网才可以打开。<br />
-  本文主要讨论论文的实现原理，并给出部分程序源代码，方便后来者研究和参考。<br />
-# 摘要 英文在中文之后 / English follows Chinese<br />
-  全局路径规划是水面无人艇设计的关键技术之一。本文基于电子海图和六边形网格建立全局环境模型，并且证明六边形网格在有效性，安全性和快速性方面优于传统的正方形网格。此外，本文引入Cube坐标系来简化六边形坐标运算。进一步地，我们提出了一种改进的A*算法来实现两点之间的路径规划。在此基础上，我们构建了多个任务点的全局路径规划模型，并提出了一种改进的蚁群优化算法来准确实现多任务点的全局路径规划。仿真结果表明，全局路径规划系统可以安全、快速地规划出多个任务点的最优路径，在安全性，快速性和路径长度方面均优于传统方法。此外，全局规划路径可直接用于USV的实际场景。<br />
+Vehicle among Multiple Task Points</a>，以及 arXiv 的<a target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.08106">下载链接</a>。官方文献下载链接需要科学上网才可以打开。<br>
+  本文主要讨论论文的实现原理，并给出部分程序源代码，方便后来者研究和参考。<br>
+# 摘要 英文在中文之后 / English follows Chinese<br>
+  全局路径规划是水面无人艇设计的关键技术之一。本文基于电子海图和六边形网格建立全局环境模型，并且证明六边形网格在有效性，安全性和快速性方面优于传统的正方形网格。此外，本文引入 Cube 坐标系来简化六边形坐标运算。进一步地，我们提出了一种改进的 A * 算法来实现两点之间的路径规划。在此基础上，我们构建了多个任务点的全局路径规划模型，并提出了一种改进的蚁群优化算法来准确实现多任务点的全局路径规划。仿真结果表明，全局路径规划系统可以安全、快速地规划出多个任务点的最优路径，在安全性，快速性和路径长度方面均优于传统方法。此外，全局规划路径可直接用于 USV 的实际场景。<br>
   Global path planning is the key technology in the design of unmanned
 surface vehicles. This paper establishes global environment modelling
 based on electronic charts and hexagonal grids which are proved to be
@@ -344,29 +344,25 @@ planned path can directly apply to actual applications of USVs. #
   本文提出的多任务点全局路径规划算法主要分为电子海图解析、六边形网格化建模、两点间路径搜索、多任务点的路径规划四部分。</p>
 <p><img data-src="http://www.waylon.one/downloads/images/blog/IJVAS_Struct.png" width="600" height="120"></p>
 <p>  其中，通过解析电子海图文件，提取其中的海域地理信息及碍航物等信息，利用六边形进行网格化，建立由可航行六边形网格和不可航行六边形网格组成的环境模型。相关资料可以参考
-<a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/6506906.html">基于8211lib库对s57电子海图的解析和存储</a>
-和 <a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/7192315.html">正六边形网格化(Hexagonal
-Grids)原理与实现</a>。<br />
-  在实现环境建模后，两点间路径搜索算法优化的目标是在确保航行安全性的前提下，尽可能使规划的路径航行代价最小，最大程度地减小与最短路径、最小航行代价无关的计算量。本文设计综合多因素的航行代价，利用Hart提出的A*算法实现两点间的初步搜索，然后利用去除多余航点的曲线平滑算法，在保证安全的前提下减少路径中不必要的航点，使多段折线化为直线，增加路径的光滑度，规划的路径会更加符合起止点之间的期望路径，符合水面无人艇的运动学特性。相关资料可以参考
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/6506906.html">基于 8211lib 库对 s57 电子海图的解析和存储</a>
+和 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/7192315.html">正六边形网格化 (Hexagonal
+Grids) 原理与实现</a>。<br>
+  在实现环境建模后，两点间路径搜索算法优化的目标是在确保航行安全性的前提下，尽可能使规划的路径航行代价最小，最大程度地减小与最短路径、最小航行代价无关的计算量。本文设计综合多因素的航行代价，利用 Hart 提出的 A * 算法实现两点间的初步搜索，然后利用去除多余航点的曲线平滑算法，在保证安全的前提下减少路径中不必要的航点，使多段折线化为直线，增加路径的光滑度，规划的路径会更加符合起止点之间的期望路径，符合水面无人艇的运动学特性。相关资料可以参考
 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/8443815.html">Research and
 Implementation of Global Path Planning for Unmanned Surface Vehicle
-Based on Electronic Chart</a> 论文。<br />
-  在多任务点设计中，本文分析了港口巡逻、水质采样、水文勘测等任务对于全局路径规划的具体要求，从中抽象出针对这些任务通用的路径规划需求：在存在障碍物的海洋环境中，在给定多个任务点坐标的情形下，要求水面无人艇从起始点出发，安全地巡行到各个任务点执行具体的任务，再返回到目标点，要求总体的航路代价和最小。如在水质采样中，航路任务要求水面无人艇从固定点出发，根据设定路线行驶到各个采样点，根据采样要求完成全自动采集水样后，返回到目标点进行下一步处理，该航路任务要求完全符合本文抽象出来的全局路径规划要求。<br />
-  在水面无人艇复杂任务应用场景下，多任务点的路径规划可以抽象为网络最短路径问题，该网络本质上是一个有权值的有向图。多任务点的全局路径规划抽象模型--网络最短路径问题,可以近似为旅行商问题(Traveling
-Salesman Problem, TSP)，是非常典型的NP (Nondeterministic
-Polynomial)难问题。在应用蚁群算法解决多任务点的全局路径规划问题时，路径规划问题可以转化为在一个由节点和边组成的网络权重图（网络最短路径模型）中搜索最优闭环路径，如下图所示。相关资料可以参考
-<a
-target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/8478671.html">基于蚁群算法的机械臂打孔路径规划</a>。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/ant_graph.png" /></p>
+Based on Electronic Chart</a> 论文。<br>
+  在多任务点设计中，本文分析了港口巡逻、水质采样、水文勘测等任务对于全局路径规划的具体要求，从中抽象出针对这些任务通用的路径规划需求：在存在障碍物的海洋环境中，在给定多个任务点坐标的情形下，要求水面无人艇从起始点出发，安全地巡行到各个任务点执行具体的任务，再返回到目标点，要求总体的航路代价和最小。如在水质采样中，航路任务要求水面无人艇从固定点出发，根据设定路线行驶到各个采样点，根据采样要求完成全自动采集水样后，返回到目标点进行下一步处理，该航路任务要求完全符合本文抽象出来的全局路径规划要求。<br>
+  在水面无人艇复杂任务应用场景下，多任务点的路径规划可以抽象为网络最短路径问题，该网络本质上是一个有权值的有向图。多任务点的全局路径规划抽象模型 -- 网络最短路径问题，可以近似为旅行商问题 (Traveling
+Salesman Problem, TSP)，是非常典型的 NP (Nondeterministic
+Polynomial) 难问题。在应用蚁群算法解决多任务点的全局路径规划问题时，路径规划问题可以转化为在一个由节点和边组成的网络权重图（网络最短路径模型）中搜索最优闭环路径，如下图所示。相关资料可以参考
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/8478671.html">基于蚁群算法的机械臂打孔路径规划</a>。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/ant_graph.png"></p>
 <h1 id="实现程序">实现程序</h1>
-<p>  因为程序实现于2017年，在性能和流程中仍然不够完善，欢迎邮件进行交流和给出建议。程序最新代码请参考本人的GitHub
-<a target="_blank" rel="noopener" href="https://github.com/wylloong">wylloong</a>。<br />
+<p>  因为程序实现于 2017 年，在性能和流程中仍然不够完善，欢迎邮件进行交流和给出建议。程序最新代码请参考本人的 GitHub
+<a target="_blank" rel="noopener" href="https://github.com/wylloong">wylloong</a>。<br>
   程序运行结果如下，其中黑点为任务点，红色线段为最后规划的全局路径。</p>
 <figure>
-<img data-src="http://www.waylon.one/downloads/images/science/USV_Global_Path_Planning_Multiple_points.png"
-alt="程序运行结果" />
+<img data-src="http://www.waylon.one/downloads/images/science/USV_Global_Path_Planning_Multiple_points.png" alt="程序运行结果">
 <figcaption aria-hidden="true">程序运行结果</figcaption>
 </figure>
 
@@ -388,8 +384,8 @@ alt="程序运行结果" />
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/USV/ENC-analysis-store/" rel="prev" title="解析和读取S-57电子海图的数据">
-                  <i class="fa fa-chevron-left"></i> 解析和读取S-57电子海图的数据
+                <a href="/USV/ENC-analysis-store/" rel="prev" title="解析和读取 S-57 电子海图的数据">
+                  <i class="fa fa-chevron-left"></i> 解析和读取 S-57 电子海图的数据
                 </a>
             </div>
             <div class="post-nav-item">
@@ -434,8 +430,26 @@ alt="程序运行结果" />
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -458,6 +472,7 @@ alt="程序运行结果" />
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -469,6 +484,7 @@ alt="程序运行结果" />
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

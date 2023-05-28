@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,14 +18,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc]  本文研究了一个垂直跳跃机器人 (a 1D mass-spring system with an actuated mass) 的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力(马达)的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率 (resonant frequency) \(f_{0}\)。其中，类似于蹲下来起跳">
+    <meta name="description" content="[toc]  本文研究了一个垂直跳跃机器人 (a 1D mass-spring system with an actuated mass) 的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力 (马达) 的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率 (resonant frequency) \(f_{0}\)。其中，类似于蹲下来起">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解读 Lift-off dynamics in a simple jumping robot">
 <meta property="og:url" content="http://www.waylon.one/paper/lift-off-simple-robot/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc]  本文研究了一个垂直跳跃机器人 (a 1D mass-spring system with an actuated mass) 的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力(马达)的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率 (resonant frequency) \(f_{0}\)。其中，类似于蹲下来起跳">
+<meta property="og:description" content="[toc]  本文研究了一个垂直跳跃机器人 (a 1D mass-spring system with an actuated mass) 的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力 (马达) 的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率 (resonant frequency) \(f_{0}\)。其中，类似于蹲下来起">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/lift_off_robot_schematic_diagram.jpg">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/lift_off_position.jpg">
@@ -84,7 +85,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -161,7 +161,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -180,9 +180,6 @@
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -287,6 +284,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -314,19 +318,15 @@
 <!--Lift-off dynamics in a simple jumping robot-->
 <p>本文研究了一个垂直跳跃机器人 (a 1D mass-spring system with an
 actuated mass)
-的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力(马达)的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率
-(resonant frequency) <span
-class="math inline">\(f_{0}\)</span>。其中，类似于蹲下来起跳 (squat
-maneuver) 的行为，最优跳跃的频率高于 <span
-class="math inline">\(f_{0}\)</span>；类似于反向运动(counter-movement)，最优跳跃的频率低于<span
-class="math inline">\(f_{0}\)</span>。</p>
+的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力 (马达) 的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率
+(resonant frequency) <span class="math inline">\(f_{0}\)</span>。其中，类似于蹲下来起跳 (squat
+maneuver) 的行为，最优跳跃的频率高于 <span class="math inline">\(f_{0}\)</span>；类似于反向运动 (counter-movement)，最优跳跃的频率低于<span class="math inline"> \(f_{0}\)</span>。</p>
 <blockquote>
 <p>Systematic variation of forcing parameters reveals complex dynamics
 which are sensitive to amplitude, phase and frequency.</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1208.6289">文献地址</a></p>
-<p>多平台维护不易，内容实时更新于 <a
-href="http://www.waylon.one/paper/lift-off-simple-robot/">个人网站</a>，请移步阅读最新内容。</p>
+<p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/lift-off-simple-robot/">个人网站</a>，请移步阅读最新内容。</p>
 <!--
 共振（resonance）是物理学上的一个运用频率非常高的专业术语，是指一物理系统在特定频率下，比其他频率以更大的振幅做振动的情形；这些特定频率称之为共振频率。在共振频率下，很小的周期振动便可产生很大的振动，因为系统储存了动能。
 -->
@@ -340,8 +340,8 @@ provide guidance for simplifying control of more complex devices, and
 even reveal principles of biological locomotion.</p>
 </blockquote>
 <ul>
-<li>研究背景：在越过复杂地形时，生物启发的跳跃机器人是轮式机器人的一个替代。目前，跳跃的最优策略往往是基于经验来调试，瞬间行为(如离地跳跃)的动态系统分析(dynamics
-of transient behaviors)是相对少的。</li>
+<li>研究背景：在越过复杂地形时，生物启发的跳跃机器人是轮式机器人的一个替代。目前，跳跃的最优策略往往是基于经验来调试，瞬间行为 (如离地跳跃) 的动态系统分析 (dynamics
+of transient behaviors) 是相对少的。</li>
 </ul>
 <blockquote>
 <p>In robotics, biologically inspired legged jumping robots have been
@@ -356,7 +356,7 @@ issues of lift-off, are relatively scarce.</p>
 </blockquote>
 <h1 id="experiment-and-model">Experiment and model</h1>
 <ul>
-<li>硬件设计：线性马达+弹簧+推力棒+空气轴承(摩擦小)</li>
+<li>硬件设计：线性马达 + 弹簧 + 推力棒 + 空气轴承 (摩擦小)</li>
 </ul>
 <blockquote>
 <p>The robot consisted of a linear motor actuator with a series spring
@@ -364,9 +364,9 @@ rigidly attached to the bottom end of the actuator’s lightweight thrust
 rod. The actuator was mounted to an air bearing which allowed for 1D,
 and nearly frictionless, motion.</p>
 </blockquote>
-<p><img data-src="/downloads/images/blog/lift_off_robot_schematic_diagram.jpg" /></p>
+<p><img data-src="/downloads/images/blog/lift_off_robot_schematic_diagram.jpg"></p>
 <ul>
-<li>马达(actuator)相对轴承(bearing)的力量有限，所以通过倾斜来减少重力，但我不太理解这番话蕴含的物理意思，无法想象轴承和马达的位置关系是什么。</li>
+<li>马达 (actuator) 相对轴承 (bearing) 的力量有限，所以通过倾斜来减少重力，但我不太理解这番话蕴含的物理意思，无法想象轴承和马达的位置关系是什么。</li>
 </ul>
 <blockquote>
 <p>Due to power limitations in the actuator, the bearing was inclined at
@@ -374,12 +374,12 @@ and nearly frictionless, motion.</p>
 acceleration to 0.276g.</p>
 </blockquote>
 <ul>
-<li>马达相对于驱动棒(thrust rod)底部的位置关系表达式，如下所示。</li>
+<li>马达相对于驱动棒 (thrust rod) 底部的位置关系表达式，如下所示。</li>
 </ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/lift_off_position.jpg" /></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/lift_off_position.jpg"></p>
 <ul>
-<li>设计巧妙处，利用电路(open
-circuit)做传感器，统计跳跃时间和高度，简单且精度高。</li>
+<li>设计巧妙处，利用电路 (open
+circuit) 做传感器，统计跳跃时间和高度，简单且精度高。</li>
 </ul>
 <blockquote>
 <p>To detect lift-off, a continuity sensor attached to the bottom of the
@@ -388,8 +388,7 @@ ground.</p>
 </blockquote>
 <p>结合理论和实验，作者提出一个机器人的动态模型，原理及推导过程，如下所示。</p>
 <figure>
-<img data-src="/downloads/images/blog/lift_off_dynamic_model.jpg"
-alt="公式推导" />
+<img data-src="/downloads/images/blog/lift_off_dynamic_model.jpg" alt="公式推导">
 <figcaption aria-hidden="true">公式推导</figcaption>
 </figure>
 <p>以及，和地面碰撞后的恢复系数。</p>
@@ -408,18 +407,17 @@ was then restricted to only one cycle (N = 1). We systematically
 examined jumping height for N = 1.</p>
 </blockquote>
 <h2 id="两种跳跃模式">两种跳跃模式</h2>
-<p>本节主要研究频率(frequency) <span class="math inline">\(f\)</span>
-和初始相位(initial phase offset) <span
-class="math inline">\(\phi\)</span>
-对跳跃高度的影响。从跳跃高度图发现，局部两个最大值，对应两种跳跃行为模式(two
+<p>本节主要研究频率 (frequency) <span class="math inline">\(f\)</span>
+和初始相位 (initial phase offset) <span class="math inline">\(\phi\)</span>
+对跳跃高度的影响。从跳跃高度图发现，局部两个最大值，对应两种跳跃行为模式 (two
 distinct modes of jumping)。</p>
 <ul>
-<li>单次跳(single jump)</li>
+<li>单次跳 (single jump)</li>
 </ul>
 <p>In the single jump mode, the robot compressed the spring and was
 propelled into the air.</p>
 <ul>
-<li>突突跳(stutter jump)</li>
+<li>突突跳 (stutter jump)</li>
 </ul>
 <p>In the stutter jump mode, the robot performed a small initial jump
 followed by a larger second jump.</p>
@@ -427,14 +425,11 @@ followed by a larger second jump.</p>
 马达先下压，再大反弹。
 -->
 <figure>
-<img data-src="/downloads/images/blog/lift_off_jumping_modes.jpg"
-alt="两种跳跃模式示意图" />
+<img data-src="/downloads/images/blog/lift_off_jumping_modes.jpg" alt="两种跳跃模式示意图">
 <figcaption aria-hidden="true">两种跳跃模式示意图</figcaption>
 </figure>
 <p>重要结论：For large <span class="math inline">\(\phi\)</span> single
-jumps predominate while stutter jumps occurred at lower <span
-class="math inline">\(f\)</span> and <span
-class="math inline">\(\phi\)</span>.</p>
+jumps predominate while stutter jumps occurred at lower <span class="math inline">\(f\)</span> and <span class="math inline">\(\phi\)</span>.</p>
 <h2 id="single-jump-vs-stutter-jump">Single jump vs Stutter jump</h2>
 <ul>
 <li>起跳时间：<strong>The time to lift-off was smaller for single jumps
@@ -442,8 +437,7 @@ than stutter jumps</strong>.</li>
 </ul>
 <h1 id="theory-of-transient-mixing">Theory of transient mixing</h1>
 <ul>
-<li><p>看似简单的等式一，因为参数 <span
-class="math inline">\(\alpha\)</span> 的线性，更像是一个分段线性动态系统
+<li><p>看似简单的等式一，因为参数 <span class="math inline">\(\alpha\)</span> 的线性，更像是一个分段线性动态系统
 (piecewise linear dynamical systems)，包含一系列复杂的行为。</p></li>
 <li><p>基于等式一，理论分析为什么最佳跳跃不是发生在谐振频率。</p></li>
 </ul>
@@ -454,28 +448,26 @@ resonance.</p>
 <h2 id="single-jump">Single jump</h2>
 <p>基于对等式一的变形，从模型中发现理论依据。</p>
 <figure>
-<img data-src="/downloads/images/blog/lift_off_single_jump_analyse.jpg"
-alt="理论分析" />
+<img data-src="/downloads/images/blog/lift_off_single_jump_analyse.jpg" alt="理论分析">
 <figcaption aria-hidden="true">理论分析</figcaption>
 </figure>
 <blockquote>
 <p>Moving off resonance, the prefactor favors higher f over lower, so
-the optimum f lies somewhat above <span
-class="math inline">\(f_{0}\)</span> (resonance). This argument holds
+the optimum f lies somewhat above <span class="math inline">\(f_{0}\)</span> (resonance). This argument holds
 regardless of A.</p>
 </blockquote>
 <h2 id="stutter-jump">Stutter jump</h2>
-<p>基于物理公式瞬时动能(instantaneous power) P = 外界力 F(external
-force) 乘以 质心速度 V(the center-of-mass robot velocity)。</p>
+<p>基于物理公式瞬时动能 (instantaneous power) P = 外界力 F (external
+force) 乘以 质心速度 V (the center-of-mass robot velocity)。</p>
 <h2 id="single-jump-vs-stutter-jump-1">Single jump vs Stutter jump</h2>
 <ul>
-<li>最佳突突跳(stutter jump)的频率带宽(narrow frequency
-bandwidth)比较窄。 &gt; This sensitivity to proper timing explains the
+<li>最佳突突跳 (stutter jump) 的频率带宽 (narrow frequency
+bandwidth) 比较窄。 &gt; This sensitivity to proper timing explains the
 narrow frequency bandwidth required to achieve optimal jump heights
 using the stutter jump mode.</li>
-<li>最佳突突跳的频率强依赖幅值，单次跳则没有明显依赖。 &gt; A further
+<li> 最佳突突跳的频率强依赖幅值，单次跳则没有明显依赖。 &gt; A further
 consequence is a strong dependence of optimal f with respect to A.</li>
-<li>和单次跳跃相比，突突跳达到相同高度的消耗能量要少一个数量级。 &gt;
+<li> 和单次跳跃相比，突突跳达到相同高度的消耗能量要少一个数量级。 &gt;
 Thus the stutter jump is energetically advantageous since it has a lower
 optimal f than the single jump. In fact, the stutter jump uses nearly
 <strong>an order of magnitude less</strong> power to achieve comparable
@@ -487,7 +479,7 @@ jump height to the single jump.</li>
 <li>发现突突跳，使用的能量少，但是跳跃高度高，性价比高。 &gt; The system
 becomes hybrid for certain parameters as a stutter jump emerges. This
 mode achieves comparable jump height but uses less power.</li>
-<li>研究成果和已有结论相符 &gt; Biologically, our model is in accord
+<li> 研究成果和已有结论相符 &gt; Biologically, our model is in accord
 with a previous model of bipedal jumping which predicted that
 counter-movement achieves greater jump height than the squat jump. A
 quick single jump that resembles a squat jump is beneficial when a fast
@@ -502,7 +494,7 @@ intrinsic and environmental, affect optimal performance</li>
 or efficiency.</li>
 <li>Animals jump off compliant surfaces (like tree branches) and from
 deformable substrates (like sand).</li>
-<li>如何结合 Single jump 和 Stutter jump，取得更优的表现。</li>
+<li> 如何结合 Single jump 和 Stutter jump，取得更优的表现。</li>
 </ul>
 <!--Pri- mates like Galagos (bushbabies) have been documented to perform this double jump behavior to reach a higher platform [26].-->
 <!--
@@ -574,8 +566,26 @@ deformable substrates (like sand).</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -598,6 +608,7 @@ deformable substrates (like sand).</li>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -609,6 +620,7 @@ deformable substrates (like sand).</li>
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 

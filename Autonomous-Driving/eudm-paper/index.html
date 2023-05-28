@@ -9,6 +9,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
   <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="deskxpDjduMieHbS">
 
 <link rel="stylesheet" href="/css/main.css">
 
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"manual","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="[toc] 本文是香港科技大学的研究结果，发表于 ICRA 2020。 作为一个自动驾驶的研发人员，通篇读下来认为这篇论文研究在实际工程应用中价值比较低。如果非学术原因，不建议深度研究。 其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是 spatial-temporal planner 方案； 其二，原本吸引我的 POMDP 和 多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到">
 <meta property="og:type" content="article">
@@ -82,7 +83,6 @@
       <p class="site-title">One's Way</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">Dare to create</p>
   </div>
 
   <div class="site-nav-right">
@@ -163,7 +163,7 @@ Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -182,9 +182,6 @@ Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
   <div class="links-of-author animated">
       <span class="links-of-author-item">
         <a href="https://github.com/waylondotone" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;waylondotone" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:yanlong.wangchn@gmail.com" title="E-Mail → mailto:yanlong.wangchn@gmail.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
 
@@ -289,6 +286,13 @@ Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
     </span>
 
   
+    <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">Views: </span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="Word count in article">
       <span class="post-meta-item-icon">
@@ -313,8 +317,7 @@ Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" 
     
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
-<p>本文是香港科技大学的研究结果，发表于 <a
-target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9197302">ICRA
+<p>本文是香港科技大学的研究结果，发表于 <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9197302">ICRA
 2020</a>。</p>
 <p>作为一个自动驾驶的研发人员，通篇读下来认为这篇论文研究在实际工程应用中价值比较低。如果非学术原因，不建议深度研究。</p>
 <p>其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是
@@ -339,13 +342,12 @@ mechanism.</p>
 <p>The key idea is utilizing domain-specific expert knowledge to guide
 the branching in both action and intention space.</p>
 </blockquote>
-<p>基于领域专业知识和经验，在行为和意图空间中引导和限制自车行为扩展(branching)。</p>
+<p>基于领域专业知识和经验，在行为和意图空间中引导和限制自车行为扩展 (branching)。</p>
 <blockquote>
 <p>We also release the code of our framework to accommodate
 benchmarking.</p>
 </blockquote>
-<p><a
-target="_blank" rel="noopener" href="https://github.com/HKUST-Aerial-Robotics/eudm_planner">https://github.com/HKUST-Aerial-Robotics/eudm_planner</a>
+<p><a target="_blank" rel="noopener" href="https://github.com/HKUST-Aerial-Robotics/eudm_planner">https://github.com/HKUST-Aerial-Robotics/eudm_planner</a>
 现在可以访问，但是目前代码没有继续维护，参考意义不大，可以作为其他算法的比较基准。</p>
 <h1 id="introduction">INTRODUCTION</h1>
 <blockquote>
@@ -355,8 +357,8 @@ given perfect perception, it is still challenging to make safe and
 efficient decisions due to uncertain and sometimes unpredictable
 intentions of other agents.</p>
 </blockquote>
-<p>自动驾驶研究领域的核心难点之一—推理其他交通参与者的意图。这一部分的不确定性一方面是车辆行为不确定，另一方面车辆的行为受自车行为影响，存在不确定性。</p>
-<p>Note：自动驾驶的不确定性是客观存在的，无法彻底消除，但是可以尽量限制不确定性。这一部分的不确定性如果在上游不能解决，在行为决策层就需要对多种意图考虑(decision-making
+<p>自动驾驶研究领域的核心难点之一 — 推理其他交通参与者的意图。这一部分的不确定性一方面是车辆行为不确定，另一方面车辆的行为受自车行为影响，存在不确定性。</p>
+<p>Note：自动驾驶的不确定性是客观存在的，无法彻底消除，但是可以尽量限制不确定性。这一部分的不确定性如果在上游不能解决，在行为决策层就需要对多种意图考虑 (decision-making
 under uncertainty)，导致自车行为保守。</p>
 <blockquote>
 <p>Partially observable Markov decision process (POMDP) provides a
@@ -440,7 +442,7 @@ suitable for long-term decision-making</li>
 </ul>
 <p>用车辆语意信息来描述车辆未来行为，比如跟随前方车辆，让行横向车辆等，这要比单纯的车辆状态要好用，容易理解。</p>
 <h2 id="preliminaries-on-pomdp">Preliminaries on POMDP</h2>
-<p><img data-src="/downloads/images/EUDM_POMDP.png" alt="POMDP" style="zoom:50%;" /></p>
+<p><img data-src="/downloads/images/EUDM_POMDP.png" alt="POMDP" style="zoom:50%;"></p>
 <blockquote>
 <p>The optimal policy is often pursued using a multi-step look-ahead
 search starting from the current belief.</p>
@@ -452,8 +454,7 @@ deal with the Curse of Dimensionality and Curse of History. Meanwhile,
 generic heuristic searches such as branch-and-bound and reachability
 analysis can be used to accelerate the search.</p>
 </blockquote>
-<h2
-id="domain-specific-closed-loop-policy-tree-dcp-tree">Domain-specific
+<h2 id="domain-specific-closed-loop-policy-tree-dcp-tree">Domain-specific
 Closed-loop Policy Tree (DCP-Tree)</h2>
 <p>以论文图 4 为例，讲解 DCP-Tree 的步骤：</p>
 <ul>
@@ -481,7 +482,7 @@ intention is sampled according to a behavior prediction algorithm. The
 limitation of MPDM is that, with a limited number of samples,
 influential risky outcomes may not be rolled out, especially when the
 initial intention prediction is inaccurate.</li>
-<li>本文改进：As a result, by conditioning on the ego policy sequence,
+<li> 本文改进：As a result, by conditioning on the ego policy sequence,
 we can pick out a set of relevant vehicles w.r.t. the ego future
 actions. The selection process is currently based on rule-based expert
 knowledge as detailed in Sec. V.
@@ -495,13 +496,13 @@ potentially risky scenarios.</li>
 <li>And for the vehicles which pass the assessment, we use maximum a
 posteriori (MAP) from initial belief.</li>
 </ul></li>
-<li>即，通过对物体的所有意图仿真，筛选出来危险的场景，然后重点关注。</li>
+<li> 即，通过对物体的所有意图仿真，筛选出来危险的场景，然后重点关注。</li>
 </ul></li>
 </ul>
 <p>NOTE：辅助算法流程，方便理清楚算法实现，这就是一个 ST Planner
 的简化版本，新意不足，核心内容避而不谈。</p>
 <h1 id="implementation-details">IMPLEMENTATION DETAILS</h1>
-<p><img data-src="/downloads/images/EUDM_framework.jpg" alt="EUDM framework" style="zoom:50%;" /></p>
+<p><img data-src="/downloads/images/EUDM_framework.jpg" alt="EUDM framework" style="zoom:50%;"></p>
 <h2 id="semantic-level-actions">Semantic-level Actions</h2>
 <ul>
 <li>We consider both lateral and longitudinal actions to ensure the
@@ -585,7 +586,7 @@ between current velocity and desired velocity), safety (measured by the
 distance between our vehicle and surrounding vehicles) and consistency
 (measured by the difference between the last best policy and the policy
 to be evaluated).</li>
-<li>难道所有的问题，都要化解为一个优化问题吗？策略的一致性，我们一般没有考虑到，这也是一个重要的维度。</li>
+<li> 难道所有的问题，都要化解为一个优化问题吗？策略的一致性，我们一般没有考虑到，这也是一个重要的维度。</li>
 </ul></li>
 </ul>
 <h2 id="trajectory-generation">Trajectory Generation</h2>
@@ -595,7 +596,7 @@ previous work, which utilizes a <strong>spatio-temporal corridor
 structure</strong> to generate safe and dynamically feasible
 trajectories.</li>
 </ul>
-<p><img data-src="/downloads/images/EUDM_algorithm.jpg" alt="EUDM algorithm" style="zoom:50%;" /><img data-src="" /></p>
+<p><img data-src="/downloads/images/EUDM_algorithm.jpg" alt="EUDM algorithm" style="zoom:50%;"><img data-src=""></p>
 <h1 id="experimental-results">EXPERIMENTAL RESULTS</h1>
 <h2 id="simulation-platform-and-environment">Simulation Platform and
 Environment</h2>
@@ -633,13 +634,13 @@ vehicle.</li>
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/Finance/convertible-bond/" rel="prev" title="什么是可转债打新?">
-                  <i class="fa fa-chevron-left"></i> 什么是可转债打新?
+                <a href="/Finance/convertible-bond/" rel="prev" title="什么是可转债打新？">
+                  <i class="fa fa-chevron-left"></i> 什么是可转债打新？
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/Linux/linux-mount-disk/" rel="next" title="Linux 18.04挂载硬盘">
-                  Linux 18.04挂载硬盘 <i class="fa fa-chevron-right"></i>
+                <a href="/Linux/linux-mount-disk/" rel="next" title="Linux 18.04 挂载硬盘">
+                  Linux 18.04 挂载硬盘 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
@@ -679,8 +680,26 @@ vehicle.</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:38</span>
+    <span title="Reading time total">15:39</span>
   </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
 </div>
 
     </div>
@@ -703,6 +722,7 @@ vehicle.</li>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
@@ -714,6 +734,7 @@ vehicle.</li>
 
 
   
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
