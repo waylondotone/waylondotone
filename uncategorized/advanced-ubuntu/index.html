@@ -28,7 +28,7 @@
 <meta property="og:description" content="什么是 Snap Snap 包是 Ubuntu 16.04 LTS 发布时引入的新应用格式包。 当你在安装完 snap 后，你会发现在在根目录下会出现如 &#x2F;dev&#x2F;loop0、&#x2F;dev&#x2F;loop1 等挂载点，这些挂载点正是 snap 软件包的目录。Snap 使用了 squashFS 文件系统，一种开源的压缩，只读文件系统，基于 GPL 协议发行。一旦 snap 被安装后，其就有一个只读的文件系统和">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-05-28T07:58:41.000Z">
-<meta property="article:modified_time" content="2023-05-28T09:09:00.086Z">
+<meta property="article:modified_time" content="2023-05-30T16:00:10.491Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="Weekly Blogs">
 <meta property="article:tag" content="Linux">
@@ -143,7 +143,7 @@
         <div class="post-toc-wrap sidebar-panel">
             <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-snap"><span class="nav-number">1.</span> <span class="nav-text">什么是 Snap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-shutter-screenshot-tool"><span class="nav-number">2.</span> <span class="nav-text">Install Shutter Screenshot
 Tool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#installing-shutter-on-ubuntu-20.04-18.04"><span class="nav-number">2.1.</span> <span class="nav-text">Installing Shutter on
-Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li></ol></div>
+Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2-python-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">切换 Python 环境</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -190,6 +190,13 @@ Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li></ol></div>
   </div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/Programming/advanced-python/" rel="bookmark">
+        <time class="popular-posts-time">2023-03-19</time>
+        <br>
+      Python 进阶
+      </a>
+    </li>
+    <li class="popular-posts-item">
       <a class="popular-posts-link" href="/Ubuntu/how-to-install-zoom-in-linux/" rel="bookmark">
         <time class="popular-posts-time">2020-01-06</time>
         <br>
@@ -197,24 +204,24 @@ Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li></ol></div>
       </a>
     </li>
     <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/Ubuntu/Python/Getting-started-with-pip/" rel="bookmark">
+        <time class="popular-posts-time">2019-11-15</time>
+        <br>
+      Getting started with pip
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/Python/python-interactive-mode/" rel="bookmark">
+        <time class="popular-posts-time">2020-02-08</time>
+        <br>
+      基于 interactive mode 实现 matplotlib 动态更新图片 (交互式绘图)
+      </a>
+    </li>
+    <li class="popular-posts-item">
       <a class="popular-posts-link" href="/Ubuntu/install-sogou-ubuntu-18/" rel="bookmark">
         <time class="popular-posts-time">2019-08-09</time>
         <br>
       How to install Sogou Pinyin in non-Chinese versions of Ubuntu 18.04 / 如何在非中文版的 Ubuntu 18.04 安搜狗拼音输入法
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/Ubuntu/install-rtags-vim-ubuntu-18/" rel="bookmark">
-        <time class="popular-posts-time">2019-08-09</time>
-        <br>
-      How to install rtags for vim in Ubuntu 18.04
-      </a>
-    </li>
-    <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/Linux/tmux/" rel="bookmark">
-        <time class="popular-posts-time">2020-09-29</time>
-        <br>
-      tmux 使用
       </a>
     </li>
   </ul>
@@ -265,9 +272,15 @@ Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li></ol></div>
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2023-05-28 15:58:41 / Modified: 17:09:00" itemprop="dateCreated datePublished" datetime="2023-05-28T15:58:41+08:00">2023-05-28</time>
+      <time title="Created: 2023-05-28 15:58:41" itemprop="dateCreated datePublished" datetime="2023-05-28T15:58:41+08:00">2023-05-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-31 00:00:10" itemprop="dateModified" datetime="2023-05-31T00:00:10+08:00">2023-05-31</time>
     </span>
 
   
@@ -284,14 +297,14 @@ Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li></ol></div>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>406</span>
+      <span>503</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
@@ -319,7 +332,9 @@ snap 的安全性要优于传统的 Linux 软件包。同时，每个 snap
 Tool</h2>
 <h3 id="installing-shutter-on-ubuntu-20.04-18.04">Installing Shutter on
 Ubuntu 20.04 &amp; 18.04</h3>
-<figure class="highlight shell"><figcaption><span>https://itsfoss.com/install-shutter-ubuntu/ Installing Shutter on Ubuntu 20.04 &amp; 18.04</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Shutter is not available <span class="keyword">in</span> Ubuntu 20.04.</span></span><br><span class="line">sudo add-apt-repository ppa:linuxuprising/shutter</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight shell"><figcaption><span>https://itsfoss.com/install-shutter-ubuntu/ Installing Shutter on Ubuntu 20.04 &amp; 18.04</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Shutter is not available in Ubuntu 20.04.</span><br><span class="line">sudo add-apt-repository ppa:linuxuprising/shutter</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="切换-python-环境">切换 Python 环境</h2>
+<figure class="highlight shell"><figcaption><span>https://www.cnblogs.com/liuzhenbo/p/13176869.html ubuntu 切换 python 版本 </span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 查看你系统中有哪些Python的二进制文件可供使用</span><br><span class="line">ls /usr/bin/python*</span><br><span class="line">// 查看python替换版本信息</span><br><span class="line">update-alternatives --list python</span><br><span class="line">// 使用以下命令随时在列出的python替换版本中任意切换</span><br><span class="line">sudo update-alternatives --config python</span><br><span class="line">// 再查一下默认Python版本</span><br><span class="line">python --version</span><br></pre></td></tr></tbody></table></figure>
 
     </div>
 
@@ -374,7 +389,7 @@ Ubuntu 20.04 &amp; 18.04</h3>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">258k</span>
+    <span title="Word count total">259k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
