@@ -146,7 +146,11 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">RELATED WORK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">SYSTEM OVERVIEW</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">DECISION-MAKING VIA GUIDED BRANCHING</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preliminaries-on-POMDP"><span class="nav-number">5.1.</span> <span class="nav-text">Preliminaries on POMDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Domain-specific-Closed-loop-Policy-Tree-DCP-Tree"><span class="nav-number">5.2.</span> <span class="nav-text">Domain-specific Closed-loop Policy Tree (DCP-Tree)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conditional-Focused-Branching-CFB"><span class="nav-number">5.3.</span> <span class="nav-text">Conditional Focused Branching (CFB)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">IMPLEMENTATION DETAILS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Semantic-level-Actions"><span class="nav-number">6.1.</span> <span class="nav-text">Semantic-level Actions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Forward-Simulation"><span class="nav-number">6.2.</span> <span class="nav-text">Forward Simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Belief-Update"><span class="nav-number">6.3.</span> <span class="nav-text">Belief Update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CFB-Mechanism"><span class="nav-number">6.4.</span> <span class="nav-text">CFB Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Policy-Evaluation"><span class="nav-number">6.5.</span> <span class="nav-text">Policy Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trajectory-Generation"><span class="nav-number">6.6.</span> <span class="nav-text">Trajectory Generation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">EXPERIMENTAL RESULTS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Simulation-Platform-and-Environment"><span class="nav-number">7.1.</span> <span class="nav-text">Simulation Platform and Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Qualitative-Results"><span class="nav-number">7.2.</span> <span class="nav-text">Qualitative Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Metrics"><span class="nav-number">7.2.1.</span> <span class="nav-text">Metrics</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.</span> <span class="nav-text">算法实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">3.</span> <span class="nav-text">RELATED WORK</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#system-overview"><span class="nav-number">4.</span> <span class="nav-text">SYSTEM OVERVIEW</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#decision-making-via-guided-branching"><span class="nav-number">5.</span> <span class="nav-text">DECISION-MAKING VIA GUIDED
+BRANCHING</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#preliminaries-on-pomdp"><span class="nav-number">5.1.</span> <span class="nav-text">Preliminaries on POMDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#domain-specific-closed-loop-policy-tree-dcp-tree"><span class="nav-number">5.2.</span> <span class="nav-text">Domain-specific
+Closed-loop Policy Tree (DCP-Tree)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conditional-focused-branching-cfb"><span class="nav-number">5.3.</span> <span class="nav-text">Conditional Focused Branching
+(CFB)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#implementation-details"><span class="nav-number">6.</span> <span class="nav-text">IMPLEMENTATION DETAILS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#semantic-level-actions"><span class="nav-number">6.1.</span> <span class="nav-text">Semantic-level Actions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#forward-simulation"><span class="nav-number">6.2.</span> <span class="nav-text">Forward Simulation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#belief-update"><span class="nav-number">6.3.</span> <span class="nav-text">Belief Update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cfb-mechanism"><span class="nav-number">6.4.</span> <span class="nav-text">CFB Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#policy-evaluation"><span class="nav-number">6.5.</span> <span class="nav-text">Policy Evaluation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#trajectory-generation"><span class="nav-number">6.6.</span> <span class="nav-text">Trajectory Generation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experimental-results"><span class="nav-number">7.</span> <span class="nav-text">EXPERIMENTAL RESULTS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#simulation-platform-and-environment"><span class="nav-number">7.1.</span> <span class="nav-text">Simulation Platform and
+Environment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#qualitative-results"><span class="nav-number">7.2.</span> <span class="nav-text">Qualitative Results</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#metrics"><span class="nav-number">7.2.1.</span> <span class="nav-text">Metrics</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -313,217 +317,304 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
-<p>本文是香港科技大学的研究结果，发表于 <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9197302">ICRA 2020</a>。</p>
+<p>本文是香港科技大学的研究结果，发表于 <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9197302">ICRA
+2020</a>。</p>
 <p>作为一个自动驾驶的研发人员，通篇读下来认为这篇论文研究在实际工程应用中价值比较低。如果非学术原因，不建议深度研究。</p>
-<p>其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是 spatial-temporal planner 方案；</p>
-<p>其二，原本吸引我的 POMDP 和 多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到自车未来行为决策影响的，所以存在一定的不确定性，如何评估这部分不确定性，如何判断对方车是否有合作意图，这部分难点问题也没有深入研究。</p>
+<p>其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是
+spatial-temporal planner 方案；</p>
+<p>其二，原本吸引我的 POMDP 和
+多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到自车未来行为决策影响的，所以存在一定的不确定性，如何评估这部分不确定性，如何判断对方车是否有合作意图，这部分难点问题也没有深入研究。</p>
 <p>因为后续的精力有限，自己不会再对阅读的论文进行整理，但是我会逐渐整理并分享一个自动驾驶进阶学习资料。</p>
 <span id="more"></span>
-<h1>Abstract</h1>
+<h1 id="abstract">Abstract</h1>
 <blockquote>
-<p>In this paper, we present an efficient uncertainty-aware decision-making (EUDM) framework, which generates long-term lateral and longitudinal behaviors in complex driving environments in real-time.</p>
+<p>In this paper, we present an efficient uncertainty-aware
+decision-making (EUDM) framework, which generates long-term lateral and
+longitudinal behaviors in complex driving environments in real-time.</p>
 </blockquote>
-<p>本文从纵向和横向两个维度规划自动驾驶未来 8s 的决策，优点在于决策的生成实时性。</p>
+<p>本文从纵向和横向两个维度规划自动驾驶未来 8s
+的决策，优点在于决策的生成实时性。</p>
 <blockquote>
-<p>The computation complexity is controlled to an appropriate level by two novel techniques, namely, the domain-specific closed-loop policy tree (DCP-Tree) structure and conditional focused branching (CFB) mechanism.</p>
-<p>The key idea is utilizing domain-specific expert knowledge to guide the branching in both action and intention space.</p>
+<p>The computation complexity is controlled to an appropriate level by
+two novel techniques, namely, the domain-specific closed-loop policy
+tree (DCP-Tree) structure and conditional focused branching (CFB)
+mechanism.</p>
+<p>The key idea is utilizing domain-specific expert knowledge to guide
+the branching in both action and intention space.</p>
 </blockquote>
 <p>基于领域专业知识和经验，在行为和意图空间中引导和限制自车行为扩展 (branching)。</p>
 <blockquote>
-<p>We also release the code of our framework to accommodate benchmarking.</p>
+<p>We also release the code of our framework to accommodate
+benchmarking.</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/HKUST-Aerial-Robotics/eudm_planner">https://github.com/HKUST-Aerial-Robotics/eudm_planner</a> 现在可以访问，但是目前代码没有继续维护，参考意义不大，可以作为其他算法的比较基准。</p>
-<h1>INTRODUCTION</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/HKUST-Aerial-Robotics/eudm_planner">https://github.com/HKUST-Aerial-Robotics/eudm_planner</a>
+现在可以访问，但是目前代码没有继续维护，参考意义不大，可以作为其他算法的比较基准。</p>
+<h1 id="introduction">INTRODUCTION</h1>
 <blockquote>
-<p>Reasoning about hidden intentions of other agents is the key capability for a safe and robust automated driving system. However, even given perfect perception, it is still challenging to make safe and efficient decisions due to uncertain and sometimes unpredictable intentions of other agents.</p>
+<p>Reasoning about hidden intentions of other agents is the key
+capability for a safe and robust automated driving system. However, even
+given perfect perception, it is still challenging to make safe and
+efficient decisions due to uncertain and sometimes unpredictable
+intentions of other agents.</p>
 </blockquote>
 <p>自动驾驶研究领域的核心难点之一 — 推理其他交通参与者的意图。这一部分的不确定性一方面是车辆行为不确定，另一方面车辆的行为受自车行为影响，存在不确定性。</p>
-<p>Note：自动驾驶的不确定性是客观存在的，无法彻底消除，但是可以尽量限制不确定性。这一部分的不确定性如果在上游不能解决，在行为决策层就需要对多种意图考虑 (decision-making under uncertainty)，导致自车行为保守。</p>
+<p>Note：自动驾驶的不确定性是客观存在的，无法彻底消除，但是可以尽量限制不确定性。这一部分的不确定性如果在上游不能解决，在行为决策层就需要对多种意图考虑 (decision-making
+under uncertainty)，导致自车行为保守。</p>
 <blockquote>
-<p>Partially observable Markov decision process (POMDP) provides a general and principled mathematical framework for planning in partially observable stochastic environments. However, due to the curse of dimensionality, POMDP quickly becomes computationally intractable when the problem size scales.</p>
+<p>Partially observable Markov decision process (POMDP) provides a
+general and principled mathematical framework for planning in partially
+observable stochastic environments. However, due to the curse of
+dimensionality, POMDP quickly becomes computationally intractable when
+the problem size scales.</p>
 </blockquote>
-<p>POMDP 知识，希望大家花时间详细了解一下，这是除 ML / RL 方法外，处理交互的一种做法。</p>
+<p>POMDP 知识，希望大家花时间详细了解一下，这是除 ML / RL
+方法外，处理交互的一种做法。</p>
 <h2 id="算法实现">算法实现</h2>
 <blockquote>
-<p>In this paper, we present an efficient uncertainty-aware decision-making (EUDM) framework.</p>
-<p>First, EUDM uses a domain-specific closed-loop policy tree (DCP-Tree) to construct a semantic-level action space. Each node in the policy tree is a finite-horizon semantic behavior of the ego vehicle.</p>
+<p>In this paper, we present an efficient uncertainty-aware
+decision-making (EUDM) framework.</p>
+<p>First, EUDM uses a domain-specific closed-loop policy tree (DCP-Tree)
+to construct a semantic-level action space. Each node in the policy tree
+is a finite-horizon semantic behavior of the ego vehicle.</p>
 </blockquote>
-<p>第一步：DCP-Tree 可以确定自车的初步决策，那么可以确定下来自车的行为空间。注意，其他车辆的意图还不确定。</p>
+<p>第一步：DCP-Tree
+可以确定自车的初步决策，那么可以确定下来自车的行为空间。注意，其他车辆的意图还不确定。</p>
 <blockquote>
-<p>EUDM uses the conditional focused branching (CFB) mechanism to pick out the potentially risky scenarios using open-loop safety assessment conditioning on the ego action sequence.</p>
+<p>EUDM uses the conditional focused branching (CFB) mechanism to pick
+out the potentially risky scenarios using open-loop safety assessment
+conditioning on the ego action sequence.</p>
 </blockquote>
-<p>第二步：CFB 可以基于自车的初步决策，识别并过滤其他车辆的危险场景。</p>
+<p>第二步：CFB
+可以基于自车的初步决策，识别并过滤其他车辆的危险场景。</p>
 <blockquote>
-<p>EUDM is highly parallelizable, and can produce long-term (up to 8 s) lateral and longitudinal fine-grained behavior plans in real-time (20 Hz).</p>
+<p>EUDM is highly parallelizable, and can produce long-term (up to 8 s)
+lateral and longitudinal fine-grained behavior plans in real-time (20
+Hz).</p>
 </blockquote>
 <p>规划时常是 8s，计算性能表现为 50ms，这组参数基本满足驾驶需求。</p>
-<h1>RELATED WORK</h1>
+<h1 id="related-work">RELATED WORK</h1>
 <blockquote>
-<p>POMDP is a powerful tool to handle various uncertainties in the driving task using a general probabilistic framework. However, due to the curse of dimensionality, POMDP quickly becomes computationally intractable when the problem size scales.</p>
+<p>POMDP is a powerful tool to handle various uncertainties in the
+driving task using a general probabilistic framework. However, due to
+the curse of dimensionality, POMDP quickly becomes computationally
+intractable when the problem size scales.</p>
 </blockquote>
 <p>POMDP 理论在不确定性决策中广泛应用，但是存在计算复杂度大的缺陷。</p>
 <blockquote>
-<p>Hubmann et al. proposed POMDP-based decision-making methods for urban intersection and merging scenarios.</p>
+<p>Hubmann et al. proposed POMDP-based decision-making methods for urban
+intersection and merging scenarios.</p>
 </blockquote>
 <p>TODO: 后续可以研究一下这篇论文。</p>
 <blockquote>
-<p>In this paper, we follow the idea of semantic-level closed-loop policies from MPDM. However, there are two major differences.</p>
+<p>In this paper, we follow the idea of semantic-level closed-loop
+policies from MPDM. However, there are two major differences.</p>
 </blockquote>
-<p>本文是在已有研究基础上 (MPDM)，发现研究的缺陷，提出两个改进做法，属于对已有工作的创新。</p>
-<h1>SYSTEM OVERVIEW</h1>
+<p>本文是在已有研究基础上
+(MPDM)，发现研究的缺陷，提出两个改进做法，属于对已有工作的创新。</p>
+<h1 id="system-overview">SYSTEM OVERVIEW</h1>
 <blockquote>
-<p>In EUDM, DCP-Tree is used to guide the branching in the action domain and update the semantic-level policy tree based on the previous best policy.</p>
+<p>In EUDM, DCP-Tree is used to guide the branching in the action domain
+and update the semantic-level policy tree based on the previous best
+policy.</p>
 </blockquote>
 <blockquote>
-<p>For each ego action sequence, the CFB mechanism is applied to pick out risky hidden intentions of nearby vehicles and achieves guided branching in intention space.</p>
+<p>For each ego action sequence, the CFB mechanism is applied to pick
+out risky hidden intentions of nearby vehicles and achieves guided
+branching in intention space.</p>
 </blockquote>
 <blockquote>
-<p>The output of the CFB process is a set of scenarios containing different hidden intentions combinations of nearby vehicles.</p>
+<p>The output of the CFB process is a set of scenarios containing
+different hidden intentions combinations of nearby vehicles.</p>
 </blockquote>
 <p>TODO: 附上示意图</p>
-<h1>DECISION-MAKING VIA GUIDED BRANCHING</h1>
-<p>The key feature of MPDM is using semantic-level policies instead of traditional “state”-level actions (e.g., discretized accelerations or velocities).</p>
+<h1 id="decision-making-via-guided-branching">DECISION-MAKING VIA GUIDED
+BRANCHING</h1>
+<p>The key feature of MPDM is using semantic-level policies instead of
+traditional “state”-level actions (e.g., discretized accelerations or
+velocities).</p>
 <ul>
-<li>one major limitation of MPDM is that the semantic-level policy of the ego vehicle is not allowed to change in the planning horizon.
+<li>one major limitation of MPDM is that the semantic-level policy of
+the ego vehicle is not allowed to change in the planning horizon.
 <ul>
-<li>As a result, the decision of MPDM tends to be local and may not be suitable for long-term decision-making</li>
-</ul>
-</li>
+<li>As a result, the decision of MPDM tends to be local and may not be
+suitable for long-term decision-making</li>
+</ul></li>
 </ul>
 <p>用车辆语意信息来描述车辆未来行为，比如跟随前方车辆，让行横向车辆等，这要比单纯的车辆状态要好用，容易理解。</p>
-<h2 id="Preliminaries-on-POMDP">Preliminaries on POMDP</h2>
-<img data-src="/downloads/images/EUDM_POMDP.png" alt="POMDP" style="zoom:50%;">
+<h2 id="preliminaries-on-pomdp">Preliminaries on POMDP</h2>
+<p><img data-src="/downloads/images/EUDM_POMDP.png" alt="POMDP" style="zoom:50%;"></p>
 <blockquote>
-<p>The optimal policy is often pursued using a multi-step look-ahead search starting from the current belief.</p>
+<p>The optimal policy is often pursued using a multi-step look-ahead
+search starting from the current belief.</p>
 </blockquote>
 <p>POMDP 可以扩展，但是非常容易陷入爆炸问题中。</p>
 <blockquote>
-<p>State-of-the-art online POMDP planners use Monte-Carlo sampling to deal with the Curse of Dimensionality and Curse of History. Meanwhile, generic heuristic searches such as branch-and-bound and reachability analysis can be used to accelerate the search.</p>
+<p>State-of-the-art online POMDP planners use Monte-Carlo sampling to
+deal with the Curse of Dimensionality and Curse of History. Meanwhile,
+generic heuristic searches such as branch-and-bound and reachability
+analysis can be used to accelerate the search.</p>
 </blockquote>
-<h2 id="Domain-specific-Closed-loop-Policy-Tree-DCP-Tree">Domain-specific Closed-loop Policy Tree (DCP-Tree)</h2>
+<h2 id="domain-specific-closed-loop-policy-tree-dcp-tree">Domain-specific
+Closed-loop Policy Tree (DCP-Tree)</h2>
 <p>以论文图 4 为例，讲解 DCP-Tree 的步骤：</p>
 <ul>
-<li>
-<p>The nodes of DCP-Tree are pre-defined semantic-level actions associated with a certain time duration.</p>
-</li>
-<li>
-<p>The directed edges of the tree represent the execution order in time.</p>
-</li>
-<li>
-<p>DCP-Tree origins from an ongoing action a, which is the executing semantic-level action from the best policy in the last planning cycle.</p>
-</li>
-<li>
-<p>DCP-Tree is expanded by a pre-defined strategy: from the ongoing action, each policy sequence will contain at most one change of action in one planning cycle.</p>
+<li><p>The nodes of DCP-Tree are pre-defined semantic-level actions
+associated with a certain time duration.</p></li>
+<li><p>The directed edges of the tree represent the execution order in
+time.</p></li>
+<li><p>DCP-Tree origins from an ongoing action a, which is the executing
+semantic-level action from the best policy in the last planning
+cycle.</p></li>
+<li><p>DCP-Tree is expanded by a pre-defined strategy: from the ongoing
+action, each policy sequence will contain at most one change of action
+in one planning cycle.</p>
 <ul>
-<li>Results: Compared to MPDM, DCP-Tree has much larger decision space resulting in more flexible maneuvers.</li>
+<li>Results: Compared to MPDM, DCP-Tree has much larger decision space
+resulting in more flexible maneuvers.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Conditional-Focused-Branching-CFB">Conditional Focused Branching (CFB)</h2>
+<h2 id="conditional-focused-branching-cfb">Conditional Focused Branching
+(CFB)</h2>
 <ul>
-<li>其他研究的缺陷: In the case of MPDM, the intention of the nearby vehicles is fixed for the whole planning horizon, and the initial intention is sampled according to a behavior prediction algorithm. The limitation of MPDM is that, with a limited number of samples, influential risky outcomes may not be rolled out, especially when the initial intention prediction is inaccurate.</li>
-<li> 本文改进：As a result, by conditioning on the ego policy sequence, we can pick out a set of relevant vehicles w.r.t. the ego future actions. The selection process is currently based on rule-based expert knowledge as detailed in Sec. V.
+<li>其他研究的缺陷: In the case of MPDM, the intention of the nearby
+vehicles is fixed for the whole planning horizon, and the initial
+intention is sampled according to a behavior prediction algorithm. The
+limitation of MPDM is that, with a limited number of samples,
+influential risky outcomes may not be rolled out, especially when the
+initial intention prediction is inaccurate.</li>
+<li> 本文改进：As a result, by conditioning on the ego policy sequence,
+we can pick out a set of relevant vehicles w.r.t. the ego future
+actions. The selection process is currently based on rule-based expert
+knowledge as detailed in Sec. V.
 <ul>
-<li>Instead of enumerating all the possible intentions for this subset of vehicles, we introduce a preliminary safety check to pick out the vehicles to which we should pay special attention.
+<li>Instead of enumerating all the possible intentions for this subset
+of vehicles, we introduce a preliminary safety check to pick out the
+vehicles to which we should pay special attention.
 <ul>
-<li>As a result, the branching in intention space is guided to potentially risky scenarios.</li>
-<li>And for the vehicles which pass the assessment, we use maximum a posteriori (MAP) from initial belief.</li>
-</ul>
-</li>
+<li>As a result, the branching in intention space is guided to
+potentially risky scenarios.</li>
+<li>And for the vehicles which pass the assessment, we use maximum a
+posteriori (MAP) from initial belief.</li>
+</ul></li>
 <li> 即，通过对物体的所有意图仿真，筛选出来危险的场景，然后重点关注。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<p>NOTE：辅助算法流程，方便理清楚算法实现，这就是一个 ST Planner 的简化版本，新意不足，核心内容避而不谈。</p>
-<h1>IMPLEMENTATION DETAILS</h1>
-<img data-src="/downloads/images/EUDM_framework.jpg" alt="EUDM framework" style="zoom:50%;">
-<h2 id="Semantic-level-Actions">Semantic-level Actions</h2>
+<p>NOTE：辅助算法流程，方便理清楚算法实现，这就是一个 ST Planner
+的简化版本，新意不足，核心内容避而不谈。</p>
+<h1 id="implementation-details">IMPLEMENTATION DETAILS</h1>
+<p><img data-src="/downloads/images/EUDM_framework.jpg" alt="EUDM framework" style="zoom:50%;"></p>
+<h2 id="semantic-level-actions">Semantic-level Actions</h2>
 <ul>
-<li>We consider both lateral and longitudinal actions to ensure the diversity of the driving policy.</li>
-<li>The depth of the DCP-Tree is set as 4, thereby we obtain a planning horizon up to 8 s.
+<li>We consider both lateral and longitudinal actions to ensure the
+diversity of the driving policy.</li>
+<li>The depth of the DCP-Tree is set as 4, thereby we obtain a planning
+horizon up to 8 s.
 <ul>
 <li>8s 的规划周期，满足大家的基本做法。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Forward-Simulation">Forward Simulation</h2>
+<h2 id="forward-simulation">Forward Simulation</h2>
 <ul>
-<li>The goal of the closed-loop simulation is to push the state of the multi-agent system forward while considering the potential interaction.
+<li>The goal of the closed-loop simulation is to push the state of the
+multi-agent system forward while considering the potential interaction.
 <ul>
 <li>如何考虑，如何实现，文章没有展开讨论，这恰恰是当前实践的难点内容。</li>
-</ul>
-</li>
-<li>We adopt the intelligent driving model and pure pursuit controller as the longitudinal and lateral simulation models, respectively.
+</ul></li>
+<li>We adopt the intelligent driving model and pure pursuit controller
+as the longitudinal and lateral simulation models, respectively.
 <ul>
 <li>后续做研究，可以基于此模型</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Belief-Update">Belief Update</h2>
+<h2 id="belief-update">Belief Update</h2>
 <ul>
-<li>The belief over these intentions of agent vehicles are updated during the forward simulation as shown in Fig. 2.
+<li>The belief over these intentions of agent vehicles are updated
+during the forward simulation as shown in Fig. 2.
 <ul>
 <li>如何考虑，如何实现，文章没有展开讨论，这恰恰是当前实践的难点内容。</li>
-</ul>
-</li>
-<li>In this work, we adopt a rule-based lightweight belief tracking module that takes a set of features and metrics including velocity difference, distance w.r.t. the leading and following agents on the current and neighboring lanes, responsibility-sensitive safety (RSS), and lane-changing model as input2. The belief tracker generates a probability distribution over the intentions (i.e., LK, LCL, LCR).
+</ul></li>
+<li>In this work, we adopt a rule-based lightweight belief tracking
+module that takes a set of features and metrics including velocity
+difference, distance w.r.t. the leading and following agents on the
+current and neighboring lanes, responsibility-sensitive safety (RSS),
+and lane-changing model as input2. The belief tracker generates a
+probability distribution over the intentions (i.e., LK, LCL, LCR).
 <ul>
 <li>TODO: 看源码理解一下，这是自己关心的内容。</li>
-</ul>
-</li>
-<li>Currently, we are exploring using learning-based belief trackers for intention tracking which will be incorporated into the EUDM framework.
+</ul></li>
+<li>Currently, we are exploring using learning-based belief trackers for
+intention tracking which will be incorporated into the EUDM framework.
 <ul>
 <li>学习研究画大饼的做法，大概率没有后续进展。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="CFB-Mechanism">CFB Mechanism</h2>
+<h2 id="cfb-mechanism">CFB Mechanism</h2>
 <ul>
 <li>The first step of CFB is the key vehicle selection.</li>
-<li>The second step is uncertain vehicle selection according to the initial belief.
+<li>The second step is uncertain vehicle selection according to the
+initial belief.
 <ul>
-<li>Specifically, we pick out the vehicles, whose probabilities for the three intentions are close to each other, as uncertain vehicles.
+<li>Specifically, we pick out the vehicles, whose probabilities for the
+three intentions are close to each other, as uncertain vehicles.
 <ul>
 <li>three intentions 是指 {LK, LCL, LCR}.</li>
-</ul>
-</li>
-<li>Note that for the vehicles with confident prediction, we select the MAP intention and marginalize the intention probabilities using the MAP selection result.</li>
-</ul>
-</li>
-<li>The third step is using the open-loop forward simulation for safety assessment.
+</ul></li>
+<li>Note that for the vehicles with confident prediction, we select the
+MAP intention and marginalize the intention probabilities using the MAP
+selection result.</li>
+</ul></li>
+<li>The third step is using the open-loop forward simulation for safety
+assessment.
 <ul>
-<li>For the vehicles which fail the assessment, we enumerate all the possible combinations of their intentions. Each combination becomes a CFB-selected scenario and the probability of scenario is calculated.</li>
+<li>For the vehicles which fail the assessment, we enumerate all the
+possible combinations of their intentions. Each combination becomes a
+CFB-selected scenario and the probability of scenario is
+calculated.</li>
+</ul></li>
+<li>The fourth step is picking out top k scenarios according to
+user-preference, and we further marginalize the probabilities among the
+top-k scenarios.</li>
 </ul>
-</li>
-<li>The fourth step is picking out top k scenarios according to user-preference, and we further marginalize the probabilities among the top-k scenarios.</li>
-</ul>
-<h2 id="Policy-Evaluation">Policy Evaluation</h2>
+<h2 id="policy-evaluation">Policy Evaluation</h2>
 <ul>
-<li>The overall reward for a policy sequence is calculated by the weighted summation of the reward for each CFB-selected scenario.
+<li>The overall reward for a policy sequence is calculated by the
+weighted summation of the reward for each CFB-selected scenario.
 <ul>
-<li>The reward function consists of a linear combination of multiple user-defined metrics including efficiency (measured by the difference between current velocity and desired velocity), safety (measured by the distance between our vehicle and surrounding vehicles) and consistency (measured by the difference between the last best policy and the policy to be evaluated).</li>
+<li>The reward function consists of a linear combination of multiple
+user-defined metrics including efficiency (measured by the difference
+between current velocity and desired velocity), safety (measured by the
+distance between our vehicle and surrounding vehicles) and consistency
+(measured by the difference between the last best policy and the policy
+to be evaluated).</li>
 <li> 难道所有的问题，都要化解为一个优化问题吗？策略的一致性，我们一般没有考虑到，这也是一个重要的维度。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Trajectory-Generation">Trajectory Generation</h2>
+<h2 id="trajectory-generation">Trajectory Generation</h2>
 <ul>
-<li>The behavior plan is fed to the motion planner proposed in our previous work, which utilizes a <strong>spatio-temporal corridor structure</strong> to generate safe and dynamically feasible trajectories.</li>
+<li>The behavior plan is fed to the motion planner proposed in our
+previous work, which utilizes a <strong>spatio-temporal corridor
+structure</strong> to generate safe and dynamically feasible
+trajectories.</li>
 </ul>
-<p><img data-src="/downloads/images/EUDM_algorithm.jpg" alt="EUDM algorithm" style="zoom:50%;"><img data-src="" alt=""></p>
-<h1>EXPERIMENTAL RESULTS</h1>
-<h2 id="Simulation-Platform-and-Environment">Simulation Platform and Environment</h2>
+<p><img data-src="/downloads/images/EUDM_algorithm.jpg" alt="EUDM algorithm" style="zoom:50%;"><img data-src=""></p>
+<h1 id="experimental-results">EXPERIMENTAL RESULTS</h1>
+<h2 id="simulation-platform-and-environment">Simulation Platform and
+Environment</h2>
 <ul>
-<li>The experiment is conducted in <strong>an interactive multi-agent simulation platform</strong> as introduced in Sect.III. All agents can interact with each other without knowing the driving model of other vehicles.</li>
+<li>The experiment is conducted in <strong>an interactive multi-agent
+simulation platform</strong> as introduced in Sect.III. All agents can
+interact with each other without knowing the driving model of other
+vehicles.</li>
 </ul>
-<h2 id="Qualitative-Results">Qualitative Results</h2>
-<h3 id="Metrics">Metrics</h3>
+<h2 id="qualitative-results">Qualitative Results</h2>
+<h3 id="metrics">Metrics</h3>
 <ul>
-<li>We introduce three major metrics to evaluate the performance of two methods, namely, safety, efficiency, and comfort.
+<li>We introduce three major metrics to evaluate the performance of two
+methods, namely, safety, efficiency, and comfort.
 <ul>
-<li>The efficiency is represented by the average velocity of the ego vehicle.</li>
-</ul>
-</li>
+<li>The efficiency is represented by the average velocity of the ego
+vehicle.</li>
+</ul></li>
 </ul>
 
     </div>
