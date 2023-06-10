@@ -256,17 +256,26 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="什么是-Snap">什么是 Snap</h2>
+          <h2 id="什么是-snap">什么是 Snap</h2>
 <p>Snap 包是 Ubuntu 16.04 LTS 发布时引入的新应用格式包。</p>
-<blockquote><p>当你在安装完 snap 后，你会发现在在根目录下会出现如 /dev/loop0、/dev/loop1 等挂载点，这些挂载点正是 snap 软件包的目录。Snap 使用了 squashFS 文件系统，一种开源的压缩，只读文件系统，基于 GPL 协议发行。一旦 snap 被安装后，其就有一个只读的文件系统和一个可写入的区域。应用自身的执行文件、库、依赖包都被放在这个只读目录，意味着该目录不能被随意篡改和写入。</p>
+<blockquote><p>当你在安装完 snap 后，你会发现在在根目录下会出现如
+/dev/loop0、/dev/loop1 等挂载点，这些挂载点正是 snap 软件包的目录。Snap
+使用了 squashFS 文件系统，一种开源的压缩，只读文件系统，基于 GPL
+协议发行。一旦 snap
+被安装后，其就有一个只读的文件系统和一个可写入的区域。应用自身的执行文件、库、依赖包都被放在这个只读目录，意味着该目录不能被随意篡改和写入。</p>
 <footer><strong>Canonical </strong><cite><a target="_blank" rel="noopener" href="https://cn.ubuntu.com/blog/what-is-snap-application">什么是 Snap 应用？</a></cite></footer></blockquote>
 
-<p>较传统 Linux 的 rpm，deb 软件包，snap 引入 squashFS 文件系统，使得 snap 的安全性要优于传统的 Linux 软件包。同时，每个 snap 默认都被严格限制（confined），即限制系统权限和资源访问。但是，可通过授予权限策略来获得对系统资源的访问。</p>
-<p>使用 snap 包的另一好处就是它类似一个容器拥有一个应用程序所有的文件和库，各个应用程序之间完全独立；解决了应用程序之间的依赖问题，使应用程序之间更容易管理，但是由此带来的问题就是它占用更多的磁盘空间。</p>
-<h2 id="Install-Shutter-Screenshot-Tool">Install Shutter Screenshot Tool</h2>
-<h3 id="Installing-Shutter-on-Ubuntu-20-04-18-04">Installing Shutter on Ubuntu 20.04 &amp; 18.04</h3>
+<p>较传统 Linux 的 rpm，deb 软件包，snap 引入 squashFS 文件系统，使得
+snap 的安全性要优于传统的 Linux 软件包。同时，每个 snap
+默认都被严格限制（confined），即限制系统权限和资源访问。但是，可通过授予权限策略来获得对系统资源的访问。</p>
+<p>使用 snap
+包的另一好处就是它类似一个容器拥有一个应用程序所有的文件和库，各个应用程序之间完全独立；解决了应用程序之间的依赖问题，使应用程序之间更容易管理，但是由此带来的问题就是它占用更多的磁盘空间。</p>
+<h2 id="install-shutter-screenshot-tool">Install Shutter Screenshot
+Tool</h2>
+<h3 id="installing-shutter-on-ubuntu-20.04-18.04">Installing Shutter on
+Ubuntu 20.04 &amp; 18.04</h3>
 <figure class="highlight shell"><figcaption><span>https://itsfoss.com/install-shutter-ubuntu/ Installing Shutter on Ubuntu 20.04 &amp; 18.04</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Shutter is not available in Ubuntu 20.04.</span><br><span class="line">sudo add-apt-repository ppa:linuxuprising/shutter</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="切换-Python-环境">切换 Python 环境</h2>
+<h2 id="切换-python-环境">切换 Python 环境</h2>
 <figure class="highlight shell"><figcaption><span>https://www.cnblogs.com/liuzhenbo/p/13176869.html ubuntu 切换 python 版本 </span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 查看你系统中有哪些Python的二进制文件可供使用</span><br><span class="line">ls /usr/bin/python*</span><br><span class="line">// 查看python替换版本信息</span><br><span class="line">update-alternatives --list python</span><br><span class="line">// 使用以下命令随时在列出的python替换版本中任意切换</span><br><span class="line">sudo update-alternatives --config python</span><br><span class="line">// 再查一下默认Python版本</span><br><span class="line">python --version</span><br></pre></td></tr></tbody></table></figure>
 
       
@@ -372,7 +381,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<p>目前手上有一台国外 VPS，我在 19 年开始在 VPS 上部署个人网站。之前利用这个 VPS 部署本地编译好的静态网页，流程大概是</p>
+<p>目前手上有一台国外 VPS，我在 19 年开始在 VPS
+上部署个人网站。之前利用这个 VPS
+部署本地编译好的静态网页，流程大概是</p>
 <ul>
 <li>本地电脑配置 hexo 环境，在本地编辑并生成静态网页；</li>
 <li>通过 git hook 等方式把本地生成的静态网页同步到远端服务器上；</li>
@@ -380,15 +391,20 @@
 </ul>
 <p>这种部署方式对多终端用户不友好，比如</p>
 <ul>
-<li>有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo 环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。</li>
-<li>如果有多台电脑，只能在配备有 hexo 环境的电脑上编辑；即使多台电脑配备有 hexo 内容，也容易有数据不同步的问题。</li>
+<li>有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo
+环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。</li>
+<li>如果有多台电脑，只能在配备有 hexo
+环境的电脑上编辑；即使多台电脑配备有 hexo
+内容，也容易有数据不同步的问题。</li>
 </ul>
 <p>本文介绍一种方式，</p>
 <img data-src="/downloads/images/website_scheme.png" class="" title="网站架构设计">
 <ul>
 <li>网站原始数据保存在 github，支持多终端访问和数据管理。</li>
 <li>远程 VPS 上部署整套 hexo 环境，支持生成静态网页结果。</li>
-<li>VPS 上获取网站数据 (通常是 source 下面的数据)，生成博客内容，启动 hexo 内置的 web 服务器（或使用 nginx 指向生成的 public 目录），对外提供访问。</li>
+<li>VPS 上获取网站数据 (通常是 source 下面的数据)，生成博客内容，启动
+hexo 内置的 web 服务器（或使用 nginx 指向生成的 public
+目录），对外提供访问。</li>
 <li>对于生成好的内容，部署到 Github （用作备份）上</li>
 </ul>
 <p>这种方法可以在多终端实时更新网站内容，摆脱对单一终端的依赖，能够支持</p>
@@ -504,22 +520,27 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>红黑树</h1>
+<h1 id="红黑树">红黑树</h1>
 <h2 id="什么是红黑树">什么是红黑树</h2>
-<h1>set/multiset 实现最大堆</h1>
+<h1 id="setmultiset-实现最大堆">set/multiset 实现最大堆</h1>
 <p>在 STL 中，set 和 multiset 是基于红黑树实现的。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/set">Sets</a> are usually implemented as <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree">red-black trees</a>.</li>
-<li>Sorting is done using the key comparison function <em><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/Compare">Compare</a></em>. Search, removal, and insertion operations have logarithmic complexity.</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/set">Sets</a>
+are usually implemented as <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Red–black_tree">red-black
+trees</a>.</li>
+<li>Sorting is done using the key comparison function <em><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/Compare">Compare</a></em>.
+Search, removal, and insertion operations have logarithmic
+complexity.</li>
 </ul>
-<h2 id="Code-Example">Code Example</h2>
+<h2 id="code-example">Code Example</h2>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="comment">// Initialize a set.</span></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::less&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>&gt; min_s;</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of set container is "</span> &lt;&lt; *min_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of set container is "</span> &lt;&lt; *min_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::greater&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_s;</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of set container is "</span> &lt;&lt; *max_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of set container is "</span> &lt;&lt; *max_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize a multiset.</span></span><br><span class="line">  std::multiset&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_ms;</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of multiset container is "</span> &lt;&lt; *max_ms.<span class="built_in">begin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of multiset container is "</span> &lt;&lt; *max_ms.<span class="built_in">rbegin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>输出结果如下</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">min value of set container is -1</span><br><span class="line">max value of set container is 5</span><br><span class="line">max value of set container is 5</span><br><span class="line">min value of set container is -1</span><br><span class="line">max value of multiset container is 5</span><br><span class="line">min value of multiset container is -1</span><br></pre></td></tr></tbody></table></figure>
 <p>参考 &lt;剑指 offer&gt; 面试题 40 — 最小的 k 个数</p>
-<h1>基于 STL 的函数 push_heap、pop_heap 和 vector 实现堆</h1>
+<h1 id="基于-stl-的函数-push_heappop_heap-和-vector-实现堆">基于 STL
+的函数 push_heap、pop_heap 和 vector 实现堆</h1>
 <p>参考 &lt;剑指 offer&gt; 面试题 41 — 数据流中的中位数</p>
-<h1>更改记录</h1>
+<h1 id="更改记录">更改记录</h1>
 <p>2023.04.02 搭建架子，写出 set 版本。</p>
 
       
@@ -622,11 +643,11 @@
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html">The Python Standard Library</a>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html">The Python
+Standard Library</a>
 <ul>
 <li><em>keep this under your pillow</em></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
       
@@ -837,8 +858,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<p>2022 年 11 月末，北京疫情变得严重起来，我开始居家办公。这段时间省下来数个小时的通勤时间，使得自己能够利用晚上的时间，捧起《如何阅读一本书》。我的初步想法是希望阅读这本书可以教会自己如何更加高效读书，如何更好地理解和整理一本书，以及纠正自己阅读的一些坏习惯。</p>
-<p><img data-src="/downloads/images/how_to_read_a_book_front_cover.jpeg" alt=""></p>
+<p>2022 年 11
+月末，北京疫情变得严重起来，我开始居家办公。这段时间省下来数个小时的通勤时间，使得自己能够利用晚上的时间，捧起《如何阅读一本书》。我的初步想法是希望阅读这本书可以教会自己如何更加高效读书，如何更好地理解和整理一本书，以及纠正自己阅读的一些坏习惯。</p>
+<p><img data-src="/downloads/images/how_to_read_a_book_front_cover.jpeg"></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Reading/how-to-read-a-book-summary/#more" rel="contents">
@@ -946,9 +968,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h2 id="ETF-简介">ETF 简介</h2>
-<h3 id="什么是-ETF-？">什么是 ETF ？</h3>
-<p>ETF 是英文 “Exchange Traded Funds” 的简称，常被译为 “<strong>交易所交易基金</strong>”。ETF 是一种在<strong>交易所上市交易</strong>的、<strong>基金份额可变</strong>的基金。ETF 结合了封闭式基金与开放式基金的运作特点，一方面，基金份额可以像封闭式基金一样在交易所二级市场进行买卖；另一方面，可以像开放式基金一样申购、赎回。 ETF 通常是以某一选定的指数所包含的成分证券为投资对象，依据构成指数的证券种类和比例，采用<strong>完全复制</strong>或抽样复制的方法进行被动投资的指数型基金。</p>
+<h2 id="etf-简介">ETF 简介</h2>
+<h3 id="什么是-etf">什么是 ETF ？</h3>
+<p>ETF 是英文 “Exchange Traded Funds”
+的简称，常被译为 “<strong>交易所交易基金</strong>”。ETF
+是一种在<strong>交易所上市交易</strong>的、<strong>基金份额可变</strong>的基金。ETF
+结合了封闭式基金与开放式基金的运作特点，一方面，基金份额可以像封闭式基金一样在交易所二级市场进行买卖；另一方面，可以像开放式基金一样申购、赎回。
+ETF
+通常是以某一选定的指数所包含的成分证券为投资对象，依据构成指数的证券种类和比例，采用<strong>完全复制</strong>或抽样复制的方法进行被动投资的指数型基金。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Finance/exchange-otc-etf/#more" rel="contents">
@@ -1270,10 +1297,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <!-- compiler_killed_swap -->
-<h1>背景</h1>
+<h1 id="背景">背景</h1>
 <p>在 Linux 系统上编译大型程序时，可能遇到如下编译错误：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c++: internal compiler error: <span class="built_in">Killed</span> (program cc1plus)</span><br><span class="line">Please submit a full bug report</span><br></pre></td></tr></tbody></table></figure>
-<p>经过查资料，大概率是编译时内存不够导致的，除了增加物理内存外 (花银子)，短期可以通过增加交换分区 swap 来解决 (时间换空间)。</p>
+<p>经过查资料，大概率是编译时内存不够导致的，除了增加物理内存外
+(花银子)，短期可以通过增加交换分区 swap 来解决 (时间换空间)。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Linux/compiler-killed-swap/#more" rel="contents">
