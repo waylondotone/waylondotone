@@ -20,19 +20,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc]   Programming grammar const int * vs const int * const vs int const *  int const* is equivalent to const int* 指向常量 int 的指针 &gt; This means that the variable being declared is a pointer, pointing">
+    <meta name="description" content="[toc]   std std::numeric_limits  The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.  int 的最大值是 numeric_limits::max().  min 和 lowest 都被用">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高阶 C++">
+<meta property="og:title" content="每周学点 C++">
 <meta property="og:url" content="http://www.waylon.one/Programming/advanced-c-plus-plus/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc]   Programming grammar const int * vs const int * const vs int const *  int const* is equivalent to const int* 指向常量 int 的指针 &gt; This means that the variable being declared is a pointer, pointing">
+<meta property="og:description" content="[toc]   std std::numeric_limits  The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.  int 的最大值是 numeric_limits::max().  min 和 lowest 都被用">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://media.geeksforgeeks.org/wp-content/uploads/spiral-2.jpg">
 <meta property="article:published_time" content="2019-12-13T23:32:01.000Z">
-<meta property="article:modified_time" content="2023-05-19T12:12:32.161Z">
+<meta property="article:modified_time" content="2023-07-08T09:44:15.435Z">
 <meta property="article:author" content="Nobody">
-<meta property="article:tag" content="C Plus Plus">
 <meta property="article:tag" content="Programming">
+<meta property="article:tag" content="C Plus Plus">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://media.geeksforgeeks.org/wp-content/uploads/spiral-2.jpg">
 
@@ -41,10 +41,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://www.waylon.one/Programming/advanced-c-plus-plus/","path":"Programming/advanced-c-plus-plus/","title":"高阶 C++"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://www.waylon.one/Programming/advanced-c-plus-plus/","path":"Programming/advanced-c-plus-plus/","title":"每周学点 C++"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>高阶 C++ | One's Way</title>
+<title>每周学点 C++ | One's Way</title>
   
 
 
@@ -143,14 +143,15 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#programming-grammar"><span class="nav-number">1.</span> <span class="nav-text">Programming grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#const-int-vs-const-int-const-vs-int-const"><span class="nav-number">1.1.</span> <span class="nav-text">const int * vs const
-int * const vs int const *</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdnumeric_limitsmin-vs-lowest"><span class="nav-number">1.2.</span> <span class="nav-text">std::numeric_limits::min() vs
-lowest()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdmove-%E5%AF%B9%E8%B1%A1%E7%A7%BB%E5%8A%A8"><span class="nav-number">1.3.</span> <span class="nav-text">std::move 对象移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8-stdmove"><span class="nav-number">1.3.1.</span> <span class="nav-text">什么时候使用 std::move</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#at-vs-operator-in-vector"><span class="nav-number">1.4.</span> <span class="nav-text">at vs operator[] in vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit-%E6%8A%91%E5%88%B6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.5.</span> <span class="nav-text">explicit
-抑制构造函数定义的隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdupper_bound-vs-stdlower_bound"><span class="nav-number">1.6.</span> <span class="nav-text">std::upper_bound vs
-std::lower_bound()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdvector-%E5%92%8C-stdstring-%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.7.</span> <span class="nav-text">std:vector 和 std:string
-的相互转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BFfunction-template%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">1.8.</span> <span class="nav-text">函数模板 (function
-template) 返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boostoptional"><span class="nav-number">1.9.</span> <span class="nav-text">boost::optional()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grammar-discriminate"><span class="nav-number">2.</span> <span class="nav-text">Grammar Discriminate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96-%E8%B5%8B%E5%80%BC%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">2.1.</span> <span class="nav-text">构造函数初始化 (赋值和初始化)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A"><span class="nav-number">2.2.</span> <span class="nav-text">动态绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">默认构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector"><span class="nav-number">2.4.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline"><span class="nav-number">2.5.</span> <span class="nav-text">inline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy-constructor-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">2.6.</span> <span class="nav-text">Copy Constructor
-拷贝构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">2.6.1.</span> <span class="nav-text">浅拷贝和深拷贝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code-style"><span class="nav-number">3.</span> <span class="nav-text">Code Style</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#class"><span class="nav-number">3.1.</span> <span class="nav-text">class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#friends"><span class="nav-number">3.2.</span> <span class="nav-text">Friends</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#initialization-and"><span class="nav-number">3.3.</span> <span class="nav-text">Initialization: &#x3D;, (), and</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#best-practices-for-initialization"><span class="nav-number">3.3.1.</span> <span class="nav-text">Best Practices for
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#std"><span class="nav-number">1.</span> <span class="nav-text">std</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdnumeric_limits"><span class="nav-number">1.1.</span> <span class="nav-text">std::numeric_limits</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#programming-grammar"><span class="nav-number">2.</span> <span class="nav-text">Programming grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-number">2.1.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstringsubstr"><span class="nav-number">2.1.1.</span> <span class="nav-text">std::string::substr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstringsize"><span class="nav-number">2.1.2.</span> <span class="nav-text">std::string::size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstringoperator"><span class="nav-number">2.1.3.</span> <span class="nav-text">std::string::operator[]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack"><span class="nav-number">2.2.</span> <span class="nav-text">stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstacktop"><span class="nav-number">2.2.1.</span> <span class="nav-text">std::stack::top</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map"><span class="nav-number">2.3.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stdmapinsert"><span class="nav-number">2.3.1.</span> <span class="nav-text">std::map::insert
+</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-int-vs-const-int-const-vs-int-const"><span class="nav-number">2.4.</span> <span class="nav-text">const int * vs const
+int * const vs int const *</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdnumeric_limitsmin-vs-lowest"><span class="nav-number">2.5.</span> <span class="nav-text">std::numeric_limits::min() vs
+lowest()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdmove-%E5%AF%B9%E8%B1%A1%E7%A7%BB%E5%8A%A8"><span class="nav-number">2.6.</span> <span class="nav-text">std::move 对象移动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8-stdmove"><span class="nav-number">2.6.1.</span> <span class="nav-text">什么时候使用 std::move</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#at-vs-operator-in-vector"><span class="nav-number">2.7.</span> <span class="nav-text">at vs operator[] in vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit-%E6%8A%91%E5%88%B6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.8.</span> <span class="nav-text">explicit
+抑制构造函数定义的隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdupper_bound-vs-stdlower_bound"><span class="nav-number">2.9.</span> <span class="nav-text">std::upper_bound vs
+std::lower_bound()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdvector-%E5%92%8C-stdstring-%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.10.</span> <span class="nav-text">std:vector 和 std:string
+的相互转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BFfunction-template%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.11.</span> <span class="nav-text">函数模板 (function
+template) 返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boostoptional"><span class="nav-number">2.12.</span> <span class="nav-text">boost::optional()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grammar-discriminate"><span class="nav-number">3.</span> <span class="nav-text">Grammar Discriminate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96-%E8%B5%8B%E5%80%BC%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">构造函数初始化 (赋值和初始化)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">动态绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">默认构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector"><span class="nav-number">3.4.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline"><span class="nav-number">3.5.</span> <span class="nav-text">inline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy-constructor-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.6.</span> <span class="nav-text">Copy Constructor
+拷贝构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">3.6.1.</span> <span class="nav-text">浅拷贝和深拷贝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code-style"><span class="nav-number">4.</span> <span class="nav-text">Code Style</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#class"><span class="nav-number">4.1.</span> <span class="nav-text">class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#friends"><span class="nav-number">4.2.</span> <span class="nav-text">Friends</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#initialization-and"><span class="nav-number">4.3.</span> <span class="nav-text">Initialization: &#x3D;, (), and</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#best-practices-for-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Best Practices for
 Initialization</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
@@ -164,7 +165,7 @@ Initialization</span></a></li></ol></li></ol></li></ol></div>
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -220,12 +221,12 @@ Initialization</span></a></li></ol></li></ol></li></ol></div>
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="高阶 C++ | One's Way">
+      <meta itemprop="name" content="每周学点 C++ | One's Way">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          高阶 C++<a href="https://github.com/waylondotone/private_hexo/tree/main/source/_posts/advanced-c-plus-plus.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
+          每周学点 C++<a href="https://github.com/waylondotone/private_hexo/tree/main/source/_posts/advanced-c-plus-plus.md" class="post-edit-link" title="Edit this post" rel="noopener" target="_blank"><i class="fa fa-pen-nib"></i></a>
         </h1>
 
         <div class="post-meta-container">
@@ -243,7 +244,7 @@ Initialization</span></a></li></ol></li></ol></li></ol></div>
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+      <time title="Modified: 2023-07-08 17:44:15" itemprop="dateModified" datetime="2023-07-08T17:44:15+08:00">2023-07-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -269,14 +270,14 @@ Initialization</span></a></li></ol></li></ol></li></ol></div>
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>3.1k</span>
+      <span>3.4k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>11 mins.</span>
+      <span>12 mins.</span>
     </span>
 </div>
 
@@ -293,7 +294,56 @@ Discussion Items:
 - make_shardpte 有一次拷贝，并且和原来的地址不一致
 
 -->
+<h1 id="std">std</h1>
+<h2 id="stdnumeric_limits"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">std::numeric_limits</a></h2>
+<ul>
+<li>The std::numeric_limits class template provides a standardized way
+to query various properties of arithmetic types.
+<ul>
+<li>int 的最大值是 numeric_limits<int>::max().</int></li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>
+和 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>
+都被用来获取某个类型的最小值。它们分别返回这个最小值可表示的最小正数 (min) 和最小负数 (lowest)。因此，当
+T
+是一个无符号类型的时候，min () 和 lowest () 返回的值是相同的。其次，lowest ()
+只对有符号类型有效，而 min () 对所有数据类型都有效。</li>
+</ul>
 <h1 id="programming-grammar">Programming grammar</h1>
+<h2 id="string">string</h2>
+<h3 id="stdstringsubstr"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/substr/">std::string::substr</a></h3>
+<ul>
+<li>Returns a newly constructed string object with its value initialized
+to a copy of a substring of this object.</li>
+<li>string::substr (pos, n) 返回从 pos 开始的 n 个字符的拷贝.</li>
+</ul>
+<h3 id="stdstringsize"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/size/">std::string::size</a></h3>
+<ul>
+<li>Returns the length of the string, in terms of bytes.</li>
+<li>Returns <strong>size_t</strong>, an unsigned integral type.
+<ul>
+<li>不能直接 min (size_t, int), 编译错误 </li>
+</ul></li>
+</ul>
+<h3 id="stdstringoperator"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/operator%5B%5D/">std::string::operator[]</a></h3>
+<ul>
+<li>Returns a <strong>reference</strong> to the character at position
+pos in the string.</li>
+</ul>
+<h2 id="stack">stack</h2>
+<h3 id="stdstacktop"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/top/">std::stack::top</a></h3>
+<ul>
+<li>Returns a <strong>reference</strong> to the top element in the
+stack.</li>
+<li> 如果栈为空，返回值未定义。</li>
+</ul>
+<h2 id="map">map</h2>
+<h3 id="stdmapinsert"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/insert">std::map::insert</a><br>
+</h3>
+<ul>
+<li>插入元素类型是 pair, 可以是 insert ({key_x, value_y}), 或者是
+insert (make_pair (key_x, value_y)).</li>
+</ul>
 <h2 id="const-int-vs-const-int-const-vs-int-const">const int * vs const
 int * const vs int const *</h2>
 <ul>
@@ -595,8 +645,8 @@ braces when resorting to direct-initialization.</li>
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/C-Plus-Plus/" rel="tag"># C Plus Plus</a>
               <a href="/tags/Programming/" rel="tag"># Programming</a>
+              <a href="/tags/C-Plus-Plus/" rel="tag"># C Plus Plus</a>
           </div>
 
         
@@ -649,7 +699,7 @@ braces when resorting to direct-initialization.</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:40</span>
+    <span title="Reading time total">15:41</span>
   </span>
 </div>
 <div class="busuanzi-count">
