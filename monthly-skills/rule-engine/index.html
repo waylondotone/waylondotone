@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc] 需求描述 作为开发人员，随着业务逻辑和功能需求的不断增加，我们经常需要维护一系列 IF...THEN...ELSE 或者 select-case 的业务逻辑 (business rules)。这部分业务规则的不断扩充，会使得代码越来越凌乱和难以维护，逐渐变成开发人员的噩梦。   举个简单的例子来感受下程序员在面对繁杂规则下的无奈。 小王家的奶牛场新进一批次奶牛，有白奶牛，黑奶牛和斑点奶">
+    <meta name="description" content="[toc] 需求描述 作为开发人员，随着业务逻辑和功能需求的不断增加，我们经常需要维护一系列 IF…THEN…ELSE 或者 select-case 的业务逻辑 (business rules)。这部分业务规则的不断扩充，会使得代码越来越凌乱和难以维护，逐渐变成开发人员的噩梦。   举个简单的例子来感受下程序员在面对繁杂规则下的无奈。 小王家的奶牛场新进一批次奶牛，有白奶牛，黑奶牛和斑点奶牛。小王">
 <meta property="og:type" content="article">
 <meta property="og:title" content="手把手搭建业务规则引擎 (Rule Engine)">
 <meta property="og:url" content="http://www.waylon.one/monthly-skills/rule-engine/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc] 需求描述 作为开发人员，随着业务逻辑和功能需求的不断增加，我们经常需要维护一系列 IF...THEN...ELSE 或者 select-case 的业务逻辑 (business rules)。这部分业务规则的不断扩充，会使得代码越来越凌乱和难以维护，逐渐变成开发人员的噩梦。   举个简单的例子来感受下程序员在面对繁杂规则下的无奈。 小王家的奶牛场新进一批次奶牛，有白奶牛，黑奶牛和斑点奶">
+<meta property="og:description" content="[toc] 需求描述 作为开发人员，随着业务逻辑和功能需求的不断增加，我们经常需要维护一系列 IF…THEN…ELSE 或者 select-case 的业务逻辑 (business rules)。这部分业务规则的不断扩充，会使得代码越来越凌乱和难以维护，逐渐变成开发人员的噩梦。   举个简单的例子来感受下程序员在面对繁杂规则下的无奈。 小王家的奶牛场新进一批次奶牛，有白奶牛，黑奶牛和斑点奶牛。小王">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/rule_engine_struct.jpg">
 <meta property="og:image" content="http://www.waylon.one/monthly-skills/downloads/images/open_source_rule_engine.JPG">
@@ -145,8 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9C%80%E6%B1%82%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">需求描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%BB%BA%E6%A8%A1"><span class="nav-number">2.</span> <span class="nav-text">问题建模</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E-vs-%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">规则引擎 vs 有限状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E"><span class="nav-number">2.1.1.</span> <span class="nav-text">规则引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%AE%80%E8%BF%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">有限状态机简述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">触发条件区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%9D%83%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">控制权区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BA%A6%E6%9D%9F"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">使用约束</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E8%B0%83%E7%A0%94"><span class="nav-number">3.</span> <span class="nav-text">规则引擎解决方案调研</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">规则引擎的使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.1.1.</span> <span class="nav-text">编程实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99%E7%9A%84%E5%88%B6%E5%AE%9A"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">业务规则的制定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">规则引擎的功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E7%9A%84%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E"><span class="nav-number">3.2.</span> <span class="nav-text">现有的规则引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#clips"><span class="nav-number">3.2.1.</span> <span class="nav-text">CLIPS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-cc-%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%B5%8C%E5%85%A5-clips"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">在 C&#x2F;C++ 程序中嵌入 CLIPS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#drools"><span class="nav-number">3.2.2.</span> <span class="nav-text">Drools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ilog"><span class="nav-number">3.2.3.</span> <span class="nav-text">ILOG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%8E%E5%9B%A2%E7%9A%84%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">美团的实践案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Erete%E7%AE%97%E6%B3%95%E7%9A%84%E5%89%8D%E5%90%91%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%92%8C%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.</span> <span class="nav-text">基于 Rete 算法的 &quot;前向推理&quot; 规则引擎的设计和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-forward-chaining"><span class="nav-number">4.1.</span> <span class="nav-text">什么是 forward
-chaining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%8E%A8%E7%90%86%E5%92%8C%E5%90%8E%E5%90%91%E6%8E%A8%E7%90%86%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.1.1.</span> <span class="nav-text">前向推理和后向推理的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%8E%A8%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">前向推理算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rete-%E7%AE%97%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">Rete 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rete-%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">Rete 算法相关概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rete-%E8%A7%84%E5%88%99%E7%BC%96%E8%AF%91"><span class="nav-number">4.2.2.</span> <span class="nav-text">Rete 规则编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rete-%E8%A7%84%E5%88%99%E6%89%A7%E8%A1%8C"><span class="nav-number">4.2.3.</span> <span class="nav-text">Rete 规则执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rete-%E7%AE%97%E6%B3%95%E4%BC%98%E7%82%B9"><span class="nav-number">4.2.4.</span> <span class="nav-text">Rete 算法优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.3.</span> <span class="nav-text">程序开发实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.3.1.</span> <span class="nav-text">规则模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.3.2.</span> <span class="nav-text">系统模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.3.3.</span> <span class="nav-text">运行实践</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">需求描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">问题建模</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E-vs-%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="nav-number">2.1.</span> <span class="nav-text">规则引擎 vs 有限状态机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E"><span class="nav-number">2.1.1.</span> <span class="nav-text">规则引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA%E7%AE%80%E8%BF%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">有限状态机简述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">触发条件区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%9D%83%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">控制权区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E7%BA%A6%E6%9D%9F"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">使用约束</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">规则引擎解决方案调研</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">规则引擎的使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.1.1.</span> <span class="nav-text">编程实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%9A%E5%8A%A1%E8%A7%84%E5%88%99%E7%9A%84%E5%88%B6%E5%AE%9A"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">业务规则的制定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">规则引擎的功能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E6%9C%89%E7%9A%84%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E"><span class="nav-number">3.2.</span> <span class="nav-text">现有的规则引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CLIPS"><span class="nav-number">3.2.1.</span> <span class="nav-text">CLIPS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8-C-C-%E7%A8%8B%E5%BA%8F%E4%B8%AD%E5%B5%8C%E5%85%A5-CLIPS"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">在 C&#x2F;C++ 程序中嵌入 CLIPS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Drools"><span class="nav-number">3.2.2.</span> <span class="nav-text">Drools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ILOG"><span class="nav-number">3.2.3.</span> <span class="nav-text">ILOG</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%8E%E5%9B%A2%E7%9A%84%E5%AE%9E%E8%B7%B5%E6%A1%88%E4%BE%8B"><span class="nav-number">3.3.</span> <span class="nav-text">美团的实践案例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">基于 Rete 算法的 &quot;前向推理&quot; 规则引擎的设计和实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-forward-chaining"><span class="nav-number">4.1.</span> <span class="nav-text">什么是 forward chaining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%8E%A8%E7%90%86%E5%92%8C%E5%90%8E%E5%90%91%E6%8E%A8%E7%90%86%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">4.1.1.</span> <span class="nav-text">前向推理和后向推理的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%8E%A8%E7%90%86%E7%AE%97%E6%B3%95"><span class="nav-number">4.2.</span> <span class="nav-text">前向推理算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Rete-%E7%AE%97%E6%B3%95"><span class="nav-number">4.2.1.</span> <span class="nav-text">Rete 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Rete-%E7%AE%97%E6%B3%95%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">Rete 算法相关概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rete-%E8%A7%84%E5%88%99%E7%BC%96%E8%AF%91"><span class="nav-number">4.2.2.</span> <span class="nav-text">Rete 规则编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rete-%E8%A7%84%E5%88%99%E6%89%A7%E8%A1%8C"><span class="nav-number">4.2.3.</span> <span class="nav-text">Rete 规则执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rete-%E7%AE%97%E6%B3%95%E4%BC%98%E7%82%B9"><span class="nav-number">4.2.4.</span> <span class="nav-text">Rete 算法优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.3.</span> <span class="nav-text">程序开发实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E5%88%99%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.3.1.</span> <span class="nav-text">规则模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%9E%8B"><span class="nav-number">4.3.2.</span> <span class="nav-text">系统模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E5%AE%9E%E8%B7%B5"><span class="nav-number">4.3.3.</span> <span class="nav-text">运行实践</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -165,7 +164,7 @@ chaining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a cla
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -282,10 +281,8 @@ chaining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a cla
     
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
-<h1 id="需求描述">需求描述</h1>
-<p>作为开发人员，随着业务逻辑和功能需求的不断增加，我们经常需要维护一系列
-IF...THEN...ELSE 或者 select-case 的业务逻辑 (business
-rules)。这部分业务规则的不断扩充，会使得代码越来越凌乱和难以维护，逐渐变成开发人员的噩梦。</p>
+<h1>需求描述</h1>
+<p>作为开发人员，随着业务逻辑和功能需求的不断增加，我们经常需要维护一系列 IF…THEN…ELSE 或者 select-case 的业务逻辑 (business rules)。这部分业务规则的不断扩充，会使得代码越来越凌乱和难以维护，逐渐变成开发人员的噩梦。</p>
 <!--
 Application logic, particularly business rules, can be messy and time consuming to maintain in code. If all your application logic is hard-coded, it can eventually lead to massive if-then-else or select-case code segments that could grow into huge nightmares. Developers have more important problems to solve and things to do than to maintain a mountain of string compares, boolean tests, or Stored Procedures. There have been numerous attempts at rules engines (a.k.a. "inference engines"), but many of them require the writing of even more cryptic looking code that is hard, if not impossible, for non-developers to maintain. De-coupling business logic from an application certainly makes for more robust and maintainable code, and provides you the ability to let non-developer subject matter experts maintain the data and rules model, provided it is logical and easy to understand. Of course, you can always link parts of your application data to a database, but that still requires a lot of developer work to define the data model and queries needed for every unique "rule-driven" event in your application, not to mention the possibility of database performance bottlenecks in a networked or limited resource environment. A table-based rules engine can be a very powerful and flexible solution for your application logic and automation needs. In a web environment, the Logician JavaScript libraries can also offload a lot of server CPU onto the user's browser and eliminate lagging server callbacks.
 -->
@@ -293,19 +290,14 @@ Application logic, particularly business rules, can be messy and time consuming 
 <p>举个简单的例子来感受下程序员在面对繁杂规则下的无奈。</p>
 <p>小王家的奶牛场新进一批次奶牛，有白奶牛，黑奶牛和斑点奶牛。小王邀请你写一段程序模块，预测下各种品种的奶牛喜欢到哪块地里吃草。我们这里假设奶牛的行为受到阳光，风，草品的影响。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Location moves_to(cow, env) {</span><br><span class="line">  if(cow.color()=="white") {</span><br><span class="line">    if(env.sunny() &amp;&amp; !env.storm()) {</span><br><span class="line">      // 白色牛奶喜欢在天气晴朗且没有大风的情况下去牧场吃草。</span><br><span class="line">      return pasture;</span><br><span class="line">    } else if(env.storm()) {</span><br><span class="line">      // 白色牛奶喜欢在暴风下去谷仓吃草。</span><br><span class="line">      return barn;</span><br><span class="line">    }</span><br><span class="line">  } else if(cow.color()=="black") {</span><br><span class="line">    ...</span><br><span class="line">  } else {</span><br><span class="line">    ...</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>上面是一段示例代码，可以看出来在只有 3
-个变量（牛奶品种，阳光，风）的情况下，我们就需要写几十行的代码来实现功能。可以想象一下，在影响变量比较多的时候，业务逻辑和应用程序如果混在一起开发的话，那么开发者需要维护上百条甚至更多的
-IF-statements
-才可以应付。对开发人员而言，一方面这些代码没有技术含量，开发人员积极性差，另一方面频繁变更的业务需求也会带来维护，调试和测试成本的指数级增加。比如，为了找出一个业务逻辑中的问题，开发人员往往不得不遍历混在代码各处的
-IF-statements 语句，效率低下且十分痛苦。</p>
+<p>上面是一段示例代码，可以看出来在只有 3 个变量（牛奶品种，阳光，风）的情况下，我们就需要写几十行的代码来实现功能。可以想象一下，在影响变量比较多的时候，业务逻辑和应用程序如果混在一起开发的话，那么开发者需要维护上百条甚至更多的 IF-statements 才可以应付。对开发人员而言，一方面这些代码没有技术含量，开发人员积极性差，另一方面频繁变更的业务需求也会带来维护，调试和测试成本的指数级增加。比如，为了找出一个业务逻辑中的问题，开发人员往往不得不遍历混在代码各处的 IF-statements 语句，效率低下且十分痛苦。</p>
 <p>数以千计的业务逻辑在现实中非常常见，从<a href="">广告推送</a>，<a target="_blank" rel="noopener" href="https://www.mtyun.com/library/maze-framework">跑腿外卖</a>到<a href="">火箭发射</a>等应用中，都有数不清的业务逻辑代码，我们可以把这部分需求归结为以下几方面。</p>
 <ul>
 <li>市场需求，业务变更是不可避免的，通常伴随着业务规则会逐渐扩充，在产品后期会变的异常复杂，同时管理层对开发效率不会妥协。</li>
 <li>市场要求，业务规则经常发生变化，系统必须能够依据业务规则的变化快速、低成本的更新。</li>
 <li>程序 = 算法 + 数据结构，有些复杂的商业规则很难推导出算法和抽象出数据模型，甚至有些业务规则常常在需求阶段可能还没有明确，在设计和编码后还在变化。</li>
 </ul>
-<p>那么，问题来了，<strong>我们如何在大规模软件开发中，很好地维护数以千计的业务逻辑
-(IF-statements) 呢</strong>？</p>
+<p>那么，问题来了，<strong>我们如何在大规模软件开发中，很好地维护数以千计的业务逻辑 (IF-statements) 呢</strong>？</p>
 <!--
 
 在这个痛苦面前，一种常见的做法是 **应用程序和业务逻辑解耦**，把这些业务逻辑放在中心数据库或其他统一的地方，由非开发人员根据业务场景，维护系统中的数据和编辑业务规则；在程序开发中，支持动态地管理和修改这部分规则，从而提供软件系统的可维护性和可扩展性。开发人员负责提高代码质量，提供应用程序和业务规则间的接口；非开发人员根据业务场景，维护系统中的数据和编辑业务规则。目前，实现这样的功能的程序，已经被开发成为规则引擎。
@@ -332,67 +324,41 @@ IF-statements 语句，效率低下且十分痛苦。</p>
 
 规则引擎正是应用于上述动态环境中的一种解决方法。
 -->
-<h1 id="问题建模">问题建模</h1>
-<p>我们首先把这类 IF-statements
-问题进行特征提取和建模，看看这类问题有什么特点呢？</p>
+<h1>问题建模</h1>
+<p>我们首先把这类 IF-statements 问题进行特征提取和建模，看看这类问题有什么特点呢？</p>
 <ul>
 <li>业务决策 (decision) 受多个影响因素 (factor) 的影响；</li>
 <li>业务决策和影响因素的关系是已知的，也就是说在影响因素状态确定的情况下，业务决策是唯一的。</li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decision = rule(factor1, factor2, …, factorn)</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li>业务决策是前向的
-(foreward-chaining)，不可逆。决策是基于规则来推导出来的，中间可能存在多个临时特征 (feature)，但是不支持从决策来推导特征和影响因素的状态。</li>
+<li>业务决策是前向的 (foreward-chaining)，不可逆。决策是基于规则来推导出来的，中间可能存在多个临时特征 (feature)，但是不支持从决策来推导特征和影响因素的状态。</li>
 <li>用户往往只关心最终的决策，而不太在意从影响因素到决策的具体推理过程。假如我们将业务决策逻辑从系统逻辑中抽离出来，而只保留最后的决策接口给用户，并不会影响系统的正常运行和用户体验。</li>
 </ul>
-<p>在调研中，<strong>规则引擎 (rule engine)</strong> 和
-<strong>有限状态机 (finite state machine)</strong>
-很快就能进入你的思路。这两种做法能够很好地解决上述问题，可以从一系列的影响因素或者特征中，经过已有的规则运算，得到最终的决策。同时，这两种做法支持<strong>业务决策逻辑从系统逻辑中抽离
-(decoupling)
-出来</strong>，使两种逻辑可以独立于彼此而变化，可以明显降低维护成本，同时支持业务逻辑的快速更新。</p>
+<p>在调研中，<strong>规则引擎 (rule engine)</strong> 和 <strong>有限状态机 (finite state machine)</strong> 很快就能进入你的思路。这两种做法能够很好地解决上述问题，可以从一系列的影响因素或者特征中，经过已有的规则运算，得到最终的决策。同时，这两种做法支持<strong>业务决策逻辑从系统逻辑中抽离  (decoupling) 出来</strong>，使两种逻辑可以独立于彼此而变化，可以明显降低维护成本，同时支持业务逻辑的快速更新。</p>
 <h2 id="规则引擎-vs-有限状态机">规则引擎 vs 有限状态机</h2>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Business_rules_engine">规则引擎</a>
-和 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Finite-state_machine">有限状态机</a>
-的详细概念，大家可以点击链接自行阅读和理解。</p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Business_rules_engine">规则引擎</a> 和 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Finite-state_machine">有限状态机</a> 的详细概念，大家可以点击链接自行阅读和理解。</p>
 <h3 id="规则引擎">规则引擎</h3>
 <!--
 规则引擎由推理引擎发展而来，是一种嵌入在应用程序中的组件，实现了将业务决策从应用程序代码中分离出来，并使用预定义的语义模块编写业务决策。接受数据输入，解释业务规则，并根据业务规则做出业务决策。
 -->
 <p>规则引擎是一种推理引擎，它是根据已有的事实 (变量)，从规则库中匹配规则，处理存在冲突的规则，执行最后筛选通过的规则。</p>
-<p>简而言之，可以理解为是把原本杂乱不堪的 IF-statements 拆成 N
-条带优先级的 "if 前提语句 then 实施语句" 的句式。</p>
+<p>简而言之，可以理解为是把原本杂乱不堪的 IF-statements 拆成 N 条带优先级的 "if 前提语句 then 实施语句" 的句式。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 业务逻辑</span><br><span class="line">if...else if...else if...else</span><br><span class="line"></span><br><span class="line"># 规则引擎</span><br><span class="line">if rule1 then action1</span><br><span class="line">if rule2 then action2</span><br><span class="line">...</span><br><span class="line">if ruleN then actionN</span><br></pre></td></tr></tbody></table></figure>
-<p>规则引擎通常主要使用 foreward-chaining 的 Rete
-引擎，按优先级匹配条件语句，实施规则语句。规则实施后会触发事实的变化，引擎又会重新进行条件匹配，直到不能再匹配为止，Rete
-算法从理论上保证了服从的最高。</p>
+<p>规则引擎通常主要使用 foreward-chaining 的 Rete 引擎，按优先级匹配条件语句，实施规则语句。规则实施后会触发事实的变化，引擎又会重新进行条件匹配，直到不能再匹配为止，Rete 算法从理论上保证了服从的最高。</p>
 <h3 id="有限状态机简述">有限状态机简述</h3>
-<p>通常 FSM
-包含几个要素：状态管理、状态监控、状态触发、状态触发后引发的动作。这些关系的意思可以这样理解:</p>
+<p>通常 FSM 包含几个要素：状态管理、状态监控、状态触发、状态触发后引发的动作。这些关系的意思可以这样理解:</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State(S) x Event(E) -&gt; Actions (A) -&gt; State(S’)</span><br></pre></td></tr></tbody></table></figure>
-<p>如果我们当前处于状态 S，那么发生了 E 事件， 我们应执行操作
-A，状态就会转换为 S’。</p>
+<p>如果我们当前处于状态 S，那么发生了 E 事件， 我们应执行操作 A，状态就会转换为 S’。</p>
 <p>规则引擎和有限状态机主要在触发条件，控制权，使用约束上不一样。</p>
 <h4 id="触发条件区别">触发条件区别</h4>
 <!--通常^[1]，规则引擎和有限状态机的主要区别在于焦点 (focus)。-->
-<p>在规则引擎中，上一个规则完成时会自动转移到下一个规则，而状态机则需要一个外部事件
-(external event)
-的触发，该事件将导致状态转移到下一个。简而言之，状态机是事件驱动型的，而规则引擎却不是。</p>
+<p>在规则引擎中，上一个规则完成时会自动转移到下一个规则，而状态机则需要一个外部事件 (external event) 的触发，该事件将导致状态转移到下一个。简而言之，状态机是事件驱动型的，而规则引擎却不是。</p>
 <blockquote>
-<p>In general, the major difference between a workflow engine and a
-state machine lies in focus. In a workflow engine, transition to the
-next step occurs when a previous action is completed, whilst a state
-machine needs an external event that will cause branching to the next
-activity. In other words, state machine is event driven and workflow
-engine is not.</p>
+<p>In general, the major difference between a workflow engine and a state machine lies in focus. In a workflow engine, transition to the next step occurs when a previous action is completed, whilst a state machine needs an external event that will cause branching to the next activity. In other words, state machine is event driven and workflow engine is not.</p>
 </blockquote>
 <h4 id="控制权区别">控制权区别</h4>
-<p>规则引擎是可以预测的
-(predictable)。系统可以根据我们在初始时提供的状态和规则来驱动流程
-(process)
-向前，<strong>规则控制着这个流程的发展</strong>。状态机恰恰相反，它是外部事件驱动着完成。即使我们已经定义好状态
-(states) 和状态之间的转移条件 (transitions)，决策进展 (decision making
-process) 也是由外部事件来决定的。虽然状态机遵循的结构仍然像工作流
-(sequential workflow)，但是<strong>控制权传递给了外部环境</strong>。</p>
+<p>规则引擎是可以预测的 (predictable)。系统可以根据我们在初始时提供的状态和规则来驱动流程 (process) 向前，<strong>规则控制着这个流程的发展</strong>。状态机恰恰相反，它是外部事件驱动着完成。即使我们已经定义好状态 (states) 和状态之间的转移条件 (transitions)，决策进展 (decision making process) 也是由外部事件来决定的。虽然状态机遵循的结构仍然像工作流 (sequential workflow)，但是<strong>控制权传递给了外部环境</strong>。</p>
 <!--
 A state-machine workflow is the reverse. It is driven by external events to its completion. We define the states and required transitions between those states. The workflow sits and waits for an external event to occur before transitioning to one of the defined states. The decision making process happens externally outside of the workflow – there is a structure to be followed still like a sequential workflow but control is passed to its external environment.
 
@@ -402,36 +368,20 @@ There are two main forms of workflows: sequential and state-machine. Sequential 
 <h4 id="使用约束">使用约束</h4>
 <p>如果系统不是很复杂，那么状态机是一个很好的解决方案。如果能够绘制所有可能的状态以及触发事件，则可以使用状态机。通常，状态机可以很好地用于<strong>网络协议</strong>或某些<strong>嵌入式系统</strong>。</p>
 <blockquote>
-<p>State machine is a good solution if your system is not very complex.
-You may implement it if you are capable of drawing all the possible
-states as well as the events that will cause transitions to them. In
-general, state machines work well for network protocols or some of the
-embedded systems.</p>
+<p>State machine is a good solution if your system is not very complex. You may implement it if you are capable of drawing all the possible states as well as the events that will cause transitions to them. In general, state machines work well for network protocols or some of the embedded systems.</p>
 </blockquote>
 <p>规则引擎是管理业务流程的好方法，它是任务分配，CRM 和其他复杂系统的正确解决方案。最终目标是改善业务流程和公司效率，这就是为什么它非常适合业务流程自动化的原因。</p>
 <blockquote>
-<p>Workflow engine implementation is a good way of managing business
-processes. It is the right solution for task allocation, CRM and other
-complex systems. All in all, its ultimate goal is to improve business
-processes and company’s efficiency. That is why it perfectly suits for
-business process automation.</p>
+<p>Workflow engine implementation is a good way of managing business processes. It is the right solution for task allocation, CRM and other complex systems. All in all, its ultimate goal is to improve business processes and company’s efficiency. That is why it perfectly suits for business process automation.</p>
 </blockquote>
 <p>结合上面的分析对比，在影响因素较多，且不需要外界事件触发的情况下，使用规则引擎达到业务规则和应用的低耦合，是目前解决业务规则不断繁重的解决方案，本文<strong>后面也主要讨论规则引擎相关的问题</strong>。</p>
-<h1 id="规则引擎解决方案调研">规则引擎解决方案调研</h1>
-<p>在解决问题之前，最好先做充分的调研，避免重复造轮子 (Reinventing the
-wheel)。</p>
-<p>规则引擎的概念最早由文章 <a target="_blank" rel="noopener" href="https://downloads.hindawi.com/journals/sp/1992/727852.pdf">A C++
-Class for Rule-Base Objects</a> 提出，描述了在冬季高速公路养护 (winter
-highway maintenance)
-中的实际应用。现在看起来可能比较简单，但是放到上个世纪 90
-年代，还是有新意的做法。</p>
+<h1>规则引擎解决方案调研</h1>
+<p>在解决问题之前，最好先做充分的调研，避免重复造轮子 (Reinventing the wheel)。</p>
+<p>规则引擎的概念最早由文章 <a target="_blank" rel="noopener" href="https://downloads.hindawi.com/journals/sp/1992/727852.pdf">A C++ Class for Rule-Base Objects</a> 提出，描述了在冬季高速公路养护 (winter highway maintenance) 中的实际应用。现在看起来可能比较简单，但是放到上个世纪 90 年代，还是有新意的做法。</p>
 <h2 id="规则引擎的使用方法">规则引擎的使用方法</h2>
 <p>规则引擎是一种嵌套在应用程序中的组件，它实现了将业务规则从应用程序代码中分离出来。规则引擎使用特定的语法编写业务规则，规则引擎可以接受数据输入、解释业务规则、并根据业务规则做出相应的决策。</p>
 <p>通俗来说，规则引擎就是负责执行系统中规则的插件，亦可以作为一个远程系统供业务系统调用。</p>
-<figure>
-<img data-src="/downloads/images/rule_engine_struct.jpg" alt="规则引擎示意图">
-<figcaption aria-hidden="true">规则引擎示意图</figcaption>
-</figure>
+<p><img data-src="/downloads/images/rule_engine_struct.jpg" alt="规则引擎示意图"></p>
 <p>引入规则引擎后带来的好处：</p>
 <ul>
 <li>实现业务逻辑与业务规则的分离，实现业务规则的集中管理；</li>
@@ -444,8 +394,7 @@ highway maintenance)
 <h4 id="业务规则的制定">业务规则的制定</h4>
 <p>一个业务规则包含一组条件和<strong>满足此条件下执行的操作</strong>，它们表示业务规则应用程序的一段业务逻辑。</p>
 <p>业务规则通常应该由业务分析人员和策略管理者开发和修改，但有些复杂的业务规则也可以由技术人员使用面向对象的技术语言或脚本来定制。</p>
-<p>业务规则的理论基础是:
-设置一个或多个条件，当满足这些条件时会触发一个或多个操作。</p>
+<p>业务规则的理论基础是：设置一个或多个条件，当满足这些条件时会触发一个或多个操作。</p>
 <h4 id="规则引擎的功能">规则引擎的功能</h4>
 <p>由于规则引擎是软件组件，所以只有开发人员才能够通过程序接口的方式来使用和控制它。</p>
 <p>规则引擎的程序接口至少包含以下几种 API：</p>
@@ -464,73 +413,50 @@ highway maintenance)
 </ul>
 <p>使用了规则引擎之后，许多涉及业务逻辑的程序代码基本被这五个典型步骤所取代。一个开放的业务规则引擎应该可以” 嵌入” 在应用程序的任何位置，不同位置的规则引擎可以使用不同的规则集，用于处理不同的数据对象。</p>
 <h2 id="现有的规则引擎">现有的规则引擎</h2>
-<p>常见的开源规则引擎 -- <a target="_blank" rel="noopener" href="https://awesomeopensource.com/projects/rule-engine">The Top 23
-Rule Engine Open Source Projects</a> ，如以下所示。</p>
-<figure>
-<img data-src="../downloads/images/open_source_rule_engine.JPG" alt="开源规则引擎排行榜">
-<figcaption aria-hidden="true">开源规则引擎排行榜</figcaption>
-</figure>
-<p>此外，你也找到一些其他开源的规则推导开源软件，比如基于规则表的推理软件 <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>。</p>
+<p>常见的开源规则引擎 – <a target="_blank" rel="noopener" href="https://awesomeopensource.com/projects/rule-engine">The Top 23 Rule Engine Open Source Projects</a><br>
+，如以下所示。</p>
+<p><img data-src="../downloads/images/open_source_rule_engine.JPG" alt="开源规则引擎排行榜"></p>
+<p>此外，你也找到一些其他开源的规则推导开源软件，比如基于规则表的推理软件 ^[2]。</p>
 <p>本文会挑选几款教程比较多，应用范围广的规则引擎做比较和讲解。</p>
-<p>目前，常用的商用规则管理系统 (BRMS) 是 ILOG
-JRules，普遍使用的开源规则引擎是 CLIPS 和 Drools。</p>
-<h3 id="clips">CLIPS</h3>
-<p>根据 <a target="_blank" rel="noopener" href="http://www.clipsrules.net/">官方网站</a> 介绍，CLIPS
-(the C Language Integrated Production System) 于 1984
-年由美国航空航天局约翰逊空间中心 (NASA’s Johnson Space Center)
-推出，意在克服 LISP 移植性差、开发工具和硬件成本高、嵌入性低的缺点。</p>
+<p>目前，常用的商用规则管理系统 (BRMS) 是 ILOG JRules，普遍使用的开源规则引擎是 CLIPS 和 Drools。</p>
+<h3 id="CLIPS">CLIPS</h3>
+<p>根据 <a target="_blank" rel="noopener" href="http://www.clipsrules.net/">官方网站</a> 介绍，CLIPS (the C Language Integrated Production System) 于 1984 年由美国航空航天局约翰逊空间中心 (NASA’s Johnson Space Center) 推出，意在克服 LISP 移植性差、开发工具和硬件成本高、嵌入性低的缺点。</p>
 <blockquote>
-<p>Developed at NASA’s Johnson Space Center from 1985 to 1996, the C
-Language Integrated Production System (CLIPS) is a rule-based
-programming language useful for creating expert systems and other
-programs where a heuristic solution is easier to implement and maintain
-than an algorithmic solution. Written in C for portability, CLIPS can be
-installed and used on a wide variety of platforms. Since 1996, CLIPS has
-been available as public domain software.</p>
+<p>Developed at NASA’s Johnson Space Center from 1985 to 1996, the C Language Integrated Production System (CLIPS) is a rule-based programming language useful for creating expert systems and other programs where a heuristic solution is easier to implement and maintain than an algorithmic solution. Written in C for portability, CLIPS can be installed and used on a wide variety of platforms. Since 1996, CLIPS has been available as public domain software.</p>
 </blockquote>
-<p>CLIPS 是一个基于 <strong>Rete 算法</strong> 的前向推理语言，用标准 C
-语言编写。它具有高移植性、高扩展性、强大的知识表达能力和编程方式以及低成本等特点。</p>
+<p>CLIPS 是一个基于 <strong>Rete 算法</strong> 的前向推理语言，用标准 C 语言编写。它具有高移植性、高扩展性、强大的知识表达能力和编程方式以及低成本等特点。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://clipsrules.sourceforge.net/">CLIPS 源代码</a></li>
 <li><a target="_blank" rel="noopener" href="http://www.clipsrules.net/Documentation.html">CLIPS 官方学习文档</a></li>
 <li><a target="_blank" rel="noopener" href="https://fevin.art/post/clips-rule-engine-introduction/">中文简介</a>，讲述了规则引擎的工作机制。</li>
 </ul>
-<h4 id="在-cc-程序中嵌入-clips">在 C/C++ 程序中嵌入 CLIPS</h4>
+<h4 id="在-C-C-程序中嵌入-CLIPS">在 C/C++ 程序中嵌入 CLIPS</h4>
 <p>基本步骤：</p>
-<ol type="1">
+<ol>
 <li>定义规则模板，规则执行阶段控制逻辑；</li>
 <li>加载规则库，创建 CLIPS 执行实例；</li>
 <li>将变量转换成 CLIPS 事实 (facts)；</li>
 <li>执行 CLIPS 规则；</li>
 <li>获取 CLIPS 规则模板生成结果；</li>
 </ol>
-<h3 id="drools">Drools</h3>
-<p>Drools 是用 Java 语言编写的开放源码规则引擎，使用 <strong>Rete
-算法</strong> 对所编写的规则求值。</p>
-<p>Drools 允许使用声明方式表达业务逻辑，可以使用非 XML
-的本地语言编写规则，从而便于学习和理解。同时，通过使用其中的 DSL (Domain
-Specific
-Language)，可以实现<strong>用自然语言方式来描述业务规则</strong>，使得业务分析人员也可以看懂业务规则代码。</p>
+<h3 id="Drools">Drools</h3>
+<p>Drools 是用 Java 语言编写的开放源码规则引擎，使用 <strong>Rete 算法</strong> 对所编写的规则求值。</p>
+<p>Drools 允许使用声明方式表达业务逻辑，可以使用非 XML 的本地语言编写规则，从而便于学习和理解。同时，通过使用其中的 DSL (Domain Specific Language)，可以实现<strong>用自然语言方式来描述业务规则</strong>，使得业务分析人员也可以看懂业务规则代码。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/kiegroup/drools">开源源代码</a></li>
 <li><a target="_blank" rel="noopener" href="https://docs.jboss.org/drools/release/7.49.0.Final/drools-docs/html_single/index.html#_fork_github">开发文档</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/51296996">中文简介</a>，讲述了规则引擎的工作机制。</li>
 </ul>
-<h3 id="ilog">ILOG</h3>
-<p>Ilog Jrules 是由 IBM 开发的业务规则管理系统 (Business Rules
-Management
-System，BRMS)，它提供了对整个企业业务规则进行建模、编写、测试、部署和维护所必需的所有工具。</p>
+<h3 id="ILOG">ILOG</h3>
+<p>Ilog Jrules 是由 IBM 开发的业务规则管理系统 (Business Rules Management System，BRMS)，它提供了对整个企业业务规则进行建模、编写、测试、部署和维护所必需的所有工具。</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.ibm.com/support/knowledgecenter/SSZJPZ_11.7.0/com.ibm.swg.im.iis.conn.jrules.use.doc/topics/ilog_jrules_container.html">官网介绍</a></li>
 </ul>
-<p>因为 Ilog Jrules
-不开源，同时偏向于界面维护，这里不做详细分析和比较。</p>
+<p>因为 Ilog Jrules 不开源，同时偏向于界面维护，这里不做详细分析和比较。</p>
 <h2 id="美团的实践案例">美团的实践案例</h2>
-<p>根据 <a target="_blank" rel="noopener" href="https://www.mtyun.com/library/maze-framework">从 0 到 1：构建强大且易用的规则引擎</a>
-的描述，美团点评也经历过开源 Drools 从入门到放弃的故事。</p>
+<p>根据 <a target="_blank" rel="noopener" href="https://www.mtyun.com/library/maze-framework">从 0 到 1：构建强大且易用的规则引擎</a> 的描述，美团点评也经历过开源 Drools 从入门到放弃的故事。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">在实践中，我们发现 Drools 方案有以下几个优缺点：</span><br><span class="line"></span><br><span class="line"># 优点</span><br><span class="line">- 策略规则和执行逻辑解耦方便维护。</span><br><span class="line"># 缺点</span><br><span class="line">- 业务分析师无法独立完成规则配置：由于规则主体DSL是编程语言（支持Java, Groovy, Python），因此仍然需要开发工程师维护。</span><br><span class="line">- 规则规模变大以后也会变得不好维护，相对硬编码的优势便不复存在。</span><br><span class="line">- 规则的语法仅适合扁平的规则，对于嵌套条件语义（then里嵌套when...then子句）的规则只能将条件进行笛卡尔积组合以后进行配置，不利于维护。</span><br></pre></td></tr></tbody></table></figure>
-<p>由于 Drools 的问题较多，美团点评最后放弃了
-Drools，而开始基于需求模型设计一个规则引擎。</p>
+<p>由于 Drools 的问题较多，美团点评最后放弃了 Drools，而开始基于需求模型设计一个规则引擎。</p>
 <p>评价：在实际应用层面，重复造轮子不完全是一件坏事情，并非全无价值，例如用来回避软件许可问题、第三方模组或零件的技术限制。</p>
 <blockquote>
 <p>重造方的轮子是重新创造一个已有的方法（重造轮子），而且其结果比已有的还差（方的轮子）。重造方的轮子是一种反模式，发生在工程师不知道或轻视标准的作法，或是不了解问题，或是不知道标准作法已可以充分地克服问题。重造方的轮子可能是经验不足的工程师所产生，或是因为第二系统效应造成。</p>
@@ -542,53 +468,25 @@ Drools，而开始基于需求模型设计一个规则引擎。</p>
 </blockquote>
 <!--
 绩效规则主体是数据处理，但我们认为数据处理同样属于规则的范畴，因此我们将其放在本文进行分析。-->
-<h1 id="基于rete算法的前向推理规则引擎的设计和实现">基于 Rete 算法的 "前向推理" 规则引擎的设计和实现</h1>
-<p>标题比较复杂，我们来拆分一些。首先，我们实现的规则引擎只解决满足前向推理
-(forward chaining) 的问题；其次，Rete
-算法是解决前向推理问题的通用解法，我们使用这个算法是可以得到理论保证的，路子不会走太偏。</p>
-<h2 id="什么是-forward-chaining">什么是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Forward_chaining">forward
-chaining</a></h2>
-<p>前向推理 (又叫正向推理，前向链接) 是使用推理引擎 (inference engine)
-的主要方法之一，是在专家系统 (expert systems)，业务和生产规则系统
-(business and production rule systems) 上广泛应用的策略。</p>
+<h1>基于 Rete 算法的 "前向推理" 规则引擎的设计和实现</h1>
+<p>标题比较复杂，我们来拆分一些。首先，我们实现的规则引擎只解决满足前向推理 (forward chaining) 的问题；其次，Rete 算法是解决前向推理问题的通用解法，我们使用这个算法是可以得到理论保证的，路子不会走太偏。</p>
+<h2 id="什么是-forward-chaining">什么是 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Forward_chaining">forward chaining</a></h2>
+<p>前向推理 (又叫正向推理，前向链接) 是使用推理引擎 (inference engine) 的主要方法之一，是在专家系统 (expert systems)，业务和生产规则系统 (business and production rule systems) 上广泛应用的策略。</p>
 <blockquote>
-<p>Forward chaining (or forward reasoning) is one of the two main
-methods of reasoning when using an inference engine and can be described
-logically as repeated application of modus ponens. Forward chaining is a
-popular implementation strategy for expert systems, business and
-production rule systems. The opposite of forward chaining is backward
-chaining.</p>
+<p>Forward chaining (or forward reasoning) is one of the two main methods of reasoning when using an inference engine and can be described logically as repeated application of modus ponens. Forward chaining is a popular implementation strategy for expert systems, business and production rule systems. The opposite of forward chaining is backward chaining.</p>
 </blockquote>
-<p>前向推理从可用数据开始，使用推理规则来提取更多特征和数据，直到达到目的。推理引擎使用前向链接来搜索推理规则
-(inference rules) 直到找到一个前提条件 (If clause)
-为真；当找到这样的规则时，引擎可以得出结论或推断出结果 (Then
-clause)，从而将新信息添加到其数据中
-(可能是中间的临时特征)。推理引擎将迭代此过程，直到再无可用规则可被选用或者求得了所要求的解为止。</p>
+<p>前向推理从可用数据开始，使用推理规则来提取更多特征和数据，直到达到目的。推理引擎使用前向链接来搜索推理规则 (inference rules) 直到找到一个前提条件 (If clause) 为真；当找到这样的规则时，引擎可以得出结论或推断出结果 (Then clause)，从而将新信息添加到其数据中 (可能是中间的临时特征)。推理引擎将迭代此过程，直到再无可用规则可被选用或者求得了所要求的解为止。</p>
 <blockquote>
-<p>Forward chaining starts with the available data and uses inference
-rules to extract more data (from an end user, for example) until a goal
-is reached. An inference engine using forward chaining searches the
-inference rules until it finds one where the antecedent (If clause) is
-known to be true. When such a rule is found, the engine can conclude, or
-infer, the consequent (Then clause), resulting in the addition of new
-information to its data. Inference engines will iterate through this
-process until a goal is reached.</p>
+<p>Forward chaining starts with the available data and uses inference rules to extract more data (from an end user, for example) until a goal is reached. An inference engine using forward chaining searches the inference rules until it finds one where the antecedent (If clause) is known to be true. When such a rule is found, the engine can conclude, or infer, the consequent (Then clause), resulting in the addition of new information to its data. Inference engines will iterate through this process until a goal is reached.</p>
 </blockquote>
 <h3 id="前向推理和后向推理的区别">前向推理和后向推理的区别</h3>
-<p>和人类的思维相对应，规则引擎中也存在两种推理方式：正向推理
-(Forward-Chaining) 和反向推理 (Backward-Chaining)。</p>
+<p>和人类的思维相对应，规则引擎中也存在两种推理方式：正向推理 (Forward-Chaining) 和反向推理 (Backward-Chaining)。</p>
 <p>正向推理也叫演绎法，由事实驱动，从一个初始的事实出发，不断地应用规则得出结论。首先在候选队列中选择一条规则作为启用规则进行推理，记录其结论作为下一步推理时的证据。如此重复这个过程，直到再无可用规则可被选用或者求得了所要求的解为止。</p>
 <p>反向推理也叫归纳法，由目标驱动，首先提出某个假设，然后寻找支持该假设的证据，若所需的证据都能找到，说明原假设是正确的；若无论如何都找不到所需要的证据，则说明原假设不成立，此时需要另做新的假设。</p>
 <h2 id="前向推理算法">前向推理算法</h2>
-<p>前向推理应用规则从前提 (premises) 应用到结论
-(conclusions)。目前，它使用暴力算法 (brute force
-algorithm)，随机选择来源 (source) 和规则，应用规则以得出结论，重新插入结论作为新的来源
-(source)，并迭代上述过程直到达到停止标准 <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>。</p>
+<p>前向推理应用规则从前提 (premises) 应用到结论 (conclusions)。目前，它使用暴力算法 (brute force algorithm)，随机选择来源 (source) 和规则，应用规则以得出结论，重新插入结论作为新的来源 (source)，并迭代上述过程直到达到停止标准 ^[3]。</p>
 <blockquote>
-<p>The forward chainer applies rules from premises to conclusions. It
-currently uses a rather brute force algorithms, select sources and rules
-somewhat randomly, apply these to produce conclusions, re-insert them
-are new sources and re-iterate till a stop criterion has been met.</p>
+<p>The forward chainer applies rules from premises to conclusions. It currently uses a rather brute force algorithms, select sources and rules somewhat randomly, apply these to produce conclusions, re-insert them are new sources and re-iterate till a stop criterion has been met.</p>
 </blockquote>
 <!--
 # Forward Chainer Algorithm
@@ -613,62 +511,46 @@ Check if one of the stopping criteria has been met. If so, exit and return the p
 
 from https://wiki.opencog.org/w/Unified_rule_engine#Inference_Tree
 -->
-<h3 id="rete-算法">Rete 算法</h3>
-<p><a target="_blank" rel="noopener" href="https://developer.ibm.com/zh/technologies/artificial-intelligence/articles/os-drools/">开源规则流引擎实践</a>
-深入剖析了基于 rete 算法的规则引擎；<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3e9afe9e0617">RETE 算法简述 &amp;
-实践</a> 以例子来讲述 rete
-算法的实践。本节基于上述两篇博客文章，经整理和消化后介绍 Rete 算法 <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>。</p>
-<p>Rete 算法最初是由 CMU 的 Charles L.Forgy 博士在 1974
-年发表的论文中所阐述的算法，该算法提供了专家系统的一个高效实现。</p>
-<p>Rete
-匹配算法是一种进行大量模式集合和大量对象集合间比较的高效方法，通过网络筛选的方法找出所有匹配各个模式的对象和规则。核心思想是将分离的匹配项根据内容动态构造匹配树，以达到显著降低计算量的效果。自
-Rete 算法提出以后，它就被用到一些大型的规则系统中，像 ILog、Jess、JBoss
-Rules 等都是基于 RETE 算法的规则引擎。</p>
+<h3 id="Rete-算法">Rete 算法</h3>
+<p><a target="_blank" rel="noopener" href="https://developer.ibm.com/zh/technologies/artificial-intelligence/articles/os-drools/">开源规则流引擎实践</a> 深入剖析了基于 rete 算法的规则引擎；<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3e9afe9e0617">RETE 算法简述 &amp; 实践</a> 以例子来讲述 rete 算法的实践。本节基于上述两篇博客文章，经整理和消化后介绍 Rete 算法 ^[4]。</p>
+<p>Rete 算法最初是由 CMU 的 Charles L.Forgy 博士在 1974 年发表的论文中所阐述的算法，该算法提供了专家系统的一个高效实现。</p>
+<p>Rete 匹配算法是一种进行大量模式集合和大量对象集合间比较的高效方法，通过网络筛选的方法找出所有匹配各个模式的对象和规则。核心思想是将分离的匹配项根据内容动态构造匹配树，以达到显著降低计算量的效果。自 Rete 算法提出以后，它就被用到一些大型的规则系统中，像 ILog、Jess、JBoss Rules 等都是基于 RETE 算法的规则引擎。</p>
 <blockquote>
-<p>Rete has become the basis for many popular rule engines and expert
-system shells, including Tibco Business Events, Newgen OmniRules, CLIPS,
-Jess, Drools, IBM Operational Decision Management, OPSJ, Blaze Advisor,
-BizTalk Rules Engine, Soar, Clara and Sparkling Logic SMARTS.</p>
+<p>Rete has become the basis for many popular rule engines and expert system shells, including Tibco Business Events, Newgen OmniRules, CLIPS, Jess, Drools, IBM Operational Decision Management, OPSJ, Blaze Advisor, BizTalk Rules Engine, Soar, Clara and Sparkling Logic SMARTS.</p>
 </blockquote>
-<p>Rete 算法可以被分为两个部分：规则编译和规则执行。当
-Rete 算法进行事实的断言时，包含三个阶段：匹配、选择和执行，称做
-match-select-act。</p>
+<p>Rete 算法可以被分为两个部分：规则编译和规则执行。当 Rete 算法进行事实的断言时，包含三个阶段：匹配、选择和执行，称做 match-select-act。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[1Rete Algorithm]--&gt;B(1 规则编译)</span><br><span class="line">A--&gt;C(2 规则执行)</span><br><span class="line">B--&gt;D(创建了规则集对应的 Rete 网络 , 它是一个事实可以在其中流动的图)</span><br><span class="line">C--&gt;E(1 匹配)</span><br><span class="line">C--&gt;F(2 选择)</span><br><span class="line">C--&gt;G(3 执行)</span><br></pre></td></tr></tbody></table></figure>
-<h4 id="rete-算法相关概念">Rete 算法相关概念</h4>
+<h4 id="Rete-算法相关概念">Rete 算法相关概念</h4>
 <ul>
 <li>Fact：已经存在的事实，它是指对象之间及对象属性之间的多元关系。</li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">事实用一个三元组来表示：（标识符 ^ 属性 值）</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li>Rule：规则，包含条件和行为两部分，条件部分又叫左手元（LHS），行为部分又叫右手元（RHS）。条件部分可以有多条条件，并且可以用
-and 或 or 连接。其一般形式如下：</li>
+<li>Rule：规则，包含条件和行为两部分，条件部分又叫左手元（LHS），行为部分又叫右手元（RHS）。条件部分可以有多条条件，并且可以用 and 或 or 连接。其一般形式如下：</li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(name-of-this-production</span><br><span class="line"> LHS /*one or more conditions*/</span><br><span class="line"> --&gt;</span><br><span class="line"> RHS /*one or more actions*/</span><br><span class="line"> )</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>Patten：模式，也就是规则的条件部分，是已知事实的泛化形式，是未实例化的多元关系。</li>
 <li>RootNode：Rete 网络的根节点，所有对象通过 Root 节点进入网络。</li>
 </ul>
-<figure>
-<img data-src="../downloads/images/rete_demo.png" alt="RETE 网络示例">
-<figcaption aria-hidden="true">RETE 网络示例</figcaption>
-</figure>
-<h3 id="rete-规则编译">Rete 规则编译</h3>
-<h3 id="rete-规则执行">Rete 规则执行</h3>
-<h3 id="rete-算法优点">Rete 算法优点</h3>
+<p><img data-src="../downloads/images/rete_demo.png" alt="RETE 网络示例"></p>
+<h3 id="Rete-规则编译">Rete 规则编译</h3>
+<h3 id="Rete-规则执行">Rete 规则执行</h3>
+<h3 id="Rete-算法优点">Rete 算法优点</h3>
 <h2 id="程序开发实践">程序开发实践</h2>
-<p>参考 <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>。</p>
+<p>参考 ^[5]。</p>
 <h3 id="规则模型">规则模型</h3>
 <p>规则主要由三部分构成：</p>
 <ul>
-<li><p>FACT 对象：用户输入的事实对象，作为决策因子使用。</p></li>
-<li><p>规则：LHS（Left Hand Side）部分即条件分支逻辑。RHS（Right Hand
-Side）部分即执行逻辑。</p>
+<li>
+<p>FACT 对象：用户输入的事实对象，作为决策因子使用。</p>
+</li>
+<li>
+<p>规则：LHS（Left Hand Side）部分即条件分支逻辑。RHS（Right Hand Side）部分即执行逻辑。</p>
 <ul>
-<li>LHS 和 RHS 部分是由一个或多个模式 (pattern)
-构成的。模式是规则内最小单位。模式的输入参数可以是另一个模式或 FACT
-对象（比如逻辑与运算 [参数 1] &amp;&amp;
-[参数 2] 中参数 1 可以是另一个表达式）。</li>
-</ul></li>
+<li>LHS 和 RHS 部分是由一个或多个模式 (pattern) 构成的。模式是规则内最小单位。模式的输入参数可以是另一个模式或 FACT 对象（比如逻辑与运算 [参数 1] &amp;&amp; [参数 2] 中参数 1 可以是另一个表达式）。</li>
+</ul>
+</li>
 </ul>
 <!--
 模式需要支持以下3种类别：
@@ -686,7 +568,8 @@ Side）部分即执行逻辑。</p>
 <li>知识库：负责提供配置视图和模式因子。知识库之所以叫 “知识” 库一个很重要的特征是知识库可以低成本扩展知识。
 <ul>
 <li>模式：构成规则的最小单位，不可拆分，可以直接被规则引擎执行。</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <!--
 - 视图：用于业务分析师等非技术背景的人员配置规则。作用两方面：
@@ -695,9 +578,9 @@ Side）部分即执行逻辑。</p>
 <ul>
 <li>资源管理器：负责管理规则。
 <ul>
-<li>依赖管理：负责将规则解析为模式树。为了最大限度地增强规则的表达能力，每一个模式设计都很 “原子”
-(atom)，这样如果想配置一个完整语义的规则，则必须由多个子规则共同构成，因此规则之间会有树形依赖关系。</li>
-</ul></li>
+<li>依赖管理：负责将规则解析为模式树。为了最大限度地增强规则的表达能力，每一个模式设计都很 “原子” (atom)，这样如果想配置一个完整语义的规则，则必须由多个子规则共同构成，因此规则之间会有树形依赖关系。</li>
+</ul>
+</li>
 </ul>
 <!--  
 如$参数1 + $参数2 > $参数3这样的规则便是由多个模式“复合”而成，则他的依赖关系如下所示。
@@ -705,9 +588,9 @@ Side）部分即执行逻辑。</p>
 <ul>
 <li>规则引擎：负责执行规则。
 <ul>
-<li>模式执行器：负责直接执行模式。执行器可以根据业务的表达能力需求选择基于
-Drools、Aviator 等第三方引擎，甚至可以基于 ANTLR 定制。</li>
-</ul></li>
+<li>模式执行器：负责直接执行模式。执行器可以根据业务的表达能力需求选择基于 Drools、Aviator 等第三方引擎，甚至可以基于 ANTLR 定制。</li>
+</ul>
+</li>
 </ul>
 <h3 id="运行实践">运行实践</h3>
 <ul>
@@ -715,39 +598,33 @@ Drools、Aviator 等第三方引擎，甚至可以基于 ANTLR 定制。</li>
 <li>预编译规则实例。因为规则每次编译执行会导致性能问题，因此会在引擎初始化和规则有变更这两个时机将增量版本的规则预编译成可执行代码。</li>
 </ul>
 <p>系统代码调用规则引擎的基本步骤：</p>
-<ol type="1">
+<ol>
 <li>定义规则模板，规则执行阶段的控制逻辑；</li>
 <li>加载规则库，创建规则引擎实例；</li>
 <li>将变量转换成规则引擎的事实；</li>
 <li>执行规则推理；</li>
 <li>获取规则模板生成结果；</li>
 </ol>
-<h1 id="references">References</h1>
+<h1>References</h1>
 <ul>
-<li>[1] <a target="_blank" rel="noopener" href="https://workflowengine.io/blog/workflow-engine-vs-state-machine/">WORKFLOW
-ENGINE VS. STATE MACHINE</a></li>
-<li>[2] <a target="_blank" rel="noopener" href="https://www.codeproject.com/Articles/194167/Logician-A-Table-based-Rules-Engine-Suite-In-C-NET">A
-Table-based Rules Engine Suite using XML</a></li>
-<li>[3] <a target="_blank" rel="noopener" href="https://wiki.opencog.org/w/Unified_rule_engine#Forward_Chainer">Forward
-Chainer</a></li>
-<li>[4] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rete_algorithm">Rete
-Algorithm from Wikipedia</a></li>
+<li>[1] <a target="_blank" rel="noopener" href="https://workflowengine.io/blog/workflow-engine-vs-state-machine/">WORKFLOW ENGINE VS. STATE MACHINE</a></li>
+<li>[2] <a target="_blank" rel="noopener" href="https://www.codeproject.com/Articles/194167/Logician-A-Table-based-Rules-Engine-Suite-In-C-NET">A Table-based Rules Engine Suite using XML</a></li>
+<li>[3] <a target="_blank" rel="noopener" href="https://wiki.opencog.org/w/Unified_rule_engine#Forward_Chainer">Forward Chainer</a></li>
+<li>[4] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rete_algorithm">Rete Algorithm from Wikipedia</a></li>
 <li>[5] <a target="_blank" rel="noopener" href="https://www.mtyun.com/library/maze-framework">https://www.mtyun.com/library/maze-framework</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Business_rules_engine">Business
-rules engine from Wikipedia</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Inference_engine">Inference
-engine from Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Business_rules_engine">Business rules engine from Wikipedia</a></li>
+<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Inference_engine">Inference engine from Wikipedia</a></li>
 <li><a target="_blank" rel="noopener" href="http://holbrook.github.io/2012/03/20/rule_engine_1.html">规则，推理机和规则引擎</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3e9afe9e0617">RETE 算法简述 &amp;
-实践</a>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/3e9afe9e0617">RETE 算法简述 &amp; 实践</a>
 <ul>
 <li>讲解的比较好 </li>
-</ul></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/bazald/ConcRete">rete 算法的 github
-实现</a>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/bazald/ConcRete">rete 算法的 github 实现</a>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/wangty163/Rete">Rete github</a></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <!--
 [Visual programming language](https://en.wikipedia.org/wiki/Visual_programming_language) 亨通提到的可视化编程做法，我不是很认同这种做法
@@ -768,15 +645,6 @@ https://github.com/DanielThurau/Simple-RuleBase-Inference-Engine
 https://github.com/ivgiuliani/ant 和万老板的实现类似，有working memory
 
 -->
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn1" role="doc-endnote"><p>2<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>3<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>4<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>5<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
 
     </div>
 
@@ -834,13 +702,13 @@ https://github.com/ivgiuliani/ant 和万老板的实现类似，有working memor
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">259k</span>
+    <span title="Word count total">261k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:42</span>
+    <span title="Reading time total">15:48</span>
   </span>
 </div>
 <div class="busuanzi-count">

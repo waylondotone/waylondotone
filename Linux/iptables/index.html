@@ -141,8 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iptables-%E8%A7%84%E5%88%99%E6%9D%A5%E9%98%BB%E6%AD%A2%E7%89%B9%E5%AE%9A-ip-%E8%AE%BF%E9%97%AE"><span class="nav-number">2.</span> <span class="nav-text">iptables 规则来阻止特定 IP
-访问</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">iptables 规则来阻止特定 IP 访问</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -161,7 +160,7 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-count">29</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -319,36 +318,47 @@
 <!--
 网站屏蔽和阻止特定地区和国家的IP访问
 -->
-<h1 id="前言">前言</h1>
+<h1>前言</h1>
 <p>无论是出于什么原因，屏蔽和阻止特定地区和国家的 IP 访问都是我们日常建站中经常要用到的。</p>
 <!--因为自己之前在网站的about页面展露太多消息，被美研同事发现我的踪迹，网站经常被访问，所以决定封掉某IP段，避免被访问-->
-<p>如果网站是 Nginx，则可以直接使用 Nginx-ngx_http_geoip_module
-模块，该模块可以精确到国家、省、市等一级的 IP，并且全部由 Nginx
-执行识别和阻止访问，所以相对于 PHP 来说比较省资源，但是 Nginx
-编译起来比较费事。</p>
-<p>如果网站是搭建在 VPS 或者独立服务器上，那么可以直接使用 Linux
-防火墙，利用 iptables 规则来阻止特定国家和省份的 IP 访问。</p>
-<h1 id="iptables-规则来阻止特定-ip-访问">iptables 规则来阻止特定 IP
-访问</h1>
-<ol type="1">
+<p>如果网站是 Nginx，则可以直接使用 Nginx-ngx_http_geoip_module 模块，该模块可以精确到国家、省、市等一级的 IP，并且全部由 Nginx 执行识别和阻止访问，所以相对于 PHP 来说比较省资源，但是 Nginx 编译起来比较费事。</p>
+<p>如果网站是搭建在 VPS 或者独立服务器上，那么可以直接使用 Linux 防火墙，利用 iptables 规则来阻止特定国家和省份的 IP 访问。</p>
+<h1>iptables 规则来阻止特定 IP 访问</h1>
+<ol>
 <li>安装 iptables 防火墙 </li>
 </ol>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CentOS</span><br><span class="line">yum install iptables</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2" type="1">
-<li><p>清除已有 iptables 规则 </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>屏蔽指定 IP </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#屏蔽单个IP的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP</span><br><span class="line">#封IP段即从123.45.6.1到123.45.6.254的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP</span><br></pre></td></tr></tbody></table></figure> <!--66.249.90.xx-->
-<!--66.249.90.184--><p></p></li>
-<li><p>查看已添加的 iptables 规则 </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n</span><br><span class="line">v：显示详细信息，包括每条规则的匹配包数量和匹配字节数</span><br><span class="line">x：在 v 的基础上，禁止自动单位换算（K、M）</span><br><span class="line">n：只显示IP地址和端口号，不将ip解析为域名</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>iptables 的开机启动及规则保存 </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chkconfig –level 345 iptables on</span><br><span class="line">systemctl enable iptables.service</span><br><span class="line"># 如果配置文件里面设置了开机启动，systemctl enable命令相当于激活开机启动。</span><br><span class="line"># CentOS</span><br><span class="line">service iptables save &lt;--保存规则</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>重启后生效 </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启：chkconfig iptables on</span><br><span class="line">关闭：chkconfig iptables off</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>即时生效，重启后失效 </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启：service iptables start</span><br><span class="line">关闭：service iptables stop</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<ol start="2">
+<li>清除已有 iptables 规则 </li>
 </ol>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></tbody></table></figure>
+<ol start="3">
+<li>屏蔽指定 IP</li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#屏蔽单个IP的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP</span><br><span class="line">#封IP段即从123.45.6.1到123.45.6.254的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP</span><br></pre></td></tr></tbody></table></figure>
+<!--66.249.90.xx-->
+<!--66.249.90.184-->
+<ol start="4">
+<li>查看已添加的 iptables 规则 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -L -n</span><br><span class="line">v：显示详细信息，包括每条规则的匹配包数量和匹配字节数</span><br><span class="line">x：在 v 的基础上，禁止自动单位换算（K、M）</span><br><span class="line">n：只显示IP地址和端口号，不将ip解析为域名</span><br></pre></td></tr></tbody></table></figure>
+<ol start="5">
+<li>iptables 的开机启动及规则保存 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chkconfig –level 345 iptables on</span><br><span class="line">systemctl enable iptables.service</span><br><span class="line"># 如果配置文件里面设置了开机启动，systemctl enable命令相当于激活开机启动。</span><br><span class="line"># CentOS</span><br><span class="line">service iptables save &lt;--保存规则</span><br></pre></td></tr></tbody></table></figure>
+<ol start="6">
+<li>重启后生效 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启：chkconfig iptables on</span><br><span class="line">关闭：chkconfig iptables off</span><br></pre></td></tr></tbody></table></figure>
+<ol start="7">
+<li>即时生效，重启后失效 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">开启：service iptables start</span><br><span class="line">关闭：service iptables stop</span><br></pre></td></tr></tbody></table></figure>
 <!--
 # References
 - [网站屏蔽和阻止特定地区和国家的IP访问设置方法-PHP代码/Nginx/WordPress设置](https://wzfou.com/zuzhi-ip/)
 - [centos服务器 屏蔽ip](https://blog.csdn.net/u013939884/article/details/55803118)
 -->
-
     </div>
 
     
@@ -405,13 +415,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">259k</span>
+    <span title="Word count total">261k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:42</span>
+    <span title="Reading time total">15:48</span>
   </span>
 </div>
 <div class="busuanzi-count">
