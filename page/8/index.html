@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -183,6 +183,147 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/website/add-video-in-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/website/add-video-in-blog/" class="post-title-link" itemprop="url">Hexo 博客如何加入 B 站视频 / How to add bilibili shared video link in Hexo</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-01-23 11:18:21" itemprop="dateCreated datePublished" datetime="2020-01-23T11:18:21+08:00">2020-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/website/" itemprop="url" rel="index"><span itemprop="name">website</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>637</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>2 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>[toc]</p>
+<p>Hexo 搭建博客后，如果想在博客中分享视频，避免网站服务器带宽的限制，需要添加其他视频网站的外链播放器，具体该怎么操作呢？</p>
+<h1 id="solution-1-hexo-tag-aplayer">Solution 1: hexo-tag-aplayer</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a>
+是 <a target="_blank" rel="noopener" href="https://github.com/MoePlayer/DPlayer">DPlayer</a> 播放器的
+Hexo 标签插件。</p>
+<p>因为版本维护者不再支持新版本的更新，有些 bug 没有解决，所以对于高版本的 Hexo 支持不友好，甚至安装阶段就会报错。所以，我不是很支持继续使用该方法。</p>
+<p>ps. 想继续坚持使用该方法的，可以移步阅读 <a target="_blank" rel="noopener" href="https://www.datablog.top/2019/04/25/hexo-with-music-and-movie/">在 Hexo 搭建的博客中插入音乐或者视频</a>。</p>
+<h1 id="solution-2-视频网站外链">Solution 2: 视频网站外链</h1>
+<p>Hexo 支持 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#iframe">iframe</a>
+的方式插入视频，所示我们可以把视频上传到哔哩哔哩、优酷、腾讯视频等，然后生成外链再拿来用。</p>
+<p>大部分视频网站的外链播放器在视频开头都会加上 30 秒 - 2 分钟的广告，于是选择 B 站，无广告，无广告，无广告！</p>
+<h2 id="去b站获取视频外链">去 B 站获取视频外链</h2>
+<p>选择视频下方 “分享” 里的嵌入代码，而不是视频地址。否则进入 Hexo
+博客后，网页会自动跳转到 bilibili 的视频页面，而不是自己的博客页面。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/Copy_bilibili_link.jpg"></p>
+<h2 id="在文章中插入视频外链">在文章中插入视频外链</h2>
+<p>Markdown 中可以直接插入 html 代码，但是 hexo 给我们特意准备了一个 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#Raw">raw</a>
+标签来插入 html 代码，防止一些其他因素的干扰，这里我们就使用 raw 来插入视频外链。</p>
+
+<iframe src="//player.bilibili.com/player.html?aid=90978812&amp;cid=155358422&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
+
+<p>因为外链 html 没有和 Hexo 适配，所以在网页上打开，界面靠左并且窗口小，显得很难看，不够大气。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/raw_video_demo.jpg"></p>
+<h2 id="美化播放器样式">美化播放器样式</h2>
+<p>这里分享一个很巧妙的偷懒方法，我们可以去 Hexo 的 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官网</a>，看看作者是如何布局的，然后把代码抄回来。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/hexo_pick_up_video_element.jpg"></p>
+<p>那么，我们只要把布局中的 src，替换为自己的外链地址，就可以设置好视频的布局。</p>
+
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+<iframe src="//player.bilibili.com/player.html?aid=90978812&amp;cid=155358422&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>
+
+<p>因为简书不支持 iframe，大家可以去我的网站看看效果。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/video_demo.jpg"></p>
+<h1 id="references">References</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yimagudao/article/details/89524210">hexo-tag-dplayer</a><br>
+</li>
+<li><a target="_blank" rel="noopener" href="https://haokan.baidu.com/v?pd=wisenatural&amp;vid=5242915545602714565">hexo 博客插入 B 站视频外链（raw 实现）</a><br>
+</li>
+<li><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1623914788952059989&amp;wfr=spider&amp;for=pc">Hexo 博客中加入 B 站视频播放器</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1507,7 +1648,7 @@ Brod）所提出的的概念。这一概念本来有两个意思：
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-07-09 00:00:09" itemprop="dateModified" datetime="2023-07-09T00:00:09+08:00">2023-07-09</time>
+      <time title="Modified: 2023-07-09 16:30:05" itemprop="dateModified" datetime="2023-07-09T16:30:05+08:00">2023-07-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1561,10 +1702,10 @@ to query various properties of arithmetic types.
 </ul></li>
 <li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>
 和 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>
-都被用来获取某个类型的最小值。它们分别返回这个最小值可表示的最小正数 (min) 和最小负数 (lowest)。因此，当
-T
-是一个无符号类型的时候，min () 和 lowest () 返回的值是相同的。其次，lowest ()
-只对有符号类型有效，而 min () 对所有数据类型都有效。</li>
+都被用来获取某个类型的最小值。它们分别返回这个最小值可表示的最小正数
+(min) 和最小负数 (lowest)。因此，当 T 是一个无符号类型的时候，min () 和
+lowest () 返回的值是相同的。其次，lowest () 只对有符号类型有效，而 min ()
+对所有数据类型都有效。</li>
 </ul>
 <h2 id="stdsort"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/sort">std::sort</a></h2>
 <ul>
@@ -1573,7 +1714,7 @@ order.
 <ul>
 <li>要求传入两个迭代器确定范围</li>
 </ul></li>
-<li>逆序排序 std::sort (ver.rbegin (),ver.rend ())</li>
+<li>逆序排序 std::sort (vec.rbegin (), vec.rend ())</li>
 </ul>
 <h2 id="stdequal"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/equal">std::equal</a></h2>
 <ul>
@@ -2398,184 +2539,6 @@ VHF 自动、定时播发，在 VHF
 覆盖范围内（20 海里）装备 AIS 设备的船舶，可自动接收到这些信息。</li>
 </ul></li>
 <li><a target="_blank" rel="noopener" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">百度地图坐标拾取系统</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Ubuntu/Python/Getting-started-with-pip/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Nobody">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-      <meta itemprop="description" content="sharing daily progress and life">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | One's Way">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Ubuntu/Python/Getting-started-with-pip/" class="post-title-link" itemprop="url">Getting started with pip</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-11-15 17:35:19" itemprop="dateCreated datePublished" datetime="2019-11-15T17:35:19+08:00">2019-11-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Ubuntu/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>655</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="pip-是什么">pip 是什么</h1>
-<p>pip 是一个通用的 Python 包管理工具，提供了对第三方 Python
-包的查找、下载、安装、卸载的功能。</p>
-<p>注意：不是所有的第三方 Python 包都能通过 pip 来安装，只能是发布在 <a target="_blank" rel="noopener" href="https://pypi.org/">pypi.org</a> 上面的才能通过 pip 安装。</p>
-<!--
-[pip安装和使用入门指南](https://www.yuanrenxue.com/python/pip-usage.html)  
--->
-<h1 id="pip3-和-pip-的区别">pip3 和 pip 的区别</h1>
-<p>如果机器同时装有 python2 和 python3，那么 pip 默认给 python2 用，pip3
-指定给 python3 用，两者的安装路径是不同的。</p>
-<p>如果机器只有 python3，pip 和 pip3 的作用是一样的。</p>
-<!--
-[Python3 pip 与pip3 区别](https://blog.csdn.net/stcaaa/article/details/83824031)
--->
-<h1 id="常用命令">常用命令</h1>
-<h2 id="pip命令帮助">pip 命令帮助</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip help</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="检查-pip-是否安装和-pip-的版本号">检查 pip 是否安装和 pip
-的版本号</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --version</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="pip-安装第三方包">pip 安装第三方包</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install SomePackage</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>安装该软件的最新版本，同时 pip
-会计算该软件的依赖包，如果没有冲突，就会把该软件包的依赖包一起安装。</p>
-</blockquote>
-<ul>
-<li>如果要安装指定版本的软件包呢，就需要在软件包名后面加一个具体的版本号，比如 </li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install SomePackage==2.21.0</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="pip-升级软件包">pip 升级软件包</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade SomePackage</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="pip-搜索软件包">pip 搜索软件包</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip search SomePackage</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="pip-卸载软件包">pip 卸载软件包</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip uninstall SomePackage</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>注意：卸载软件包之前最好先用 pip show
-命令看一下该软件包的被依赖关系，如果其它包依赖你要卸载的软件包，那么你卸载后，其它软件包就没法运行了。</p>
-</blockquote>
-<h2 id="pip-查看包信息">pip 查看包信息</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip show SomePackage</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>查看该软件包的作者，软件安装路径，依赖的库和被依赖的库等。</p>
-</blockquote>
-<h2 id="显示本地软件包">显示本地软件包</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip list</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>list 命令显示本地所有安装的第三方库和相应的版本号。</p>
-</blockquote>
-<h2 id="导出本地所有软件包名和版本号">导出本地所有软件包名和版本号</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>上面命令会把软件包名和版本号导到 requirements.txt
-文件里，方便在另一台电脑上部署一个相同的 Python
-软件包环境，或者提交到生产环境去运行，或者一键卸载 / 升级全部的第三方软件包。</p>
-</blockquote>
-<ul>
-<li>pip list 和 pip freeze 的区别</li>
-</ul>
-<blockquote>
-<p>pip list 和 pip freeze 的区别是 pip list 列出了所有的包，pip freeze
-只列出由 pip 安装的软件包。</p>
-</blockquote>
-<h2 id="升级包到当前最新的版本">升级包到当前最新的版本</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U SomePackage</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="升级-pip">升级 pip</h2>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install --upgrade pip</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="其他">其他</h1>
-<ul>
-<li>Python 的包管理工具也不只有 pip，还有 Conda、Pipenv、Poetry
-等。Conda、Pipenv
-的好处是不只能管理包工具，还能管理虚拟路径，让你一台电脑能安装和运行多个版本的
-Python，不会发生冲突。</li>
 </ul>
 
       

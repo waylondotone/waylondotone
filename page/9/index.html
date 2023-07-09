@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -183,6 +183,184 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Ubuntu/Python/Getting-started-with-pip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Ubuntu/Python/Getting-started-with-pip/" class="post-title-link" itemprop="url">Getting started with pip</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-11-15 17:35:19" itemprop="dateCreated datePublished" datetime="2019-11-15T17:35:19+08:00">2019-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Ubuntu/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>655</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>2 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="pip-是什么">pip 是什么</h1>
+<p>pip 是一个通用的 Python 包管理工具，提供了对第三方 Python
+包的查找、下载、安装、卸载的功能。</p>
+<p>注意：不是所有的第三方 Python 包都能通过 pip 来安装，只能是发布在 <a target="_blank" rel="noopener" href="https://pypi.org/">pypi.org</a> 上面的才能通过 pip 安装。</p>
+<!--
+[pip安装和使用入门指南](https://www.yuanrenxue.com/python/pip-usage.html)  
+-->
+<h1 id="pip3-和-pip-的区别">pip3 和 pip 的区别</h1>
+<p>如果机器同时装有 python2 和 python3，那么 pip 默认给 python2 用，pip3
+指定给 python3 用，两者的安装路径是不同的。</p>
+<p>如果机器只有 python3，pip 和 pip3 的作用是一样的。</p>
+<!--
+[Python3 pip 与pip3 区别](https://blog.csdn.net/stcaaa/article/details/83824031)
+-->
+<h1 id="常用命令">常用命令</h1>
+<h2 id="pip命令帮助">pip 命令帮助</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip help</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="检查-pip-是否安装和-pip-的版本号">检查 pip 是否安装和 pip
+的版本号</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip --version</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="pip-安装第三方包">pip 安装第三方包</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install SomePackage</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>安装该软件的最新版本，同时 pip
+会计算该软件的依赖包，如果没有冲突，就会把该软件包的依赖包一起安装。</p>
+</blockquote>
+<ul>
+<li>如果要安装指定版本的软件包呢，就需要在软件包名后面加一个具体的版本号，比如 </li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install SomePackage==2.21.0</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="pip-升级软件包">pip 升级软件包</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade SomePackage</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="pip-搜索软件包">pip 搜索软件包</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip search SomePackage</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="pip-卸载软件包">pip 卸载软件包</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip uninstall SomePackage</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>注意：卸载软件包之前最好先用 pip show
+命令看一下该软件包的被依赖关系，如果其它包依赖你要卸载的软件包，那么你卸载后，其它软件包就没法运行了。</p>
+</blockquote>
+<h2 id="pip-查看包信息">pip 查看包信息</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip show SomePackage</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>查看该软件包的作者，软件安装路径，依赖的库和被依赖的库等。</p>
+</blockquote>
+<h2 id="显示本地软件包">显示本地软件包</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip list</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>list 命令显示本地所有安装的第三方库和相应的版本号。</p>
+</blockquote>
+<h2 id="导出本地所有软件包名和版本号">导出本地所有软件包名和版本号</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>上面命令会把软件包名和版本号导到 requirements.txt
+文件里，方便在另一台电脑上部署一个相同的 Python
+软件包环境，或者提交到生产环境去运行，或者一键卸载 / 升级全部的第三方软件包。</p>
+</blockquote>
+<ul>
+<li>pip list 和 pip freeze 的区别</li>
+</ul>
+<blockquote>
+<p>pip list 和 pip freeze 的区别是 pip list 列出了所有的包，pip freeze
+只列出由 pip 安装的软件包。</p>
+</blockquote>
+<h2 id="升级包到当前最新的版本">升级包到当前最新的版本</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -U SomePackage</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="升级-pip">升级 pip</h2>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m pip install --upgrade pip</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="其他">其他</h1>
+<ul>
+<li>Python 的包管理工具也不只有 pip，还有 Conda、Pipenv、Poetry
+等。Conda、Pipenv
+的好处是不只能管理包工具，还能管理虚拟路径，让你一台电脑能安装和运行多个版本的
+Python，不会发生冲突。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2455,148 +2633,6 @@ following line to .vimrc if you have installed Vundle, and then run
 <p><strong>Finally</strong>, the last but essential step is that forcing
 cmake to output compile_commands.json (like <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/v3.5/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html">DCMAKE_EXPORT_COMPILE_COMMANDS</a>)
 and link it with rtags according to your project. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 [***] your_src_path</span><br><span class="line">rc -J your_build_folder_path  &lt;-- use compile_commands.json in your build folder</span><br><span class="line">rdm &amp; &lt;-- launch the rtags server</span><br></pre></td></tr></tbody></table></figure><p></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/website/statistics-visitor-traffic/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Nobody">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-      <meta itemprop="description" content="sharing daily progress and life">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | One's Way">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/website/statistics-visitor-traffic/" class="post-title-link" itemprop="url">通过 clustermaps 统计 Hexo 网站的访问地区和 IP</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-08-08 10:06:46" itemprop="dateCreated datePublished" datetime="2019-08-08T10:06:46+08:00">2019-08-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/website/" itemprop="url" rel="index"><span itemprop="name">website</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>571</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>[toc]</p>
-<h1 id="前言">前言</h1>
-<p>在 <a href="http://www.waylon.one/website/Website-FAQ/">Website
-FAQ</a>，实现了使用 "卜算子" 来统计网站访问人数，但是 "卜算子" 仅可以提供访问人数的统计，进一步的信息却无法提供。那么，如果想知道过往访客来自哪些国家和地区，显示网站访问实时动态的信息，应该怎么做呢？</p>
-<p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/statistics-visitor-traffic/">个人网站</a>，请移步阅读最新内容。</p>
-<h1 id="clustermaps-是什么">clustermaps 是什么</h1>
-<p><a target="_blank" rel="noopener" href="https://clustrmaps.com">clustrmaps.com</a>
-是美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。</p>
-<blockquote>
-<p>Add the ClustrMaps hit tracker to your site or blog and see a
-real-time map of your visitors from around the world! Proudly show and
-grow your hidden community of interest.</p>
-</blockquote>
-<p>网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是<strong>免费</strong>的，能够满足个人网站的需求，如下图所示。</p>
-<p><img data-src="/downloads/images/blog/visitor_traffic_demo.png"></p>
-<h1 id="配置-clustrmaps">配置 clustrmaps</h1>
-<ul>
-<li>网站注册后，访问 <a target="_blank" rel="noopener" href="https://clustrmaps.com/add">Enter your
-website address</a> 添加自己的网站地址，选择免费的服务。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/input_url.png"></p>
-<p><img data-src="/downloads/images/blog/choose_plan.png"></p>
-<ul>
-<li>选择自己喜欢的插件格式，现在 Hexo 的 Next
-两种主题都是支持的，但是自己比较喜欢 Map widget 的主题。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/map_widget.png"></p>
-<ul>
-<li>点击选择后，拷贝网站出现的脚本
-javascript 代码，粘贴到 Next 主题下某个位置。博主测试过如下两个位置，挑选一个配置即可以。推荐位置二，自定义程度高。
-<ul>
-<li><p>位置一：将代码插入到 themes\_partials.swig 的最后。
-</p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  {% endif %}</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert clustrmaps.com --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">id</span>=<span class="string">'clustrmaps'</span> <span class="attr">src</span>=<span class="string">'//cdn.clustrmaps.com/map_v2.js?XXX'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% include '../_custom/header.swig' %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>位置二：将代码插入到 \_macro.swig 文件的</p>
-<div class="”sidebar-inner”">
-
-</div>
-<p>图层。 </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-inner"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- set display_toc = page.toc.enable and display_toc %}</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Begin Insert clustrmaps.com --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">id</span>=<span class="string">"clustrmaps"</span> <span class="attr">src</span>=<span class="string">"//clustrmaps.com/map_v2.js?d=iBmc9XXXXXX=a"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- End Insert clustrmaps.com --&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- if display_toc %}</span><br><span class="line">      {%- set toc = toc(page.content, { class: "nav", list_number: page.toc.number, max_depth: page.toc.max_depth }) %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-</ul></li>
-<li>重新部署网站，就可以在首页看到实时访客来源图，如我的网站首页所示。另外，点击地图，可以看到更详细的信息，包括访客的地图、浏览设备以及
-IP。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/detaile_IP.png"></p>
 
       
     </div>
