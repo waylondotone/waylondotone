@@ -267,37 +267,44 @@
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <p>Hexo 搭建博客后，如果想在博客中分享视频，避免网站服务器带宽的限制，需要添加其他视频网站的外链播放器，具体该怎么操作呢？</p>
-<h1>Solution 1: hexo-tag-aplayer</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 是 <a target="_blank" rel="noopener" href="https://github.com/MoePlayer/DPlayer">DPlayer</a> 播放器的 Hexo 标签插件。</p>
+<h1 id="solution-1-hexo-tag-aplayer">Solution 1: hexo-tag-aplayer</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a>
+是 <a target="_blank" rel="noopener" href="https://github.com/MoePlayer/DPlayer">DPlayer</a> 播放器的
+Hexo 标签插件。</p>
 <p>因为版本维护者不再支持新版本的更新，有些 bug 没有解决，所以对于高版本的 Hexo 支持不友好，甚至安装阶段就会报错。所以，我不是很支持继续使用该方法。</p>
 <p>ps. 想继续坚持使用该方法的，可以移步阅读 <a target="_blank" rel="noopener" href="https://www.datablog.top/2019/04/25/hexo-with-music-and-movie/">在 Hexo 搭建的博客中插入音乐或者视频</a>。</p>
-<h1>Solution 2: 视频网站外链</h1>
-<p>Hexo 支持 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#iframe">iframe</a> 的方式插入视频，所示我们可以把视频上传到哔哩哔哩、优酷、腾讯视频等，然后生成外链再拿来用。</p>
+<h1 id="solution-2-视频网站外链">Solution 2: 视频网站外链</h1>
+<p>Hexo 支持 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#iframe">iframe</a>
+的方式插入视频，所示我们可以把视频上传到哔哩哔哩、优酷、腾讯视频等，然后生成外链再拿来用。</p>
 <p>大部分视频网站的外链播放器在视频开头都会加上 30 秒 - 2 分钟的广告，于是选择 B 站，无广告，无广告，无广告！</p>
-<h2 id="去B站获取视频外链">去 B 站获取视频外链</h2>
-<p>选择视频下方 “分享” 里的嵌入代码，而不是视频地址。否则进入 Hexo 博客后，网页会自动跳转到 bilibili 的视频页面，而不是自己的博客页面。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/Copy_bilibili_link.jpg" alt=""></p>
+<h2 id="去b站获取视频外链">去 B 站获取视频外链</h2>
+<p>选择视频下方 “分享” 里的嵌入代码，而不是视频地址。否则进入 Hexo
+博客后，网页会自动跳转到 bilibili 的视频页面，而不是自己的博客页面。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/Copy_bilibili_link.jpg"></p>
 <h2 id="在文章中插入视频外链">在文章中插入视频外链</h2>
-<p>Markdown 中可以直接插入 html 代码，但是 hexo 给我们特意准备了一个 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#Raw">raw</a> 标签来插入 html 代码，防止一些其他因素的干扰，这里我们就使用 raw 来插入视频外链。</p>
+<p>Markdown 中可以直接插入 html 代码，但是 hexo 给我们特意准备了一个 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#Raw">raw</a>
+标签来插入 html 代码，防止一些其他因素的干扰，这里我们就使用 raw 来插入视频外链。</p>
 
 <iframe src="//player.bilibili.com/player.html?aid=90978812&amp;cid=155358422&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <p>因为外链 html 没有和 Hexo 适配，所以在网页上打开，界面靠左并且窗口小，显得很难看，不够大气。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/raw_video_demo.jpg" alt=""></p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/raw_video_demo.jpg"></p>
 <h2 id="美化播放器样式">美化播放器样式</h2>
 <p>这里分享一个很巧妙的偷懒方法，我们可以去 Hexo 的 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官网</a>，看看作者是如何布局的，然后把代码抄回来。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/hexo_pick_up_video_element.jpg" alt=""></p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/hexo_pick_up_video_element.jpg"></p>
 <p>那么，我们只要把布局中的 src，替换为自己的外链地址，就可以设置好视频的布局。</p>
 
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
 <iframe src="//player.bilibili.com/player.html?aid=90978812&amp;cid=155358422&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>
 
 <p>因为简书不支持 iframe，大家可以去我的网站看看效果。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/video_demo.jpg" alt=""></p>
-<h1>References</h1>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/video_demo.jpg"></p>
+<h1 id="references">References</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yimagudao/article/details/89524210">hexo-tag-dplayer</a></li>
-<li><a target="_blank" rel="noopener" href="https://haokan.baidu.com/v?pd=wisenatural&amp;vid=5242915545602714565">hexo 博客插入 B 站视频外链（raw 实现）</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yimagudao/article/details/89524210">hexo-tag-dplayer</a><br>
+</li>
+<li><a target="_blank" rel="noopener" href="https://haokan.baidu.com/v?pd=wisenatural&amp;vid=5242915545602714565">hexo 博客插入 B 站视频外链（raw 实现）</a><br>
+</li>
 <li><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1623914788952059989&amp;wfr=spider&amp;for=pc">Hexo 博客中加入 B 站视频播放器</a></li>
 </ul>
 
@@ -399,34 +406,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>背景</h1>
-<p>当用户点击我们发布的一些旧链接，而 Hexo 的链接都是永久链接，如果该文章被我们删除或者更改了链接，那么用户便会显示 nginx 的 404 页面，这个页面不够友好并且不能帮我们跳转到首页。</p>
-<p>其实，hexo 本身是具备自定义 404 页面的，并且 nginx  会自动拦截并显示指定的 404 Not Found 页面，我们可以通过配置 hexo 和 nginx 来跳转自定义界面。</p>
+          <h1 id="背景">背景</h1>
+<p>当用户点击我们发布的一些旧链接，而 Hexo
+的链接都是永久链接，如果该文章被我们删除或者更改了链接，那么用户便会显示
+nginx 的 404 页面，这个页面不够友好并且不能帮我们跳转到首页。</p>
+<p>其实，hexo 本身是具备自定义 404 页面的，并且 nginx
+会自动拦截并显示指定的 404 Not Found 页面，我们可以通过配置 hexo 和
+nginx 来跳转自定义界面。</p>
 <p>你可以在我的域名下随便修改一个网址，查看自定义 404 页面展示效果，如 <a target="_blank" rel="noopener" href="http://www.yanlongwang.net/123_404">http://www.yanlongwang.net/123_404</a>。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/404_demo.png" alt=""></p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/404_demo.png"></p>
 <blockquote>
 <p>希望新的一年每个家庭都能够幸福美满，充满孩子们的欢声笑语。我也想尽自己的所能，来帮助离家的孩子们能够回到温暖的父母身边。我在今天这个特殊的日子，在自己的博客添加了腾讯 404 公益页面，希望光顾我博客的朋友如果看到 404 页面的时候，能够有现实的意义。每一个孩子都不应该被放弃，如果有万分之一的希望。</p>
 </blockquote>
-<h1>设置 hexo 的 404 页面</h1>
-<ol>
-<li>在 Hexo 命令行执行 </li>
+<h1 id="设置-hexo-的-404-页面">设置 hexo 的 404 页面</h1>
+<ol type="1">
+<li>在 Hexo 命令行执行 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page 404</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page 404</span><br></pre></td></tr></tbody></table></figure>
-<p>那么在 Hexo 的根目录下，创建一个文件夹：\hexo\source\404。</p>
-<ol start="2">
-<li>编辑 <a target="_blank" rel="noopener" href="http://index.md">index.md</a>，自动跳转腾讯公益。</li>
+<p>那么在 Hexo 的根目录下，创建一个文件夹：\404。</p>
+<ol start="2" type="1">
+<li>编辑 index.md，自动跳转腾讯公益。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js"</span> <span class="attr">homePageName</span>=<span class="string">"返回首页"</span> <span class="attr">homePageUrl</span>=<span class="string">"https://www.yanlongwang.net"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span> /&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">title</span>&gt;</span>404<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">         <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"//qzonestyle.gtimg.cn/qzone/hybrid/app/404/search_children.js"</span> <span class="attr">homePageName</span>=<span class="string">"返回首页"</span> <span class="attr">homePageUrl</span>=<span class="string">"https://www.yanlongwang.net"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 <p>其中，修改 homePageUrl 设置为自己的网站主页。</p>
-<ol start="3">
+<ol start="3" type="1">
 <li>重新发布网站</li>
 </ol>
-<h1>设置 nginx 环境以支持 404 页面显示</h1>
-<ol>
-<li>编辑服务器上 nginx 的配置文件，将 error_page 设置为 hexo 的 404 页面。</li>
+<h1 id="设置-nginx-环境以支持-404-页面显示">设置 nginx 环境以支持 404
+页面显示</h1>
+<ol type="1">
+<li>编辑服务器上 nginx 的配置文件，将 error_page 设置为 hexo 的 404
+页面。</li>
 </ol>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## location in /etc/nginx/conf.d/xxx.conf</span><br><span class="line">location / {</span><br><span class="line">   root /your_root;</span><br><span class="line">   index index.html index.htm;</span><br><span class="line">   error_page 404 /404/index.html;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2">
+<ol start="2" type="1">
 <li>重启 nginx 并检查 nginx 状态 </li>
 </ol>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">## 重启 nginx</span><br><span class="line">- systemctl restart nginx </span><br><span class="line">## 检查重启后 nginx 的状态</span><br><span class="line">- nginx -t</span><br><span class="line">  * nginx: the configuration file /etc/nginx/nginx.conf syntax is ok</span><br><span class="line">  * nginx: configuration file /etc/nginx/nginx.conf test is successful</span><br></pre></td></tr></tbody></table></figure>
@@ -530,21 +541,23 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>音标</h1>
+<h1 id="音标">音标</h1>
 <!--![国际音标分类图](Elementary-English-Grammar/international_phonetic_system.jpg)-->
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/international_phonetic_system.jpg" alt="国际音标分类图"></p>
+<figure>
+<img data-src="https://www.yanlongwang.net/downloads/images/blog/international_phonetic_system.jpg" alt="国际音标分类图">
+<figcaption aria-hidden="true">国际音标分类图</figcaption>
+</figure>
 <!--![发音原理](Elementary-English-Grammar/phonetic_categories.jpg)-->
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/phonetic_categories.jpg" alt="发音原理"></p>
+<figure>
+<img data-src="https://www.yanlongwang.net/downloads/images/blog/phonetic_categories.jpg" alt="发音原理">
+<figcaption aria-hidden="true">发音原理 </figcaption>
+</figure>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[音标_48个] --&gt; B(元音音标_20个)</span><br><span class="line">A --&gt; C(辅音音标_28个)</span><br><span class="line">B --&gt; D(元音是构成英文单词发音的基本元素)</span><br><span class="line">D --&gt; E(单元音)</span><br><span class="line">D --&gt; F(双元音)</span><br><span class="line">B --&gt; G(发音时声带振动且气流在通路上不受发音器官阻挡的是元音)</span><br><span class="line">C --&gt; H(发音时气流在通路上受到发音器官阻挡的是辅音)</span><br><span class="line"></span><br><span class="line">G --&gt; I(舌位不移动,在发音过程中没有摩擦,不受发音器官的任何阻碍)</span><br><span class="line">F --&gt; J(双元音的发音要领是发音饱满,舌行和唇形都要到位)</span><br><span class="line">C --&gt; K(辅音依元音而存在,与元音配合产生音节)</span><br><span class="line">H --&gt; L(清辅音)</span><br><span class="line">L --&gt; M(发音时声带不振动,送气的叫清辅音)</span><br><span class="line">H --&gt; N(浊辅音)</span><br><span class="line">N --&gt; O(发音时声带振动,不送气的叫浊辅音)</span><br></pre></td></tr></tbody></table></figure>
 <!-- [PPT点读](https://zhuanlan.zhihu.com/p/28925020) -->
-<h1>名词复数变化及发音规则</h1>
+<h1 id="名词复数变化及发音规则">名词复数变化及发音规则</h1>
 <ul>
-<li>
-<p>一般在词尾加 - s。s 在元音或浊辅音后读 [z]，在清辅音后面读成 [s]，在 [t] 后与 [t] 在一起读成 [ts]，在 [d] 后与 [d] 一起读成 [dz]。</p>
-</li>
-<li>
-<p>以 s, sh, ch, x 结尾的词在词尾加 - es，读 [iz]。</p>
-</li>
+<li><p>一般在词尾加 - s。s 在元音或浊辅音后读 [z]，在清辅音后面读成 [s]，在 [t] 后与 [t] 在一起读成 [ts]，在 [d] 后与 [d] 一起读成 [dz]。</p></li>
+<li><p>以 s, sh, ch, x 结尾的词在词尾加 - es，读 [iz]。</p></li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">watch -&gt; watches  </span><br><span class="line">class -&gt; classes</span><br><span class="line">box -&gt; boxes</span><br></pre></td></tr></tbody></table></figure>
 <ul>
@@ -556,8 +569,7 @@
 <ul>
 <li>以元音字母 + o 结尾的词一律加 - s，读 [z]。</li>
 <li>少数以 o 结尾的词，在词尾加 - es，读 [z]。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tobacco -&gt; tobaccos</span><br><span class="line">radio -&gt; radios</span><br><span class="line">hero -&gt; heroes</span><br><span class="line">tomato -&gt; tomatoes</span><br><span class="line">potato -&gt; potatoes</span><br></pre></td></tr></tbody></table></figure>
 <ul>
@@ -567,35 +579,23 @@
 <ul>
 <li>不规则名词的复数形式
 <ul>
-<li>通过变化单词内部元音字母，构成复杂形式。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man -&gt; men</span><br><span class="line">mouse -&gt; mice</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>单数形式和复数形式相同 </li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheep, deer, Chinese, Japanese</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<li>通过变化单词内部元音字母，构成复杂形式。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">man -&gt; men</span><br><span class="line">mouse -&gt; mice</span><br></pre></td></tr></tbody></table></figure></li>
+<li>单数形式和复数形式相同 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sheep, deer, Chinese, Japanese</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
 </ul>
 <p>Reference to <a target="_blank" rel="noopener" href="https://m.hujiang.com/en/p95953/">沪江英语_名词复数变化及发音规则</a></p>
-<h1>动词第三人称单数的变化规则及发音规律</h1>
+<h1 id="动词第三人称单数的变化规则及发音规律">动词第三人称单数的变化规则及发音规律</h1>
 <ul>
-<li>大多数动词在词尾加 "s"，在清辅音后发音为 [s]，在浊辅音及元音后发音为 [z]。</li>
+<li>大多数动词在词尾加 "s"，在清辅音后发音为 [s]，在浊辅音及元音后发音为 [z]。
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stop -&gt; stops [s] make -&gt; makes [s]</span><br><span class="line">read -&gt; reads [z] play -&gt; plays [z]</span><br></pre></td></tr></tbody></table></figure></li>
+<li>以辅音字母加 "y" 结尾的，要先将 "y" 变为 "i"，然后再加 "es"，读 [iz]。
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly -&gt; flies [iz] carry -&gt; carries [iz]</span><br></pre></td></tr></tbody></table></figure></li>
+<li>以 "s, x, ch, sh" 结尾的，在词尾加 "es"，发音为 [iz]。
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">teach -&gt; teaches [iz] watch -&gt; watches [iz]</span><br></pre></td></tr></tbody></table></figure></li>
+<li>以 "o" 结尾的动词，加 "es"，读 [z]。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go -&gt; goes [z] do -&gt; does [z]</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">stop -&gt; stops [s] make -&gt; makes [s]</span><br><span class="line">read -&gt; reads [z] play -&gt; plays [z]</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>以辅音字母加 "y" 结尾的，要先将 "y" 变为 "i"，然后再加 "es"，读 [iz]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fly -&gt; flies [iz] carry -&gt; carries [iz]</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>以 "s, x, ch, sh" 结尾的，在词尾加 "es"，发音为 [iz]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">teach -&gt; teaches [iz] watch -&gt; watches [iz]</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>以 "o" 结尾的动词，加 "es"，读 [z]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go -&gt; goes [z] do -&gt; does [z]</span><br></pre></td></tr></tbody></table></figure>
 <p>Reference to <a target="_blank" rel="noopener" href="https://www.weibo.com/p/230418864e42750102v7hk?pids=Pl_Official_CardMixFeedv6__4&amp;feed_filter=2">动词第三人称单数的变化规则及发音规律</a></p>
-<h1>动词的过去式、过去分词及发音规则</h1>
+<h1 id="动词的过去式过去分词及发音规则">动词的过去式、过去分词及发音规则</h1>
 <blockquote>
 <p>规则动词的过去分词的构成规则与规则动词的过去式的构成规则相同。</p>
 </blockquote>
@@ -603,47 +603,23 @@
 <ul>
 <li>规则动词的过去式词尾变化有几种：
 <ul>
-<li>一般动词，在词尾直接加 - ed。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watched, planted, watered, pulled, climbed, picked</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>以不发音的 e 结尾的动词，只在词尾加 d。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liked, moved, tasted</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>以 “辅音字母 + y” 结尾的动词，变 y 为 i，再加 ed。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">study —&gt; studied</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>以 1 个元音字母加 1 个辅音字母结尾的重读闭音节，末尾只有一个辅音字母 (r、y、x、w 除外)，先双写该辅音字母，再加 ed。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop -&gt; stopped drop —&gt; dropped</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<li>一般动词，在词尾直接加 - ed。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watched, planted, watered, pulled, climbed, picked</span><br></pre></td></tr></tbody></table></figure></li>
+<li>以不发音的 e 结尾的动词，只在词尾加 d。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liked, moved, tasted</span><br></pre></td></tr></tbody></table></figure></li>
+<li>以 “辅音字母 + y” 结尾的动词，变 y 为 i，再加 ed。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">study —&gt; studied</span><br></pre></td></tr></tbody></table></figure></li>
+<li>以 1 个元音字母加 1 个辅音字母结尾的重读闭音节，末尾只有一个辅音字母 (r、y、x、w 除外)，先双写该辅音字母，再加 ed。
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">stop -&gt; stopped drop —&gt; dropped</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
 </ul>
 <h2 id="发音规则">发音规则</h2>
 <ul>
-<li>在浊辅音和元音后，-ed 读 [d]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lived, watered, listened, played</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>在清辅音后，-ed 读 [t]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liked, helped, watched</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>在 [t],[d] 音后，-ed 读 [id]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">planted, wanted, handed</span><br></pre></td></tr></tbody></table></figure>
-<ul>
+<li>在浊辅音和元音后，-ed 读 [d]。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lived, watered, listened, played</span><br></pre></td></tr></tbody></table></figure></li>
+<li>在清辅音后，-ed 读 [t]。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liked, helped, watched</span><br></pre></td></tr></tbody></table></figure></li>
+<li>在 [t],[d] 音后，-ed 读 [id]。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">planted, wanted, handed</span><br></pre></td></tr></tbody></table></figure></li>
 <li>在 "辅音字母 + y" 结尾后，-ed 读 [ɪd] 或 [aɪd]。
 <ul>
-<li>如果 y 的发音为 [ɪ]，则整体词尾发作 [ɪd]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">studied、carried、hurried</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>如果 y 的发音为 [aɪ]，则整体词尾发作 [aɪd]。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dried、cried、fried</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<li>如果 y 的发音为 [ɪ]，则整体词尾发作 [ɪd]。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">studied、carried、hurried</span><br></pre></td></tr></tbody></table></figure></li>
+<li>如果 y 的发音为 [aɪ]，则整体词尾发作 [aɪd]。 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dried、cried、fried</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
 </ul>
 <p>Reference to <a target="_blank" rel="noopener" href="http://www.59edu.com/xuexiao/primary/201102/23602.html">规则动词的过去式及发音规则</a><br>
 <a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/06ad08d6360cba1aa811dae5.html">动词过去式和过去分词的变化及发音规则</a></p>
@@ -748,41 +724,38 @@
     <div class="post-body" itemprop="articleBody">
           <!--date: 2020-02-06 12:21:22-->
 <p>[toc]</p>
-<h1>What’s zoom</h1>
+<h1 id="whats-zoom">What's zoom</h1>
 <blockquote>
-<p>Zoom offers communications software that combines video conferencing, online meetings, chat, and mobile collaboration. Zoom can be installed on Windows and Linux desktops and mobile devices.</p>
+<p>Zoom offers communications software that combines video conferencing,
+online meetings, chat, and mobile collaboration. Zoom can be installed
+on Windows and Linux desktops and mobile devices.</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://zoom.com.cn/download?os=linux">Zoom’s Linux client</a> allows you to start or join Zoom meetings on Ubuntu, Fedora and many other Linux distributions.</p>
-<h1>How to install zoom</h1>
-<p>The following commands would download the Zoom package for Debian system and install it using the apt package manager.</p>
-<ol>
-<li>Install wget if not installed</li>
+<p><a target="_blank" rel="noopener" href="https://zoom.com.cn/download?os=linux">Zoom's Linux
+client</a> allows you to start or join Zoom meetings on Ubuntu, Fedora
+and many other Linux distributions.</p>
+<h1 id="how-to-install-zoom">How to install zoom</h1>
+<p>The following commands would download the Zoom package for Debian
+system and install it using the apt package manager.</p>
+<ol type="1">
+<li><p>Install wget if not installed </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt -y install wget</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>Download the latest Zoom package </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://zoom.us/client/latest/zoom_amd64.deb</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>Install the zoom package </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ./zoom_amd64.deb</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>Check zoom is installed successfully </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache policy zoom</span><br></pre></td></tr></tbody></table></figure><p></p></li>
 </ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt -y install wget</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2">
-<li>Download the latest Zoom package</li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://zoom.us/client/latest/zoom_amd64.deb</span><br></pre></td></tr></tbody></table></figure>
-<ol start="3">
-<li>Install the zoom package</li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ./zoom_amd64.deb</span><br></pre></td></tr></tbody></table></figure>
-<ol start="4">
-<li>Check zoom is installed successfully</li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache policy zoom</span><br></pre></td></tr></tbody></table></figure>
 <!--copy from apt-cache policy --help-->
-<p>apt-cache queries and displays available information about installed and installable packages, in which policy shows policy settings. The output information has demonstrated the downloaded package has installed successfully.</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zoom:</span><br><span class="line">  Installed: 3.5.352596.0119</span><br><span class="line">  Candidate: 3.5.352596.0119</span><br><span class="line">  Version table:</span><br><span class="line"> *** 3.5.352596.0119 100</span><br><span class="line">        100 /var/lib/dpkg/status</span><br></pre></td></tr></tbody></table></figure>
-<ol start="5">
-<li>Set up zoom in command line</li>
+<p>apt-cache queries and displays available information about installed
+and installable packages, in which policy shows policy settings. The
+output information has demonstrated the downloaded package has installed
+successfully. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">zoom:</span><br><span class="line">  Installed: 3.5.352596.0119</span><br><span class="line">  Candidate: 3.5.352596.0119</span><br><span class="line">  Version table:</span><br><span class="line"> *** 3.5.352596.0119 100</span><br><span class="line">        100 /var/lib/dpkg/status</span><br></pre></td></tr></tbody></table></figure><p></p>
+<ol start="5" type="1">
+<li>Set up zoom in command line <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zoom</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zoom</span><br></pre></td></tr></tbody></table></figure>
-<h1>Reference</h1>
+<h1 id="reference">Reference</h1>
 <p>None.</p>
 <!--
 [在Ubuntu 19.04/18.04、Debian 10/9上安装Zoom的方法](https://ywnz.com/linuxrj/5400.html)
 -->
+
       
     </div>
 
@@ -882,7 +855,7 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>What’s boost?</h1>
+<h1 id="whats-boost">What's boost?</h1>
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://www.boost.org/">Boost</a> 是为 C++ 语言标准库提供扩展的一些 C++ 程序库的总称。Boost 库是一个可移植、提供源代码的 C++ 库，作为标准库的后备，是 C++ 标准化进程的开发引擎之一，是为 C++ 语言标准库提供扩展的一些 C++ 程序库的总称。</p>
 </blockquote>
@@ -890,37 +863,49 @@
 <p>Boost 由于其对跨平台的强调，对标准 C++ 的强调，与编写平台无关。但 Boost 中也有很多是实验性质的东西，在实际的开发中使用<strong>需要谨慎</strong>。</p>
 </blockquote>
 <blockquote>
-<p>The Boost license encourages both commercial and non-commercial use.</p>
+<p>The Boost license encourages both commercial and non-commercial
+use.</p>
 </blockquote>
-<h2 id="Boost-Geometry"><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/index.html">Boost.Geometry</a></h2>
+<h2 id="boost.geometry"><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/index.html">Boost.Geometry</a></h2>
 <blockquote>
-<p>Boost.Geometry (aka Generic Geometry Library, GGL), part of collection of the Boost C++ Libraries, defines concepts, primitives and algorithms for solving geometry problems. / Boost.Geometry 用于解决几何问题的概念、原语和算法。</p>
+<p>Boost.Geometry (aka Generic Geometry Library, GGL), part of
+collection of the Boost C++ Libraries, defines concepts, primitives and
+algorithms for solving geometry problems. / Boost.Geometry
+用于解决几何问题的概念、原语和算法。</p>
 </blockquote>
-<h1>Functions</h1>
-<h2 id="Geometry">Geometry</h2>
-<h3 id="Reference"><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/geometry/reference.html">Reference</a></h3>
+<h1 id="functions">Functions</h1>
+<h2 id="geometry">Geometry</h2>
+<h3 id="reference"><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/geometry/reference.html">Reference</a></h3>
 <h4 id="buffer"><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/geometry/reference/algorithms/buffer/buffer_7_with_strategies.html">buffer</a></h4>
 <blockquote>
-<p>Calculates the buffer (a polygon being the spatial point set collection within a specified maximum distance from a geometry) of a geometry. / 通俗点，在原有形状的外围加上指定距离的边界，形成新的几何形状。</p>
+<p>Calculates the buffer (a polygon being the spatial point set
+collection within a specified maximum distance from a geometry) of a
+geometry. /
+通俗点，在原有形状的外围加上指定距离的边界，形成新的几何形状。</p>
 </blockquote>
-<p><img data-src="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/img/algorithms/buffer_strategies.png" alt="一图胜千言"></p>
+<figure>
+<img data-src="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/img/algorithms/buffer_strategies.png" alt="一图胜千言">
+<figcaption aria-hidden="true">一图胜千言 </figcaption>
+</figure>
 <h4 id="difference"><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/geometry/reference/algorithms/difference/difference_3.html">difference</a></h4>
 <blockquote>
-<p>Calculates the spatial set theoretic difference of two geometries. / 计算两个图形的差异。</p>
+<p>Calculates the spatial set theoretic difference of two geometries. /
+计算两个图形的差异。</p>
 </blockquote>
-<p><img data-src="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/img/algorithms/difference_b.png" alt=""></p>
+<p><img data-src="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/img/algorithms/difference_b.png"></p>
 <h4 id="simplify"><a target="_blank" rel="noopener" href="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/geometry/reference/algorithms/simplify/simplify_3.html">simplify</a></h4>
 <blockquote>
 <p>Simplify a geometry. / 简化一个几何图形，比如减少曲线的端点数。</p>
 </blockquote>
-<p><img data-src="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/svg_simplify_country.png" alt=""></p>
-<h1>Others</h1>
+<p><img data-src="https://www.boost.org/doc/libs/1_70_0/libs/geometry/doc/html/svg_simplify_country.png"></p>
+<h1 id="others">Others</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiangxianghehe/article/details/79013034">Linux 下查看 Boost 版本</a></li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dpkg -S /usr/include/boost/version.hpp</span><br><span class="line"></span><br><span class="line">// or</span><br><span class="line"></span><br><span class="line">vim /usr/include/boost/version.hpp  // without dpkg</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>复习: Run “dpkg --help” in Linux, 可以查看 "-S|--search <pattern>  Find package(s) owning file(s)".</pattern></p>
+<p>复习: Run "dpkg --help" in Linux, 可以查看 "-S|--search <pattern> Find
+package(s) owning file(s)".</pattern></p>
 </blockquote>
 
       
@@ -1022,66 +1007,83 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>背景</h1>
+<h1 id="背景">背景</h1>
 <p>大多数读者比较害羞，不喜欢留言，这样子就不方便自己从读者角度评价博客文章的质量，希望在网站增加投票的功能，方便读者留下评价和反馈。</p>
 <p>多平台维护不易，最新文章更新于 <a href="http://www.waylon.one/website/website-voting/">个人网站</a>，欢迎访问和留言。</p>
-<p>网站的 NexT 主题，已默认集成 <strong>WidgetPack</strong> 的 Rating widget，在主题文件夹下的 _config.yml 的 rating 字段就可见相关默认配置。</p>
+<p>网站的 NexT 主题，已默认集成 <strong>WidgetPack</strong> 的 Rating
+widget，在主题文件夹下的 _config.yml 的 rating
+字段就可见相关默认配置。</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># Star rating support to each article.</span><br><span class="line"># To get your ID visit https://widgetpack.com</span><br><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br><span class="line"># ---------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
 <p>总体而言，NexT 已经默认集成了 WidgetPack 的 Ratingwidget，要启用 Ratingwidget，只需要在 WidgetPack.com 注册后添加站点，获得 ID 后，修改 NexT 主题配置文件 rating 字段内容即可。目前，WidgetPack 对个人用户提供了部分免费功能，可以满足个人博客网站的需求。</p>
-<h1>什么是 WidgetPack</h1>
-<p><a target="_blank" rel="noopener" href="https://widgetpack.com/">Widget Pack</a> makes it easy to add website widgets like comments, reviews, rating to your Blog, Online Shop or Website in minutes.</p>
+<h1 id="什么是-widgetpack">什么是 WidgetPack</h1>
+<p><a target="_blank" rel="noopener" href="https://widgetpack.com/">Widget Pack</a> makes it easy to
+add website widgets like comments, reviews, rating to your Blog, Online
+Shop or Website in minutes.</p>
 <blockquote>
-<p>While using this Site, you may need to feed-in personal information that can be used to contact or identify you (“Personal Information”). Personal Information may include, but is not limited to, some unique characteristics that disclose your personality, such as: name, email, photo, likes and dislikes.<br>
-WidgetPack web-servers automatically track and store Site usage data. This information is liable to include, but is not limited to, your computer’s IP. Along other sites, WidgetPack also uses “cookies” to collect such information. A cookie is an essential data file that is stored on your computer hard drive for record-keeping purposes allowing saving your registration ID and login password for prospective logins to WidgetPack Site; “session ID cookies” enable certain features of the Site providing authentication, identification of a user session, session contents and some other preferences.<br>
-You can tweak your browser by changing its options to stop accepting cookies or to prompt you before accepting a cookie from the websites you visit. If you do not accept cookies, however, you may not be able to use some of the Site’s features or all the functionalities of our services.</p>
+<p>While using this Site, you may need to feed-in personal information
+that can be used to contact or identify you (“Personal Information”).
+Personal Information may include, but is not limited to, some unique
+characteristics that disclose your personality, such as: name, email,
+photo, likes and dislikes. WidgetPack web-servers automatically track
+and store Site usage data. This information is liable to include, but is
+not limited to, your computer’s IP. Along other sites, WidgetPack also
+uses “cookies” to collect such information. A cookie is an essential
+data file that is stored on your computer hard drive for record-keeping
+purposes allowing saving your registration ID and login password for
+prospective logins to WidgetPack Site; “session ID cookies” enable
+certain features of the Site providing authentication, identification of
+a user session, session contents and some other preferences. You can
+tweak your browser by changing its options to stop accepting cookies or
+to prompt you before accepting a cookie from the websites you visit. If
+you do not accept cookies, however, you may not be able to use some of
+the Site’s features or all the functionalities of our services.</p>
 </blockquote>
-<p>简而言之，Widget Pack 会在得到授权的情况下，自动跟踪和存储你在某些网站上留下的个人信息 (邮箱、IP、cookies) 等，方便快捷地为一些博客、购物网站提供评价、留言和投票等小插件功能。</p>
+<p>简而言之，Widget
+Pack 会在得到授权的情况下，自动跟踪和存储你在某些网站上留下的个人信息 (邮箱、IP、cookies) 等，方便快捷地为一些博客、购物网站提供评价、留言和投票等小插件功能。</p>
 <p>目前，WidgetPack 对个人用户提供了部分免费功能，一个网址和一个 moderator，可以满足个人博客网站的需求。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_price_plan.jpg" alt=""></p>
-<h1>配置过程</h1>
-<h2 id="获取ID">获取 ID</h2>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_price_plan.jpg"></p>
+<h1 id="配置过程">配置过程</h1>
+<h2 id="获取id">获取 ID</h2>
 <ul>
-<li>点击 <a target="_blank" rel="noopener" href="https://widgetpack.com/star-rating-widget">Widgetpack.com</a> 链接注册，可以获得获取用户 ID。</li>
-<li>在 “Add new site” 中，填入网站地址和名称，会生成 Rating Widget 安装代码，如下所示。</li>
+<li>点击 <a target="_blank" rel="noopener" href="https://widgetpack.com/star-rating-widget">Widgetpack.com</a>
+链接注册，可以获得获取用户 ID。</li>
+<li>在 “Add new site” 中，填入网站地址和名称，会生成 Rating
+Widget 安装代码，如下所示。</li>
 </ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/add_new_site.jpg" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/add_new_site.jpg"></p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wpac-rating"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">wpac_init = window.wpac_init || [];</span><br><span class="line">wpac_init.push({widget: 'Rating', id: your_id}); # your_id 为注册生成的ID</span><br><span class="line">(function() {</span><br><span class="line">    if ('WIDGETPACK_LOADED' in window) return;</span><br><span class="line">    WIDGETPACK_LOADED = true;</span><br><span class="line">    var mc = document.createElement('script');</span><br><span class="line">    mc.type = 'text/javascript';</span><br><span class="line">    mc.async = true;</span><br><span class="line">    mc.src = 'https://embed.widgetpack.com/widget.js';</span><br><span class="line">    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);</span><br><span class="line">})();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://widgetpack.com"</span> <span class="attr">class</span>=<span class="string">"wpac-cr"</span>&gt;</span>Star Rating WIDGET PACK<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>以上安装代码已默认集成到 /hexo/themes/next/layout/_third-party/rating.swig 文件中，所以除了确认下 <strong>ID</strong>，或者使用默认的 <strong><a target="_blank" rel="noopener" href="http://theme.rating.id">theme.rating.id</a></strong>, 不需要其他操作。</p>
+<p>以上安装代码已默认集成到
+/hexo/themes/next/layout/_third-party/rating.swig
+文件中，所以除了确认下 <strong>ID</strong>，或者使用默认的
+<strong>theme.rating.id</strong>, 不需要其他操作。</p>
 <h2 id="设置投票方式">设置投票方式</h2>
 <p>在网站上，在侧边栏可以选择统计 Rating 的方式。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/set_rating_display.jpg" alt=""></p>
-<p>目前网站有三种方式可选，目标读者是国内的话，建议采用 Device，我是选择 IP Address。</p>
-<ul>
-<li>Social</li>
-<li>IP Address</li>
-<li>Device(Cookie)</li>
-</ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/vota_setting.jpg" alt=""></p>
-<h2 id="Hexo-配置">Hexo 配置</h2>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/set_rating_display.jpg"></p>
+<p>目前网站有三种方式可选，目标读者是国内的话，建议采用 Device，我是选择
+IP Address。 - Social - IP Address - Device (Cookie)</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/vota_setting.jpg"></p>
+<h2 id="hexo-配置">Hexo 配置</h2>
 <p>NexT 主题配置文件 _config.yml 中 rating 的默认设置如下：</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br></pre></td></tr></tbody></table></figure>
-<p>仅需要将设置 enable 改为 true，把 #&lt;app_id&gt; 替换为 <a target="_blank" rel="noopener" href="http://widgetpack.com">widgetpack.com</a> 上生成的 ID。</p>
-<h1>网站效果预览</h1>
+<p>仅需要将设置 enable 改为 true，把 #&lt;app_id&gt; 替换为
+widgetpack.com 上生成的 ID。</p>
+<h1 id="网站效果预览">网站效果预览</h1>
 <ul>
-<li>
-<p>桌面浏览器效果<br>
-<img data-src="http://www.waylon.one/downloads/images/blog/voting_demo.jpg" alt=""></p>
-</li>
-<li>
-<p>手机浏览器效果<br>
-<img data-src="http://www.waylon.one/downloads/images/blog/rating_demo_phone.png" alt=""></p>
-</li>
+<li><p>桌面浏览器效果 <img data-src="http://www.waylon.one/downloads/images/blog/voting_demo.jpg"></p></li>
+<li><p>手机浏览器效果 <img data-src="http://www.waylon.one/downloads/images/blog/rating_demo_phone.png"></p></li>
 </ul>
-<h1>投票监控</h1>
+<h1 id="投票监控">投票监控</h1>
 <p>登录你的网站后，可以监控投票反馈情况，以及对某些投票进行管理，示意如下:</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_monitor.jpg" alt=""></p>
-<h1>Reference</h1>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_monitor.jpg"></p>
+<h1 id="reference">Reference</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/61d9d46935e3">Hexo 上 NexT 主题配置 WidgetPack 的 Rating widget 文章投票功能</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/61d9d46935e3">Hexo 上 NexT 主题配置 WidgetPack 的 Rating
+widget 文章投票功能</a></li>
 </ul>
 <hr>
 <p>如果文章对你有帮助，请为我投票哦！如果有任何疑问，欢迎留言讨论。<br>
-If the article helps you, please vote for me. If you have any questions, please do not hesitate to discuss with me!</p>
+If the article helps you, please vote for me. If you have any questions,
+please do not hesitate to discuss with me!</p>
 
       
     </div>
@@ -1183,12 +1185,17 @@ If the article helps you, please vote for me. If you have any questions, please 
     <div class="post-body" itemprop="articleBody">
           <!--date: 2020-12-27 19:01:51-->
 <p>[toc]</p>
-<p><img data-src="/downloads/images/feed_on_poor.jpg" alt="饱食穷民封面"></p>
-<p>《饱食穷民》是一本纪实文学题材，在日本上市已经有近二十五年的时间，书中所述的事情也已经过去了三十多年，但是又和中国现在发生在我们身边的一些社会现象有着惊人的相似之处，比如<strong>小微借贷</strong>，<strong>加班</strong>和<strong>厌食</strong>等，这在 30 多年前的日本已经司空见惯。</p>
-<p>读这本书，可以通过时空错位来借鉴 20 多年前发生在日本的事情，现在也发生在我们身边。以史为镜，可以照出我们自己得与失，值得我好好思考和借鉴。</p>
-<h1>作者简介</h1>
+<figure>
+<img data-src="/downloads/images/feed_on_poor.jpg" alt="饱食穷民封面">
+<figcaption aria-hidden="true">饱食穷民封面</figcaption>
+</figure>
+<p>《饱食穷民》是一本纪实文学题材，在日本上市已经有近二十五年的时间，书中所述的事情也已经过去了三十多年，但是又和中国现在发生在我们身边的一些社会现象有着惊人的相似之处，比如<strong>小微借贷</strong>，<strong>加班</strong>和<strong>厌食</strong>等，这在
+30 多年前的日本已经司空见惯。</p>
+<p>读这本书，可以通过时空错位来借鉴 20
+多年前发生在日本的事情，现在也发生在我们身边。以史为镜，可以照出我们自己得与失，值得我好好思考和借鉴。</p>
+<h1 id="作者简介">作者简介</h1>
 <p>本书的作者，斋藤茂男，是日本著名新闻记者，同时也是一名广为人知的<strong>纪实文学作家</strong>。在以超人般的精力从事记者工作的同时，作者至一九九四年间由岩波书店出版的十二本纪实文学作品集《日本世相》系列，不仅是他从二十世纪七十年代到九十年代记者生涯的集大成之作，同时也是一幅刻画了日本社会从经济高速增长时期直到泡沫经济破灭的真实写照。这本《饱食穷民》是纪实文学《日本世相》系列的作品之一。</p>
-<h1>时代背景</h1>
+<h1 id="时代背景">时代背景</h1>
 <p>这本《饱食穷民》所记录的时代背景，正是二十世纪八十年代中期到九十年代的这段时间。在这个时期，日本成功挺过石油危机、日元升值等一连串的 “国难”，还化 “国难” 为动力，成功收获众多世界第一的勋章，跃居超级经济大国之列。</p>
 <p>在欣欣向荣的表象下，作者通过一系列的采访，描述了社会底层的人民虽然解决了温饱问题，但是却在借贷、加班和厌食中痛苦，不知满足，迷失了自己。</p>
 <!--
@@ -1202,39 +1209,44 @@ If the article helps you, please vote for me. If you have any questions, please 
 <!-- 至一九九四年间由岩波书店出版的十二本纪实文学作品集《日本世相》系列，不仅是他从二十世纪七十年代到九十年代记者生涯的集大成之作，同时也是一幅刻画了日本社会从经济高速增长时期直到泡沫经济破灭的真实写照。这本《饱食穷民》即是纪实文学《日本世相》系列的作品之一。
 -->
 <hr>
-<p>注：文章后面的内容大部分摘录自《饱食穷民》，MC 后面的内容是我新增的。</p>
-<h1>关于《日本世相》</h1>
+<p>注：文章后面的内容大部分摘录自《饱食穷民》，MC
+后面的内容是我新增的。</p>
+<h1 id="关于日本世相">关于《日本世相》</h1>
 <p>饱食穷民描述的时代和现在的中国很像，经济高速发展，房价飞涨，跃居超级经济大国之列。那个阶段，所有人都陷入一个巨大装置，努力把时间变为金钱，被强迫着，要更快、更有效率地活着，哪怕超越身体极限，时时刻刻，一分一秒都不能错过。这节奏让我们无法按照自然时间生活，过有生命力的生活，只感觉身心俱疲，不停被压榨。</p>
 <ul>
-<li>MC: 我使用 阶段 这个名词来描绘 20 年前的日本，因为我认为这可能是每一个国家崛起的必经过程，和时间的关系并不大。</li>
+<li>MC: 我使用 阶段 这个名词来描绘 20
+年前的日本，因为我认为这可能是每一个国家崛起的必经过程，和时间的关系并不大。</li>
 </ul>
-<h1>序章 走向世纪末</h1>
+<h1 id="序章-走向世纪末">序章 走向世纪末</h1>
 <ul>
 <li>洛克希德事件案发，日本首相田中角荣被捕。
 <ul>
-<li>MC：洛克希德公司是当时美国最大的飞机制造公司和军火供应商之一，该公司主要是依靠行贿打开国外市场的，因此，美国的许多飞机制造商向美国参议院外交委员会跨国公司小组进行了举报。日本检察官从中发现了一张领受人为田中角荣的 5 亿日元的收据。法院认定田中角荣违犯外汇法、受托受贿，判处其四年徒刑，罚金 5 亿日元。这起日本历史上旷日持久的马拉松审判，在历时 19 年，耗资 6 亿日元后，终于落下帷幕。</li>
-</ul>
-</li>
+<li>MC：洛克希德公司是当时美国最大的飞机制造公司和军火供应商之一，该公司主要是依靠行贿打开国外市场的，因此，美国的许多飞机制造商向美国参议院外交委员会跨国公司小组进行了举报。日本检察官从中发现了一张领受人为田中角荣的
+5
+亿日元的收据。法院认定田中角荣违犯外汇法、受托受贿，判处其四年徒刑，罚金
+5 亿日元。这起日本历史上旷日持久的马拉松审判，在历时 19 年，耗资 6
+亿日元后，终于落下帷幕。</li>
+</ul></li>
 <li>苏联切尔诺贝利核电站事故发生，世界陷入不安。
 <ul>
-<li>MC：切尔诺贝利核电站位于前苏联基辅市北 130 公里的地方，是前苏联 1973 年开始修建，1977 年启动的最大的核电站。1986 年 4 月 26 日，世界上最严重的核事故在苏联切尔诺贝利核电站发生。</li>
-</ul>
-</li>
-<li>1987 年房价一年飙升三倍。日本国营铁道和日本航空民营化改革。空前的理财热潮，股价暴跌。
+<li>MC：切尔诺贝利核电站位于前苏联基辅市北 130 公里的地方，是前苏联 1973
+年开始修建，1977 年启动的最大的核电站。1986 年 4 月 26
+日，世界上最严重的核事故在苏联切尔诺贝利核电站发生。</li>
+</ul></li>
+<li>1987
+年房价一年飙升三倍。日本国营铁道和日本航空民营化改革。空前的理财热潮，股价暴跌。
 <ul>
 <li>MC: 这个阶段可能类似于 08 ~ 15 年的中国，房地产价格飞涨。</li>
-</ul>
-</li>
+</ul></li>
 <li>以新增消费税为主要内容的税收改革法案在临时国会获通过。<strong>经济以内需为中心持续走高</strong>。
 <ul>
-<li>MC: 现在的中国提出 “构建以<strong>国内大循环</strong>为主体、国内国际双循环相互促进的新发展格局”，貌似和这个阶段相似。现在的房地产已经耗干了每个家庭的消费能力，经济内需怎么促进呢？现阶段的反垄断、数字税等，是否可以算作消费税的另一种形式呢？</li>
-</ul>
-</li>
+<li>MC:
+现在的中国提出 “构建以<strong>国内大循环</strong>为主体、国内国际双循环相互促进的新发展格局”，貌似和这个阶段相似。现在的房地产已经耗干了每个家庭的消费能力，经济内需怎么促进呢？现阶段的反垄断、数字税等，是否可以算作消费税的另一种形式呢？</li>
+</ul></li>
 <li>德国实现统一，正式结束分裂历史。
 <ul>
 <li>MC：1990 年发生的事情，东德西德统一，距离我们并不遥远。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <h2 id="不会珍爱自己的人们">不会珍爱自己的人们</h2>
 <!--
@@ -1247,29 +1259,25 @@ If the article helps you, please vote for me. If you have any questions, please 
 <ul>
 <li>这无疑让人联想到这样一幅画面：<strong>竞争和生产效率至上主义的齿轮正奏响嘎吱嘎吱的旋律，日夜压榨着每一个人</strong>。
 <ul>
-<li>MC：能否对应到现在 “降本增效” 的阶段。裁员的压力下，每一个人被 KPI 压得喘不过气来。</li>
-</ul>
-</li>
+<li>MC：能否对应到现在 “降本增效” 的阶段。裁员的压力下，每一个人被 KPI
+压得喘不过气来。</li>
+</ul></li>
 </ul>
 <!--
 - 日本和欧美先进资本主义国家在劳动时间长度上存在的差异，已经成为众所周知的事实。而且这一结论，还是基于日本劳动省的官方统计数据得出的。
 -->
 <ul>
-<li>
-<p>如今，私营电视台也纷纷推出《直播到天明》这种深夜节目，满街都是 24 小时营业的便利店，整个社会都逐渐朝着 “24 小时不夜城” 方向发展。就像纽约、伦敦等大都市一样，成功跻身国际金融中心之列的东京在信息、经济上和国外往来越来越紧密。由于时差的关系，越来越多的写字楼到了夜晚也灯火通明。</p>
-</li>
-<li>
-<p><strong>本应以改善公司业务为目的的微电子化，反而将前所未有的高精度管理的手段指向了公司员工</strong>。效率至上的管理系统创造出巨大财富的生产系统，开始了对人类的报复。第一盏红灯，亮给了人类的健康。</p>
+<li><p>如今，私营电视台也纷纷推出《直播到天明》这种深夜节目，满街都是 24
+小时营业的便利店，整个社会都逐渐朝着 “24
+小时不夜城” 方向发展。就像纽约、伦敦等大都市一样，成功跻身国际金融中心之列的东京在信息、经济上和国外往来越来越紧密。由于时差的关系，越来越多的写字楼到了夜晚也灯火通明。</p></li>
+<li><p><strong>本应以改善公司业务为目的的微电子化，反而将前所未有的高精度管理的手段指向了公司员工</strong>。效率至上的管理系统创造出巨大财富的生产系统，开始了对人类的报复。第一盏红灯，亮给了人类的健康。</p>
 <ul>
 <li>我们就像是骑在一辆随时会倒下的独轮车上，感受到背后不断逼近的不安，非得骑到把自己累倒，不死不休。</li>
-</ul>
-</li>
-<li>
-<p>现在是寻呼机时代。计算机技术人员无论假期还是深夜，都会因为机器故障和维护被叫去公司工作。</p>
+</ul></li>
+<li><p>现在是寻呼机时代。计算机技术人员无论假期还是深夜，都会因为机器故障和维护被叫去公司工作。</p>
 <ul>
 <li>MC: 现在手机时代，不限于程序员，打工人正常的休息都没有了。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <!--
 - 对于电视台的所有节目来说，收视率是可以左右节目存亡的数据。在这个行业，收视率越是上涨，目标就越是水涨船高。
@@ -1278,36 +1286,27 @@ If the article helps you, please vote for me. If you have any questions, please 
 <li>少数资产家把持着一路狂涨的土地，贪得无厌地增殖手中的资产，导致贫富差距越拉越大。
 <ul>
 <li>在这样一个挥汗劳动不如坐收利息的社会，人心没有不走向疯狂的道理。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1>饱食穷民</h1>
+<h1 id="饱食穷民">饱食穷民</h1>
 <h2 id="无处可逃的男人">无处可逃的男人</h2>
 <ul>
-<li>
-<p>公司每年都会制定更高的目标，我们每年都必须超额完成公司的目标才行。在这种制度下，无论你怎么拼命，都永远不会有解脱的那天。</p>
-<!--MC：有一点像现在的 issue 数量，无论你如何辛苦地去修复，总是会有更多的问题反馈，不死不休。-->
-</li>
-<li>
-<p>小微贷为了多收利息，放款的数额通常大于借款人申请的金额。</p>
+<li><p>公司每年都会制定更高的目标，我们每年都必须超额完成公司的目标才行。在这种制度下，无论你怎么拼命，都永远不会有解脱的那天。</p>
+<!--MC：有一点像现在的 issue 数量，无论你如何辛苦地去修复，总是会有更多的问题反馈，不死不休。--></li>
+<li><p>小微贷为了多收利息，放款的数额通常大于借款人申请的金额。</p>
 <ul>
 <li>放款人通常会通过抬举借款人的方式，麻痹他们的神经，怂恿他们多借，最后酿成严重的后果。
 <ul>
-<li>MC: 这种做法在现在的小微贷款也很普遍，互联网平台总是会借给你更多的钱，额度远远超过你的需求。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>这些公司打着‘XX 大作战’的旗号，喊出大家齐心协力达成目标之类的口号，或是提高士气，或是鼓励员工互相竞争，甚至在公司内制造出员工皆兄弟这种氛围，这其实也是人力管理的方法之一。</p>
+<li>MC:
+这种做法在现在的小微贷款也很普遍，互联网平台总是会借给你更多的钱，额度远远超过你的需求。</li>
+</ul></li>
+</ul></li>
+<li><p>这些公司打着‘XX 大作战’的旗号，喊出大家齐心协力达成目标之类的口号，或是提高士气，或是鼓励员工互相竞争，甚至在公司内制造出员工皆兄弟这种氛围，这其实也是人力管理的方法之一。</p>
 <ul>
 <li>归根结底，在这种所有员工‘人人有责’的制度中，一旦一个人遭遇失败，就会陷入严重的孤独感和失落感之中，认为自己给同事造成了麻烦和损失，从而产生自责的情绪。</li>
-</ul>
-</li>
-<li>
-<p>公司在不停强调要我们 “学会独立思考”，但每天都被销售指标穷追不舍的员工，又哪里有时间读书、思考呢？</p>
-<!--MC:上级老板总是让我们工作时要有长远的规划，但是加班加点干不完，哪里有远方呢？-->
-</li>
+</ul></li>
+<li><p>公司在不停强调要我们 “学会独立思考”，但每天都被销售指标穷追不舍的员工，又哪里有时间读书、思考呢？</p>
+<!--MC:上级老板总是让我们工作时要有长远的规划，但是加班加点干不完，哪里有远方呢？--></li>
 </ul>
 <!--
 
@@ -1315,83 +1314,63 @@ If the article helps you, please vote for me. If you have any questions, please 
 -->
 <h2 id="梦想之城">梦想之城</h2>
 <ul>
-<li>
-<p>在父亲的劝说下，祐二郎中学毕业后，也不得不过上了烧炭挣钱的日子。每天早上五点起床之后，要走上两个小时的山路。弟弟砍树，把树干锯成一段一段的，哥哥去炭窑把锯好的木头烧成炭。烧好的炭，每十五公斤捆成一大捆，然后每个人背四捆下山。年纪才十五岁的少年本来身体就不壮实，要背负六十公斤的木炭下山，其中辛苦，可想而知。每走两三百米，就要靠在石头上休息一次，喘过气来后再走两三百米…… 如此循环往复。</p>
-<!--MC：和小时候家里的描述差不多，自己积极参与鸽子养殖活动。反思下小时候的自己，又何尝不是这样子，难道自己现在丧失了奋斗吃苦的精神了吗？-->
-</li>
-<li>
-<p>工作第二年，他把母亲接到东京来旅游。看着满面笑容的母亲，他心里得意极了。</p>
-<!--MC: 自己也是这样的做法，工作后第一次让父母来北京。-->
-</li>
-<li>
-<p>从某些角度看，<strong>保险合同总量的激增正反映了人们心中的不安</strong>。</p>
-</li>
+<li><p>在父亲的劝说下，祐二郎中学毕业后，也不得不过上了烧炭挣钱的日子。每天早上五点起床之后，要走上两个小时的山路。弟弟砍树，把树干锯成一段一段的，哥哥去炭窑把锯好的木头烧成炭。烧好的炭，每十五公斤捆成一大捆，然后每个人背四捆下山。年纪才十五岁的少年本来身体就不壮实，要背负六十公斤的木炭下山，其中辛苦，可想而知。每走两三百米，就要靠在石头上休息一次，喘过气来后再走两三百米…… 如此循环往复。</p>
+<!--MC：和小时候家里的描述差不多，自己积极参与鸽子养殖活动。反思下小时候的自己，又何尝不是这样子，难道自己现在丧失了奋斗吃苦的精神了吗？--></li>
+<li><p>工作第二年，他把母亲接到东京来旅游。看着满面笑容的母亲，他心里得意极了。</p>
+<!--MC: 自己也是这样的做法，工作后第一次让父母来北京。--></li>
+<li><p>从某些角度看，<strong>保险合同总量的激增正反映了人们心中的不安</strong>。</p></li>
 </ul>
-<h2 id="我要买！买！买！">我要买！买！买！</h2>
+<h2 id="我要买买买">我要买！买！买！</h2>
 <ul>
-<li>
-<p>信贷消费真正开始快速增长，其实是在石油危机后的<strong>低增长时代</strong>。不光卖方需要变本加厉地提升市场的消费欲望，买方也是，<strong>一方面面临实际收入的减少，而另一方面却希望维持现有生活和消费水平，不愿让步</strong>。</p>
+<li><p>信贷消费真正开始快速增长，其实是在石油危机后的<strong>低增长时代</strong>。不光卖方需要变本加厉地提升市场的消费欲望，买方也是，<strong>一方面面临实际收入的减少，而另一方面却希望维持现有生活和消费水平，不愿让步</strong>。</p>
 <ul>
 <li>咱们都生活在大量消费的社会之中，<strong>刺激欲望的宣传像洪水一样席卷着我们</strong>。面对这一大潮，我们甚至来不及思考就被卷入其中。</li>
 <li>MC：中国逐步进入低增长时代，现在内循环是经济主要增长动力；那么，社会和政府也会不遗余力地促进消费，但是我们要限制借贷消费，警惕实际购买能力下降。</li>
-</ul>
-</li>
-<li>
-<p>我们公司的主要业务是销售和租赁复印机。在这次出事之前，公司和一家信贷公司达成合作，信贷公司给我们介绍客户，而我们公司的员工需要用他们公司的信用卡。</p>
-<!--MC: 公司内部经常需要做其他企业的优惠活动，实际也并不便宜，比如波司登的内购，莫非也是类似交易？ -->
-</li>
-<li>
-<p><strong>很多女性平时心中都有一种空虚感，不断寻求能够满足自己的东西</strong>。有时候刚好赶上身体状态的变化，就很容易无法控制购物消费的冲动，会大量购买衣服等物品。这种心理，有时候还会以别的形式体现出来，比如喝酒、吃东西等。</p>
+</ul></li>
+<li><p>我们公司的主要业务是销售和租赁复印机。在这次出事之前，公司和一家信贷公司达成合作，信贷公司给我们介绍客户，而我们公司的员工需要用他们公司的信用卡。</p>
+<!--MC: 公司内部经常需要做其他企业的优惠活动，实际也并不便宜，比如波司登的内购，莫非也是类似交易？ --></li>
+<li><p><strong>很多女性平时心中都有一种空虚感，不断寻求能够满足自己的东西</strong>。有时候刚好赶上身体状态的变化，就很容易无法控制购物消费的冲动，会大量购买衣服等物品。这种心理，有时候还会以别的形式体现出来，比如喝酒、吃东西等。</p>
 <ul>
 <li>夫妻关系虽然表面上很好，甚至看上去十分融洽，但其实妻子想要和丈夫享受更多二人世界的需求却不能实现，又没办法率直坦诚地向丈夫表达心中的诉求。还有就是夫妻关系整体十分淡薄，没有<strong>构成两人相互支撑的关系</strong>。这时，妻子就很容易变得需要依靠物质来填补心中的空虚。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <h2 id="美满生活">美满生活</h2>
 <ul>
-<li>
-<p>虽然像我这样的人根本算不上什么中产阶级，但我心中多少总有一些仿佛是中产阶级般的感觉。想着既然别人都去夏威夷，那我也得去夏威夷。别人有的东西，我当然也想买，别人去旅游，那我也得去旅游，想过上高质量的生活…… 你说对吧？我承认确实有虚荣心在里面。</p>
+<li>虽然像我这样的人根本算不上什么中产阶级，但我心中多少总有一些仿佛是中产阶级般的感觉。想着既然别人都去夏威夷，那我也得去夏威夷。别人有的东西，我当然也想买，别人去旅游，那我也得去旅游，想过上高质量的生活…… 你说对吧？我承认确实有虚荣心在里面。
 <ul>
 <li>MC：警惕陷入消费危机，中产陷阱。消费不攀比，量入为出。</li>
+</ul></li>
+<li>一开始，我对她还有一些不解和轻蔑，认为这个女人的金钱观和脑子都有问题，然而听着她的倾诉，又渐渐觉得<strong>她就像一个身坠陷阱的小动物，沉湎于虚假繁荣的生活中不能自拔</strong>，甚至开始对她抱有一些同情。</li>
 </ul>
-</li>
-<li>
-<p>一开始，我对她还有一些不解和轻蔑，认为这个女人的金钱观和脑子都有问题，然而听着她的倾诉，又渐渐觉得<strong>她就像一个身坠陷阱的小动物，沉湎于虚假繁荣的生活中不能自拔</strong>，甚至开始对她抱有一些同情。</p>
-</li>
-</ul>
-<h2 id="X先生的对话">X 先生的对话</h2>
+<h2 id="x先生的对话">X 先生的对话</h2>
 <ul>
 <li>所谓‘细民’，是指有固定工作的社会底层的一般工人阶层。‘贫民’是属于没有固定工作的城市杂工阶层。而‘穷民’，则是指老弱病残等无力维持生计的赤贫阶层。</li>
 <li>究竟贫困在哪些方面呢？
 <ul>
 <li>首先，是在经济上没有可以依靠的储蓄。
 <ul>
-<li>缺少‘储蓄’的不安，还有另一层意义。<strong>一个人从根本上赖以生存的最终手段 – 技术、技能、知识、判断能力，也许一夜之间就会被彻底推翻</strong>。现代人心中的这种不安，都在日渐膨胀。</li>
-</ul>
-</li>
+<li>缺少‘储蓄’的不安，还有另一层意义。<strong>一个人从根本上赖以生存的最终手段
+--
+技术、技能、知识、判断能力，也许一夜之间就会被彻底推翻</strong>。现代人心中的这种不安，都在日渐膨胀。</li>
+</ul></li>
 <li>物质和精神的双重折磨，是现代贫困的一大特征。</li>
-</ul>
-</li>
+</ul></li>
 <li>现代社会中能够作为滋润人的 “水”，换而言之对人们来说最为重要的又是什么呢？X 先生这样告诉我们：“<strong>我们所在的资本主义社会中，企业既无情也无义，只会一味追求利益，这个社会中，资本一面不停增值，一面彼此之间还会不断竞争</strong>。刺激企业追求利益的冲动、经济的冲动不停侵蚀人们的生活，压垮、吞噬并统治生活本身…… 我认为，这就是当今社会的特质。
 <ul>
 <li>就连我们的生活，也遭到了经济原理的彻底占领…… 所以，<strong>人们开始变得像企业一样对经济活动愈发敏感，甚至可以说人类已经被改造成了金钱和物质统治下的行尸走肉</strong>。所谓经济活动原本是指人们曾经为了糊口而进行的耕田、狩猎等为生活动。<strong>虽然经济是支撑人们生活的重要基础，但其本身不是我们活着的目的</strong>。</li>
-</ul>
-</li>
-<li>X 先生说，<strong>生活第一，经济是支撑生活的基础</strong> – 这本应该是再理所当然不过的道理，然而不知不觉之间，已经变得本末颠倒，因此我们有必要对其进行重新审视。</li>
+</ul></li>
+<li>X 先生说，<strong>生活第一，经济是支撑生活的基础</strong> --
+这本应该是再理所当然不过的道理，然而不知不觉之间，已经变得本末颠倒，因此我们有必要对其进行重新审视。</li>
 <li>拓展自己的能力、不断成长发展，满足实现自我的欲望。</li>
 <li><strong>如果每个人的个人世界中，不能够充分地、均衡地满足上述多种多样的欲望，那么无论我们的宪法多么强调和平和人权的重要性，我们也会忘记是非善恶，忘记我们应该齐心协力实现的目标，无法做出正确的判断</strong>。我们在战争中付出了惨烈的代价才得到的民主主义，不就是为了让每个人都能够发展自己的人性、实现幸福生活的国家体制吗？</li>
 </ul>
-<h1>快节奏的城市</h1>
+<h1 id="快节奏的城市">快节奏的城市</h1>
 <h2 id="魔性附身">魔性附身</h2>
 <ul>
-<li>
-<p>巴士里塞满了一看便知是 “高科技战士” 的上班族。他们把公文包垫在膝盖上，手里举着经济类报纸，耳朵里插着耳机，一言不发…… 这就是现在随处可见的、面目整齐划一的男人们的生活状态。</p>
-<!--MC: 上班族的众生相。北京的 13 号线早高峰，随处可见戴耳机看手机，表情呆板的现代人，毫无生气和热情。-->  
-</li>
-<li>
-<p>公司将系统工程师和程序员等精锐部队调集于此，再加上外包公司派来的援军，以人海战术来推进这个项目。</p>
-<!--MC: 和现在中国的人力分配和思路如出一辙。现在项目攻坚，大家聚到一起果然效率比较高。-->
-</li>
+<li><p>巴士里塞满了一看便知是 “高科技战士” 的上班族。他们把公文包垫在膝盖上，手里举着经济类报纸，耳朵里插着耳机，一言不发…… 这就是现在随处可见的、面目整齐划一的男人们的生活状态。</p>
+<!--MC: 上班族的众生相。北京的 13 号线早高峰，随处可见戴耳机看手机，表情呆板的现代人，毫无生气和热情。--></li>
+<li><p>公司将系统工程师和程序员等精锐部队调集于此，再加上外包公司派来的援军，以人海战术来推进这个项目。</p>
+<!--MC: 和现在中国的人力分配和思路如出一辙。现在项目攻坚，大家聚到一起果然效率比较高。--></li>
 </ul>
 <!--
 - 现在，社会上都对计算机技术人员抱有成见，认为他们性格沉闷无趣。很多女性甚至单纯地将从业者和黑客、阴暗、性格变态等标签画上等号。当然，你的谈吐也十分无聊。
@@ -1401,93 +1380,73 @@ If the article helps you, please vote for me. If you have any questions, please 
 - 不知道他说的这些，是所谓“新新人类”们所共通的生活方式，还是这群工程师日夜陪伴计算机这一现代魔性“生物”所造就的特有性格。
 -->
 <ul>
-<li>技术应激（technostress）：这个词最早来自美国临床心理学家克雷格・布罗德（Craig Brod）所提出的的概念。这一概念本来有两个意思：
+<li>技术应激（technostress）：这个词最早来自美国临床心理学家克雷格・布罗德（Craig
+Brod）所提出的的概念。这一概念本来有两个意思：
 <ul>
 <li>一是指中老年人对于计算机的排斥症状。现在，各个公司都争相导入计算机办公系统，很多人跟不上计算机化的脚步，但又不得不用计算机办公…… 对于计算机的不安、恐怖，给他们带来了很大的心理压力。
 <ul>
 <li>但是最近几年，这种 “计算机排斥症” 不断减少，反而是人们对计算机的过度适应症状开始显现出来。</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>系统工程师们的宿命，就是面对性格冥顽不灵又不知变通的计算机，在终端的屏幕前一边自问自答，一边重新组织逻辑关系、修改错误，孤身奋战。问题解决、计算机正常工作后的成就感就越大。每当这时，“冥顽不灵的倔老头” 仿佛摇身一变，成了 “顺从又听话的老好人”。好多人都说 “对机器越来越爱不释手”，或是有 “人马合一的快感”。估计就是这种感觉。
 <ul>
 <li>当人和计算机之间产生了上面这种亲密关系后，每当离开计算机，人心中都会产生不安。这种对计算机过度适应的心理状态，就是所谓的技术应激。
 <ul>
 <li><strong>没有感情、无论何时都会正确无误地回应人类的计算机，就会比受感情左右的人类好处得多。相比之下，人际交往就会显得越发麻烦。这样发展的结果，就是越来越厌恶和人交往，逐渐走向自闭，失去鲜活水润的感情</strong>。</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>如果出现问题，就会停下来思考，然后再次输入自己设计的逻辑，电脑马上又会输出结果。这种你来我往的过招实在太有趣了，渐渐地，这种趣味就会像毒品一样作用于你的身体。这样一来，无论你在终端机前坐几个小时，身体都不会觉得疲劳。只要是软件技术人员，无论是谁几乎都会有相同的感觉。</li>
 <li>计算机领域的工作一方面富于创造性和趣味性，另一方面却无时无刻都需要面对被时代追赶的压力。
 <ul>
 <li>开发计算机软件的工作会刺激人对知识的好奇心，独具趣味。不仅如此，每名工程师编程都有其独特的个性，如果有一百名工程师同时开发一个系统，那这个系统中就会有一百种独具个性的程序。软件开发就是这样一种富于创造性和个性的工作。</li>
 <li><strong>每个工程师都要面对自身技术落后于时代的不安</strong>。<strong>编程是一项十分麻烦的工作，所以才会有人说，工程师三十五岁就得退休</strong>。工程师拼的不光是知识，到最后决定胜负的其实是腕力和体力。
 <ul>
-<li>MC: 现在流行的程序员 35 岁就退休，原来在 80 年代就已经在日本流行起来。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>计算机的世界里，不是 1 就是 0，不是正确就是错误，不是黑就是白。所谓的‘中间’‘灰色’‘暧昧地带’是不存在的。
+<li>MC: 现在流行的程序员 35 岁就退休，原来在 80
+年代就已经在日本流行起来。</li>
+</ul></li>
+</ul></li>
+<li>计算机的世界里，不是 1 就是
+0，不是正确就是错误，不是黑就是白。所谓的‘中间’‘灰色’‘暧昧地带’是不存在的。
 <ul>
 <li>从早到晚面对计算机，在沉重的心理压力下，连思考方式都要和机器合一。</li>
-</ul>
-</li>
+</ul></li>
 <li>将浪费压缩到最低，不断寻求到达目标的捷径。越是陷入这种思考模式，和计算机的对话就越是顺利。但是，这样却会导致和人的交往越发空虚、冷漠。
 <ul>
 <li>这样下去的话，和其他人的交往就会越来越少，视野也会越来越窄。<strong>大家的脑子有九成都被电脑占领了，对于政治、社会之类的越发淡漠，至于文学、戏剧什么的就更是像火星人的活动，连想都不会去想</strong>。这样每天都面对计算机，<strong>虽然技术会有所提高，但作为一个人是没有成长的</strong>。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <h2 id="人心的变化">人心的变化</h2>
 <ul>
-<li>
-<p>计算机的世界里，一切不合逻辑的事情绝无容身之地。当她在这样一个 “逻辑社会” 中待久了，就会<strong>对不合逻辑的事情、没有客观根据的事情产生极强的抵触情绪</strong>。</p>
+<li><p>计算机的世界里，一切不合逻辑的事情绝无容身之地。当她在这样一个 “逻辑社会” 中待久了，就会<strong>对不合逻辑的事情、没有客观根据的事情产生极强的抵触情绪</strong>。</p>
 <ul>
 <li>“但是，如果转行干别的…… 放眼望去其他的行业我都觉得十分无聊。就好像我做的工作比他们那些普通人都要高端，我比他们都高一个层次。不知不觉之间，我已经变得这么高傲自大、藐视别人了。连我自己都特别厌恶这样的自己……”</li>
 <li><strong> 因为计算机只能接受 “非黑即白” 这种二元对立型的逻辑，所以和计算机接触的人类的思维模式也会被计算机 “改造”，变得越来越像计算机</strong>。</li>
-</ul>
-</li>
-<li>
-<p>在 “职业” 一栏填 “家庭主妇” 的女性，其实也有很多在做各自的副业。比如，利用年轻时在国外居住的经历开个外语班，教小孩子们外语，或者从国外代购一些高级生活用品之类的。</p>
+</ul></li>
+<li><p>在 “职业” 一栏填 “家庭主妇” 的女性，其实也有很多在做各自的副业。比如，利用年轻时在国外居住的经历开个外语班，教小孩子们外语，或者从国外代购一些高级生活用品之类的。</p>
 <ul>
 <li>MC：现在的副业，斜杠青年好多从事的也是类似工作。原来现在所谓的代购，一点都不新鲜，只不过工具和方式适应了时代发生变化而已。</li>
-</ul>
-</li>
-<li>
-<p>计算机软件行业从业者每天都在和计算机独处，工作强度很高，日复一日、年复一年。听说在这样的公司里，经常能够听到有人发出野兽一般的吼叫。也许就在<strong>他们每天压抑着人类的感情波动、一心只求自己的思维能够和计算机同步</strong>的同时，心中也会存留着重做人类的欲望。</p>
-<!--MC：作为软件行业从业者，没有发现这样的事情，但是身边的同事，经常说 fuck 的语言。 -->
-</li>
-<li>
-<p>我们人类究竟在通过计算机追求什么呢？归根结底，还是‘缩短时间’这一永无止境的任务。我们的工作就是使用各种技术，不断寻找缩短处理问题的时间的方法。</p>
-</li>
+</ul></li>
+<li><p>计算机软件行业从业者每天都在和计算机独处，工作强度很高，日复一日、年复一年。听说在这样的公司里，经常能够听到有人发出野兽一般的吼叫。也许就在<strong>他们每天压抑着人类的感情波动、一心只求自己的思维能够和计算机同步</strong>的同时，心中也会存留着重做人类的欲望。</p>
+<!--MC：作为软件行业从业者，没有发现这样的事情，但是身边的同事，经常说 fuck 的语言。 --></li>
+<li><p>我们人类究竟在通过计算机追求什么呢？归根结底，还是‘缩短时间’这一永无止境的任务。我们的工作就是使用各种技术，不断寻找缩短处理问题的时间的方法。</p></li>
 </ul>
 <h2 id="自闭化的社会">自闭化的社会</h2>
 <ul>
-<li>
-<p>在考察 “计算机与人” 的关系的时候，最重要的视角在于这个人是在一个怎样的现实体验中获得人生的成长。</p>
+<li><p>在考察 “计算机与人” 的关系的时候，最重要的视角在于这个人是在一个怎样的现实体验中获得人生的成长。</p>
 <ul>
 <li>如果心灵的体验十分贫乏、人格不够健全的话，就不会在面对美丽的自然景观时感到喜悦，也不会在看到艺术品后心灵像受到涤荡一样产生清爽的向往。或者说，<strong>这种向往已经干涸，只能对工作后的成就感产生快感</strong>。</li>
-</ul>
-</li>
-<li>
-<p>技术应激这一发生在软件技术人员身上的典型症状 – 比如凡事都要用二元对立的思维分出是非黑白，或者因为计算机对人类顺从、忠诚好相处，而厌恶和有感情的人类打交道等心理现象 – 是由于他们本身就具备容易产生这种症状的人格，才能在计算机的影响下诱发心理上的异变。</p>
-</li>
-<li>
-<p>计算机会煽动人们的求知欲和好奇心，将逻辑的快乐像 “毒品” 一样注入我们的身体。在 “毒品” 的召唤下，人们和计算机的感情愈发亲密的同时，和他人之间的关系却变得空洞化。</p>
-<!--MC:我们宁可在家无聊看剧，玩手机，也懒得出去和朋友聚一聚。 -->
-</li>
-<li>
-<p>我们人类获得生存价值感有两个条件：一是<strong>职业活动中的成就感</strong>，另一个是<strong>人际关系中获得亲密性带来的满足感</strong>。然而现代工业社会却强迫人们仅通过职业活动的成就感去获得人生的满足。极端来说，就是只要有工作，其他什么都无所谓了，根本无暇顾及排解寂寞、充实自己等方面的需求。</p>
-</li>
-<li>
-<p>家长在养育孩子的时候，<strong>太过情绪化地关心孩子</strong>、给孩子过高的期待，反而会<strong>忽视孩子所需的关爱和心理上的其他需求</strong>，让孩子对人类的感情产生抗拒心理，厌恶和他人打交道。</p>
+</ul></li>
+<li><p>技术应激这一发生在软件技术人员身上的典型症状 --
+比如凡事都要用二元对立的思维分出是非黑白，或者因为计算机对人类顺从、忠诚好相处，而厌恶和有感情的人类打交道等心理现象
+--
+是由于他们本身就具备容易产生这种症状的人格，才能在计算机的影响下诱发心理上的异变。</p></li>
+<li><p>计算机会煽动人们的求知欲和好奇心，将逻辑的快乐像 “毒品” 一样注入我们的身体。在 “毒品” 的召唤下，人们和计算机的感情愈发亲密的同时，和他人之间的关系却变得空洞化。</p>
+<!--MC:我们宁可在家无聊看剧，玩手机，也懒得出去和朋友聚一聚。 --></li>
+<li><p>我们人类获得生存价值感有两个条件：一是<strong>职业活动中的成就感</strong>，另一个是<strong>人际关系中获得亲密性带来的满足感</strong>。然而现代工业社会却强迫人们仅通过职业活动的成就感去获得人生的满足。极端来说，就是只要有工作，其他什么都无所谓了，根本无暇顾及排解寂寞、充实自己等方面的需求。</p></li>
+<li><p>家长在养育孩子的时候，<strong>太过情绪化地关心孩子</strong>、给孩子过高的期待，反而会<strong>忽视孩子所需的关爱和心理上的其他需求</strong>，让孩子对人类的感情产生抗拒心理，厌恶和他人打交道。</p>
 <ul>
 <li>在体验现实的过程中充实自己的心灵。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <!--
 - 学历 -- 走入社会的通行证。
@@ -1498,202 +1457,124 @@ If the article helps you, please vote for me. If you have any questions, please 
 <li>虽然他们表面上可以与人对话，但话题全都是些新出的汽车，或者哪个饭店的法国菜好吃什么的。也就是说，他们说出来的不过是‘信息’而已。
 <ul>
 <li><strong>他们认为只要能交换信息、看起来能说得上话，就是所谓的人际关系</strong>。但其实，明朗快活只是肤浅的表面现象，<strong>他们的关系只停留在高高兴兴地交换信息而已</strong>。</li>
-</ul>
-</li>
-</ul>
-</li>
+</ul></li>
+</ul></li>
 <li>最近很多父母甚至认为 “最好尽量避免感情的波澜，过平稳、顺利的生活才是幸福的家庭”。越来越多的家庭中，夫妇之间、亲子之间简直就像陌生人一样，所有人都只是<strong>表演着幸福的家庭</strong>而已。</li>
 <li>我们每一个人，就像一个个顺从的精密部件一样，被组装、吸纳进计算机系统里面，逐渐变成机器。对于这点，我们就像患了感觉迟钝症一样，完全没有抗拒。</li>
 </ul>
-<h1>呕吐的女人</h1>
+<h1 id="呕吐的女人">呕吐的女人</h1>
 <h2 id="狂乱的独角戏">狂乱的独角戏</h2>
 <ul>
-<li>
-<p>她看起来不擅长用语言描述自己的感觉，用的也都是些类似 “快感”“轻松的感觉”“幸福的感觉” 这种平淡无奇的词语。交流之中，我看到了她无法与人分享自己感受的遗憾。</p>
+<li><p>她看起来不擅长用语言描述自己的感觉，用的也都是些类似 “快感”“轻松的感觉”“幸福的感觉” 这种平淡无奇的词语。交流之中，我看到了她无法与人分享自己感受的遗憾。</p>
 <ul>
 <li>MC: 无法清楚表达自己的感情和直觉，也是一种缺失和遗憾。</li>
-</ul>
-</li>
-<li>
-<p>幼儿园老师们的话语中透露出了这样的担忧：将孩子看作一个无法替代的生命，无条件地倾注自己的一切，通过最原始最坦诚的爱，全面接受孩子的一切 —— 这样的家长在如今社会里越来越少了。</p>
+</ul></li>
+<li><p>幼儿园老师们的话语中透露出了这样的担忧：将孩子看作一个无法替代的生命，无条件地倾注自己的一切，通过最原始最坦诚的爱，全面接受孩子的一切 —— 这样的家长在如今社会里越来越少了。</p>
 <ul>
 <li>有一个老师甚至说，家长们的眼神 “十分冰冷，<strong>无时无刻不在将自己的孩子和别的孩子的能力进行比较</strong>”。
 <ul>
 <li>MC: 我们对孩子的爱，开始附加条件，不是纯粹的爱。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>因为她的母亲是一个情感比较淡漠，但十分理智的人，所以仅仅停留在从理智上理解孩子，而非用自己的心灵去全面地接受孩子。大概是她做不到这点吧。</p>
-</li>
-<li>
-<p>母亲作为一名女性，也存在依赖丈夫、希望从丈夫那里得到关爱的心理。然而对于这些需要扮演父亲角色的母亲来说，她们的这种心理需求非但得不到满足，反而要压抑自己对于关爱的需求，一个人面对生活中的一切。而只有她们在夫妻关系中获得满足，有一个稳定的内心世界，才能对自己的孩子倾注充分的母爱……</p>
-<!--MC: 爱是相互影响和促进的东西。你对妻子倾注的爱减少了，可能妻子对家庭的爱也会减少。-->
-</li>
-<li>
-<p>孩子和双亲之一关系过度亲密，形成了 “模拟夫妇” 的关系，而另一方家庭成员却始终缺席。这种关系不仅限于母女，也有父女形成 “模拟夫妇” 的情况。</p>
-</li>
-<li>
-<p>对于从刚出生到三岁的婴儿来说，母亲是一个能够接受、包容一切的依存对象。而等孩子成长到需要规范行为的教育阶段，母亲就会禁止某些行为，变成一个只能包容部分的依存对象。通过这个过程，<strong>能够包容自己的母亲和不能包容自己的母亲合二为一，成为一个完整的母亲形象</strong>。但是，如果一开始没有一个能够彻底依存的对象，孩子就会不停地寻求这样一个缺失的对象……</p>
-</li>
-<li>
-<p>心理专家们对这一现象的看法其实并不统一，而且他们都默契地表示自己的解释 “仅仅是假设”，回避确定性的回答。在这种情况下我的选择只有一个，就是尽可能多倾听各方面的意见。</p>
-<!--MC：在没有明确答案的情况下，尽量多倾听是一个不错的主意。-->
-</li>
-<li>
-<p>没有影子的、半透明的生物一样的女人们，一个接一个地出现在深深的海底，飘摇在蓝白色的光亮之中，随后消失。</p>
-</li>
-<li>
-<p>这一切都是她<strong>不断勉强自己、通过挑战极限状态才得来的结果。而她对自己的要求又高得离谱，不愿接受未达标的自己</strong>。如果这时她能够承认自己的失败，退出这个死循环，就能获得解脱，但她又不甘心认输，才会把自己弄成一副皮包骨头的病态模样，<strong>让别人以为她是因为身患疾病才没有成就更高的发展</strong>。</p>
-<!--MC: 坦然而言，自己目前的状态，也可能是不断勉强自己、通过挑战极限状态才得来的结果。自己并不是非常聪明，但是通过刻苦和认知换来现在的状态，现在仍然不肯认输。-->
-</li>
-<li>
-<p>很多像她这样的患者都接受不了原原本本的自己，而是希望<strong>通过控制和加工自己获得社会认同</strong>。然而她们这样做并非仅仅想获得社会的好评，而是在苦苦寻求一个能够原原本本接受自己的存在。</p>
+</ul></li>
+</ul></li>
+<li><p>因为她的母亲是一个情感比较淡漠，但十分理智的人，所以仅仅停留在从理智上理解孩子，而非用自己的心灵去全面地接受孩子。大概是她做不到这点吧。</p></li>
+<li><p>母亲作为一名女性，也存在依赖丈夫、希望从丈夫那里得到关爱的心理。然而对于这些需要扮演父亲角色的母亲来说，她们的这种心理需求非但得不到满足，反而要压抑自己对于关爱的需求，一个人面对生活中的一切。而只有她们在夫妻关系中获得满足，有一个稳定的内心世界，才能对自己的孩子倾注充分的母爱……</p>
+<!--MC: 爱是相互影响和促进的东西。你对妻子倾注的爱减少了，可能妻子对家庭的爱也会减少。--></li>
+<li><p>孩子和双亲之一关系过度亲密，形成了 “模拟夫妇” 的关系，而另一方家庭成员却始终缺席。这种关系不仅限于母女，也有父女形成 “模拟夫妇” 的情况。</p></li>
+<li><p>对于从刚出生到三岁的婴儿来说，母亲是一个能够接受、包容一切的依存对象。而等孩子成长到需要规范行为的教育阶段，母亲就会禁止某些行为，变成一个只能包容部分的依存对象。通过这个过程，<strong>能够包容自己的母亲和不能包容自己的母亲合二为一，成为一个完整的母亲形象</strong>。但是，如果一开始没有一个能够彻底依存的对象，孩子就会不停地寻求这样一个缺失的对象……</p></li>
+<li><p> 心理专家们对这一现象的看法其实并不统一，而且他们都默契地表示自己的解释 “仅仅是假设”，回避确定性的回答。在这种情况下我的选择只有一个，就是尽可能多倾听各方面的意见。</p>
+<!--MC：在没有明确答案的情况下，尽量多倾听是一个不错的主意。--></li>
+<li><p>没有影子的、半透明的生物一样的女人们，一个接一个地出现在深深的海底，飘摇在蓝白色的光亮之中，随后消失。</p></li>
+<li><p>这一切都是她<strong>不断勉强自己、通过挑战极限状态才得来的结果。而她对自己的要求又高得离谱，不愿接受未达标的自己</strong>。如果这时她能够承认自己的失败，退出这个死循环，就能获得解脱，但她又不甘心认输，才会把自己弄成一副皮包骨头的病态模样，<strong>让别人以为她是因为身患疾病才没有成就更高的发展</strong>。</p>
+<!--MC: 坦然而言，自己目前的状态，也可能是不断勉强自己、通过挑战极限状态才得来的结果。自己并不是非常聪明，但是通过刻苦和认知换来现在的状态，现在仍然不肯认输。--></li>
+<li><p>很多像她这样的患者都接受不了原原本本的自己，而是希望<strong>通过控制和加工自己获得社会认同</strong>。然而她们这样做并非仅仅想获得社会的好评，而是在苦苦寻求一个能够原原本本接受自己的存在。</p>
 <ul>
 <li>一般人都会量体裁衣，而她却反过来削足适履，不断按照社会上的价值观来改造自己、强迫自己，<strong>自我肯定的意识</strong>非常淡薄。</li>
-</ul>
-</li>
-<li>
-<p><strong>学历、地位、财产 – 那些一切都以超一流为目标不断拼搏，又对社会顶层心存强烈执念的人们，双眼总被这一目标蒙蔽，到最后心中只剩下无限的空虚</strong>。</p>
-</li>
+</ul></li>
+<li><p><strong>学历、地位、财产 --
+那些一切都以超一流为目标不断拼搏，又对社会顶层心存强烈执念的人们，双眼总被这一目标蒙蔽，到最后心中只剩下无限的空虚</strong>。</p></li>
 </ul>
 <h2 id="为妻为女">为妻为女</h2>
 <ul>
-<li>
-<p>海岬像一双温柔的臂膀，从两侧环抱着这个小小的海湾。岸边绿、红、黄、白的房屋，就像鲜花一样点缀着海湾。</p>
-</li>
-<li>
-<p>回国之后，有一天他忽然向我求婚…… 还说不久之后，可能会被公司派去国外工作，让我跟他一起出国，去国外的大学读研究生，所以要赶紧把英语学好…… 那时候我也觉得可以跟他组建一个温暖的家庭，之后要是能跟他一起去美国留学就更好了。心中对未来充满了憧憬……</p>
-</li>
+<li><p>海岬像一双温柔的臂膀，从两侧环抱着这个小小的海湾。岸边绿、红、黄、白的房屋，就像鲜花一样点缀着海湾。</p></li>
+<li><p>回国之后，有一天他忽然向我求婚…… 还说不久之后，可能会被公司派去国外工作，让我跟他一起出国，去国外的大学读研究生，所以要赶紧把英语学好…… 那时候我也觉得可以跟他组建一个温暖的家庭，之后要是能跟他一起去美国留学就更好了。心中对未来充满了憧憬……</p></li>
 </ul>
 <h2 id="两个自己">两个自己</h2>
 <ul>
-<li>
-<p>虽然女人们都认为自己想要瘦下来是出于自己的审美，但实际上，我认为这是她们已经彻底被男性占主导地位的社会价值观所吞噬、所洗脑的结果。</p>
-</li>
-<li>
-<p>人类有控制他人的欲望。有人通过依赖去控制他人，也有人如果不被人依赖就会心神不宁、坐立难安。所谓依赖共生关系，就是指这两者之间所构成的依赖和被依赖的关系，或者说是统治与被统治的关系。</p>
+<li><p>虽然女人们都认为自己想要瘦下来是出于自己的审美，但实际上，我认为这是她们已经彻底被男性占主导地位的社会价值观所吞噬、所洗脑的结果。</p></li>
+<li><p>人类有控制他人的欲望。有人通过依赖去控制他人，也有人如果不被人依赖就会心神不宁、坐立难安。所谓依赖共生关系，就是指这两者之间所构成的依赖和被依赖的关系，或者说是统治与被统治的关系。</p>
 <ul>
 <li>在依赖共生的同时，为了填补无法完全控制对方时所产生的寂寞、愤怒、渴望等负面感情，就会产生对食物、酒精、药物的依赖，进而染指赌博、滥交、浪费等行为。</li>
 <li>所谓依赖共生关系，是<strong>指一个通过让对方依赖自己而控制对方的人，和一个通过依赖对方来控制对方的人之间所形成的依赖与被依赖的人际关系成瘾</strong>。形成这种关系的两个人会无止境地向对方索取，通常会形成互相憎恶却无法分开、互相蔑视却不能缺少对方的局面，重复着爱恨纠缠的悲剧。</li>
-</ul>
-</li>
-<li>
-<p>江津子和上班族的丈夫两人住在这样一个 “人工” 的小镇。虽然已经结婚三年，但<strong>大概是因为还没有小孩，这个年轻的主妇脸上还留着些许学生气</strong>。</p>
-<!--MC: 这是对我和 XM 的贴切描述。-->
-</li>
-<li>
-<p>我们人类，每一个人都是一个无法替代的生命，都是一个不可以通过容貌、能力、地位来排序的、独一无二的宝贵存在。或许我们可以将其称为 “人类观”，一种发自内心的尊崇个性、尊敬并爱护人类的价值观。</p>
-</li>
+</ul></li>
+<li><p>江津子和上班族的丈夫两人住在这样一个 “人工” 的小镇。虽然已经结婚三年，但<strong>大概是因为还没有小孩，这个年轻的主妇脸上还留着些许学生气</strong>。</p>
+<!--MC: 这是对我和 XM 的贴切描述。--></li>
+<li><p>我们人类，每一个人都是一个无法替代的生命，都是一个不可以通过容貌、能力、地位来排序的、独一无二的宝贵存在。或许我们可以将其称为 “人类观”，一种发自内心的尊崇个性、尊敬并爱护人类的价值观。</p></li>
 </ul>
 <!--
 - 让我们想象一下，她在不安的驱使下，在午后空无一人的房间里沉默地吞咽东西的样子。她的身影仿佛向我们讲述着被剥夺了在闲暇中享受时间之乐趣的时代悲哀。
 -->
-<h1>后记</h1>
+<h1 id="后记">后记</h1>
 <ul>
-<li>
-<p>现在这个词的意义，就只剩下被人们忘却的无色无味、不痛不痒的每一天，像一座无人的工厂一样在那里毫无意义地空转而已。</p>
-</li>
-<li>
-<p>日本人工作到死的过程，不仅是为了 “垃圾” 而工作的过程，同时也是<strong>通过大量生产、大量消费垃圾，来维持饱食繁荣</strong>的现状的过程。</p>
-</li>
-<li>
-<p>通过将容器改成铝制，销售方式也从人卖给人变成了自动售货机贩卖。自动售货机的生产量飞速增长，以至于现在存量已超二百五十万台，可以说是遍布全国。</p>
-<!--MC：现在自动售货机才在中国普及开来，中国现在并不领先多少。-->
-</li>
-<li>
-<p>为了维持生产和消费的节奏我们拼命地工作，同时大量进口制造垃圾的能源 – 石油。</p>
-</li>
-<li>
-<p>我们真的可以乘坐着这样一艘被充满欺瞒的 “垃圾” 和泡沫托着的破船，漫无目的地航行在茫茫大海上吗？</p>
-</li>
+<li><p>现在这个词的意义，就只剩下被人们忘却的无色无味、不痛不痒的每一天，像一座无人的工厂一样在那里毫无意义地空转而已。</p></li>
+<li><p>日本人工作到死的过程，不仅是为了 “垃圾” 而工作的过程，同时也是<strong>通过大量生产、大量消费垃圾，来维持饱食繁荣</strong>的现状的过程。</p></li>
+<li><p>通过将容器改成铝制，销售方式也从人卖给人变成了自动售货机贩卖。自动售货机的生产量飞速增长，以至于现在存量已超二百五十万台，可以说是遍布全国。</p>
+<!--MC：现在自动售货机才在中国普及开来，中国现在并不领先多少。--></li>
+<li><p>为了维持生产和消费的节奏我们拼命地工作，同时大量进口制造垃圾的能源
+-- 石油。</p></li>
+<li><p>我们真的可以乘坐着这样一艘被充满欺瞒的 “垃圾” 和泡沫托着的破船，漫无目的地航行在茫茫大海上吗？</p></li>
 </ul>
-<h2 id="追踪采访-寂寥的穷民们漂泊依旧">追踪采访 寂寥的穷民们漂泊依旧</h2>
+<h2 id="追踪采访-寂寥的穷民们漂泊依旧">追踪采访
+寂寥的穷民们漂泊依旧</h2>
 <ul>
-<li>
-<p>现代市民受到暴力压迫的情况少了很多，然而，<strong>严格的评价制度取代了暴力对人进行管理，并依据人的 “质量” 进行阶层划分</strong>。社会的评价制度在内化后形成了人们的自我评价，使<strong>人们自觉主动地将自己客体化</strong>，并努力成为对他者（社会）来说的 “优质产品”。</p>
+<li><p>现代市民受到暴力压迫的情况少了很多，然而，<strong>严格的评价制度取代了暴力对人进行管理，并依据人的 “质量” 进行阶层划分</strong>。社会的评价制度在内化后形成了人们的自我评价，使<strong>人们自觉主动地将自己客体化</strong>，并努力成为对他者（社会）来说的 “优质产品”。</p>
 <ul>
 <li>MC：作者的文笔和思考准确，描述出了当下社会的一个现实截面。</li>
-</ul>
-</li>
-<li>
-<p><strong>所有人都在希求一个没有评价和监视、情绪和身体能不受到伤害的安全地带</strong>。然而，学校不是这样的地方，家庭也不是，那人们的安全地带究竟在哪里呢？只要人们不安的根源不消除，这种病症就不会根除，只会继续增加。</p>
+</ul></li>
+<li><p><strong>所有人都在希求一个没有评价和监视、情绪和身体能不受到伤害的安全地带</strong>。然而，学校不是这样的地方，家庭也不是，那人们的安全地带究竟在哪里呢？只要人们不安的根源不消除，这种病症就不会根除，只会继续增加。</p>
 <ul>
 <li>对于男性来说，公司是一个像母体一样的地方。公司就像是他们的母亲。再反观女性，不光无时无刻都活在来自男性的评价之中，就<strong>连与生俱来无法改变的长相都要被人残酷地挑剔</strong>。所以，就算她们想通过拒食和过食寻求短暂的退化，也是完全可以理解的。</li>
-</ul>
-</li>
-<li>
-<p>她们的<strong>父亲过度适应公司的工作，沉湎于提高效率、增加利润的行为，除了工作以外对其他事物全无任何兴趣</strong>，可以说是脑子里被灌输了工作程序的 “机器人” 职员。她们的母亲为这样的丈夫奉献一切，只能在对孩子的过度关怀中寻求自己的价值，也是脑子里被灌输了如此价值观的贤妻良母 “机器人”。这些女性都是在这样一对对依赖共生关系下的 “机器人” 家庭里长大，按照事先安排好的剧本走进良好的学校，成为贤妻良母，被驱赶着走上设计好的、没有坎坷的人生，然而她们一定看破了其中虚伪的本质。也没关系嘛…… <strong>现在的社会连人们的愤怒都能吸收，让其烟消云散</strong>。人们迷失了自己真正的需要。现在对日本职业足球联赛的狂热给人一种很是虚伪的感觉，就像是人为炒起来的一样。<strong>我们就是这样被看不见的暴力驯服成一群忘记愤怒、没有力气的优良市民</strong>。</p>
+</ul></li>
+<li><p>她们的<strong>父亲过度适应公司的工作，沉湎于提高效率、增加利润的行为，除了工作以外对其他事物全无任何兴趣</strong>，可以说是脑子里被灌输了工作程序的 “机器人” 职员。她们的母亲为这样的丈夫奉献一切，只能在对孩子的过度关怀中寻求自己的价值，也是脑子里被灌输了如此价值观的贤妻良母 “机器人”。这些女性都是在这样一对对依赖共生关系下的 “机器人” 家庭里长大，按照事先安排好的剧本走进良好的学校，成为贤妻良母，被驱赶着走上设计好的、没有坎坷的人生，然而她们一定看破了其中虚伪的本质。也没关系嘛…… <strong>现在的社会连人们的愤怒都能吸收，让其烟消云散</strong>。人们迷失了自己真正的需要。现在对日本职业足球联赛的狂热给人一种很是虚伪的感觉，就像是人为炒起来的一样。<strong>我们就是这样被看不见的暴力驯服成一群忘记愤怒、没有力气的优良市民</strong>。</p>
 <ul>
 <li>就像是温柔版的法西斯主义？对对，就是这种。也就是说社会整体都变得像‘机器人’一样。</li>
-</ul>
-</li>
-<li>
-<p>最近最让人忧心的，是无法接受自己的人越来越多。她们不单单是对于学习之类的事情缺乏自信，而且严重缺乏让别人接受、认同自己的存在的体验。<strong>由于缺乏和他人建立亲密关系的经验，她们对现状严重不安。所以，哪怕是一点点挫折都会让她们坠入孤独的深渊，产生被人抛弃的感受</strong>。</p>
-</li>
-<li>
-<p><strong>爱情和亲密关系，本不应该是必须达成目标后才能获得的东西</strong>，不能像解决其他问题一样，先设定一个目标，然后思考方法、制订计划后才能获得爱。然而<strong>让我们看看现在的亲子关系，家长的爱不再是无私的、无条件的给予和接受，而是必须达成某些目标之后，才能得到，才有资格成为所谓的 “乖孩子”</strong>。</p>
-</li>
-<li>
-<p>比如夫妻之间本应该可以推心置腹地进行交流，但现实中真正能做到的夫妻却并不多。虽然表面上看上去十分和睦，但内心却并不能充分交流。这种关系被称作<strong>伪交互性</strong>，在这种关系下，<strong>夫妻双方都认为一旦发生矛盾就会分手，所以会想办法相互迁就</strong>。这种状态让人不禁觉得，他们之间的关系是缺乏感情的波澜和迸发，是稀薄且充满虚伪的，就像在表演自己的角色一样…… <strong>就连关爱、照顾他人都被当作任务来完成，可以说是一种虚伪的关系</strong>。</p>
-</li>
-<li>
-<p>我觉得，<strong>越是能够容许孩子们绕弯、跌倒的社会，就越能保留孩子们的天性，这个社会、集团中个体的生存能力就越顽强。然而现在的社会能够容忍孩子绕弯的幅度越来越小，认为这个容忍幅度一旦超出某个程度，就再也回不到正轨</strong>。</p>
+</ul></li>
+<li><p>最近最让人忧心的，是无法接受自己的人越来越多。她们不单单是对于学习之类的事情缺乏自信，而且严重缺乏让别人接受、认同自己的存在的体验。<strong>由于缺乏和他人建立亲密关系的经验，她们对现状严重不安。所以，哪怕是一点点挫折都会让她们坠入孤独的深渊，产生被人抛弃的感受</strong>。</p></li>
+<li><p><strong>爱情和亲密关系，本不应该是必须达成目标后才能获得的东西</strong>，不能像解决其他问题一样，先设定一个目标，然后思考方法、制订计划后才能获得爱。然而<strong>让我们看看现在的亲子关系，家长的爱不再是无私的、无条件的给予和接受，而是必须达成某些目标之后，才能得到，才有资格成为所谓的 “乖孩子”</strong>。</p></li>
+<li><p>比如夫妻之间本应该可以推心置腹地进行交流，但现实中真正能做到的夫妻却并不多。虽然表面上看上去十分和睦，但内心却并不能充分交流。这种关系被称作<strong>伪交互性</strong>，在这种关系下，<strong>夫妻双方都认为一旦发生矛盾就会分手，所以会想办法相互迁就</strong>。这种状态让人不禁觉得，他们之间的关系是缺乏感情的波澜和迸发，是稀薄且充满虚伪的，就像在表演自己的角色一样…… <strong>就连关爱、照顾他人都被当作任务来完成，可以说是一种虚伪的关系</strong>。</p></li>
+<li><p>我觉得，<strong>越是能够容许孩子们绕弯、跌倒的社会，就越能保留孩子们的天性，这个社会、集团中个体的生存能力就越顽强。然而现在的社会能够容忍孩子绕弯的幅度越来越小，认为这个容忍幅度一旦超出某个程度，就再也回不到正轨</strong>。</p>
 <ul>
 <li>现在的孩子们从小就在自己的心里放了一个小口袋，将本真的自己收进这个口袋里。</li>
-</ul>
-</li>
-<li>
-<p>她的这种病症，属于儿童抽动症中的‘抽动秽语综合征’，越是不可以说的话就越要说，越是在不可以说的地方发病就越严重。这个病症，就像是对不允许出格的社会的反照、讽刺和抗争一样。</p>
-</li>
-<li>
-<p>其实，无论是拒食的孩子还是过食的孩子，好多人都对我说不想把病治好，想就这样保持病态。他们周围的人，要么在催促他们治疗，要么鼓励他们不能因此丧失自信，只要努力就会有希望等。对于病人来说，这是最不愿意听到的话语。他们根本不想治疗，也不想抱希望，因为对于他们来说，明天、未来不知道会比现在更加悲惨多少。对他们来说，处于病态反而意味着他们的生命是有所保障的。</p>
-</li>
-<li>
-<p><strong>在现代社会，不这样做的话家庭就无法适应社会，所以家长们才会不惜一切去执行</strong>。然而，他们越是想去适应社会，孩子们受到的压迫就越是厉害。</p>
+</ul></li>
+<li><p>她的这种病症，属于儿童抽动症中的‘抽动秽语综合征’，越是不可以说的话就越要说，越是在不可以说的地方发病就越严重。这个病症，就像是对不允许出格的社会的反照、讽刺和抗争一样。</p></li>
+<li><p>其实，无论是拒食的孩子还是过食的孩子，好多人都对我说不想把病治好，想就这样保持病态。他们周围的人，要么在催促他们治疗，要么鼓励他们不能因此丧失自信，只要努力就会有希望等。对于病人来说，这是最不愿意听到的话语。他们根本不想治疗，也不想抱希望，因为对于他们来说，明天、未来不知道会比现在更加悲惨多少。对他们来说，处于病态反而意味着他们的生命是有所保障的。</p></li>
+<li><p><strong>在现代社会，不这样做的话家庭就无法适应社会，所以家长们才会不惜一切去执行</strong>。然而，他们越是想去适应社会，孩子们受到的压迫就越是厉害。</p>
 <ul>
 <li>MC：内卷，适者生存，如果你不这样做，那么你就无法生存下去，被迫参与社会的竞争。</li>
+</ul></li>
+<li><p><strong>无法表露真实的自己，被迫戴上面具伪装出另一个样子生活下去，由此造成的痛苦才是万病之源</strong>。孩子只有沿着家长给他规划好的路线、言听计从才能成为优等生。虽然他们可能会被人推举当个班长、学生会主席之类的，但作为一个人来说可能会被孤立。而对于孩子自身来说，到了一定年龄后，当在外部的体验中碰壁，就会将目光转向自己。</p></li>
+<li><p>这个过程被称为家庭的重组，家长和孩子的价值观都会产生变化。<strong>只要家庭成员能够达成共识，认为别人的眼光其实无所谓，社会上的价值观也不那么重要，就能迎来希望的曙光</strong>。</p></li>
+<li><p>孩子们本来需要无穷无尽的、无条件的爱，如果对爱的需求无法获得满足，产生了依赖性的性格，就会寻找其他事物去代替其所需的爱，并以此填补心中对爱的需求。</p></li>
+<li><p>然而今天，现代社会（西欧社会）的自我理想终于开始变得破绽百出。<strong>对于自身力量的信仰将胜者变为 “努力成功” 的俘虏，将败者变为寂寞和渴望的奴隶</strong>。在寂寞和渴望中产生了对酒精、药物、食物、性、赌博、购物的依赖症状。</p></li>
+<li><p>我们究竟想要做什么？想要度过怎样的人生？在我们尚未思考出结论时，我们自身中机械性的部分就已经擅自启动，和全家人一起按照 “幸福家庭” 的剧本表演着过家家一样的生活 —— 这是一群追求和他人一致外表、和他人同等稳定的 “趋同成瘾机器人”。<strong>隐藏在饱食泡沫时代背后的，就是这样一群时代囚徒颠沛流离的景象</strong>。</p></li>
+<li><p>作者在本书的 “追踪采访” 章节的末尾处向每个读者抛出了一个值得深思的问题。“<strong>我们究竟想要做什么？想要度过怎样的人生？</strong>” 书中的一个个事例看似纷杂，但其实都贯穿着同样的设问。</p></li>
 </ul>
-</li>
-<li>
-<p><strong>无法表露真实的自己，被迫戴上面具伪装出另一个样子生活下去，由此造成的痛苦才是万病之源</strong>。孩子只有沿着家长给他规划好的路线、言听计从才能成为优等生。虽然他们可能会被人推举当个班长、学生会主席之类的，但作为一个人来说可能会被孤立。而对于孩子自身来说，到了一定年龄后，当在外部的体验中碰壁，就会将目光转向自己。</p>
-</li>
-<li>
-<p>这个过程被称为家庭的重组，家长和孩子的价值观都会产生变化。<strong>只要家庭成员能够达成共识，认为别人的眼光其实无所谓，社会上的价值观也不那么重要，就能迎来希望的曙光</strong>。</p>
-</li>
-<li>
-<p>孩子们本来需要无穷无尽的、无条件的爱，如果对爱的需求无法获得满足，产生了依赖性的性格，就会寻找其他事物去代替其所需的爱，并以此填补心中对爱的需求。</p>
-</li>
-<li>
-<p>然而今天，现代社会（西欧社会）的自我理想终于开始变得破绽百出。<strong>对于自身力量的信仰将胜者变为 “努力成功” 的俘虏，将败者变为寂寞和渴望的奴隶</strong>。在寂寞和渴望中产生了对酒精、药物、食物、性、赌博、购物的依赖症状。</p>
-</li>
-<li>
-<p>我们究竟想要做什么？想要度过怎样的人生？在我们尚未思考出结论时，我们自身中机械性的部分就已经擅自启动，和全家人一起按照 “幸福家庭” 的剧本表演着过家家一样的生活 —— 这是一群追求和他人一致外表、和他人同等稳定的 “趋同成瘾机器人”。<strong>隐藏在饱食泡沫时代背后的，就是这样一群时代囚徒颠沛流离的景象</strong>。</p>
-</li>
-<li>
-<p>作者在本书的 “追踪采访” 章节的末尾处向每个读者抛出了一个值得深思的问题。“<strong>我们究竟想要做什么？想要度过怎样的人生？</strong>” 书中的一个个事例看似纷杂，但其实都贯穿着同样的设问。</p>
-</li>
-</ul>
-<h1>译后记</h1>
+<h1 id="译后记">译后记</h1>
 <ul>
-<li>
-<p>虽然本书在国内出版距原作在日本上市有近二十五年的时间差，书中所述的不少事情也已经过去了三十多年甚至更久，但读过本书的读者一定会发现，如今发生在我们身边的一些社会现象和书中所述存在惊人的相似之处。比如，日本当年盘踞在车站前的小微贷，如今早已将阵地转移到了手机和互联网上。日本当年红极一时的<strong>自我启发活动</strong>，如今也包装成精美的个人提升、企业培训课程粉墨登场，令许多企业管理层与普通白领趋之若鹜，不惜花高价去学习；<strong>从近来引发社会广泛关注的 “996 工作制” 中，译者也仿佛看到了很多日本上班族日夜拼命工作的身影</strong>。</p>
-</li>
-<li>
-<p>日本社会曾经历过的事情，如今有一些或原原本本，或改头换面，或多或少发生在我们自己的身上。</p>
-</li>
-<li>
-<p>对于我们来说，这本写于三十多年前的纪实文学不应是 “隔岸观火”“事不关己”，而应是一面照出我们自己得与失的 “明镜”，值得我们更好借鉴。</p>
-</li>
+<li><p>虽然本书在国内出版距原作在日本上市有近二十五年的时间差，书中所述的不少事情也已经过去了三十多年甚至更久，但读过本书的读者一定会发现，如今发生在我们身边的一些社会现象和书中所述存在惊人的相似之处。比如，日本当年盘踞在车站前的小微贷，如今早已将阵地转移到了手机和互联网上。日本当年红极一时的<strong>自我启发活动</strong>，如今也包装成精美的个人提升、企业培训课程粉墨登场，令许多企业管理层与普通白领趋之若鹜，不惜花高价去学习；<strong>从近来引发社会广泛关注的 “996 工作制” 中，译者也仿佛看到了很多日本上班族日夜拼命工作的身影</strong>。</p></li>
+<li><p>日本社会曾经历过的事情，如今有一些或原原本本，或改头换面，或多或少发生在我们自己的身上。</p></li>
+<li><p>对于我们来说，这本写于三十多年前的纪实文学不应是 “隔岸观火”“事不关己”，而应是一面照出我们自己得与失的 “明镜”，值得我们更好借鉴。</p></li>
 </ul>
 <hr>
-<h1>我的随想</h1>
+<h1 id="我的随想">我的随想</h1>
 <p>在现在这个浮躁的社会，我们刚刚经历了房价暴涨，经济前景不明，不禁思考未来社会会何去何从？</p>
-<p>幸好隔壁邻居先中国 30 年经历了经济高速增长时期，所以我一直想读一本书，窥视 80 年代末经济停滞前的日本最后的狂欢，来为现在的自己提个醒，帮助自己更好地对未来做一些预测。</p>
+<p>幸好隔壁邻居先中国 30
+年经历了经济高速增长时期，所以我一直想读一本书，窥视 80
+年代末经济停滞前的日本最后的狂欢，来为现在的自己提个醒，帮助自己更好地对未来做一些预测。</p>
 <p>这是我第一次读相关的书，当我捧起这本书时，看到了一个个熟悉的社会百态，比如小额借贷，买房，加班过劳死，35 岁退休等等，只不过工具和形式为了适应时代做出来调整和更改。</p>
 <p>如果你赞同中国未来的发展可能会和日本类似，那么这本书就像一个长着告诉你各种可能发展以及未来的状态。你可以在比较中选择适合自己的发展方式，对我而言，可能更偏向于<strong>适度工作，追求体验，享受和家人朋友在一起的时光，让生活充实有趣</strong>。</p>
-<p>作为刚毕业不久的打工人，在没有读书前，我是一个满心斗志的加班人，希望在职场做出一番事业来。这本书让我逐渐意识到，日本在 80 年代就已经开始了 996 的加班生活，自己正在被社会评价指标裹挟着成为一个工具人，除了工作对其他事情都不感兴趣，我的未来是何其枯燥和无聊。<strong>我要有最后的倔强，我希望自己能够多去亲近大自然，扩宽自己的视野，最末和朋友聚一聚</strong>。</p>
+<p>作为刚毕业不久的打工人，在没有读书前，我是一个满心斗志的加班人，希望在职场做出一番事业来。这本书让我逐渐意识到，日本在
+80 年代就已经开始了 996
+的加班生活，自己正在被社会评价指标裹挟着成为一个工具人，除了工作对其他事情都不感兴趣，我的未来是何其枯燥和无聊。<strong>我要有最后的倔强，我希望自己能够多去亲近大自然，扩宽自己的视野，最末和朋友聚一聚</strong>。</p>
 <p>我是一名程序员，也经常会被电脑吸引着坐在屏幕前几小时，看到事物的思维开始二值化，不愿意去处理复杂的人际交往关系，这可能是程序员的共性。这本书告诉自己，程序是有意思的工作，但是要谨防上瘾，自己需要不断地反思，锻炼自己的思维能力，从更高的视野看待事情。</p>
 <p>不可否认，中国现在已经步入低增长时期，国家和社会在积极地扩展内需，我们受到的诱惑只增不减，总是会有一个声音告诉你，你需要什么，甚至你连思考都没有就开始购物。在社会开始疯狂的时候，自己需要坚持<a href="http://www.waylon.one/Reading/expression-on-simple-life/">不持有的生活</a>，理性看待不必要的消费，不要跟随大流去疯狂购物。</p>
 <p>这本书给了自己一些新奇的观点：</p>
@@ -1811,119 +1692,144 @@ Discussion Items:
 - make_shardpte 有一次拷贝，并且和原来的地址不一致
 
 -->
-<h1>std</h1>
-<h2 id="std-numeric-limits"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">std::numeric_limits</a></h2>
+<h1 id="std">std</h1>
+<h2 id="stdnumeric_limits"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">std::numeric_limits</a></h2>
 <ul>
-<li>The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.
+<li>The std::numeric_limits class template provides a standardized way
+to query various properties of arithmetic types.
 <ul>
 <li>int 的最大值是 numeric_limits<int>::max().</int></li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>
+和 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>
+都被用来获取某个类型的最小值。它们分别返回这个最小值可表示的最小正数
+(min) 和最小负数 (lowest)。因此，当 T 是一个无符号类型的时候，min () 和
+lowest () 返回的值是相同的。其次，lowest () 只对有符号类型有效，而 min ()
+对所有数据类型都有效。</li>
 </ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a> 和 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a> 都被用来获取某个类型的最小值。它们分别返回这个最小值可表示的最小正数 (min) 和最小负数 (lowest)。因此，当 T 是一个无符号类型的时候，min () 和 lowest () 返回的值是相同的。其次，lowest () 只对有符号类型有效，而 min () 对所有数据类型都有效。</li>
-</ul>
-<h2 id="std-sort"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/sort">std::sort</a></h2>
+<h2 id="stdsort"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/sort">std::sort</a></h2>
 <ul>
-<li>Sorts the elements in the range [first, last) in non-descending order.
+<li>Sorts the elements in the range [first, last) in non-descending
+order.
 <ul>
 <li>要求传入两个迭代器确定范围</li>
-</ul>
-</li>
+</ul></li>
 <li>逆序排序 std::sort (vec.rbegin (), vec.rend ())</li>
 </ul>
-<h2 id="std-equal"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/equal">std::equal</a></h2>
+<h2 id="stdequal"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/equal">std::equal</a></h2>
 <ul>
-<li>Two ranges are considered equal if they have the same number of elements and, for every iterator i in the range [first1, last1), *i equals *(first2 + (i - first1)).
+<li>Two ranges are considered equal if they have the same number of
+elements and, for every iterator i in the range [first1, last1), <em>i
+equals </em>(first2 + (i - first1)).
 <ul>
 <li>要求按位置一致</li>
+</ul></li>
+<li> std::equal should not be used to compare the ranges formed by the
+iterators from std::unordered_set/map</li>
 </ul>
-</li>
-<li> std::equal should not be used to compare the ranges formed by the iterators from std::unordered_set/map</li>
-</ul>
-<h1>Programming grammar</h1>
+<h1 id="programming-grammar">Programming grammar</h1>
 <h2 id="string">string</h2>
-<h3 id="std-string-substr"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/substr/">std::string::substr</a></h3>
+<h3 id="stdstringsubstr"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/substr/">std::string::substr</a></h3>
 <ul>
-<li>Returns a newly constructed string object with its value initialized to a copy of a substring of this object.</li>
+<li>Returns a newly constructed string object with its value initialized
+to a copy of a substring of this object.</li>
 <li>string::substr (pos, n) 返回从 pos 开始的 n 个字符的拷贝.</li>
 </ul>
-<h3 id="std-string-size"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/size/">std::string::size</a></h3>
+<h3 id="stdstringsize"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/size/">std::string::size</a></h3>
 <ul>
 <li>Returns the length of the string, in terms of bytes.</li>
 <li>Returns <strong>size_t</strong>, an unsigned integral type.
 <ul>
 <li>不能直接 min (size_t, int), 编译错误 </li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="std-string-operator"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/operator%5B%5D/">std::string::operator[]</a></h3>
+<h3 id="stdstringoperator"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/operator%5B%5D/">std::string::operator[]</a></h3>
 <ul>
-<li>Returns a <strong>reference</strong> to the character at position pos in the string.</li>
+<li>Returns a <strong>reference</strong> to the character at position
+pos in the string.</li>
 </ul>
 <h2 id="stack">stack</h2>
-<h3 id="std-stack-top"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/top/">std::stack::top</a></h3>
+<h3 id="stdstacktop"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/top/">std::stack::top</a></h3>
 <ul>
-<li>Returns a <strong>reference</strong> to the top element in the stack.</li>
+<li>Returns a <strong>reference</strong> to the top element in the
+stack.</li>
 <li> 如果栈为空，返回值未定义。</li>
 </ul>
 <h2 id="map">map</h2>
-<h3 id="std-map-insert"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/insert">std::map::insert</a>\</h3>
+<h3 id="stdmapinsert"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/insert">std::map::insert</a><br>
+</h3>
 <ul>
-<li>插入元素类型是 pair, 可以是 insert ({key_x, value_y}), 或者是 insert (make_pair (key_x, value_y)).</li>
+<li>插入元素类型是 pair, 可以是 insert ({key_x, value_y}), 或者是
+insert (make_pair (key_x, value_y)).</li>
 </ul>
-<h2 id="const-int-vs-const-int-const-vs-int-const">const int * vs const int * const vs int const *</h2>
+<h2 id="const-int-vs-const-int-const-vs-int-const">const int * vs const
+int * const vs int const *</h2>
 <ul>
-<li>int const* is equivalent to const int* 指向常量 int 的指针</li>
+<li><p>int const* is equivalent to const int* 指向常量 int 的指针 &gt;
+This means that the variable being declared is a pointer, pointing to a
+constant integer. Effectively, this implies that the pointer is pointing
+to <strong>a value that should not be changed</strong>. Const qualifier
+doesn’t affect the pointer in this scenario so the pointer is allowed to
+point to some other address.</p></li>
+<li><p>int *const 指向 int 的常量指针 &gt; This means that the variable
+being declared is a constant pointer pointing to an integer.
+Effectively, this implies that <strong>the pointer shouldn’t point to
+some other address</strong>. Const qualifier doesn’t affect the value of
+integer in this scenario so the value being stored in the address is
+allowed to change.</p></li>
+<li><p>const int* const is equivalent to int const* const
+指向常量 int 的常量指针 &gt; This means that the variable being declared
+is a constant pointer pointing to a constant integer. Effectively, this
+implies that a constant pointer is pointing to a constant value. Hence,
+<strong>neither the pointer should point to a new address nor the value
+being pointed to should be changed</strong>.</p></li>
+<li><p>Memory Map <img data-src="https://media.geeksforgeeks.org/wp-content/uploads/spiral-2.jpg"></p></li>
 </ul>
 <blockquote>
-<p>This means that the variable being declared is a pointer, pointing to a constant integer. Effectively, this implies that the pointer is pointing to <strong>a value that should not be changed</strong>. Const qualifier doesn’t affect the pointer in this scenario so the pointer is allowed to point to some other address.</p>
-</blockquote>
-<ul>
-<li>int *const 指向 int 的常量指针</li>
-</ul>
-<blockquote>
-<p>This means that the variable being declared is a constant pointer pointing to an integer. Effectively, this implies that <strong>the pointer shouldn’t point to some other address</strong>. Const qualifier doesn’t affect the value of integer in this scenario so the value being stored in the address is allowed to change.</p>
-</blockquote>
-<ul>
-<li>const int* const is equivalent to int const* const 指向常量 int 的常量指针</li>
-</ul>
-<blockquote>
-<p>This means that the variable being declared is a constant pointer pointing to a constant integer. Effectively, this implies that a constant pointer is pointing to a constant value. Hence, <strong>neither the pointer should point to a new address nor the value being pointed to should be changed</strong>.</p>
-</blockquote>
-<ul>
-<li>Memory Map<br>
-<img data-src="https://media.geeksforgeeks.org/wp-content/uploads/spiral-2.jpg" alt=""></li>
-</ul>
-<blockquote>
-<p>One way to remember the syntax (according to Bjarne Stroustrup) is the spiral rule -<br>
-The rule says, start from the name of the variable and move clockwise to the next pointer or type. Repeat until expression ends.</p>
+<p>One way to remember the syntax (according to Bjarne Stroustrup) is
+the spiral rule - The rule says, start from the name of the variable and
+move clockwise to the next pointer or type. Repeat until expression
+ends.</p>
 </blockquote>
 <blockquote>
-<p>Using this rule, even complex declarations can be decoded like, int ** const is a const pointer to pointer to an int.</p>
+<p>Using this rule, even complex declarations can be decoded like, int
+** const is a const pointer to pointer to an int.</p>
 </blockquote>
 <blockquote>
-<p>以 * 为界， 在 * 前后的 const 可以和同侧的 data type 调换位置，不影响变量表达的含义。</p>
+<p>以 * 为界， 在 * 前后的 const 可以和同侧的 data type
+调换位置，不影响变量表达的含义。</p>
 </blockquote>
 <!--
 The first const keyword can go either side of data type, hence const int* const is equivalent to int const* const.
 -->
 <ul>
-<li>Reference to <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-between-const-int-const-int-const-and-int-const/">Difference between const int*, const int * const, and int const *</a></li>
+<li>Reference to <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-between-const-int-const-int-const-and-int-const/">Difference
+between const int*, const int * const, and int const *</a></li>
 </ul>
-<h2 id="std-numeric-limits-min-vs-lowest">std::numeric_limits::min() vs lowest()</h2>
-<p>根据 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">ppreference</a> 定义：</p>
+<h2 id="stdnumeric_limitsmin-vs-lowest">std::numeric_limits::min() vs
+lowest()</h2>
+<p>根据 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">ppreference</a>
+定义：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>: Returns the lowest finite value representable by the numeric type T, that is, a finite value x such that there is no other finite value y where y &lt; x.</li>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>：For floating-point types with denormalization, min returns the minimum positive normalized value.</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>:
+Returns the lowest finite value representable by the numeric type T,
+that is, a finite value x such that there is no other finite value y
+where y &lt; x.</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>：For
+floating-point types with denormalization, min returns the minimum
+positive normalized value.</li>
 </ul>
 <p>也就是说，</p>
-<ol>
-<li>如果 T 属于 int 型，則 min 和 lowest 会返回一样的值，皆为该类型的最小值（负数或 0）。</li>
-<li>如果 T 属于浮点型，min 返回 “最小正数”，lowest 返回最小值。</li>
+<ol type="1">
+<li>如果 T 属于 int 型，則 min 和 lowest
+会返回一样的值，皆为该类型的最小值（负数或 0）。</li>
+<li>如果 T 属于浮点型，min 返回 "最小正数"，lowest 返回最小值。</li>
 </ol>
 <ul>
-<li>Reference to <a target="_blank" rel="noopener" href="https://blog.csdn.net/keineahnung2345/article/details/104181062">C++ std::numeric_limits::max ()，min () 及 lowest ()</a></li>
+<li>Reference to <a target="_blank" rel="noopener" href="https://blog.csdn.net/keineahnung2345/article/details/104181062">C++
+std::numeric_limits::max ()，min () 及 lowest ()</a></li>
 </ul>
-<h2 id="std-move-对象移动">std::move 对象移动</h2>
+<h2 id="stdmove-对象移动">std::move 对象移动</h2>
 <blockquote>
 <p>在重新分配内存的过程中，从旧内存将元素拷贝到新内存是不必要的，最好的方式是移动元素；此外，IO 类和 unique_ptr 类可以移动但不能拷贝。</p>
 </blockquote>
@@ -1939,79 +1845,98 @@ The first const keyword can go either side of data type, hence const int* const 
 <p>我们可以销毁一个移后源对象，也可以赋予它新值，但不能使用一个移后源对象的值。</p>
 </blockquote>
 <ul>
-<li>与多数标准库名字的使用不同，对 move 我们不提供 using 声明，我们直接调用 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/move">std::move</a> 而不是 move。</li>
+<li>与多数标准库名字的使用不同，对 move 我们不提供 using 声明，我们直接调用
+<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/move">std::move</a>
+而不是 move。</li>
 </ul>
-<h3 id="什么时候使用-std-move">什么时候使用 std::move</h3>
+<h3 id="什么时候使用-stdmove">什么时候使用 std::move</h3>
 <blockquote>
-<p>When the criteria for elision of a copy operation are met or would be met save for the fact that the source object is a function parameter, and the object to be copied is designated by an lvalue, overload resolution to select the constructor for the copy is ﬁrst performed as if the object were designated by an rvalue.</p>
+<p>When the criteria for elision of a copy operation are met or would be
+met save for the fact that the source object is a function parameter,
+and the object to be copied is designated by an lvalue, overload
+resolution to select the constructor for the copy is ﬁrst performed as
+if the object were designated by an rvalue.</p>
 </blockquote>
-<p>To answer the question in the title, use std::move on a return value when you want it to be moved and it would not get moved anyway. That is:</p>
-<ul>
-<li>you want it to be moved, and</li>
-<li>it is an lvalue, and</li>
-<li>it is not eligible for copy elision, and</li>
-<li>it is not the name of a by-value function parameter.</li>
-</ul>
-<p>Reference to <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14856344/when-should-stdmove-be-used-on-a-function-return-value">When should std::move be used on a function return value? [duplicate]</a>.</p>
+<p>To answer the question in the title, use std::move on a return value
+when you want it to be moved and it would not get moved anyway. That is:
+- you want it to be moved, and - it is an lvalue, and - it is not
+eligible for copy elision, and - it is not the name of a by-value
+function parameter.</p>
+<p>Reference to <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14856344/when-should-stdmove-be-used-on-a-function-return-value">When
+should std::move be used on a function return value?
+[duplicate]</a>.</p>
 <h2 id="at-vs-operator-in-vector">at vs operator[] in vector</h2>
 <!--
 国静在代码中的comments，让我意识到两者的区别。-->
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/at/">at</a> returns a reference to the element at position n in the vector, which automatically checks whether n is within the bounds of valid elements in the vector, throwing an out_of_range exception if it is not.</p>
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/operator%5B%5D/">operator[]</a> returns a reference to the element at position n in the vector container. Portable programs should never call this function with an argument n that is out of range, since this causes undefined behavior.</p>
-<p><strong>operator[]</strong> has the same behavior as <strong>at</strong>, except that vector::at is bound-checked and signals if the requested position is out of range by throwing an out_of_range exception.</p>
+<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/at/">at</a>
+returns a reference to the element at position n in the vector, which
+automatically checks whether n is within the bounds of valid elements in
+the vector, throwing an out_of_range exception if it is not.</p>
+<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/operator%5B%5D/">operator[]</a>
+returns a reference to the element at position n in the vector
+container. Portable programs should never call this function with an
+argument n that is out of range, since this causes undefined
+behavior.</p>
+<p><strong>operator[]</strong> has the same behavior as
+<strong>at</strong>, except that vector::at is bound-checked and signals
+if the requested position is out of range by throwing an out_of_range
+exception.</p>
 <blockquote>
 <p>在程序中推荐使用 at 函数，而不是 [] 操作符，更安全。</p>
 </blockquote>
-<h2 id="explicit-抑制构造函数定义的隐式转换">explicit 抑制构造函数定义的隐式转换</h2>
-<p>关键字 explicit 只对一个实参的构造函数有效。只能在类内声明构造函数时使用 explicit 关键字，在类外部定义时不应重复。<br>
+<h2 id="explicit-抑制构造函数定义的隐式转换">explicit
+抑制构造函数定义的隐式转换</h2>
+<p>关键字 explicit 只对一个实参的构造函数有效。只能在类内声明构造函数时使用 explicit 关键字，在类外部定义时不应重复。
 当我们用 explicit 关键字声明构造函数时，它将只能以直接初始化的形式使用。而且，编译器将不会在自动转换过程中使用该构造函数。</p>
 <blockquote>
 <p>需要多个实参的构造函数不能用于隐式转换，所以无需将这些构造函数指定为 explicit 的。实测，即使指定为 explicit，程序编译不报错。</p>
 </blockquote>
-<h2 id="std-upper-bound-vs-std-lower-bound">std::upper_bound vs std::lower_bound()</h2>
+<h2 id="stdupper_bound-vs-stdlower_bound">std::upper_bound vs
+std::lower_bound()</h2>
 <p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/upper_bound">upper_bound</a></p>
-<h2 id="std-vector-和-std-string-的相互转换">std:vector 和 std:string 的相互转换</h2>
+<h2 id="stdvector-和-stdstring-的相互转换">std:vector 和 std:string
+的相互转换</h2>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/string/string/assign/">string::assign</a></p>
+<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/string/string/assign/">string::assign</a>
 <ul>
-<li>Assigns a new value to the string, replacing its current contents.</li>
-</ul>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/assign/">vector::assign</a></p>
+<li>Assigns a new value to the string, replacing its current
+contents.</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/assign/">vector::assign</a>
 <ul>
-<li>Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.</li>
+<li>Assigns new contents to the vector, replacing its current contents,
+and modifying its size accordingly.</li>
+</ul></li>
+<li>vector<char> to string <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// First method</span><br><span class="line">std::vector&lt;char&gt; data = {'a', 'b', 'c'};</span><br><span class="line">std::string res;</span><br><span class="line">res.insert(res.begin(), data.begin(), data.end());</span><br></pre></td></tr></tbody></table></figure></char></li>
 </ul>
-</li>
-<li>
-<p>vector<char> to string</char></p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// First method</span><br><span class="line">std::vector&lt;char&gt; data = {'a', 'b', 'c'};</span><br><span class="line">std::string res;</span><br><span class="line">res.insert(res.begin(), data.begin(), data.end());</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Second method</span><br><span class="line">std::vector&lt;char&gt; data = {'a', 'b', 'c'};</span><br><span class="line">std::string str;</span><br><span class="line">str.clear();</span><br><span class="line">str.assign(data.begin(),data.end());</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>string to vector<char></char></li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string str = "what a nice day!";</span><br><span class="line">std::vector &lt;char&gt; chars;</span><br><span class="line">chars.resize(str.size());</span><br><span class="line">chars.assign(str.begin(),str.end())</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://repl.it/@wylloong/charstostring">Verify Online</a></li>
+<li><a target="_blank" rel="noopener" href="https://repl.it/@wylloong/charstostring">Verify
+Online</a></li>
 </ul>
-<h2 id="函数模板-function-template-返回值">函数模板 (function template) 返回值</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012515223/article/details/17003679">https://blog.csdn.net/u012515223/article/details/17003679</a></p>
-<h2 id="boost-optional">boost::optional()</h2>
+<h2 id="函数模板function-template返回值">函数模板 (function
+template) 返回值</h2>
+<p>https://blog.csdn.net/u012515223/article/details/17003679</p>
+<h2 id="boostoptional">boost::optional()</h2>
 <ul>
-<li>读取访问器 (read access) .get () 返回非常量引用 (non-const reference)，所以你可以向其中写入。</li>
+<li>读取访问器 (read access) .get () 返回非常量引用 (non-const
+reference)，所以你可以向其中写入。</li>
 </ul>
 <blockquote>
-<p>It is sometimes helpful to think of optional as a value-and-pointer mixed together. There is a possibly null pointer to an owned buffer of memory that may, or may not hold a copy of the type.</p>
+<p>It is sometimes helpful to think of optional as a value-and-pointer
+mixed together. There is a possibly null pointer to an owned buffer of
+memory that may, or may not hold a copy of the type.</p>
 </blockquote>
 <p>你可以使用 * 或者 -&gt; 来替代 get () 函数，以下三种写法是等价的。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*optional</span><br><span class="line">optional-&gt;</span><br><span class="line">optional.get()</span><br></pre></td></tr></tbody></table></figure>
 <!--
 ![How to use boost::optional](https://stackoverflow.com/questions/22227839/how-to-use-boostoptional)
 -->
-<h1>Grammar Discriminate</h1>
+<h1 id="grammar-discriminate">Grammar Discriminate</h1>
 <h2 id="构造函数初始化-赋值和初始化">构造函数初始化 (赋值和初始化)</h2>
 <p>我们一般习惯于<strong>构造函数初始化列表</strong>和<strong>函数体内</strong>对类的成员变量初始化，两者的区别难道仅仅是表达方式和初始化位置不同吗？</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 辨析两种初始化参数的方式 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Just show me the code!</span></span><br><span class="line"><span class="comment">// 构造函数初始化列表 (constructor initialize list)</span></span><br><span class="line">ClassA::ClassA(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name_in):name_(name_in) {</span><br><span class="line">    <span class="comment">// 只调用了默认构造函数，不会再调用拷贝构造函数。</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 赋值初始化</span></span><br><span class="line">ClassA::ClassA(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name_in) {</span><br><span class="line">    <span class="comment">// 对象的成员变量的初始化动作发生在进入构造函数体之前。</span></span><br><span class="line">    <span class="comment">// name_不是初始化而是赋值。首先调用了这个类的默认构造函数，然后将name_in赋值到name_，即在调用拷贝构造函数。</span></span><br><span class="line">    name_ = name_in; </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -2028,45 +1953,56 @@ The first const keyword can go either side of data type, hence const int* const 
 <h2 id="默认构造函数">默认构造函数</h2>
 <ul>
 <li>一旦我们定义了一些其他的构造函数，那么除非我们再定义一个默认的构造函数，否则类将没有默认构造函数。</li>
-<li>= default : 声明默认构造函数，等同于之前使用的合成默认构造函数。</li>
+<li>= default :
+声明默认构造函数，等同于之前使用的合成默认构造函数。</li>
 </ul>
-<h2 id="Vector">Vector</h2>
+<h2 id="vector">Vector</h2>
 <ul>
 <li>当 vector 对象（或数组）销毁时，存储在其中的对象也会被销毁，也就是依次销毁 vector 中的每一个元素。</li>
-<li>很多使用动态内存的类应该使用 vector 对象或者 string 对象管理必要的存储空间；使用 vector 或者 string 的类能避免分配和释放内存带来的复杂性。</li>
+<li>很多使用动态内存的类应该使用 vector 对象或者 string
+对象管理必要的存储空间；使用 vector 或者 string
+的类能避免分配和释放内存带来的复杂性。</li>
 </ul>
 <h2 id="inline">inline</h2>
 <ul>
-<li>引入原因：为了解决一些频繁调用的小函数大量消耗栈空间（栈内存）的问题，特别的引入了 <strong>inline</strong> 修饰符，表示为内联函数。栈空间就是指放置程序的局部数据（也就是函数内数据）的内存空间。</li>
-<li>inline 只适合涵数体内代码简单的涵数使用，不能包含复杂的结构控制语句，并且不能内联函数本身不能是直接递归函数（即，自己内部还调用自己的函数）.</li>
-<li>inline 函数仅仅是一个对编译器的建议，所以最后能否真正内联，由编译器决定。一个好的编译器将会根据函数的定义体，自动地取消不值得的内联</li>
-<li>定义在类中的成员函数默认都是内联的，如果在类定义时就在类内给出函数定义，那当然最好。如果在类中未给出成员函数定义，而又想内联该函数的话，那在类外要加上 inline，否则就认为不是内联的。</li>
+<li>引入原因:
+为了解决一些频繁调用的小函数大量消耗栈空间（栈内存）的问题，特别的引入了
+<strong>inline</strong>
+修饰符，表示为内联函数。栈空间就是指放置程序的局部数据（也就是函数内数据）的内存空间。</li>
+<li>inline
+只适合涵数体内代码简单的涵数使用，不能包含复杂的结构控制语句，并且不能内联函数本身不能是直接递归函数（即，自己内部还调用自己的函数）.</li>
+<li>inline
+函数仅仅是一个对编译器的建议，所以最后能否真正内联，由编译器决定。一个好的编译器将会根据函数的定义体，自动地取消不值得的内联</li>
+<li>定义在类中的成员函数默认都是内联的，如果在类定义时就在类内给出函数定义，那当然最好。如果在类中未给出成员函数定义，而又想内联该函数的话，那在类外要加上
+inline，否则就认为不是内联的。</li>
 <li>内联是以代码膨胀（复制）为代价，仅仅省去了函数调用的开销，从而提高函数的执行效率。
 <ul>
 <li>如果执行函数体内代码的时间，相比于函数调用的开销较大，那么效率的收获会很少。另一方面，每一处内联函数的调用都要复制代码，将使程序的总代码量增大，消耗更多的内存空间。</li>
-</ul>
-</li>
+</ul></li>
 <li>inline 不应该出现在函数的声明中，原因如下:
 <ul>
-<li>高质量 C++/C 程序设计风格的一个基本原则：声明与定义不可混为一谈，用户没有必要、也不应该知道函数是否需要内联。</li>
-<li>一个好的编译器将会根据函数的定义体，自动地取消不值得的内联（这进一步说明了 inline 不应该出现在函数的声明中）。</li>
-</ul>
-</li>
+<li>高质量 C++/C
+程序设计风格的一个基本原则：声明与定义不可混为一谈，用户没有必要、也不应该知道函数是否需要内联。</li>
+<li>一个好的编译器将会根据函数的定义体，自动地取消不值得的内联（这进一步说明了
+inline 不应该出现在函数的声明中）。</li>
+</ul></li>
 </ul>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头文件</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Foo</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>;</span><br><span class="line">}</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 定义文件</span></span><br><span class="line"><span class="comment">// 关键字 inline 必须与函数定义体放在一起才能使函数成为内联，仅将 inline 放在函数声明前面不起任何作用。</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">A::Foo</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>{}</span><br></pre></td></tr></tbody></table></figure>
 <!--
 
 [C++ 中的 inline 用法](https://www.runoob.com/w3cnote/cpp-inline-usage.html)
 -->
-<h2 id="Copy-Constructor-拷贝构造函数">Copy Constructor 拷贝构造函数</h2>
-<p>一个特殊的构造函数，一般只有一个参数，这个参数一般是用  const 修饰的，对自己类的一个引用 (reference)。</p>
+<h2 id="copy-constructor-拷贝构造函数">Copy Constructor
+拷贝构造函数</h2>
+<p>一个特殊的构造函数，一般只有一个参数，这个参数一般是用 const
+修饰的，对自己类的一个引用 (reference)。</p>
 <h3 id="浅拷贝和深拷贝">浅拷贝和深拷贝</h3>
 <p>浅拷贝：两个变量进行浅拷贝时，它们指向同一个地址，它们的值相同。这样会有问题，当其中的一个析构了那个地址，另外一个也没有了，有时候会发生错误，但浅拷贝比较廉价。</p>
 <p>深拷贝：两个变量进行深拷贝时，第二变量会重新申请一块区域来存放跟第一个变量指向地址的值。两个东西完全是独立的，只是值相同。消耗比较大，因为要重新申请空间。</p>
-<h1>Code Style</h1>
+<h1 id="code-style">Code Style</h1>
 <h2 id="class">class</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setter</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Accessors</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Friends">Friends</h2>
+<h2 id="friends">Friends</h2>
 <!--
 [](https://google.github.io/styleguide/cppguide.html#Friends)
 
@@ -2080,29 +2016,40 @@ c++ lambda表达式作为类模板参数
 ## 模板定义和实现不分开
 https://www.cnblogs.com/jingshikongming/p/9037881.html
 -->
-<h2 id="Initialization-and">Initialization: =, (), and {}</h2>
+<h2 id="initialization-and">Initialization: =, (), and</h2>
 <ul>
-<li>For uniform initialization syntax，大括号初始化 (Brace Initialization) 的潜在问题：
+<li>For uniform initialization syntax，大括号初始化 (Brace
+Initialization) 的潜在问题：
 <ul>
-<li>“uniform” is a stretch: there are cases where ambiguity still exists.</li>
-<li>This syntax is not exactly intuitive: no other common language uses something like it.
+<li>“uniform” is a stretch: there are cases where ambiguity still
+exists.</li>
+<li>This syntax is not exactly intuitive: no other common language uses
+something like it.
 <ul>
-<li>For uniform initialization syntax, we don’t believe in general that the benefits outweigh the drawbacks.</li>
+<li>For uniform initialization syntax, we don’t believe in general that
+the benefits outweigh the drawbacks.</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Best-Practices-for-Initialization">Best Practices for Initialization</h3>
+<h3 id="best-practices-for-initialization">Best Practices for
+Initialization</h3>
 <ul>
-<li>Use assignment syntax when initializing directly with the intended literal value (for example: int, float, or std::string values), with smart pointers such as std::shared_ptr, std::unique_ptr, with containers (std::vector, std::map, etc), when performing struct initialization, or doing copy construction.</li>
-<li>Use the traditional constructor syntax (with parentheses) when the initialization is performing some active logic, rather than simply composing values together.</li>
-<li>Use {} initialization without the = only if the above options don’t compile.</li>
+<li>Use assignment syntax when initializing directly with the intended
+literal value (for example: int, float, or std::string values), with
+smart pointers such as std::shared_ptr, std::unique_ptr, with containers
+(std::vector, std::map, etc), when performing struct initialization, or
+doing copy construction.</li>
+<li>Use the traditional constructor syntax (with parentheses) when the
+initialization is performing some active logic, rather than simply
+composing values together.</li>
+<li>Use {} initialization without the = only if the above options don’t
+compile.</li>
 <li>Never mix {}s and auto.
 <ul>
-<li>For the language lawyers: prefer copy-initialization over direct-initialization when available, and use parentheses over curly braces when resorting to direct-initialization.</li>
-</ul>
-</li>
+<li>For the language lawyers: prefer copy-initialization over
+direct-initialization when available, and use parentheses over curly
+braces when resorting to direct-initialization.</li>
+</ul></li>
 </ul>
 <!--
 - [三种初始化方式](https://abseil.io/tips/88)
@@ -2207,13 +2154,16 @@ https://www.cnblogs.com/jingshikongming/p/9037881.html
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>Commands</h1>
+<h1 id="commands">Commands</h1>
 <ul>
-<li>命令行终端输入: vimtutor。 这是史上最简单、最全面的 vim 基础教程，至今无人超越。</li>
+<li>命令行终端输入: vimtutor。
+这是史上最简单、最全面的 vim 基础教程，至今无人超越。<br>
+</li>
 <li>tree<br>
-<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-tree.html">tree</a> 命令用于以树状图列出目录的内容，它会列出指定目录下的所有文件，包括子目录里的文件。</li>
+<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-tree.html">tree</a>
+命令用于以树状图列出目录的内容，它会列出指定目录下的所有文件，包括子目录里的文件。</li>
 </ul>
-<h1>功能扩展</h1>
+<h1 id="功能扩展">功能扩展</h1>
 <h2 id="文本整体的处理">文本整体的处理</h2>
 <ul>
 <li>gu：切换为小写</li>
@@ -2226,21 +2176,19 @@ https://www.cnblogs.com/jingshikongming/p/9037881.html
 <li>dw
 <ul>
 <li>从光标当前的位置开始删除，直到单词最后。</li>
-</ul>
-</li>
+</ul></li>
 <li>daw
 <ul>
 <li>删除光标所在的单词，简记 delete a word。</li>
-</ul>
-</li>
+</ul></li>
 <li>bdw
 <ul>
-<li>复合命令，b 可以让光标回退到单词开头的位置，而 dw 则是从头开始删除单词。</li>
-</ul>
-</li>
+<li>复合命令，b
+可以让光标回退到单词开头的位置，而 dw 则是从头开始删除单词。</li>
+</ul></li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># de 删除至当前单词末尾，包括当前字符</span><br><span class="line"># d$ 删除至当前行尾</span><br><span class="line"># 2dd 删除两行</span><br></pre></td></tr></tbody></table></figure>
-<h1>移动光标</h1>
+<h1 id="移动光标">移动光标</h1>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># hjkl</span><br><span class="line"># 2w 向前移动两个单词</span><br><span class="line"># 3e 向前移动到第 3 个单词的末尾</span><br><span class="line"># 0 移动到行首</span><br><span class="line"># &lt;ctrl&gt;+o 跳转回之前的位置</span><br><span class="line"># &lt;ctrl&gt;+i 返回跳转之前的位置</span><br></pre></td></tr></tbody></table></figure>
 <p>修改</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># A 当前行末尾添加</span><br></pre></td></tr></tbody></table></figure>
@@ -2269,22 +2217,18 @@ https://www.cnblogs.com/jingshikongming/p/9037881.html
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxiao93/article/details/53677764">vim 在系统剪切板的复制与粘贴</a></li>
 </ul>
-<ol>
-<li>查看 vim 版本是否支持 clipboard</li>
+<ol type="1">
+<li>查看 vim 版本是否支持 clipboard <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim --version | grep "clipboard"</span><br></pre></td></tr></tbody></table></figure></li>
+<li>clipboard 前面如果有一个减号，说明不支持，需要 安装图形化界面的 vim。
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim-gnome</span><br></pre></td></tr></tbody></table></figure></li>
+<li>打开 vim 输入 :reg 查看 vim 的寄存器，当支持 clipboard
+之后，会多出 "+ 寄存器，表示系统剪切板。在 vim 中进入 visual 视图后，使用
+"Ny
+(N 表示特定寄存器编号)，可以将内容复制到特定的剪切板，那么我们的目的是要复制到系统剪切板则需要选中内容后输入命令：
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+y</span><br></pre></td></tr></tbody></table></figure></li>
+<li>同理，"+p 将系统剪切板的内容拷贝到 vim 中（非编辑模式下）。
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+p</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim --version | grep "clipboard"</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2">
-<li>clipboard 前面如果有一个减号，说明不支持，需要 安装图形化界面的 vim。</li>
-</ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim-gnome</span><br></pre></td></tr></tbody></table></figure>
-<ol start="3">
-<li>打开 vim 输入 :reg 查看 vim 的寄存器，当支持 clipboard 之后，会多出 "+ 寄存器，表示系统剪切板。在 vim 中进入 visual 视图后，使用"Ny (N 表示特定寄存器编号)，可以将内容复制到特定的剪切板，那么我们的目的是要复制到系统剪切板则需要选中内容后输入命令：</li>
-</ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+y</span><br></pre></td></tr></tbody></table></figure>
-<ol start="4">
-<li>同理，"+p 将系统剪切板的内容拷贝到 vim 中（非编辑模式下）。</li>
-</ol>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+p</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="多窗口调整窗口大小">多窗口调整窗口大小</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 命令行模式下 </span><br><span class="line">// 纵向调整 []输入可选，可以输入也可以不输入，num 指代一个数字</span><br><span class="line">:res[ize]  num		// 指定当前窗口为num列num行</span><br><span class="line">:res[ize] +num		// 把当前窗口高度增加num行 </span><br><span class="line">:res[ize] -num		// 把当前窗口高度减少num行 </span><br><span class="line">// 横向调整 </span><br><span class="line">:vert[ical] res[ize]  num		// 指定当前窗口为num列 </span><br><span class="line">:vert[ical] res[ize] +num		// 把当前窗口增加num列 </span><br><span class="line">:vert[ical] res[ize] -num		// 把当前窗口减少num列</span><br></pre></td></tr></tbody></table></figure>
 <p><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/qwaszx523/77750600">参考链接</a></p>
@@ -2292,13 +2236,17 @@ https://www.cnblogs.com/jingshikongming/p/9037881.html
 <p>命令行模式，输入 “set number” 或者 “set nu”。</p>
 <h2 id="替换文本">替换文本</h2>
 <ul>
-<li>对于替换命令 s 来说，如果要替换掉换行符，需使用 \n 作为搜索串；如果要替换字符串生成新行，请使用 \r 作为目标串。</li>
+<li>对于替换命令 s 来说，如果要替换掉换行符，需使用
+作为搜索串；如果要替换字符串生成新行，请使用 为目标串。</li>
 </ul>
 <hr>
-<h1>References</h1>
+<h1 id="references">References</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&amp;mid=2655439918&amp;idx=2&amp;sn=8b7d7fa6c170ae9698af8bbef0aa64e6&amp;chksm=bd7300598a04894fbc11b825485c53fe4a5be1be9707d24ab39e8b21ff88c5be073c16ec9312&amp;mpshare=1&amp;scene=1&amp;srcid=11050XVg00AZfUY8Hw7ww2z9#rd">如何让 Vim 成为我们的神器</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/l5f1299fxOuMF9ZZ4wA17A?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=202001">git 高级用法小抄</a> <!--内容包括新手入门，.vimrc的基本配置和插件配置(NerdTree)。--></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&amp;mid=2655439918&amp;idx=2&amp;sn=8b7d7fa6c170ae9698af8bbef0aa64e6&amp;chksm=bd7300598a04894fbc11b825485c53fe4a5be1be9707d24ab39e8b21ff88c5be073c16ec9312&amp;mpshare=1&amp;scene=1&amp;srcid=11050XVg00AZfUY8Hw7ww2z9#rd">如何让
+Vim 成为我们的神器</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/l5f1299fxOuMF9ZZ4wA17A?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=202001">git
+高级用法小抄</a>
+<!--内容包括新手入门，.vimrc的基本配置和插件配置(NerdTree)。--></li>
 </ul>
 
       
@@ -2400,15 +2348,16 @@ https://www.cnblogs.com/jingshikongming/p/9037881.html
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>Online Tools</h1>
+<h1 id="online-tools">Online Tools</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://latex.codecogs.com/eqneditor/editor.php">在线 LaTex 公式编辑</a>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.codecogs.com/latex/eqneditor.php">在线 LaTex 公式 Markup</a></li>
-</ul>
-</li>
+<li><a target="_blank" rel="noopener" href="https://www.codecogs.com/latex/eqneditor.php">在线 LaTex 公式
+Markup</a></li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://www.websequencediagrams.com/">在线流程图编辑</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.overleaf.com/login?">在线 Latex 编辑 - overleaf</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.overleaf.com/login?">在线 Latex 编辑 -
+overleaf</a></li>
 <li><a target="_blank" rel="noopener" href="https://convertio.co/zh/webp-png/">WEBP 到 PNG 转换器</a></li>
 <li><a href="uzer.me">云端全能办公神器 - UZER.ME</a></li>
 <li><a target="_blank" rel="noopener" href="https://convertio.co/zh/">格式转换神器 - Convertio</a></li>
@@ -2417,176 +2366,179 @@ https://www.cnblogs.com/jingshikongming/p/9037881.html
 <li><a target="_blank" rel="noopener" href="http://bigjpg.com/">图片放大神器</a></li>
 <li><a target="_blank" rel="noopener" href="http://ocrmaker.com/">在线文字识别 - OCR 服务</a>
 <ul>
-<li>通过使用光学字符识别（Optical Character Recognition - OCR）技术将文本文档的扫描或（智能手机）图像转换为可编辑文件。我们的在线 OCR 服务可以免费使用，只需上传您的图像文件。 OCR 软件采用 JPG，PNG 或 PDF（测试中），唯一的限制是图像 / PDF 不能大于 5MB。</li>
-</ul>
-</li>
+<li>通过使用光学字符识别（Optical Character Recognition -
+OCR）技术将文本文档的扫描或（智能手机）图像转换为可编辑文件。我们的在线 OCR 服务可以免费使用，只需上传您的图像文件。
+OCR 软件采用 JPG，PNG 或 PDF（测试中），唯一的限制是图像 / PDF
+不能大于 5MB。</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="http://www.pdfdo.com/image-to-txt.aspx">在线文字识别</a>
 <ul>
-<li>此处，再推荐一款超级好用的本地 OCR 工具–天若 OCR，需要安装 .net 环境。<a href="http://www.waylon.one/downloads/files/Tianruo_OCR.exe">下载链接 4.88 M</a>。</li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="http://pressbin.com/tools/excel_to_html_table/index.html">No-Cruft Excel to HTML Table Converter</a>
+<li>此处，再推荐一款超级好用的本地 OCR 工具 -- 天若 OCR，需要安装 .net
+环境。<a href="http://www.waylon.one/downloads/files/Tianruo_OCR.exe">下载链接
+4.88 M</a>。</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="http://pressbin.com/tools/excel_to_html_table/index.html">No-Cruft
+Excel to HTML Table Converter</a>
 <ul>
 <li>Excel 表格转 HTML 语言 </li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://webcode.tools/">Web 代码生成工具</a>
 <ul>
-<li>只要输入你的需求，它就可以生成代码，满足各种基本的和高级的需求。对于不是很熟悉 HTML 和 CSS 的 Web 开发人员来说，这个工具非常有用。</li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://fingerprintjs.com/">网站浏览记录工具 - fingerprintjs</a>
+<li>只要输入你的需求，它就可以生成代码，满足各种基本的和高级的需求。对于不是很熟悉
+HTML 和 CSS 的 Web 开发人员来说，这个工具非常有用。</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="https://fingerprintjs.com/">网站浏览记录工具 -
+fingerprintjs</a>
 <ul>
-<li> 通过网站来获取浏览器的一系列唯一标识既不需要用到 cookie，也不需要用到任何可能随时被恶意用户随时重置的数据。</li>
-<li>它快速提取网页浏览器的大量属性，既可以单独使用它们，也可以用它们生成散列值，用于标识用户的唯一性。当你在做一个 Web 项目时，这个工具提取的属性是最有可能替代移动设备的 UUID 的。</li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://clustrmaps.com">网站浏览记录工具 - clustrmaps.com</a>
+<li> 通过网站来获取浏览器的一系列唯一标识既不需要用到
+cookie，也不需要用到任何可能随时被恶意用户随时重置的数据。</li>
+<li>它快速提取网页浏览器的大量属性，既可以单独使用它们，也可以用它们生成散列值，用于标识用户的唯一性。当你在做一个 Web
+项目时，这个工具提取的属性是最有可能替代移动设备的 UUID 的。</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="https://clustrmaps.com">网站浏览记录工具 -
+clustrmaps.com</a>
 <ul>
-<li> 美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。同时，网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是免费的，能够满足个人网站的需求。</li>
-</ul>
+<li> 美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。同时，网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是免费的，能够满足个人网站的需求。<br>
 </li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://gitmind.com/">在线思维导图制作 - gitmind</a>
 <ul>
 <li> 完全免费的在线思维导图制作网站。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://www.edrawsoft.cn/mindmaster/">MindMaster</a>
 <ul>
 <li> 跨平台，支持在线绘制</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://www.pdf2go.com/zh/">在线编辑你的 PDF 文件</a>
 <ul>
-<li>支持在线转换为 PDF，PDF 转 JPG，或旋转页面，合并、拆分 PDF 文件，添加或删除 PDF 文件中的密码保护等来编辑 PDF。</li>
+<li>支持在线转换为 PDF，PDF 转 JPG，或旋转页面，合并、拆分 PDF
+文件，添加或删除 PDF 文件中的密码保护等来编辑 PDF。</li>
 <li>没有使用限额限制。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://ps.gaoding.com/#/">在线 PS</a></li>
 <li><a target="_blank" rel="noopener" href="https://bz.zzzmh.cn/">极简壁纸</a>
 <ul>
 <li>高质量精品壁纸网站，可以给你的电脑加上唯美的壁纸。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="http://www.cmbs.cn/">在线图片打码网</a>
 <ul>
 <li>简约的方式，为自己的图片自定义打码。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://weibomiaopai.com/">在线视频下载</a>
 <ul>
 <li>本软件提供了在线的微博视频、秒拍、腾讯视频等视频下载解析转存强大利器。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://xiezuocat.com/#/">写作猫</a>
 <ul>
 <li>面向文字工作者的服务，可以帮你修改错别字、推敲用语等，还能实时同步翻译。支持网页端和小程序端。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://www.sejda.com/html-to-pdf">html 网页转长 pdf</a>
 <ul>
 <li> 和通常的网页转 pdf 格式打印不同，工具可以把网页转换为<strong>一页</strong>的 pdf 文档，类似于长截图，内容不会分页截断，适合电子端阅读。如果网页内容比较多，这一页 pdf 会非常长。</li>
-<li>免费试用限制：Free service for 20 links per task and 3 tasks per hour.</li>
+<li>免费试用限制：Free service for 20 links per task and 3 tasks per
+hour.</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1>Online IDE</h1>
+<h1 id="online-ide">Online IDE</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="http://cpp.sh/">cpp.sh</a></li>
 <li><a target="_blank" rel="noopener" href="https://repl.it/upgrade/wylloong">在线 IDE - repl.it</a>
 <ul>
-<li> 一个完美的在线 IDE，你可以在几秒钟之内为你喜欢的编程语言或技术栈启动一个编程环境。它支持所有现代编程语言，比如 Python、Kotlin、Ruby 和 JavaScript。你可以安装语言库和包，然后直接使用它们，免去下载和管理工作。</li>
-<li>你也可以直接通过 <a target="_blank" rel="noopener" href="http://repl.it">repl.it</a> 链接分享代码，还能通过嵌入 <a target="_blank" rel="noopener" href="http://repl.it">repl.it</a> 链接让用户与代码交互。</li>
+<li> 一个完美的在线
+IDE，你可以在几秒钟之内为你喜欢的编程语言或技术栈启动一个编程环境。它支持所有现代编程语言，比如
+Python、Kotlin、Ruby 和
+JavaScript。你可以安装语言库和包，然后直接使用它们，免去下载和管理工作。</li>
+<li>你也可以直接通过 repl.it 链接分享代码，还能通过嵌入 repl.it
+链接让用户与代码交互。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h1>Online Resource</h1>
+<h1 id="online-resource">Online Resource</h1>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://b-ok.cc/">ZLibrary</a></p>
+<li><a target="_blank" rel="noopener" href="https://b-ok.cc/">ZLibrary</a>
 <ul>
-<li>The world’s largest ebook library.</li>
-<li>ZLibrary 是一个免费电子书籍搜索下载网站，成立于 2009 年，目前收录超过 500 万本电子书籍，主要是<strong>英文原版</strong>的电子书籍，读者可以根据关键词来搜索，也可以通过 ISBN 码搜索，另外也提供了下载历史记录方便查看历史记录。</li>
-</ul>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="http://www.dnbbn.com/">达牛的博客</a></p>
+<li>The world's largest ebook library.</li>
+<li>ZLibrary 是一个免费电子书籍搜索下载网站，成立于 2009 年，目前收录超过
+500
+万本电子书籍，主要是<strong>英文原版</strong>的电子书籍，读者可以根据关键词来搜索，也可以通过
+ISBN 码搜索，另外也提供了下载历史记录方便查看历史记录。</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="http://www.dnbbn.com/">达牛的博客</a>
 <ul>
 <li>达牛对日常办公使用频率较高的工具做了一些收藏整理，基本都是破解版软件。</li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/reachos/p/11818627.html">visio 2019 激活方法</a></li>
-</ul>
-</li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/reachos/p/11818627.html">visio 2019
+激活方法</a></li>
+</ul></li>
 </ul>
 <!--
 [世界最大的免费电子图书馆ZLibrary](https://zhuanlan.zhihu.com/p/142309453#:~:text=ZLibrary%E6%98%AF%E4%B8%80%E4%B8%AA%E5%85%8D%E8%B4%B9%E7%94%B5%E5%AD%90,%E6%9C%80%E5%A4%A7%E7%9A%84%E5%85%8D%E8%B4%B9%E5%9B%BE%E4%B9%A6%E9%A6%86%E3%80%82)
 -->
-<h1>English Writing Polish</h1>
+<h1 id="english-writing-polish">English Writing Polish</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://app.mtutor.engkoo.com/englishwriting/">微软爱写作</a>
 <ul>
 <li>微软亚洲研究院研发的作文打分功能。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="http://www.hemingwayapp.com/">Hemingway Editor</a>
 <ul>
-<li>Hemingway makes your writing bold and clear. It’s like a spellchecker, but for style. It makes sure that your reader will focus on your message, not your prose.</li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://writeandimprove.com/">Cambridge Writing Polish</a></li>
+<li>Hemingway makes your writing bold and clear. It's like a
+spellchecker, but for style. It makes sure that your reader will focus
+on your message, not your prose.</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="https://writeandimprove.com/">Cambridge Writing
+Polish</a></li>
 </ul>
 <!--
 [微软免费AI作文打分软件升级](https://mp.weixin.qq.com/s?__biz=MzIzNjc1NzUzMw==&mid=2247535205&idx=3&sn=b8f61846cf563ce898f6352834de0884&chksm=e8d0fd17dfa77401d741cfc26f2760d9e98a8b22ef2742c94d84109e41d4ffcfa51c76a9c2fe&mpshare=1&scene=1&srcid=&sharer_sharetime=1576904058704&sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd)
 -->
-<h1>Translation</h1>
+<h1 id="translation">Translation</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://translate.google.cn/">Google Translate</a>
 <ul>
-<li> 谷歌翻译在通过采用谷歌神经机器翻译 （GNMT：Google Neural Machine Translation） 系统后，可以极大提升翻译效率，在科技文、商务文方面尤为出色，但在文学、艺术领域还有待提高。</li>
-</ul>
-</li>
+<li> 谷歌翻译在通过采用谷歌神经机器翻译 （GNMT：Google Neural Machine
+Translation）
+系统后，可以极大提升翻译效率，在科技文、商务文方面尤为出色，但在文学、艺术领域还有待提高。</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://cn.bing.com/translator/">Bing Translator</a></li>
 <li><a target="_blank" rel="noopener" href="http://www.urbandictionary.com/">Urban Dictionary</a>
 <ul>
 <li> 欧美青少年用语；年轻人口头禅、俚语 </li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="http://onlineslangdictionary.com/">Online Slang Dictionary</a>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="http://onlineslangdictionary.com/">Online Slang
+Dictionary</a>
 <ul>
 <li> 英美习语大全 </li>
-</ul>
-</li>
+</ul></li>
 <li><a href="">Trados</a>
 <ul>
-<li>Trados 是本地化工作者必不可少的工具，它能提升翻译内容的一致性，减少重复劳动，降低翻译项目成本。</li>
-</ul>
-</li>
+<li>Trados
+是本地化工作者必不可少的工具，它能提升翻译内容的一致性，减少重复劳动，降低翻译项目成本。</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://www.english-corpora.org/coca/">COCA 语料库</a>
 <ul>
 <li>语料库是指经科学取样和加工的大规模电子文本库。适用于英语深度学习者、学者、研究人士。</li>
-</ul>
-</li>
+</ul></li>
 </ul>
 <!--
 
 [9个大神们都爱用的翻译工具](https://mp.weixin.qq.com/s?__biz=MzU1NTcxODQ0OQ==&mid=2247542149&amp;idx=1&amp;sn=e2bf9cade2837d0b655a09dadebfe906&source=41#wechat_redirect)
 
 -->
-<h1>Programming Resources</h1>
+<h1 id="programming-resources">Programming Resources</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://man.linuxde.net/">Linux 命令大全</a></li>
 <li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/">cplusplus</a></li>
 </ul>
-<h1>地图工具</h1>
+<h1 id="地图工具">地图工具</h1>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="http://www.shipxy.com/">全球船舶 AIS 信息</a></p>
+<li><a target="_blank" rel="noopener" href="http://www.shipxy.com/">全球船舶 AIS 信息</a>
 <ul>
-<li>船舶自动识别系统 (Automatic Identification System, 简称 AIS) 是一种新型的助航设备。AIS 基本功能是：将本船和他船的精确船位、航向、航速（矢量线）、转向速度和最近船舶会遇距离等动态信息和船名、呼号、船型、船长与船宽等静态信息通过 VHF 自动、定时播发，在 VHF 覆盖范围内（20 海里）装备 AIS 设备的船舶，可自动接收到这些信息。</li>
-</ul>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">百度地图坐标拾取系统</a></p>
-</li>
+<li>船舶自动识别系统 (Automatic Identification System, 简称 AIS)
+是一种新型的助航设备。AIS
+基本功能是：将本船和他船的精确船位、航向、航速（矢量线）、转向速度和最近船舶会遇距离等动态信息和船名、呼号、船型、船长与船宽等静态信息通过
+VHF 自动、定时播发，在 VHF
+覆盖范围内（20 海里）装备 AIS 设备的船舶，可自动接收到这些信息。</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">百度地图坐标拾取系统</a></li>
 </ul>
 
       
