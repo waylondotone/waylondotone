@@ -1902,794 +1902,6 @@ P2P 交易记账系统，根据 CPU 算力来模拟投票 和
       </tags>
   </entry>
   <entry>
-    <title>解读 Baidu Apollo EM Motion Planner</title>
-    <url>/Autonomous-Driving/Baidu-Apollo-EM-Motion-Planner/</url>
-    <content><![CDATA[<p>[toc]</p>
-<p><strong>解读 Baidu Apollo EM Motion Planner</strong></p>
-<p>论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 <a href="http://arxiv.org/abs/1807.08048">文章链接</a>。</p>
-<p>现在看来 (2021 年)，这篇论文属于 Apollo
-系统<strong>规划与决策模块</strong>的白皮书，文章介绍的方法和思想，在现阶段
-L4
-级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。</p>
-<p>我目前就职于某国内某自动驾驶创业公司，主要研究规划与决策领域的行为决策
-(behavior/maneuver decision)，以下 ABC 代指目前所在公司的化名。</p>
-<p>我在研读论文多次的基础上，基于目前的工作经验和设计实践，对文章的设计做一些个人的粗浅解读和评价，行家轻拍。欢迎大家在文章下留言赐教。</p>
-<p>对于新手，建议在读论文前，先阅读 Case Study
-这一章，了解文章在解决什么问题，以及大概是如何解决这个问题，这对文章的整体理解有帮助。</p>
-<hr>
-<h1 id="abstract">ABSTRACT</h1>
-<p>Apollo 系统目标：工业级的 L4
-自动驾驶系统，注重安全性、舒适度和可扩展性。</p>
-<blockquote>
-<p>The developed system aims to address the industrial level-4 motion
-planning problem while considering safety, comfort and scalability.</p>
-</blockquote>
-<p>Apollo 开源代码地址：<a href="https://github.com/ApolloAuto/apollo">Apollo open source
-autonomous driving platform</a>。</p>
-<p>注意：Apollo
-是一个 “伪开源”，公布出来的代码逻辑简单，更像是一个自动驾驶系统的空架子，和官方实际路测的代码是不一样的。</p>
-<h1 id="introduction">INTRODUCTION</h1>
-<p>The system covers multilane and single-lane autonomous driving in a
-hierarchical manner: - 第一级：变道选择。The <strong>top layer</strong>
-of the system is a <strong>multilane strategy</strong> that handles
-lane-change scenarios by <strong>comparing lane-level
-trajectories</strong> computed in parallel.</p>
-<!--
-  * 类比于 ABC公司的 maneuver select/arbitrator 
--->
-<ul>
-<li>第二级：车道内的轨迹优化和速度优化。Inside the lane-level trajectory
-generator, it iteratively solves path and speed optimization based on a
-Frenet frame.
-<ul>
-<li>For path and speed optimization, a combination of dynamic
-programming and spline-based quadratic programming is proposed to
-construct a scalable and easy-to-tune framework to handle traffic rules,
-obstacle decisions and smoothness simultaneously.</li>
-</ul></li>
-</ul>
-<hr>
-<p>补充知识点：什么是 Frenet frame？</p>
-<p>Frenet
-坐标系通常使用道路的中心线作为参考线，使用参考线的<strong>切线向量</strong>和<strong>法线向量</strong>建立坐标系。</p>
-<p>如下图所示，这个 S-D 坐标系即为 Frenet
-坐标系，它以车辆自身为原点，坐标轴相互垂直，分为： 纵向
-S：沿着参考线的方向； 横向 D：参考线的法向。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg"></p>
-<p>相比于笛卡尔坐标系，Frenet
-坐标系可明显地简化问题。因为车辆在行驶中，自车基于参考线 (道路中心线) 的位置，就可以使用纵向距离和横向距离来描述，同时纵向和横向的速度、加速度、加加速度等信息直接和道路相关；在车道保持和换道过程中都具有很强的实用性。</p>
-<!--
-From http://blog.sina.com.cn/s/blog_86186c970102yhrh.html
--->
-<hr>
-<!--
-![系统架构设计](WEBRESOURCE53447e28972063eb3a12a0cf9e17d4e1)
--->
-<p><img data-src="http://www.waylon.one/downloads/images/blog/onboard_module_of_Apollo.JPG"></p>
-<blockquote>
-<p>In the figure, the HD map module provides a high-definition map that
-can be accessed by every on-line module. Perception and localization
-modules provide the necessary dynamic environment information, which can
-be further used to predict future environment status in the prediction
-module. The motion planning module considers all information to generate
-a safe and smooth trajectory to feed into the vehicle control
-module.</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[safety]--&gt;B(traffic regulations)</span><br><span class="line">A--&gt;C(range coverage)</span><br><span class="line">A--&gt;D(cycle time efficiency)</span><br><span class="line">A--&gt;E(emergency safety)</span><br><span class="line">C--&gt;F(we aim to provide a trajectory with at least an eight second or two hundred meter motion planning trajectory)</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src=""></p>
-<p>在运动规划中，最重要的两个指标是安全 (safety) 和乘坐体验 (ride
-experience)。</p>
-<p>关于安全性，主要从交通规则 (traffic regulations)，场景覆盖范围 (range
-coverage)，周期规划效率 (cycle time efficiency) 和紧急安全 (emergency
-safety) 四个方面考虑。</p>
-<blockquote>
-<p>In motion planner, safety is always the top priority. We consider
-autonomous driving safety in, but not limited to, the following aspects:
-traffic regulations, range coverage, cycle time efficiency and emergency
-safety.</p>
-</blockquote>
-<!--
-在紧急模式下，自动驾驶系统可以在 100 ms 内就反应，而正常驾驶员需要至少 300ms 的反应时间。
-
-> In the case of an emergency, the system could react within 100 ms, compared with a 300 ms reaction time for a normal human driver.
--->
-<p>关于乘坐体验，主要从场景覆盖 (scenario coverage)，交通规则 (traffic
-regulation) 和舒适度 (comfort，比如自车加速度和 Jerk) 三方面着手。</p>
-<blockquote>
-<p>In addition to safety, passengers’ ride experience is also important.
-The measurement of ride experience includes, but is not limited to,
-scenario coverage, traffic regulation and comfort.</p>
-</blockquote>
-<!--
-
-# 学习语法表达
-First, the search space is expanded across multiple lanes, which causes the algorithm to be **computationally expensive**.
-
-it is not easy to apply traffic regulations under the same frame.
-
--->
-<h2 id="multilane-strategy">Multilane Strategy</h2>
-<p>运动规划的注意点之一：自车的决策应该尽量稳定，以方便其他交通参与者预测自车的意图。如果自车在正常行驶过程中，和其他车辆交互决策不稳定 (如障碍物误感) 带来的急刹车，容易造成后方车辆制动不及时而发生追尾。</p>
-<!--
-ABC 公司的设计中，曾发生自车急刹，被后方车辆追尾的情况。
--->
-<blockquote>
-<p>It is important to follow consistent on- road driving behavior to
-inform other drivers of the intention of the autonomous driving
-vehicle.</p>
-</blockquote>
-<p>变道策略需要能处理主动变道 ( routing
-规划) 和被动变道 (道路前方被堵塞) 两种情况，通常变道成功率 (success rate)
-会作为变道质量的一个重要衡量指标。</p>
-<blockquote>
-<p>Typically, a multilane strategy should cover both nonpassive and
-passive lane-change scenarios. * In EM planner, a nonpassive lane-change
-is a request triggered by the routing module for the purpose of reaching
-the final destination. * A passive lane change is defined as an ego car
-maneuver when the default lane is blocked by the dynamic
-environment.</p>
-</blockquote>
-<p>文中提到的做法是对主动变道和被动变道进行并行计算 (parallel
-framework)。 * 对所有的候选车道，以车道级别 (lane-level)
-进行交通规则、车道内障碍物的分析，那么每个车道都会生成一个最可行的轨迹
-(best-possible trajectory)。最后，一个 cross-lane trajectory decider
-会基于安全性和代价函数两方面来选择车道。</p>
-<blockquote>
-<p>We propose a parallel framework to handle both passive and nonpassive
-lane changes. For candidate lanes, all obstacles and environment
-information are projected on lane-based Frenet frames. Then, the traffic
-regulations are bound with the given lane-level strategy. Under this
-framework, each candidate lane will generate a best-possible trajectory
-based on the lane-level optimizer. Finally, a cross-lane trajectory
-decider will determine which lane to choose based on both the cost
-functional and safety rules.</p>
-</blockquote>
-<!--
-类比于 ABC 公司的 lane sequence。
--->
-<h1 id="path-speed-iterative-algorithm">Path-Speed Iterative
-Algorithm</h1>
-<p>大多数自动驾驶软件运动规划的做法是，沿着车道参考线 (reference
-line，通常是从高精度地图中得到车道中心线) 把单车道问题转化为 Frenet
-frames with time (SLT) 问题。其中，S 指 Frenet 坐标系下的纵向，L
-指横向，T 指代时间。</p>
-<blockquote>
-<p>Many autonomous driving motion planning algorithms are developed in
-Frenet frames with time (SLT) to reduce the planning dimension with the
-help of a reference line.</p>
-</blockquote>
-<p>如何在 Frenet 中找到最优轨迹是一个 3D (S+L+T)
-约束优化问题，文章中提到两种做法的路线之争。在我看来，现在工业界主流前沿的做法是第二种，第一种正在被逐渐淘汰。</p>
-<blockquote>
-<p>Finding the optimal trajectory in a Frenet frame is essentially a 3D
-constrained optimization problem. There are typically two types of
-approaches: direct 3D optimization methods and the path-speed decoupled
-method. * [方法一：无脑优化采样] Direct methods attempt to find the
-optimal trajectory within SLT using either trajectory sampling or
-lattice search. + These approaches are limited by their search
-complexity, which increases as both the <strong>spatial</strong> and
-<strong>temporal</strong> search resolutions increase. To qualify the
-time consumption requirement, one has to compromise with increasing the
-search grid size or sampling resolution. Thus, the generated trajectory
-is suboptimal.</p>
-</blockquote>
-<p><!--
-    + ABC之前的做法是这样子的，但是后面逐渐被替换掉。
---></p>
-<ul>
-<li>[方法二：path-speed 解耦，先求 path，再解 speed] The path-speed
-decoupled approach <strong>optimizes path and speed separately</strong>.
-Path optimization typically considers static obstacles. Then, the speed
-profile is created based on the generated path. <strong>It is possible
-that the path-speed approach is not optimal with the appearance of
-dynamic obstacles</strong>. However, since the path and speed are
-decoupled, this approach achieves more flexibility in both path and
-speed optimization.
-<ul>
-<li>一个负责问题，如果一旦可以分为几个小问题，或者之前已经解决的问题，那么问题整体难度就会降低下来。</li>
-</ul></li>
-</ul>
-<h2 id="path-speed-decoupled-framework">Path-speed decoupled
-framework</h2>
-<ul>
-<li>EM planner 分别迭代优化 path 和 speed。在 path
-优化中，利用上一帧的速度 (speed profile from the last cycle)
-来预估和低速对象障碍物的交互，然后基于生成的 path 来优化速度。
-<ul>
-<li>注意，实践中要减少对上一次规划轨迹的依赖。</li>
-</ul></li>
-</ul>
-<blockquote>
-<p>EM planner optimizes path and speed iteratively. The speed profile
-from the last cycle is used to estimate interactions with
-<strong>oncoming</strong> and <strong>low-speed dynamic
-obstacles</strong> in the path optimizer. Then, the generated path is
-sent to the speed optimizer to evaluate an optimal speed profile.</p>
-</blockquote>
-<p>这里补充一下，Path-speed decoupled 的方法对高速物体的 nudge
-行为处理不友好；这里通过变道代替 nudge
-来灵巧地避开这个缺陷问题，但是会引来频繁变道的风险。比如，一辆快速自行车和自车同行，自行车距离自车比较近，自车难道要变道来超过
-(overtake) 这个自行车吗？</p>
-<blockquote>
-<p>For high-speed dynamic dynamic obstacles, EM planner prefers a
-lane-change maneuver rather than nudging for safety reasons.</p>
-</blockquote>
-<h2 id="decisions-and-traffic-regulations">Decisions and Traffic
-Regulations</h2>
-<p>EM planner 先做出决策 (make
-decisions)，再规划轨迹。决策可以输出清晰的自车意图，把非凸问题约束为凸问题，不仅减少寻找最优轨迹的搜索空间，而且允许使用凸优化问题的优化方法。</p>
-<blockquote>
-<p>In Apollo EM planner, we make decisions prior to providing a smooth
-trajectory. The decision process is designed to make on-road intentions
-clear and reduce the search space for finding the optimal
-trajectory.</p>
-</blockquote>
-<p>决策的路线之争。</p>
-<blockquote>
-<p>Many decision-included planners attempt to generate vehicle states as
-the ego car decision. These approaches can be further divided into
-hand-tuning decisions and model-based decisions. *
-[方法一：手写规则，扩展性差] The advantage of hand-tuning decision is
-its tunability. However, scalability is its limitation. In some cases,
-scenarios can go beyond the hand-tuning decision rule’s description. +
-When considering dozens of obstacles, the decision behavior is difficult
-to be accurately described by a finite set of ego car states.</p>
-</blockquote>
-<!--
-这也是值得 reasoner 考虑的问题，如何避免负责的规则呢？比如机器学习反馈 risk 的程度。
--->
-<ul>
-<li>[方法二：基于模型的决策] The model-based decision approaches
-generally discretize the ego car <strong>status</strong> into finite
-driving statuses and use data-driven methods to tune the model.</li>
-</ul>
-<!--
-# 多物体交互。按照 GJ 的说法，其他车可以利用自车的模型来预测轨迹。
-The consideration of multi- agent interactions will benefit both prediction and decision-making processes.
--->
-<p>Targeting level-4 autonomous driving, a decision module shall include
-both <strong>scalability</strong> and
-<strong>feasibility</strong>.<br>
-* Scalability is the scenario expression ability (i.e., the autonomous
-driving cases that can be explained). + 不要过拟合 (over-fit) 一个
-issue，适用性差。 * For feasibility, we mean that the generated decision
-shall include a feasible region in which the ego car can maneuver
-<strong>within dynamic limitations</strong>. + Both hand-tuning and
-model-based decisions do not generate a collision-free trajectory to
-verify the feasibility. * 同意，decision
-层并不会考虑是否能够生成轨迹，所以有些决策是无效的。</p>
-<p>划重点：EM planner
-的做法是先生成初略的轨迹来表示交互意图 (不受限于障碍物数量)；然后，生成一个有约束的凸走廊
-(a convex feasible
-space)，用<strong>凸优化</strong>的方法来求解优化轨迹。 * 目前，ABC
-是先生成决策，然后决策作为约束，在 ST planner 中搜索粗略的轨迹，和 EM
-的做法不一致。</p>
-<blockquote>
-<p>In EM planner’s decision step, we describe the behavior differently.
-* First, <strong>the ego car moving intention is described by a rough
-and feasible trajectory</strong>. Then, the interactions between
-obstacles are measured with this trajectory. + This feasible
-trajectory-based decision is scalable even when scenarios become more
-complicated. * Second, the planner will also generate a <strong>convex
-feasible space</strong> for <strong>smoothing spline parameters</strong>
-based on the trajectory. + A quadratic-programming-based smoothing
-spline solver could be used to generate smoother path and speed profiles
-that follow the decision. This guarantees a feasible and smooth
-solution.</p>
-</blockquote>
-<h1 id="em-planner-framework-with-multilane-strategy">EM PLANNER
-FRAMEWORK WITH MULTILANE STRATEGY</h1>
-<p>除了 lane-level motion planning 的具体实现方法不同，这章节数据流和
-ABC 的实现非常类似，设计架构在工业界领先，可以重点参考。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_framework.JPG"></p>
-<ol type="1">
-<li><p>在 Data Center 接受并同步数据。 &gt; all sources of information
-are collected and synced at the <strong>data center
-module</strong>.</p></li>
-<li><p> 基于道路中心线，选择几条可行
-lane，然后生成基于其中心线的障碍物投影信息 (SL 坐标描述)。</p></li>
-</ol>
-<blockquote>
-<p>The reference line generator will produce some candidate lane-level
-reference lines along with information about traffic regulations and
-obstacles.</p>
-</blockquote>
-<ol start="3" type="1">
-<li>lane-level optimizer module</li>
-</ol>
-<h1 id="em-planner-at-lane-level">EM PLANNER AT LANE LEVEL</h1>
-<p>The iteration includes two E-steps and two M-steps <strong>in one
-planning cycle</strong>. The trajectory information will iterate between
-planning cycles.</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_Iteration.JPG"></p>
-<p>在两个 M-steps 中，通过 DP 和 QP 来生成 path 和 speed
-profiles。请注意，在一个规划间隔内，planning
-规划出一条可行的轨迹，需要迭代多次 EM planner，也就是运行多次 E-steps 和
-M-steps.</p>
-<blockquote>
-<p>In two M-steps, path and speed profiles are generated by a
-combination of dynamic programming and quadratic programming.</p>
-</blockquote>
-<hr>
-<p>在第一步 E-step 中，静态和动态障碍物投影到车道的 Frenet
-frame，准备进行 SL 的 path 规划。</p>
-<blockquote>
-<p>In the first E-step, obstacles are projected on <strong>the lane
-Frenet frame</strong>. This projection includes both static obstacle
-projection and dynamic obstacle projection. *
-静态障碍物的投影：<strong>Static obstacles</strong> will be projected
-directly based on a Cartesian-Frenet frame transformation. *
-动态障碍物的投影 (负责)：Considering the previous cycle planning
-trajectory, we can evaluate the estimated dynamic obstacle and ego car
-positions <strong>at each time point</strong>. + The overlap of dynamic
-obstacles and the ego car at each time point will be mapped in the
-Frenet frame.</p>
-</blockquote>
-<!--    
-在下一次规划中，使用了上一次的轨迹；这违背了自己对上次轨迹不能用到当前帧的信仰。下次可以和面试者讨论下。如果这一帧，自车的轨迹突变，怎么解决呢？这种依赖上一次的轨迹，可以解决吗？
--->
-<p>出于安全考虑 (目前技术处理这类场景的安全性把握不大)，在 SL
-投影中，只对低速 (low-speed traffic) 和对向 (oncoming)
-动态障碍物使用；高速物体通过变道来解决。</p>
-<blockquote>
-<p>For safety considerations, the SL projection of dynamic obstacles
-will only consider low-speed traffic and oncoming obstacles. For
-high-speed traffic, EM planner’s parallel lane-change strategy will
-cover the scenario.</p>
-</blockquote>
-<h3 id="如何把非凸问题转变为凸优化问题">如何把非凸问题转变为凸优化问题？</h3>
-<ol type="1">
-<li>DP 可以在障碍物投影后的非凸空间 (SL) 中找到一个初略 path
-解，然后从这个初略解中得到针对障碍物的决策，比如 nudge，yield 还是
-overtake。</li>
-</ol>
-<blockquote>
-<p>Although we projected obstacles on SL and ST frames, the optimal path
-and speed solution still lies in a non-convex space. Thus, we use
-dynamic programming to first obtain a rough solution; meanwhile,
-<strong>this solution can provide obstacle decisions such as nudge,
-yield and overtake</strong>.</p>
-</blockquote>
-<!--
-决策是在 path 的 DP 中决策的吗？
--->
-<ol start="2" type="1">
-<li>基于针对障碍物的决策，生成一个凸区域 (convex hull，凸包)，可供 QP
-算法求解。</li>
-</ol>
-<blockquote>
-<p>We use the rough decision to determine a convex hull for the
-quadratic-programming-based spline optimizer.</p>
-</blockquote>
-<ol start="3" type="1">
-<li>通过优化器在凸空间内求解。</li>
-</ol>
-<blockquote>
-<p>The optimizer can find solutions within the convex hull.</p>
-</blockquote>
-<hr>
-<p>待补充知识点：什么是非凸优化问题呢？</p>
-<p>如何把一个非凸问题转变为可解问题呢？此处引用 Pony 的一篇技术分析文章
--- <a href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a>
-。</p>
-<hr>
-<h3 id="sl-and-st-mapping-e-step">SL and ST Mapping (E-step)</h3>
-<!--
-待补充知识点：ST 和 SL 投影是什么呢？
--->
-<p>对于单车道而言，SL
-投影是基于车道中心线；对于变道而言，中间涉及到至少两条单车道，两条车道的连接使用的是
-G2 算法。</p>
-<p>The SL projection is based on a G2 (continuous curvature derivative)
-smooth reference line.</p>
-<p>如何把动态障碍物转化到 SL 中？</p>
-<p>参考上一次的自车规划轨迹 (last cycle
-trajectory)，可以得到自车在指定时间上位于 S
-方向上的位置，来预估和障碍物预测轨迹的相交处 (interactions)。 &gt; For
-dynamic obstacles, we mapped the obstacles with the help of the last
-cycle trajectory of the ego car. The last cycle’s moving trajectory is
-projected on the Frenet frame to extract the station direction speed
-profile. This will provide an estimate of the ego car’s station
-coordinates <strong>given a specific time</strong>. The estimated ego
-car station coordinates will help to evaluate the dynamic obstacle
-interactions. + Once an ego car’s station coordinates have interacted
-with an obstacle trajectory point with the same time, a shaded area on
-the SL map will be marked as the estimated interaction with the dynamic
-obstacle.</p>
-<p>ST 投影帮助我们评估自车的速度轮廓 (speed profile)。因为在 ST
-图中抠除障碍物占据的空间 (shaded
-area)，剩余的空间其实是速度可行区间。</p>
-<blockquote>
-<p>ST projection helps us evaluate the ego car’s speed profile. The
-remaining region is the speed profile feasible region.</p>
-</blockquote>
-<h3 id="m-step-dp-path">M-Step DP Path</h3>
-<p>M-step path 的目标是找到优化的 path 轮廓，分为基于 DP 的决策和 QP
-的路线规划，i.e. DP 得到决策，QP 进行轨迹规划。</p>
-<blockquote>
-<p>The M-step path optimizer optimizes the path profile in the Frenet
-frame. * This is represented as finding an optimal function of lateral
-coordinate w.r.t. station coordinate in nonconvex SL space (e.g.,
-nudging from left and right might be two local optima). * The path
-optimizer includes two steps: <strong>dynamic-programming-based path
-decision</strong> and <strong>spline-based path planning</strong>.</p>
-</blockquote>
-<p>Path 动态规划提供了一个粗糙的 path 轮廓，包括可行的通道和障碍物的
-nudge 决策。注意，生成的 path 轮廓是采样点连接起来的，不够精细。</p>
-<!--
-在path生成中决定是否 nudge
--->
-<blockquote>
-<p>The dynamic programming path step provides a rough path profile with
-<strong>feasible tunnels</strong> and <strong>obstacle nudge
-decisions</strong>.</p>
-</blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_structure_Fig_6.JPG"></p>
-<p>The step includes a lattice sampler, cost function and dynamic
-programming search. + Lattice Sampler: The <strong>lattice
-sampler</strong> is based on a Frenet frame. Multiple rows of points are
-first sampled ahead of the ego vehicle. Points between different rows
-are smoothly connected by quintic polynomial edges. +
-撒点的做法来搜索粗略路线，使用五次多项式来拟合平滑路线。 + Cost
-Function: <strong>Each graph edge</strong> is evaluated by the summation
-of cost functionals. We use information from the SL projection, traffic
-regulations and vehicle dynamics to construct the functional. +
-从障碍物，交通规则和车辆动力学三方面来计算每个连接边 (两个 lattice point
-的连接线) 的代价。此处略过 cost 函数的设计。 + Dynamic Programming
-Search: Edge costs are used to select a candidate path with the
-<strong>lowest cost</strong> through a dynamic programming search. The
-candidate path will also <strong>determine the obstacle
-decisions</strong>.</p>
-<h3 id="m-step-spline-qp-path">M-Step Spline QP Path</h3>
-<p>Spline QP path 是上面 dynamic programming path 的进一步优化
-(refinement)。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Path.JPG"></p>
-<p>在 dynamic programming path 中，基于选择路线的可行通道 (feasible
-tunnel) 被确定下来就是一个凸优化问题，spline QP path
-是在可行通道中产生一条平滑的路线。</p>
-<blockquote>
-<p>The spline QP path step is a refinement of the dynamic programming
-path step. In a dynamic programming path, a feasible tunnel is generated
-based on the selected path. Then, the spline-based QP step will generate
-a smooth path within this feasible tunnel.</p>
-</blockquote>
-<p>在线性化的约束 (linearized constraint) 中，利用 QP spline solver
-来求解优化目标函数 (objective function)，从而生成生成 spline QP
-path。</p>
-<blockquote>
-<p>The spline QP path is generated by optimizing an objective function
-with a linearized constraint through the QP spline solver.</p>
-</blockquote>
-<h4 id="目标函数组成">目标函数组成</h4>
-<p>目标函数由平滑代价和引导线代价组成，其中引导线是上一步的 DP
-path。</p>
-<blockquote>
-<p>The objective function of the QP path is a <strong>linear
-combination</strong> of smoothness costs and guidance line cost. * The
-guidance line in this step is the DP path. <strong>The guidance line
-provides an estimate of the obstacle nudging distance</strong>.</p>
-</blockquote>
-<!--
-![QP_path_objective_function](E3D91C46ED8648009D9B758630BC1510)
--->
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Path_QP_cost_function.JPG"></p>
-<p>上述目标函数在 nudge 障碍物的距离和平滑性中做了平衡和取舍。</p>
-<blockquote>
-<p>The objective function describes the balance between nudging
-obstacles and smoothness.</p>
-</blockquote>
-<h4 id="约束组成">约束组成</h4>
-<p>约束由可行边界约束 (boundary constraints) 和自车动态性能约束 (dynamic
-feasibility) 组成。</p>
-<blockquote>
-<p>The constraints in the QP path include boundary constraints and
-dynamic feasibility. These constraints are applied on f(s), f’(s) and
-f’’(s) at <strong>a sequence of station coordinates</strong> s0, s1,
-..., sn.</p>
-</blockquote>
-<p>在 EM planner 中，使用自行车模型 (bicycle model)
-来考虑自车的动力学特性；在规划阶段，把车辆模型简化为自行车模型，是一种比较通用的做法。</p>
-<blockquote>
-<p>In EM planner, the ego vehicle is considered under the bicycle
-model.</p>
-</blockquote>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/left_corner.jpg" alt="左上角约束推导图">
-<figcaption aria-hidden="true">左上角约束推导图</figcaption>
-</figure>
-<p>上面的操作和近似转换是做什么呢？在横向 (lateral direction)
-约束求解中，l = f (s)，因为 sin 不是线性的函数，所以使用 f (s)
-的导数来替代 sin
-函数。在允许一定误差的情况下，把一个非线性函数，转化为线性约束 (linear
-constraints) 问题。</p>
-<blockquote>
-<p>To keep the boundary constraint convex and linear, we add two half
-circles on the front and rear ends of the ego car.</p>
-</blockquote>
-<p>那么，现在已经把所有的约束化简为线性约束，问题就可以使用 quadratic
-programming solver
-来快速求解这个问题，效率更高。这就是<strong>数学的魅力啊</strong>！</p>
-<blockquote>
-<p>Since all constraints are linear with respect to spline parameters, a
-quadratic programming solver can be used to solve the problem very fast.
-* In addition to the boundary constraint, the generated path shall match
-the ego car’s initial lateral position and derivatives. +
-实现细节注意点：考虑车辆的初始状态。</p>
-</blockquote>
-<h2 id="m-step-dp-speed-optimizer">M-Step DP Speed Optimizer</h2>
-<!--
-(和 ABC 的 ST planner 比较通用)
--->
-<p>在 ST 图中，使用 DP 算法生成一个速度轮廓 (speed profile)，即 v =
-S (t)。</p>
-<blockquote>
-<p>The speed optimizer generates a speed profile in the ST graph, which
-is represented as a station function with respect to time S(t).</p>
-</blockquote>
-<p>在 ST graph 中找最优 speed profile 是一个复杂的非凸问题。我们使用
-dynamic programming 和 spline quadratic programming 在 ST
-图中寻找一个平滑的速度轮廓 (非最优)。</p>
-<p>同 Path planner，我们先利用 DP 算法搜索一个粗略的 speed
-profile，把问题从非凸问题化简为凸问题；然后在有约束的情况下，沿着 speed
-profile (guidance line)，使用 QP 算法来求解最优的速度解。</p>
-<blockquote>
-<p>We use dynamic programming combined with spline quadratic programming
-to find a smooth speed profile on the ST graph.</p>
-</blockquote>
-<h3 id="dp-speed-框架">DP speed 框架</h3>
-<p>The DP speed step includes a cost functional, ST graph grids and
-dynamic programming search. The generated result includes a
-<strong>piecewise</strong> linear speed profile, a feasible tunnel and
-<strong>obstacle speed decisions</strong>.</p>
-<p>待补充，obstacle speed decisions 是什么形式的决策呢？</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_Speed_Optimizer.JPG"></p>
-<p>首先，对整个 ST 图进行网格化处理，包括对障碍物进行网格化分割。 &gt;
-obstacle information is first discretized into grids on the ST
-graph.</p>
-<p>类似于从网格中按时间递增顺序，搜索带约束的可行解，速度可以在网格上表示为
-(s0, s1, ..., sn)，形状是锯齿形的。</p>
-<blockquote>
-<p>A piecewise linear speed profile function is represented as S = (s0,
-s1, ..., sn) on the grids.</p>
-</blockquote>
-<p>Cost function 由三部分组成： - Velocity keeping cost: * This term
-indicates that the vehicle shall follow the designated speed when there
-are no obstacles or traffic light restrictions present. V^ref describes
-the reference speed, which is determined by the road speed limits,
-curvature and other traffic regulations. - Smoothness cost: * The
-acceleration and jerk square integral describes the smoothness of the
-speed profile. - Total obstacle cost: * The <strong>distances</strong>
-of the ego car to all obstacles are evaluated to determine the total
-obstacle costs.</p>
-<p>DP 搜索时要注意车辆动力学限制；同时，可以根据运动学约束做剪枝
-(pruning) 操作。</p>
-<blockquote>
-<p>The dynamic constraints include <strong>acceleration, jerk limits and
-a monotonicity constraint</strong> since we require that the generated
-trajectories do not perform backing maneuvers when driving on the road.
-* Some necessary pruning based on vehicle dynamic constraints is also
-applied to accelerate the process.</p>
-</blockquote>
-<hr>
-<p>知识点，如何把导数问题简化为有限差分问题。</p>
-<p>ai = ((si-si-1)/dt - (si-1 - si-2)/dt)/dt。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/finite_difference_method.JPG"></p>
-<hr>
-<h2 id="m-step-qp-speed-optimizer">M-Step QP Speed Optimizer</h2>
-<p>因为锯齿形的线性速度轮廓不能满足运动学特性，所以使用 spline QP step
-去填补这个空缺 (fill this gap)。</p>
-<blockquote>
-<p>Since the piecewise linear speed profile cannot satisfy dynamic
-requirements, the spline QP step is needed to fill this gap.</p>
-</blockquote>
-<h3 id="spline-qp-speed-框架">Spline QP Speed 框架</h3>
-<p>如下图所示，spline QP speed 是在满足路径单调性 (monotonicity
-evaluated at designated points，不倒车), 交通规则 (traffic regulations,
-可行通道) 和车辆运动学约束 (vehicle dynamic constraints)
-的线性约束情况下，通过 cost
-的方式获取最优的速度，同时考虑了速度平滑性和参考速度。</p>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Speed_Optimizer.JPG" alt="Fig. 13">
-<figcaption aria-hidden="true">Fig. 13</figcaption>
-</figure>
-<p>The spline QP speed step includes three parts: cost functional,
-linearized constraint and spline QP solver.</p>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/Speed_QP_cost.jpg" alt="cost function">
-<figcaption aria-hidden="true">cost function</figcaption>
-</figure>
-<p>The objective function is a balance between following the guidance
-line and smoothness. The spline optimization is within the linearized
-constraint.</p>
-<p>After wrapping up the cost objective and constraints, the spline
-solver will generate a smooth feasible speed profile.</p>
-<!--
-
-注意，重要的求解步骤，就是这么一笔带过了。如何进行 QP 的求解，是自己感兴趣的内容。
-
--->
-<h2 id="notes-on-solving-quadratic-programming-problems">Notes on
-Solving Quadratic Programming Problems</h2>
-<h3 id="优化任务量">优化任务量</h3>
-<p>一次优化过程中大概有一百个采样点，那么约束就多于 600 个。</p>
-<blockquote>
-<p>For safety considerations, we evaluate the path and speed at
-approximately one-hundred different locations or time points.</p>
-</blockquote>
-<p>path 和 speed 的优化问题，由一个五项式表达出来，但是约束条件有 30
-个之多；然后，使用 QP solver 来求解。</p>
-<blockquote>
-<p>For both the path and speed optimizers, we find that piecewise
-quintic polynomials are good enough. The spline generally contains 3 to
-5 polynomials with approximately 30 parameters. Thus, <strong>the
-quadratic programming problem has a relatively small objective function
-but large number of constraints</strong>.</p>
-</blockquote>
-<p>In addition to accelerating the quadratic programming, <strong>we use
-the result calculated in the last cycle as a hot start</strong>. *
-注意，在 EM
-文章中，优先使用上一次的规划轨迹，不仅可以提高求解效率，同时容易和上一次的决策保持一致。</p>
-<p>因为使用上一次的规划轨迹来求解，QP 问题可以平均在 3ms 内求解。</p>
-<blockquote>
-<p>The QP problem can be solved within 3 ms on average, which satisfies
-our time consumption requirement.</p>
-</blockquote>
-<p>此处补充一下，QP 求解是轨迹规划耗时的重点，平均 3ms
-不代表求解性能一定好，更需要关注耗时最差的情况，或者中位数的情况。 *
-举个例子，假设在 100 次求解中，如果 99 次求解耗时均是 2 ms，只有一次耗时
-102
-ms，那么最坏的这次求解，会导致自车反应延迟，足以影响自动驾驶安全，但是平均时间是
-3ms。这就是统计学描述的精妙。</p>
-<h2 id="notes-on-non-convex-optimization-with-dp-and-qp">Notes on
-Non-convex Optimization With DP and QP</h2>
-<p>DP 和 QP 各有局限，结合起来一起解决非凸优化问题。</p>
-<blockquote>
-<p>DP and QP alone both have their limitations in the non-convex domain.
-A combination of DP and QP will take advantage of the two and reach an
-ideal solution.</p>
-</blockquote>
-<ul>
-<li>DP: As described earlier in this manuscript, the <strong>DP
-algorithm depends on a sampling step to generate candidate
-solutions</strong>. Because of the restriction of processing time,
-<strong>the number of sampled candidates is limited by the sampling
-grid</strong>. Optimization within a finite grid yields a <strong>rough
-DP solution</strong>. In other words, DP does not necessarily, and in
-almost all cases would not, <strong>deliver</strong> the optimal
-solution.
-<ul>
-<li>For example, DP could select a path that nudges the obstacle from
-the left but not nudge with the best distance.</li>
-<li>DP 方法受限于采样精度 (求解性能约束)，不能找出最优的结果。</li>
-</ul></li>
-<li>QP: Conversely, QP generates a solution based on the <strong>convex
-domain</strong>. It is not available without the help of the DP step.
-<ul>
-<li>For example, if an obstacle is in front of the master vehicle, QP
-requires a decision, such as nudge from the left, nudge from the right,
-follow, or overtake, to generate its constraint. <strong>A random or
-rule-based decision will make QP susceptible to failure or fall into a
-local minimal</strong>.</li>
-<li>QP 主要是解决凸优化问题，需要 DP 把非凸问题简化为凸优化问题。</li>
-<li>目前，ABC's 的 stopping
-constraints，并不是输出一个决策，而是输出一个约束到 ST 中，在 ST
-中进行决策的优化。从而，决策上的约束，可以把一个非凸问题化简为凸优化问题。</li>
-</ul></li>
-<li>DP + QP: A DP plus QP algorithm will minimize the limitations of
-both: (1) The EM planner first uses DP to search within a grid to reach
-a rough resolution. (2) <strong>The DP results are used to generate a
-convex domain and guide QP</strong>. (3) QP is used to search for the
-optimal solution in the convex region that most likely contains global
-optima.
-<ul>
-<li>ABC 目前使用 reasoner 把一个非凸问题转化为凸优化问题，reasoner
-的输出就是凸问题的约束。</li>
-</ul></li>
-</ul>
-<p>各家公司的做法，千差万别，本质上都是在求解一个优化问题，把非凸的问题转化为凸问题，最后优化求解。</p>
-<h1 id="case-study">CASE STUDY</h1>
-<p>EM planner 是一个轻量级决策 (light-decision) 的规划器。</p>
-<p>Although most state-of-the-art planning algorithms are based on
-<strong>heavy decisions</strong>, <strong>EM planner is a
-light-decision-based planner</strong>. It is true that a
-heavy-decision-based algorithm, or heavily rule-based algorithm, is
-easily understood and explained. The disadvantages are also clear: it
-may be trapped in corner cases (while its frequency is closely related
-to the complexity and magnitude of the number of rules) and not always
-be optimal. * 和 EM planner 相比，目前 ABC 做法的缺陷，在行为决策部分
-(reasoner)，规则的痕迹太重了。那么，能否引入比较智能的算法或者架构，来解决这类约束呢？这也是自己下一步的努力方向。
-* 自动驾驶不能通过重规则 (heavy-decision-based algorithm)
-来实现，最好的做法还是通过优化来实现。</p>
-<!--
-These cases were exposed during the intense daily test routines in Baidu’s heavy-decision planning modules and solved by the latest light-decision planning module.
-
-我推测，百度曾经也有一套规则痕迹偏重的做法，但是可能后期被抛弃。
--->
-<p>这个示例中，进行了两次迭代 (两轮 EM
-迭代)。通常，环境越复杂，计算迭代时间越复杂，所以优化问题是一个没有时间收敛上限的问题。</p>
-<blockquote>
-<p>In general, the more complicated the environment is, the the more
-steps that may be required.</p>
-</blockquote>
-<p>建议在读论文前，先阅读 Case Study
-这一章，了解文章在解决什么问题，以及如何解决这个问题，对文章的实现有初步了解。</p>
-<h1 id="computational-performance">COMPUTATIONAL PERFORMANCE</h1>
-<p>这篇文章把三维 (station-lateral-speed) 的问题，化简为两个二维问题
-(station-lateral problem and station-speed
-problem)，那么大大简化了计算复杂度。也就是，问题复杂度降维了。</p>
-<blockquote>
-<p>Because the three-dimensional station-lateral-speed problem has been
-split into two two-dimensional problems, i.e., <strong>station-lateral
-problem and station-speed problem</strong>, the computational complexity
-of EM planner has been significantly decreased, and thus, this planner
-is very efficient. <strong>It takes less than 100 ms on
-average</strong>.</p>
-</blockquote>
-<p>从问题复杂度 O (n (M+N))
-来分析求解效率，可以应用到论文中，具有学术的感觉。但是，为什么是 M
-(后续车道) + N (障碍物数量) 呢？</p>
-<blockquote>
-<p>Assuming that we have n obstacles with M candidate path profiles and
-N candidate speed profiles, the computational complexity of this
-algorithm is <strong>O(n(M+N))</strong>.</p>
-</blockquote>
-<h1 id="conclusion">CONCLUSION</h1>
-<p>在自动驾驶中，安全性 (safety) 和通行能力 (passability) 是关键问题
-(critical issue)。如果规则太过严格，那么通过率必然会下降。</p>
-<blockquote>
-<p>One critical issue in autonomous driving vehicles is the challenge of
-safety vs. passability. A strict rule increases the safety of the
-vehicle but lowers the passability, and vice versa.</p>
-</blockquote>
-<p>EM planner described in this manuscript is also designed to solve the
-<strong>inconsistency</strong> of potential decisions and planning,
-while it also improves the passability of autonomous driving vehicles. *
-通过复用上一次的决策 (hot
-start)，如果环境不发生大的变化，决策容易和上一次的决策保持一致。 *
-决策不稳定，也是目前 ABC 遇到的常见问题之一。</p>
-<p>EM planner 把一个 3D 问题化简为 2 个 2D
-问题，化繁为简，降低了问题难度，提高了求解效率。</p>
-<blockquote>
-<p>EM planner significantly reduces computational complexity by
-transforming a three-dimensional station-lateral-speed problem into two
-twodimensional station-lateral/station-speed problems. It could
-significantly reduce the processing time and therefore increase the
-interaction ability of the whole system.</p>
-</blockquote>
-<hr>
-<p>最后，APPENDIX 2 中的 CONSTRAINED SMOOTHING SPLINE AND QUADRATIC
-PROGRAMMING 一节，应用到了复杂的再生核希尔伯特空间 ( Reproducing kernel
-Hilbert
-space，RKHS)，复杂的证明过程已经超出了我的理解范围，等应用时再详细研究下。</p>
-<blockquote>
-<p>The spline QP path and speed optimizer uses the same constrained
-smoothing spline framework. In this section, we formalize the smoothing
-spline problem within the quadratic programming framework and linearized
-constraints. Optimization with a quadratic convex objective and
-linearized constraints can be rapidly and stably solved.</p>
-</blockquote>
-<h1 id="references">References</h1>
-<ul>
-<li><a href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a></li>
-</ul>
-<h1 id="表达学习">表达学习</h1>
-<ul>
-<li>Further safety design is beyond this manuscript’s scope.</li>
-<li>Figure 15 is a hands-on example of how EM planner iterates
-<strong>within and between planning cycles</strong> to achieve the
-optimal trajectory.</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Autonomous Driving</category>
-      </categories>
-      <tags>
-        <tag>Weekly Blogs</tag>
-        <tag>Robotics</tag>
-        <tag>Autonomous Driving</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2020 大同游记</title>
     <url>/Trip/Datong-trip-2020/</url>
     <content><![CDATA[<p>我的老家虽然位于晋冀豫三省交汇处，但是自己从未踏足过山西，对山西的记忆也仅停留在煤炭，晋中，太原等抽象的符号。</p>
@@ -3297,354 +2509,6 @@ I/Q 数据计算瞬时幅值。</p>
         <tag>Weekly Blogs</tag>
         <tag>Robotics</tag>
         <tag>Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 Docker 在 Linux 上安装 NextCloud 私有云盘</title>
-    <url>/Linux/Install-nextcloud-in-docker/</url>
-    <content><![CDATA[<!--
-[Nextcloud 搭建私人云服务教程](https://blog.itswincer.com/posts/bf0413ac/)
-[使用Docker快速安装NextCloud个人私有云盘](https://www.moerats.com/archives/420/)
-[docker容器开机自启](https://www.cnblogs.com/gcgc/p/10494615.html)
--->
-<p>ps. 本文实时更新于 <a href="http://www.waylon.one/Linux/Install-nextcloud-in-docker/">个人网站</a>，请移步阅读。</p>
-<p>国内的网盘虽然免费，但总让人对隐私不太放心，毕竟 “免费的永远是最贵的”。</p>
-<p>自己之前购买了一个 VPS，搭建自己的网站后，感觉没有充分利用 VPS
-的流量和性能，于是琢磨搭建一个私人的云服务，随后就发现了 Nextcloud
-这一开源云服务。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/Baidu_to_private.JPG"></p>
-<blockquote>
-<p>通过 <a href="https://bandwagonhost.com/aff.php?aff=60653">链接</a>
-注册并购买搬瓦工 VPS，就可以按下面的教程安装 NextCloud
-私人云盘啦，我也可以得到新客注册的返现。</p>
-</blockquote>
-<h1 id="about-nextcloud">About NextCloud</h1>
-<blockquote>
-<p><a href="https://nextcloud.com/">Nextcloud</a> is the <strong>open
-source file sync and share software</strong> for everyone from
-individuals to large enterprises and service providers. Nextcloud
-provides a safe, secure and compliant file sync and share solution on
-servers you control.<br>
-With Nextcloud you can share one or more folders on your PC, and sync
-them with your Nextcloud server. <strong>Place files in your local
-shared directories, and those files are immediately synced to the
-server, and then to other PCs via the desktop client.</strong> Not near
-a desktop client? No problem, simply log in with the web client and
-manage your files there. <strong>The Android and iOS mobile apps allow
-you to browse, download and upload photos and videos.</strong><br>
-Whether using a mobile device, a workstation, or a web client, Nextcloud
-provides the ability to put the right files in the right hands at the
-right time on any device in one simple-to-use, secure, private and
-controlled solution.</p>
-</blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/Nextcloud.png"></p>
-<p>简而言之，Nextcloud
-是一个自由及开放源代码的私有云网盘，每个人都可以在私人服务器上安装并运行它，能够快速同步你的文件到你的私有服务器，方便你跨平台 (现在支持 PC、Android 和 iOS)
-同步和分享文件，功能和百度云不差多少，优点是隐私好，同步下载速度取决于服务器带宽。</p>
-<p>与 Dropbox 等专有服务相比，Nextcloud
-的开放架构让用户可以利用应用程序的方式在服务器上新增额外的功能，并让用户可以完全掌控自己的数据。同时，Nextcloud
-可与在 Windows、macOS 或是多种 Linux 发布版上运行的客户端同步。</p>
-<p>Nextcloud
-用户可以管理日历、联系人、计划工作与流媒体。此外，用户也可以在 Nextcloud
-上使用基于浏览器的文本编辑器、书签服务、缩略网址服务、相册、RSS 阅读器与文件查看器。因为有良好的扩展性，Nextcloud 可以透过鼠标点一下即可完成安装的应用程序强化其功能，并可连线至
-Dropbox、Google 云端硬盘与 Amazon S3 等产品。</p>
-<h1 id="安装简介">安装简介</h1>
-<p>Nextcloud 虽然这么好用，但是安装依赖却非常复杂，需要安装 LNMP
-集成环境 (i.e. Linux + Nginx + MySql +
-PHP)，在搭建过程中或多或少都会出点问题。</p>
-<p>本文推荐一个很方便的安装方法 <a href="https://github.com/chrootLogin/docker-nextcloud">docker-nextcloud</a>，使用纯命令形式在
-Docker 上安装 NextCloud (Docker file
-会帮你把负责的依赖都配置好)，并探讨如何配置反向代理，适合尝鲜的新手。</p>
-<p>安装 Docker 后，需要安装两个容器：mysql 和 nextcloud。其中，mysql
-用于存储用户的数据，nextcloud 通过向 mysql
-容器读写数据，从而实现数据的存储和访问。</p>
-<h1 id="安装docker">安装 Docker</h1>
-<blockquote>
-<p>Docker
-是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的
-Linux 或 Windows
-机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
-</blockquote>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># CentOS 7、Debian、Ubuntu</span><br><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="复习知识点">复习知识点</h2>
-<ul>
-<li>curl 是一个工具，用于传输来自服务器或者到服务器的数据。</li>
-<li>systemctl 是一个系统管理守护进程、工具和库的集合，用于取代 system
-V、service 和 chkconfig 命令，初始进程主要负责控制 systemd
-系统和服务管理器。</li>
-<li>systemctl start 启动服务</li>
-<li> systemctl enable 激活服务并在开机时启用</li>
-</ul>
-<!--
-[Centos7中systemctl命令详解](https://www.cnblogs.com/zhming26/p/6155201.html)
--->
-<h1 id="安装-nextcloud-服务器">安装 Nextcloud 服务器</h1>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># 拉取 Mysql 镜像和 Nextcloud 镜像</span><br><span class="line">docker pull rootlogin/nextcloud &amp;&amp; docker pull mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 mysql 容器，注意修改数据库信息</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 nextcloud 容器，添加链接到 mysql 容器；ip 是浏览器访问云盘的端口号。使用镜像 rootlogin/nextcloud，以后台模式启动一个容器, 容器命名为 nextcloud，将容器的 80 端口映射到主机的 3000 端口,主机的目录 /var/nextcloud/data 映射到容器的 /data，并添加链接到上述的 nextcloud_db 容器。</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br></pre></td></tr></tbody></table></figure>
-<!--
-密码 supersecretpassword
--->
-<!--
-docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10
--->
-<!--
-docker run -d --name nextcloud --restart=always --link nextcloud_db:nextcloud_db -v /var/nextcloud/data:/data -p 3000:80 rootlogin/nextcloud
--->
-<blockquote>
-<p>MariaDB 和 MySQL 的关系：<strong>MariaDB 数据库管理系统是 MySQL
-的一个分支</strong>。开发这个分支的原因之一是：甲骨文公司收购了 MySQL
-后，有将 MySQL
-闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br>
-MariaDB 的目的是完全兼容 MySQL，包括 API 和命令行，使之能轻松成为 MySQL
-的代替品。</p>
-</blockquote>
-<p>&nbsp; <img data-src="http://www.waylon.one/downloads/images/next_cloud_container.png"></p>
-<p>恭喜你，现在初级版的云服务器已经搭建成功。访问地址为
-http://your_ip:3000。<br>
-启动命令里的 3000
-端口可自行替换，不过后面有关端口的命令都可自行修改，/var/nextcloud/data 为网盘的数据库，可以自行修改。</p>
-<h2 id="复习知识点-1">复习知识点</h2>
-<ul>
-<li>docker pull 是从镜像仓库拉取镜像。</li>
-<li><a href="https://www.runoob.com/docker/docker-run-command.html">docker
-run</a> 是创建一个新的容器并运行一个命令。</li>
-<li>--restart=always，设置开机重启</li>
-</ul>
-<h1 id="防火墙开启端口">防火墙开启端口</h1>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">#CentOS 7</span><br><span class="line">firewall-cmd --zone=public --add-port=3000/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="初始设置">初始设置</h1>
-<ul>
-<li>访问 http://your_ip:3000。</li>
-<li>创建管理员帐号和密码</li>
-<li>数据库选择 MySQL/MariaDB，如果配置不成功，可以选择 SQLite
-(性能差点，但是可以满足个人基本的需求)。</li>
-</ul>
-<table>
-<thead>
-<tr class="header">
-<th>名称</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>用户名</td>
-<td> test</td>
-</tr>
-<tr class="even">
-<td> 密码</td>
-<td> test</td>
-</tr>
-<tr class="odd">
-<td> 数据库名</td>
-<td> test</td>
-</tr>
-<tr class="even">
-<td> 地址</td>
-<td> nextcloud_db:3306</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>mysql 数据库默认端口是 3306。</p>
-</blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/nextcloud_initialize.png"></p>
-<ul>
-<li>恭喜你，进入自己的网盘界面。</li>
-</ul>
-<p><img data-src="/downloads/images/nextcloud_web.png"></p>
-<h1 id="域名访问">域名访问</h1>
-<p>IP 访问会直接把云盘的 IP
-和端口暴露出来，感觉不太妥。如果要<!--像上面示例 [点击访问](http://drive.waylon.one/)，-->通过域名访问自己的网盘，就需要反代了。</p>
-<p>反代可以用 Nginx、Apache、Caddy，本文讲述如何使用 Nginx。</p>
-<blockquote>
-<p>Nginx 是一款轻量级的 Web
-服务器 / 反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在 BSD-like
-协议下发行。其特点是占有内存少，并发能力强，</p>
-</blockquote>
-<p>默认用户已经完成购买域名、安装 Nginx
-的前序步骤，鼓励折腾一下，有问题欢迎下面留言交流。</p>
-<h2 id="certbot-生成-https-证书">certbot 生成 https 证书</h2>
-<p>Let's
-Encrypt 是很火的一个免费 SSL 证书发行项目，自动化发行证书，证书有 90 天的有效期。适合个人使用或者临时使用，不用再忍受自签发证书不受浏览器信赖的提示。<br>
-附上 CentOS 7.2 的 <a href="https://www.vpser.net/build/letsencrypt-certbot.html">免费 SSL 证书 Let's
-Encrypt</a> 流程。</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">./certbot-auto certonly --email your_mail --agree-tos --no-eff-email --webroot -w /var/nextcloud -d drive.example.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="配置-nginx-配置文件">配置 Nginx 配置文件</h2>
-<p>在 /etc/nginx/conf.d/ 下的配置文件里添加如下配置。</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">server {</span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line">    # enforce https</span><br><span class="line">    return 301 https://$server_name$request_uri;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">server {</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    listen [::]:443 ssl http2;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate  /etc/letsencrypt/live/drive.example.com/fullchain.pem;</span><br><span class="line">    ssl_certificate_key  /etc/letsencrypt/live/drive.example.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";</span><br><span class="line"></span><br><span class="line">    location / {</span><br><span class="line">     proxy_pass http://your_ip:3000;</span><br><span class="line">     proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>最后，重启 nginx，就可以通过网址访问自己的云盘啦！</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="安装中可能遇到的问题-fqa">安装中可能遇到的问题 FQA</h1>
-<ul>
-<li>Q:
-初始化时，提示 “看起来您正在尝试重新安装您的 Nextcloud。但您的 config 文件夹中没有 CAN_INSTALL 文件。请在您的 config 文件夹中创建 CAN_INSTALL 文件以继续。”</li>
-<li>A: 运行如下命令。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">cd /var/nextcloud/data/config &amp;&amp; touch CAN_INSTALL</span><br></pre></td></tr></tbody></table></figure>
-<p>其中，/var/nextcloud/data 为网盘的数据库，请自行修改。</p>
-<hr>
-<ul>
-<li>Q: 反向代理后，网址无法直接访问，比如提示 403。</li>
-<li>A：请先定位问题，可以在 /var/log/nginx/error.log 查看代理错误。</li>
-</ul>
-<hr>
-<ul>
-<li>Q: 关机重启后，原来配置好的网盘无法访问。</li>
-<li>A: 在使用 docker
-run 启动容器时，已经使用 --restart 参数来设置容器开机自启。如果发现服务器重启后，无法访问网盘，可以尝试
-update 命令设置 --restart=always。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">docker update --restart=always 容器名称</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>Docker 提供了 restart policy 机制，可以在容器退出或者 Docker
-重启时控制容器能够自启动。这种 Restart policy
-可以保证相关容器按照正确顺序启动。</p>
-</blockquote>
-<hr>
-<ul>
-<li>Q: 通过 IP 方式 登录时，没有出现登录界面，显示 "HTTP ERROR
-500".</li>
-<li>A: 根据 <a href="https://help.nextcloud.com/t/solved-nextcloud-12-http-error-500/21577">Nextcloud
-12 HTTP Error 500</a> 提供的方法，更新 PHP 模块可以解决问题。
-<ul>
-<li>我使用 apt-get upgrade 升级了所有软件的版本，然后问题得到修复。</li>
-</ul></li>
-</ul>
-<blockquote>
-<p>HTTP 500 错误，全称为 HTTP 500 Internal Server Error，即 HTTP 500
-内部服务器错误。<strong>HTTP 500
-内部服务器错误表示服务器遇到意外情况，导致其无法履行请求</strong>，但它无法说明具体错误或发生错误的根本原因。当发生错误时，访问的网站会显示发生错误。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>VPS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>How to bring in google AdSense to Hexo website / Hexo 网站承接 google AdSense 广告</title>
-    <url>/website/Introduce-AdSense-to-website/</url>
-    <content><![CDATA[<p>[toc]</p>
-<p>FYI 本博客实时更新于 <a href="https://www.yanlongwang.net/website/Introduce-AdSense-to-website/">个人网站
-- Hexo 网站引入 google AdSense</a>，请移步阅读最新内容。</p>
-<h1 id="前言">前言</h1>
-<p>个人网站 <a href="www.yanlongwang.net">www.yanlongwang.net</a>
-已经运营近一年，每日的浏览量不断上升，现在维持在两位数，打算承接一点广告赚睡后收入，用来维持网站的日常运营，希望能覆盖网站的服务器和域名开销。</p>
-<p>目前，自己通过 Google AdSense
-在个人网站的广告位承接广告，下面主要讲解从注册 Google
-AdSense，到审核通过后设置广告的基本操作。</p>
-<p>点击 <a href="www.yanlongwang.net">www.yanlongwang.net</a>
-测试体验，如下图。在侧边栏下部应该可以看到 AdSense
-推送的广告，如果看不到，查看浏览器是否安装了 AdBlock
-等广告屏蔽插件，请暂时关闭这些插件。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_sidebar_ad_example.jpg"></p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">// 系统</span><br><span class="line">- Next Theme</span><br><span class="line">// 在 hexo 目录下, 输入 “hexo version” 可以查看 Next 及依赖的版本</span><br><span class="line">- hexo: 3.8.0</span><br><span class="line">- hexo-cli: 1.1.0</span><br><span class="line">- ...</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="广告联盟选择">广告联盟选择</h1>
-<p>在国内，比较知名的广告联盟都要求网站备案，比如<a href="http://union.baidu.com/customerLogin.html">百度广告联盟</a>，否则无法承接广告，而自己的小网站暂时没有备案，所以只能选择国外的广告联盟。</p>
-<p>国外的广告联盟，毫无疑问会选择 Google
-AdSense，申请门槛相对较低。网站一般运营几个月，有十几篇文章，是比较容易通过审核的。并且，AdSense
-的广告相比百度联盟的还是比较优质的，所以最后选择 google AdSense
-联盟。</p>
-<h1 id="注册-adsense-账号">注册 AdSense 账号</h1>
-<ul>
-<li><a href="https://www.google.com/adsense/start/#">注册网站</a>
-搬梯子登录</li>
-<li>点击右上角 Get started 进行注册；如有 google 账号，可以直接点击 sign
-in 进行登录。</li>
-</ul>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/adsense_sign_up.jpg"></p>
-<ul>
-<li>填写完信息之后，页面会生成一段代码，要求你放置到你的网站的
-
-标记中。注意，当审核通过后，这一段代码在开启 “自动广告” 后，会自动推送广告。
-<ul>
-<li>针对 Next Theme，可以复制代码到 themes\_partials.swig
-中任意一个 script 块下。 <figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- layout example in head.swig --&gt;</span></span><br><span class="line">{% if theme.google_site_verification %}</span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"{{ theme.google_site_verification }}"</span> /&gt;</span></span><br><span class="line">{% endif %}</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">data-ad-client</span>=<span class="string">"ca-pub-612**56"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% if theme.bing_site_verification %}</span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"{{ theme.bing_site_verification }}"</span> /&gt;</span></span><br><span class="line">{% endif %}</span><br></pre></td></tr></tbody></table></figure></li>
-</ul></li>
-<li>在你添加完成之后，在 google AdSense
-上点击确认，谷歌会到你的网站上进行核查和验收。</li>
-<li>博主是 2020.02.05 上午申请，2020.02.06 上午收到申请通过的邮件。</li>
-</ul>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_check_pass.jpg"></p>
-<h1 id="配置广告位">配置广告位</h1>
-<p>在收到审核通过的邮件后，可以登录 google AdSense
-在自己的网站上进行广告位置的筛选和设计了，目前 google AdSense
-主要提供了自动广告和广告单元两种形式的广告添加方式。</p>
-<h2 id="自动广告">自动广告</h2>
-<p>自动广告是 google AdSense
-近来提供的一种广告形式，它能够通过分析你的博客布局结构，自定义的在你的网站中插入合适的广告，无论是内容，还是广告尺寸，都是完全契合网站内容本身的，算是一种比较高质量的广告。</p>
-<p>打开 AdSense
-首页，然后转到广告。您可以在概览中为各个网站设置自动广告。</p>
-<p>如果您的网站已经启用自动广告，在审核通过的几个小时内，您便会在网站上看到相关的广告，并开始累积收入 (之前插入的检验代码，接入了
-google AdSense 的自动广告)。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_Autonomous_Ads.jpg"></p>
-<p>这种广告投放的几率比较小，在 PC 端效率比较低，如果你的网站支持移动端查看的话，会自动投放移动端自适应的广告。</p>
-<h2 id="广告单元">广告单元</h2>
-<p>为了能够最高效的利用自己博客的广告位，AdSense 提供了三种固定广告位。</p>
-<ul>
-<li>文字广告和展示广告 (即侧边栏，评论区之类的固定广告位)</li>
-<li> 信息流广告 (插入在信息流内容的广告位置)</li>
-<li> 文章内嵌广告 (主要是插入在每篇文章内部的开始，中间，结尾部分，展示次数比较多，强烈推荐)</li>
-</ul>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_blocks.jpg"></p>
-<p>由于本人的是博客网站，所以第二种信息流广告没有投入使用，第三种影响阅读体验，所以博主现在主要采用第一种方式，在侧边栏展示广告。</p>
-<p>具体的操作流程是，在网站上，选择广告单元 -&gt; 新建广告位 -&gt; 选择对应的广告类型 -&gt; 生成对应的广告代码。</p>
-<h3 id="广告单元插入">广告单元插入</h3>
-<p>博主启用了自动广告，广告单元仅使用了第一种方式，在网站的侧边栏和评论区展示广告，但下面会提供几种针对
-Hexo 的 Next Theme 广告单元代码位置的插入。</p>
-<h4 id="插入评论区">插入评论区</h4>
-<p>将广告单元生成的广告代码插入 _partials.swig 中的末尾即可。
-</p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">  {% elseif theme.valine.appid and theme.valine.appkey %}</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"comments"</span> <span class="attr">id</span>=<span class="string">"comments"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  {% endif %}</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert google ad blocks --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Comment_Below --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"ca-pub-61***56"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"83***73"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">     (adsbygoogle = <span class="variable language_">window</span>.<span class="property">adsbygoogle</span> || []).<span class="title function_">push</span>({});</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% endif %}</span><br></pre></td></tr></tbody></table></figure><p></p>
-<h4 id="插入侧边栏">插入侧边栏</h4>
-将代码插入\_macro.swig 文件中
-<div class="”sidebar-inner”">
-
-</div>
-<p>的最下侧。 </p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">      {% if theme.sidebar.b2t %}</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back-to-top"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-arrow-up"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">          {% if theme.sidebar.scrollpercent %}</span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"scrollpercent"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>0<span class="tag">&lt;/<span class="name">span</span>&gt;</span>%<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          {% endif %}</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      {% endif %}</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert google ad blocks --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Comment_Below --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"ca-pub-6129496365361356"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"8323610673"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">     (adsbygoogle = <span class="variable language_">window</span>.<span class="property">adsbygoogle</span> || []).<span class="title function_">push</span>({});</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line">{% endmacro %}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure><p></p>
-<h4 id="插入文章头部">插入文章头部</h4>
-<p>在 \_custom&nbsp;目录下，新建 google_adsense.swig，并将 AdSense
-提供的广告代码放入其中，然后将 </p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">{% include '../_custom/google_adsense.swig' %}</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p>插入到 \_macro.swig 文件中。</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">        {% else %}</span><br><span class="line">          {% if post.type === 'picture' %}</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"{{ url_for(post.path) }}"</span>&gt;</span>{{ post.content }}<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">          {% else %}</span><br><span class="line">            {{ post.content }}</span><br><span class="line">          {% endif %}</span><br><span class="line">        {% endif %}</span><br><span class="line">      {% else %}</span><br><span class="line"><span class="comment">&lt;!-- Insert google ad blocks --&gt;</span></span><br><span class="line">        {% include '../_custom/google_adsense.swig' %}</span><br><span class="line"></span><br><span class="line">        {{ post.content }}</span><br><span class="line">      {% endif  %}</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    {#####################}</span><br><span class="line">    {### END POST BODY ###}</span><br><span class="line">    {#####################}</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>我不建议在一个网页中布置多个广告，广告内容雷同，会严重影响用户阅读体验。在页面的侧边布置一个广告，难道不香吗？</strong></p>
-<h1 id="注意事项">注意事项</h1>
-<p>在成功接入 AdSense 后，google
-会根据几种方式和数据判断广告点击是否作弊，从而注销你的账号，所以不要心存侥幸心理，好好发原创文章，提高网站的质量才是王道。</p>
-<ul>
-<li>作弊广告点击者的 IP 地址与你 Adsense 账户登录 IP 地址相同</li>
-<li>作弊广告点击的 CTR 数据太高</li>
-<li>作弊广告点击者的 IP 地址来自同一个地理区域</li>
-<li>根据 Cookies 判断作弊 Adsense 广告点击</li>
-<li>作弊广告点击者页面停留时间太短</li>
-<li>直接访问者的广告点击率过高</li>
-<li>流量小但广告点击率高</li>
-<li>在网页上用文字提示请求鼓动点击广告</li>
-</ul>
-<!--
-copy from [hexo个人next主题博客接入谷歌广告](http://www.darylliu.cn/archives/6a1f6623.html)
--->
-<h1 id="last-but-not-least">Last but not least</h1>
-<p>现在通过 AdSense
-能赚到的收入本身并不高，尤其是博客类的网站更是如此，但在有空余的地方放置一点广告还是能起到丰富博客的作用。</p>
-<p>既然大家愿意花时间和精力去搭建个人博客，除了钱以外，肯定还有其他的目的，希望大家不忘初心，更不要舍本逐末，忘记了自己搭建博客的初衷，毕竟广告收入这个事情，有当然好，没有也不用气馁，尽力就好～</p>
-<h1 id="references">References</h1>
-<ul>
-<li><a href="http://www.darylliu.cn/archives/6a1f6623.html">hexo 个人 next 主题博客接入谷歌广告</a></li>
-<li><a href="https://juejin.im/post/5c95d230e51d45124e35cef6">hexo 博客 next 主题添加 google
-adsense (亲测可用)</a></li>
-<li><a href="https://blog.csdn.net/stormdony/article/details/85608944">Hexo 接入 Google
-adsense 广告</a></li>
-</ul>
-<hr>
-<p>坚持原创技术分享，您的支持将鼓励我继续创作！</p>
-]]></content>
-      <categories>
-        <category>website</category>
-      </categories>
-      <tags>
-        <tag>Website operations</tag>
       </tags>
   </entry>
   <entry>
@@ -7496,130 +6360,6 @@ swap 中等待，然后把新的进程调入到内存中运行。</li>
       </tags>
   </entry>
   <entry>
-    <title>什么是可转债打新？</title>
-    <url>/Finance/convertible-bond/</url>
-    <content><![CDATA[<p>[toc]</p>
-<p><strong>文章观点仅代表作者本人看法，存在个人的认知局限性。若内容涉及投资建议，仅供参考勿作为投资依据。投资有风险，入市需谨慎</strong>。</p>
-<p>今年第二次中签可转债 — 锦浪发债。之前被公众号安利打新债赚钱容易，但是赚钱的具体原因却不晓得，趁着这次中签新债的机会，以
-<strong>锦浪发债</strong> 为例，扒一扒打新债赚钱的原理。</p>
-<p><img data-src="/downloads/images/jinlangfazhai.jpg" alt="锦浪发债中签" style="zoom:33%;"></p>
-<h1 id="什么是可转债">什么是可转债</h1>
-<p>可转债全称 <strong>可转换公司债券 (Convertible
-bond)，</strong>属于公司债券的一种形式。可转换公司债券是指发行人依照法定程序发行、在一定期限内依据约定的条件可以转换成股份的公司债券。公司发行可转换债券的<strong>主要动因是为了增强证券对投资者的吸引力，能以较低的成本筹集到所需要的资金</strong>。</p>
-<blockquote>
-<p>这种债券附加转股选择权，在转换前是公司债券形式，转换后相当于增发了股票。因此，可转换公司债券兼有债权投资和股权投资的双重优势。</p>
-<p>可转换公司债券与一般的债券一样，在转换前投资者可以定期得到利息收人，但此时不具有股东的权利；当发行公司的经营业绩取得显著增长时，可转换公司债券的持有人可以在约定期限内，按预定的转换价格转换成公司的股份，以分享公司业绩增长带来的收益。可转换债券一旦转换成普通股票，能使公司将原来筹集的期限有限的资金转化成长期稳定的股本，扩大了股本规模。</p>
-</blockquote>
-<p>可转债本质上是公司借钱的一张 “欠条”，相当于我们把钱借给了上市公司，到期可以拿回本金 + 利息。借钱期限到了，公司是要返还我们本金还有利息的，这是 “债” 的部分。同时，它还可以转化为股票。如果股价上涨，我们不想做公司的债主，还可以做公司的股东，这就是 “可转” 的含义。正因为可转债具备「股债」双重特性，所以又被认为是「下有保底，上不封顶」的投资品。</p>
-<p>注意，可转换债券通常包含 <strong>赎回条款</strong> 和
-<strong>回售条款</strong>，一般可以分为可赎回债券和可回售债券。</p>
-<ul>
-<li>可赎回债券，是指可转换公司债券发行人拥有是否实施赎回条款选择权的债券。当公司股票价格在一段时间内连续高于转换价格达到一定幅度时，公司可以按照事先约定的赎回价格买回发行在外尚未转股的可转换债券。</li>
-<li>可回售债券，是指可转换公司债券的持有人是否实施回售条款选择权的债券。当公司的股票价格在一段时间内连续低于转换价格达到一定幅度时，可转换公司债券持有人有权按事先约定的价格将所持可转债卖给发行人。</li>
-</ul>
-<p>可转换公司债券一般要经股东大会或董事会的决议通过才能发行，而且在发行时，应在发行条款中规定转换期限和转换价格。</p>
-<hr>
-<p>本文以 <strong>锦浪发债</strong>
-为例，看看公告中是如何规定利息、转债、赎回和回售条款。本节以下截图均来自
-<a href="https://pdf.dfcfw.com/pdf/H2_AN202202071545531483_1.pdf?1644265927000.pdf">锦浪科技股份有限公司向不特定对象发行可转换公司债券发行公告</a>。</p>
-<h2 id="利息">利息</h2>
-<p><img data-src="/downloads/images/nianxian-5331745.png" alt="债务存续期限" style="zoom: 33%;"></p>
-<p><img data-src="/downloads/images/fuxi.png" alt="利息" style="zoom: 33%;"></p>
-<h2 id="转股">转股</h2>
-<p><img data-src="/downloads/images/zhuangu.png" alt="转股" style="zoom: 33%;"></p>
-<h2 id="有条件赎回条款">有条件赎回条款</h2>
-<p><img data-src="/downloads/images/suhui.png" alt="赎回条款" style="zoom: 33%;"></p>
-<h2 id="有条件回售条款">有条件回售条款</h2>
-<p><img data-src="/downloads/images/huishou.png" alt="回售条款" style="zoom: 33%;"></p>
-<p><img data-src="/downloads/images/gujiahuishou.jpeg" alt="股价下跌，回售政策" style="zoom:100%;"></p>
-<h1 id="可转债打新为什么能赚钱">可转债打新为什么能赚钱</h1>
-<p>要理解可转债打新赚钱的原理，我们必须要弄清楚一件事 — 溢价率，我们打新收益大部分都源自于溢价率，然后小部分是股价上涨所致。</p>
-<!--
-
-「可转债打新」风险相对较小，相对安全。可转债 100 元以下近乎保本，长远来看，有债性保护，下跌的幅度有限，而上涨，也能比肩股票，是寻求稳健收益的渠道。-->
-<p>可转债等同于 “买了保险的股票”，价格可看成 “正股价格 + 保险费” 或者 “正股价格 *（1 + 转股溢价率）”，转股溢价率随着市场情绪的变化而变化。一般的规律如下：</p>
-<ul>
-<li><strong>信用级别越高，溢价率越高；</strong></li>
-<li><strong>转债价格越低，溢价率越高；</strong></li>
-<li><strong>市场越看好某个股，溢价率越高。</strong></li>
-</ul>
-<h2 id="溢价率">溢价率</h2>
-<p>溢价率怎么查？通过集思录的<a href="https://www.jisilu.cn/web/data/cb/list">可转债筛选功能</a>，我们可以查看锦浪溢价率。因为未上市交易，溢价率为负，这里仅是示例。</p>
-<p><img data-src="/downloads/images/jinlangyijialv.png" alt="锦浪溢价率" style="zoom:67%;"></p>
-<h3 id="溢价率通常大于0">溢价率通常大于 0</h3>
-<p><img data-src="/downloads/images/yijialv.jpg" alt="溢价率计算" style="zoom:50%;"></p>
-<h2 id="转股价格">转股价格</h2>
-<h3 id="初始转股价格">初始转股价格</h3>
-<p>公告中的初始转股价格不得低于</p>
-<ul>
-<li>募集说明书公告日前二十个交易日公司股票交易均价；</li>
-<li>前一个交易日公司股票交易均价；</li>
-</ul>
-<p>所以，一般在发行前，溢价率小于 0，发行后溢价率为正。</p>
-<h3 id="转股价格向下修正">转股价格向下修正</h3>
-<p><img data-src="/downloads/images/xiangxiaxiuzheng.png" alt="股价下跌，向下修正" style="zoom:33%;"></p>
-<h1 id="交易机制">交易机制</h1>
-<h2 id="申购t日">申购 (T 日)</h2>
-<ul>
-<li>T
-日，投资者网上有效申购数量与原股东优先配售后余额部分 (含原股东放弃优先配售部分)，即网上发行总量确定后，发行人与保荐机构 (主承销商) 按照以下原则配售可转债:
-<ul>
-<li>当有效申购总量小于或等于网上发行总量时，投资者按照其有效申购量认购；</li>
-<li>当网上申购总量大于网上发行总量时，按投资者摇号中签结果确定配售数量。</li>
-</ul></li>
-<li>原 A
-股股东除可参加优先配售外，还可参加优先配售后余额的网上申购。</li>
-<li>每个证券账户的 最低申购数量为 10 张 (1,000 元)，每 10
-张为一个申购单位，超过 10 张的必须 是 10 张的整数倍，每个账户申购上限是
-1 万张 (100 万元)，超出部分为无效申购。</li>
-<li>投资者参与可转债网上申购只能使用一个证券账户。同一投资者使用多个证券账户参与同一只可转债申购的，或投资者使用同一证券账户多次参与同一只可转债申购的，以该投资者的第一笔申购为有效申购，其余申购均为无效申购。</li>
-</ul>
-<h2 id="中签t2日">中签 (T+2 日)</h2>
-<ul>
-<li>新债中签号公布之后，当天下午 16
-点之前必须认购成功，否则就是弃购，一般是半个月左右上市，上市之后注意卖出时机。
-<ul>
-<li>若是持续在 130
-元的价位，是可能被强制赎回的，强制性赎回会折损持有者的利润，因为强赎的价格是很低的。</li>
-</ul></li>
-</ul>
-<h2 id="发行">发行</h2>
-<ul>
-<li>可转债实行 T+0 交易，按照市场实时价格进行成交，没有涨跌幅限制
-(设有临时停牌机制)。</li>
-</ul>
-<p><img data-src="/downloads/images/jiaoyixianzhi.png" alt="交易限制" style="zoom: 33%;"></p>
-<ul>
-<li>对投资者不收取佣金、过户费和印花税等费用。</li>
-</ul>
-<h1 id="债券信用评级">债券信用评级</h1>
-<blockquote>
-<p>债券信用评级是以企业或经济主体发行的有价债券为对象进行的信用评级。债券信用评级大多是企业债券信用评级，是对具有独立法人资格企业所发行某特定债券、按期还本付息的可靠程度进行客观公正的评估，并标示其信用程度的等级。这种信用评级，是为投资者购买债券和证券市场债券的流通转让活动提供信息服务。</p>
-</blockquote>
-<p>锦浪转债的信息评级是 AA-。“AA”
-表示偿还债务的能力很强，受不利经济环境的影响不大，违约风险很低；“-”
-符合进行微调，表示略低于本等级。</p>
-<p><img data-src="/downloads/images/zhaiquanpingji.png" alt="债券评级" style="zoom: 33%;"></p>
-<h1 id="风险">风险</h1>
-<ul>
-<li>发行可转换公司债券一般不提供担保。公司本次发行可转换公司债券未提供担保措施，那么如果可转债存续期间出现对公司经营管理和偿债能力有重大负面影响的事件，本次可转债可能因未提供担保而增加兑付风险。</li>
-<li><a href="https://mp.weixin.qq.com/s/BpijeelIkfzA8ft_nbKg9w">溢价过高，强制赎回风险</a>。可转债背后的上市公司在满足一定条件后，有权用很低的价格，强行从你手中把可转债买回来。</li>
-</ul>
-<h1 id="参考">参考</h1>
-<ul>
-<li><a href="https://finance.sina.com.cn/money/fund/fundzmt/2020-03-08/doc-iimxxstf7435098.shtml">深度揭秘：可转债打新为什么能赚钱？赚了谁的钱？</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/97993034">可转债打新为什么能赚钱</a></li>
-<li><a href="https://www.jisilu.cn/web/data/cb/list">溢价率查询平台 — 集思录</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Finance</category>
-      </categories>
-      <tags>
-        <tag>Weekly Blogs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>巧用 STL 容器构建堆</title>
     <url>/Programming/cpp-heap-via-container/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -11414,6 +10154,130 @@ ipad 上精读。</p>
       </tags>
   </entry>
   <entry>
+    <title>什么是可转债打新？</title>
+    <url>/Finance/convertible-bond/</url>
+    <content><![CDATA[<p>[toc]</p>
+<p><strong>文章观点仅代表作者本人看法，存在个人的认知局限性。若内容涉及投资建议，仅供参考勿作为投资依据。投资有风险，入市需谨慎</strong>。</p>
+<p>今年第二次中签可转债 — 锦浪发债。之前被公众号安利打新债赚钱容易，但是赚钱的具体原因却不晓得，趁着这次中签新债的机会，以
+<strong>锦浪发债</strong> 为例，扒一扒打新债赚钱的原理。</p>
+<p><img data-src="/downloads/images/jinlangfazhai.jpg" alt="锦浪发债中签" style="zoom:33%;"></p>
+<h1 id="什么是可转债">什么是可转债</h1>
+<p>可转债全称 <strong>可转换公司债券 (Convertible
+bond)，</strong>属于公司债券的一种形式。可转换公司债券是指发行人依照法定程序发行、在一定期限内依据约定的条件可以转换成股份的公司债券。公司发行可转换债券的<strong>主要动因是为了增强证券对投资者的吸引力，能以较低的成本筹集到所需要的资金</strong>。</p>
+<blockquote>
+<p>这种债券附加转股选择权，在转换前是公司债券形式，转换后相当于增发了股票。因此，可转换公司债券兼有债权投资和股权投资的双重优势。</p>
+<p>可转换公司债券与一般的债券一样，在转换前投资者可以定期得到利息收人，但此时不具有股东的权利；当发行公司的经营业绩取得显著增长时，可转换公司债券的持有人可以在约定期限内，按预定的转换价格转换成公司的股份，以分享公司业绩增长带来的收益。可转换债券一旦转换成普通股票，能使公司将原来筹集的期限有限的资金转化成长期稳定的股本，扩大了股本规模。</p>
+</blockquote>
+<p>可转债本质上是公司借钱的一张 “欠条”，相当于我们把钱借给了上市公司，到期可以拿回本金 + 利息。借钱期限到了，公司是要返还我们本金还有利息的，这是 “债” 的部分。同时，它还可以转化为股票。如果股价上涨，我们不想做公司的债主，还可以做公司的股东，这就是 “可转” 的含义。正因为可转债具备「股债」双重特性，所以又被认为是「下有保底，上不封顶」的投资品。</p>
+<p>注意，可转换债券通常包含 <strong>赎回条款</strong> 和
+<strong>回售条款</strong>，一般可以分为可赎回债券和可回售债券。</p>
+<ul>
+<li>可赎回债券，是指可转换公司债券发行人拥有是否实施赎回条款选择权的债券。当公司股票价格在一段时间内连续高于转换价格达到一定幅度时，公司可以按照事先约定的赎回价格买回发行在外尚未转股的可转换债券。</li>
+<li>可回售债券，是指可转换公司债券的持有人是否实施回售条款选择权的债券。当公司的股票价格在一段时间内连续低于转换价格达到一定幅度时，可转换公司债券持有人有权按事先约定的价格将所持可转债卖给发行人。</li>
+</ul>
+<p>可转换公司债券一般要经股东大会或董事会的决议通过才能发行，而且在发行时，应在发行条款中规定转换期限和转换价格。</p>
+<hr>
+<p>本文以 <strong>锦浪发债</strong>
+为例，看看公告中是如何规定利息、转债、赎回和回售条款。本节以下截图均来自
+<a href="https://pdf.dfcfw.com/pdf/H2_AN202202071545531483_1.pdf?1644265927000.pdf">锦浪科技股份有限公司向不特定对象发行可转换公司债券发行公告</a>。</p>
+<h2 id="利息">利息</h2>
+<p><img data-src="/downloads/images/nianxian-5331745.png" alt="债务存续期限" style="zoom: 33%;"></p>
+<p><img data-src="/downloads/images/fuxi.png" alt="利息" style="zoom: 33%;"></p>
+<h2 id="转股">转股</h2>
+<p><img data-src="/downloads/images/zhuangu.png" alt="转股" style="zoom: 33%;"></p>
+<h2 id="有条件赎回条款">有条件赎回条款</h2>
+<p><img data-src="/downloads/images/suhui.png" alt="赎回条款" style="zoom: 33%;"></p>
+<h2 id="有条件回售条款">有条件回售条款</h2>
+<p><img data-src="/downloads/images/huishou.png" alt="回售条款" style="zoom: 33%;"></p>
+<p><img data-src="/downloads/images/gujiahuishou.jpeg" alt="股价下跌，回售政策" style="zoom:100%;"></p>
+<h1 id="可转债打新为什么能赚钱">可转债打新为什么能赚钱</h1>
+<p>要理解可转债打新赚钱的原理，我们必须要弄清楚一件事 — 溢价率，我们打新收益大部分都源自于溢价率，然后小部分是股价上涨所致。</p>
+<!--
+
+「可转债打新」风险相对较小，相对安全。可转债 100 元以下近乎保本，长远来看，有债性保护，下跌的幅度有限，而上涨，也能比肩股票，是寻求稳健收益的渠道。-->
+<p>可转债等同于 “买了保险的股票”，价格可看成 “正股价格 + 保险费” 或者 “正股价格 *（1 + 转股溢价率）”，转股溢价率随着市场情绪的变化而变化。一般的规律如下：</p>
+<ul>
+<li><strong>信用级别越高，溢价率越高；</strong></li>
+<li><strong>转债价格越低，溢价率越高；</strong></li>
+<li><strong>市场越看好某个股，溢价率越高。</strong></li>
+</ul>
+<h2 id="溢价率">溢价率</h2>
+<p>溢价率怎么查？通过集思录的<a href="https://www.jisilu.cn/web/data/cb/list">可转债筛选功能</a>，我们可以查看锦浪溢价率。因为未上市交易，溢价率为负，这里仅是示例。</p>
+<p><img data-src="/downloads/images/jinlangyijialv.png" alt="锦浪溢价率" style="zoom:67%;"></p>
+<h3 id="溢价率通常大于0">溢价率通常大于 0</h3>
+<p><img data-src="/downloads/images/yijialv.jpg" alt="溢价率计算" style="zoom:50%;"></p>
+<h2 id="转股价格">转股价格</h2>
+<h3 id="初始转股价格">初始转股价格</h3>
+<p>公告中的初始转股价格不得低于</p>
+<ul>
+<li>募集说明书公告日前二十个交易日公司股票交易均价；</li>
+<li>前一个交易日公司股票交易均价；</li>
+</ul>
+<p>所以，一般在发行前，溢价率小于 0，发行后溢价率为正。</p>
+<h3 id="转股价格向下修正">转股价格向下修正</h3>
+<p><img data-src="/downloads/images/xiangxiaxiuzheng.png" alt="股价下跌，向下修正" style="zoom:33%;"></p>
+<h1 id="交易机制">交易机制</h1>
+<h2 id="申购t日">申购 (T 日)</h2>
+<ul>
+<li>T
+日，投资者网上有效申购数量与原股东优先配售后余额部分 (含原股东放弃优先配售部分)，即网上发行总量确定后，发行人与保荐机构 (主承销商) 按照以下原则配售可转债:
+<ul>
+<li>当有效申购总量小于或等于网上发行总量时，投资者按照其有效申购量认购；</li>
+<li>当网上申购总量大于网上发行总量时，按投资者摇号中签结果确定配售数量。</li>
+</ul></li>
+<li>原 A
+股股东除可参加优先配售外，还可参加优先配售后余额的网上申购。</li>
+<li>每个证券账户的 最低申购数量为 10 张 (1,000 元)，每 10
+张为一个申购单位，超过 10 张的必须 是 10 张的整数倍，每个账户申购上限是
+1 万张 (100 万元)，超出部分为无效申购。</li>
+<li>投资者参与可转债网上申购只能使用一个证券账户。同一投资者使用多个证券账户参与同一只可转债申购的，或投资者使用同一证券账户多次参与同一只可转债申购的，以该投资者的第一笔申购为有效申购，其余申购均为无效申购。</li>
+</ul>
+<h2 id="中签t2日">中签 (T+2 日)</h2>
+<ul>
+<li>新债中签号公布之后，当天下午 16
+点之前必须认购成功，否则就是弃购，一般是半个月左右上市，上市之后注意卖出时机。
+<ul>
+<li>若是持续在 130
+元的价位，是可能被强制赎回的，强制性赎回会折损持有者的利润，因为强赎的价格是很低的。</li>
+</ul></li>
+</ul>
+<h2 id="发行">发行</h2>
+<ul>
+<li>可转债实行 T+0 交易，按照市场实时价格进行成交，没有涨跌幅限制
+(设有临时停牌机制)。</li>
+</ul>
+<p><img data-src="/downloads/images/jiaoyixianzhi.png" alt="交易限制" style="zoom: 33%;"></p>
+<ul>
+<li>对投资者不收取佣金、过户费和印花税等费用。</li>
+</ul>
+<h1 id="债券信用评级">债券信用评级</h1>
+<blockquote>
+<p>债券信用评级是以企业或经济主体发行的有价债券为对象进行的信用评级。债券信用评级大多是企业债券信用评级，是对具有独立法人资格企业所发行某特定债券、按期还本付息的可靠程度进行客观公正的评估，并标示其信用程度的等级。这种信用评级，是为投资者购买债券和证券市场债券的流通转让活动提供信息服务。</p>
+</blockquote>
+<p>锦浪转债的信息评级是 AA-。“AA”
+表示偿还债务的能力很强，受不利经济环境的影响不大，违约风险很低；“-”
+符合进行微调，表示略低于本等级。</p>
+<p><img data-src="/downloads/images/zhaiquanpingji.png" alt="债券评级" style="zoom: 33%;"></p>
+<h1 id="风险">风险</h1>
+<ul>
+<li>发行可转换公司债券一般不提供担保。公司本次发行可转换公司债券未提供担保措施，那么如果可转债存续期间出现对公司经营管理和偿债能力有重大负面影响的事件，本次可转债可能因未提供担保而增加兑付风险。</li>
+<li><a href="https://mp.weixin.qq.com/s/BpijeelIkfzA8ft_nbKg9w">溢价过高，强制赎回风险</a>。可转债背后的上市公司在满足一定条件后，有权用很低的价格，强行从你手中把可转债买回来。</li>
+</ul>
+<h1 id="参考">参考</h1>
+<ul>
+<li><a href="https://finance.sina.com.cn/money/fund/fundzmt/2020-03-08/doc-iimxxstf7435098.shtml">深度揭秘：可转债打新为什么能赚钱？赚了谁的钱？</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/97993034">可转债打新为什么能赚钱</a></li>
+<li><a href="https://www.jisilu.cn/web/data/cb/list">溢价率查询平台 — 集思录</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Finance</category>
+      </categories>
+      <tags>
+        <tag>Weekly Blogs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>解读 Lift-off dynamics in a simple jumping robot</title>
     <url>/paper/lift-off-simple-robot/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -13505,6 +12369,53 @@ them in our navigation module.</p>
       </tags>
   </entry>
   <entry>
+    <title>protocol buffers</title>
+    <url>/uncategorized/protocol-buffers/</url>
+    <content><![CDATA[<h1 id="package"><a href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
+<ul>
+<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to
+a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol
+message types.</li>
+<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a
+C++ namespace.
+<ul>
+<li>即 package 指定的路径，会被转换为 namespace，来避免命名冲突。</li>
+</ul></li>
+</ul>
+<h2 id="arena-allocation"><a href="https://protobuf.dev/reference/cpp/arenas/#why">Arena
+Allocation</a></h2>
+<ul>
+<li> 功能：Arena allocation is a C++-only feature that helps you optimize
+your memory usage and improve performance when working with protocol
+buffers.</li>
+<li> 原因：By default, protocol buffers performs heap allocations for
+each message object, each of its subobjects, and several field types,
+such as strings. These allocations occur in bulk when parsing a message
+and when building new messages in memory, and associated deallocations
+happen when messages and their subobject trees are freed.
+<ul>
+<li>Message
+的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
+</ul></li>
+</ul>
+<h1 id="python">Python</h1>
+<h2 id="enum">Enum</h2>
+<h3 id="could-not-serialize-object-typeerror-cant-pickle-google.protobuf.pyext._message.enumdescriptor-objects">Could
+not serialize object: TypeError: can't pickle
+google.protobuf.pyext._message.EnumDescriptor objects</h3>
+<p>我在实际 spark 上处理数据时，报错 "Could not serialize object:
+TypeError: can't pickle google.protobuf.pyext._message.EnumDescriptor
+objects", 通过报错信息，很明确这是在实际 python 代码中引用 enum
+导致的问题.</p>
+<figure class="highlight plaintext"><figcaption><span>enum_test.proto</span><a href="/downloads/code/enum_test.proto">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"># Add code later</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="参考教程">参考教程</h1>
+<ul>
+<li><a href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand
+Protobuf enum in python</a></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>基于 interactive mode 实现 matplotlib 动态更新图片 (交互式绘图)</title>
     <url>/Python/python-interactive-mode/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -13554,6 +12465,354 @@ pyplot command triggers a draw.</p>
       <tags>
         <tag>Weekly Blogs</tag>
         <tag>Programming</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Docker 在 Linux 上安装 NextCloud 私有云盘</title>
+    <url>/Linux/Install-nextcloud-in-docker/</url>
+    <content><![CDATA[<!--
+[Nextcloud 搭建私人云服务教程](https://blog.itswincer.com/posts/bf0413ac/)
+[使用Docker快速安装NextCloud个人私有云盘](https://www.moerats.com/archives/420/)
+[docker容器开机自启](https://www.cnblogs.com/gcgc/p/10494615.html)
+-->
+<p>ps. 本文实时更新于 <a href="http://www.waylon.one/Linux/Install-nextcloud-in-docker/">个人网站</a>，请移步阅读。</p>
+<p>国内的网盘虽然免费，但总让人对隐私不太放心，毕竟 “免费的永远是最贵的”。</p>
+<p>自己之前购买了一个 VPS，搭建自己的网站后，感觉没有充分利用 VPS
+的流量和性能，于是琢磨搭建一个私人的云服务，随后就发现了 Nextcloud
+这一开源云服务。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/Baidu_to_private.JPG"></p>
+<blockquote>
+<p>通过 <a href="https://bandwagonhost.com/aff.php?aff=60653">链接</a>
+注册并购买搬瓦工 VPS，就可以按下面的教程安装 NextCloud
+私人云盘啦，我也可以得到新客注册的返现。</p>
+</blockquote>
+<h1 id="about-nextcloud">About NextCloud</h1>
+<blockquote>
+<p><a href="https://nextcloud.com/">Nextcloud</a> is the <strong>open
+source file sync and share software</strong> for everyone from
+individuals to large enterprises and service providers. Nextcloud
+provides a safe, secure and compliant file sync and share solution on
+servers you control.<br>
+With Nextcloud you can share one or more folders on your PC, and sync
+them with your Nextcloud server. <strong>Place files in your local
+shared directories, and those files are immediately synced to the
+server, and then to other PCs via the desktop client.</strong> Not near
+a desktop client? No problem, simply log in with the web client and
+manage your files there. <strong>The Android and iOS mobile apps allow
+you to browse, download and upload photos and videos.</strong><br>
+Whether using a mobile device, a workstation, or a web client, Nextcloud
+provides the ability to put the right files in the right hands at the
+right time on any device in one simple-to-use, secure, private and
+controlled solution.</p>
+</blockquote>
+<p><img data-src="http://www.waylon.one/downloads/images/Nextcloud.png"></p>
+<p>简而言之，Nextcloud
+是一个自由及开放源代码的私有云网盘，每个人都可以在私人服务器上安装并运行它，能够快速同步你的文件到你的私有服务器，方便你跨平台 (现在支持 PC、Android 和 iOS)
+同步和分享文件，功能和百度云不差多少，优点是隐私好，同步下载速度取决于服务器带宽。</p>
+<p>与 Dropbox 等专有服务相比，Nextcloud
+的开放架构让用户可以利用应用程序的方式在服务器上新增额外的功能，并让用户可以完全掌控自己的数据。同时，Nextcloud
+可与在 Windows、macOS 或是多种 Linux 发布版上运行的客户端同步。</p>
+<p>Nextcloud
+用户可以管理日历、联系人、计划工作与流媒体。此外，用户也可以在 Nextcloud
+上使用基于浏览器的文本编辑器、书签服务、缩略网址服务、相册、RSS 阅读器与文件查看器。因为有良好的扩展性，Nextcloud 可以透过鼠标点一下即可完成安装的应用程序强化其功能，并可连线至
+Dropbox、Google 云端硬盘与 Amazon S3 等产品。</p>
+<h1 id="安装简介">安装简介</h1>
+<p>Nextcloud 虽然这么好用，但是安装依赖却非常复杂，需要安装 LNMP
+集成环境 (i.e. Linux + Nginx + MySql +
+PHP)，在搭建过程中或多或少都会出点问题。</p>
+<p>本文推荐一个很方便的安装方法 <a href="https://github.com/chrootLogin/docker-nextcloud">docker-nextcloud</a>，使用纯命令形式在
+Docker 上安装 NextCloud (Docker file
+会帮你把负责的依赖都配置好)，并探讨如何配置反向代理，适合尝鲜的新手。</p>
+<p>安装 Docker 后，需要安装两个容器：mysql 和 nextcloud。其中，mysql
+用于存储用户的数据，nextcloud 通过向 mysql
+容器读写数据，从而实现数据的存储和访问。</p>
+<h1 id="安装docker">安装 Docker</h1>
+<blockquote>
+<p>Docker
+是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的
+Linux 或 Windows
+机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+</blockquote>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># CentOS 7、Debian、Ubuntu</span><br><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="复习知识点">复习知识点</h2>
+<ul>
+<li>curl 是一个工具，用于传输来自服务器或者到服务器的数据。</li>
+<li>systemctl 是一个系统管理守护进程、工具和库的集合，用于取代 system
+V、service 和 chkconfig 命令，初始进程主要负责控制 systemd
+系统和服务管理器。</li>
+<li>systemctl start 启动服务</li>
+<li> systemctl enable 激活服务并在开机时启用</li>
+</ul>
+<!--
+[Centos7中systemctl命令详解](https://www.cnblogs.com/zhming26/p/6155201.html)
+-->
+<h1 id="安装-nextcloud-服务器">安装 Nextcloud 服务器</h1>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># 拉取 Mysql 镜像和 Nextcloud 镜像</span><br><span class="line">docker pull rootlogin/nextcloud &amp;&amp; docker pull mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 mysql 容器，注意修改数据库信息</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 nextcloud 容器，添加链接到 mysql 容器；ip 是浏览器访问云盘的端口号。使用镜像 rootlogin/nextcloud，以后台模式启动一个容器, 容器命名为 nextcloud，将容器的 80 端口映射到主机的 3000 端口,主机的目录 /var/nextcloud/data 映射到容器的 /data，并添加链接到上述的 nextcloud_db 容器。</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br></pre></td></tr></tbody></table></figure>
+<!--
+密码 supersecretpassword
+-->
+<!--
+docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10
+-->
+<!--
+docker run -d --name nextcloud --restart=always --link nextcloud_db:nextcloud_db -v /var/nextcloud/data:/data -p 3000:80 rootlogin/nextcloud
+-->
+<blockquote>
+<p>MariaDB 和 MySQL 的关系：<strong>MariaDB 数据库管理系统是 MySQL
+的一个分支</strong>。开发这个分支的原因之一是：甲骨文公司收购了 MySQL
+后，有将 MySQL
+闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br>
+MariaDB 的目的是完全兼容 MySQL，包括 API 和命令行，使之能轻松成为 MySQL
+的代替品。</p>
+</blockquote>
+<p>&nbsp; <img data-src="http://www.waylon.one/downloads/images/next_cloud_container.png"></p>
+<p>恭喜你，现在初级版的云服务器已经搭建成功。访问地址为
+http://your_ip:3000。<br>
+启动命令里的 3000
+端口可自行替换，不过后面有关端口的命令都可自行修改，/var/nextcloud/data 为网盘的数据库，可以自行修改。</p>
+<h2 id="复习知识点-1">复习知识点</h2>
+<ul>
+<li>docker pull 是从镜像仓库拉取镜像。</li>
+<li><a href="https://www.runoob.com/docker/docker-run-command.html">docker
+run</a> 是创建一个新的容器并运行一个命令。</li>
+<li>--restart=always，设置开机重启</li>
+</ul>
+<h1 id="防火墙开启端口">防火墙开启端口</h1>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">#CentOS 7</span><br><span class="line">firewall-cmd --zone=public --add-port=3000/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="初始设置">初始设置</h1>
+<ul>
+<li>访问 http://your_ip:3000。</li>
+<li>创建管理员帐号和密码</li>
+<li>数据库选择 MySQL/MariaDB，如果配置不成功，可以选择 SQLite
+(性能差点，但是可以满足个人基本的需求)。</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>名称</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>用户名</td>
+<td> test</td>
+</tr>
+<tr class="even">
+<td> 密码</td>
+<td> test</td>
+</tr>
+<tr class="odd">
+<td> 数据库名</td>
+<td> test</td>
+</tr>
+<tr class="even">
+<td> 地址</td>
+<td> nextcloud_db:3306</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>mysql 数据库默认端口是 3306。</p>
+</blockquote>
+<p><img data-src="http://www.waylon.one/downloads/images/nextcloud_initialize.png"></p>
+<ul>
+<li>恭喜你，进入自己的网盘界面。</li>
+</ul>
+<p><img data-src="/downloads/images/nextcloud_web.png"></p>
+<h1 id="域名访问">域名访问</h1>
+<p>IP 访问会直接把云盘的 IP
+和端口暴露出来，感觉不太妥。如果要<!--像上面示例 [点击访问](http://drive.waylon.one/)，-->通过域名访问自己的网盘，就需要反代了。</p>
+<p>反代可以用 Nginx、Apache、Caddy，本文讲述如何使用 Nginx。</p>
+<blockquote>
+<p>Nginx 是一款轻量级的 Web
+服务器 / 反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在 BSD-like
+协议下发行。其特点是占有内存少，并发能力强，</p>
+</blockquote>
+<p>默认用户已经完成购买域名、安装 Nginx
+的前序步骤，鼓励折腾一下，有问题欢迎下面留言交流。</p>
+<h2 id="certbot-生成-https-证书">certbot 生成 https 证书</h2>
+<p>Let's
+Encrypt 是很火的一个免费 SSL 证书发行项目，自动化发行证书，证书有 90 天的有效期。适合个人使用或者临时使用，不用再忍受自签发证书不受浏览器信赖的提示。<br>
+附上 CentOS 7.2 的 <a href="https://www.vpser.net/build/letsencrypt-certbot.html">免费 SSL 证书 Let's
+Encrypt</a> 流程。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">./certbot-auto certonly --email your_mail --agree-tos --no-eff-email --webroot -w /var/nextcloud -d drive.example.com</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置-nginx-配置文件">配置 Nginx 配置文件</h2>
+<p>在 /etc/nginx/conf.d/ 下的配置文件里添加如下配置。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">server {</span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line">    # enforce https</span><br><span class="line">    return 301 https://$server_name$request_uri;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">server {</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    listen [::]:443 ssl http2;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate  /etc/letsencrypt/live/drive.example.com/fullchain.pem;</span><br><span class="line">    ssl_certificate_key  /etc/letsencrypt/live/drive.example.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";</span><br><span class="line"></span><br><span class="line">    location / {</span><br><span class="line">     proxy_pass http://your_ip:3000;</span><br><span class="line">     proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>最后，重启 nginx，就可以通过网址访问自己的云盘啦！</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="安装中可能遇到的问题-fqa">安装中可能遇到的问题 FQA</h1>
+<ul>
+<li>Q:
+初始化时，提示 “看起来您正在尝试重新安装您的 Nextcloud。但您的 config 文件夹中没有 CAN_INSTALL 文件。请在您的 config 文件夹中创建 CAN_INSTALL 文件以继续。”</li>
+<li>A: 运行如下命令。</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">cd /var/nextcloud/data/config &amp;&amp; touch CAN_INSTALL</span><br></pre></td></tr></tbody></table></figure>
+<p>其中，/var/nextcloud/data 为网盘的数据库，请自行修改。</p>
+<hr>
+<ul>
+<li>Q: 反向代理后，网址无法直接访问，比如提示 403。</li>
+<li>A：请先定位问题，可以在 /var/log/nginx/error.log 查看代理错误。</li>
+</ul>
+<hr>
+<ul>
+<li>Q: 关机重启后，原来配置好的网盘无法访问。</li>
+<li>A: 在使用 docker
+run 启动容器时，已经使用 --restart 参数来设置容器开机自启。如果发现服务器重启后，无法访问网盘，可以尝试
+update 命令设置 --restart=always。</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">docker update --restart=always 容器名称</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>Docker 提供了 restart policy 机制，可以在容器退出或者 Docker
+重启时控制容器能够自启动。这种 Restart policy
+可以保证相关容器按照正确顺序启动。</p>
+</blockquote>
+<hr>
+<ul>
+<li>Q: 通过 IP 方式 登录时，没有出现登录界面，显示 "HTTP ERROR
+500".</li>
+<li>A: 根据 <a href="https://help.nextcloud.com/t/solved-nextcloud-12-http-error-500/21577">Nextcloud
+12 HTTP Error 500</a> 提供的方法，更新 PHP 模块可以解决问题。
+<ul>
+<li>我使用 apt-get upgrade 升级了所有软件的版本，然后问题得到修复。</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>HTTP 500 错误，全称为 HTTP 500 Internal Server Error，即 HTTP 500
+内部服务器错误。<strong>HTTP 500
+内部服务器错误表示服务器遇到意外情况，导致其无法履行请求</strong>，但它无法说明具体错误或发生错误的根本原因。当发生错误时，访问的网站会显示发生错误。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>How to bring in google AdSense to Hexo website / Hexo 网站承接 google AdSense 广告</title>
+    <url>/website/Introduce-AdSense-to-website/</url>
+    <content><![CDATA[<p>[toc]</p>
+<p>FYI 本博客实时更新于 <a href="https://www.yanlongwang.net/website/Introduce-AdSense-to-website/">个人网站
+- Hexo 网站引入 google AdSense</a>，请移步阅读最新内容。</p>
+<h1 id="前言">前言</h1>
+<p>个人网站 <a href="www.yanlongwang.net">www.yanlongwang.net</a>
+已经运营近一年，每日的浏览量不断上升，现在维持在两位数，打算承接一点广告赚睡后收入，用来维持网站的日常运营，希望能覆盖网站的服务器和域名开销。</p>
+<p>目前，自己通过 Google AdSense
+在个人网站的广告位承接广告，下面主要讲解从注册 Google
+AdSense，到审核通过后设置广告的基本操作。</p>
+<p>点击 <a href="www.yanlongwang.net">www.yanlongwang.net</a>
+测试体验，如下图。在侧边栏下部应该可以看到 AdSense
+推送的广告，如果看不到，查看浏览器是否安装了 AdBlock
+等广告屏蔽插件，请暂时关闭这些插件。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_sidebar_ad_example.jpg"></p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">// 系统</span><br><span class="line">- Next Theme</span><br><span class="line">// 在 hexo 目录下, 输入 “hexo version” 可以查看 Next 及依赖的版本</span><br><span class="line">- hexo: 3.8.0</span><br><span class="line">- hexo-cli: 1.1.0</span><br><span class="line">- ...</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="广告联盟选择">广告联盟选择</h1>
+<p>在国内，比较知名的广告联盟都要求网站备案，比如<a href="http://union.baidu.com/customerLogin.html">百度广告联盟</a>，否则无法承接广告，而自己的小网站暂时没有备案，所以只能选择国外的广告联盟。</p>
+<p>国外的广告联盟，毫无疑问会选择 Google
+AdSense，申请门槛相对较低。网站一般运营几个月，有十几篇文章，是比较容易通过审核的。并且，AdSense
+的广告相比百度联盟的还是比较优质的，所以最后选择 google AdSense
+联盟。</p>
+<h1 id="注册-adsense-账号">注册 AdSense 账号</h1>
+<ul>
+<li><a href="https://www.google.com/adsense/start/#">注册网站</a>
+搬梯子登录</li>
+<li>点击右上角 Get started 进行注册；如有 google 账号，可以直接点击 sign
+in 进行登录。</li>
+</ul>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/adsense_sign_up.jpg"></p>
+<ul>
+<li>填写完信息之后，页面会生成一段代码，要求你放置到你的网站的
+
+标记中。注意，当审核通过后，这一段代码在开启 “自动广告” 后，会自动推送广告。
+<ul>
+<li>针对 Next Theme，可以复制代码到 themes\_partials.swig
+中任意一个 script 块下。 <figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- layout example in head.swig --&gt;</span></span><br><span class="line">{% if theme.google_site_verification %}</span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"{{ theme.google_site_verification }}"</span> /&gt;</span></span><br><span class="line">{% endif %}</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">data-ad-client</span>=<span class="string">"ca-pub-612**56"</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% if theme.bing_site_verification %}</span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"msvalidate.01"</span> <span class="attr">content</span>=<span class="string">"{{ theme.bing_site_verification }}"</span> /&gt;</span></span><br><span class="line">{% endif %}</span><br></pre></td></tr></tbody></table></figure></li>
+</ul></li>
+<li>在你添加完成之后，在 google AdSense
+上点击确认，谷歌会到你的网站上进行核查和验收。</li>
+<li>博主是 2020.02.05 上午申请，2020.02.06 上午收到申请通过的邮件。</li>
+</ul>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_check_pass.jpg"></p>
+<h1 id="配置广告位">配置广告位</h1>
+<p>在收到审核通过的邮件后，可以登录 google AdSense
+在自己的网站上进行广告位置的筛选和设计了，目前 google AdSense
+主要提供了自动广告和广告单元两种形式的广告添加方式。</p>
+<h2 id="自动广告">自动广告</h2>
+<p>自动广告是 google AdSense
+近来提供的一种广告形式，它能够通过分析你的博客布局结构，自定义的在你的网站中插入合适的广告，无论是内容，还是广告尺寸，都是完全契合网站内容本身的，算是一种比较高质量的广告。</p>
+<p>打开 AdSense
+首页，然后转到广告。您可以在概览中为各个网站设置自动广告。</p>
+<p>如果您的网站已经启用自动广告，在审核通过的几个小时内，您便会在网站上看到相关的广告，并开始累积收入 (之前插入的检验代码，接入了
+google AdSense 的自动广告)。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_Autonomous_Ads.jpg"></p>
+<p>这种广告投放的几率比较小，在 PC 端效率比较低，如果你的网站支持移动端查看的话，会自动投放移动端自适应的广告。</p>
+<h2 id="广告单元">广告单元</h2>
+<p>为了能够最高效的利用自己博客的广告位，AdSense 提供了三种固定广告位。</p>
+<ul>
+<li>文字广告和展示广告 (即侧边栏，评论区之类的固定广告位)</li>
+<li> 信息流广告 (插入在信息流内容的广告位置)</li>
+<li> 文章内嵌广告 (主要是插入在每篇文章内部的开始，中间，结尾部分，展示次数比较多，强烈推荐)</li>
+</ul>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/AdSense_blocks.jpg"></p>
+<p>由于本人的是博客网站，所以第二种信息流广告没有投入使用，第三种影响阅读体验，所以博主现在主要采用第一种方式，在侧边栏展示广告。</p>
+<p>具体的操作流程是，在网站上，选择广告单元 -&gt; 新建广告位 -&gt; 选择对应的广告类型 -&gt; 生成对应的广告代码。</p>
+<h3 id="广告单元插入">广告单元插入</h3>
+<p>博主启用了自动广告，广告单元仅使用了第一种方式，在网站的侧边栏和评论区展示广告，但下面会提供几种针对
+Hexo 的 Next Theme 广告单元代码位置的插入。</p>
+<h4 id="插入评论区">插入评论区</h4>
+<p>将广告单元生成的广告代码插入 _partials.swig 中的末尾即可。
+</p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">  {% elseif theme.valine.appid and theme.valine.appkey %}</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"comments"</span> <span class="attr">id</span>=<span class="string">"comments"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  {% endif %}</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert google ad blocks --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Comment_Below --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"ca-pub-61***56"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"83***73"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">     (adsbygoogle = <span class="variable language_">window</span>.<span class="property">adsbygoogle</span> || []).<span class="title function_">push</span>({});</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% endif %}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h4 id="插入侧边栏">插入侧边栏</h4>
+将代码插入\_macro.swig 文件中
+<div class="”sidebar-inner”">
+
+</div>
+<p>的最下侧。 </p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">      {% if theme.sidebar.b2t %}</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"back-to-top"</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">i</span> <span class="attr">class</span>=<span class="string">"fa fa-arrow-up"</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">          {% if theme.sidebar.scrollpercent %}</span><br><span class="line">            <span class="tag">&lt;<span class="name">span</span> <span class="attr">id</span>=<span class="string">"scrollpercent"</span>&gt;</span><span class="tag">&lt;<span class="name">span</span>&gt;</span>0<span class="tag">&lt;/<span class="name">span</span>&gt;</span>%<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">          {% endif %}</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      {% endif %}</span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert google ad blocks --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- Comment_Below --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">ins</span> <span class="attr">class</span>=<span class="string">"adsbygoogle"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">style</span>=<span class="string">"display:block"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-client</span>=<span class="string">"ca-pub-6129496365361356"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-slot</span>=<span class="string">"8323610673"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-ad-format</span>=<span class="string">"auto"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">data-full-width-responsive</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">ins</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">     (adsbygoogle = <span class="variable language_">window</span>.<span class="property">adsbygoogle</span> || []).<span class="title function_">push</span>({});</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">aside</span>&gt;</span></span><br><span class="line">{% endmacro %}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure><p></p>
+<h4 id="插入文章头部">插入文章头部</h4>
+<p>在 \_custom&nbsp;目录下，新建 google_adsense.swig，并将 AdSense
+提供的广告代码放入其中，然后将 </p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">{% include '../_custom/google_adsense.swig' %}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>插入到 \_macro.swig 文件中。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">        {% else %}</span><br><span class="line">          {% if post.type === 'picture' %}</span><br><span class="line">            <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"{{ url_for(post.path) }}"</span>&gt;</span>{{ post.content }}<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">          {% else %}</span><br><span class="line">            {{ post.content }}</span><br><span class="line">          {% endif %}</span><br><span class="line">        {% endif %}</span><br><span class="line">      {% else %}</span><br><span class="line"><span class="comment">&lt;!-- Insert google ad blocks --&gt;</span></span><br><span class="line">        {% include '../_custom/google_adsense.swig' %}</span><br><span class="line"></span><br><span class="line">        {{ post.content }}</span><br><span class="line">      {% endif  %}</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    {#####################}</span><br><span class="line">    {### END POST BODY ###}</span><br><span class="line">    {#####################}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>我不建议在一个网页中布置多个广告，广告内容雷同，会严重影响用户阅读体验。在页面的侧边布置一个广告，难道不香吗？</strong></p>
+<h1 id="注意事项">注意事项</h1>
+<p>在成功接入 AdSense 后，google
+会根据几种方式和数据判断广告点击是否作弊，从而注销你的账号，所以不要心存侥幸心理，好好发原创文章，提高网站的质量才是王道。</p>
+<ul>
+<li>作弊广告点击者的 IP 地址与你 Adsense 账户登录 IP 地址相同</li>
+<li>作弊广告点击的 CTR 数据太高</li>
+<li>作弊广告点击者的 IP 地址来自同一个地理区域</li>
+<li>根据 Cookies 判断作弊 Adsense 广告点击</li>
+<li>作弊广告点击者页面停留时间太短</li>
+<li>直接访问者的广告点击率过高</li>
+<li>流量小但广告点击率高</li>
+<li>在网页上用文字提示请求鼓动点击广告</li>
+</ul>
+<!--
+copy from [hexo个人next主题博客接入谷歌广告](http://www.darylliu.cn/archives/6a1f6623.html)
+-->
+<h1 id="last-but-not-least">Last but not least</h1>
+<p>现在通过 AdSense
+能赚到的收入本身并不高，尤其是博客类的网站更是如此，但在有空余的地方放置一点广告还是能起到丰富博客的作用。</p>
+<p>既然大家愿意花时间和精力去搭建个人博客，除了钱以外，肯定还有其他的目的，希望大家不忘初心，更不要舍本逐末，忘记了自己搭建博客的初衷，毕竟广告收入这个事情，有当然好，没有也不用气馁，尽力就好～</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="http://www.darylliu.cn/archives/6a1f6623.html">hexo 个人 next 主题博客接入谷歌广告</a></li>
+<li><a href="https://juejin.im/post/5c95d230e51d45124e35cef6">hexo 博客 next 主题添加 google
+adsense (亲测可用)</a></li>
+<li><a href="https://blog.csdn.net/stormdony/article/details/85608944">Hexo 接入 Google
+adsense 广告</a></li>
+</ul>
+<hr>
+<p>坚持原创技术分享，您的支持将鼓励我继续创作！</p>
+]]></content>
+      <categories>
+        <category>website</category>
+      </categories>
+      <tags>
+        <tag>Website operations</tag>
       </tags>
   </entry>
   <entry>
@@ -13709,6 +12968,68 @@ B 馆免费领取花生和啤酒（一杯原浆和雪花啤酒）。</li>
       </categories>
       <tags>
         <tag>Journey</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>转载 - 小狗钱钱读后感 - 不只是理财</title>
+    <url>/Reading/reprinte-impression-of-Ein-Hund-namens-Money/</url>
+    <content><![CDATA[<p>挺喜欢这篇文章的几个非理财观点，文章转载于 <a href="http://minxueyu.com/2020/03/10/%E3%80%8A%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F-%E5%AE%9E%E7%94%A8%E7%9A%84%E5%BB%BA%E8%AE%AE/">实用的建议</a>。</p>
+<p>通过阅读《小狗钱钱》这本书，我们除了可以收获很多金钱、理财相关的观念和知识外，还可以获得很多实用的建议，我认为将这些实践应用于日常生活中，可以帮助我们进步、达成自己的目标。</p>
+<p>本书关于金钱、理财的观点和建议，大家可以看我的另一篇读后感<a href="http://minxueyu.com/2020/03/10/《小狗钱钱》读后感-关于金钱/">《小狗钱钱》读后感 - 关于金钱</a>。</p>
+<div data-align="center">
+<p><img width="200" data-src="http://minxueyu.com/img/financing/小狗钱钱.jpg"></p>
+</div>
+<h1 id="实用的建议">实用的建议</h1>
+<h2 id="你只有两个选择做与不做没有试试看">你只有两个选择：做与不做，没有试试看</h2>
+<p>本书关于做一件事情的理念：你只有两个选择：做与不做，没有试试看。</p>
+<p>当小狗钱钱给吉娅提出梦想储钱罐和梦想相册时，吉娅说自己会试试看，小狗钱钱对吉娅说：</p>
+<blockquote>
+<p>你只有两个选择：做或不做，不能是我试一下”</p>
+</blockquote>
+<blockquote>
+<p>如果你只是抱着试试看的心态，那么你只会以失败告终，你会一事无成。尝试纯粹是一种借口，你还没有做，就已经给自己想好了退路。</p>
+</blockquote>
+<p>反思一下我们自己，在做一件事情时，我们是不是要么犹豫半天后选择不做，要么是不是会说 “我尝试一下吧”，其实那时候内心已经允许自己完不成了，甚至已经接受了失败这个结局。为了避免这样的事情发生，我们可以像吉娅一样，虽然没有监督自己的狗狗，但是可以自己监督自己，一旦说 “尝试一下” 就在本子上记录一次，最后争取只留下 “做” 与 “不做” 两个选项。</p>
+<h2 id="多想实现目标后的美好少想事情做不好的原因">多想实现目标后的美好，少想事情做不好的原因</h2>
+<p>钱钱给吉娅提出她看待问题的一个错误思维：首先考虑的总是事情做不成的原因，而不是去想象达成目标后的美好。</p>
+<blockquote>
+<p>你必须设想你已经拥有了这些东西，这样捏的一个小愿望才会变成一种强烈的愿望，你想象的越多，你的愿望就越强烈，那么你就会开始寻找机会来实现自己的梦想。</p>
+</blockquote>
+<p>基于此，钱钱给她提出的可实践性建议是建立梦想相册，让她把梦想 “去美国交流”、“笔记本电脑” 相关的图片保存到相册中，时常拿出来看，加强自己的渴望。</p>
+<p>关于梦想储钱罐和梦想相册，我自己也进行了实践了一下，我找出本子罗列自己十个需要金钱来实现的愿望，挑选出了三个，并设定了各自的资金来源，刚好咕咕机到手了，所以打算把与愿望相关的图片都打印出来，而且还要把梦想写的更详细一点，等我达成某个梦想时，再来与大家分享。</p>
+<h2 id="自信决定了是否可以成功">自信决定了是否可以成功</h2>
+<p>本书还强调了自信的重要性，而且认为过于自信比不够自信要好得多。</p>
+<blockquote>
+<p>你的自信程度决定了你是否相信自己的能力，是否相信你自己，如果你根本不相信你能做到的话，那么你就根本不会动手去做，而假如你不开始去做，那么你就什么也得不到。</p>
+</blockquote>
+<p>这段话我深感理解，我是一个自卑的人，任何时候都不自信，而且由于没有信心做成功，自然也不会付出相应的努力，所以很多事情不出所料地都失败了，而这些事情的失败像是地上的雪花，自卑这个雪球经过一片片雪花逐渐变的越来越大，之后又更容易沾上雪花。自卑、不为之努力、失败形成了一个完美的循环，自己无法逃脱。</p>
+<p>关于如何建立自信，钱钱给吉娅的建议是：设立自己的 “成功日记”，每天记录至少 5 件个人成果，任何小事都可以，而且不用纠结有些事情是否属于成果，可以给予自己肯定的答复。这个建议之前也有在别的地方听到过，但是都没有付诸实践，这次我计划开始写 “成功日记”，到目前为止已经坚持了 17 天，未有过间断，我发现自己喜欢上了这项活动。虽然里面记录的大部分搜是很小的事情，现在我每天晚上睡觉前拿出我的小本本回想今天的个人成果，感觉很开心，这对自己至少是一种积极的暗示，而且我发现开始更愿意完成自己每天的任务计划，不知道是不是有它的功劳呢。</p>
+<h2 id="把精力集中在你知道的能做的和拥有的东西上">把精力集中在你知道的、能做的和拥有的东西上</h2>
+<p>当吉娅决定要开始赚钱，但是不知道如何下手时，钱钱给她讲了个故事，借故事提出两个建议：</p>
+<blockquote>
+<ol type="1">
+<li>为别人解决一个难题，那么你就能赚到很多钱；</li>
+<li>把精力集中在你知道的、能做的和拥有的东西上。</li>
+</ol>
+</blockquote>
+<p>如果你也有 “开源” 的打算，我感觉这两个建议非常好，考虑下别人需要什么和自己有什么。而第二个建议可能不仅限于赚钱，自己的事业或工作也一样，人的精力是有限的，专注于自己知道、能做和拥有的东西上，不要跟随潮流看大家干嘛自己也干嘛，最终可能什么都不精，找到自己会的，把某一方面做的很精通，可能整体带来的收益更大。</p>
+<h2 id="重要的事情要坚持做">重要的事情要坚持做</h2>
+<p>由于小狗钱钱是吉娅捡到的，当吉娅找到狗主人时，由于害怕失去钱钱而十分害怕和烦恼，因此停止了成功日记的记录和梦想相册的整理。钱钱因此非常生气，它说：</p>
+<blockquote>
+<p>困难总是在不断地出现。尽管如此，你每天还是要不间断地去做对你地未来意义重大地事情，这件事情可能花费时间不多，但就是这段时间会让一切变得不同。</p>
+</blockquote>
+<p>这个有点观点比较像四现象法则中提出的对待 “重要不紧急” 事件的态度，这些事情可能不是十分紧急的，但是这些事情的重要性却很高，无论如何都应该坚持，那么有什么好的建议吗？钱钱给的建议是，应该在固定的时间里，有规律地做这些事情，这样可以防止由于其他紧急事情、或者心情等原因导致的中断。</p>
+<h2 id="小时规定">72 小时规定</h2>
+<p>钱钱告诉吉娅在想做什么事情时，在 72 小时内去完成，不要拖太久时间，否则这件事情你可能永远不会再做了。</p>
+<p>这个规定很适合于我们平常一些灵感和想法的实施，这些事情完全属于自主自愿，更多的是靠一时的冲动和兴趣，如果开始的太晚，或者持续时间太久，很容易中途放弃，最终就不了了之。</p>
+<h1 id="写在最后">写在最后</h1>
+<p>关于实用的建议，我大概就梳理出了这么几个，希望大家可以找到适合自己的建议并进行实践，我实践一段时间后，也会和大家分享我的成长和收获。</p>
+]]></content>
+      <categories>
+        <category>Reading</category>
+      </categories>
+      <tags>
+        <tag>Finance</tag>
       </tags>
   </entry>
   <entry>
@@ -13890,70 +13211,8 @@ Pages</a></li>
         <category>hexo</category>
       </categories>
       <tags>
-        <tag>VPS</tag>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>转载 - 小狗钱钱读后感 - 不只是理财</title>
-    <url>/Reading/reprinte-impression-of-Ein-Hund-namens-Money/</url>
-    <content><![CDATA[<p>挺喜欢这篇文章的几个非理财观点，文章转载于 <a href="http://minxueyu.com/2020/03/10/%E3%80%8A%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F-%E5%AE%9E%E7%94%A8%E7%9A%84%E5%BB%BA%E8%AE%AE/">实用的建议</a>。</p>
-<p>通过阅读《小狗钱钱》这本书，我们除了可以收获很多金钱、理财相关的观念和知识外，还可以获得很多实用的建议，我认为将这些实践应用于日常生活中，可以帮助我们进步、达成自己的目标。</p>
-<p>本书关于金钱、理财的观点和建议，大家可以看我的另一篇读后感<a href="http://minxueyu.com/2020/03/10/《小狗钱钱》读后感-关于金钱/">《小狗钱钱》读后感 - 关于金钱</a>。</p>
-<div data-align="center">
-<p><img width="200" data-src="http://minxueyu.com/img/financing/小狗钱钱.jpg"></p>
-</div>
-<h1 id="实用的建议">实用的建议</h1>
-<h2 id="你只有两个选择做与不做没有试试看">你只有两个选择：做与不做，没有试试看</h2>
-<p>本书关于做一件事情的理念：你只有两个选择：做与不做，没有试试看。</p>
-<p>当小狗钱钱给吉娅提出梦想储钱罐和梦想相册时，吉娅说自己会试试看，小狗钱钱对吉娅说：</p>
-<blockquote>
-<p>你只有两个选择：做或不做，不能是我试一下”</p>
-</blockquote>
-<blockquote>
-<p>如果你只是抱着试试看的心态，那么你只会以失败告终，你会一事无成。尝试纯粹是一种借口，你还没有做，就已经给自己想好了退路。</p>
-</blockquote>
-<p>反思一下我们自己，在做一件事情时，我们是不是要么犹豫半天后选择不做，要么是不是会说 “我尝试一下吧”，其实那时候内心已经允许自己完不成了，甚至已经接受了失败这个结局。为了避免这样的事情发生，我们可以像吉娅一样，虽然没有监督自己的狗狗，但是可以自己监督自己，一旦说 “尝试一下” 就在本子上记录一次，最后争取只留下 “做” 与 “不做” 两个选项。</p>
-<h2 id="多想实现目标后的美好少想事情做不好的原因">多想实现目标后的美好，少想事情做不好的原因</h2>
-<p>钱钱给吉娅提出她看待问题的一个错误思维：首先考虑的总是事情做不成的原因，而不是去想象达成目标后的美好。</p>
-<blockquote>
-<p>你必须设想你已经拥有了这些东西，这样捏的一个小愿望才会变成一种强烈的愿望，你想象的越多，你的愿望就越强烈，那么你就会开始寻找机会来实现自己的梦想。</p>
-</blockquote>
-<p>基于此，钱钱给她提出的可实践性建议是建立梦想相册，让她把梦想 “去美国交流”、“笔记本电脑” 相关的图片保存到相册中，时常拿出来看，加强自己的渴望。</p>
-<p>关于梦想储钱罐和梦想相册，我自己也进行了实践了一下，我找出本子罗列自己十个需要金钱来实现的愿望，挑选出了三个，并设定了各自的资金来源，刚好咕咕机到手了，所以打算把与愿望相关的图片都打印出来，而且还要把梦想写的更详细一点，等我达成某个梦想时，再来与大家分享。</p>
-<h2 id="自信决定了是否可以成功">自信决定了是否可以成功</h2>
-<p>本书还强调了自信的重要性，而且认为过于自信比不够自信要好得多。</p>
-<blockquote>
-<p>你的自信程度决定了你是否相信自己的能力，是否相信你自己，如果你根本不相信你能做到的话，那么你就根本不会动手去做，而假如你不开始去做，那么你就什么也得不到。</p>
-</blockquote>
-<p>这段话我深感理解，我是一个自卑的人，任何时候都不自信，而且由于没有信心做成功，自然也不会付出相应的努力，所以很多事情不出所料地都失败了，而这些事情的失败像是地上的雪花，自卑这个雪球经过一片片雪花逐渐变的越来越大，之后又更容易沾上雪花。自卑、不为之努力、失败形成了一个完美的循环，自己无法逃脱。</p>
-<p>关于如何建立自信，钱钱给吉娅的建议是：设立自己的 “成功日记”，每天记录至少 5 件个人成果，任何小事都可以，而且不用纠结有些事情是否属于成果，可以给予自己肯定的答复。这个建议之前也有在别的地方听到过，但是都没有付诸实践，这次我计划开始写 “成功日记”，到目前为止已经坚持了 17 天，未有过间断，我发现自己喜欢上了这项活动。虽然里面记录的大部分搜是很小的事情，现在我每天晚上睡觉前拿出我的小本本回想今天的个人成果，感觉很开心，这对自己至少是一种积极的暗示，而且我发现开始更愿意完成自己每天的任务计划，不知道是不是有它的功劳呢。</p>
-<h2 id="把精力集中在你知道的能做的和拥有的东西上">把精力集中在你知道的、能做的和拥有的东西上</h2>
-<p>当吉娅决定要开始赚钱，但是不知道如何下手时，钱钱给她讲了个故事，借故事提出两个建议：</p>
-<blockquote>
-<ol type="1">
-<li>为别人解决一个难题，那么你就能赚到很多钱；</li>
-<li>把精力集中在你知道的、能做的和拥有的东西上。</li>
-</ol>
-</blockquote>
-<p>如果你也有 “开源” 的打算，我感觉这两个建议非常好，考虑下别人需要什么和自己有什么。而第二个建议可能不仅限于赚钱，自己的事业或工作也一样，人的精力是有限的，专注于自己知道、能做和拥有的东西上，不要跟随潮流看大家干嘛自己也干嘛，最终可能什么都不精，找到自己会的，把某一方面做的很精通，可能整体带来的收益更大。</p>
-<h2 id="重要的事情要坚持做">重要的事情要坚持做</h2>
-<p>由于小狗钱钱是吉娅捡到的，当吉娅找到狗主人时，由于害怕失去钱钱而十分害怕和烦恼，因此停止了成功日记的记录和梦想相册的整理。钱钱因此非常生气，它说：</p>
-<blockquote>
-<p>困难总是在不断地出现。尽管如此，你每天还是要不间断地去做对你地未来意义重大地事情，这件事情可能花费时间不多，但就是这段时间会让一切变得不同。</p>
-</blockquote>
-<p>这个有点观点比较像四现象法则中提出的对待 “重要不紧急” 事件的态度，这些事情可能不是十分紧急的，但是这些事情的重要性却很高，无论如何都应该坚持，那么有什么好的建议吗？钱钱给的建议是，应该在固定的时间里，有规律地做这些事情，这样可以防止由于其他紧急事情、或者心情等原因导致的中断。</p>
-<h2 id="小时规定">72 小时规定</h2>
-<p>钱钱告诉吉娅在想做什么事情时，在 72 小时内去完成，不要拖太久时间，否则这件事情你可能永远不会再做了。</p>
-<p>这个规定很适合于我们平常一些灵感和想法的实施，这些事情完全属于自主自愿，更多的是靠一时的冲动和兴趣，如果开始的太晚，或者持续时间太久，很容易中途放弃，最终就不了了之。</p>
-<h1 id="写在最后">写在最后</h1>
-<p>关于实用的建议，我大概就梳理出了这么几个，希望大家可以找到适合自己的建议并进行实践，我实践一段时间后，也会和大家分享我的成长和收获。</p>
-]]></content>
-      <categories>
-        <category>Reading</category>
-      </categories>
-      <tags>
-        <tag>Finance</tag>
+        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
@@ -14465,6 +13724,175 @@ https://github.com/ivgiuliani/ant 和万老板的实现类似，有working memor
       </tags>
   </entry>
   <entry>
+    <title>通过 clustermaps 统计 Hexo 网站的访问地区和 IP</title>
+    <url>/website/statistics-visitor-traffic/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="前言">前言</h1>
+<p>在 <a href="http://www.waylon.one/website/Website-FAQ/">Website
+FAQ</a>，实现了使用 "卜算子" 来统计网站访问人数，但是 "卜算子" 仅可以提供访问人数的统计，进一步的信息却无法提供。那么，如果想知道过往访客来自哪些国家和地区，显示网站访问实时动态的信息，应该怎么做呢？</p>
+<p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/statistics-visitor-traffic/">个人网站</a>，请移步阅读最新内容。</p>
+<h1 id="clustermaps-是什么">clustermaps 是什么</h1>
+<p><a href="https://clustrmaps.com">clustrmaps.com</a>
+是美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。</p>
+<blockquote>
+<p>Add the ClustrMaps hit tracker to your site or blog and see a
+real-time map of your visitors from around the world! Proudly show and
+grow your hidden community of interest.</p>
+</blockquote>
+<p>网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是<strong>免费</strong>的，能够满足个人网站的需求，如下图所示。</p>
+<p><img data-src="/downloads/images/blog/visitor_traffic_demo.png"></p>
+<h1 id="配置-clustrmaps">配置 clustrmaps</h1>
+<ul>
+<li>网站注册后，访问 <a href="https://clustrmaps.com/add">Enter your
+website address</a> 添加自己的网站地址，选择免费的服务。</li>
+</ul>
+<p><img data-src="/downloads/images/blog/input_url.png"></p>
+<p><img data-src="/downloads/images/blog/choose_plan.png"></p>
+<ul>
+<li>选择自己喜欢的插件格式，现在 Hexo 的 Next
+两种主题都是支持的，但是自己比较喜欢 Map widget 的主题。</li>
+</ul>
+<p><img data-src="/downloads/images/blog/map_widget.png"></p>
+<ul>
+<li>点击选择后，拷贝网站出现的脚本
+javascript 代码，粘贴到 Next 主题下某个位置。博主测试过如下两个位置，挑选一个配置即可以。推荐位置二，自定义程度高。
+<ul>
+<li><p>位置一：将代码插入到 themes\_partials.swig 的最后。
+</p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">  {% endif %}</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert clustrmaps.com --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">id</span>=<span class="string">'clustrmaps'</span> <span class="attr">src</span>=<span class="string">'//cdn.clustrmaps.com/map_v2.js?XXX'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% include '../_custom/header.swig' %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>位置二：将代码插入到 \_macro.swig 文件的</p>
+<div class="”sidebar-inner”">
+
+</div>
+<p>图层。 </p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-inner"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- set display_toc = page.toc.enable and display_toc %}</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Begin Insert clustrmaps.com --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">id</span>=<span class="string">"clustrmaps"</span> <span class="attr">src</span>=<span class="string">"//clustrmaps.com/map_v2.js?d=iBmc9XXXXXX=a"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- End Insert clustrmaps.com --&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- if display_toc %}</span><br><span class="line">      {%- set toc = toc(page.content, { class: "nav", list_number: page.toc.number, max_depth: page.toc.max_depth }) %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+</ul></li>
+<li>重新部署网站，就可以在首页看到实时访客来源图，如我的网站首页所示。另外，点击地图，可以看到更详细的信息，包括访客的地图、浏览设备以及
+IP。</li>
+</ul>
+<p><img data-src="/downloads/images/blog/detaile_IP.png"></p>
+]]></content>
+      <categories>
+        <category>website</category>
+      </categories>
+      <tags>
+        <tag>Website</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>网站被谷歌和百度收录</title>
+    <url>/website/site-indexed/</url>
+    <content><![CDATA[<p>[toc]</p>
+<p>在谷歌或者百度的搜索链接中，使用以下格式可以直接搜索自己的域名。如果能搜索到就说明已经被收录，反之则没有。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">// site: your_wabsite</span><br><span class="line">site: http://www.waylon.one</span><br></pre></td></tr></tbody></table></figure>
+<p>如果自己的域名没有被收录，那么可以通过下面的方式，让自己的网站内容被
+baidu 和 google 收录，增加网站 SEO。</p>
+<h1 id="google">Google</h1>
+<h2 id="注册-webmasters">注册 webmasters</h2>
+<p><a href="http://www.google.cn/webmasters/">webmasters 入口</a></p>
+<h2 id="添加网站资源">添加网站资源</h2>
+<p>根据 <a href="https://support.google.com/webmasters/answer/34592">添加网站资源</a>，现在支持网址前缀资源和网域资源。
+* 网址前缀资源：仅包含具有指定前缀（包括协议 http/https）的网址。 *
+网域资源：包括所有子网域（m、www
+等）和多种协议（http、https、ftp）的网域级资源。 *
+如果您希望资源匹配任何协议或子网域（http/https/www./m.
+等），请考虑改为添加网域资源，但 <strong>网域资源仅支持 DNS
+记录验证</strong>。</p>
+<ul>
+<li>选择网域资源后，弹框要求对 DNS 支持验证。</li>
+</ul>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/google_DNS_detail.jpg"></p>
+<ul>
+<li>登录到域名提供商网站（我是在 Doynadot 解析域名）。</li>
+<li>将验证的 TXT 记录复制到验证网站的 DNS 配置中。</li>
+<li>注意：DNS 更改可能要过一段时间才会生效。如果 Search Console
+未能立即发现相应记录，请等待 1 天，然后重新尝试验证。</li>
+</ul>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/google_DNS_verification.jpg"></p>
+<h2 id="添加站点地图">添加站点地图</h2>
+<p>站点地图（sitemap），是一个页面，上面放置了网站上需要搜索引擎抓取的所有页面的链接。站点地图可以告诉搜索引擎网站上有哪些可供抓取的网页，以便搜索引擎可以更加智能地抓取网站。</p>
+<h3 id="配置站点地图">配置站点地图</h3>
+<ul>
+<li>安装百度和 Google 的站点地图生成插件。</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>修改配置文件</li>
+</ul>
+<p>修改 Hexo 站点配置文件 _config.yml，添加以下内容：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 自动生成 sitemap</span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>执行网站生成和部署命令，进入
+，检查里面是否有 sitemap.xml 文件，这就是生成的站点地图，里面包含了网站上所有页面的链接，google
+搜索引擎通过这个文件来抓取网站页面。</li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="提交站点地图">提交站点地图</h3>
+<p>如下图所示，在<strong>添加新的站点地图</strong>中添加自己的站点地图并提交，那么自己的网站内容就会被
+google 周期性收录。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/google_sitemap.jpg"></p>
+<h1 id="baidu">Baidu</h1>
+<h2 id="网站提交">网站提交</h2>
+<ul>
+<li>提交网址给百度的入口 <a href="https://ziyuan.baidu.com/site/siteadd#/">点这里</a>。</li>
+<li>网站提交过后，在第三步有一个验证网站步骤，证明您是该域名的拥有者。
+<ul>
+<li>我选择的是文件验证，需要将验证文件放置于您所配置域名的根目录下，对应于
+Hexo 的 hexo_file_path。</li>
+<li>网站发布成功后，返回站点验证。</li>
+<li>为保持验证通过的状态，成功验证后请不要删除 HTML 文件。</li>
+</ul></li>
+</ul>
+<h2 id="资源提交">资源提交</h2>
+<ul>
+<li>普通收录工具可以向百度搜索主动推送资源，缩短爬虫发现网站链接的时间。入口
+<a href="https://ziyuan.baidu.com/linksubmit/index?site">点这里</a>。</li>
+<li>在资源提交中，我选择了<strong>主动推送</strong> (实时) 的方式，有以下优势。
+<ul>
+<li>及时发现：可以缩短百度爬虫发现您站点新链接的时间，使新发布的页面可以在第一时间被百度收录。<br>
+</li>
+<li>保护原创：对于网站的最新原创内容，使用主动推送功能可以快速通知到百度，使内容可以在转发之前被百度发现。</li>
+</ul></li>
+</ul>
+<h2 id="推送配置">推送配置</h2>
+<p>参考 <a href="https://lanlan2017.github.io/blog/7ac3f85/">hexo
+百度主动推送</a> 实现，实现基于插件的自动推送。</p>
+<ol type="1">
+<li>安装 hexo-baidu-url-submit 插件</li>
+</ol>
+<p>在 Hexo 站点根目录下，输入下面命令安装插件。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-baidu-url-submit --save</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2" type="1">
+<li>在站点配置文件 (_config.yml) 中添加 baidu-url-submit 的配置项</li>
+</ol>
+<p>其中，进入主动推送工具后，会看到接口调用地址的 token，token 是由 16 个英文数字组合的字符串。</p>
+<p><img data-src="https://zhanzhang.bj.bcebos.com/files/000471450342318.jpg"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 设置百度主动推送</span><br><span class="line">baidu_url_submit:</span><br><span class="line">  count: 200  # 比如200，代表提交最新的200个链接</span><br><span class="line">  host: your_website # 在百度站长平台中注册的域名</span><br><span class="line">  token: your_token # 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!</span><br><span class="line">  path: baidu_urls.txt # 文本文档的地址，文件默认</span><br></pre></td></tr></tbody></table></figure>
+<ol start="3" type="1">
+<li>加入新的 deploy 配置项</li>
+</ol>
+<p>在站点配置文件中找到 deploy 项，添加新的推送项，如下所示：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">- type: git</span><br><span class="line">  repo: XXX</span><br><span class="line">  branch: master</span><br><span class="line">- type: baidu_url_submitter</span><br></pre></td></tr></tbody></table></figure>
+<ol start="4" type="1">
+<li>验证配置是否成功</li>
+</ol>
+<p>重新部署网站，查看 git-bash 中的信息，类似于下面的信息。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">INFO  Deploying: baidu_url_submitter</span><br><span class="line">INFO  Submitting urls</span><br><span class="line">http://www.waylon.one/blog/uncategorized/dynadot-buy-domain/</span><br><span class="line">http://www.waylon.one/blog/uncategorized/hello-world/</span><br><span class="line">{"remain":2998,"success":2}</span><br><span class="line">INFO  Deploy done: baidu_url_submitter</span><br></pre></td></tr></tbody></table></figure>
+<p>对比接口的返回信息，推送成功。 </p><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">{"remain":2998,"success":2}</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/baidu_push_feedback.jpg"></p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://lanlan2017.github.io/blog/7ac3f85/">hexo
+百度主动推送</a></li>
+<li><a href="https://www.jianshu.com/p/25145964abf3">hexo 博客被 Google 和百度收录</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>website</category>
+      </categories>
+      <tags>
+        <tag>website</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第二次剑桥领思考试回忆</title>
     <url>/English/second-linguaskill/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -14606,172 +14034,132 @@ please do not hesitate to discuss with me!</p>
       </tags>
   </entry>
   <entry>
-    <title>网站被谷歌和百度收录</title>
-    <url>/website/site-indexed/</url>
+    <title>第三次剑桥领思考试回忆</title>
+    <url>/English/third-linguaskill/</url>
     <content><![CDATA[<p>[toc]</p>
-<p>在谷歌或者百度的搜索链接中，使用以下格式可以直接搜索自己的域名。如果能搜索到就说明已经被收录，反之则没有。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">// site: your_wabsite</span><br><span class="line">site: http://www.waylon.one</span><br></pre></td></tr></tbody></table></figure>
-<p>如果自己的域名没有被收录，那么可以通过下面的方式，让自己的网站内容被
-baidu 和 google 收录，增加网站 SEO。</p>
-<h1 id="google">Google</h1>
-<h2 id="注册-webmasters">注册 webmasters</h2>
-<p><a href="http://www.google.cn/webmasters/">webmasters 入口</a></p>
-<h2 id="添加网站资源">添加网站资源</h2>
-<p>根据 <a href="https://support.google.com/webmasters/answer/34592">添加网站资源</a>，现在支持网址前缀资源和网域资源。
-* 网址前缀资源：仅包含具有指定前缀（包括协议 http/https）的网址。 *
-网域资源：包括所有子网域（m、www
-等）和多种协议（http、https、ftp）的网域级资源。 *
-如果您希望资源匹配任何协议或子网域（http/https/www./m.
-等），请考虑改为添加网域资源，但 <strong>网域资源仅支持 DNS
-记录验证</strong>。</p>
-<ul>
-<li>选择网域资源后，弹框要求对 DNS 支持验证。</li>
-</ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/google_DNS_detail.jpg"></p>
-<ul>
-<li>登录到域名提供商网站（我是在 Doynadot 解析域名）。</li>
-<li>将验证的 TXT 记录复制到验证网站的 DNS 配置中。</li>
-<li>注意：DNS 更改可能要过一段时间才会生效。如果 Search Console
-未能立即发现相应记录，请等待 1 天，然后重新尝试验证。</li>
-</ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/google_DNS_verification.jpg"></p>
-<h2 id="添加站点地图">添加站点地图</h2>
-<p>站点地图（sitemap），是一个页面，上面放置了网站上需要搜索引擎抓取的所有页面的链接。站点地图可以告诉搜索引擎网站上有哪些可供抓取的网页，以便搜索引擎可以更加智能地抓取网站。</p>
-<h3 id="配置站点地图">配置站点地图</h3>
-<ul>
-<li>安装百度和 Google 的站点地图生成插件。</li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-generator-sitemap --save</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>修改配置文件</li>
-</ul>
-<p>修改 Hexo 站点配置文件 _config.yml，添加以下内容：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 自动生成 sitemap</span><br><span class="line">sitemap:</span><br><span class="line">  path: sitemap.xml</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>执行网站生成和部署命令，进入
-，检查里面是否有 sitemap.xml 文件，这就是生成的站点地图，里面包含了网站上所有页面的链接，google
-搜索引擎通过这个文件来抓取网站页面。</li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="提交站点地图">提交站点地图</h3>
-<p>如下图所示，在<strong>添加新的站点地图</strong>中添加自己的站点地图并提交，那么自己的网站内容就会被
-google 周期性收录。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/google_sitemap.jpg"></p>
-<h1 id="baidu">Baidu</h1>
-<h2 id="网站提交">网站提交</h2>
-<ul>
-<li>提交网址给百度的入口 <a href="https://ziyuan.baidu.com/site/siteadd#/">点这里</a>。</li>
-<li>网站提交过后，在第三步有一个验证网站步骤，证明您是该域名的拥有者。
-<ul>
-<li>我选择的是文件验证，需要将验证文件放置于您所配置域名的根目录下，对应于
-Hexo 的 hexo_file_path。</li>
-<li>网站发布成功后，返回站点验证。</li>
-<li>为保持验证通过的状态，成功验证后请不要删除 HTML 文件。</li>
-</ul></li>
-</ul>
-<h2 id="资源提交">资源提交</h2>
-<ul>
-<li>普通收录工具可以向百度搜索主动推送资源，缩短爬虫发现网站链接的时间。入口
-<a href="https://ziyuan.baidu.com/linksubmit/index?site">点这里</a>。</li>
-<li>在资源提交中，我选择了<strong>主动推送</strong> (实时) 的方式，有以下优势。
-<ul>
-<li>及时发现：可以缩短百度爬虫发现您站点新链接的时间，使新发布的页面可以在第一时间被百度收录。<br>
-</li>
-<li>保护原创：对于网站的最新原创内容，使用主动推送功能可以快速通知到百度，使内容可以在转发之前被百度发现。</li>
-</ul></li>
-</ul>
-<h2 id="推送配置">推送配置</h2>
-<p>参考 <a href="https://lanlan2017.github.io/blog/7ac3f85/">hexo
-百度主动推送</a> 实现，实现基于插件的自动推送。</p>
-<ol type="1">
-<li>安装 hexo-baidu-url-submit 插件</li>
-</ol>
-<p>在 Hexo 站点根目录下，输入下面命令安装插件。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">npm install hexo-baidu-url-submit --save</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2" type="1">
-<li>在站点配置文件 (_config.yml) 中添加 baidu-url-submit 的配置项</li>
-</ol>
-<p>其中，进入主动推送工具后，会看到接口调用地址的 token，token 是由 16 个英文数字组合的字符串。</p>
-<p><img data-src="https://zhanzhang.bj.bcebos.com/files/000471450342318.jpg"></p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line"># 设置百度主动推送</span><br><span class="line">baidu_url_submit:</span><br><span class="line">  count: 200  # 比如200，代表提交最新的200个链接</span><br><span class="line">  host: your_website # 在百度站长平台中注册的域名</span><br><span class="line">  token: your_token # 请注意这是您的秘钥， 所以请不要把博客源代码发布在公众仓库里!</span><br><span class="line">  path: baidu_urls.txt # 文本文档的地址，文件默认</span><br></pre></td></tr></tbody></table></figure>
-<ol start="3" type="1">
-<li>加入新的 deploy 配置项</li>
-</ol>
-<p>在站点配置文件中找到 deploy 项，添加新的推送项，如下所示：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">- type: git</span><br><span class="line">  repo: XXX</span><br><span class="line">  branch: master</span><br><span class="line">- type: baidu_url_submitter</span><br></pre></td></tr></tbody></table></figure>
-<ol start="4" type="1">
-<li>验证配置是否成功</li>
-</ol>
-<p>重新部署网站，查看 git-bash 中的信息，类似于下面的信息。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">INFO  Deploying: baidu_url_submitter</span><br><span class="line">INFO  Submitting urls</span><br><span class="line">http://www.waylon.one/blog/uncategorized/dynadot-buy-domain/</span><br><span class="line">http://www.waylon.one/blog/uncategorized/hello-world/</span><br><span class="line">{"remain":2998,"success":2}</span><br><span class="line">INFO  Deploy done: baidu_url_submitter</span><br></pre></td></tr></tbody></table></figure>
-<p>对比接口的返回信息，推送成功。 </p><figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">{"remain":2998,"success":2}</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/baidu_push_feedback.jpg"></p>
-<h1 id="references">References</h1>
-<ul>
-<li><a href="https://lanlan2017.github.io/blog/7ac3f85/">hexo
-百度主动推送</a></li>
-<li><a href="https://www.jianshu.com/p/25145964abf3">hexo 博客被 Google 和百度收录</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>website</category>
-      </categories>
-      <tags>
-        <tag>website</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过 clustermaps 统计 Hexo 网站的访问地区和 IP</title>
-    <url>/website/statistics-visitor-traffic/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h1 id="前言">前言</h1>
-<p>在 <a href="http://www.waylon.one/website/Website-FAQ/">Website
-FAQ</a>，实现了使用 "卜算子" 来统计网站访问人数，但是 "卜算子" 仅可以提供访问人数的统计，进一步的信息却无法提供。那么，如果想知道过往访客来自哪些国家和地区，显示网站访问实时动态的信息，应该怎么做呢？</p>
-<p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/statistics-visitor-traffic/">个人网站</a>，请移步阅读最新内容。</p>
-<h1 id="clustermaps-是什么">clustermaps 是什么</h1>
-<p><a href="https://clustrmaps.com">clustrmaps.com</a>
-是美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。</p>
+<!--
+空调调整到26度，保证室内舒适
+-->
+<p>免责声明：因为剑桥领思的考试内容和形式存在变化，以下内容仅代表我的个人认知、个人经历和个人观点，不能确保信息完全准确和实时同步，请读者自己辨识。如果有任何错误，请不要将它们归咎于任何其他个人或组织。</p>
+<p><a href="http://www.waylon.one/English/linguaskill-introduction/">领思介绍</a><br>
+<a href="http://www.waylon.one/English/first-linguaskill/">第一次领思考试回忆</a>
+<a href="http://waylon.one/English/second-linguaskill/">第二次领思考试回忆</a></p>
+<p>第二次的领思成绩，虽然口语和写作有所进步，但是仍然没有达到自己的目标，自己在
+2020 年 8 月 8
+日上午，参加了第三次领思考试，三战领思考试，希望能取得好结果吧。</p>
+<p>在第三次考试中，自己看到了一些熟悉的题目，也就是在第一次和第二次领思考试中遇到的题目。</p>
+<p>在这次考试中，自己又遇到了多次网络断线，以及和客服沟通界面打不开的问题，看来自己的网络是十分脆弱啊。最后，加上中间断网的时间，自己超过系统考试时间
+110 分钟才交卷。</p>
+<p>期间，自己点击开始考试时，总是
+“loading”，然后界面奔溃，无法加载考试项。自己和客服人员沟通很久的情况下，自己甚至想放弃这次考试，好在最后坚持，客服人员和考试机构联系，自己可以重新登录界面，接着之前的考试继续作答。<strong>考试时，不要随意关闭网站，即使网站奔溃，也要先和客服人员联系</strong>。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Third_Linguaskill_Test_Report.jpg"></p>
+<p>上面是收到的成绩单，Speaking
+分数让自己很吃惊，我原本感觉比第二次的作答要好上很多，结果成绩反而低了不少，现在我实在搞不清楚如何评分，现在的分数基本只是雅思
+4.0 ~ 4.5 的水平，和我的雅思成绩差一档。</p>
+<p>我自己和英国的剑桥领思机构写信沟通后，现在领思不支持成绩复议（附答复），只能接受这样的结果吧，佛系一点。</p>
 <blockquote>
-<p>Add the ClustrMaps hit tracker to your site or blog and see a
-real-time map of your visitors from around the world! Proudly show and
-grow your hidden community of interest.</p>
+<p>With regards to your score, I am afraid to let you know that our
+normal process is that since the Linguaskill is not a certified exam,
+but rather an adaptive test, there is no formal Results Enquiry process
+for this exam. Therefore we cannot remark your scores.</p>
 </blockquote>
-<p>网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是<strong>免费</strong>的，能够满足个人网站的需求，如下图所示。</p>
-<p><img data-src="/downloads/images/blog/visitor_traffic_demo.png"></p>
-<h1 id="配置-clustrmaps">配置 clustrmaps</h1>
+<h1 id="speaking">Speaking</h1>
+<!--
+这一次自己调整做法顺序，为了不被室友影响，自己首先选择了口语，然后是听力和阅读，最后是写作。
+-->
+<p>在阅读题目和 Think
+阶段，自己可以热身，对着题目开始说起来；当听到作答铃声后，立即开始正式的回答。</p>
+<h2 id="part-1">Part 1</h2>
 <ul>
-<li>网站注册后，访问 <a href="https://clustrmaps.com/add">Enter your
-website address</a> 添加自己的网站地址，选择免费的服务。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/input_url.png"></p>
-<p><img data-src="/downloads/images/blog/choose_plan.png"></p>
+<li>前面四个老问题，可以预先准备好。 新的题目
 <ul>
-<li>选择自己喜欢的插件格式，现在 Hexo 的 Next
-两种主题都是支持的，但是自己比较喜欢 Map widget 的主题。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/map_widget.png"></p>
+<li>How often do you use the Internet?
 <ul>
-<li>点击选择后，拷贝网站出现的脚本
-javascript 代码，粘贴到 Next 主题下某个位置。博主测试过如下两个位置，挑选一个配置即可以。推荐位置二，自定义程度高。
-<ul>
-<li><p>位置一：将代码插入到 themes\_partials.swig 的最后。
-</p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">  {% endif %}</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert clustrmaps.com --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">id</span>=<span class="string">'clustrmaps'</span> <span class="attr">src</span>=<span class="string">'//cdn.clustrmaps.com/map_v2.js?XXX'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% include '../_custom/header.swig' %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
-<li><p>位置二：将代码插入到 \_macro.swig 文件的</p>
-<div class="”sidebar-inner”">
-
-</div>
-<p>图层。 </p><figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-inner"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- set display_toc = page.toc.enable and display_toc %}</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Begin Insert clustrmaps.com --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">id</span>=<span class="string">"clustrmaps"</span> <span class="attr">src</span>=<span class="string">"//clustrmaps.com/map_v2.js?d=iBmc9XXXXXX=a"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- End Insert clustrmaps.com --&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- if display_toc %}</span><br><span class="line">      {%- set toc = toc(page.content, { class: "nav", list_number: page.toc.number, max_depth: page.toc.max_depth }) %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li>没有使用 4 步结构，解释原因或者影响。</li>
 </ul></li>
-<li>重新部署网站，就可以在首页看到实时访客来源图，如我的网站首页所示。另外，点击地图，可以看到更详细的信息，包括访客的地图、浏览设备以及
-IP。</li>
+<li>A person who is interesting?</li>
+</ul></li>
 </ul>
-<p><img data-src="/downloads/images/blog/detaile_IP.png"></p>
+<!--自己没有着重回答为什么有意思，感觉有点跑题了。-->
+<h2 id="part-2">Part 2</h2>
+<ul>
+<li>大声朗读句子，注意断句和发音；前面几个题目不需要那么紧急地作答，把握好自己的节奏。</li>
+<li>几个注意点：
+<ul>
+<li>网站的阅读：www.words.com</li>
+<li>vocalbulary /vəˈkæbjələri/n. 词汇；词表</li>
+<li> tablets /'tæblɪts/n. [药] 药片</li>
+</ul></li>
+</ul>
+<h2 id="part-3">Part 3</h2>
+<ul>
+<li>原题： A technology you want to own</li>
+</ul>
+<h2 id="part-4">Part 4</h2>
+<ul>
+<li>三个房屋的价格比较，答题模板可以和 “两件 jacket” 的比较类似</li>
+</ul>
+<h2 id="part5">part5</h2>
+<p>Movies Cinema 话题</p>
+<ul>
+<li>advantage of watching movies in cinemas than TV
+<ul>
+<li>audio-visual experience</li>
+</ul></li>
+<li>Will watch movies in cinema be popular in the future</li>
+<li>What's kind of cinemas popular among people
+<ul>
+<li>action， thriller /ˈθrɪlə(r)/</li>
+</ul></li>
+<li>Why/How movie would change as people get old?</li>
+</ul>
+<p>注意：自己在思考的时候，应该去素材库中寻找，而不是木讷地不知所措，开始回答时随心所欲。</p>
+<h1 id="listing">Listing</h1>
+<ul>
+<li>因为没有吃早饭，自己做听力已经比较累了，总是精神不集中，容易走神，需要好好休息。</li>
+<li>遇到 salmon 渔民 和 mushroom 外观的原题目。</li>
+</ul>
+<h1 id="reading">Reading</h1>
+<ul>
+<li>遇到完形填空的一篇原题目，"XX
+lake"，后面如果多次考试，尽量考完后回忆下，搞懂题目。
+<ul>
+<li>is the interest in XX lake that</li>
+<li>soon to began</li>
+</ul></li>
+</ul>
+<h1 id="writing">Writing</h1>
+<p>根据上次的经验，文章数量多，减少拼写错误，作文的得分还不错。</p>
+<h2 id="task-1">Task 1</h2>
+<ul>
+<li>Email about develivey time
+<ul>
+<li>作答 180 字</li>
+</ul></li>
+</ul>
+<!--
+- 快递员
+- hand over
+-->
+<h2 id="task-2">Task 2</h2>
+<ul>
+<li>the best journey
+<ul>
+<li>作答 260 字</li>
+</ul></li>
+</ul>
+<!--
+  * 使用猴子的素材。-->
+<hr>
+<p>如果文章对你有帮助，请为我投票哦！如果有任何疑问，欢迎留言讨论。<br>
+If the article helps you, please vote for me. If you have any questions,
+please do not hesitate to discuss with me!</p>
 ]]></content>
       <categories>
-        <category>website</category>
+        <category>English</category>
       </categories>
       <tags>
-        <tag>Website</tag>
+        <tag>English</tag>
       </tags>
   </entry>
   <entry>
@@ -15028,135 +14416,6 @@ hello ！大卡车过大沙丘时，有时候有 30
       </tags>
   </entry>
   <entry>
-    <title>第三次剑桥领思考试回忆</title>
-    <url>/English/third-linguaskill/</url>
-    <content><![CDATA[<p>[toc]</p>
-<!--
-空调调整到26度，保证室内舒适
--->
-<p>免责声明：因为剑桥领思的考试内容和形式存在变化，以下内容仅代表我的个人认知、个人经历和个人观点，不能确保信息完全准确和实时同步，请读者自己辨识。如果有任何错误，请不要将它们归咎于任何其他个人或组织。</p>
-<p><a href="http://www.waylon.one/English/linguaskill-introduction/">领思介绍</a><br>
-<a href="http://www.waylon.one/English/first-linguaskill/">第一次领思考试回忆</a>
-<a href="http://waylon.one/English/second-linguaskill/">第二次领思考试回忆</a></p>
-<p>第二次的领思成绩，虽然口语和写作有所进步，但是仍然没有达到自己的目标，自己在
-2020 年 8 月 8
-日上午，参加了第三次领思考试，三战领思考试，希望能取得好结果吧。</p>
-<p>在第三次考试中，自己看到了一些熟悉的题目，也就是在第一次和第二次领思考试中遇到的题目。</p>
-<p>在这次考试中，自己又遇到了多次网络断线，以及和客服沟通界面打不开的问题，看来自己的网络是十分脆弱啊。最后，加上中间断网的时间，自己超过系统考试时间
-110 分钟才交卷。</p>
-<p>期间，自己点击开始考试时，总是
-“loading”，然后界面奔溃，无法加载考试项。自己和客服人员沟通很久的情况下，自己甚至想放弃这次考试，好在最后坚持，客服人员和考试机构联系，自己可以重新登录界面，接着之前的考试继续作答。<strong>考试时，不要随意关闭网站，即使网站奔溃，也要先和客服人员联系</strong>。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Third_Linguaskill_Test_Report.jpg"></p>
-<p>上面是收到的成绩单，Speaking
-分数让自己很吃惊，我原本感觉比第二次的作答要好上很多，结果成绩反而低了不少，现在我实在搞不清楚如何评分，现在的分数基本只是雅思
-4.0 ~ 4.5 的水平，和我的雅思成绩差一档。</p>
-<p>我自己和英国的剑桥领思机构写信沟通后，现在领思不支持成绩复议（附答复），只能接受这样的结果吧，佛系一点。</p>
-<blockquote>
-<p>With regards to your score, I am afraid to let you know that our
-normal process is that since the Linguaskill is not a certified exam,
-but rather an adaptive test, there is no formal Results Enquiry process
-for this exam. Therefore we cannot remark your scores.</p>
-</blockquote>
-<h1 id="speaking">Speaking</h1>
-<!--
-这一次自己调整做法顺序，为了不被室友影响，自己首先选择了口语，然后是听力和阅读，最后是写作。
--->
-<p>在阅读题目和 Think
-阶段，自己可以热身，对着题目开始说起来；当听到作答铃声后，立即开始正式的回答。</p>
-<h2 id="part-1">Part 1</h2>
-<ul>
-<li>前面四个老问题，可以预先准备好。 新的题目
-<ul>
-<li>How often do you use the Internet?
-<ul>
-<li>没有使用 4 步结构，解释原因或者影响。</li>
-</ul></li>
-<li>A person who is interesting?</li>
-</ul></li>
-</ul>
-<!--自己没有着重回答为什么有意思，感觉有点跑题了。-->
-<h2 id="part-2">Part 2</h2>
-<ul>
-<li>大声朗读句子，注意断句和发音；前面几个题目不需要那么紧急地作答，把握好自己的节奏。</li>
-<li>几个注意点：
-<ul>
-<li>网站的阅读：www.words.com</li>
-<li>vocalbulary /vəˈkæbjələri/n. 词汇；词表</li>
-<li> tablets /'tæblɪts/n. [药] 药片</li>
-</ul></li>
-</ul>
-<h2 id="part-3">Part 3</h2>
-<ul>
-<li>原题： A technology you want to own</li>
-</ul>
-<h2 id="part-4">Part 4</h2>
-<ul>
-<li>三个房屋的价格比较，答题模板可以和 “两件 jacket” 的比较类似</li>
-</ul>
-<h2 id="part5">part5</h2>
-<p>Movies Cinema 话题</p>
-<ul>
-<li>advantage of watching movies in cinemas than TV
-<ul>
-<li>audio-visual experience</li>
-</ul></li>
-<li>Will watch movies in cinema be popular in the future</li>
-<li>What's kind of cinemas popular among people
-<ul>
-<li>action， thriller /ˈθrɪlə(r)/</li>
-</ul></li>
-<li>Why/How movie would change as people get old?</li>
-</ul>
-<p>注意：自己在思考的时候，应该去素材库中寻找，而不是木讷地不知所措，开始回答时随心所欲。</p>
-<h1 id="listing">Listing</h1>
-<ul>
-<li>因为没有吃早饭，自己做听力已经比较累了，总是精神不集中，容易走神，需要好好休息。</li>
-<li>遇到 salmon 渔民 和 mushroom 外观的原题目。</li>
-</ul>
-<h1 id="reading">Reading</h1>
-<ul>
-<li>遇到完形填空的一篇原题目，"XX
-lake"，后面如果多次考试，尽量考完后回忆下，搞懂题目。
-<ul>
-<li>is the interest in XX lake that</li>
-<li>soon to began</li>
-</ul></li>
-</ul>
-<h1 id="writing">Writing</h1>
-<p>根据上次的经验，文章数量多，减少拼写错误，作文的得分还不错。</p>
-<h2 id="task-1">Task 1</h2>
-<ul>
-<li>Email about develivey time
-<ul>
-<li>作答 180 字</li>
-</ul></li>
-</ul>
-<!--
-- 快递员
-- hand over
--->
-<h2 id="task-2">Task 2</h2>
-<ul>
-<li>the best journey
-<ul>
-<li>作答 260 字</li>
-</ul></li>
-</ul>
-<!--
-  * 使用猴子的素材。-->
-<hr>
-<p>如果文章对你有帮助，请为我投票哦！如果有任何疑问，欢迎留言讨论。<br>
-If the article helps you, please vote for me. If you have any questions,
-please do not hesitate to discuss with me!</p>
-]]></content>
-      <categories>
-        <category>English</category>
-      </categories>
-      <tags>
-        <tag>English</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>tmux 使用</title>
     <url>/Linux/tmux/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -15219,6 +14478,95 @@ Ctrl+b</strong>。</p>
       </categories>
       <tags>
         <tag>Weekly Blogs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 上 Next 主题配置文章投票功能 / How to add the voting function in next theme</title>
+    <url>/website/website-voting/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1 id="背景">背景</h1>
+<p>大多数读者比较害羞，不喜欢留言，这样子就不方便自己从读者角度评价博客文章的质量，希望在网站增加投票的功能，方便读者留下评价和反馈。</p>
+<p>多平台维护不易，最新文章更新于 <a href="http://www.waylon.one/website/website-voting/">个人网站</a>，欢迎访问和留言。</p>
+<p>网站的 NexT 主题，已默认集成 <strong>WidgetPack</strong> 的 Rating
+widget，在主题文件夹下的 _config.yml 的 rating
+字段就可见相关默认配置。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># Star rating support to each article.</span><br><span class="line"># To get your ID visit https://widgetpack.com</span><br><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br><span class="line"># ---------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
+<p>总体而言，NexT 已经默认集成了 WidgetPack 的 Ratingwidget，要启用 Ratingwidget，只需要在 WidgetPack.com 注册后添加站点，获得 ID 后，修改 NexT 主题配置文件 rating 字段内容即可。目前，WidgetPack 对个人用户提供了部分免费功能，可以满足个人博客网站的需求。</p>
+<h1 id="什么是-widgetpack">什么是 WidgetPack</h1>
+<p><a href="https://widgetpack.com/">Widget Pack</a> makes it easy to
+add website widgets like comments, reviews, rating to your Blog, Online
+Shop or Website in minutes.</p>
+<blockquote>
+<p>While using this Site, you may need to feed-in personal information
+that can be used to contact or identify you (“Personal Information”).
+Personal Information may include, but is not limited to, some unique
+characteristics that disclose your personality, such as: name, email,
+photo, likes and dislikes. WidgetPack web-servers automatically track
+and store Site usage data. This information is liable to include, but is
+not limited to, your computer’s IP. Along other sites, WidgetPack also
+uses “cookies” to collect such information. A cookie is an essential
+data file that is stored on your computer hard drive for record-keeping
+purposes allowing saving your registration ID and login password for
+prospective logins to WidgetPack Site; “session ID cookies” enable
+certain features of the Site providing authentication, identification of
+a user session, session contents and some other preferences. You can
+tweak your browser by changing its options to stop accepting cookies or
+to prompt you before accepting a cookie from the websites you visit. If
+you do not accept cookies, however, you may not be able to use some of
+the Site’s features or all the functionalities of our services.</p>
+</blockquote>
+<p>简而言之，Widget
+Pack 会在得到授权的情况下，自动跟踪和存储你在某些网站上留下的个人信息 (邮箱、IP、cookies) 等，方便快捷地为一些博客、购物网站提供评价、留言和投票等小插件功能。</p>
+<p>目前，WidgetPack 对个人用户提供了部分免费功能，一个网址和一个 moderator，可以满足个人博客网站的需求。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_price_plan.jpg"></p>
+<h1 id="配置过程">配置过程</h1>
+<h2 id="获取id">获取 ID</h2>
+<ul>
+<li>点击 <a href="https://widgetpack.com/star-rating-widget">Widgetpack.com</a>
+链接注册，可以获得获取用户 ID。</li>
+<li>在 “Add new site” 中，填入网站地址和名称，会生成 Rating
+Widget 安装代码，如下所示。</li>
+</ul>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/add_new_site.jpg"></p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wpac-rating"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">wpac_init = window.wpac_init || [];</span><br><span class="line">wpac_init.push({widget: 'Rating', id: your_id}); # your_id 为注册生成的ID</span><br><span class="line">(function() {</span><br><span class="line">    if ('WIDGETPACK_LOADED' in window) return;</span><br><span class="line">    WIDGETPACK_LOADED = true;</span><br><span class="line">    var mc = document.createElement('script');</span><br><span class="line">    mc.type = 'text/javascript';</span><br><span class="line">    mc.async = true;</span><br><span class="line">    mc.src = 'https://embed.widgetpack.com/widget.js';</span><br><span class="line">    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);</span><br><span class="line">})();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://widgetpack.com"</span> <span class="attr">class</span>=<span class="string">"wpac-cr"</span>&gt;</span>Star Rating WIDGET PACK<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>以上安装代码已默认集成到
+/hexo/themes/next/layout/_third-party/rating.swig
+文件中，所以除了确认下 <strong>ID</strong>，或者使用默认的
+<strong>theme.rating.id</strong>, 不需要其他操作。</p>
+<h2 id="设置投票方式">设置投票方式</h2>
+<p>在网站上，在侧边栏可以选择统计 Rating 的方式。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/set_rating_display.jpg"></p>
+<p>目前网站有三种方式可选，目标读者是国内的话，建议采用 Device，我是选择
+IP Address。 - Social - IP Address - Device (Cookie)</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/vota_setting.jpg"></p>
+<h2 id="hexo-配置">Hexo 配置</h2>
+<p>NexT 主题配置文件 _config.yml 中 rating 的默认设置如下：</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br></pre></td></tr></tbody></table></figure>
+<p>仅需要将设置 enable 改为 true，把 #&lt;app_id&gt; 替换为
+widgetpack.com 上生成的 ID。</p>
+<h1 id="网站效果预览">网站效果预览</h1>
+<ul>
+<li><p>桌面浏览器效果 <img data-src="http://www.waylon.one/downloads/images/blog/voting_demo.jpg"></p></li>
+<li><p>手机浏览器效果 <img data-src="http://www.waylon.one/downloads/images/blog/rating_demo_phone.png"></p></li>
+</ul>
+<h1 id="投票监控">投票监控</h1>
+<p>登录你的网站后，可以监控投票反馈情况，以及对某些投票进行管理，示意如下:</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_monitor.jpg"></p>
+<h1 id="reference">Reference</h1>
+<ul>
+<li><a href="https://www.jianshu.com/p/61d9d46935e3">Hexo 上 NexT 主题配置 WidgetPack 的 Rating
+widget 文章投票功能</a></li>
+</ul>
+<hr>
+<p>如果文章对你有帮助，请为我投票哦！如果有任何疑问，欢迎留言讨论。<br>
+If the article helps you, please vote for me. If you have any questions,
+please do not hesitate to discuss with me!</p>
+]]></content>
+      <categories>
+        <category>website</category>
+      </categories>
+      <tags>
+        <tag>Website</tag>
       </tags>
   </entry>
   <entry>
@@ -16326,95 +15674,6 @@ Waymo 路测报告</a></li>
       </tags>
   </entry>
   <entry>
-    <title>Hexo 上 Next 主题配置文章投票功能 / How to add the voting function in next theme</title>
-    <url>/website/website-voting/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h1 id="背景">背景</h1>
-<p>大多数读者比较害羞，不喜欢留言，这样子就不方便自己从读者角度评价博客文章的质量，希望在网站增加投票的功能，方便读者留下评价和反馈。</p>
-<p>多平台维护不易，最新文章更新于 <a href="http://www.waylon.one/website/website-voting/">个人网站</a>，欢迎访问和留言。</p>
-<p>网站的 NexT 主题，已默认集成 <strong>WidgetPack</strong> 的 Rating
-widget，在主题文件夹下的 _config.yml 的 rating
-字段就可见相关默认配置。</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># Star rating support to each article.</span><br><span class="line"># To get your ID visit https://widgetpack.com</span><br><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br><span class="line"># ---------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
-<p>总体而言，NexT 已经默认集成了 WidgetPack 的 Ratingwidget，要启用 Ratingwidget，只需要在 WidgetPack.com 注册后添加站点，获得 ID 后，修改 NexT 主题配置文件 rating 字段内容即可。目前，WidgetPack 对个人用户提供了部分免费功能，可以满足个人博客网站的需求。</p>
-<h1 id="什么是-widgetpack">什么是 WidgetPack</h1>
-<p><a href="https://widgetpack.com/">Widget Pack</a> makes it easy to
-add website widgets like comments, reviews, rating to your Blog, Online
-Shop or Website in minutes.</p>
-<blockquote>
-<p>While using this Site, you may need to feed-in personal information
-that can be used to contact or identify you (“Personal Information”).
-Personal Information may include, but is not limited to, some unique
-characteristics that disclose your personality, such as: name, email,
-photo, likes and dislikes. WidgetPack web-servers automatically track
-and store Site usage data. This information is liable to include, but is
-not limited to, your computer’s IP. Along other sites, WidgetPack also
-uses “cookies” to collect such information. A cookie is an essential
-data file that is stored on your computer hard drive for record-keeping
-purposes allowing saving your registration ID and login password for
-prospective logins to WidgetPack Site; “session ID cookies” enable
-certain features of the Site providing authentication, identification of
-a user session, session contents and some other preferences. You can
-tweak your browser by changing its options to stop accepting cookies or
-to prompt you before accepting a cookie from the websites you visit. If
-you do not accept cookies, however, you may not be able to use some of
-the Site’s features or all the functionalities of our services.</p>
-</blockquote>
-<p>简而言之，Widget
-Pack 会在得到授权的情况下，自动跟踪和存储你在某些网站上留下的个人信息 (邮箱、IP、cookies) 等，方便快捷地为一些博客、购物网站提供评价、留言和投票等小插件功能。</p>
-<p>目前，WidgetPack 对个人用户提供了部分免费功能，一个网址和一个 moderator，可以满足个人博客网站的需求。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_price_plan.jpg"></p>
-<h1 id="配置过程">配置过程</h1>
-<h2 id="获取id">获取 ID</h2>
-<ul>
-<li>点击 <a href="https://widgetpack.com/star-rating-widget">Widgetpack.com</a>
-链接注册，可以获得获取用户 ID。</li>
-<li>在 “Add new site” 中，填入网站地址和名称，会生成 Rating
-Widget 安装代码，如下所示。</li>
-</ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/add_new_site.jpg"></p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wpac-rating"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">wpac_init = window.wpac_init || [];</span><br><span class="line">wpac_init.push({widget: 'Rating', id: your_id}); # your_id 为注册生成的ID</span><br><span class="line">(function() {</span><br><span class="line">    if ('WIDGETPACK_LOADED' in window) return;</span><br><span class="line">    WIDGETPACK_LOADED = true;</span><br><span class="line">    var mc = document.createElement('script');</span><br><span class="line">    mc.type = 'text/javascript';</span><br><span class="line">    mc.async = true;</span><br><span class="line">    mc.src = 'https://embed.widgetpack.com/widget.js';</span><br><span class="line">    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);</span><br><span class="line">})();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://widgetpack.com"</span> <span class="attr">class</span>=<span class="string">"wpac-cr"</span>&gt;</span>Star Rating WIDGET PACK<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>以上安装代码已默认集成到
-/hexo/themes/next/layout/_third-party/rating.swig
-文件中，所以除了确认下 <strong>ID</strong>，或者使用默认的
-<strong>theme.rating.id</strong>, 不需要其他操作。</p>
-<h2 id="设置投票方式">设置投票方式</h2>
-<p>在网站上，在侧边栏可以选择统计 Rating 的方式。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/set_rating_display.jpg"></p>
-<p>目前网站有三种方式可选，目标读者是国内的话，建议采用 Device，我是选择
-IP Address。 - Social - IP Address - Device (Cookie)</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/vota_setting.jpg"></p>
-<h2 id="hexo-配置">Hexo 配置</h2>
-<p>NexT 主题配置文件 _config.yml 中 rating 的默认设置如下：</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br></pre></td></tr></tbody></table></figure>
-<p>仅需要将设置 enable 改为 true，把 #&lt;app_id&gt; 替换为
-widgetpack.com 上生成的 ID。</p>
-<h1 id="网站效果预览">网站效果预览</h1>
-<ul>
-<li><p>桌面浏览器效果 <img data-src="http://www.waylon.one/downloads/images/blog/voting_demo.jpg"></p></li>
-<li><p>手机浏览器效果 <img data-src="http://www.waylon.one/downloads/images/blog/rating_demo_phone.png"></p></li>
-</ul>
-<h1 id="投票监控">投票监控</h1>
-<p>登录你的网站后，可以监控投票反馈情况，以及对某些投票进行管理，示意如下:</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_monitor.jpg"></p>
-<h1 id="reference">Reference</h1>
-<ul>
-<li><a href="https://www.jianshu.com/p/61d9d46935e3">Hexo 上 NexT 主题配置 WidgetPack 的 Rating
-widget 文章投票功能</a></li>
-</ul>
-<hr>
-<p>如果文章对你有帮助，请为我投票哦！如果有任何疑问，欢迎留言讨论。<br>
-If the article helps you, please vote for me. If you have any questions,
-please do not hesitate to discuss with me!</p>
-]]></content>
-      <categories>
-        <category>website</category>
-      </categories>
-      <tags>
-        <tag>Website</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《我想和这个世界不一样》摘录</title>
     <url>/Reading/wo-xiang-he-zhe-ge/</url>
     <content><![CDATA[<p>我想和这个世界不一样（在喜欢的城市醒过来）</p>
@@ -16887,6 +16146,794 @@ file name: xiamen_trip_2020
       </categories>
       <tags>
         <tag>Journey</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>解读 Baidu Apollo EM Motion Planner</title>
+    <url>/Autonomous-Driving/Baidu-Apollo-EM-Motion-Planner/</url>
+    <content><![CDATA[<p>[toc]</p>
+<p><strong>解读 Baidu Apollo EM Motion Planner</strong></p>
+<p>论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 <a href="http://arxiv.org/abs/1807.08048">文章链接</a>。</p>
+<p>现在看来 (2021 年)，这篇论文属于 Apollo
+系统<strong>规划与决策模块</strong>的白皮书，文章介绍的方法和思想，在现阶段
+L4
+级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。</p>
+<p>我目前就职于某国内某自动驾驶创业公司，主要研究规划与决策领域的行为决策
+(behavior/maneuver decision)，以下 ABC 代指目前所在公司的化名。</p>
+<p>我在研读论文多次的基础上，基于目前的工作经验和设计实践，对文章的设计做一些个人的粗浅解读和评价，行家轻拍。欢迎大家在文章下留言赐教。</p>
+<p>对于新手，建议在读论文前，先阅读 Case Study
+这一章，了解文章在解决什么问题，以及大概是如何解决这个问题，这对文章的整体理解有帮助。</p>
+<hr>
+<h1 id="abstract">ABSTRACT</h1>
+<p>Apollo 系统目标：工业级的 L4
+自动驾驶系统，注重安全性、舒适度和可扩展性。</p>
+<blockquote>
+<p>The developed system aims to address the industrial level-4 motion
+planning problem while considering safety, comfort and scalability.</p>
+</blockquote>
+<p>Apollo 开源代码地址：<a href="https://github.com/ApolloAuto/apollo">Apollo open source
+autonomous driving platform</a>。</p>
+<p>注意：Apollo
+是一个 “伪开源”，公布出来的代码逻辑简单，更像是一个自动驾驶系统的空架子，和官方实际路测的代码是不一样的。</p>
+<h1 id="introduction">INTRODUCTION</h1>
+<p>The system covers multilane and single-lane autonomous driving in a
+hierarchical manner: - 第一级：变道选择。The <strong>top layer</strong>
+of the system is a <strong>multilane strategy</strong> that handles
+lane-change scenarios by <strong>comparing lane-level
+trajectories</strong> computed in parallel.</p>
+<!--
+  * 类比于 ABC公司的 maneuver select/arbitrator 
+-->
+<ul>
+<li>第二级：车道内的轨迹优化和速度优化。Inside the lane-level trajectory
+generator, it iteratively solves path and speed optimization based on a
+Frenet frame.
+<ul>
+<li>For path and speed optimization, a combination of dynamic
+programming and spline-based quadratic programming is proposed to
+construct a scalable and easy-to-tune framework to handle traffic rules,
+obstacle decisions and smoothness simultaneously.</li>
+</ul></li>
+</ul>
+<hr>
+<p>补充知识点：什么是 Frenet frame？</p>
+<p>Frenet
+坐标系通常使用道路的中心线作为参考线，使用参考线的<strong>切线向量</strong>和<strong>法线向量</strong>建立坐标系。</p>
+<p>如下图所示，这个 S-D 坐标系即为 Frenet
+坐标系，它以车辆自身为原点，坐标轴相互垂直，分为： 纵向
+S：沿着参考线的方向； 横向 D：参考线的法向。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg"></p>
+<p>相比于笛卡尔坐标系，Frenet
+坐标系可明显地简化问题。因为车辆在行驶中，自车基于参考线 (道路中心线) 的位置，就可以使用纵向距离和横向距离来描述，同时纵向和横向的速度、加速度、加加速度等信息直接和道路相关；在车道保持和换道过程中都具有很强的实用性。</p>
+<!--
+From http://blog.sina.com.cn/s/blog_86186c970102yhrh.html
+-->
+<hr>
+<!--
+![系统架构设计](WEBRESOURCE53447e28972063eb3a12a0cf9e17d4e1)
+-->
+<p><img data-src="http://www.waylon.one/downloads/images/blog/onboard_module_of_Apollo.JPG"></p>
+<blockquote>
+<p>In the figure, the HD map module provides a high-definition map that
+can be accessed by every on-line module. Perception and localization
+modules provide the necessary dynamic environment information, which can
+be further used to predict future environment status in the prediction
+module. The motion planning module considers all information to generate
+a safe and smooth trajectory to feed into the vehicle control
+module.</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[safety]--&gt;B(traffic regulations)</span><br><span class="line">A--&gt;C(range coverage)</span><br><span class="line">A--&gt;D(cycle time efficiency)</span><br><span class="line">A--&gt;E(emergency safety)</span><br><span class="line">C--&gt;F(we aim to provide a trajectory with at least an eight second or two hundred meter motion planning trajectory)</span><br></pre></td></tr></tbody></table></figure>
+<p><img data-src=""></p>
+<p>在运动规划中，最重要的两个指标是安全 (safety) 和乘坐体验 (ride
+experience)。</p>
+<p>关于安全性，主要从交通规则 (traffic regulations)，场景覆盖范围 (range
+coverage)，周期规划效率 (cycle time efficiency) 和紧急安全 (emergency
+safety) 四个方面考虑。</p>
+<blockquote>
+<p>In motion planner, safety is always the top priority. We consider
+autonomous driving safety in, but not limited to, the following aspects:
+traffic regulations, range coverage, cycle time efficiency and emergency
+safety.</p>
+</blockquote>
+<!--
+在紧急模式下，自动驾驶系统可以在 100 ms 内就反应，而正常驾驶员需要至少 300ms 的反应时间。
+
+> In the case of an emergency, the system could react within 100 ms, compared with a 300 ms reaction time for a normal human driver.
+-->
+<p>关于乘坐体验，主要从场景覆盖 (scenario coverage)，交通规则 (traffic
+regulation) 和舒适度 (comfort，比如自车加速度和 Jerk) 三方面着手。</p>
+<blockquote>
+<p>In addition to safety, passengers’ ride experience is also important.
+The measurement of ride experience includes, but is not limited to,
+scenario coverage, traffic regulation and comfort.</p>
+</blockquote>
+<!--
+
+# 学习语法表达
+First, the search space is expanded across multiple lanes, which causes the algorithm to be **computationally expensive**.
+
+it is not easy to apply traffic regulations under the same frame.
+
+-->
+<h2 id="multilane-strategy">Multilane Strategy</h2>
+<p>运动规划的注意点之一：自车的决策应该尽量稳定，以方便其他交通参与者预测自车的意图。如果自车在正常行驶过程中，和其他车辆交互决策不稳定 (如障碍物误感) 带来的急刹车，容易造成后方车辆制动不及时而发生追尾。</p>
+<!--
+ABC 公司的设计中，曾发生自车急刹，被后方车辆追尾的情况。
+-->
+<blockquote>
+<p>It is important to follow consistent on- road driving behavior to
+inform other drivers of the intention of the autonomous driving
+vehicle.</p>
+</blockquote>
+<p>变道策略需要能处理主动变道 ( routing
+规划) 和被动变道 (道路前方被堵塞) 两种情况，通常变道成功率 (success rate)
+会作为变道质量的一个重要衡量指标。</p>
+<blockquote>
+<p>Typically, a multilane strategy should cover both nonpassive and
+passive lane-change scenarios. * In EM planner, a nonpassive lane-change
+is a request triggered by the routing module for the purpose of reaching
+the final destination. * A passive lane change is defined as an ego car
+maneuver when the default lane is blocked by the dynamic
+environment.</p>
+</blockquote>
+<p>文中提到的做法是对主动变道和被动变道进行并行计算 (parallel
+framework)。 * 对所有的候选车道，以车道级别 (lane-level)
+进行交通规则、车道内障碍物的分析，那么每个车道都会生成一个最可行的轨迹
+(best-possible trajectory)。最后，一个 cross-lane trajectory decider
+会基于安全性和代价函数两方面来选择车道。</p>
+<blockquote>
+<p>We propose a parallel framework to handle both passive and nonpassive
+lane changes. For candidate lanes, all obstacles and environment
+information are projected on lane-based Frenet frames. Then, the traffic
+regulations are bound with the given lane-level strategy. Under this
+framework, each candidate lane will generate a best-possible trajectory
+based on the lane-level optimizer. Finally, a cross-lane trajectory
+decider will determine which lane to choose based on both the cost
+functional and safety rules.</p>
+</blockquote>
+<!--
+类比于 ABC 公司的 lane sequence。
+-->
+<h1 id="path-speed-iterative-algorithm">Path-Speed Iterative
+Algorithm</h1>
+<p>大多数自动驾驶软件运动规划的做法是，沿着车道参考线 (reference
+line，通常是从高精度地图中得到车道中心线) 把单车道问题转化为 Frenet
+frames with time (SLT) 问题。其中，S 指 Frenet 坐标系下的纵向，L
+指横向，T 指代时间。</p>
+<blockquote>
+<p>Many autonomous driving motion planning algorithms are developed in
+Frenet frames with time (SLT) to reduce the planning dimension with the
+help of a reference line.</p>
+</blockquote>
+<p>如何在 Frenet 中找到最优轨迹是一个 3D (S+L+T)
+约束优化问题，文章中提到两种做法的路线之争。在我看来，现在工业界主流前沿的做法是第二种，第一种正在被逐渐淘汰。</p>
+<blockquote>
+<p>Finding the optimal trajectory in a Frenet frame is essentially a 3D
+constrained optimization problem. There are typically two types of
+approaches: direct 3D optimization methods and the path-speed decoupled
+method. * [方法一：无脑优化采样] Direct methods attempt to find the
+optimal trajectory within SLT using either trajectory sampling or
+lattice search. + These approaches are limited by their search
+complexity, which increases as both the <strong>spatial</strong> and
+<strong>temporal</strong> search resolutions increase. To qualify the
+time consumption requirement, one has to compromise with increasing the
+search grid size or sampling resolution. Thus, the generated trajectory
+is suboptimal.</p>
+</blockquote>
+<p><!--
+    + ABC之前的做法是这样子的，但是后面逐渐被替换掉。
+--></p>
+<ul>
+<li>[方法二：path-speed 解耦，先求 path，再解 speed] The path-speed
+decoupled approach <strong>optimizes path and speed separately</strong>.
+Path optimization typically considers static obstacles. Then, the speed
+profile is created based on the generated path. <strong>It is possible
+that the path-speed approach is not optimal with the appearance of
+dynamic obstacles</strong>. However, since the path and speed are
+decoupled, this approach achieves more flexibility in both path and
+speed optimization.
+<ul>
+<li>一个负责问题，如果一旦可以分为几个小问题，或者之前已经解决的问题，那么问题整体难度就会降低下来。</li>
+</ul></li>
+</ul>
+<h2 id="path-speed-decoupled-framework">Path-speed decoupled
+framework</h2>
+<ul>
+<li>EM planner 分别迭代优化 path 和 speed。在 path
+优化中，利用上一帧的速度 (speed profile from the last cycle)
+来预估和低速对象障碍物的交互，然后基于生成的 path 来优化速度。
+<ul>
+<li>注意，实践中要减少对上一次规划轨迹的依赖。</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>EM planner optimizes path and speed iteratively. The speed profile
+from the last cycle is used to estimate interactions with
+<strong>oncoming</strong> and <strong>low-speed dynamic
+obstacles</strong> in the path optimizer. Then, the generated path is
+sent to the speed optimizer to evaluate an optimal speed profile.</p>
+</blockquote>
+<p>这里补充一下，Path-speed decoupled 的方法对高速物体的 nudge
+行为处理不友好；这里通过变道代替 nudge
+来灵巧地避开这个缺陷问题，但是会引来频繁变道的风险。比如，一辆快速自行车和自车同行，自行车距离自车比较近，自车难道要变道来超过
+(overtake) 这个自行车吗？</p>
+<blockquote>
+<p>For high-speed dynamic dynamic obstacles, EM planner prefers a
+lane-change maneuver rather than nudging for safety reasons.</p>
+</blockquote>
+<h2 id="decisions-and-traffic-regulations">Decisions and Traffic
+Regulations</h2>
+<p>EM planner 先做出决策 (make
+decisions)，再规划轨迹。决策可以输出清晰的自车意图，把非凸问题约束为凸问题，不仅减少寻找最优轨迹的搜索空间，而且允许使用凸优化问题的优化方法。</p>
+<blockquote>
+<p>In Apollo EM planner, we make decisions prior to providing a smooth
+trajectory. The decision process is designed to make on-road intentions
+clear and reduce the search space for finding the optimal
+trajectory.</p>
+</blockquote>
+<p>决策的路线之争。</p>
+<blockquote>
+<p>Many decision-included planners attempt to generate vehicle states as
+the ego car decision. These approaches can be further divided into
+hand-tuning decisions and model-based decisions. *
+[方法一：手写规则，扩展性差] The advantage of hand-tuning decision is
+its tunability. However, scalability is its limitation. In some cases,
+scenarios can go beyond the hand-tuning decision rule’s description. +
+When considering dozens of obstacles, the decision behavior is difficult
+to be accurately described by a finite set of ego car states.</p>
+</blockquote>
+<!--
+这也是值得 reasoner 考虑的问题，如何避免负责的规则呢？比如机器学习反馈 risk 的程度。
+-->
+<ul>
+<li>[方法二：基于模型的决策] The model-based decision approaches
+generally discretize the ego car <strong>status</strong> into finite
+driving statuses and use data-driven methods to tune the model.</li>
+</ul>
+<!--
+# 多物体交互。按照 GJ 的说法，其他车可以利用自车的模型来预测轨迹。
+The consideration of multi- agent interactions will benefit both prediction and decision-making processes.
+-->
+<p>Targeting level-4 autonomous driving, a decision module shall include
+both <strong>scalability</strong> and
+<strong>feasibility</strong>.<br>
+* Scalability is the scenario expression ability (i.e., the autonomous
+driving cases that can be explained). + 不要过拟合 (over-fit) 一个
+issue，适用性差。 * For feasibility, we mean that the generated decision
+shall include a feasible region in which the ego car can maneuver
+<strong>within dynamic limitations</strong>. + Both hand-tuning and
+model-based decisions do not generate a collision-free trajectory to
+verify the feasibility. * 同意，decision
+层并不会考虑是否能够生成轨迹，所以有些决策是无效的。</p>
+<p>划重点：EM planner
+的做法是先生成初略的轨迹来表示交互意图 (不受限于障碍物数量)；然后，生成一个有约束的凸走廊
+(a convex feasible
+space)，用<strong>凸优化</strong>的方法来求解优化轨迹。 * 目前，ABC
+是先生成决策，然后决策作为约束，在 ST planner 中搜索粗略的轨迹，和 EM
+的做法不一致。</p>
+<blockquote>
+<p>In EM planner’s decision step, we describe the behavior differently.
+* First, <strong>the ego car moving intention is described by a rough
+and feasible trajectory</strong>. Then, the interactions between
+obstacles are measured with this trajectory. + This feasible
+trajectory-based decision is scalable even when scenarios become more
+complicated. * Second, the planner will also generate a <strong>convex
+feasible space</strong> for <strong>smoothing spline parameters</strong>
+based on the trajectory. + A quadratic-programming-based smoothing
+spline solver could be used to generate smoother path and speed profiles
+that follow the decision. This guarantees a feasible and smooth
+solution.</p>
+</blockquote>
+<h1 id="em-planner-framework-with-multilane-strategy">EM PLANNER
+FRAMEWORK WITH MULTILANE STRATEGY</h1>
+<p>除了 lane-level motion planning 的具体实现方法不同，这章节数据流和
+ABC 的实现非常类似，设计架构在工业界领先，可以重点参考。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_framework.JPG"></p>
+<ol type="1">
+<li><p>在 Data Center 接受并同步数据。 &gt; all sources of information
+are collected and synced at the <strong>data center
+module</strong>.</p></li>
+<li><p> 基于道路中心线，选择几条可行
+lane，然后生成基于其中心线的障碍物投影信息 (SL 坐标描述)。</p></li>
+</ol>
+<blockquote>
+<p>The reference line generator will produce some candidate lane-level
+reference lines along with information about traffic regulations and
+obstacles.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>lane-level optimizer module</li>
+</ol>
+<h1 id="em-planner-at-lane-level">EM PLANNER AT LANE LEVEL</h1>
+<p>The iteration includes two E-steps and two M-steps <strong>in one
+planning cycle</strong>. The trajectory information will iterate between
+planning cycles.</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_Iteration.JPG"></p>
+<p>在两个 M-steps 中，通过 DP 和 QP 来生成 path 和 speed
+profiles。请注意，在一个规划间隔内，planning
+规划出一条可行的轨迹，需要迭代多次 EM planner，也就是运行多次 E-steps 和
+M-steps.</p>
+<blockquote>
+<p>In two M-steps, path and speed profiles are generated by a
+combination of dynamic programming and quadratic programming.</p>
+</blockquote>
+<hr>
+<p>在第一步 E-step 中，静态和动态障碍物投影到车道的 Frenet
+frame，准备进行 SL 的 path 规划。</p>
+<blockquote>
+<p>In the first E-step, obstacles are projected on <strong>the lane
+Frenet frame</strong>. This projection includes both static obstacle
+projection and dynamic obstacle projection. *
+静态障碍物的投影：<strong>Static obstacles</strong> will be projected
+directly based on a Cartesian-Frenet frame transformation. *
+动态障碍物的投影 (负责)：Considering the previous cycle planning
+trajectory, we can evaluate the estimated dynamic obstacle and ego car
+positions <strong>at each time point</strong>. + The overlap of dynamic
+obstacles and the ego car at each time point will be mapped in the
+Frenet frame.</p>
+</blockquote>
+<!--    
+在下一次规划中，使用了上一次的轨迹；这违背了自己对上次轨迹不能用到当前帧的信仰。下次可以和面试者讨论下。如果这一帧，自车的轨迹突变，怎么解决呢？这种依赖上一次的轨迹，可以解决吗？
+-->
+<p>出于安全考虑 (目前技术处理这类场景的安全性把握不大)，在 SL
+投影中，只对低速 (low-speed traffic) 和对向 (oncoming)
+动态障碍物使用；高速物体通过变道来解决。</p>
+<blockquote>
+<p>For safety considerations, the SL projection of dynamic obstacles
+will only consider low-speed traffic and oncoming obstacles. For
+high-speed traffic, EM planner’s parallel lane-change strategy will
+cover the scenario.</p>
+</blockquote>
+<h3 id="如何把非凸问题转变为凸优化问题">如何把非凸问题转变为凸优化问题？</h3>
+<ol type="1">
+<li>DP 可以在障碍物投影后的非凸空间 (SL) 中找到一个初略 path
+解，然后从这个初略解中得到针对障碍物的决策，比如 nudge，yield 还是
+overtake。</li>
+</ol>
+<blockquote>
+<p>Although we projected obstacles on SL and ST frames, the optimal path
+and speed solution still lies in a non-convex space. Thus, we use
+dynamic programming to first obtain a rough solution; meanwhile,
+<strong>this solution can provide obstacle decisions such as nudge,
+yield and overtake</strong>.</p>
+</blockquote>
+<!--
+决策是在 path 的 DP 中决策的吗？
+-->
+<ol start="2" type="1">
+<li>基于针对障碍物的决策，生成一个凸区域 (convex hull，凸包)，可供 QP
+算法求解。</li>
+</ol>
+<blockquote>
+<p>We use the rough decision to determine a convex hull for the
+quadratic-programming-based spline optimizer.</p>
+</blockquote>
+<ol start="3" type="1">
+<li>通过优化器在凸空间内求解。</li>
+</ol>
+<blockquote>
+<p>The optimizer can find solutions within the convex hull.</p>
+</blockquote>
+<hr>
+<p>待补充知识点：什么是非凸优化问题呢？</p>
+<p>如何把一个非凸问题转变为可解问题呢？此处引用 Pony 的一篇技术分析文章
+-- <a href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a>
+。</p>
+<hr>
+<h3 id="sl-and-st-mapping-e-step">SL and ST Mapping (E-step)</h3>
+<!--
+待补充知识点：ST 和 SL 投影是什么呢？
+-->
+<p>对于单车道而言，SL
+投影是基于车道中心线；对于变道而言，中间涉及到至少两条单车道，两条车道的连接使用的是
+G2 算法。</p>
+<p>The SL projection is based on a G2 (continuous curvature derivative)
+smooth reference line.</p>
+<p>如何把动态障碍物转化到 SL 中？</p>
+<p>参考上一次的自车规划轨迹 (last cycle
+trajectory)，可以得到自车在指定时间上位于 S
+方向上的位置，来预估和障碍物预测轨迹的相交处 (interactions)。 &gt; For
+dynamic obstacles, we mapped the obstacles with the help of the last
+cycle trajectory of the ego car. The last cycle’s moving trajectory is
+projected on the Frenet frame to extract the station direction speed
+profile. This will provide an estimate of the ego car’s station
+coordinates <strong>given a specific time</strong>. The estimated ego
+car station coordinates will help to evaluate the dynamic obstacle
+interactions. + Once an ego car’s station coordinates have interacted
+with an obstacle trajectory point with the same time, a shaded area on
+the SL map will be marked as the estimated interaction with the dynamic
+obstacle.</p>
+<p>ST 投影帮助我们评估自车的速度轮廓 (speed profile)。因为在 ST
+图中抠除障碍物占据的空间 (shaded
+area)，剩余的空间其实是速度可行区间。</p>
+<blockquote>
+<p>ST projection helps us evaluate the ego car’s speed profile. The
+remaining region is the speed profile feasible region.</p>
+</blockquote>
+<h3 id="m-step-dp-path">M-Step DP Path</h3>
+<p>M-step path 的目标是找到优化的 path 轮廓，分为基于 DP 的决策和 QP
+的路线规划，i.e. DP 得到决策，QP 进行轨迹规划。</p>
+<blockquote>
+<p>The M-step path optimizer optimizes the path profile in the Frenet
+frame. * This is represented as finding an optimal function of lateral
+coordinate w.r.t. station coordinate in nonconvex SL space (e.g.,
+nudging from left and right might be two local optima). * The path
+optimizer includes two steps: <strong>dynamic-programming-based path
+decision</strong> and <strong>spline-based path planning</strong>.</p>
+</blockquote>
+<p>Path 动态规划提供了一个粗糙的 path 轮廓，包括可行的通道和障碍物的
+nudge 决策。注意，生成的 path 轮廓是采样点连接起来的，不够精细。</p>
+<!--
+在path生成中决定是否 nudge
+-->
+<blockquote>
+<p>The dynamic programming path step provides a rough path profile with
+<strong>feasible tunnels</strong> and <strong>obstacle nudge
+decisions</strong>.</p>
+</blockquote>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_structure_Fig_6.JPG"></p>
+<p>The step includes a lattice sampler, cost function and dynamic
+programming search. + Lattice Sampler: The <strong>lattice
+sampler</strong> is based on a Frenet frame. Multiple rows of points are
+first sampled ahead of the ego vehicle. Points between different rows
+are smoothly connected by quintic polynomial edges. +
+撒点的做法来搜索粗略路线，使用五次多项式来拟合平滑路线。 + Cost
+Function: <strong>Each graph edge</strong> is evaluated by the summation
+of cost functionals. We use information from the SL projection, traffic
+regulations and vehicle dynamics to construct the functional. +
+从障碍物，交通规则和车辆动力学三方面来计算每个连接边 (两个 lattice point
+的连接线) 的代价。此处略过 cost 函数的设计。 + Dynamic Programming
+Search: Edge costs are used to select a candidate path with the
+<strong>lowest cost</strong> through a dynamic programming search. The
+candidate path will also <strong>determine the obstacle
+decisions</strong>.</p>
+<h3 id="m-step-spline-qp-path">M-Step Spline QP Path</h3>
+<p>Spline QP path 是上面 dynamic programming path 的进一步优化
+(refinement)。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Path.JPG"></p>
+<p>在 dynamic programming path 中，基于选择路线的可行通道 (feasible
+tunnel) 被确定下来就是一个凸优化问题，spline QP path
+是在可行通道中产生一条平滑的路线。</p>
+<blockquote>
+<p>The spline QP path step is a refinement of the dynamic programming
+path step. In a dynamic programming path, a feasible tunnel is generated
+based on the selected path. Then, the spline-based QP step will generate
+a smooth path within this feasible tunnel.</p>
+</blockquote>
+<p>在线性化的约束 (linearized constraint) 中，利用 QP spline solver
+来求解优化目标函数 (objective function)，从而生成生成 spline QP
+path。</p>
+<blockquote>
+<p>The spline QP path is generated by optimizing an objective function
+with a linearized constraint through the QP spline solver.</p>
+</blockquote>
+<h4 id="目标函数组成">目标函数组成</h4>
+<p>目标函数由平滑代价和引导线代价组成，其中引导线是上一步的 DP
+path。</p>
+<blockquote>
+<p>The objective function of the QP path is a <strong>linear
+combination</strong> of smoothness costs and guidance line cost. * The
+guidance line in this step is the DP path. <strong>The guidance line
+provides an estimate of the obstacle nudging distance</strong>.</p>
+</blockquote>
+<!--
+![QP_path_objective_function](E3D91C46ED8648009D9B758630BC1510)
+-->
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Path_QP_cost_function.JPG"></p>
+<p>上述目标函数在 nudge 障碍物的距离和平滑性中做了平衡和取舍。</p>
+<blockquote>
+<p>The objective function describes the balance between nudging
+obstacles and smoothness.</p>
+</blockquote>
+<h4 id="约束组成">约束组成</h4>
+<p>约束由可行边界约束 (boundary constraints) 和自车动态性能约束 (dynamic
+feasibility) 组成。</p>
+<blockquote>
+<p>The constraints in the QP path include boundary constraints and
+dynamic feasibility. These constraints are applied on f(s), f’(s) and
+f’’(s) at <strong>a sequence of station coordinates</strong> s0, s1,
+..., sn.</p>
+</blockquote>
+<p>在 EM planner 中，使用自行车模型 (bicycle model)
+来考虑自车的动力学特性；在规划阶段，把车辆模型简化为自行车模型，是一种比较通用的做法。</p>
+<blockquote>
+<p>In EM planner, the ego vehicle is considered under the bicycle
+model.</p>
+</blockquote>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/left_corner.jpg" alt="左上角约束推导图">
+<figcaption aria-hidden="true">左上角约束推导图</figcaption>
+</figure>
+<p>上面的操作和近似转换是做什么呢？在横向 (lateral direction)
+约束求解中，l = f (s)，因为 sin 不是线性的函数，所以使用 f (s)
+的导数来替代 sin
+函数。在允许一定误差的情况下，把一个非线性函数，转化为线性约束 (linear
+constraints) 问题。</p>
+<blockquote>
+<p>To keep the boundary constraint convex and linear, we add two half
+circles on the front and rear ends of the ego car.</p>
+</blockquote>
+<p>那么，现在已经把所有的约束化简为线性约束，问题就可以使用 quadratic
+programming solver
+来快速求解这个问题，效率更高。这就是<strong>数学的魅力啊</strong>！</p>
+<blockquote>
+<p>Since all constraints are linear with respect to spline parameters, a
+quadratic programming solver can be used to solve the problem very fast.
+* In addition to the boundary constraint, the generated path shall match
+the ego car’s initial lateral position and derivatives. +
+实现细节注意点：考虑车辆的初始状态。</p>
+</blockquote>
+<h2 id="m-step-dp-speed-optimizer">M-Step DP Speed Optimizer</h2>
+<!--
+(和 ABC 的 ST planner 比较通用)
+-->
+<p>在 ST 图中，使用 DP 算法生成一个速度轮廓 (speed profile)，即 v =
+S (t)。</p>
+<blockquote>
+<p>The speed optimizer generates a speed profile in the ST graph, which
+is represented as a station function with respect to time S(t).</p>
+</blockquote>
+<p>在 ST graph 中找最优 speed profile 是一个复杂的非凸问题。我们使用
+dynamic programming 和 spline quadratic programming 在 ST
+图中寻找一个平滑的速度轮廓 (非最优)。</p>
+<p>同 Path planner，我们先利用 DP 算法搜索一个粗略的 speed
+profile，把问题从非凸问题化简为凸问题；然后在有约束的情况下，沿着 speed
+profile (guidance line)，使用 QP 算法来求解最优的速度解。</p>
+<blockquote>
+<p>We use dynamic programming combined with spline quadratic programming
+to find a smooth speed profile on the ST graph.</p>
+</blockquote>
+<h3 id="dp-speed-框架">DP speed 框架</h3>
+<p>The DP speed step includes a cost functional, ST graph grids and
+dynamic programming search. The generated result includes a
+<strong>piecewise</strong> linear speed profile, a feasible tunnel and
+<strong>obstacle speed decisions</strong>.</p>
+<p>待补充，obstacle speed decisions 是什么形式的决策呢？</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_Speed_Optimizer.JPG"></p>
+<p>首先，对整个 ST 图进行网格化处理，包括对障碍物进行网格化分割。 &gt;
+obstacle information is first discretized into grids on the ST
+graph.</p>
+<p>类似于从网格中按时间递增顺序，搜索带约束的可行解，速度可以在网格上表示为
+(s0, s1, ..., sn)，形状是锯齿形的。</p>
+<blockquote>
+<p>A piecewise linear speed profile function is represented as S = (s0,
+s1, ..., sn) on the grids.</p>
+</blockquote>
+<p>Cost function 由三部分组成： - Velocity keeping cost: * This term
+indicates that the vehicle shall follow the designated speed when there
+are no obstacles or traffic light restrictions present. V^ref describes
+the reference speed, which is determined by the road speed limits,
+curvature and other traffic regulations. - Smoothness cost: * The
+acceleration and jerk square integral describes the smoothness of the
+speed profile. - Total obstacle cost: * The <strong>distances</strong>
+of the ego car to all obstacles are evaluated to determine the total
+obstacle costs.</p>
+<p>DP 搜索时要注意车辆动力学限制；同时，可以根据运动学约束做剪枝
+(pruning) 操作。</p>
+<blockquote>
+<p>The dynamic constraints include <strong>acceleration, jerk limits and
+a monotonicity constraint</strong> since we require that the generated
+trajectories do not perform backing maneuvers when driving on the road.
+* Some necessary pruning based on vehicle dynamic constraints is also
+applied to accelerate the process.</p>
+</blockquote>
+<hr>
+<p>知识点，如何把导数问题简化为有限差分问题。</p>
+<p>ai = ((si-si-1)/dt - (si-1 - si-2)/dt)/dt。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/finite_difference_method.JPG"></p>
+<hr>
+<h2 id="m-step-qp-speed-optimizer">M-Step QP Speed Optimizer</h2>
+<p>因为锯齿形的线性速度轮廓不能满足运动学特性，所以使用 spline QP step
+去填补这个空缺 (fill this gap)。</p>
+<blockquote>
+<p>Since the piecewise linear speed profile cannot satisfy dynamic
+requirements, the spline QP step is needed to fill this gap.</p>
+</blockquote>
+<h3 id="spline-qp-speed-框架">Spline QP Speed 框架</h3>
+<p>如下图所示，spline QP speed 是在满足路径单调性 (monotonicity
+evaluated at designated points，不倒车), 交通规则 (traffic regulations,
+可行通道) 和车辆运动学约束 (vehicle dynamic constraints)
+的线性约束情况下，通过 cost
+的方式获取最优的速度，同时考虑了速度平滑性和参考速度。</p>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Speed_Optimizer.JPG" alt="Fig. 13">
+<figcaption aria-hidden="true">Fig. 13</figcaption>
+</figure>
+<p>The spline QP speed step includes three parts: cost functional,
+linearized constraint and spline QP solver.</p>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/Speed_QP_cost.jpg" alt="cost function">
+<figcaption aria-hidden="true">cost function</figcaption>
+</figure>
+<p>The objective function is a balance between following the guidance
+line and smoothness. The spline optimization is within the linearized
+constraint.</p>
+<p>After wrapping up the cost objective and constraints, the spline
+solver will generate a smooth feasible speed profile.</p>
+<!--
+
+注意，重要的求解步骤，就是这么一笔带过了。如何进行 QP 的求解，是自己感兴趣的内容。
+
+-->
+<h2 id="notes-on-solving-quadratic-programming-problems">Notes on
+Solving Quadratic Programming Problems</h2>
+<h3 id="优化任务量">优化任务量</h3>
+<p>一次优化过程中大概有一百个采样点，那么约束就多于 600 个。</p>
+<blockquote>
+<p>For safety considerations, we evaluate the path and speed at
+approximately one-hundred different locations or time points.</p>
+</blockquote>
+<p>path 和 speed 的优化问题，由一个五项式表达出来，但是约束条件有 30
+个之多；然后，使用 QP solver 来求解。</p>
+<blockquote>
+<p>For both the path and speed optimizers, we find that piecewise
+quintic polynomials are good enough. The spline generally contains 3 to
+5 polynomials with approximately 30 parameters. Thus, <strong>the
+quadratic programming problem has a relatively small objective function
+but large number of constraints</strong>.</p>
+</blockquote>
+<p>In addition to accelerating the quadratic programming, <strong>we use
+the result calculated in the last cycle as a hot start</strong>. *
+注意，在 EM
+文章中，优先使用上一次的规划轨迹，不仅可以提高求解效率，同时容易和上一次的决策保持一致。</p>
+<p>因为使用上一次的规划轨迹来求解，QP 问题可以平均在 3ms 内求解。</p>
+<blockquote>
+<p>The QP problem can be solved within 3 ms on average, which satisfies
+our time consumption requirement.</p>
+</blockquote>
+<p>此处补充一下，QP 求解是轨迹规划耗时的重点，平均 3ms
+不代表求解性能一定好，更需要关注耗时最差的情况，或者中位数的情况。 *
+举个例子，假设在 100 次求解中，如果 99 次求解耗时均是 2 ms，只有一次耗时
+102
+ms，那么最坏的这次求解，会导致自车反应延迟，足以影响自动驾驶安全，但是平均时间是
+3ms。这就是统计学描述的精妙。</p>
+<h2 id="notes-on-non-convex-optimization-with-dp-and-qp">Notes on
+Non-convex Optimization With DP and QP</h2>
+<p>DP 和 QP 各有局限，结合起来一起解决非凸优化问题。</p>
+<blockquote>
+<p>DP and QP alone both have their limitations in the non-convex domain.
+A combination of DP and QP will take advantage of the two and reach an
+ideal solution.</p>
+</blockquote>
+<ul>
+<li>DP: As described earlier in this manuscript, the <strong>DP
+algorithm depends on a sampling step to generate candidate
+solutions</strong>. Because of the restriction of processing time,
+<strong>the number of sampled candidates is limited by the sampling
+grid</strong>. Optimization within a finite grid yields a <strong>rough
+DP solution</strong>. In other words, DP does not necessarily, and in
+almost all cases would not, <strong>deliver</strong> the optimal
+solution.
+<ul>
+<li>For example, DP could select a path that nudges the obstacle from
+the left but not nudge with the best distance.</li>
+<li>DP 方法受限于采样精度 (求解性能约束)，不能找出最优的结果。</li>
+</ul></li>
+<li>QP: Conversely, QP generates a solution based on the <strong>convex
+domain</strong>. It is not available without the help of the DP step.
+<ul>
+<li>For example, if an obstacle is in front of the master vehicle, QP
+requires a decision, such as nudge from the left, nudge from the right,
+follow, or overtake, to generate its constraint. <strong>A random or
+rule-based decision will make QP susceptible to failure or fall into a
+local minimal</strong>.</li>
+<li>QP 主要是解决凸优化问题，需要 DP 把非凸问题简化为凸优化问题。</li>
+<li>目前，ABC's 的 stopping
+constraints，并不是输出一个决策，而是输出一个约束到 ST 中，在 ST
+中进行决策的优化。从而，决策上的约束，可以把一个非凸问题化简为凸优化问题。</li>
+</ul></li>
+<li>DP + QP: A DP plus QP algorithm will minimize the limitations of
+both: (1) The EM planner first uses DP to search within a grid to reach
+a rough resolution. (2) <strong>The DP results are used to generate a
+convex domain and guide QP</strong>. (3) QP is used to search for the
+optimal solution in the convex region that most likely contains global
+optima.
+<ul>
+<li>ABC 目前使用 reasoner 把一个非凸问题转化为凸优化问题，reasoner
+的输出就是凸问题的约束。</li>
+</ul></li>
+</ul>
+<p>各家公司的做法，千差万别，本质上都是在求解一个优化问题，把非凸的问题转化为凸问题，最后优化求解。</p>
+<h1 id="case-study">CASE STUDY</h1>
+<p>EM planner 是一个轻量级决策 (light-decision) 的规划器。</p>
+<p>Although most state-of-the-art planning algorithms are based on
+<strong>heavy decisions</strong>, <strong>EM planner is a
+light-decision-based planner</strong>. It is true that a
+heavy-decision-based algorithm, or heavily rule-based algorithm, is
+easily understood and explained. The disadvantages are also clear: it
+may be trapped in corner cases (while its frequency is closely related
+to the complexity and magnitude of the number of rules) and not always
+be optimal. * 和 EM planner 相比，目前 ABC 做法的缺陷，在行为决策部分
+(reasoner)，规则的痕迹太重了。那么，能否引入比较智能的算法或者架构，来解决这类约束呢？这也是自己下一步的努力方向。
+* 自动驾驶不能通过重规则 (heavy-decision-based algorithm)
+来实现，最好的做法还是通过优化来实现。</p>
+<!--
+These cases were exposed during the intense daily test routines in Baidu’s heavy-decision planning modules and solved by the latest light-decision planning module.
+
+我推测，百度曾经也有一套规则痕迹偏重的做法，但是可能后期被抛弃。
+-->
+<p>这个示例中，进行了两次迭代 (两轮 EM
+迭代)。通常，环境越复杂，计算迭代时间越复杂，所以优化问题是一个没有时间收敛上限的问题。</p>
+<blockquote>
+<p>In general, the more complicated the environment is, the the more
+steps that may be required.</p>
+</blockquote>
+<p>建议在读论文前，先阅读 Case Study
+这一章，了解文章在解决什么问题，以及如何解决这个问题，对文章的实现有初步了解。</p>
+<h1 id="computational-performance">COMPUTATIONAL PERFORMANCE</h1>
+<p>这篇文章把三维 (station-lateral-speed) 的问题，化简为两个二维问题
+(station-lateral problem and station-speed
+problem)，那么大大简化了计算复杂度。也就是，问题复杂度降维了。</p>
+<blockquote>
+<p>Because the three-dimensional station-lateral-speed problem has been
+split into two two-dimensional problems, i.e., <strong>station-lateral
+problem and station-speed problem</strong>, the computational complexity
+of EM planner has been significantly decreased, and thus, this planner
+is very efficient. <strong>It takes less than 100 ms on
+average</strong>.</p>
+</blockquote>
+<p>从问题复杂度 O (n (M+N))
+来分析求解效率，可以应用到论文中，具有学术的感觉。但是，为什么是 M
+(后续车道) + N (障碍物数量) 呢？</p>
+<blockquote>
+<p>Assuming that we have n obstacles with M candidate path profiles and
+N candidate speed profiles, the computational complexity of this
+algorithm is <strong>O(n(M+N))</strong>.</p>
+</blockquote>
+<h1 id="conclusion">CONCLUSION</h1>
+<p>在自动驾驶中，安全性 (safety) 和通行能力 (passability) 是关键问题
+(critical issue)。如果规则太过严格，那么通过率必然会下降。</p>
+<blockquote>
+<p>One critical issue in autonomous driving vehicles is the challenge of
+safety vs. passability. A strict rule increases the safety of the
+vehicle but lowers the passability, and vice versa.</p>
+</blockquote>
+<p>EM planner described in this manuscript is also designed to solve the
+<strong>inconsistency</strong> of potential decisions and planning,
+while it also improves the passability of autonomous driving vehicles. *
+通过复用上一次的决策 (hot
+start)，如果环境不发生大的变化，决策容易和上一次的决策保持一致。 *
+决策不稳定，也是目前 ABC 遇到的常见问题之一。</p>
+<p>EM planner 把一个 3D 问题化简为 2 个 2D
+问题，化繁为简，降低了问题难度，提高了求解效率。</p>
+<blockquote>
+<p>EM planner significantly reduces computational complexity by
+transforming a three-dimensional station-lateral-speed problem into two
+twodimensional station-lateral/station-speed problems. It could
+significantly reduce the processing time and therefore increase the
+interaction ability of the whole system.</p>
+</blockquote>
+<hr>
+<p>最后，APPENDIX 2 中的 CONSTRAINED SMOOTHING SPLINE AND QUADRATIC
+PROGRAMMING 一节，应用到了复杂的再生核希尔伯特空间 ( Reproducing kernel
+Hilbert
+space，RKHS)，复杂的证明过程已经超出了我的理解范围，等应用时再详细研究下。</p>
+<blockquote>
+<p>The spline QP path and speed optimizer uses the same constrained
+smoothing spline framework. In this section, we formalize the smoothing
+spline problem within the quadratic programming framework and linearized
+constraints. Optimization with a quadratic convex objective and
+linearized constraints can be rapidly and stably solved.</p>
+</blockquote>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a></li>
+</ul>
+<h1 id="表达学习">表达学习</h1>
+<ul>
+<li>Further safety design is beyond this manuscript’s scope.</li>
+<li>Figure 15 is a hands-on example of how EM planner iterates
+<strong>within and between planning cycles</strong> to achieve the
+optimal trajectory.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Autonomous Driving</category>
+      </categories>
+      <tags>
+        <tag>Weekly Blogs</tag>
+        <tag>Robotics</tag>
+        <tag>Autonomous Driving</tag>
       </tags>
   </entry>
 </search>
