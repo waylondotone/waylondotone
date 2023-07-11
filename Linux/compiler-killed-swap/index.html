@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA-swap"><span class="nav-number">2.</span> <span class="nav-text">什么是交换分区 swap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">作用原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%A2%9E%E5%8A%A0%E4%BA%A4%E6%8D%A2%E5%88%86%E5%8C%BA"><span class="nav-number">3.</span> <span class="nav-text">如何增加交换分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E5%B7%B2%E7%BB%8F%E6%9C%89-swap-%E5%88%86%E5%8C%BA"><span class="nav-number">4.</span> <span class="nav-text">查看是否已经有 swap 分区 </span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">什么是交换分区 swap</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8%E5%8E%9F%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">作用原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">如何增加交换分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">查看是否已经有 swap 分区</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -277,25 +277,19 @@
     
     
     <div class="post-body" itemprop="articleBody"><!-- compiler_killed_swap -->
-<h1 id="背景">背景</h1>
+<h1>背景</h1>
 <p>在 Linux 系统上编译大型程序时，可能遇到如下编译错误：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c++: internal compiler error: <span class="built_in">Killed</span> (program cc1plus)</span><br><span class="line">Please submit a full bug report</span><br></pre></td></tr></tbody></table></figure>
-<p>经过查资料，大概率是编译时内存不够导致的，除了增加物理内存外
-(花银子)，短期可以通过增加交换分区 swap 来解决 (时间换空间)。</p>
+<p>经过查资料，大概率是编译时内存不够导致的，除了增加物理内存外 (花银子)，短期可以通过增加交换分区 swap 来解决 (时间换空间)。</p>
 <span id="more"></span>
-<h1 id="什么是交换分区-swap">什么是交换分区 swap</h1>
-<p>Linux 中的交换分区 (swap)，类似于 Windows
-的虚拟内存，就是当<strong>内存不足</strong> (RAM)
-的时候，把一部分<strong>硬盘空间</strong>虚拟成内存使用，从而解决内存容量不足的情况。</p>
+<h1>什么是交换分区 swap</h1>
+<p>Linux 中的交换分区 (swap)，类似于 Windows 的虚拟内存，就是当<strong>内存不足</strong> (RAM) 的时候，把一部分<strong>硬盘空间</strong>虚拟成内存使用，从而解决内存容量不足的情况。</p>
 <blockquote>
-<p>功能：在内存不够的情况下，操作系统先<strong>把内存中暂时不用的数据，存到硬盘的交换空间</strong>，腾出内存来让别的程序运行，和
-Windows 的虚拟内存（pagefile.sys）的作用是相似的。</p>
+<p>功能：在内存不够的情况下，操作系统先<strong>把内存中暂时不用的数据，存到硬盘的交换空间</strong>，腾出内存来让别的程序运行，和 Windows 的虚拟内存（pagefile.sys）的作用是相似的。</p>
 </blockquote>
-<p>副作用：虽然这个 swap
-分区能够作为 "虚拟" 的内存，但<strong>它的速度比物理内存可是慢多了</strong>。</p>
+<p>副作用：虽然这个 swap 分区能够作为 "虚拟" 的内存，但<strong>它的速度比物理内存可是慢多了</strong>。</p>
 <blockquote>
-<p>如果需要更快的速度的话，并不能寄厚望于
-swap，最好的办法仍然是加大物理内存，swap 分区只是临时的解决办法。</p>
+<p>如果需要更快的速度的话，并不能寄厚望于 swap，最好的办法仍然是加大物理内存，swap 分区只是临时的解决办法。</p>
 </blockquote>
 <h2 id="作用原理">作用原理</h2>
 <p>计算机对内存分为<strong>物理内存</strong>与<strong>虚拟内存</strong>（注意虚拟内存和虚拟地址空间的区别）。</p>
@@ -303,42 +297,41 @@ swap，最好的办法仍然是加大物理内存，swap 分区只是临时的�
 <li>物理内存就是计算机的实际内存大小，由 RAM 芯片组成的。</li>
 <li>虚拟内存则是虚拟出来的，使用磁盘代替内存。虚拟内存的出现，让机器内存不够的情况得到部分解决。这里的虚拟内存，即所谓的 swap。</li>
 </ul>
-<p>当程序运行起来后，由操作系统做具体虚拟内存到物理内存的替换和加载
-(相应的页与段的虚拟内存管理)。</p>
+<p>当程序运行起来后，由操作系统做具体虚拟内存到物理内存的替换和加载 (相应的页与段的虚拟内存管理)。</p>
 <ul>
-<li>当用户提交程序，然后产生进程，在机器上运行。机器会判断当前物理内存是否还有空闲允许进程调入内存运行，如果有那么则直接调入内存进行运行；如果没有，那么会根据优先级选择一个进程挂起，把该进程交换到
-swap 中等待，然后把新的进程调入到内存中运行。</li>
-<li>根据这种换入和换出，实现了内存的循环利用，让用户感觉不到内存的限制。其中，swap
-扮演了一个非常重要的角色，就是暂存被换出的进程。</li>
+<li>当用户提交程序，然后产生进程，在机器上运行。机器会判断当前物理内存是否还有空闲允许进程调入内存运行，如果有那么则直接调入内存进行运行；如果没有，那么会根据优先级选择一个进程挂起，把该进程交换到 swap 中等待，然后把新的进程调入到内存中运行。</li>
+<li>根据这种换入和换出，实现了内存的循环利用，让用户感觉不到内存的限制。其中，swap 扮演了一个非常重要的角色，就是暂存被换出的进程。</li>
 </ul>
-<h1 id="如何增加交换分区">如何增加交换分区</h1>
+<h1>如何增加交换分区</h1>
 <p>因为之前可能进行过 swap 扩容，所以第一步是把之前的交换分区关闭。</p>
-<ol type="1">
-<li><h1 id="查看是否已经有-swap-分区">查看是否已经有 swap 分区 </h1></li>
+<ol>
+<li>
+<h1>查看是否已经有 swap 分区</h1>
+</li>
 </ol>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2" type="1">
+<ol start="2">
 <li>如果有，先把原来的 swap 关闭 </li>
 </ol>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">swapoff -a</span><br><span class="line"><span class="comment"># 详细的用法可以：swapoff --help</span></span><br></pre></td></tr></tbody></table></figure>
-<ol start="3" type="1">
+<ol start="3">
 <li>扩展分区</li>
 </ol>
 <p>交换分区的合理值，可以根据你系统内存的大小，以及<strong>所使用的程序</strong>，自行决定交换分区的大小。</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># count 的大小就是增加的 swap 空间的大小，64M 是块大小，所以空间大小是 bs*count=1024MB</span></span><br><span class="line">sudo <span class="built_in">dd</span> <span class="keyword">if</span>=/dev/zero of=/swapfile bs=64M count=16</span><br><span class="line"><span class="comment"># 把刚才空间格式化成 swap 格式</span></span><br><span class="line">sudo mkswap /swapfile</span><br><span class="line"><span class="comment"># 该目录权限，不改的话，在下一步启动时会报 “swapon: /swapfile: ”</span></span><br><span class="line"><span class="comment"># “insecure permissions 0644, 0600 suggested.” 错误</span></span><br><span class="line"><span class="built_in">chmod</span> 0600 /swapfile</span><br><span class="line"><span class="comment"># 使用刚才创建的 swap 空间</span></span><br><span class="line">sudo swapon /swapfile</span><br></pre></td></tr></tbody></table></figure>
-<ol start="4" type="1">
+<ol start="4">
 <li>关闭临时空间 </li>
 </ol>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapoff -a</span><br></pre></td></tr></tbody></table></figure>
-<ol start="5" type="1">
+<ol start="5">
 <li>查看当前内存使用情况，确认交换分区设置成功。</li>
 </ol>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">free -m</span><br></pre></td></tr></tbody></table></figure>
-<ol start="6" type="1">
+<ol start="6">
 <li>其他命令 </li>
 </ol>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">swapon -s <span class="comment"># 可以查看当期swap的使用情况</span></span><br></pre></td></tr></tbody></table></figure>
-<h1 id="references">References</h1>
+<h1>References</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_27148893/article/details/88936044">你的内存不够啦</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zwan0518/article/details/12059213">Linux 中 Swap 与 Memory 内存简单介绍</a></li>
@@ -406,7 +399,7 @@ swap 中等待，然后把新的进程调入到内存中运行。</li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:49</span>
+    <span title="Reading time total">15:50</span>
   </span>
 </div>
 <div class="busuanzi-count">

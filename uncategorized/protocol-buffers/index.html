@@ -140,10 +140,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#package"><span class="nav-number">1.</span> <span class="nav-text">Package</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#arena-allocation"><span class="nav-number">1.1.</span> <span class="nav-text">Arena
-Allocation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#python"><span class="nav-number">2.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#enum"><span class="nav-number">2.1.</span> <span class="nav-text">Enum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#could-not-serialize-object-typeerror-cant-pickle-google.protobuf.pyext._message.enumdescriptor-objects"><span class="nav-number">2.1.1.</span> <span class="nav-text">Could
-not serialize object: TypeError: can&#39;t pickle
-google.protobuf.pyext._message.EnumDescriptor objects</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%95%99%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">参考教程</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Package</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Arena-Allocation"><span class="nav-number">1.1.</span> <span class="nav-text">Arena Allocation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Enum"><span class="nav-number">2.1.</span> <span class="nav-text">Enum</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Could-not-serialize-object-TypeError-can%E2%80%99t-pickle-google-protobuf-pyext-message-EnumDescriptor-objects"><span class="nav-number">2.1.1.</span> <span class="nav-text">Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">参考教程</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -293,47 +290,32 @@ google.protobuf.pyext._message.EnumDescriptor objects</span></a></li></ol></li><
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="package"><a target="_blank" rel="noopener" href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
+    <div class="post-body" itemprop="articleBody"><h1><a target="_blank" rel="noopener" href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
 <ul>
-<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to
-a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol
-message types.</li>
-<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a
-C++ namespace.
+<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol message types.</li>
+<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a C++ namespace.
 <ul>
 <li>即 package 指定的路径，会被转换为 namespace，来避免命名冲突。</li>
-</ul></li>
 </ul>
-<h2 id="arena-allocation"><a target="_blank" rel="noopener" href="https://protobuf.dev/reference/cpp/arenas/#why">Arena
-Allocation</a></h2>
-<ul>
-<li> 功能：Arena allocation is a C++-only feature that helps you optimize
-your memory usage and improve performance when working with protocol
-buffers.</li>
-<li> 原因：By default, protocol buffers performs heap allocations for
-each message object, each of its subobjects, and several field types,
-such as strings. These allocations occur in bulk when parsing a message
-and when building new messages in memory, and associated deallocations
-happen when messages and their subobject trees are freed.
-<ul>
-<li>Message
-的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
-</ul></li>
+</li>
 </ul>
-<h1 id="python">Python</h1>
-<h2 id="enum">Enum</h2>
-<h3 id="could-not-serialize-object-typeerror-cant-pickle-google.protobuf.pyext._message.enumdescriptor-objects">Could
-not serialize object: TypeError: can't pickle
-google.protobuf.pyext._message.EnumDescriptor objects</h3>
-<p>我在实际 spark 上处理数据时，报错 "Could not serialize object:
-TypeError: can't pickle google.protobuf.pyext._message.EnumDescriptor
-objects", 通过报错信息，很明确这是在实际 python 代码中引用 enum
-导致的问题.</p>
+<h2 id="Arena-Allocation"><a target="_blank" rel="noopener" href="https://protobuf.dev/reference/cpp/arenas/#why">Arena Allocation</a></h2>
+<ul>
+<li> 功能：Arena allocation is a C+±only feature that helps you optimize your memory usage and improve performance when working with protocol buffers.</li>
+<li> 原因：By default, protocol buffers performs heap allocations for each message object, each of its subobjects, and several field types, such as strings. These allocations occur in bulk when parsing a message and when building new messages in memory, and associated deallocations happen when messages and their subobject trees are freed.
+<ul>
+<li>Message 的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
+</ul>
+</li>
+</ul>
+<h1>Python</h1>
+<h2 id="Enum">Enum</h2>
+<h3 id="Could-not-serialize-object-TypeError-can’t-pickle-google-protobuf-pyext-message-EnumDescriptor-objects">Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects</h3>
+<p>我在实际 spark 上处理数据时，报错 “Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects”, 通过报错信息，很明确这是在实际 python 代码中引用 enum 导致的问题.</p>
 <figure class="highlight plaintext"><figcaption><span>enum_test.proto</span><a href="/downloads/code/enum_test.proto">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Add code later</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="参考教程">参考教程</h1>
+<h1>参考教程</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand
-Protobuf enum in python</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand Protobuf enum in python</a></li>
 </ul>
 
     </div>
@@ -391,7 +373,7 @@ Protobuf enum in python</a></li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:49</span>
+    <span title="Reading time total">15:50</span>
   </span>
 </div>
 <div class="busuanzi-count">

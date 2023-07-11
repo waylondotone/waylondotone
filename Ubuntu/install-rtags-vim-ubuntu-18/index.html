@@ -141,9 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-install-rtags-for-vim-in-ubuntu-18.04-%E5%A6%82%E4%BD%95%E5%9C%A8ubuntu-18.04-vim%E4%B8%8A%E5%AE%89%E8%A3%85rtags%E6%8F%92%E4%BB%B6"><span class="nav-number">1.</span> <span class="nav-text">How
-to install rtags for vim in Ubuntu 18.04 &#x2F; 如何在 Ubuntu 18.04
-vim 上安装 rtags 插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#whats-rtags"><span class="nav-number">2.</span> <span class="nav-text">What&#39;s rtags</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-install-rtags"><span class="nav-number">3.</span> <span class="nav-text">How to install rtags</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">How to install rtags for vim in Ubuntu 18.04 &#x2F; 如何在 Ubuntu 18.04 vim 上安装 rtags 插件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">What’s rtags</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">How to install rtags</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,17 +202,17 @@ vim 上安装 rtags 插件</span></a></li><li class="nav-item nav-level-1"><a cl
       </a>
     </li>
     <li class="popular-posts-item">
-      <a class="popular-posts-link" href="/uncategorized/advanced-ubuntu/" rel="bookmark">
-        <time class="popular-posts-time">2023-05-28</time>
-        <br>
-      ubuntu 进阶学习
-      </a>
-    </li>
-    <li class="popular-posts-item">
       <a class="popular-posts-link" href="/Linux/vim-configuration/" rel="bookmark">
         <time class="popular-posts-time">2020-09-29</time>
         <br>
       vim 插件配置
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/uncategorized/advanced-ubuntu/" rel="bookmark">
+        <time class="popular-posts-time">2023-05-28</time>
+        <br>
+      ubuntu 进阶学习
       </a>
     </li>
     <li class="popular-posts-item">
@@ -323,38 +321,23 @@ vim 上安装 rtags 插件</span></a></li><li class="nav-item nav-level-1"><a cl
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="how-to-install-rtags-for-vim-in-ubuntu-18.04-如何在ubuntu-18.04-vim上安装rtags插件">How
-to install rtags for vim in Ubuntu 18.04 / 如何在 Ubuntu 18.04
-vim 上安装 rtags 插件</h1>
-<p>This blog introduces how to install the best cross-reference tool, <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a>, that I have ever
-used in vim, step by step. I hope it helps.</p>
-<h1 id="whats-rtags">What's rtags</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">Rtags</a> is a
-client/server application that indexes C/C++ code and keeps a persistent
-file-based database of references, declarations, definitions,
-symbolnames etc. It allows you to find symbols by name (including nested
-class and namespace scope). Most importantly, it gives you proper
-follow-symbol and find-references support.</p>
-<p>Rtags comes with emacs support but there are projects supporting
-other IDEs: <a target="_blank" rel="noopener" href="https://github.com/lyuts/vim-rtags">vim-rtags</a>
-and <a target="_blank" rel="noopener" href="https://github.com/rampage644/sublime-rtags">sublime-rtags</a>.</p>
+    <div class="post-body" itemprop="articleBody"><h1>How to install rtags for vim in Ubuntu 18.04 / 如何在 Ubuntu 18.04 vim 上安装 rtags 插件</h1>
+<p>This blog introduces how to install the best cross-reference tool, <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a>, that I have ever used in vim, step by step. I hope it helps.</p>
+<h1>What’s rtags</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">Rtags</a> is a client/server application that indexes C/C++ code and keeps a persistent file-based database of references, declarations, definitions, symbolnames etc. It allows you to find symbols by name (including nested class and namespace scope). Most importantly, it gives you proper follow-symbol and find-references support.</p>
+<p>Rtags comes with emacs support but there are projects supporting other IDEs: <a target="_blank" rel="noopener" href="https://github.com/lyuts/vim-rtags">vim-rtags</a> and <a target="_blank" rel="noopener" href="https://github.com/rampage644/sublime-rtags">sublime-rtags</a>.</p>
 <p>In this blog, We would install vim-rtags later.</p>
-<h1 id="how-to-install-rtags">How to install rtags</h1>
-<p><strong>First</strong>, you need clang, which is a compiler front end
-for the C, C++, Objective-C and so on. It uses the LLVM compiler
-infrastructure as its back end and has been part of the LLVM release
-cycle since LLVM 2.6. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">// sudo apt install clang-5.0 lld-5.0  </span><br><span class="line">// sudo apt install libclang-5.0-dev  </span><br><span class="line">sudo apt install llvm-7-dev libclang-7-dev</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1>How to install rtags</h1>
+<p><strong>First</strong>, you need clang, which is a compiler front end for the C, C++, Objective-C and so on. It uses the LLVM compiler infrastructure as its back end and has been part of the LLVM release cycle since LLVM 2.6.</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">// sudo apt install clang-5.0 lld-5.0  </span><br><span class="line">// sudo apt install libclang-5.0-dev  </span><br><span class="line">sudo apt install llvm-7-dev libclang-7-dev</span><br></pre></td></tr></tbody></table></figure>
 <!--And then add the bin binary to your path.-->
-<p><strong>Secondly</strong>, make and install <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a> as follows.
-</p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">git clone --recursive https://github.com/Andersbakken/rtags.git</span><br><span class="line">cd rtags &lt;-- in rtags directory</span><br><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .</span><br><span class="line">make</span><br><span class="line">sudo make install </span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><strong>Thirdly</strong>, you should install vim-rtags in <a target="_blank" rel="noopener" href="https://github.com/VundleVim/Vundle.vim">Vundle.vim</a>. I think
-it's the easiest way to install rtags plugin in vim. You need to add the
-following line to .vimrc if you have installed Vundle, and then run
-:PluginInstall in vim. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plugin 'lyuts/vim-rtags' &lt;-- install in vim</span><br></pre></td></tr></tbody></table></figure><p></p>
-<p><strong>Finally</strong>, the last but essential step is that forcing
-cmake to output compile_commands.json (like <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/v3.5/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html">DCMAKE_EXPORT_COMPILE_COMMANDS</a>)
-and link it with rtags according to your project. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 [***] your_src_path</span><br><span class="line">rc -J your_build_folder_path  &lt;-- use compile_commands.json in your build folder</span><br><span class="line">rdm &amp; &lt;-- launch the rtags server</span><br></pre></td></tr></tbody></table></figure><p></p>
-
+<p><strong>Secondly</strong>, make and install <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a> as follows.</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">git clone --recursive https://github.com/Andersbakken/rtags.git</span><br><span class="line">cd rtags &lt;-- in rtags directory</span><br><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .</span><br><span class="line">make</span><br><span class="line">sudo make install </span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Thirdly</strong>, you should install vim-rtags in <a target="_blank" rel="noopener" href="https://github.com/VundleVim/Vundle.vim">Vundle.vim</a>. I think it’s the easiest way to install rtags plugin in vim.<br>
+You need to add the following line to .vimrc if you have installed Vundle, and then run :PluginInstall in vim.</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plugin 'lyuts/vim-rtags' &lt;-- install in vim</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Finally</strong>, the last but essential step is that forcing cmake to output compile_commands.json (like <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/v3.5/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html">DCMAKE_EXPORT_COMPILE_COMMANDS</a>) and link it with rtags according to your project.</p>
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 [***] your_src_path</span><br><span class="line">rc -J your_build_folder_path  &lt;-- use compile_commands.json in your build folder</span><br><span class="line">rdm &amp; &lt;-- launch the rtags server</span><br></pre></td></tr></tbody></table></figure>
     </div>
 
     
@@ -417,7 +400,7 @@ and link it with rtags according to your project. </p><figure class="highlight h
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:49</span>
+    <span title="Reading time total">15:50</span>
   </span>
 </div>
 <div class="busuanzi-count">
