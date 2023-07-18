@@ -144,11 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#whats-nslookup"><span class="nav-number">2.</span> <span class="nav-text">What&#39;s nslookup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-to-use"><span class="nav-number">3.</span> <span class="nav-text">How to use</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#find-the-ip-address-of-an-host"><span class="nav-number">3.1.</span> <span class="nav-text">Find the IP address of an
-Host</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lookup-ip-address-to-domain-name"><span class="nav-number">3.2.</span> <span class="nav-text">Lookup IP address to domain
-name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#find-mail-servers-for-a-domain"><span class="nav-number">3.3.</span> <span class="nav-text">Find mail servers for a
-Domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#non-authoritative-answer-%E9%9D%9E%E6%9D%83%E5%A8%81%E5%BA%94%E7%AD%94"><span class="nav-number">3.4.</span> <span class="nav-text">Non-authoritative answer
-(非权威应答)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">What’s nslookup</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">How to use</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-the-IP-address-of-an-Host"><span class="nav-number">3.1.</span> <span class="nav-text">Find the IP address of an Host</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lookup-IP-address-to-domain-name"><span class="nav-number">3.2.</span> <span class="nav-text">Lookup IP address to domain name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Find-mail-servers-for-a-Domain"><span class="nav-number">3.3.</span> <span class="nav-text">Find mail servers for a Domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Non-authoritative-answer-%E9%9D%9E%E6%9D%83%E5%A8%81%E5%BA%94%E7%AD%94"><span class="nav-number">3.4.</span> <span class="nav-text">Non-authoritative answer (非权威应答)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -334,60 +330,39 @@ Domain</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href=
 
 若想人不知，除非己莫为。既然你可以浏览到的内容，为什么别人就不能浏览到呢？只不过略微复杂一点罢了。
 -->
-<h1 id="background">Background</h1>
-<p>Recently, I found my website was visited by a set of IPs from the
-same region (Mountain View), as shown below. Without thought, I deemed
-my website was suffering from hacker attacks or somebody's dig.</p>
-<p>I was a little anxious and regretted that sharing some personal
-private information on my website. I built this website on sharing my
-own experience and learned knowledge to the masses and storing
-individual materials for my convenient use. I previously did not believe
-somebody would spare no effort to my website.</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/google_bot.png"></p>
-<p>Take it easy. I later found that these visitors are from Google's
-robotic crawler using an excellent tool -- nslookup, but I still decided
-to delete all personal information to protect my privacy.</p>
-<h1 id="whats-nslookup">What's nslookup</h1>
+<h1>Background</h1>
+<p>Recently, I found my website was visited by a set of IPs from the same region (Mountain View), as shown below. Without thought, I deemed my website was suffering from hacker attacks or somebody’s dig.</p>
+<p>I was a little anxious and regretted that sharing some personal private information on my website. I built this website on sharing my own experience and learned knowledge to the masses and storing individual materials for my convenient use. I previously did not believe somebody would spare no effort to my website.</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/google_bot.png" alt=""></p>
+<p>Take it easy. I later found that these visitors are from Google’s robotic crawler using an excellent tool – nslookup, but I still decided to delete all personal information to protect my privacy.</p>
+<h1>What’s nslookup</h1>
 <blockquote>
-<p>nslookup, name server lookup, is a network administration
-command-line tool available in many computer operating systems (like
-MacOs, Linux and Windows) for querying the Domain Name System (DNS) to
-obtain domain name or IP address mapping, or other DNS records.</p>
+<p>nslookup, name server lookup, is a network administration command-line tool available in many computer operating systems (like MacOs, Linux and Windows) for querying the Domain Name System (DNS) to obtain domain name or IP address mapping, or other DNS records.</p>
 </blockquote>
 <ul>
-<li>The command does not use the operating system's local Domain Name
-System resolver library to perform its queries, and thus may behave
-differently from dig, which does.</li>
+<li>The command does not use the operating system’s local Domain Name System resolver library to perform its queries, and thus may behave differently from dig, which does.</li>
 </ul>
-<h1 id="how-to-use">How to use</h1>
-<h2 id="find-the-ip-address-of-an-host">Find the IP address of an
-Host</h2>
+<h1>How to use</h1>
+<h2 id="Find-the-IP-address-of-an-Host">Find the IP address of an Host</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nslookup ip</span><br><span class="line"># nslookup www.waylon.one</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/search_domain_ip.jpg"></p>
-<h2 id="lookup-ip-address-to-domain-name">Lookup IP address to domain
-name</h2>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/search_domain_ip.jpg" alt=""></p>
+<h2 id="Lookup-IP-address-to-domain-name">Lookup IP address to domain name</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nslookup ip</span><br><span class="line"># nslookup 66.249.73.108</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/search_ip_address.png"></p>
-<h2 id="find-mail-servers-for-a-domain">Find mail servers for a
-Domain</h2>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/search_ip_address.png" alt=""></p>
+<h2 id="Find-mail-servers-for-a-Domain">Find mail servers for a Domain</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nslookup  -querytype=mx  domain-name</span><br><span class="line"># nslookup  -querytype=mx 163.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="non-authoritative-answer-非权威应答">Non-authoritative answer
-(非权威应答)</h2>
-<p>You may notice that you get non authoritative answers. This is
-nothing to worry about as all it means is that the DNS server has
-already recently resolved this query. It can retrieve the results from
-cache, and doesn’t need to contact the authoritative name server.</p>
+<h2 id="Non-authoritative-answer-非权威应答">Non-authoritative answer (非权威应答)</h2>
+<p>You may notice that you get non authoritative answers. This is nothing to worry about as all it means is that the DNS server has already recently resolved this query. It can retrieve the results from cache, and doesn’t need to contact the authoritative name server.</p>
 <blockquote>
-<p>当你看到 “non-authoritative
-answer”，意味着你本地的 DNS 服务器之前访问过这个网址，这次查询直接是从本地 DNS 缓存中得到的。</p>
+<p>当你看到 “non-authoritative answer”，意味着你本地的 DNS 服务器之前访问过这个网址，这次查询直接是从本地 DNS 缓存中得到的。</p>
 </blockquote>
-<h1 id="references">References</h1>
+<h1>References</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://www.steves-internet-guide.com/using-nslookup/">How
-to Use Nslookup – Beginners Guide</a>
+<li><a target="_blank" rel="noopener" href="http://www.steves-internet-guide.com/using-nslookup/">How to Use Nslookup – Beginners Guide</a>
 <ul>
 <li>A very good article. </li>
-</ul></li>
+</ul>
+</li>
 <li><a target="_blank" rel="noopener" href="http://www.clownseo.com/seojsfx/154.html">如何辨别是不是一个真正的百度爬虫</a></li>
 <li><a target="_blank" rel="noopener" href="https://support.google.com/webmasters/answer/182072">Googlebot</a></li>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38058202/article/details/80468688">应用 nslookup 命令查看 A 记录</a></li>
