@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">拷贝还是复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">运算符的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">boost::geometry::covered_by</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#int64-t-vs-int"><span class="nav-number">3.1.</span> <span class="nav-text">int64_t vs int</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8B%B7%E8%B4%9D%E8%BF%98%E6%98%AF%E5%A4%8D%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">拷贝还是复制</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">运算符的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#boostgeometrycovered_by"><span class="nav-number">3.</span> <span class="nav-text">boost::geometry::covered_by</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#int64_t-vs-int"><span class="nav-number">3.1.</span> <span class="nav-text">int64_t vs int</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -293,19 +293,22 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1>拷贝还是复制</h1>
+    <div class="post-body" itemprop="articleBody"><h1 id="拷贝还是复制">拷贝还是复制</h1>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (auto occupant_in_yield_zone_state : occupant_in_yield_zone_states_) {}</span><br><span class="line"></span><br><span class="line">for (auto&amp; occupant_in_yield_zone_state : occupant_in_yield_zone_states_) {}</span><br></pre></td></tr></tbody></table></figure>
-<h1>运算符的区别</h1>
+<h1 id="运算符的区别">运算符的区别</h1>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 加号优先级高，三元运算符 从右向左 解析</span><br><span class="line">single_sum = (l1!=nullptr?l1-&gt;val:0) + (l2!=nullptr?l2-&gt;val:0) + next_tmp;</span><br><span class="line"></span><br><span class="line">single_sum = l1!=nullptr?l1-&gt;val:0 + l2!=nullptr?l2-&gt;val:0 + next_tmp;</span><br><span class="line"></span><br><span class="line">等同于</span><br><span class="line"></span><br><span class="line">single_sum = l1!=nullptr?l1-&gt;val:[(0 + l2)!=nullptr?l2-&gt;val:(0 + next_tmp)];</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/operator_precedence">c++ 运算符优先级</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/misayaaaaa/article/details/62417326">C++ 右结合律与左结合律详解</a></li>
+<li><a target="_blank" rel="noopener" href="https://zh.cppreference.com/w/cpp/language/operator_precedence">c++
+运算符优先级</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/misayaaaaa/article/details/62417326">C++
+右结合律与左结合律详解</a></li>
 </ul>
 <blockquote>
-<p>表达式 a &gt; b ? b &gt; c ? 1 : 0 : 2 将被解析为 a &gt; b ? (b&gt; c ? 1 : 0) : 2。</p>
+<p>表达式 a &gt; b ? b &gt; c ? 1 : 0 : 2 将被解析为 a &gt; b ? (b&gt; c
+? 1 : 0) : 2。</p>
 </blockquote>
-<h1>boost::geometry::covered_by</h1>
-<h2 id="int64-t-vs-int">int64_t vs int</h2>
+<h1 id="boostgeometrycovered_by">boost::geometry::covered_by</h1>
+<h2 id="int64_t-vs-int">int64_t vs int</h2>
 
     </div>
 
