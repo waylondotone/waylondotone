@@ -965,7 +965,7 @@ Bang）就是一个奇异点（singularity）。在奇异点之前，所有我�
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+      <time title="Modified: 2023-07-24 00:00:07" itemprop="dateModified" datetime="2023-07-24T00:00:07+08:00">2023-07-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -984,7 +984,7 @@ Bang）就是一个奇异点（singularity）。在奇异点之前，所有我�
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>2.4k</span>
+      <span>2.3k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -1178,10 +1178,14 @@ https://blog.csdn.net/Xiao_CangTian/article/details/89506674
 <h3 id="ctags">ctags</h3>
 <p>  产生标记文件以帮助在源文件中定位对象。<br>
 <a target="_blank" rel="noopener" href="https://blog.csdn.net/yockie/article/details/51090644">在 Vim 中使用 ctags</a></p>
-<h3 id="leaderf">LeaderF</h3>
-<p>  一款模糊查找插件 ——LeaderF，无论是从性能还是匹配精度上，都远远超越 ctrlp。LeaderF 是一个用 Python 写的 vim 插件，可以在成千上万数十万个文件中，通过模糊查找的方式，快速找到目标文件。它还有很多衍生功能：快速打开或定位某个 buffer、最近使用的文件（mru）、tags（包括函数、类、变量等）、命令历史、文件中的某一行、vim 的 help、marks 等等。<br>
+<h3 id="leaderf"><a target="_blank" rel="noopener" href="https://github.com/Yggdroot/LeaderF">LeaderF</a></h3>
+<p>一款模糊查找插件 —— LeaderF，无论是从性能还是匹配精度上，都远远超越
+ctrlp。</p>
+<p>LeaderF 是一个用 Python 写的 vim
+插件，可以在成千上万数十万个文件中，通过模糊查找的方式，快速找到目标文件。它还有很多衍生功能：快速打开或定位某个
+buffer、最近使用的文件（mru）、tags（包括函数、类、变量等）、命令历史、文件中的某一行、vim
+的 help、marks 等等。<br>
 <a target="_blank" rel="noopener" href="https://blog.csdn.net/archofortune/article/details/80131444">让人相见恨晚的 vim 插件：模糊查找神器 LeaderF</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yangjig/p/6014198.html">vim 使用技巧_快捷键</a></p>
 <!--
 > 莫名其妙，会报错。但是升级到vim 8.1,解决问题不报错。 
 -->
@@ -1220,25 +1224,26 @@ check your g:tagbar_ctags_bin setting.</li>
 definitions</li>
 </ul></li>
 </ul>
-<h3 id="nerd-tree">NERD-tree</h3>
-<p>NERDTree 的作用就是列出当前路径的目录树，一般 IDE 都是有的。可以方便的浏览项目的总体的目录结构和创建删除重命名文件或文件名。
-<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/eXMxGx">NERDTree 插件</a></p>
+<h3 id="nerd-tree"><a target="_blank" rel="noopener" href="https://github.com/preservim/nerdtree">NERD-tree</a></h3>
+<p>NERDTree 的作用就是列出当前路径的目录树，一般 IDE 都是有的。可以方便的浏览项目的总体的目录结构和创建删除重命名文件或文件名。</p>
 <ul>
-<li>:NERDTreeFind 找到当前文件的目录 </li>
+<li><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/eXMxGx">NERDTree 插件</a></p></li>
+<li><p>:NERDTreeFind 找到当前文件的目录 </p></li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Ctrl + F to find the file's directory</span><br><span class="line"># Configure in ~/.vimrc .</span><br><span class="line">map &lt;C-f&gt; :NERDTreeFind&lt;CR&gt;</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="vim-配置">vim 配置</h3>
-<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15685729/vim-what-is-the-difference-between-let-g-let-b-etc">VIM
-: What is the difference between let g:, let b:</a><br>
-  :set is for setting options, :let for assigning a value to a variable.
-ps. vim 专用</p>
 <h1 id="设置快捷键">设置快捷键</h1>
 <ul>
 <li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012291393/article/details/78650512">Vim 中的自定义快捷键</a></p></li>
 <li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/nucdy/p/5251659.html">Ubuntu 终端常用的快捷键</a></p></li>
 </ul>
-<h1 id="vimrc-文件配置">.vimrc 文件配置</h1>
+<h2 id="vim-配置">vim 配置</h2>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/15685729/vim-what-is-the-difference-between-let-g-let-b-etc">VIM
+: What is the difference between let g:, let b:</a><br>
+  :set is for setting options, :let for assigning a value to a variable.
+ps. vim 专用</p>
+<h3 id="vimrc-文件配置">.vimrc 文件配置</h3>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"># 文件编码</span><br><span class="line">set encoding=utf-8</span><br><span class="line"># 显示行号</span><br><span class="line">set number</span><br><span class="line"># 取消换行</span><br><span class="line">set nowrap</span><br><span class="line"># 显示光标当前位置</span><br><span class="line">set ruler</span><br><span class="line"># 设置缩进</span><br><span class="line">set cindent</span><br><span class="line">set tabstop=2</span><br><span class="line">set shiftwidth=2</span><br><span class="line"># 突出显示当前行</span><br><span class="line">set cursorline</span><br><span class="line"># 查找</span><br><span class="line">set ic</span><br><span class="line">set hls</span><br><span class="line">set is</span><br><span class="line"># 左下角显示当前 vim 模式</span><br><span class="line">set showmode</span><br><span class="line"># 代码折叠</span><br><span class="line">set nofoldenable</span><br><span class="line">主题</span><br><span class="line">syntax enable</span><br><span class="line">set background=dark</span><br><span class="line">colorscheme solarized</span><br></pre></td></tr></tbody></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yangjig/p/6014198.html">vim 使用技巧_快捷键</a></p>
 <h1 id="references">References</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1839f1fb3f08">vim 插件管理器
@@ -3078,7 +3083,7 @@ ipad 上精读。</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:50</span>
+    <span title="Reading time total">15:51</span>
   </span>
 </div>
 <div class="busuanzi-count">
