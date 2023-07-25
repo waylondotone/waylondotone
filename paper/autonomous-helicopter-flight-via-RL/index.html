@@ -40,8 +40,8 @@
 <meta property="article:modified_time" content="2023-05-19T12:12:32.165Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="Weekly Blogs">
-<meta property="article:tag" content="paper">
 <meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="paper">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.waylon.one/downloads/images/blog/Yamaha_R-50_helicopter.png">
 
@@ -152,10 +152,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#autonomous-helicopter"><span class="nav-number">3.</span> <span class="nav-text">Autonomous Helicopter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87"><span class="nav-number">3.1.</span> <span class="nav-text">硬件设备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#model-identification"><span class="nav-number">4.</span> <span class="nav-text">Model identification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fit-the-helicopters-dynamics-model"><span class="nav-number">4.1.</span> <span class="nav-text">Fit the helicopter’s
-dynamics model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#locally-weighted-linear-regression-%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">4.1.1.</span> <span class="nav-text">Locally
-weighted linear regression (局部加权线性回归)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reinforcement-learning-the-pegasus-algorithm"><span class="nav-number">5.</span> <span class="nav-text">Reinforcement
-learning: The PEGASUS algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9pegasus%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">对 PEGASUS 的描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#learning-to-hover"><span class="nav-number">6.</span> <span class="nav-text">Learning to Hover</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#flying-competition-maneuvers"><span class="nav-number">7.</span> <span class="nav-text">Flying competition maneuvers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">8.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Autonomous Helicopter</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87"><span class="nav-number">3.1.</span> <span class="nav-text">硬件设备</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Model identification</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fit-the-helicopter%E2%80%99s-dynamics-model"><span class="nav-number">4.1.</span> <span class="nav-text">Fit the helicopter’s dynamics model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Locally-weighted-linear-regression-%E5%B1%80%E9%83%A8%E5%8A%A0%E6%9D%83%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">4.1.1.</span> <span class="nav-text">Locally weighted linear regression (局部加权线性回归)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Reinforcement learning: The PEGASUS algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9PEGASUS%E7%9A%84%E6%8F%8F%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">对 PEGASUS 的描述</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">Learning to Hover</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">Flying competition maneuvers</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -316,30 +313,31 @@ learning: The PEGASUS algorithm</span></a><ol class="nav-child"><li class="nav-i
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p>Autonomous Helicopter Flight via Reinforcement Learning</p>
-<p><a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~jordan/papers/ng-etal03.pdf">Paper
-download link</a></p>
+<p><a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~jordan/papers/ng-etal03.pdf">Paper download link</a></p>
 <p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/autonomous-helicopter-flight-via-RL/">个人网站</a>，请移步阅读最新内容。</p>
 <!--
 - 先给出结论，然后举个例子，方便读者理解。这是一种好的写作方法，可以借鉴下。
 
 -->
-<h1 id="abstract">Abstract</h1>
-<p>直升机飞行被普遍认为是一个具有挑战性的控制问题。作者在本文中描述了强化学习在自动直升机飞行控制器设计上的成功应用：本文首先拟合了一个随机、非线性的直升机动态模型，然后使用该模型去学习如何定点悬浮 (hover
-in place)，以及如何飞出 RC 直升机竞赛的复杂行为 (maneuvers)。 &gt; In this
-paper, we describe the successful application of reinforcement learning
-to designing a controller for autonomous helicopter flight.</p>
+<h1>Abstract</h1>
+<p>直升机飞行被普遍认为是一个具有挑战性的控制问题。作者在本文中描述了强化学习在自动直升机飞行控制器设计上的成功应用：本文首先拟合了一个随机、非线性的直升机动态模型，然后使用该模型去学习如何定点悬浮 (hover in place)，以及如何飞出 RC 直升机竞赛的复杂行为 (maneuvers)。</p>
 <blockquote>
-<p>CM (Comment):
-博客着重分析直升机模型建立，以及基于模型的控制策略学习。</p>
+<p>In this paper, we describe the successful application of reinforcement learning to designing a controller for autonomous helicopter flight.</p>
 </blockquote>
-<h1 id="introduction">INTRODUCTION</h1>
+<blockquote>
+<p>CM (Comment): 博客着重分析直升机模型建立，以及基于模型的控制策略学习。</p>
+</blockquote>
+<h1>INTRODUCTION</h1>
 <ul>
-<li><p>直升机悬停的难度，旋翼顺时针转动，直升机底盘会逆时针旋转；引入尾部旋翼来克服底盘的转动，但同时带来了漂移 (drift) 的问题。所以，直升机悬停时，一般是机体向右倾斜。
-&gt; So, for a helicopter to hover in place, it must actually be tilted
-slightly to the right, so that the main rotor’s thrust is directed
-downwards and slightly to the left, to counteract this tendency to drift
-sideways.</p></li>
-<li><p> 对于没有较多直升机控制知识的同学，建议先观看一个讲解直升机飞行原理和控制策略的科普视频，复习一下牛顿三大定律在直升机控制上的应用，否则后面的控制学习不容易理解。</p></li>
+<li>
+<p>直升机悬停的难度，旋翼顺时针转动，直升机底盘会逆时针旋转；引入尾部旋翼来克服底盘的转动，但同时带来了漂移 (drift) 的问题。所以，直升机悬停时，一般是机体向右倾斜。</p>
+<blockquote>
+<p>So, for a helicopter to hover in place, it must actually be tilted slightly to the right, so that the main rotor’s thrust is directed downwards and slightly to the left, to counteract this tendency to drift sideways.</p>
+</blockquote>
+</li>
+<li>
+<p>对于没有较多直升机控制知识的同学，建议先观看一个讲解直升机飞行原理和控制策略的科普视频，复习一下牛顿三大定律在直升机控制上的应用，否则后面的控制学习不容易理解。</p>
+</li>
 </ul>
 <!--
 [牛顿力学三大定律](http://gaozhongwuli.com/zt/niudun/480447.html)
@@ -362,11 +360,9 @@ sideways.</p></li>
   * [link](https://zh.wikipedia.org/wiki/%E9%80%B2%E5%8B%95)
 -->
 <ul>
-<li>看完视频后，相比可以看到直升机设计精巧 (ingenious
-solutions)，然而不直观的直升机动力学 (nonintuitive
-dynamics) 使得直升机的控制具有难度。</li>
+<li>看完视频后，相比可以看到直升机设计精巧 (ingenious solutions)，然而不直观的直升机动力学 (nonintuitive dynamics) 使得直升机的控制具有难度。</li>
 </ul>
-<h1 id="autonomous-helicopter">Autonomous Helicopter</h1>
+<h1>Autonomous Helicopter</h1>
 <h2 id="硬件设备">硬件设备</h2>
 <ul>
 <li>Yamaha R-50 helicopter (长 3.6m，载重 20kg)
@@ -375,116 +371,107 @@ dynamics) 使得直升机的控制具有难度。</li>
 <li>a differential GPS system (a resolution of 2cm)</li>
 <li>a digital compass</li>
 <li>an onboard navigation computer</li>
-</ul></li>
 </ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Yamaha_R-50_helicopter.png"></p>
-<ul>
-<li> 最后，基于卡尔曼滤波 (the position estimates given by the Kalman
-filte)，上述硬件以 50Hz 对外输出直升机的状态估计 (数字量)：位置 (position)，方向 (orientation)，速度 (velocity) 和角速度 (angular
-velocities)。</li>
+</li>
 </ul>
-<p>基于上述视频容易理解，大多数直升机是通过 4 维的运动空间 (4-dimensional
-action space) 来实现飞行控制的：桨旋转平台的前后左右的倾斜 (tilting this
-plane either forwards/backwards or
-sideways)，主螺旋桨角度的变化，机翼螺旋桨角度的变化。</p>
-<ol type="1">
-<li>Cyclic pitch: The longtitudinal (front-back) and latitudinal
-(left-right) cyclic pitch controls. By tilting this plane (the
-helicopter’s rotors rotate) either forwards/backwards or sideways, these
-controls cause the helicopter to accelerate forward/backwards or
-sideways.</li>
-</ol>
-<p><img width="467" height="263" data-src="http://www.waylon.one/downloads/images/blog/cyclic_pitch.jpg"></p>
-<ol start="2" type="1">
-<li>Collective pitch: The (main rotor) collective pitch control. By
-varying the tilt angle ofthe rotor blades, the collective pitch control
-affects the main rotor’s thrust.</li>
-</ol>
-<p><img width="467" height="263" data-src="http://www.waylon.one/downloads/images/blog/collective_pitch.jpg"></p>
-<ol start="3" type="1">
-<li>Yaw motion: The tail rotor collective pitch control. Using a
-mechanism similar to the main rotor collective pitch control, this
-controls the tail rotor’s thrust.</li>
-</ol>
-<p><img width="467" height="263" data-src="http://www.waylon.one/downloads/images/blog/yaw_motion.jpg"></p>
-<p>综上，本文的任务就是基于卡尔曼滤波的位置估计，周期 (50Hz) 挑选好的控制行为 (pick
-good control actions)。 &gt; Using the position estimates given by the
-Kalman filter, our task is to pick good control actions every 50th of a
-second.</p>
-<h1 id="model-identification">Model identification</h1>
-<h2 id="fit-the-helicopters-dynamics-model">Fit the helicopter’s
-dynamics model</h2>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Yamaha_R-50_helicopter.png" alt=""></p>
 <ul>
-<li><p>数据输入：记录人类驾驶员操作直升机的数据 (12-dimensional
-helicopter state &amp; 4-dimensional helicopter control
-inputs)，使用这些飞行数据进行模型拟合 (model fittin)。 &gt; We began by
-asking a human pilot to fly the helicopter for several minutes, and
-recorded the 12-dimensional helicopter state and 4-dimensional
-helicopter control inputs as it was flown.</p></li>
-<li><p> 使用机体坐标系 (helicopter body coordinates)，可以减少参数辨识量。
-&gt; in which the x, y, and z axes are forwards, sideways, and down
-relative to the current position of the helicopter.</p>
-<blockquote>
-<p>Our model is identified in the body coordinates, which has four fewer
-variables than the spatial (world) coordinates.</p>
-</blockquote></li>
+<li> 最后，基于卡尔曼滤波 (the position estimates given by the Kalman filte)，上述硬件以 50Hz 对外输出直升机的状态估计 (数字量)：位置 (position)，方向 (orientation)，速度 (velocity) 和角速度 (angular velocities)。</li>
 </ul>
-<h3 id="locally-weighted-linear-regression-局部加权线性回归">Locally
-weighted linear regression (局部加权线性回归)</h3>
+<p>基于上述视频容易理解，大多数直升机是通过 4 维的运动空间 (4-dimensional action space) 来实现飞行控制的：桨旋转平台的前后左右的倾斜 (tilting this plane either forwards/backwards or sideways)，主螺旋桨角度的变化，机翼螺旋桨角度的变化。</p>
+<ol>
+<li>Cyclic pitch: The longtitudinal (front-back) and latitudinal (left-right) cyclic pitch controls. By tilting this plane (the helicopter’s rotors rotate) either forwards/backwards or sideways, these controls cause the helicopter to accelerate forward/backwards or sideways.</li>
+</ol>
+<img width="467" height="263" data-src="http://www.waylon.one/downloads/images/blog/cyclic_pitch.jpg">
+<ol start="2">
+<li>Collective pitch: The (main rotor) collective pitch control. By varying the tilt angle ofthe rotor blades, the collective pitch control affects the main rotor’s thrust.</li>
+</ol>
+<img width="467" height="263" data-src="http://www.waylon.one/downloads/images/blog/collective_pitch.jpg">
+<ol start="3">
+<li>Yaw motion: The tail rotor collective pitch control. Using a mechanism similar to the main rotor collective pitch control, this controls the tail rotor’s thrust.</li>
+</ol>
+<img width="467" height="263" data-src="http://www.waylon.one/downloads/images/blog/yaw_motion.jpg">
+<p>综上，本文的任务就是基于卡尔曼滤波的位置估计，周期 (50Hz) 挑选好的控制行为 (pick good control actions)。</p>
+<blockquote>
+<p>Using the position estimates given by the Kalman filter, our task is to pick good control actions every 50th of a second.</p>
+</blockquote>
+<h1>Model identification</h1>
+<h2 id="Fit-the-helicopter’s-dynamics-model">Fit the helicopter’s dynamics model</h2>
 <ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/czdbest/p/5767138.html">局部加权线性回归知识</a></p></li>
-<li><p> s(t+1) = f(s(t), a(t), noise)<br>
-&gt; By applying locally-weighted regression with the state s(t) and
-action a(t) as inputs, and the one-step differences of each of the state
-variables in turn as the target output, this gives us a non-linear,
-stochastic, model ofthe dynamics, allowing us to predict s(t+1) as a
-function of s(t) and a(t) plus noise.</p></li>
-<li><p> 此外，和直升机的先验知识结合，提出优化模型的一些策略方法，减少拟合的参数量。
-&gt; Similar to the use of body coordinates to exploit symmetries, there
-is other prior knowledge that can be incorporated.</p>
+<li>
+<p>数据输入：记录人类驾驶员操作直升机的数据 (12-dimensional helicopter state &amp; 4-dimensional helicopter control inputs)，使用这些飞行数据进行模型拟合 (model fittin)。</p>
 <blockquote>
-<p>Similar reasoning allows us to conclude that certain other parameters
-should be 0， 1/50(50Hz) or g(gravity), and these were also
-<strong>hard-coded</strong> into the model.</p>
-</blockquote></li>
-<li><p>加入三个不可观测的参数 (unobserved
-variables) 来描述模型在控制上的延迟 (model latencies)。</p>
+<p>We began by asking a human pilot to fly the helicopter for several minutes, and recorded the 12-dimensional helicopter state and 4-dimensional helicopter control inputs as it was flown.</p>
+</blockquote>
+</li>
+<li>
+<p>使用机体坐标系 (helicopter body coordinates)，可以减少参数辨识量。</p>
 <blockquote>
-<p>Finally, we added three extra (unobserved) variables to model
-latencies in the responses to the controls.</p>
-</blockquote></li>
-<li><p>通过图片 (plots) 将长时间段的均方差显示出来的交互方式，更容易看出差异和比较来选择模型，观察模型在长时间段内的拟合准确程度。
-&gt; Our main tool for choosing among the models was plots.</p>
-<blockquote>
-<p>查看在一段时间内 (at longer time scales) 的预测位置 (estimated
-position) 和真实位置 (true position) 的均方差 (mean-squared error)。</p>
+<p>in which the x, y, and z axes are forwards, sideways, and down relative to the current position of the helicopter.</p>
 </blockquote>
 <blockquote>
-<p>For a model, the mean-squared error (as measured on test data)
-between the helicopter’s true position and the estimated position at a
-certain time in the future.</p>
-</blockquote></li>
-<li><p>建立好模型的意义，增强后期在真实环境下的可靠性。 &gt; We wanted
-to verify the fitted model carefully, so as to be reasonably confident
-that a controller tested successfully in simulation will also be safe in
-real life.</p>
+<p>Our model is identified in the body coordinates, which has four fewer variables than the spatial (world) coordinates.</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="Locally-weighted-linear-regression-局部加权线性回归">Locally weighted linear regression (局部加权线性回归)</h3>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/czdbest/p/5767138.html">局部加权线性回归知识</a></p>
+</li>
+<li>
+<p>s(t+1) = f(s(t), a(t), noise)</p>
+<blockquote>
+<p>By applying locally-weighted regression with the state s(t) and action a(t) as inputs, and the one-step differences of each of the state variables in turn as the target output, this gives us a non-linear, stochastic, model ofthe dynamics, allowing us to predict s(t+1) as a function of s(t) and a(t) plus noise.</p>
+</blockquote>
+</li>
+<li>
+<p>此外，和直升机的先验知识结合，提出优化模型的一些策略方法，减少拟合的参数量。</p>
+<blockquote>
+<p>Similar to the use of body coordinates to exploit symmetries, there is other prior knowledge that can be incorporated.</p>
+</blockquote>
+<blockquote>
+<p>Similar reasoning allows us to conclude that certain other parameters should be 0， 1/50(50Hz) or g(gravity), and these were also <strong>hard-coded</strong> into the model.</p>
+</blockquote>
+</li>
+<li>
+<p>加入三个不可观测的参数 (unobserved variables) 来描述模型在控制上的延迟 (model latencies)。</p>
+<blockquote>
+<p>Finally, we added three extra (unobserved) variables to model latencies in the responses to the controls.</p>
+</blockquote>
+</li>
+<li>
+<p>通过图片 (plots) 将长时间段的均方差显示出来的交互方式，更容易看出差异和比较来选择模型，观察模型在长时间段内的拟合准确程度。</p>
+<blockquote>
+<p>Our main tool for choosing among the models was plots.</p>
+</blockquote>
+<blockquote>
+<p>查看在一段时间内 (at longer time scales) 的预测位置 (estimated position) 和真实位置 (true position) 的均方差 (mean-squared error)。</p>
+</blockquote>
+<blockquote>
+<p>For a model, the mean-squared error (as measured on test data) between the helicopter’s true position and the estimated position at a certain time in the future.</p>
+</blockquote>
+</li>
+<li>
+<p>建立好模型的意义，增强后期在真实环境下的可靠性。</p>
+<blockquote>
+<p>We wanted to verify the fitted model carefully, so as to be reasonably confident that a controller tested successfully in simulation will also be safe in real life.</p>
+</blockquote>
 <blockquote>
 <p>对没有建模的噪声输入，担心噪声超出模型的预测。为次，通过图片检查 (plots) 直升机的预测输出是否超出误差阈值。</p>
 </blockquote>
 <blockquote>
-<p>One of our concerns was the possibility that unmodeled correlations
-in noise might mean the noise variance of the actual dynamics is much
-larger than predicted by the model.</p>
-</blockquote></li>
+<p>One of our concerns was the possibility that unmodeled correlations in noise might mean the noise variance of the actual dynamics is much larger than predicted by the model.</p>
+</blockquote>
+</li>
 </ul>
-<h1 id="reinforcement-learning-the-pegasus-algorithm">Reinforcement
-learning: The PEGASUS algorithm</h1>
-<h2 id="对pegasus的描述">对 PEGASUS 的描述</h2>
-<p><img width="628" height="140" data-src="http://www.waylon.one/downloads/images/blog/PEGASUS.jpg"></p>
+<h1>Reinforcement learning: The PEGASUS algorithm</h1>
+<h2 id="对PEGASUS的描述">对 PEGASUS 的描述</h2>
+<img width="628" height="140" data-src="http://www.waylon.one/downloads/images/blog/PEGASUS.jpg">
 <ul>
 <li>这些使用程序很难精确计算，但是可以借助于计算机来仿真 MDP 的动力学。</li>
 </ul>
-<p><img width="631" height="120" data-src="http://www.waylon.one/downloads/images/blog/PEGASUS_calculate.jpg"></p>
+<img width="631" height="120" data-src="http://www.waylon.one/downloads/images/blog/PEGASUS_calculate.jpg">
 <!--
 - 看似简单的PEGASUS算法，实则是一个困难的随机优化问题。
 
@@ -492,16 +479,15 @@ CM: 为何会有这样的论断，自己却不是很清楚，看来对深度学�
 
 > This is a difficult stochastic optimization problem.
 -->
-<p><img width="631" height="108" data-src="http://www.waylon.one/downloads/images/blog/good_estimate_of_U.jpg"></p>
-<h1 id="learning-to-hover">Learning to Hover</h1>
+<img width="631" height="108" data-src="http://www.waylon.one/downloads/images/blog/good_estimate_of_U.jpg">
+<h1>Learning to Hover</h1>
 <ul>
-<li><p>以其他控制器尝试为例 (μ-synthesis)，来说明问题的难度和微妙</p>
+<li>
+<p>以其他控制器尝试为例 (μ-synthesis)，来说明问题的难度和微妙</p>
 <blockquote>
-<p>These comments should not be taken as conclusive of the viability of
-any of these methods; rather, we take them to be indicative of the
-difficulty and subtlety involved in learning a helicopter
-controller.</p>
-</blockquote></li>
+<p>These comments should not be taken as conclusive of the viability of any of these methods; rather, we take them to be indicative of the difficulty and subtlety involved in learning a helicopter controller.</p>
+</blockquote>
+</li>
 </ul>
 <!--
 自己的眼光局限，限制了对Matlab的理解，原来matlab有很多的tools，避免重复造轮子的麻烦
@@ -517,47 +503,54 @@ controller.</p>
 尊重每一个学科，存在是有必要性的，只不过必要性现在没有体现出来而已。如果自己不是读文献，不是准备读博士，怎么会发现世界的奇妙呢？困在自己的一点认知中，妄自尊大才可怕。
 -->
 <ul>
-<li><p>从直升机悬停开始学习策略。 &gt; We began by learning a policy for
-hovering in place.</p>
-<ul>
-<li><p>直升机悬停控制的神经网络设计<br>
-<img data-src="http://www.waylon.one/downloads/images/blog/RL_helicopter_policy_class.jpg"></p>
+<li>
+<p>从直升机悬停开始学习策略。</p>
 <blockquote>
-<p>The picture inside the circles indicate whether a node outputs the
-sum of their inputs, or the tanh of the sum of their inputs. Each edge
-with an arrow in the picture denotes a tunable parameter. The solid
-lines show the hovering policy class. The dashed lines show the extra
-weights added for trajectory following.</p>
+<p>We began by learning a policy for hovering in place.</p>
+</blockquote>
+<ul>
+<li>
+<p>直升机悬停控制的神经网络设计<br>
+<img data-src="http://www.waylon.one/downloads/images/blog/RL_helicopter_policy_class.jpg" alt=""></p>
+<blockquote>
+<p>The picture inside the circles indicate whether a node outputs the sum of their inputs, or the tanh of the sum of their inputs. Each edge with an arrow in the picture denotes a tunable parameter. The solid lines show the hovering policy class. The dashed lines show the extra weights added for trajectory following.</p>
 </blockquote>
 <ul>
 <li>很明显，需要具备直升机控制的理论和实践知识。</li>
 </ul>
 <blockquote>
-<p>Each of the edges in the figure represents a weight, and <strong>the
-connections were chosen via simple reasoning about which control channel
-should be used to control which state variables</strong>.</p>
-</blockquote></li>
-</ul></li>
-<li><p>结合具体的问题和目标，设计奖励函数和惩罚函数，这是需要除计算机知识和强化学习知识外的专业知识和实践经验。</p>
+<p>Each of the edges in the figure represents a weight, and <strong>the connections were chosen via simple reasoning about which control channel should be used to control which state variables</strong>.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>结合具体的问题和目标，设计奖励函数和惩罚函数，这是需要除计算机知识和强化学习知识外的专业知识和实践经验。</p>
 <ul>
-<li>二阶奖励函数 (靠近目标点 + 速度变化慢) &gt; This encourages the
-helicopter to hover near target position, while also keeping the
-velocity small and not making abrupt movements.</li>
-<li> 二阶惩罚函数 (鼓励平滑控制和小行动) &gt; To encourage small actions
-and smooth control of the helicopter, we also used a quadratic penalty
-for actions.</li>
-</ul></li>
-<li><p> 基于辨识的模型 (model
-identified)，使用 PEGASUS 算法来获得实用策略 (the utilities of
-policies) 的近似值 <span class="math inline">\(\[\hat{U}(\pi)\]\)</span>。 &gt; Using the model
-identified, we can now apply PEGASUS to define approximations <span class="math inline">\(\[\hat{U}(\pi)\]\)</span> to the utilities of
-policies.</p></li>
-<li><p> 策略和动态特性的可连续和平滑性。</p>
+<li>二阶奖励函数 (靠近目标点 + 速度变化慢)
 <blockquote>
-<p>Since policies are smoothly parameterized in the weights, and the
-dynamics are themselves continuous in the actions, the estimates of
-utilities are also continuous in the weights.</p>
-</blockquote></li>
+<p>This encourages the helicopter to hover near target position, while also keeping the velocity small and not making abrupt movements.</p>
+</blockquote>
+</li>
+<li>二阶惩罚函数 (鼓励平滑控制和小行动)
+<blockquote>
+<p>To encourage small actions and smooth control of the helicopter, we also used a quadratic penalty for actions.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>基于辨识的模型 (model identified)，使用 PEGASUS 算法来获得实用策略 (the utilities of policies) 的近似值 $[\hat {U}(\pi)]$。</p>
+<blockquote>
+<p>Using the model identified, we can now apply PEGASUS to define approximations $[\hat{U}(\pi)]$ to the utilities of policies.</p>
+</blockquote>
+</li>
+<li>
+<p>策略和动态特性的可连续和平滑性。</p>
+<blockquote>
+<p>Since policies are smoothly parameterized in the weights, and the dynamics are themselves continuous in the actions, the estimates of utilities are also continuous in the weights.</p>
+</blockquote>
+</li>
 </ul>
 <!--
   * 作者在脚注中，非常严谨地作出说明，因为计算的数值精度，可能导致策略的不连续性。严谨的做学问态度，让自己自愧不如。
@@ -565,41 +558,38 @@ utilities are also continuous in the weights.</p>
 一篇好的实用论文，绝对不是因为弄虚作假而被人喜爱，如果自己辛苦的实现，仅仅是一堆废纸，弄虚作假浪费别人的时间，价值无法被肯定，那么写来有何用。乾隆的诗词万篇，最后流传被人喜爱的又有几篇呢？
 -->
 <ul>
-<li><p>求取策略的权重时，应用爬山算法来最大化<span class="math inline"> \(\[\hat{U}(\pi)\]\)</span>，其中使用梯度上升 (gradient
-ascent algorithm) 和随机游走 (random-walk algorithm) 两种算法，来最大化策略
-<span class="math inline">\(\[\pi\]\)</span>。 &gt; We may thus apply
-standard hillclimbing algorithms to maximize <span class="math inline">\(\[\hat{U}(\pi)\]\)</span> in terms of the policy’s
-weights.</p></li>
-<li><p> 在策略学习中，最消耗资源的是重复加速蒙特卡罗评价 (Monte Carlo
-evaluation) 来获得策略，文章提出使用并行计算 (parallelized our
-implementation) 来加速蒙特卡罗评价的训练。</p>
+<li>
+<p>求取策略的权重时，应用爬山算法来最大化 $[\hat {U}(\pi)]$，其中使用梯度上升 (gradient ascent algorithm) 和随机游走 (random-walk algorithm) 两种算法，来最大化策略 $[\pi]$。</p>
+<blockquote>
+<p>We may thus apply standard hillclimbing algorithms to maximize $[\hat{U}(\pi)]$ in terms of the policy’s weights.</p>
+</blockquote>
+</li>
+<li>
+<p>在策略学习中，最消耗资源的是重复加速蒙特卡罗评价 (Monte Carlo evaluation) 来获得策略，文章提出使用并行计算 (parallelized our implementation) 来加速蒙特卡罗评价的训练。</p>
 <ul>
 <li>在不同的计算机使用不同的样本来计算；</li>
-<li>然后聚合训练结果，获得策略 <span class="math inline">\(\[\hat{U}(\pi)\]\)</span>。</li>
+<li>然后聚合训练结果，获得策略 $[\hat {U}(\pi)]$。</li>
 </ul>
 <blockquote>
-<p>The most expensive step in policy search was the repeated Monte Carlo
-evaluation to obtain <span class="math inline">\(\[\hat{U}(\pi)\]\)</span>. To speed this up, we
-parallelized our implementation, and Monte Carlo evaluations using
-different samples were run on different computers, and the results were
-then aggregated to obtain <span class="math inline">\(\[\hat{U}(\pi)\]\)</span>.</p>
-</blockquote></li>
-<li><p>如何评价控制策略的表现：文章比较基于学习的策略和人类驾驶员的性能表现，来证明算法的稳定性。
-&gt; We also compare the performance of our learned policy against that
-of our human pilot trained and licensed by Yamaha to fly the R-50
-helicopter.</p></li>
-</ul>
-<h1 id="flying-competition-maneuvers">Flying competition maneuvers</h1>
-<ul>
-<li><p>作者参加了 AMA (the Academy of Model
-Aeronautics) 组织的直升机飞行挑战 (an annual RC helicopter
-competition)，挑战极具难度的 3 个行为，比如如下图所示的 pirouette (turning
-in place)。</p>
-<blockquote>
-<p>We took the first three maneuvers from the most challenging, Class
-III, segment of their competition.</p>
+<p>The most expensive step in policy search was the repeated Monte Carlo evaluation to obtain $[\hat{U}(\pi)]$. To speed this up, we parallelized our implementation, and Monte Carlo evaluations using different samples were run on different computers, and the results were then aggregated to obtain $[\hat{U}(\pi)]$.</p>
 </blockquote>
-<p><img width="300" height="300" data-src="https://thumbs.dreamstime.com/b/colorful-dancer-pirouette-fifth-position-vector-illustration-79727401.jpg"></p></li>
+</li>
+<li>
+<p>如何评价控制策略的表现：文章比较基于学习的策略和人类驾驶员的性能表现，来证明算法的稳定性。</p>
+<blockquote>
+<p>We also compare the performance of our learned policy against that of our human pilot trained and licensed by Yamaha to fly the R-50 helicopter.</p>
+</blockquote>
+</li>
+</ul>
+<h1>Flying competition maneuvers</h1>
+<ul>
+<li>
+<p>作者参加了 AMA (the Academy of Model Aeronautics) 组织的直升机飞行挑战 (an annual RC helicopter competition)，挑战极具难度的 3 个行为，比如如下图所示的 pirouette (turning in place)。</p>
+<blockquote>
+<p>We took the first three maneuvers from the most challenging, Class III, segment of their competition.</p>
+</blockquote>
+<img width="300" height="300" data-src="https://thumbs.dreamstime.com/b/colorful-dancer-pirouette-fifth-position-vector-illustration-79727401.jpg">
+</li>
 </ul>
 <!--
 貌似搞学术，也是可以参加一些竞赛的，验证自己的水平，为自己的研究打call!
@@ -607,77 +597,78 @@ III, segment of their competition.</p>
 读论文，居然可以学习到芭蕾的一个概念，单脚尖旋转，看起来很酷。
 -->
 <ul>
-<li><p>文章目前只是学习了如何悬停 (hover)，那么如何能够沿着轨迹飞行呢？作者给出的一种做法是让直升机沿着特定的轨迹点，慢慢变化状态，控制策略和悬停基本一致。</p>
+<li>
+<p>文章目前只是学习了如何悬停 (hover)，那么如何能够沿着轨迹飞行呢？作者给出的一种做法是让直升机沿着特定的轨迹点，慢慢变化状态，控制策略和悬停基本一致。</p>
 <blockquote>
-<p>How does one design a controller for flying trajectories? Given a
-controller for keeping a system’s state at a point, one standard way to
-make the system move through a particular trajectory is to slowly vary
-along a sequence of set points on that trajectory.</p>
-</blockquote></li>
-<li><p>另一种做法，重新训练参数来准确跟踪轨迹 &gt; Retrain the policy’s
-parameters for accurate trajectory following.</p>
+<p>How does one design a controller for flying trajectories? Given a controller for keeping a system’s state at a point, one standard way to make the system move through a particular trajectory is to slowly vary along a sequence of set points on that trajectory.</p>
+</blockquote>
+</li>
+<li>
+<p>另一种做法，重新训练参数来准确跟踪轨迹</p>
+<blockquote>
+<p>Retrain the policy’s parameters for accurate trajectory following.</p>
+</blockquote>
 <ul>
-<li><p>trajectory following vs trajectory tracking</p>
+<li>
+<p>trajectory following vs trajectory tracking</p>
 <blockquote>
-<p>Path/Trajectory following is all about following a predefined path
-which does not involve time as a constraint. Thus, if you are on the
-path and following it with whatever speed you have reached your goal. On
-the contrary, trajectory tracking involves time as a constraint. Meaning
-that you have to be at a certain point at a certain time.</p>
-</blockquote></li>
-<li><p>基于直升机的理论机制，优化网络模型。</p>
-<blockquote>
-<p>Since we are now flying trajectories and not only hovering, we also
-augmented the policy class to take into account more of the coupling
-between the helicopter’s different sub-dynamics. /
-比如旋转时，尾翼控制会带来漂移；上升下降控制时，带来旋转的影响，这一部分在最开始的视频中有讲到。</p>
-</blockquote></li>
-<li><p>设计 (specify) 轨迹跟踪 (trajectory following) 时的奖励函数。</p>
+<p>Path/Trajectory following is all about following a predefined path which does not involve time as a constraint. Thus, if you are on the path and following it with whatever speed you have reached your goal. On the contrary, trajectory tracking involves time as a constraint. Meaning that you have to be at a certain point at a certain time.</p>
+</blockquote>
+</li>
+</ul>
 <ul>
-<li><p>贴近轨迹 (penalize
-deviation)：惩罚位置的偏差，计算直升机当前位置和其投影到理想轨迹的位置偏差。</p>
+<li>
+<p>基于直升机的理论机制，优化网络模型。</p>
 <blockquote>
-<p>“tracked” position: the “projection” of the helicopter’s position
-onto the path of the idealized, desired trajectory.</p>
+<p>Since we are now flying trajectories and not only hovering, we also augmented the policy class to take into account more of the coupling between the helicopter’s different sub-dynamics. / 比如旋转时，尾翼控制会带来漂移；上升下降控制时，带来旋转的影响，这一部分在最开始的视频中有讲到。</p>
+</blockquote>
+</li>
+<li>
+<p>设计 (specify) 轨迹跟踪 (trajectory following) 时的奖励函数。</p>
+<ul>
+<li>
+<p>贴近轨迹 (penalize deviation)：惩罚位置的偏差，计算直升机当前位置和其投影到理想轨迹的位置偏差。</p>
+<blockquote>
+<p>“tracked” position: the “projection” of the helicopter’s position onto the path of the idealized, desired trajectory.</p>
 </blockquote>
 <blockquote>
-<p>the learning algorithm pays a penalty that is quadratic between the
-actual position and the “tracked” position on the idealized
-trajectory.</p>
-</blockquote></li>
-<li><p>前进奖励 (making progress)：使用沿着轨迹增加的势函数 (potential
-function)，如果直升机前进，那么可以获得正奖励 (positive reward)。</p>
+<p>the learning algorithm pays a penalty that is quadratic between the actual position and the “tracked” position on the idealized trajectory.</p>
+</blockquote>
+</li>
+<li>
+<p>前进奖励 (making progress)：使用沿着轨迹增加的势函数 (potential function)，如果直升机前进，那么可以获得正奖励 (positive reward)。</p>
 <blockquote>
-<p>Since, we are already tracking where along the desired trajectory the
-helicopter is, we chose a potential function that increases along the
-trajectory. Thus, whenever the helicopter’s makes forward progress along
-this trajectory, it receives positive reward.</p>
-</blockquote></li>
-<li><p>定义解耦 (decouple our definition) &gt; Finally, our modifications
-have decoupled our definition of the reward function from (x<em>,
-y</em>, z<em>, w</em>) and the evolution of (x<em>, y</em>, z<em>,
-w</em>) in time.</p>
+<p>Since, we are already tracking where along the desired trajectory the helicopter is, we chose a potential function that increases along the trajectory. Thus, whenever the helicopter’s makes forward progress along this trajectory, it receives positive reward.</p>
+</blockquote>
+</li>
+<li>
+<p>定义解耦 (decouple our definition)</p>
+<blockquote>
+<p>Finally, our modifications have decoupled our definition of the reward function from (x*, y*, z*, w*) and the evolution of (x*, y*, z*, w*) in time.</p>
+</blockquote>
 <ul>
-<li>(x<em>, y</em>, z<em>, w</em>) represents a desired hovering
-position and orientation.</li>
+<li>(x*, y*, z*, w*) represents a desired hovering position and orientation.</li>
 </ul>
 <blockquote>
-<p>We considered several alternatives, but the main one used ended up
-being a modification for flying trajectories that have both a vertical
-and a horizontal component (such as along the two upper edges of the
-triangle in III.1).</p>
-</blockquote></li>
-<li><p>模型控制需要根据实际测试，人为干预，不断调整，而不是一劳永逸，比如在 z 方向上人为加入时延，来避免 “bowed-out” 或者 “bowed-in” 轨迹。
-&gt; the z (vertical)-response of the helicopter is very fast. In
-contrast, the x and y responses are much slower.</p></li>
-</ul></li>
-</ul></li>
+<p>We considered several alternatives, but the main one used ended up being a modification for flying trajectories that have both a vertical and a horizontal component (such as along the two upper edges of the triangle in III.1).</p>
+</blockquote>
+</li>
+<li>
+<p>模型控制需要根据实际测试，人为干预，不断调整，而不是一劳永逸，比如在 z 方向上人为加入时延，来避免 “bowed-out” 或者 “bowed-in” 轨迹。</p>
+<blockquote>
+<p>the z (vertical)-response of the helicopter is very fast. In contrast, the x and y responses are much slower.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
 <iframe src="//player.bilibili.com/player.html?aid=242991298&amp;bvid=BV19e411s7Ho&amp;cid=183111788&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>
 
-<h1 id="references">References</h1>
+<h1>References</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u013181595/article/details/86563414">吴恩达直升机控制系列论文笔记</a></li>
 <li><a target="_blank" rel="noopener" href="http://heli.stanford.edu/">吴恩达的链接</a></li>
@@ -692,8 +683,8 @@ contrast, the x and y responses are much slower.</p></li>
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
-              <a href="/tags/paper/" rel="tag"># paper</a>
               <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+              <a href="/tags/paper/" rel="tag"># paper</a>
           </div>
 
         
