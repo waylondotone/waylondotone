@@ -144,7 +144,10 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Hexo 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">NextCloud 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">邮件服务器配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">更新  letsencrypt 证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Hexo 提示 “TypeError [ERR_INVALID_ARG_TYPE]: The “path” argument must be of type string ” 解决办法</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">Hexo 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#nextcloud-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">NextCloud 配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">邮件服务器配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0-letsencrypt-%E8%AF%81%E4%B9%A6"><span class="nav-number">4.</span> <span class="nav-text">更新
+ letsencrypt 证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hexo-%E6%8F%90%E7%A4%BA-typeerrorerr_invalid_arg_type-the-path-argument-must-be-of-type-string-%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">5.</span> <span class="nav-text">Hexo
+提示 “TypeError [ERR_INVALID_ARG_TYPE]: The &quot;path&quot; argument must be of
+type string ” 解决办法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -319,10 +322,14 @@
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/Website-FAQ/">个人网站</a>，请移步阅读最新内容。</p>
-<h1>Hexo 配置</h1>
+<h1 id="hexo-配置">Hexo 配置</h1>
 <ul>
-<li>Q: 如何修改 <strong>hexo d</strong> 命令的端口</li>
-<li> A: 如果服务器 / VPS 的 SSH 端口不是默认的<font color="green"> 22</font>，那么需要对本地 <font color="green">_config.yml</font> 文件的 <font color="green">deploy</font> 字段，做如下修改：</li>
+<li>Q: 如何修改 <strong>hexo d</strong> 命令的端口<br>
+</li>
+<li>A:
+如果服务器 / VPS 的 SSH 端口不是默认的<font color="green"> 22</font>，那么需要对本地
+<font color="green">_config.yml</font> 文件的
+<font color="green">deploy</font> 字段，做如下修改：</li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  message: update</span><br><span class="line">  repo: ssh://username@ip:<span class="tag">&lt;<span class="name">your-port</span>&gt;</span>/path_to_remote_git</span><br><span class="line">  branch: master</span><br></pre></td></tr></tbody></table></figure>
 <!--
@@ -330,50 +337,55 @@
 -->
 <ul>
 <li>Q: Next 主题 busuanzi_count 访客统计失效</li>
-<li> A: <a target="_blank" rel="noopener" href="http://ibruce.info/2015/04/04/busuanzi/">卜算子官网</a> 提示，“因七牛强制过期『<a target="_blank" rel="noopener" href="http://dn-lbstatics.qbox.me">dn-lbstatics.qbox.me</a>』域名，与客服沟通无果，只能更换域名到『<a target="_blank" rel="noopener" href="http://busuanzi.ibruce.info">busuanzi.ibruce.info</a>』”，所以需要修改卜算子在 next 主题插件里面的域名。<br>
-其中，hexo-theme-next 主题中使用了 dn-lbstatics.qbox.me 域名的文件位置为：hexo\themes\next\layout\_third-party\analytics\busuanzi-counter.swig.</li>
+<li> A: <a target="_blank" rel="noopener" href="http://ibruce.info/2015/04/04/busuanzi/">卜算子官网</a>
+提示，"因七牛强制过期『dn-lbstatics.qbox.me』域名，与客服沟通无果，只能更换域名到『busuanzi.ibruce.info』"，所以需要修改卜算子在 next 主题插件里面的域名。<br>
+其中，hexo-theme-next 主题中使用了 dn-lbstatics.qbox.me 域名的文件位置为：hexo\_third-party-counter.swig.</li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 把以下代码</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"># 替换成</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 <p>然后重新生成和部署博客，即可看到卜算子功能修复，可以参考本人网站下方统计数据，如下图所示。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/bu_suan_zi_demo.jpg" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/bu_suan_zi_demo.jpg"></p>
 <!--
 [解决hexo博客的Next主题busuanzi_count失效方法](https://ywandy.github.io/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E7%9A%84Next%E4%B8%BB%E9%A2%98busuanzi-count%E5%A4%B1%E6%95%88%E6%96%B9%E6%B3%95.html)
 
 -->
-<h1>NextCloud 配置</h1>
+<h1 id="nextcloud-配置">NextCloud 配置</h1>
 <ul>
-<li>Q: 浏览器只能上传到<font color="red"> <strong> nextcloud</strong></font> 服务器 1M 小容量文件</li>
-<li> A: 上传文件大小限制，主要由 nginx 配置文件中的 client_max_body_size 的值决定，其默认值为 1M，我们根据需求调整其大小。</li>
+<li>Q: 浏览器只能上传到<font color="red">
+<strong> nextcloud</strong></font> 服务器 1M 小容量文件<br>
+</li>
+<li>A: 上传文件大小限制，主要由 nginx
+配置文件中的 client_max_body_size 的值决定，其默认值为
+1M，我们根据需求调整其大小。</li>
 </ul>
-<ol>
-<li>修改 nginx 配置文件目录下的 nginx.conf 文件 (一般路径是 /etc/nginx/nginx.conf)，增加如下图所示红色内容。</li>
+<ol type="1">
+<li>修改 nginx 配置文件目录下的 nginx.conf 文件
+(一般路径是 /etc/nginx/nginx.conf)，增加如下图所示红色内容。</li>
 </ol>
-<p><img data-src="/downloads/images/blog/expand_nextcloud_size.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/expand_nextcloud_size.png"></p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server_names_hash_bucket_size 128;</span><br><span class="line">client_header_buffer_size 32k;</span><br><span class="line">large_client_header_buffers 4 32k;</span><br><span class="line">client_max_body_size 8000m;</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2">
-<li>重启 nginx</li>
+<ol start="2" type="1">
+<li>重启 nginx <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure></li>
+<li>检查 nginx 配置状态 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure>
-<ol start="3">
-<li>检查 nginx 配置状态 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></tbody></table></figure>
 <!--
 [Docker搭建私有云Nextcloud](https://www.pbeta.me/docker-nextcloud-ssl/)
 -->
 <hr>
-<h1>邮件服务器配置</h1>
+<h1 id="邮件服务器配置">邮件服务器配置</h1>
 <ul>
 <li>Q: 免费邮件服务器配置</li>
-<li> A: Yandex，一家来自俄罗斯的域名邮箱提供商，可以搭建免费的域名邮局，免费账户支持 POP、SMTP，还支持 API。唯一的缺点是海外商家，官网速度比较慢，科学上网。</li>
+<li> A:
+Yandex，一家来自俄罗斯的域名邮箱提供商，可以搭建免费的域名邮局，免费账户支持 POP、SMTP，还支持 API。唯一的缺点是海外商家，官网速度比较慢，科学上网。</li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POP3：pop.yandex.com 开启SSL 端口 995  </span><br><span class="line">SMTP：smtp.yandex.com 开启SSL 端口 465  </span><br><span class="line">IMAP：imap.yandex.com 开启SSL 端口 993  </span><br></pre></td></tr></tbody></table></figure>
 <p>以<strong>网易邮箱大师</strong>为例，配置图示如下：<br>
-<img data-src="/downloads/images/blog/yandex_config.png" alt=""></p>
+<img data-src="/downloads/images/blog/yandex_config.png"></p>
 <hr>
-<h1>更新<font color="red"> <strong> letsencrypt</strong></font> 证书</h1>
+<h1 id="更新-letsencrypt-证书">更新<font color="red">
+<strong> letsencrypt</strong></font> 证书</h1>
 <ul>
-<li>Q: letsencrypt 的 https 证书期限是 3 个月，到期后如何重新更新证书呢？</li>
+<li>Q:
+letsencrypt 的 https 证书期限是 3 个月，到期后如何重新更新证书呢？</li>
 <li>A: certbot renew<br>
 // 上面的指令不成功，换成下面的指令，重新申请证书，不需要改配置<br>
 // sudo certbot --force-renew</li>
@@ -392,30 +404,25 @@
    your certificates, run "certbot renew"
    -->
 <ul>
-<li>
-<p>Q: 在 Centos 7 上如何更新 letsencrypt ?</p>
-</li>
-<li>
-<p>A: /root/certbot-auto renew<br>
+<li><p>Q: 在 Centos 7 上如何更新 letsencrypt ?</p></li>
+<li><p>A: /root/certbot-auto renew<br>
 // 上面的指令不成功，换成下面的指令，重新申请证书，不需要改配置<br>
 // sudo /root/certbot-auto --force-renew</p>
 <blockquote>
-<p>You should test your configuration at:<br>
-<a target="_blank" rel="noopener" href="https://www.ssllabs.com/ssltest/analyze.html?d=your.site">https://www.ssllabs.com/ssltest/analyze.html?d=your.site</a></p>
-</blockquote>
-</li>
-<li>
-<p>Q: Renew 失败，报错信息如下：</p>
-<blockquote>
-<p>Attempting to renew cert (<a target="_blank" rel="noopener" href="http://www.xx.net">www.xx.net</a>) from /etc/letsencrypt/renewal/www.xx.net.conf produced an unexpected error: ‘ascii’ codec can’t decode byte 0xe8 in position 57: ordinal not in range(128). Skipping.</p>
-</blockquote>
+<p>You should test your configuration at:
+https://www.ssllabs.com/ssltest/analyze.html?d=your.site</p>
+</blockquote></li>
+<li><p>Q: Renew 失败，报错信息如下： &gt; Attempting to renew cert
+(www.xx.net) from /etc/letsencrypt/renewal/www.xx.net.conf produced an
+unexpected error: 'ascii' codec can't decode byte 0xe8 in position 57:
+ordinal not in range (128). Skipping.</p>
 <blockquote>
 <p>All renewal attempts failed.</p>
-</blockquote>
-</li>
-<li>
-<p>A: 解决方法：可能 nginx 配置文件中有中文注释，删掉之后即可 renew 成功。可参考  <a target="_blank" rel="noopener" href="https://github.com/certbot/certbot/issues/5509">UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe7 in position 2: ordinal not in range(128)</a> 。</p>
-</li>
+</blockquote></li>
+<li><p>A: 解决方法：可能 nginx 配置文件中有中文注释，删掉之后即可 renew
+成功。可参考 <a target="_blank" rel="noopener" href="https://github.com/certbot/certbot/issues/5509">UnicodeDecodeError:
+'ascii' codec can't decode byte 0xe7 in position 2: ordinal not in
+range(128)</a> 。</p></li>
 </ul>
 <!--
 [免费SSL证书Let's Encrypt(certbot)安装使用教程](https://www.vpser.net/build/letsencrypt-certbot.html)
@@ -483,20 +490,25 @@ server {
 
 -->
 <hr>
-<h1>Hexo 提示 “TypeError [ERR_INVALID_ARG_TYPE]: The “path” argument must be of type string ” 解决办法</h1>
+<h1 id="hexo-提示-typeerrorerr_invalid_arg_type-the-path-argument-must-be-of-type-string-解决办法">Hexo
+提示 “TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of
+type string ” 解决办法</h1>
 <ul>
-<li>
-<p>Q：在网站部署过程中，Mac 系统中 “hexo d” 会提示 TypeError [ERR_INVALID_ARG_TYPE]: The “path” argument must be of type string。</p>
-</li>
-<li>
-<p>A：这是因为安装的 node 版本过高导致的。Hexo 官网对 node 的版本要求是不低于 10.13，推荐 12.0 或更高版本。</p>
+<li><p>Q：在网站部署过程中，Mac 系统中 “hexo d” 会提示
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type
+string。</p></li>
+<li><p>A：这是因为安装的 node 版本过高导致的。Hexo 官网对 node
+的版本要求是不低于 10.13，推荐 12.0 或更高版本。</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> (Should be at least Node.js 10.13, recommends 12.0 or higher)</p>
+<p><a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> (Should be at least Node.js
+10.13, recommends 12.0 or higher)</p>
 </blockquote>
-<p>截止在 2021 年 9 月，实践发现 LTS 14.17 版本并不适配最新版的 hexo，所以对 hexo 升级是解决不了这个报错问题。变通的方法是对 node 版本降低，安装 12.0 版本可以解决问题。</p>
-<p>在 mac 上如何降级 node 版本，如下。详细可参见 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5c298486dbd">homebrew 安装指定版本 node</a> 。</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 如果之前使用`brew install node`安装过 node,需要先执行<span class="string">'解绑'</span>node</span><br><span class="line">brew unlink <span class="title function_">node</span> <span class="params">(不一定需要运行)</span></span><br><span class="line"># 查找可用的node版本 </span><br><span class="line">brew search node</span><br><span class="line"># 安装你需要的版本，建议 node@12</span><br><span class="line">brew install node@12</span><br><span class="line"># 绑定，node@12 需要和你的安装版本一致</span><br><span class="line">brew link node@12</span><br><span class="line"># 上一步如果报错, 按照提示执行命令，比如</span><br><span class="line">brew link --overwrite --force node@12</span><br><span class="line"># 检查安装版本</span><br><span class="line">node -v</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<p>截止在 2021 年 9 月，实践发现 LTS 14.17 版本并不适配最新版的
+hexo，所以对 hexo 升级是解决不了这个报错问题。变通的方法是对 node
+版本降低，安装 12.0 版本可以解决问题。</p>
+<p>在 mac 上如何降级 node 版本，如下。详细可参见 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5c298486dbd">homebrew
+安装指定版本 node</a> 。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 如果之前使用`brew install node`安装过 node,需要先执行<span class="string">'解绑'</span>node</span><br><span class="line">brew unlink <span class="title function_">node</span> <span class="params">(不一定需要运行)</span></span><br><span class="line"># 查找可用的node版本 </span><br><span class="line">brew search node</span><br><span class="line"># 安装你需要的版本，建议 node@12</span><br><span class="line">brew install node@12</span><br><span class="line"># 绑定，node@12 需要和你的安装版本一致</span><br><span class="line">brew link node@12</span><br><span class="line"># 上一步如果报错, 按照提示执行命令，比如</span><br><span class="line">brew link --overwrite --force node@12</span><br><span class="line"># 检查安装版本</span><br><span class="line">node -v</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <hr>
 
