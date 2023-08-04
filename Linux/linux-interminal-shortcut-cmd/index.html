@@ -142,7 +142,8 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">shell 和 终端 的概念区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">终端命令行快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#history-%E2%80%93-%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">history – 历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mv-%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">mv 移动文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.2.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar-%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">2.3.</span> <span class="nav-text">tar 文件解压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-2"><span class="nav-number">2.3.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shell-%E5%92%8C-%E7%BB%88%E7%AB%AF-%E7%9A%84%E6%A6%82%E5%BF%B5%E5%8C%BA%E5%88%AB"><span class="nav-number">1.</span> <span class="nav-text">shell
+和 终端 的概念区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">2.</span> <span class="nav-text">终端命令行快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#history----%E5%8E%86%E5%8F%B2%E5%91%BD%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">history -- 历史命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mv-%E7%A7%BB%E5%8A%A8%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">mv 移动文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">2.2.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tar-%E6%96%87%E4%BB%B6%E8%A7%A3%E5%8E%8B%E7%BC%A9"><span class="nav-number">2.3.</span> <span class="nav-text">tar 文件解压缩</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-1"><span class="nav-number">2.3.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -309,53 +310,76 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
-<h1><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38214171/article/details/90050340">shell 和 终端 的概念区别</a></h1>
+<h1 id="shell-和-终端-的概念区别"><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38214171/article/details/90050340">shell
+和 终端 的概念区别</a></h1>
 <ul>
-<li><ruby>终端<rt> termimal</rt></ruby>，作用是<strong>提供一个命令的输入输出环境</strong>，在 linux 下使用组合键 ctrl+alt+T 打开的就是终端。</li>
-<li>shell 是一个<strong>命令行解释器</strong>，是 linux 内核的一个外壳，负责外界与 linux 内核的交互。shell 接收用户或者其他应用程序的命令，然后将这些命令转化成内核能理解的语言并传给内核，内核执行命令完成后将结果返回给用户或者应用程序。</li>
+<li><ruby>终端<rt> termimal</rt></ruby>，作用是<strong>提供一个命令的输入输出环境</strong>，在
+linux 下使用组合键 ctrl+alt+T 打开的就是终端。</li>
+<li>shell 是一个<strong>命令行解释器</strong>，是 linux
+内核的一个外壳，负责外界与 linux 内核的交互。shell
+接收用户或者其他应用程序的命令，然后将这些命令转化成内核能理解的语言并传给内核，内核执行命令完成后将结果返回给用户或者应用程序。</li>
 </ul>
-<p>也就是说，当你打开一个 terminal 时，操作系统会将 terminal 和 shell 关联起来。terminal 从用户这里接收输入（键盘、鼠标等输入设备），扔给 shell，然后把 shell 返回的结果展示给用户（比如通过显示器）；shell 从 terminal 拿到用户输入的命令，解析后交给操作系统内核去执行，并把执行结果返回给 terminal。</p>
-<p><img data-src="../downloads/images/shell_terminal.webp" alt=""></p>
-<h1>终端命令行快捷键</h1>
+<p>也就是说，当你打开一个 terminal 时，操作系统会将 terminal 和 shell
+关联起来。terminal 从用户这里接收输入（键盘、鼠标等输入设备），扔给
+shell，然后把 shell 返回的结果展示给用户（比如通过显示器）；shell 从
+terminal
+拿到用户输入的命令，解析后交给操作系统内核去执行，并把执行结果返回给
+terminal。</p>
+<p><img data-src="../downloads/images/shell_terminal.webp"></p>
+<h1 id="终端命令行快捷键">终端命令行快捷键</h1>
 <ul>
-<li><strong>ctrl + a</strong>  回到命令行的行首</li>
-<li><strong> ctrl + e</strong>  回到命令行的行尾</li>
-<li><strong> ctrl + c</strong>  取消当前行输入的命令，并重新到下一行</li>
-<li><strong> ctrl + r</strong> 出现命令历史记录搜索提示，输入字符后会自动匹配命令</li>
-<li><strong> ctrl + b</strong>  向后退一个字符，相当于向<strong>左方向键</strong></li>
-<li><strong> ctrl + f</strong>  向前进一个字符，相当于向<strong>右方向键</strong></li>
-<li><strong> ctrl + p</strong>  向上翻以前的输入命令，相当于向<strong>上方向键</strong></li>
-<li><strong> ctrl + n</strong>  向下翻以前的输入命令，相当于向<strong>下方向键</strong></li>
-<li><strong> alt + b</strong>  向后跳一个字</li>
-<li><strong> alt + f</strong>  向前进一个字</li>
-<li><strong> ctrl + w</strong>  从光标位置向后删除一个字</li>
-<li><strong> ctrl + y</strong>  粘贴最后一个删除的字</li>
-<li><strong> ctrl + d</strong>  删除当前光标位置的一个字符</li>
-<li><strong> ctrl + u</strong>  从光标当前位置删除所有字符至行首</li>
-<li><strong> ctrl + k</strong>  从光标当前位置删除所有字符至行尾，相当于长按 ctrl + d</li>
+<li><strong>ctrl + a</strong> 回到命令行的行首</li>
+<li><strong> ctrl + e</strong> 回到命令行的行尾</li>
+<li><strong> ctrl + c</strong> 取消当前行输入的命令，并重新到下一行</li>
+<li><strong> ctrl + r</strong>
+出现命令历史记录搜索提示，输入字符后会自动匹配命令</li>
+<li><strong> ctrl + b</strong>
+向后退一个字符，相当于向<strong>左方向键</strong></li>
+<li><strong> ctrl + f</strong>
+向前进一个字符，相当于向<strong>右方向键</strong></li>
+<li><strong> ctrl + p</strong>
+向上翻以前的输入命令，相当于向<strong>上方向键</strong></li>
+<li><strong> ctrl + n</strong>
+向下翻以前的输入命令，相当于向<strong>下方向键</strong></li>
+<li><strong> alt + b</strong> 向后跳一个字</li>
+<li><strong> alt + f</strong> 向前进一个字</li>
+<li><strong> ctrl + w</strong> 从光标位置向后删除一个字</li>
+<li><strong> ctrl + y</strong> 粘贴最后一个删除的字</li>
+<li><strong> ctrl + d</strong> 删除当前光标位置的一个字符</li>
+<li><strong> ctrl + u</strong> 从光标当前位置删除所有字符至行首</li>
+<li><strong> ctrl + k</strong>
+从光标当前位置删除所有字符至行尾，相当于长按 ctrl + d</li>
 </ul>
-<h2 id="history-–-历史命令">history – 历史命令</h2>
+<h2 id="history----历史命令">history -- 历史命令</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 在历史中搜索 start的命令</span><br><span class="line">history |grep start</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="mv-移动文件">mv 移动文件</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># The `mv` command doesn't have an `-R` flag, it moves folders recursively</span><br><span class="line">sudo mv fromPath/ toPath/</span><br></pre></td></tr></tbody></table></figure>
 <h3 id="参考资料">参考资料</h3>
 <ul>
-<li><strong><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/210168/moving-folder-and-subfolder-to-another-path">Moving folder and subfolder to another path</a></strong></li>
+<li><strong><a target="_blank" rel="noopener" href="https://askubuntu.com/questions/210168/moving-folder-and-subfolder-to-another-path">Moving
+folder and subfolder to another path</a></strong></li>
 </ul>
 <h2 id="tar-文件解压缩">tar 文件解压缩</h2>
 <ul>
-<li>The <code>tar</code> command allows you to create and extract tar archives. The tar command auto-detects compression type and extracts the archive.</li>
-<li>Bzip2 is one of the most popular algorithms for compressing tar files. By convention, the name of a tar archive compressed with <strong>bzip2</strong> ends with either <strong>.tar.bz2</strong> or <strong>.tbz2</strong>.</li>
+<li>The <code>tar</code> command allows you to create and extract tar
+archives. The tar command auto-detects compression type and extracts the
+archive.</li>
+<li>Bzip2 is one of the most popular algorithms for compressing tar
+files. By convention, the name of a tar archive compressed with
+<strong>bzip2</strong> ends with either <strong>.tar.bz2</strong> or
+<strong>.tbz2</strong>.</li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -xf archive.tar.bz2</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="参考资料-2">参考资料</h3>
+<h3 id="参考资料-1">参考资料</h3>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/how-to-extract-unzip-tar-bz2-file/">https://linuxize.com/post/how-to-extract-unzip-tar-bz2-file/</a></li>
+<li>https://linuxize.com/post/how-to-extract-unzip-tar-bz2-file/</li>
 </ul>
-<h1>Reference</h1>
+<h1 id="reference">Reference</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lvchaoshun/p/9251834.html">linux 终端命令行的快捷键列表</a></li>
-<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016129862">命令行界面 (CLI)、终端 (Terminal)、Shell、TTY，傻傻分不清楚？</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lvchaoshun/p/9251834.html">linux
+终端命令行的快捷键列表</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000016129862">命令行界面
+(CLI)、终端 (Terminal)、Shell、TTY，傻傻分不清楚？</a></li>
 </ul>
 
     </div>
