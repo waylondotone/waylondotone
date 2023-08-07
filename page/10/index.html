@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -183,6 +183,184 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Ubuntu/install-sogou-ubuntu-18/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Ubuntu/install-sogou-ubuntu-18/" class="post-title-link" itemprop="url">How to install Sogou Pinyin in non-Chinese versions of Ubuntu 18.04 / 如何在非中文版的 Ubuntu 18.04 安搜狗拼音输入法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-08-09 23:38:08" itemprop="dateCreated datePublished" datetime="2019-08-09T23:38:08+08:00">2019-08-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Ubuntu/" itemprop="url" rel="index"><span itemprop="name">Ubuntu</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>508</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>2 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>[toc]</p>
+<h1 id="background">Background</h1>
+<p>Recently, I updated my Ubuntu version from 16.04 to 18.04, and I'd
+like to share my experience on how to build a work or study environment
+for yourself.</p>
+<p>This blog mainly introduces how to install Sogou pinyin in
+non-Chinese versions of Ubuntu.</p>
+<p><img data-src="/downloads/images/Chinese_characters.png"></p>
+<h1 id="how-to-install-sogou-pinyin">How to install Sogou pinyin</h1>
+<p><strong>Firstly</strong>, you should install fcitx, a lightweight
+input method framework aimed at providing environment independent
+language support for Linux. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx-bin</span><br><span class="line">sudo apt install fcitx-table</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>You can also uninstall ibus, an input-method framework for Unix-like
+computer operating-systems. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt purge ibus</span><br><span class="line">sudo apt autoremove</span><br></pre></td></tr></tbody></table></figure> <!--
+[Another method to install pinyin](https://www.pinyinjoe.com/linux/ubuntu-18-gnome-chinese-setup.htm)
+--><p></p>
+<p>BTW, you can read <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/260601/understanding-setting-up-different-input-methods">Understanding
+&amp; setting up different input methods</a> if you are interested in
+the difference between fcitx and ibus.</p>
+<p>Recall that: &gt; remove - remove is identical to install except that
+packages are removed instead of installed. Note that removing a package
+leaves its configuration files on the system. If a plus sign is appended
+to the package name (with no intervening space), the identified package
+will be installed instead of removed.</p>
+<blockquote>
+<p>purge - purge is identical to remove except that packages are removed
+and purged (any configuration files are deleted too). This of course,
+does not apply to packages that hold configuration files inside the
+user's home folder.</p>
+</blockquote>
+<blockquote>
+<p>what sudo apt autoremove actually does? Whenever you install an
+application (using apt-get), the system will also install the software
+that this application depends on. It is common in Ubuntu/Linux that
+applications share the same libraries. When you remove the appplication
+the dependency will stay on your system. So apt-get autoremove will
+remove those dependencies that were installed with applications and that
+are no longer used by anything else on the system.</p>
+</blockquote>
+<p>You can subsequently open <strong>Language Suppor</strong> to
+double-check that <strong>Key board input method system</strong> has
+change from ibus to fcitx, and you can change it manuallyif not. You can
+ignore it and click the "Remind Me later" button if you are reminded
+that "The language support is not installed completely".</p>
+<p><img data-src="/downloads/images/language_support_linux.png"></p>
+<p>Importantly, you must <font color="red">
+<strong>reboot</strong></font> your system after that.</p>
+<p>After that, you can download the deb package from the official
+website, <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux/?r=pinyin">搜狗输入法
+for Linux</a>, or here (also official links) directly.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://cdn2.ime.sogou.com/dl/index/1524572032/sogoupinyin_2.2.0.0108_i386.deb?st=g_AXK19LEkZ7zsl2oOV3hQ&amp;e=1582358642&amp;fn=sogoupinyin_2.2.0.0108_i386.deb">32bit
+- sogoupinyin_2.2.0.0108_i386.deb</a></li>
+<li><a target="_blank" rel="noopener" href="http://cdn2.ime.sogou.com/dl/index/1571302197/sogoupinyin_2.3.1.0112_amd64.deb?st=EIacqcesOuHgsaQY0n9bjQ&amp;e=1582358642&amp;fn=sogoupinyin_2.3.1.0112_amd64.deb">64bit
+- sogoupinyin_2.3.1.0112_amd64.deb</a></li>
+</ul>
+<p>You can install it in <strong>Ubuntu Software</strong> by
+double-clicking, shown as below.</p>
+<p><img data-src="/downloads/images/sogou_deb_installed.png"></p>
+<p>Importantly, you must <font color="red">
+<strong>reboot</strong></font> your system again.</p>
+<p>You can open fcitx config tool after rebooting, as you can see below.
+You should also see Sogou Pinyin in the lists. Unfortunately, if not,
+you can add it by clicking the + mark, choose Sogou Pinyin and reboot
+the system again.</p>
+<p><img data-src="/downloads/images/fcitx_config.png"></p>
+<p>Now, you should input Chinese characters at the same time. In other
+words, you can use it as convenient in Windows system, like the
+Shuangpin input method. Yeah, you can learn more detail about Shuangpin
+in <a target="_blank" rel="noopener" href="https://www.yanlongwang.net/monthly-skills/monthlyskills-shuangpin/">双拼学习</a>.</p>
+<p>Just enjoy Ubuntu 18.04.</p>
+<h1 id="references">References</h1>
+<p><a target="_blank" rel="noopener" href="https://www.pinyinjoe.com/linux/ubuntu-18-gnome-chinese-setup.htm">Ubuntu
+Chinese Setup</a><br>
+<a target="_blank" rel="noopener" href="https://xunyunliu.github.io/post/install_sogou/">How to install
+Sogou input on Ubuntu 16.04</a></p>
+<!--
+[Reference link](https://blog.csdn.net/f_c_g_/article/details/81265589)
+-->
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1882,13 +2060,13 @@ I/Q 数据计算瞬时幅值。</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">261k</span>
+    <span title="Word count total">266k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">15:51</span>
+    <span title="Reading time total">16:06</span>
   </span>
 </div>
 <div class="busuanzi-count">
