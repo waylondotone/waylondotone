@@ -145,7 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#solution-1-hexo-tag-aplayer"><span class="nav-number">1.</span> <span class="nav-text">Solution 1: hexo-tag-aplayer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#solution-2-%E8%A7%86%E9%A2%91%E7%BD%91%E7%AB%99%E5%A4%96%E9%93%BE"><span class="nav-number">2.</span> <span class="nav-text">Solution 2: 视频网站外链</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BBb%E7%AB%99%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E5%A4%96%E9%93%BE"><span class="nav-number">2.1.</span> <span class="nav-text">去 B 站获取视频外链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%96%87%E7%AB%A0%E4%B8%AD%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E5%A4%96%E9%93%BE"><span class="nav-number">2.2.</span> <span class="nav-text">在文章中插入视频外链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96%E6%92%AD%E6%94%BE%E5%99%A8%E6%A0%B7%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">美化播放器样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Solution 1: hexo-tag-aplayer</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Solution 2: 视频网站外链</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8E%BBB%E7%AB%99%E8%8E%B7%E5%8F%96%E8%A7%86%E9%A2%91%E5%A4%96%E9%93%BE"><span class="nav-number">2.1.</span> <span class="nav-text">去 B 站获取视频外链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%96%87%E7%AB%A0%E4%B8%AD%E6%8F%92%E5%85%A5%E8%A7%86%E9%A2%91%E5%A4%96%E9%93%BE"><span class="nav-number">2.2.</span> <span class="nav-text">在文章中插入视频外链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BE%8E%E5%8C%96%E6%92%AD%E6%94%BE%E5%99%A8%E6%A0%B7%E5%BC%8F"><span class="nav-number">2.3.</span> <span class="nav-text">美化播放器样式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -282,44 +282,37 @@
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p>Hexo 搭建博客后，如果想在博客中分享视频，避免网站服务器带宽的限制，需要添加其他视频网站的外链播放器，具体该怎么操作呢？</p>
-<h1 id="solution-1-hexo-tag-aplayer">Solution 1: hexo-tag-aplayer</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a>
-是 <a target="_blank" rel="noopener" href="https://github.com/MoePlayer/DPlayer">DPlayer</a> 播放器的
-Hexo 标签插件。</p>
+<h1>Solution 1: hexo-tag-aplayer</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/MoePlayer/hexo-tag-dplayer">hexo-tag-dplayer</a> 是 <a target="_blank" rel="noopener" href="https://github.com/MoePlayer/DPlayer">DPlayer</a> 播放器的 Hexo 标签插件。</p>
 <p>因为版本维护者不再支持新版本的更新，有些 bug 没有解决，所以对于高版本的 Hexo 支持不友好，甚至安装阶段就会报错。所以，我不是很支持继续使用该方法。</p>
 <p>ps. 想继续坚持使用该方法的，可以移步阅读 <a target="_blank" rel="noopener" href="https://www.datablog.top/2019/04/25/hexo-with-music-and-movie/">在 Hexo 搭建的博客中插入音乐或者视频</a>。</p>
-<h1 id="solution-2-视频网站外链">Solution 2: 视频网站外链</h1>
-<p>Hexo 支持 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#iframe">iframe</a>
-的方式插入视频，所示我们可以把视频上传到哔哩哔哩、优酷、腾讯视频等，然后生成外链再拿来用。</p>
+<h1>Solution 2: 视频网站外链</h1>
+<p>Hexo 支持 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#iframe">iframe</a> 的方式插入视频，所示我们可以把视频上传到哔哩哔哩、优酷、腾讯视频等，然后生成外链再拿来用。</p>
 <p>大部分视频网站的外链播放器在视频开头都会加上 30 秒 - 2 分钟的广告，于是选择 B 站，无广告，无广告，无广告！</p>
-<h2 id="去b站获取视频外链">去 B 站获取视频外链</h2>
-<p>选择视频下方 “分享” 里的嵌入代码，而不是视频地址。否则进入 Hexo
-博客后，网页会自动跳转到 bilibili 的视频页面，而不是自己的博客页面。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/Copy_bilibili_link.jpg"></p>
+<h2 id="去B站获取视频外链">去 B 站获取视频外链</h2>
+<p>选择视频下方 “分享” 里的嵌入代码，而不是视频地址。否则进入 Hexo 博客后，网页会自动跳转到 bilibili 的视频页面，而不是自己的博客页面。</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/Copy_bilibili_link.jpg" alt=""></p>
 <h2 id="在文章中插入视频外链">在文章中插入视频外链</h2>
-<p>Markdown 中可以直接插入 html 代码，但是 hexo 给我们特意准备了一个 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#Raw">raw</a>
-标签来插入 html 代码，防止一些其他因素的干扰，这里我们就使用 raw 来插入视频外链。</p>
+<p>Markdown 中可以直接插入 html 代码，但是 hexo 给我们特意准备了一个 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/tag-plugins#Raw">raw</a> 标签来插入 html 代码，防止一些其他因素的干扰，这里我们就使用 raw 来插入视频外链。</p>
 
 <iframe src="//player.bilibili.com/player.html?aid=90978812&amp;cid=155358422&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 <p>因为外链 html 没有和 Hexo 适配，所以在网页上打开，界面靠左并且窗口小，显得很难看，不够大气。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/raw_video_demo.jpg"></p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/raw_video_demo.jpg" alt=""></p>
 <h2 id="美化播放器样式">美化播放器样式</h2>
 <p>这里分享一个很巧妙的偷懒方法，我们可以去 Hexo 的 <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">官网</a>，看看作者是如何布局的，然后把代码抄回来。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/hexo_pick_up_video_element.jpg"></p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/hexo_pick_up_video_element.jpg" alt=""></p>
 <p>那么，我们只要把布局中的 src，替换为自己的外链地址，就可以设置好视频的布局。</p>
 
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
 <iframe src="//player.bilibili.com/player.html?aid=90978812&amp;cid=155358422&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>
 
 <p>因为简书不支持 iframe，大家可以去我的网站看看效果。</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/video_demo.jpg"></p>
-<h1 id="references">References</h1>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/video_demo.jpg" alt=""></p>
+<h1>References</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yimagudao/article/details/89524210">hexo-tag-dplayer</a><br>
-</li>
-<li><a target="_blank" rel="noopener" href="https://haokan.baidu.com/v?pd=wisenatural&amp;vid=5242915545602714565">hexo 博客插入 B 站视频外链（raw 实现）</a><br>
-</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/yimagudao/article/details/89524210">hexo-tag-dplayer</a></li>
+<li><a target="_blank" rel="noopener" href="https://haokan.baidu.com/v?pd=wisenatural&amp;vid=5242915545602714565">hexo 博客插入 B 站视频外链（raw 实现）</a></li>
 <li><a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1623914788952059989&amp;wfr=spider&amp;for=pc">Hexo 博客中加入 B 站视频播放器</a></li>
 </ul>
 
