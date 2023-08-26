@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -183,6 +183,152 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Programming/vector-clear/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Programming/vector-clear/" class="post-title-link" itemprop="url">C++ vector 清空元素的三种方法 (有源码)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2023-08-27 06:52:48 / Modified: 07:03:08" itemprop="dateCreated datePublished" datetime="2023-08-27T06:52:48+08:00">2023-08-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Programming/" itemprop="url" rel="index"><span itemprop="name">Programming</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>380</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>[toc]</p>
+<h2 id="clear">clear</h2>
+<ul>
+<li>A reallocation is not guaranteed to happen, and the vector capacity
+is not guaranteed to change due to calling this function.</li>
+</ul>
+<h3 id="测试">测试</h3>
+<figure class="highlight c"><figcaption><span>clear demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method1_clear</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br><span class="line">  <span class="comment">// 打印 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"original: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  data.clear();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="输出">输出</h3>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Method 1</span><br><span class="line">original: size = 5 ; capacity = 5</span><br><span class="line">new: size = 0 ; capacity = 5</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="erase">erase</h2>
+<ul>
+<li><p>Removes from the vector either a single element (position) or a
+range of elements ([first,last)).</p></li>
+<li><p>An iterator pointing to the new location of the element that
+followed the last element erased by the function call.</p></li>
+</ul>
+<h3 id="测试-1">测试</h3>
+<figure class="highlight c"><figcaption><span>erase demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method2_erase</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br><span class="line">  <span class="comment">// 打印 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"original: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> iter = data.begin(); iter != data.end();) {</span><br><span class="line">    iter = data.erase(iter);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data1 = ConstructVector();</span><br><span class="line">  data1.erase(data1.begin(), data1.begin() + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data1.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data1.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="输出-1">输出</h3>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Method 2</span><br><span class="line">original: size = 5 ; capacity = 5</span><br><span class="line">new: size = 0 ; capacity = 5</span><br><span class="line">new: size = 3 ; capacity = 5</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="swap">swap</h2>
+<ul>
+<li><p>Exchanges the content of the container by the content of x, which
+is another vector object of the same type. Sizes may differ.</p></li>
+<li><p>After the call to this member function, the elements in this
+container are those which were in x before the call, and the elements of
+x are those which were in this. All iterators, references and pointers
+remain valid for the swapped objects.</p></li>
+</ul>
+<h3 id="测试-2">测试</h3>
+<figure class="highlight c"><figcaption><span>erase demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method3_swap</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br><span class="line">  <span class="comment">// 打印 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"original: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;().swap(data);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="输出-2">输出</h3>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Method 3</span><br><span class="line">original: size = 5 ; capacity = 5</span><br><span class="line">new: size = 0 ; capacity = 0</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="区别">区别</h1>
+<ul>
+<li>vector 内存占用空间只会增长，不会减小。比如你首先分配了 10,000
+个字节，然后 erase 掉后面 9,999
+个，则虽然有效元素只有一个，但是内存占用仍为 10,000 个。所有空间在
+vector 析构时回收。</li>
+<li>如果想清空原来数据占用的空间，我们可以通过交换技术
+swap, 就是通过交换函数 swap ()，使得 vector
+离开其自身的作用域，从而强制释放 vector 所占的内存空间.</li>
+</ul>
+<h1 id="源码下载">源码下载</h1>
+<p><a href="http://www.waylon.one/downloads/code/vector_clear.cpp">源码下载</a></p>
+<h2 id="编译">编译</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 文件下载目录</span><br><span class="line">g++ vector_clear.cpp -o test --std=c++14</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="reference">Reference</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhanggaofeng/p/9338681.html">C++
+vector 清空元素的三种方法</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1347,116 +1493,6 @@ Standard Library</a>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Reading/how-to-read-a-book-summary/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Nobody">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-      <meta itemprop="description" content="sharing daily progress and life">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | One's Way">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Reading/how-to-read-a-book-summary/" class="post-title-link" itemprop="url">如何阅读一本书 读后感</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2022-12-05 11:43:06" itemprop="dateCreated datePublished" datetime="2022-12-05T11:43:06+08:00">2022-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Reading/" itemprop="url" rel="index"><span itemprop="name">Reading</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>9.7k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>35 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>[toc]</p>
-<p>2022 年 11
-月末，北京疫情变得严重起来，我开始居家办公。这段时间省下来数个小时的通勤时间，使得自己能够利用晚上的时间，捧起《如何阅读一本书》。我的初步想法是希望阅读这本书可以教会自己如何更加高效读书，如何更好地理解和整理一本书，以及纠正自己阅读的一些坏习惯。</p>
-<p><img data-src="/downloads/images/how_to_read_a_book_front_cover.jpeg"></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/Reading/how-to-read-a-book-summary/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1487,7 +1523,7 @@ Standard Library</a>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">16:06</span>
+    <span title="Reading time total">16:08</span>
   </span>
 </div>
 <div class="busuanzi-count">

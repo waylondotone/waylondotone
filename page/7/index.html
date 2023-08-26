@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">100</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -183,6 +183,613 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/paper/Playing-Atari-with-Deep-Reinforcement-Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/paper/Playing-Atari-with-Deep-Reinforcement-Learning/" class="post-title-link" itemprop="url">解读 Playing Atari with Deep Reinforcement Learning</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-06-04 09:23:17" itemprop="dateCreated datePublished" datetime="2020-06-04T09:23:17+08:00">2020-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>14 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>[toc]</p>
+<p>Playing Atari with Deep Reinforcement Learning</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1312.5602v1.pdf">Paper download
+link</a></p>
+<p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/Playing-Atari-with-Deep-Reinforcement-Learning/">个人网站</a>，请移步阅读最新内容。</p>
+<h1 id="abstract">Abstract</h1>
+<p>文章提出第一个深度学习模型，能够使用强化学习算法从高维的感知输入 (high-dimensional
+sensory input) 中学习到控制策略 (control
+policies)。这个模型是一个卷积神经网络 (convolutional neural
+network)，使用 Q-learning 的变种进行训练，可以直接输入像素，然后输出评估未来奖励的值函数 (a
+value function estimating future rewards)。</p>
+<blockquote>
+<p>The deep learning model is a convolutional neural network, trained
+with a variant of Q-learning, whose input is raw pixels and whose output
+is a value function estimating future rewards.</p>
+</blockquote>
+<h1 id="introduction">Introduction</h1>
+<ul>
+<li><p>研究现状：很多 RL 应用依赖于人工制定的特征，其性能表现严重依赖特征表示的质量，不具备自学习能力。
+&gt; Most successful RL applica- tions that operate on these domains
+have relied on <strong>hand-crafted features combined with linear value
+functions or policy representations</strong>. Clearly, the performance
+of such systems heavily relies on the quality of the <strong>feature
+representation</strong>.</p></li>
+<li><p> 从深度学习 DL 在计算机视觉和语音识别上取得进步的现状，思考类似的方法能否应用到通过强化学习 RL 来控制智能体。
+&gt; Recent advances in deep learning have made it possible to
+<strong>extract high-level features from raw sensory data</strong>,
+leading to breakthroughs in computer vision and speech recognition.</p>
+<ul>
+<li>DL --&gt; extract high-level features</li>
+</ul>
+<blockquote>
+<p>It seems natural to ask whether similar techniques could also be
+beneficial for RL with sensory data.</p>
+</blockquote></li>
+<li><p>从 DL 的视角，讨论 RL 面临的挑战。</p></li>
+</ul>
+<!--
+阅读原始和权威论文后，对DL和RL的区别和联系，理解的更透彻，不再像是阅读公众号那样，浮于表面。
+- 正如学敏所言，公众号的写作者的水平，可能连自己都不如，自己谈何去学习和进步呢？不要把公众号作为认真学习的渠道。
+-->
+<ul>
+<li>比较 DL 和 RL
+<ul>
+<li>RL 有一些问题，DL 依然无法解决。</li>
+</ul></li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Deep Learning</th>
+<th>Reinforcement Learning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Data source</td>
+<td>required large amounts of hand-labelled training data</td>
+<td>learn from a scalar reward signal that is frequently sparse, noisy
+and delayed (actions and rewards)</td>
+</tr>
+<tr class="even">
+<td> 数据来源</td>
+<td>从大量人工标注的数据中学习</td>
+<td>只能从稀少、噪声和延迟的奖励中学习</td>
+</tr>
+<tr class="odd">
+<td> Data features</td>
+<td>assume the data samples to be independent</td>
+<td>typically sequences of highly correlated states</td>
+</tr>
+<tr class="even">
+<td> 数据特点</td>
+<td>采样数据独立</td>
+<td>一系列高度关联的状态</td>
+</tr>
+<tr class="odd">
+<td> Data distribution</td>
+<td>a fixed underlying distribution</td>
+<td>data distribution changes as the algorithm learns new
+behaviours</td>
+</tr>
+<tr class="even">
+<td> 数据分布</td>
+<td>固定的数据分布</td>
+<td>学习新行为后，数据分布会调整</td>
+</tr>
+</tbody>
+</table>
+<h2 id="本文贡献">本文贡献</h2>
+<ul>
+<li><p>卷积神经网络可以在复杂的 RL 环境中从视频输入数据中学习控制策略。</p>
+<blockquote>
+<p>This paper demonstrates that a convolutional neural network can
+overcome these challenges to learn successful control policies from raw
+video data in complex RL environments.</p>
+</blockquote>
+<ul>
+<li>使用 Q-learning 的变种训练
+<ul>
+<li>The network is trained with a variant of the Q-learning algorithm,
+with stochastic gradient descent to update the weights.</li>
+</ul></li>
+<li> 为了缓和关联数据和非平稳分布，使用经验回放机制 (an experience replay
+mechanism)，随机采样之前的转换，所以可以平滑过去行为的训练分布。
+<ul>
+<li>To alleviate the problems of correlated data and non-stationary
+distributions, we use an experience replay mechanism which randomly
+samples previous transitions, and thereby smooths the training
+distribution over many past behaviors.</li>
+</ul></li>
+</ul></li>
+</ul>
+<!--
+自己的研究，是十年磨一剑，还是总是在模仿，从未在超越呢。
+-->
+<h1 id="background">Background</h1>
+<h2 id="任务描述">任务描述</h2>
+<ul>
+<li><p>环境 (environment) &gt; We consider tasks in which an agent
+interacts with an environment E, in this case the Atari emulator, in a
+sequence of actions, observations and rewards.</p></li>
+<li><p> 行动 (actions): 通过合法的行为来进一步改变模拟器的内部状态和游戏得分。
+&gt; At each time-step the agent selects an action at from the set of
+legal game actions, A = {1, . . . ,K}.</p>
+<blockquote>
+<p>The action is passed to the emulator and modifies its internal state
+and the game score.</p>
+</blockquote></li>
+<li><p>观察 (observations)：屏幕像素 &gt; The emulator’s internal state
+is not observed by the agent; instead it observes an image rom the
+emulator, which is a vector of raw pixel values representing the current
+screen.</p></li>
+<li><p> 奖励 (rewards)：游戏得分 &gt; In addition it receives a reward
+representing the change in game score.</p></li>
+<li><p> 交互特征</p>
+<ul>
+<li><p>行动和奖励的延时性 (feedback delay) &gt; Note that in general the
+game score may depend on the whole prior sequence of actions and
+observations; feedback about an action may only be received after many
+thousands of time-steps have elapsed.</p></li>
+<li><p> 智能体最大化得分 &gt; The goal of the agent is to interact with
+the emulator by selecting actions in a way that maximises future
+rewards.</p></li>
+</ul></li>
+</ul>
+<h2 id="问题抽象">问题抽象</h2>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DQN_simplify_model.jpg"></p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">A[Question &amp; Model]--&gt;B(the optimal action-value function)</span><br><span class="line">A--&gt;I(learn game strategies from sequences of actions and observations)</span><br><span class="line">B--&gt;C(Intuition)</span><br><span class="line">B--&gt;J(the maximum expected reward achievable by following any strategy)</span><br><span class="line">C--&gt;D(Bellman equation)</span><br><span class="line">C--&gt;K(current reward plus the optimal value of the sequence at the next time-step)</span><br><span class="line">D--&gt;E(generalisation)</span><br><span class="line">D--&gt;L(estimate the action-value function by using the Bellman equation as an iterative update)</span><br><span class="line">E--&gt;M(the above action-value function is without any generalisation)</span><br><span class="line">E--&gt;N(function approximator)</span><br><span class="line">N--&gt;F(linear function approximator)</span><br><span class="line">N--&gt;G(non-linear function approximator)</span><br><span class="line">G--&gt;H(neural network)</span><br><span class="line">H--&gt;O(Q-network)</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>从一系列的行动和观察中学习 &gt; We therefore consider sequences of
+actions and observations, st = x1, a1, x2, ..., at−1, xt, and learn game
+strategies that depend upon these sequences.
+<ul>
+<li>有效时间内终结 &gt; All sequences in the emulator are assumed to
+terminate in a finite number of time-steps.</li>
+<li> 转化为 MDP 问题 &gt; This formalism gives rise to a large but finite
+Markov decision process (MDP) in which each sequence is a distinct
+state.</li>
+<li> 使用强化学习来处理 MDPs 问题 &gt; We can apply standard
+reinforcement learning methods for MDPs, simply by using the complete
+sequence st as the state representation at time t.</li>
+</ul></li>
+<li>Optimal action-value function：在确定初始状态后 (st, at,
+pi) 后，在规定的迭代时间内，不同的 policy 值返回的奖励是不同的；选择序列中最大的奖励，那么对于的 policy 就是最优的。
+<img data-src="http://www.waylon.one/downloads/images/blog/Atari_problem_background.jpg" alt="Problem goal and model">
+<ul>
+<li>We define the optimal action-value function Q∗(s, a) as the maximum
+expected return achievable by following any strategy, after seeing some
+sequence s and then taking some action a, Q∗(s, a) = maxπ E [Rt|st = s,
+at = a, π], where π is a policy mapping sequences to actions (or
+distributions over actions).</li>
+</ul></li>
+<li>Bellman equation
+<ul>
+<li>The optimal action-value function obeys an important identity known
+as the Bellman equation.</li>
+<li>Intuition : 转化问题为寻找当前最优 <img data-src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_1.jpg">
+<img data-src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_2.jpg"></li>
+<li>因为 the optimal value Q∗(s?, a?) of the sequence s? at the next
+time-step 不可知，所以进一步简化问题。 &gt; The basic idea behind many
+reinforcement learning algorithms is to estimate the action- value
+function, by using the Bellman equation as an iterative update, Qi+1 (s,
+a) = E [r + γ maxa?Qi (s?, a?)|s, a]. Such value
+<ul>
+<li>证明收敛性： &gt; Such value iteration algorithms converge to the
+optimal action-value function.</li>
+</ul></li>
+</ul></li>
+<li> 泛化能力
+<ul>
+<li><p>实践中，原模型严重依赖当前的 s，缺乏泛化能力。 &gt; In practice,
+this basic approach is totally impractical, because the action-value
+function is estimated separately for each sequence, without any
+generalisation.</p></li>
+<li><p> 我们希望使用一个近似函数来估计行为 - 值函数 &gt; It is common to
+use a function approximator to estimate the action-value function.</p>
+<ul>
+<li>近似函数可以使用线性函数，或者非线性函数，比如神经网络。 &gt; In the
+reinforcement learning community this is typically a linear function
+approximator, but sometimes a non-linear function approximator is used
+instead, such as a neural network.</li>
+</ul></li>
+<li><p> 问题转换：把一个复杂的数学模型，通过 Bellman equation 转换为
+Q-learning 的问题。</p></li>
+</ul></li>
+<li>Training -- Q-network
+<ul>
+<li>A Q-network can be trained by minimising a sequence of loss
+functions that changes at each iteration.</li>
+<li>Note that the targets depend on the network weights; this is in
+contrast with the targets used for supervised learning, which are fixed
+before learning begins.</li>
+<li>Differentiating the loss function with respect to the weights at the
+gradient.</li>
+<li>[又一次简化问题] Rather than computing the full expectations in the
+above gradient, it is often computationally expe- dient to optimise the
+loss function by stochastic gradient descent.</li>
+</ul></li>
+</ul>
+<!--
+- 把问题用数学的公式表达出来，但是如何实现又是一件事情；
+- 通过简化的方式，让问题看起来虽然不是最优，但是有解；
+- 把问题转化到已解的问题，那么问题基本就是解决了。比如本文，现阶段转化到 Q-learning.
+- 证明问题的收敛性，比如趋向最优。
+-->
+<ul>
+<li>Summary
+<ul>
+<li>model-free: it solves the reinforcement learning task directly using
+samples from the emulator E, without explicitly constructing an estimate
+of E.</li>
+<li>off-policy: it learns about the greedy strategy a = maxa Q(s, a; θ),
+while following a behaviour distribution that ensures adequate
+exploration of the state space.</li>
+</ul></li>
+</ul>
+<!--
+思考方法：把一个新问题，经过变换处理等，转换为已知且已解的问题，那么问题难度迎刃而解，
+-->
+<h1 id="related-work">Related Work</h1>
+<!--
+ 
+ 已有的研究现状，自己读起来有点费劲，看来作者读过的文章量还是不少的。没有足够的阅读和经历，研究可能会有局限。
+
+通过绘制研究发展的时间轴，自己可以理解项目的发展，对算法的演进脉络更清晰。
+
+-->
+<h2 id="timeline">Timeline</h2>
+<ul>
+<li><p>1995: TD-gammon used a model-free reinforcement learning
+algorithm similar to Q-learning, and approximated the value function
+using <strong>a multi-layer perceptron with one hidden
+layer</strong>.</p>
+<ul>
+<li>Early attempts to follow up on TD-gammon were less successful.</li>
+<li>1997: It was shown that combining model-free reinforcement learning
+algorithms such as Q-learning with <strong>non-linear function
+approximators</strong>, or indeed with off-policy learning could cause
+the Q-network to diverge.</li>
+</ul></li>
+<li><p>Subsequently, the majority of work in reinforcement learning
+focused on <strong>linear function approximators</strong> with better
+convergence guarantees.</p></li>
+<li><p>More recently, there has been a revival of interest in combining
+deep learning with reinforcement learning.</p>
+<ul>
+<li>Deep neural networks have been used to estimate the environment;
+restricted Boltzmann machines have been used to estimate the value
+function [2004]; or the policy [2012].</li>
+<li>The divergence issues with Q-learning have been partially addressed
+by gradient temporal-difference methods.</li>
+<li>Pros
+<ul>
+<li>These methods are proven to converge when evaluating a <strong>fixed
+policy</strong> with a nonlinear function approximator [2009]; or when
+learning a control policy with linear function approximation using a
+restricted variant of Q-learning [2010].</li>
+</ul></li>
+<li>Cons
+<ul>
+<li>However, these methods have not yet been extended to nonlinear
+control.</li>
+</ul></li>
+</ul></li>
+<li><p>2005: NFQ optimises the sequence of loss functions, using the
+RPROP algorithm to update the parameters of the Q-network.</p>
+<ul>
+<li>NFQ has also been successfully applied to simple real-world control
+tasks using purely visual input, by <strong>first using deep
+autoencoders to learn a low dimensional representation of the
+task</strong>, and then applying NFQ to this representation.
+<ul>
+<li>Our approach applies reinforcement learning
+<strong>end-to-end</strong>, directly from the visual inputs; as a
+result it may <strong>learn features</strong> that are directly relevant
+to discriminating.</li>
+</ul></li>
+<li>Cons
+<ul>
+<li>It uses a batch update that has a computational cost per iteration
+that is proportional to the size of the data set, whereas we consider
+stochastic gradient updates that have a low constant cost per iteration
+and scale to large data-sets.</li>
+</ul></li>
+</ul></li>
+<li><p>1993: Q-learning has also previously been combined with
+experience replay and a simple neural network.</p>
+<ul>
+<li>But again starting with <strong>a low-dimensional state</strong>
+rather than raw visual inputs.
+<!--+ 本文简化了问题，反而是创新。有本事简化问题，让复杂的问题不再复杂，为什么人不是一种本事呢？--></li>
+</ul></li>
+<li><p>2013: The use of the Atari 2600 emulator as a reinforcement
+learning platform, who applied standard reinforcement learning
+algorithms with linear function approximation and generic visual
+features.</p>
+<ul>
+<li>The HyperNEAT evolutionary architecture has also been applied to the
+Atari platform, where it was used to evolve (separately, for each
+distinct game) a neural network representing a strategy for that game.
+<!--* 本文发表于2013，感觉距离伟大理论的提出就是一步之遥。当然，提出的训练方法，还是帮助了伟大理论的提出。--></li>
+</ul></li>
+</ul>
+<h1 id="deep-reinforcement-learning">Deep Reinforcement Learning</h1>
+<ul>
+<li><p>现有的基于深度学习在视觉和声音上的研究，激发作者的本文研究。 &gt;
+Recent breakthroughs in computer vision and speech recognition have
+relied on efficiently training deep neural networks on very large
+training sets. The most successful approaches are trained directly from
+the raw inputs, using lightweight updates based on <strong>stochastic
+gradient descent</strong>. By feeding sufficient data into deep neural
+networks, it is often possible to <strong>learn better representations
+than handcrafted features</strong>.</p></li>
+<li><p> 本文的研究目标，连接 RL 和 DNN。 &gt; Our goal is to connect a
+reinforcement learning algorithm to a deep neural network which operates
+directly on RGB images and efficiently process training data by using
+stochastic gradient updates.</p></li>
+</ul>
+<hr>
+<ul>
+<li><p>Deep Q-learning with Experience Replay</p>
+<ol type="1">
+<li>We store the agent’s experiences at each time-step.</li>
+<li>We apply Q-learning updates, or minibatch updates, to samples of
+experience, drawn at random from the pool of stored samples.</li>
+<li>After performing experience replay, the agent selects and executes
+an action according to an ?-greedy policy.</li>
+</ol></li>
+</ul>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/deep_Q_learning_algorithm.jpg"></p>
+<ul>
+<li>DQN (off-policy) vs online Q-learning
+<ul>
+<li>Each step of experience is potentially used in many weight updates,
+which allows for greater data efficiency.</li>
+<li>Learning directly from consecutive samples is inefficient, due to
+the strong correlations between the samples; randomizing the samples
+breaks these correlations and therefore reduces the variance of the
+updates.</li>
+<li>When learning on-policy the current parameters determine the next
+data sample that the parameters are trained on.
+<ul>
+<li>It is easy to see how unwanted feedback loops may arise and the
+parameters could get stuck in a poor local minimum, or even diverge
+catastrophically.</li>
+<li>Note that when learning by experience replay, it is necessary to
+learn off-policy (because our current parameters are different to those
+used to generate the sample), which motivates the choice of
+Q-learning.</li>
+</ul></li>
+<li>By using experience replay the behavior distribution is averaged
+over many of its previous states, smoothing out learning and avoiding
+oscillations or divergence in the parameters.</li>
+<li>In practice, our algorithm only stores <strong>the last N experience
+tuples</strong> in the replay memory, and samples uniformly at random
+from D when performing updates.
+<ul>
+<li>A more sophisticated sampling strategy might emphasize transitions
+from which we can learn the most, similar to prioritized sweeping.</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr>
+<h2 id="preprocessing-and-model-architecture">Preprocessing and Model
+Architecture</h2>
+<ul>
+<li>降低输入数据的维度
+<ul>
+<li>Reduce the input dimensionality
+<ul>
+<li>[降采样和灰度化] The raw frames are preprocessed by first converting
+their RGB representation to gray-scale and down-sampling it to a 110×84
+image.</li>
+</ul></li>
+</ul></li>
+<li>How to parameterize Q using a neural network?
+<ul>
+<li>We instead use an architecture in which there is <strong>a separate
+output uni</strong>t for each possible action, and only <strong>the
+state representation is an input to the neural network</strong>.
+<ul>
+<li>The outputs correspond to the predicted Q-values of the individual
+action for the input state.</li>
+</ul></li>
+<li>The main advantage of this type of architecture is the ability to
+compute Q-values for all possible actions in a given state with only a
+single forward pass through the network.</li>
+</ul></li>
+<li>Deep Q-Networks
+<ul>
+<li>Input: state representation &gt; The input to the neural network
+consists is an 84 × 84 × 4 image.</li>
+<li>Three hidden layers, followed by a rectifier nonlinearity.</li>
+<li>Output: Q-values for actions &gt; The output layer is a fully-
+connected linear layer with a single output for each valid action.</li>
+<li>We refer to convolutional networks trained with our approach as
+<strong>Deep Q-Networks</strong> (DQN).</li>
+</ul></li>
+</ul>
+<h1 id="experiments">Experiments</h1>
+<ul>
+<li><p>方法的通用性和鲁棒性：不需要根据游戏定制信息。 &gt; We use the
+same network architecture, learning algorithm and hyperparameters
+settings across all seven games, showing that our approach is robust
+enough to work on a variety of games without incorporating game-specific
+information.</p></li>
+<li><p> 适应游戏的做法</p>
+<ul>
+<li>[修改分数比值] Since the scale of scores varies greatly from game to
+game, we fixed all positive rewards to be 1 and all negative rewards to
+be −1, leaving 0 rewards unchanged.</li>
+<li>[frame-skipping technique] The agent sees and selects actions on
+every kth frame instead of every frame, and its last action is repeated
+on skipped frames.</li>
+</ul></li>
+</ul>
+<h2 id="training-and-stability">Training and Stability</h2>
+<ul>
+<li>如何评估训练 &gt; Since our evaluation metric is the <strong>total
+reward</strong> the agent collects in an episode or game averaged over a
+number of games, we periodically compute it during training.
+<ul>
+<li>The <strong>average total reward</strong> evolves during training
+are indeed quite noisy, giving one the impression that the learning
+algorithm is not making steady progress.</li>
+<li>More stable, metric is the policy’s <strong>estimated action-value
+function Q</strong>, which provides an estimate of how much discounted
+reward the agent can obtain by following its policy from any given
+state.</li>
+<li> 收敛性缺乏理论依据保证 &gt; This suggests that, <strong>despite
+lacking any theoretical convergence guarantees</strong>, our method is
+able to train large neural networks using a reinforcement learning
+signal and stochastic gradient descent in a stable manner.
+<!-- - 问题使用不同的语言描述，显示的结果是不一样的。 这样子就证明了算法的收敛性吗？--></li>
+</ul></li>
+</ul>
+<h2 id="visualizing-the-value-function">Visualizing the Value
+Function</h2>
+<ul>
+<li>尽管理论依据少，但通过 predicted value function
+和实际游戏界面的比较和关联，来证明算法的有效性。 &gt; Figure 3
+demonstrates that our method is able to learn how the value function
+evolves for a reasonably complex sequence of events.</li>
+</ul>
+<h2 id="main-evaluation">Main Evaluation</h2>
+<ul>
+<li><p>和现有的算法、做法比较（理论和实际） &gt; We compare our results
+with the best performing methods from the RL literature.</p>
+<ul>
+<li>找出其他算法的缺陷，或者验证算法提高点。 &gt; Note that both of
+these methods <strong>incorporate significant prior knowledge</strong>
+about the visual problem by using background sub- traction and treating
+each of the 128 colors as a separate channel. In contrast, our agents
+only receive <strong>the raw RGB screenshots</strong> as input and must
+learn to detect objects on their own. &gt; Our approach (labeled DQN)
+outperforms the other learning methods by a substantial margin on all
+seven games despite incorporating almost no prior knowledge about the
+inputs.</li>
+</ul></li>
+<li><p> 人机比较 &gt; In addition to the learned agents, we also report
+scores for an expert human game player and a policy that selects actions
+uniformly at random.</p></li>
+<li><p> 和 evolutionary policy search 比较 &gt; We also include a
+comparison to the evolutionary policy search approach from [8] in the
+last three rows of table.</p></li>
+</ul>
+<!-- 如果算法在某方面表现不好，找出相关的理由，最好和算法无关，或者可以避免 -->
+<h1 id="conclusion">Conclusion</h1>
+<ul>
+<li>贡献 &gt; This paper introduced a new deep learning model for
+reinforcement learning, and demonstrated its ability to master difficult
+control policies for Atari 2600 computer games, using only raw pixels as
+input.<br>
+&gt; We also presented a variant of online Q-learning that combines
+stochastic minibatch up- dates with experience replay memory to ease the
+training of deep networks for RL.</li>
+</ul>
+<h1 id="references">References</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/caozixuan98724/article/details/99219462">其他人的解读</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2032,153 +2639,6 @@ code with you.</p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/USV/Global-path-planning-based-on-electronic-chart/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Nobody">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-      <meta itemprop="description" content="sharing daily progress and life">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | One's Way">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/USV/Global-path-planning-based-on-electronic-chart/" class="post-title-link" itemprop="url">Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-02-01 23:56:31" itemprop="dateCreated datePublished" datetime="2020-02-01T23:56:31+08:00">2020-02-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/USV/" itemprop="url" rel="index"><span itemprop="name">USV</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>1.6k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>6 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <!--2019-03-12 23:56:31-->
-<h1 id="基于电子海图的水面无人艇全局路径规划">基于电子海图的水面无人艇全局路径规划</h1>
-<p>该论文已经在 ICMIR2017 会议上发表，附上 springer 的文献地址 <a target="_blank" rel="noopener" href="https://link.springer.com/chapter/10.1007/978-3-319-65978-7_80#citeas">Research
-and Implementation of Global Path Planning for Unmanned Surface Vehicle
-Based on Electronic Chart</a>，以及 arXiv 上的 <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1802.03221">文献地址</a>。本文接下来主要对论文的实现原理进行分析，在最后给出程序代码，方便后来者研究和参考。</p>
-<h1 id="摘要">摘要</h1>
-<p>英文在中文之后 / English follows Chinese</p>
-<p>水面无人艇 (Unmanned Surface Vehicles,
-USVs) 是一种新型的水面智能载具，其中全局路径规划是 USV 研究的关键技术，它可以反映出 USV 的智能程度。为了解决 USV 的全局路径规划问题，本文基于电子海图提出航行代价寻优 (sailing
-cost
-optimization) 的改进 A * 算法。我们使用 S-57 电子海图实现八叉树网格的环境模型建立，并基于航行安全权重、引导量和路径曲线平滑处理，提出优化的 A * 算法来实现规划路径航行安全，减少规划时间，提高路径平滑度。仿真结果表明，环境建模方法和改进 A * 算法可以规划出安全合理的全局路径。</p>
-<p>Unmanned Surface Vehicle (USV) is a new type of intelligent surface
-boat, and global path planning is the key technology of USV research,
-which can reflect the intelligent level of USV. In order to solve the
-problem of global path planning of USV, this paper proposes an improved
-A* algorithm for sailing cost optimization based on electronic chart.
-This paper uses the S-57 electronic chart to realize the establishment
-of the octree grid environment model, and proposes an improved A*
-algorithm based on sailing safety weight, pilot quantity and path curve
-smoothing to ensure the safety of the route, reduce the planning time,
-and improve path smoothness. The simulation results show that the
-environmental model construction method and the improved A* algorithm
-can generate safe and reasonable global path.</p>
-<h1 id="论文实现原理">论文实现原理</h1>
-<p>水面无人艇的全局路径规划，是指在存在障碍物的复杂环境下，给定起始点和目标点，根据任务要求自主规划出一条能够安全避开环境中静态障碍物的最优路径。</p>
-<p>本文提出基于电子海图的 USV 全局路径规划方案，分为电子海图解析、全局环境模型建立和路径搜索算法三部分。通过解析电子海图文件，提取其中的海域地理信息及碍航物等信息，将海图信息渲染成为自主航路规划系统能够识别的信息模式，建立由可航行网格和不可航行网格组成的环境模型。在此基础上，本文综合考虑航行安全性、航行距离、路径平滑度等因素，采用基于航行代价寻优的改进 A * 算法来搜索环境模型中的最优路径，实现水面无人艇的全局航路自主规划，提高水面无人艇的自主决策能力和智能化水平。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/ICMIR_Struct.png" width="600" height="120"></p>
-<p>水面无人艇全局路径规划系统无法直接利用电子海图进行自主路径规划，所以需要研究矢量电子海图 S-57 数据结构，提取出全局路径规划需要的海洋环境信息，裁剪无关数据，将电子海图转换为全局航路规划系统能够直接使用的信息。其中，利用开源的 TinyXML 库保存到 xml 文件中，供路径规划系统的后续分析和处理。</p>
-<p>在提取得到电子海图 xml 文件后，通过网格化的方法把感兴趣区域划分为若干块大小相等的矩形网格，然后利用 Shapely 开源地理库依次判断网格中是否存在从电子海图中解析的静态障碍物（如陆地、海岛、浅滩），从而将网格环境地图划分为可航区域和不可航区域。</p>
-<p>在实现环境建模后，全局路径搜索算法优化的目标是在确保航行安全性的前提下，尽可能使规划的路径航行代价最小，最大程度地减小与最短路径、最小航行代价无关的计算量。其中，Hart 等使用启发式函数来评估从初始点到目标点的代价，在 Dijkstra 算法基础上，结合启发式函数形成新的路径搜索策略 --A * 算法，通过减少搜索空间来提高搜索效率，所以更适合网格情形下的全局路径规划。本文对传统的 A * 算法进行改进，实现全局路径的初步搜索。</p>
-<p>网格环境下，如果直接把 A * 算法搜索得到的节点顺序连接起来作为水面无人艇的全局规划路径，通常会出现阶梯或者锯齿状路径的情况，很明显规划的路径并不是两点间的期望路径。所以，本文提出去除多余航点的曲线平滑算法，在保证安全的前提下减少路径中不必要的航点，使多段折线化为直线，增加路径的光滑度，规划的路径会更加符合起止点之间的期望路径，符合水面无人艇的运动学特性。</p>
-<h1 id="实现程序">实现程序</h1>
-<p>因为程序是 2017 年 4 月份实现的，仍然不够完善，可能存在 bug 或者性能优化点，欢迎交流和改善。程序最新代码请参考本人 github
-<a target="_blank" rel="noopener" href="https://github.com/wylloong">wylloong</a>。</p>
-<h2 id="电子海图解析">电子海图解析</h2>
-<p>S-57 电子海图解析中，本文在之前文章中已经进行详细的分析和讲解，并给出源代码，可以参见
-<a target="_blank" rel="noopener" href="https://github.com/wylloong/S57-Electronic-Chart-Reading-and-Storing">S57-Electronic-Chart-Reading-and-Storing</a>
-和 <a href="http://www.waylon.one/USV/ENC-analysis-store/">基于 8211lib 库对 s57 电子海图的解析和存储</a>。</p>
-<h2 id="建立环境模型">建立环境模型</h2>
-<p>该部分代码可详见 github <a target="_blank" rel="noopener" href="https://github.com/wylloong/GlobalPathPlanningforUSV/blob/master/GlobalEnviStructWithSquare.py">GlobalEnviStructWithSquare</a>，如有需要请备份，可能后期会删除掉部分程序。
-### 改进 A * 算法和路径平滑处理</p>
-<p>该部分代码可详见 github <a target="_blank" rel="noopener" href="https://github.com/wylloong/GlobalPathPlanningforUSV/blob/master/GlobalPathPlanWithSquare.py">GlobalPathPlanWithSquare</a>，如有需要请备份，可能后期会删除掉部分程序。</p>
-<h2 id="程序示例">程序示例</h2>
-<p>程序的全局路径规划示意图如下所示：</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/ICMIR2017.png"></p>
-<p>Note: It's been years since I last wrote electronic chart, all
-examples may not be syntactically valid but the idea should be
-correct.</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -2209,7 +2669,7 @@ correct.</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">16:06</span>
+    <span title="Reading time total">16:08</span>
   </span>
 </div>
 <div class="busuanzi-count">
