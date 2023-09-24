@@ -150,7 +150,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">100</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -183,6 +183,207 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/paper/A-Hopping-Robot-for-Planetary-Exploration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/paper/A-Hopping-Robot-for-Planetary-Exploration/" class="post-title-link" itemprop="url">Review on A Hopping Robot for Planetary Exploration</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-28 08:32:14" itemprop="dateCreated datePublished" datetime="2020-10-28T08:32:14+08:00">2020-10-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/paper/" itemprop="url" rel="index"><span itemprop="name">paper</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>799</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>3 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>[toc]</p>
+<p>A Hopping Robot for Planetary Exploration</p>
+<p>本文提出一个行星探测跳跃机器人，可以通过跳跃来移动和滚动来拍照。一个突出的特点是机器人可以依靠单个马达
+(single motor) 朝指定方向跳跃。</p>
+<blockquote>
+<p>The goal of this project is to explore a different mobility paradigm
+which may present advantages over conventional wheel and leg
+locomotion.</p>
+</blockquote>
+<!-- 本文多次讲到系统的设计，比如机械设计的考虑点等，考虑的方向值得参考。-->
+<h1 id="introduction">INTRODUCTION</h1>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/Hopping_NASS_JPL_CAD.png" alt="CAD rendering of the hopping robot">
+<figcaption aria-hidden="true">CAD rendering of the hopping
+robot</figcaption>
+</figure>
+<p>除了轮式和足式机器人，爬行、旋转和跳跃也是可能的前进方式。</p>
+<blockquote>
+<p>Laboratory experiments have demonstrated the feasibility of
+<strong>slithering, rolling and hopping</strong> as alternate propulsion
+methods, thus paving the way to a more comprehensive approach to
+mobility than is currently considered.</p>
+</blockquote>
+<p>跳跃是在低重力环境下的一种有效移动方式。</p>
+<blockquote>
+<p>It shows that hopping is an efficient form of transportation in a
+low-gravity environment.</p>
+</blockquote>
+<p>常见的二足式跳跃机器人的运动是离散的，因为在跳跃中会有重定向
+(reorientation) 和推力机制蓄能 (recharge of the thrust mechanism)
+的间隔。</p>
+<blockquote>
+<p>The common characteristic of these two hopping systems is motion
+discontinuity, since a pause for reorientation and recharge of the
+thrust mechanism is inserted between jumps.</p>
+</blockquote>
+<h1 id="system-description">SYSTEM DESCRIPTION</h1>
+<p>系统设计目标：最小化驱动器、大小和重量。</p>
+<blockquote>
+<p>The design is driven by the desire of minimizing the number of
+actuators, and the overall size and weight, while achieving useful
+scientific capabilities.</p>
+</blockquote>
+<p>系统的缺陷：软地面不能自纠正；爬山坡不可行。</p>
+<blockquote>
+<p>A possible drawback of this design is limited mobility on soft
+terrain, since the ground will conform to the shape of the robot and
+prevent it from self-righting.</p>
+</blockquote>
+<h2 id="the-hopping-mechanism">The Hopping Mechanism</h2>
+<p>蛋型 + 自纠正能力</p>
+<blockquote>
+<p>The chosen mechanism is a robust egg-shaped body with self-righting
+capability.</p>
+</blockquote>
+<h2 id="computer-and-sensor-electronics">Computer and Sensor
+Electronics</h2>
+<p>具体的芯片设计和能耗管理，比如掉电功能、通信协议等等。</p>
+<h1 id="static-and-dynamic-models">STATIC AND DYNAMIC MODELS</h1>
+<p>再一次验证了那句话，好的模型可以为系统的最优设计提供参考。</p>
+<blockquote>
+<p>The critical design constraint required to achieve maximum hopping
+distance.</p>
+</blockquote>
+<h1 id="large-and-fine-motion-微运动">LARGE AND FINE MOTION
+(微运动)</h1>
+<p>地表状况会对轨迹的计算造成影响。Soil mechanics 土壤力学</p>
+<blockquote>
+<p>Furthermore, the uncertainty of the terrain condition and of the
+lift-off angle will prevent the advanced calculation of the trajectory
+parameters.</p>
+</blockquote>
+<!-- 我的想法，如果观测地表推断结论不靠谱，那么就要依据跳跃的情况来推断地表的土壤情况，为下一次的跳跃提供参考。 -->
+<p>如何精确地跳跃短距离，然后抵达目标点呢？</p>
+<blockquote>
+<p>To cover short distances and to approach the desired target, we are
+planning to develop and test two new methods for fine motion control of
+the hopping robot.</p>
+</blockquote>
+<p>这应该属于路径规划的一个考虑点吧，毕竟在月球上一次跳跃的距离很长呢。</p>
+<h1 id="initial-tests">INITIAL TESTS</h1>
+<p>以数学为基准去驱动设计和实现。</p>
+<h1 id="conclusions">CONCLUSIONS</h1>
+<p>新奇的机械设计：蛋型 + 单驱动</p>
+<blockquote>
+<p>The robot consists of an egg-shaped shell enclosing a thrust
+mechanism, power storage devices and control and sensing
+electronics.</p>
+</blockquote>
+<p>旋转重定向是依靠传感器提供的偏心力实现的，依赖必要的设备来实现其他功能。</p>
+<blockquote>
+<p>Hopping is powered by a spring released under computer control,
+whereas orientation is achieved by rotating an off-axis mass, consisting
+of the video camera and its transmitter, about the robot vertical
+axis.</p>
+</blockquote>
+<blockquote>
+<p>Future Work: In the future, we plan to carry out extensive
+simulations and experiments with the prototype to test its mobility
+capabilities and fully develop a new method of fine motion control based
+on hopping and rolling.</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -2919,172 +3120,8 @@ please do not hesitate to discuss with me!</p>
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/website/nslookup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Nobody">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-      <meta itemprop="description" content="sharing daily progress and life">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | One's Way">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/website/nslookup/" class="post-title-link" itemprop="url">nslookup 工具学习</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2020-07-29 23:06:26" itemprop="dateCreated datePublished" datetime="2020-07-29T23:06:26+08:00">2020-07-29</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/website/" itemprop="url" rel="index"><span itemprop="name">website</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>462</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>[toc]</p>
-<!--
-这一次惊险的经历提醒自己，审视自己网站的内容，哪些是想展示给别人看的，哪些是自己的隐私，打死也不希望别人看到？
-
-若想人不知，除非己莫为。既然你可以浏览到的内容，为什么别人就不能浏览到呢？只不过略微复杂一点罢了。
--->
-<h1 id="background">Background</h1>
-<p>Recently, I found my website was visited by a set of IPs from the
-same region (Mountain View), as shown below. Without thought, I deemed
-my website was suffering from hacker attacks or somebody's dig.</p>
-<p>I was a little anxious and regretted that sharing some personal
-private information on my website. I built this website on sharing my
-own experience and learned knowledge to the masses and storing
-individual materials for my convenient use. I previously did not believe
-somebody would spare no effort to my website.</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/google_bot.png"></p>
-<p>Take it easy. I later found that these visitors are from Google's
-robotic crawler using an excellent tool -- nslookup, but I still decided
-to delete all personal information to protect my privacy.</p>
-<h1 id="whats-nslookup">What's nslookup</h1>
-<blockquote>
-<p>nslookup, name server lookup, is a network administration
-command-line tool available in many computer operating systems (like
-MacOs, Linux and Windows) for querying the Domain Name System (DNS) to
-obtain domain name or IP address mapping, or other DNS records.</p>
-</blockquote>
-<ul>
-<li>The command does not use the operating system's local Domain Name
-System resolver library to perform its queries, and thus may behave
-differently from dig, which does.</li>
-</ul>
-<h1 id="how-to-use">How to use</h1>
-<h2 id="find-the-ip-address-of-an-host">Find the IP address of an
-Host</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nslookup ip</span><br><span class="line"># nslookup www.waylon.one</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/search_domain_ip.jpg"></p>
-<h2 id="lookup-ip-address-to-domain-name">Lookup IP address to domain
-name</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nslookup ip</span><br><span class="line"># nslookup 66.249.73.108</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/search_ip_address.png"></p>
-<h2 id="find-mail-servers-for-a-domain">Find mail servers for a
-Domain</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nslookup  -querytype=mx  domain-name</span><br><span class="line"># nslookup  -querytype=mx 163.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="non-authoritative-answer-非权威应答">Non-authoritative answer
-(非权威应答)</h2>
-<p>You may notice that you get non authoritative answers. This is
-nothing to worry about as all it means is that the DNS server has
-already recently resolved this query. It can retrieve the results from
-cache, and doesn’t need to contact the authoritative name server.</p>
-<blockquote>
-<p>当你看到 “non-authoritative
-answer”，意味着你本地的 DNS 服务器之前访问过这个网址，这次查询直接是从本地 DNS 缓存中得到的。</p>
-</blockquote>
-<h1 id="references">References</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://www.steves-internet-guide.com/using-nslookup/">How
-to Use Nslookup – Beginners Guide</a>
-<ul>
-<li>A very good article. </li>
-</ul></li>
-<li><a target="_blank" rel="noopener" href="http://www.clownseo.com/seojsfx/154.html">如何辨别是不是一个真正的百度爬虫</a></li>
-<li><a target="_blank" rel="noopener" href="https://support.google.com/webmasters/answer/182072">Googlebot</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38058202/article/details/80468688">应用 nslookup 命令查看 A 记录</a></li>
-<li><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Nslookup">nslookup_Wiki</a></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
