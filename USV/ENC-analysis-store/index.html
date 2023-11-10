@@ -35,8 +35,8 @@
 <meta property="article:modified_time" content="2023-05-19T12:12:32.153Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="Robotics">
-<meta property="article:tag" content="C Plus Plus">
 <meta property="article:tag" content="USV">
+<meta property="article:tag" content="C Plus Plus">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.waylon.one/downloads/images/science/USV/ENC_struct.png">
 
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%94%B5%E5%AD%90%E6%B5%B7%E5%9B%BE"><span class="nav-number">1.</span> <span class="nav-text">什么是电子海图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#iso-8211lib-%E5%92%8C-ogr-%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">ISO 8211lib 和 OGR 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-number">3.</span> <span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96-enc"><span class="nav-number">3.1.</span> <span class="nav-text">读取 ENC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E5%88%B0xml%E6%96%87%E4%BB%B6%E4%B8%AD"><span class="nav-number">3.2.</span> <span class="nav-text">保存到 xml 文件中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">3.3.</span> <span class="nav-text">一些实现细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%92%8C%E7%BB%93%E6%9E%9C"><span class="nav-number">4.</span> <span class="nav-text">代码和结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">什么是电子海图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">ISO 8211lib 和 OGR 简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">程序实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96-ENC"><span class="nav-number">3.1.</span> <span class="nav-text">读取 ENC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E5%88%B0xml%E6%96%87%E4%BB%B6%E4%B8%AD"><span class="nav-number">3.2.</span> <span class="nav-text">保存到 xml 文件中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E4%BA%9B%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">3.3.</span> <span class="nav-text">一些实现细节</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">代码和结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -316,90 +316,45 @@
     <div class="post-body" itemprop="articleBody"><!--2019-11-30 08:20:18-->
 <p>[toc]</p>
 <p>本文主要在 S-57 电子海图数据的理论模型和数据结构的基础上，实现对 S-57 电子海图数据文件的解析，将海图信息解析后保存到 xml 文件中，供下游程序调用和后续研究。</p>
-<h1 id="什么是电子海图">什么是电子海图</h1>
-<p>电子导航图 (Electronic Navigational Chart, ENC)
-是为航海需要而绘制的包含海域地理信息和航海信息的一种数字化的专题地图，是由各个国家的航道官方部门根据国际航道组织的《数字海道测量数据传输标准》
-(S-57 标准) 而制作的。符合国际标准的电子海图数据统称为 S-57 电子海图，
-它是一种面向对象的矢量格式的电子地图，其存储形式是二进制。<br>
-电子海图的理论模型和数据结构，可以查看国际标准《数字海道测量数据传输标准》，这里不再详述，对应英文版是《IHO
-TRANSFER STANDARD for DIGITAL HYDROGRAPHIC DATA》。<br>
-S-57 电子海图的结构如下图所示，来自 <a href="http://www.waylon.one/download/papers/Research_and_implementation_of_global_path_planning_for_unmanned_surface_vehicle.pdf">Research
-and Implementation of Global Path Planning for Unmanned Surface Vehicle
-Based on Electronic Chart</a>。</p>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_struct.png" alt="S57数据结构">
-<figcaption aria-hidden="true">S57 数据结构</figcaption>
-</figure>
-<h1 id="iso-8211lib-和-ogr-简介">ISO 8211lib 和 OGR 简介</h1>
-<p>S-57 标准封转格式是 ISO/IEC 8211
-国际标准，封装标准的基础是文件，逻辑记录是封装标准的基本成分。<br>
-ISO 8211lib 是 C++ 编写的开源库，专门用于读取符合 ISO 8211
-封装标准的数据文件，如 S-57 电子海图数据格式和空间数据传输标准数据集
-(SDTS)； GDAL 是一个开源栅格空间数据转换库，其中 OGR 是对 GDAL
-的扩展，功能与 GDAL 类似，主要提供对矢量数据格式的读写，支持 S-57
-电子海图格式，其中 S57reader 类是对 ISO 8211lib 库的封装，该类中包含读取
-S-57 电子海图数据文件所用到的基本函数。</p>
-<h1 id="程序实现">程序实现</h1>
-<h2 id="读取-enc">读取 ENC</h2>
-<p>OGR 有关于 S-57 读取的官方文档 <a target="_blank" rel="noopener" href="http://www.gdal.org/drv_s57.html">IHO S-57 (ENC)</a>，其中需要注意
-OGR 的 S-57 驱动模块将处理 S-57 文件里所有的 feature 要素，其中 S-57
-的特征物标 (feature objects) 转换为要素 (feature)，空间物标 (geometry
-objects) 自动转换化对应要素下的空间几何对象。<br>
-在 OGR 中，从 S-57 文件读取的所有要素根据物标类型 (OBJL)
-归属于相应的图层，可以类比于 GIS 里的 shape 格式，对应的图层下有要素
-(feature), 要素下面有字段 (field) 和几何对象
-(geometry)，要素的几何形状可以从几何形状中获取，要素属性可以从字段中获取。</p>
+<h1>什么是电子海图</h1>
+<p>电子导航图 (Electronic Navigational Chart, ENC) 是为航海需要而绘制的包含海域地理信息和航海信息的一种数字化的专题地图，是由各个国家的航道官方部门根据国际航道组织的《数字海道测量数据传输标准》 (S-57 标准) 而制作的。符合国际标准的电子海图数据统称为 S-57 电子海图， 它是一种面向对象的矢量格式的电子地图，其存储形式是二进制。<br>
+电子海图的理论模型和数据结构，可以查看国际标准《数字海道测量数据传输标准》，这里不再详述，对应英文版是《IHO TRANSFER STANDARD for DIGITAL HYDROGRAPHIC DATA》。<br>
+S-57 电子海图的结构如下图所示，来自 <a href="http://www.waylon.one/download/papers/Research_and_implementation_of_global_path_planning_for_unmanned_surface_vehicle.pdf">Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart</a>。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_struct.png" alt="S57数据结构"></p>
+<h1>ISO 8211lib 和 OGR 简介</h1>
+<p>S-57 标准封转格式是 ISO/IEC 8211 国际标准，封装标准的基础是文件，逻辑记录是封装标准的基本成分。<br>
+ISO 8211lib 是 C++ 编写的开源库，专门用于读取符合 ISO 8211 封装标准的数据文件，如 S-57 电子海图数据格式和空间数据传输标准数据集 (SDTS)； GDAL 是一个开源栅格空间数据转换库，其中 OGR 是对 GDAL 的扩展，功能与 GDAL 类似，主要提供对矢量数据格式的读写，支持 S-57 电子海图格式，其中 S57reader 类是对 ISO 8211lib 库的封装，该类中包含读取 S-57 电子海图数据文件所用到的基本函数。</p>
+<h1>程序实现</h1>
+<h2 id="读取-ENC">读取 ENC</h2>
+<p>OGR 有关于 S-57 读取的官方文档 <a target="_blank" rel="noopener" href="http://www.gdal.org/drv_s57.html">IHO S-57 (ENC)</a>，其中需要注意 OGR 的 S-57 驱动模块将处理 S-57 文件里所有的 feature 要素，其中 S-57 的特征物标 (feature objects) 转换为要素 (feature)，空间物标 (geometry objects) 自动转换化对应要素下的空间几何对象。<br>
+在 OGR 中，从 S-57 文件读取的所有要素根据物标类型 (OBJL) 归属于相应的图层，可以类比于 GIS 里的 shape 格式，对应的图层下有要素 (feature), 要素下面有字段 (field) 和几何对象 (geometry)，要素的几何形状可以从几何形状中获取，要素属性可以从字段中获取。</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">layer according to OBJL</span><br><span class="line">  repeated feature</span><br><span class="line">    repeated field</span><br><span class="line">    repeated geometry</span><br></pre></td></tr></tbody></table></figure>
-<p>其中，深度信息 (Depth soundings) 是 S-57 文件特有的，在读取 Depth
-soundings 需要设置 S57 Control Options 中的 ADD_SOUNDG_DEPTH 选项为
-ON，对于 S57 Control Options
-读取和导出的深层次知识请阅读官网文档。<br>
-最后，注意在程序中附加 s57objectclasses.csv 和
-s57attributes.csv 文件，否则会缺少信息，如图层只有 5 层，无法读取等深线等。官方文档是这么解释的：
-&gt; The S-57 reader depends on having two supporting files,
-s57objectclasses.csv, and s57attributes.csv available at runtime in
-order to translate features in an object class specific manner. These
-should be in the directory pointed to by the environment variable
-S57_CSV, or in the current working directory.</p>
+<p>其中，深度信息 (Depth soundings) 是 S-57 文件特有的，在读取 Depth soundings 需要设置 S57 Control Options 中的 ADD_SOUNDG_DEPTH 选项为 ON，对于 S57 Control Options 读取和导出的深层次知识请阅读官网文档。<br>
+最后，注意在程序中附加 s57objectclasses.csv 和 s57attributes.csv 文件，否则会缺少信息，如图层只有 5 层，无法读取等深线等。官方文档是这么解释的：</p>
+<blockquote>
+<p>The S-57 reader depends on having two supporting files, s57objectclasses.csv, and s57attributes.csv available at runtime in order to translate features in an object class specific manner. These should be in the directory pointed to by the environment variable S57_CSV, or in the current working directory.</p>
+</blockquote>
 <h2 id="保存到xml文件中">保存到 xml 文件中</h2>
-<p>因为项目需要，需要把 S-57 文件里特定图层的信息提取出来，S-57
-文件解析后，把感兴趣的信息保存到 xml 文件中，方便后续的处理。</p>
-<p>在 C++ 中，对 XML 文件处理中，使用一个开源的解析 XML 的解析库 --
-TinyXML，这个解析库的模型通过解析 XML
-文件，然后在内存中生成 DOM 模型，从而让我们很方便的遍历这棵 XML 树。</p>
+<p>因为项目需要，需要把 S-57 文件里特定图层的信息提取出来，S-57 文件解析后，把感兴趣的信息保存到 xml 文件中，方便后续的处理。</p>
+<p>在 C++ 中，对 XML 文件处理中，使用一个开源的解析 XML 的解析库 – TinyXML，这个解析库的模型通过解析 XML 文件，然后在内存中生成 DOM 模型，从而让我们很方便的遍历这棵 XML 树。</p>
 <h2 id="一些实现细节">一些实现细节</h2>
-<p>如果无法得到一个 object
-class 的属性或者值不正确，如 VALDCO 的值始终为 0。根据论坛的讨论 <a target="_blank" rel="noopener" href="http://osgeo-org.1560.x6.nabble.com/OGR-to-access-s57-file-missing-attributes-issue-td3742926.html">OGR
-to access s57 file, missing attributes
-issue</a>，注意是否加载了 S-57 的支持文件.csv。 &gt; The solution to that
-is to set the GDAL_DATA environment variable to point the directory with
-the s57objectclasses.csv and related files。</p>
-<h1 id="代码和结果">代码和结果</h1>
+<p>如果无法得到一个 object class 的属性或者值不正确，如 VALDCO 的值始终为 0。根据论坛的讨论 <a target="_blank" rel="noopener" href="http://osgeo-org.1560.x6.nabble.com/OGR-to-access-s57-file-missing-attributes-issue-td3742926.html">OGR to access s57 file, missing attributes issue</a>，注意是否加载了 S-57 的支持文件.csv。</p>
+<blockquote>
+<p>The solution to that is to set the GDAL_DATA environment variable to point the directory with the s57objectclasses.csv and related files。</p>
+</blockquote>
+<h1>代码和结果</h1>
 <p>解析和存储效果如下图所示，按图层要素顺序依次组织。</p>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_result.png" alt="S57结构">
-<figcaption aria-hidden="true">S57 结构</figcaption>
-</figure>
-<p>程序实现源代码及示例，欢迎访问 <a target="_blank" rel="noopener" href="https://github.com/wylloong/S57-Electronic-Chart-Reading-and-Storing">Github:
-wylloong/S57-Electronic-Chart-Reading-and-Storing</a>。<br>
+<p><img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_result.png" alt="S57结构"></p>
+<p>程序实现源代码及示例，欢迎访问 <a target="_blank" rel="noopener" href="https://github.com/wylloong/S57-Electronic-Chart-Reading-and-Storing">Github: wylloong/S57-Electronic-Chart-Reading-and-Storing</a>。<br>
 程序开发环境是 VS2015，其中需要在编译的时候修改两个位置，如下图所示，否则编译会报错。</p>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_VS_2015_config_1.png" alt="S57结构">
-<figcaption aria-hidden="true">S57 结构</figcaption>
-</figure>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_VS_2015_config_2.png" alt="S57结构">
-<figcaption aria-hidden="true"> S57 结构</figcaption>
-</figure>
+<p><img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_VS_2015_config_1.png" alt="S57结构"></p>
+<p><img data-src="http://www.waylon.one/downloads/images/science/USV/ENC_VS_2015_config_2.png" alt="S57结构"></p>
 <p>如果有内容讨论，可以下面留言。</p>
-<h1 id="references">References</h1>
+<h1>References</h1>
 <ul>
 <li>《数字海道测量数据传输标准》</li>
-<li><a target="_blank" rel="noopener" href="https://gdal.org/drivers/vector/s57.html">IHO S-57
-(ENC)</a></li>
-<li><a href="http://www.waylon.one/download/papers/Research_and_implementation_of_global_path_planning_for_unmanned_surface_vehicle.pdf">Research
-and Implementation of Global Path Planning for Unmanned Surface Vehicle
-Based on Electronic Chart</a></li>
+<li><a target="_blank" rel="noopener" href="https://gdal.org/drivers/vector/s57.html">IHO S-57 (ENC)</a></li>
+<li><a href="http://www.waylon.one/download/papers/Research_and_implementation_of_global_path_planning_for_unmanned_surface_vehicle.pdf">Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart</a></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/6506906.html">基于 8211lib 库对 s57 电子海图的解析和存储 (目前停止维护)</a></li>
 </ul>
 
@@ -412,8 +367,8 @@ Based on Electronic Chart</a></li>
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Robotics/" rel="tag"># Robotics</a>
-              <a href="/tags/C-Plus-Plus/" rel="tag"># C Plus Plus</a>
               <a href="/tags/USV/" rel="tag"># USV</a>
+              <a href="/tags/C-Plus-Plus/" rel="tag"># C Plus Plus</a>
           </div>
 
         
