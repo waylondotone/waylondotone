@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc]   std std::numeric_limits  The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.  int 的最大值是 numeric_limits::max().   min 和 lowest 都被">
+    <meta name="description" content="[toc]   std std::numeric_limits  The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.  int 的最大值是 numeric_limits::max().  min 和 lowest 都被用">
 <meta property="og:type" content="article">
 <meta property="og:title" content="每周学点 C++">
 <meta property="og:url" content="http://www.waylon.one/Programming/advanced-c-plus-plus/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc]   std std::numeric_limits  The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.  int 的最大值是 numeric_limits::max().   min 和 lowest 都被">
+<meta property="og:description" content="[toc]   std std::numeric_limits  The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.  int 的最大值是 numeric_limits::max().  min 和 lowest 都被用">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://media.geeksforgeeks.org/wp-content/uploads/spiral-2.jpg">
 <meta property="article:published_time" content="2019-12-13T23:32:01.000Z">
@@ -143,7 +143,16 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">std</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#std-numeric-limits"><span class="nav-number">1.1.</span> <span class="nav-text">std::numeric_limits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-sort"><span class="nav-number">1.2.</span> <span class="nav-text">std::sort</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-equal"><span class="nav-number">1.3.</span> <span class="nav-text">std::equal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Programming grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-number">2.1.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#std-string-substr"><span class="nav-number">2.1.1.</span> <span class="nav-text">std::string::substr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-string-size"><span class="nav-number">2.1.2.</span> <span class="nav-text">std::string::size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#std-string-operator"><span class="nav-number">2.1.3.</span> <span class="nav-text">std::string::operator[]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack"><span class="nav-number">2.2.</span> <span class="nav-text">stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#std-stack-top"><span class="nav-number">2.2.1.</span> <span class="nav-text">std::stack::top</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map"><span class="nav-number">2.3.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#std-map-insert"><span class="nav-number">2.3.1.</span> <span class="nav-text">std::map::insert\</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-int-vs-const-int-const-vs-int-const"><span class="nav-number">2.4.</span> <span class="nav-text">const int * vs const int * const vs int const *</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-numeric-limits-min-vs-lowest"><span class="nav-number">2.5.</span> <span class="nav-text">std::numeric_limits::min() vs lowest()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-move-%E5%AF%B9%E8%B1%A1%E7%A7%BB%E5%8A%A8"><span class="nav-number">2.6.</span> <span class="nav-text">std::move 对象移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-set"><span class="nav-number">2.7.</span> <span class="nav-text">std::set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STL-%E4%B8%AD-set-%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%9F"><span class="nav-number">2.7.1.</span> <span class="nav-text">STL 中 set 底层实现方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8-std-move"><span class="nav-number">2.7.2.</span> <span class="nav-text">什么时候使用 std::move</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#at-vs-operator-in-vector"><span class="nav-number">2.8.</span> <span class="nav-text">at vs operator[] in vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit-%E6%8A%91%E5%88%B6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.9.</span> <span class="nav-text">explicit 抑制构造函数定义的隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-upper-bound-vs-std-lower-bound"><span class="nav-number">2.10.</span> <span class="nav-text">std::upper_bound vs std::lower_bound()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#std-vector-%E5%92%8C-std-string-%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.11.</span> <span class="nav-text">std:vector 和 std:string 的相互转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF-function-template-%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.12.</span> <span class="nav-text">函数模板 (function template) 返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boost-optional"><span class="nav-number">2.13.</span> <span class="nav-text">boost::optional()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Grammar Discriminate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96-%E8%B5%8B%E5%80%BC%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">构造函数初始化 (赋值和初始化)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">动态绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">默认构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vector"><span class="nav-number">3.4.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline"><span class="nav-number">3.5.</span> <span class="nav-text">inline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Copy-Constructor-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.6.</span> <span class="nav-text">Copy Constructor 拷贝构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">3.6.1.</span> <span class="nav-text">浅拷贝和深拷贝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Code Style</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#class"><span class="nav-number">4.1.</span> <span class="nav-text">class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Friends"><span class="nav-number">4.2.</span> <span class="nav-text">Friends</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Initialization-and"><span class="nav-number">4.3.</span> <span class="nav-text">Initialization: &#x3D;, (), and {}</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Best-Practices-for-Initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Best Practices for Initialization</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#std"><span class="nav-number">1.</span> <span class="nav-text">std</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#stdnumeric_limits"><span class="nav-number">1.1.</span> <span class="nav-text">std::numeric_limits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdsort"><span class="nav-number">1.2.</span> <span class="nav-text">std::sort</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdequal"><span class="nav-number">1.3.</span> <span class="nav-text">std::equal</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#programming-grammar"><span class="nav-number">2.</span> <span class="nav-text">Programming grammar</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#string"><span class="nav-number">2.1.</span> <span class="nav-text">string</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstringsubstr"><span class="nav-number">2.1.1.</span> <span class="nav-text">std::string::substr</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstringsize"><span class="nav-number">2.1.2.</span> <span class="nav-text">std::string::size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstringoperator"><span class="nav-number">2.1.3.</span> <span class="nav-text">std::string::operator[]</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stack"><span class="nav-number">2.2.</span> <span class="nav-text">stack</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stdstacktop"><span class="nav-number">2.2.1.</span> <span class="nav-text">std::stack::top</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map"><span class="nav-number">2.3.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stdmapinsert"><span class="nav-number">2.3.1.</span> <span class="nav-text">std::map::insert
+</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-int-vs-const-int-const-vs-int-const"><span class="nav-number">2.4.</span> <span class="nav-text">const int * vs const
+int * const vs int const *</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdnumeric_limitsmin-vs-lowest"><span class="nav-number">2.5.</span> <span class="nav-text">std::numeric_limits::min() vs
+lowest()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdmove-%E5%AF%B9%E8%B1%A1%E7%A7%BB%E5%8A%A8"><span class="nav-number">2.6.</span> <span class="nav-text">std::move 对象移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdset"><span class="nav-number">2.7.</span> <span class="nav-text">std::set</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#stl-%E4%B8%AD-set-%E5%BA%95%E5%B1%82%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="nav-number">2.7.1.</span> <span class="nav-text">STL 中 set 底层实现方式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E4%BD%BF%E7%94%A8-stdmove"><span class="nav-number">2.7.2.</span> <span class="nav-text">什么时候使用 std::move</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#at-vs-operator-in-vector"><span class="nav-number">2.8.</span> <span class="nav-text">at vs operator[] in vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#explicit-%E6%8A%91%E5%88%B6%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E7%9A%84%E9%9A%90%E5%BC%8F%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.9.</span> <span class="nav-text">explicit
+抑制构造函数定义的隐式转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdupper_bound-vs-stdlower_bound"><span class="nav-number">2.10.</span> <span class="nav-text">std::upper_bound vs
+std::lower_bound()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stdvector-%E5%92%8C-stdstring-%E7%9A%84%E7%9B%B8%E4%BA%92%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.11.</span> <span class="nav-text">std:vector 和 std:string
+的相互转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BFfunction-template%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.12.</span> <span class="nav-text">函数模板 (function
+template) 返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#boostoptional"><span class="nav-number">2.13.</span> <span class="nav-text">boost::optional()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grammar-discriminate"><span class="nav-number">3.</span> <span class="nav-text">Grammar Discriminate</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E5%88%9D%E5%A7%8B%E5%8C%96-%E8%B5%8B%E5%80%BC%E5%92%8C%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">构造函数初始化 (赋值和初始化)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A"><span class="nav-number">3.2.</span> <span class="nav-text">动态绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">默认构造函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vector"><span class="nav-number">3.4.</span> <span class="nav-text">Vector</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#inline"><span class="nav-number">3.5.</span> <span class="nav-text">inline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#copy-constructor-%E6%8B%B7%E8%B4%9D%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.6.</span> <span class="nav-text">Copy Constructor
+拷贝构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%85%E6%8B%B7%E8%B4%9D%E5%92%8C%E6%B7%B1%E6%8B%B7%E8%B4%9D"><span class="nav-number">3.6.1.</span> <span class="nav-text">浅拷贝和深拷贝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#code-style"><span class="nav-number">4.</span> <span class="nav-text">Code Style</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#class"><span class="nav-number">4.1.</span> <span class="nav-text">class</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#friends"><span class="nav-number">4.2.</span> <span class="nav-text">Friends</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#initialization-and"><span class="nav-number">4.3.</span> <span class="nav-text">Initialization: &#x3D;, (), and</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#best-practices-for-initialization"><span class="nav-number">4.3.1.</span> <span class="nav-text">Best Practices for
+Initialization</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -285,120 +294,145 @@ Discussion Items:
 - make_shardpte 有一次拷贝，并且和原来的地址不一致
 
 -->
-<h1>std</h1>
-<h2 id="std-numeric-limits"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">std::numeric_limits</a></h2>
+<h1 id="std">std</h1>
+<h2 id="stdnumeric_limits"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">std::numeric_limits</a></h2>
 <ul>
-<li>The std::numeric_limits class template provides a standardized way to query various properties of arithmetic types.
+<li>The std::numeric_limits class template provides a standardized way
+to query various properties of arithmetic types.
 <ul>
 <li>int 的最大值是 numeric_limits<int>::max().</int></li>
-</ul>
-</li>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a> 和 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a> 都被用来获取某个类型的最小值。它们分别返回这个最小值可表示的最小正数 (min) 和最小负数 (lowest)。因此，当 T 是一个无符号类型的时候，min () 和 lowest () 返回的值是相同的。其次，lowest () 只对有符号类型有效，而 min () 对所有数据类型都有效。</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>
+和 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>
+都被用来获取某个类型的最小值。它们分别返回这个最小值可表示的最小正数
+(min) 和最小负数 (lowest)。因此，当 T 是一个无符号类型的时候，min () 和
+lowest () 返回的值是相同的。其次，lowest () 只对有符号类型有效，而 min ()
+对所有数据类型都有效。</li>
 </ul>
 <figure class="highlight c"><figcaption><span>++</span><a href="/downloads/code/int_value.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;limits&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>{</span><br><span class="line">    <span class="type">int</span> max_int = <span class="built_in">std</span>::numeric_limits&lt;<span class="type">int</span>&gt;::max();</span><br><span class="line">    <span class="type">int</span> min_int = <span class="built_in">std</span>::numeric_limits&lt;<span class="type">int</span>&gt;::min();</span><br><span class="line">    <span class="type">int</span> lowest_int = <span class="built_in">std</span>::numeric_limits&lt;<span class="type">int</span>&gt;::lowest();</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"max int is "</span> &lt;&lt; max_int &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"min int is "</span> &lt;&lt; min_int &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"lowest int is "</span> &lt;&lt; lowest_int &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// output is</span></span><br><span class="line">    <span class="comment">// max int is 2147483647</span></span><br><span class="line">    <span class="comment">// min int is -2147483648</span></span><br><span class="line">    <span class="comment">// lowest int is -2147483648</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="std-sort"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/sort">std::sort</a></h2>
+<h2 id="stdsort"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/sort">std::sort</a></h2>
 <ul>
-<li>Sorts the elements in the range [first, last) in non-descending order.
+<li>Sorts the elements in the range [first, last) in non-descending
+order.
 <ul>
 <li>要求传入两个迭代器确定范围</li>
-</ul>
-</li>
+</ul></li>
 <li>逆序排序 std::sort (vec.rbegin (), vec.rend ())</li>
 </ul>
-<h2 id="std-equal"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/equal">std::equal</a></h2>
+<h2 id="stdequal"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/equal">std::equal</a></h2>
 <ul>
-<li>Two ranges are considered equal if they have the same number of elements and, for every iterator i in the range [first1, last1), *i equals *(first2 + (i - first1)).
+<li>Two ranges are considered equal if they have the same number of
+elements and, for every iterator i in the range [first1, last1), <em>i
+equals </em>(first2 + (i - first1)).
 <ul>
 <li>要求按位置一致</li>
+</ul></li>
+<li> std::equal should not be used to compare the ranges formed by the
+iterators from std::unordered_set/map</li>
 </ul>
-</li>
-<li> std::equal should not be used to compare the ranges formed by the iterators from std::unordered_set/map</li>
-</ul>
-<h1>Programming grammar</h1>
+<h1 id="programming-grammar">Programming grammar</h1>
 <h2 id="string">string</h2>
-<h3 id="std-string-substr"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/substr/">std::string::substr</a></h3>
+<h3 id="stdstringsubstr"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/substr/">std::string::substr</a></h3>
 <ul>
-<li>Returns a newly constructed string object with its value initialized to a copy of a substring of this object.</li>
+<li>Returns a newly constructed string object with its value initialized
+to a copy of a substring of this object.</li>
 <li>string::substr (pos, n) 返回从 pos 开始的 n 个字符的拷贝.</li>
 </ul>
-<h3 id="std-string-size"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/size/">std::string::size</a></h3>
+<h3 id="stdstringsize"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/size/">std::string::size</a></h3>
 <ul>
 <li>Returns the length of the string, in terms of bytes.</li>
 <li>Returns <strong>size_t</strong>, an unsigned integral type.
 <ul>
 <li>不能直接 min (size_t, int), 编译错误 </li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h3 id="std-string-operator"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/operator%5B%5D/">std::string::operator[]</a></h3>
+<h3 id="stdstringoperator"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/string/string/operator%5B%5D/">std::string::operator[]</a></h3>
 <ul>
-<li>Returns a <strong>reference</strong> to the character at position pos in the string.</li>
+<li>Returns a <strong>reference</strong> to the character at position
+pos in the string.</li>
 </ul>
 <h2 id="stack">stack</h2>
-<h3 id="std-stack-top"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/top/">std::stack::top</a></h3>
+<h3 id="stdstacktop"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/stack/stack/top/">std::stack::top</a></h3>
 <ul>
-<li>Returns a <strong>reference</strong> to the top element in the stack.</li>
+<li>Returns a <strong>reference</strong> to the top element in the
+stack.</li>
 <li> 如果栈为空，返回值未定义。</li>
 </ul>
 <h2 id="map">map</h2>
-<h3 id="std-map-insert"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/insert">std::map::insert</a>\</h3>
+<h3 id="stdmapinsert"><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/map/insert">std::map::insert</a><br>
+</h3>
 <ul>
-<li>插入元素类型是 pair, 可以是 insert ({key_x, value_y}), 或者是 insert (make_pair (key_x, value_y)).</li>
+<li>插入元素类型是 pair, 可以是 insert ({key_x, value_y}), 或者是
+insert (make_pair (key_x, value_y)).</li>
 </ul>
-<h2 id="const-int-vs-const-int-const-vs-int-const">const int * vs const int * const vs int const *</h2>
+<h2 id="const-int-vs-const-int-const-vs-int-const">const int * vs const
+int * const vs int const *</h2>
 <ul>
-<li>int const* is equivalent to const int* 指向常量 int 的指针</li>
+<li><p>int const* is equivalent to const int* 指向常量 int 的指针 &gt;
+This means that the variable being declared is a pointer, pointing to a
+constant integer. Effectively, this implies that the pointer is pointing
+to <strong>a value that should not be changed</strong>. Const qualifier
+doesn’t affect the pointer in this scenario so the pointer is allowed to
+point to some other address.</p></li>
+<li><p>int *const 指向 int 的常量指针 &gt; This means that the variable
+being declared is a constant pointer pointing to an integer.
+Effectively, this implies that <strong>the pointer shouldn’t point to
+some other address</strong>. Const qualifier doesn’t affect the value of
+integer in this scenario so the value being stored in the address is
+allowed to change.</p></li>
+<li><p>const int* const is equivalent to int const* const
+指向常量 int 的常量指针 &gt; This means that the variable being declared
+is a constant pointer pointing to a constant integer. Effectively, this
+implies that a constant pointer is pointing to a constant value. Hence,
+<strong>neither the pointer should point to a new address nor the value
+being pointed to should be changed</strong>.</p></li>
+<li><p>Memory Map <img data-src="https://media.geeksforgeeks.org/wp-content/uploads/spiral-2.jpg"></p></li>
 </ul>
 <blockquote>
-<p>This means that the variable being declared is a pointer, pointing to a constant integer. Effectively, this implies that the pointer is pointing to <strong>a value that should not be changed</strong>. Const qualifier doesn’t affect the pointer in this scenario so the pointer is allowed to point to some other address.</p>
-</blockquote>
-<ul>
-<li>int *const 指向 int 的常量指针</li>
-</ul>
-<blockquote>
-<p>This means that the variable being declared is a constant pointer pointing to an integer. Effectively, this implies that <strong>the pointer shouldn’t point to some other address</strong>. Const qualifier doesn’t affect the value of integer in this scenario so the value being stored in the address is allowed to change.</p>
-</blockquote>
-<ul>
-<li>const int* const is equivalent to int const* const 指向常量 int 的常量指针</li>
-</ul>
-<blockquote>
-<p>This means that the variable being declared is a constant pointer pointing to a constant integer. Effectively, this implies that a constant pointer is pointing to a constant value. Hence, <strong>neither the pointer should point to a new address nor the value being pointed to should be changed</strong>.</p>
-</blockquote>
-<ul>
-<li>Memory Map<br>
-<img data-src="https://media.geeksforgeeks.org/wp-content/uploads/spiral-2.jpg" alt=""></li>
-</ul>
-<blockquote>
-<p>One way to remember the syntax (according to Bjarne Stroustrup) is the spiral rule -<br>
-The rule says, start from the name of the variable and move clockwise to the next pointer or type. Repeat until expression ends.</p>
+<p>One way to remember the syntax (according to Bjarne Stroustrup) is
+the spiral rule - The rule says, start from the name of the variable and
+move clockwise to the next pointer or type. Repeat until expression
+ends.</p>
 </blockquote>
 <blockquote>
-<p>Using this rule, even complex declarations can be decoded like, int ** const is a const pointer to pointer to an int.</p>
+<p>Using this rule, even complex declarations can be decoded like, int
+** const is a const pointer to pointer to an int.</p>
 </blockquote>
 <blockquote>
-<p>以 * 为界， 在 * 前后的 const 可以和同侧的 data type 调换位置，不影响变量表达的含义。</p>
+<p>以 * 为界， 在 * 前后的 const 可以和同侧的 data type
+调换位置，不影响变量表达的含义。</p>
 </blockquote>
 <!--
 The first const keyword can go either side of data type, hence const int* const is equivalent to int const* const.
 -->
 <ul>
-<li>Reference to <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-between-const-int-const-int-const-and-int-const/">Difference between const int*, const int * const, and int const *</a></li>
+<li>Reference to <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/difference-between-const-int-const-int-const-and-int-const/">Difference
+between const int*, const int * const, and int const *</a></li>
 </ul>
-<h2 id="std-numeric-limits-min-vs-lowest">std::numeric_limits::min() vs lowest()</h2>
-<p>根据 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">ppreference</a> 定义：</p>
+<h2 id="stdnumeric_limitsmin-vs-lowest">std::numeric_limits::min() vs
+lowest()</h2>
+<p>根据 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits">ppreference</a>
+定义：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>: Returns the lowest finite value representable by the numeric type T, that is, a finite value x such that there is no other finite value y where y &lt; x.</li>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>：For floating-point types with denormalization, min returns the minimum positive normalized value.</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/lowest">lowest</a>:
+Returns the lowest finite value representable by the numeric type T,
+that is, a finite value x such that there is no other finite value y
+where y &lt; x.</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/types/numeric_limits/min">min</a>：For
+floating-point types with denormalization, min returns the minimum
+positive normalized value.</li>
 </ul>
 <p>也就是说，</p>
-<ol>
-<li>如果 T 属于 int 型，則 min 和 lowest 会返回一样的值，皆为该类型的最小值（负数或 0）。</li>
-<li>如果 T 属于浮点型，min 返回 “最小正数”，lowest 返回最小值。</li>
+<ol type="1">
+<li>如果 T 属于 int 型，則 min 和 lowest
+会返回一样的值，皆为该类型的最小值（负数或 0）。</li>
+<li>如果 T 属于浮点型，min 返回 "最小正数"，lowest 返回最小值。</li>
 </ol>
 <ul>
-<li>Reference to <a target="_blank" rel="noopener" href="https://blog.csdn.net/keineahnung2345/article/details/104181062">C++ std::numeric_limits::max ()，min () 及 lowest ()</a></li>
+<li>Reference to <a target="_blank" rel="noopener" href="https://blog.csdn.net/keineahnung2345/article/details/104181062">C++
+std::numeric_limits::max ()，min () 及 lowest ()</a></li>
 </ul>
-<h2 id="std-move-对象移动">std::move 对象移动</h2>
+<h2 id="stdmove-对象移动">std::move 对象移动</h2>
 <blockquote>
 <p>在重新分配内存的过程中，从旧内存将元素拷贝到新内存是不必要的，最好的方式是移动元素；此外，IO 类和 unique_ptr 类可以移动但不能拷贝。</p>
 </blockquote>
@@ -414,91 +448,115 @@ The first const keyword can go either side of data type, hence const int* const 
 <p>我们可以销毁一个移后源对象，也可以赋予它新值，但不能使用一个移后源对象的值。</p>
 </blockquote>
 <ul>
-<li>与多数标准库名字的使用不同，对 move 我们不提供 using 声明，我们直接调用 <a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/move">std::move</a> 而不是 move。</li>
+<li>与多数标准库名字的使用不同，对 move 我们不提供 using 声明，我们直接调用
+<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/move">std::move</a>
+而不是 move。</li>
 </ul>
-<h2 id="std-set">std::set</h2>
-<h3 id="STL-中-set-底层实现方式？">STL 中 set 底层实现方式？</h3>
+<h2 id="stdset">std::set</h2>
+<h3 id="stl-中-set-底层实现方式">STL 中 set 底层实现方式？</h3>
 <ul>
 <li>set 底层实现方式为 RB 树（即红黑树）。</li>
-<li>红黑树与 hash table 最大的不同是，红黑树是<strong>有序结构</strong>，而 hash table 不是。
+<li>红黑树与 hash table
+最大的不同是，红黑树是<strong>有序结构</strong>，而 hash table 不是。
 <ul>
-<li>如果只是判断 set 中的元素是否存在，那么 hash 显然更合适，因为 set 的访问操作时间复杂度是 log (N) 的，而使用 hash 底层实现的 hash_set 是近似 O (1) 的。</li>
-<li>set 应该更加被强调理解为 “集合”，而集合所涉及的操作并、交、差等，即 STL 提供的如交集 set_intersection ()、并集 set_union ()、差集 set_difference () 和对称差集 set_symmetric_difference ()，都需要进行大量的比较工作，那么使用底层是有序结构的红黑树就十分恰当了，这也是其相对 hash 结构的优势所在。</li>
-</ul>
-</li>
+<li>如果只是判断 set 中的元素是否存在，那么 hash 显然更合适，因为 set
+的访问操作时间复杂度是 log (N) 的，而使用 hash 底层实现的 hash_set 是近似
+O (1) 的。</li>
+<li>set 应该更加被强调理解为 “集合”，而集合所涉及的操作并、交、差等，即
+STL 提供的如交集 set_intersection ()、并集 set_union ()、差集
+set_difference () 和对称差集
+set_symmetric_difference ()，都需要进行大量的比较工作，那么使用底层是有序结构的红黑树就十分恰当了，这也是其相对 hash 结构的优势所在。</li>
+</ul></li>
 <li>在 STL 中，set 和 multiset 都是基于红黑树实现的。</li>
 </ul>
-<h3 id="什么时候使用-std-move">什么时候使用 std::move</h3>
+<h3 id="什么时候使用-stdmove">什么时候使用 std::move</h3>
 <blockquote>
-<p>When the criteria for elision of a copy operation are met or would be met save for the fact that the source object is a function parameter, and the object to be copied is designated by an lvalue, overload resolution to select the constructor for the copy is ﬁrst performed as if the object were designated by an rvalue.</p>
+<p>When the criteria for elision of a copy operation are met or would be
+met save for the fact that the source object is a function parameter,
+and the object to be copied is designated by an lvalue, overload
+resolution to select the constructor for the copy is ﬁrst performed as
+if the object were designated by an rvalue.</p>
 </blockquote>
-<p>To answer the question in the title, use std::move on a return value when you want it to be moved and it would not get moved anyway. That is:</p>
-<ul>
-<li>you want it to be moved, and</li>
-<li>it is an lvalue, and</li>
-<li>it is not eligible for copy elision, and</li>
-<li>it is not the name of a by-value function parameter.</li>
-</ul>
-<p>Reference to <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14856344/when-should-stdmove-be-used-on-a-function-return-value">When should std::move be used on a function return value? [duplicate]</a>.</p>
+<p>To answer the question in the title, use std::move on a return value
+when you want it to be moved and it would not get moved anyway. That is:
+- you want it to be moved, and - it is an lvalue, and - it is not
+eligible for copy elision, and - it is not the name of a by-value
+function parameter.</p>
+<p>Reference to <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/14856344/when-should-stdmove-be-used-on-a-function-return-value">When
+should std::move be used on a function return value?
+[duplicate]</a>.</p>
 <h2 id="at-vs-operator-in-vector">at vs operator[] in vector</h2>
 <!--
 国静在代码中的comments，让我意识到两者的区别。-->
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/at/">at</a> returns a reference to the element at position n in the vector, which automatically checks whether n is within the bounds of valid elements in the vector, throwing an out_of_range exception if it is not.</p>
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/operator%5B%5D/">operator[]</a> returns a reference to the element at position n in the vector container. Portable programs should never call this function with an argument n that is out of range, since this causes undefined behavior.</p>
-<p><strong>operator[]</strong> has the same behavior as <strong>at</strong>, except that vector::at is bound-checked and signals if the requested position is out of range by throwing an out_of_range exception.</p>
+<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/at/">at</a>
+returns a reference to the element at position n in the vector, which
+automatically checks whether n is within the bounds of valid elements in
+the vector, throwing an out_of_range exception if it is not.</p>
+<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/operator%5B%5D/">operator[]</a>
+returns a reference to the element at position n in the vector
+container. Portable programs should never call this function with an
+argument n that is out of range, since this causes undefined
+behavior.</p>
+<p><strong>operator[]</strong> has the same behavior as
+<strong>at</strong>, except that vector::at is bound-checked and signals
+if the requested position is out of range by throwing an out_of_range
+exception.</p>
 <blockquote>
 <p>在程序中推荐使用 at 函数，而不是 [] 操作符，更安全。</p>
 </blockquote>
-<h2 id="explicit-抑制构造函数定义的隐式转换">explicit 抑制构造函数定义的隐式转换</h2>
-<p>关键字 explicit 只对一个实参的构造函数有效。只能在类内声明构造函数时使用 explicit 关键字，在类外部定义时不应重复。<br>
+<h2 id="explicit-抑制构造函数定义的隐式转换">explicit
+抑制构造函数定义的隐式转换</h2>
+<p>关键字 explicit 只对一个实参的构造函数有效。只能在类内声明构造函数时使用 explicit 关键字，在类外部定义时不应重复。
 当我们用 explicit 关键字声明构造函数时，它将只能以直接初始化的形式使用。而且，编译器将不会在自动转换过程中使用该构造函数。</p>
 <blockquote>
 <p>需要多个实参的构造函数不能用于隐式转换，所以无需将这些构造函数指定为 explicit 的。实测，即使指定为 explicit，程序编译不报错。</p>
 </blockquote>
-<h2 id="std-upper-bound-vs-std-lower-bound">std::upper_bound vs std::lower_bound()</h2>
+<h2 id="stdupper_bound-vs-stdlower_bound">std::upper_bound vs
+std::lower_bound()</h2>
 <p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/algorithm/upper_bound">upper_bound</a></p>
-<h2 id="std-vector-和-std-string-的相互转换">std:vector 和 std:string 的相互转换</h2>
+<h2 id="stdvector-和-stdstring-的相互转换">std:vector 和 std:string
+的相互转换</h2>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/string/string/assign/">string::assign</a></p>
+<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/string/string/assign/">string::assign</a>
 <ul>
-<li>Assigns a new value to the string, replacing its current contents.</li>
-</ul>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/assign/">vector::assign</a></p>
+<li>Assigns a new value to the string, replacing its current
+contents.</li>
+</ul></li>
+<li><a target="_blank" rel="noopener" href="http://www.cplusplus.com/reference/vector/vector/assign/">vector::assign</a>
 <ul>
-<li>Assigns new contents to the vector, replacing its current contents, and modifying its size accordingly.</li>
+<li>Assigns new contents to the vector, replacing its current contents,
+and modifying its size accordingly.</li>
+</ul></li>
+<li>vector<char> to string <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// First method</span><br><span class="line">std::vector&lt;char&gt; data = {'a', 'b', 'c'};</span><br><span class="line">std::string res;</span><br><span class="line">res.insert(res.begin(), data.begin(), data.end());</span><br></pre></td></tr></tbody></table></figure></char></li>
 </ul>
-</li>
-<li>
-<p>vector<char> to string</char></p>
-</li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// First method</span><br><span class="line">std::vector&lt;char&gt; data = {'a', 'b', 'c'};</span><br><span class="line">std::string res;</span><br><span class="line">res.insert(res.begin(), data.begin(), data.end());</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// Second method</span><br><span class="line">std::vector&lt;char&gt; data = {'a', 'b', 'c'};</span><br><span class="line">std::string str;</span><br><span class="line">str.clear();</span><br><span class="line">str.assign(data.begin(),data.end());</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>string to vector<char></char></li>
 </ul>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string str = "what a nice day!";</span><br><span class="line">std::vector &lt;char&gt; chars;</span><br><span class="line">chars.resize(str.size());</span><br><span class="line">chars.assign(str.begin(),str.end())</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://repl.it/@wylloong/charstostring">Verify Online</a></li>
+<li><a target="_blank" rel="noopener" href="https://repl.it/@wylloong/charstostring">Verify
+Online</a></li>
 </ul>
-<h2 id="函数模板-function-template-返回值">函数模板 (function template) 返回值</h2>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012515223/article/details/17003679">https://blog.csdn.net/u012515223/article/details/17003679</a></p>
-<h2 id="boost-optional">boost::optional()</h2>
+<h2 id="函数模板function-template返回值">函数模板 (function
+template) 返回值</h2>
+<p>https://blog.csdn.net/u012515223/article/details/17003679</p>
+<h2 id="boostoptional">boost::optional()</h2>
 <ul>
-<li>读取访问器 (read access) .get () 返回非常量引用 (non-const reference)，所以你可以向其中写入。</li>
+<li>读取访问器 (read access) .get () 返回非常量引用 (non-const
+reference)，所以你可以向其中写入。</li>
 </ul>
 <blockquote>
-<p>It is sometimes helpful to think of optional as a value-and-pointer mixed together. There is a possibly null pointer to an owned buffer of memory that may, or may not hold a copy of the type.</p>
+<p>It is sometimes helpful to think of optional as a value-and-pointer
+mixed together. There is a possibly null pointer to an owned buffer of
+memory that may, or may not hold a copy of the type.</p>
 </blockquote>
 <p>你可以使用 * 或者 -&gt; 来替代 get () 函数，以下三种写法是等价的。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">*optional</span><br><span class="line">optional-&gt;</span><br><span class="line">optional.get()</span><br></pre></td></tr></tbody></table></figure>
 <!--
 ![How to use boost::optional](https://stackoverflow.com/questions/22227839/how-to-use-boostoptional)
 -->
-<h1>Grammar Discriminate</h1>
+<h1 id="grammar-discriminate">Grammar Discriminate</h1>
 <h2 id="构造函数初始化-赋值和初始化">构造函数初始化 (赋值和初始化)</h2>
 <p>我们一般习惯于<strong>构造函数初始化列表</strong>和<strong>函数体内</strong>对类的成员变量初始化，两者的区别难道仅仅是表达方式和初始化位置不同吗？</p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 辨析两种初始化参数的方式 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Just show me the code!</span></span><br><span class="line"><span class="comment">// 构造函数初始化列表 (constructor initialize list)</span></span><br><span class="line">ClassA::ClassA(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name_in):name_(name_in) {</span><br><span class="line">    <span class="comment">// 只调用了默认构造函数，不会再调用拷贝构造函数。</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 赋值初始化</span></span><br><span class="line">ClassA::ClassA(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name_in) {</span><br><span class="line">    <span class="comment">// 对象的成员变量的初始化动作发生在进入构造函数体之前。</span></span><br><span class="line">    <span class="comment">// name_不是初始化而是赋值。首先调用了这个类的默认构造函数，然后将name_in赋值到name_，即在调用拷贝构造函数。</span></span><br><span class="line">    name_ = name_in; </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -515,45 +573,56 @@ The first const keyword can go either side of data type, hence const int* const 
 <h2 id="默认构造函数">默认构造函数</h2>
 <ul>
 <li>一旦我们定义了一些其他的构造函数，那么除非我们再定义一个默认的构造函数，否则类将没有默认构造函数。</li>
-<li>= default : 声明默认构造函数，等同于之前使用的合成默认构造函数。</li>
+<li>= default :
+声明默认构造函数，等同于之前使用的合成默认构造函数。</li>
 </ul>
-<h2 id="Vector">Vector</h2>
+<h2 id="vector">Vector</h2>
 <ul>
 <li>当 vector 对象（或数组）销毁时，存储在其中的对象也会被销毁，也就是依次销毁 vector 中的每一个元素。</li>
-<li>很多使用动态内存的类应该使用 vector 对象或者 string 对象管理必要的存储空间；使用 vector 或者 string 的类能避免分配和释放内存带来的复杂性。</li>
+<li>很多使用动态内存的类应该使用 vector 对象或者 string
+对象管理必要的存储空间；使用 vector 或者 string
+的类能避免分配和释放内存带来的复杂性。</li>
 </ul>
 <h2 id="inline">inline</h2>
 <ul>
-<li>引入原因：为了解决一些频繁调用的小函数大量消耗栈空间（栈内存）的问题，特别的引入了 <strong>inline</strong> 修饰符，表示为内联函数。栈空间就是指放置程序的局部数据（也就是函数内数据）的内存空间。</li>
-<li>inline 只适合涵数体内代码简单的涵数使用，不能包含复杂的结构控制语句，并且不能内联函数本身不能是直接递归函数（即，自己内部还调用自己的函数）.</li>
-<li>inline 函数仅仅是一个对编译器的建议，所以最后能否真正内联，由编译器决定。一个好的编译器将会根据函数的定义体，自动地取消不值得的内联</li>
-<li>定义在类中的成员函数默认都是内联的，如果在类定义时就在类内给出函数定义，那当然最好。如果在类中未给出成员函数定义，而又想内联该函数的话，那在类外要加上 inline，否则就认为不是内联的。</li>
+<li>引入原因:
+为了解决一些频繁调用的小函数大量消耗栈空间（栈内存）的问题，特别的引入了
+<strong>inline</strong>
+修饰符，表示为内联函数。栈空间就是指放置程序的局部数据（也就是函数内数据）的内存空间。</li>
+<li>inline
+只适合涵数体内代码简单的涵数使用，不能包含复杂的结构控制语句，并且不能内联函数本身不能是直接递归函数（即，自己内部还调用自己的函数）.</li>
+<li>inline
+函数仅仅是一个对编译器的建议，所以最后能否真正内联，由编译器决定。一个好的编译器将会根据函数的定义体，自动地取消不值得的内联</li>
+<li>定义在类中的成员函数默认都是内联的，如果在类定义时就在类内给出函数定义，那当然最好。如果在类中未给出成员函数定义，而又想内联该函数的话，那在类外要加上
+inline，否则就认为不是内联的。</li>
 <li>内联是以代码膨胀（复制）为代价，仅仅省去了函数调用的开销，从而提高函数的执行效率。
 <ul>
 <li>如果执行函数体内代码的时间，相比于函数调用的开销较大，那么效率的收获会很少。另一方面，每一处内联函数的调用都要复制代码，将使程序的总代码量增大，消耗更多的内存空间。</li>
-</ul>
-</li>
+</ul></li>
 <li>inline 不应该出现在函数的声明中，原因如下:
 <ul>
-<li>高质量 C++/C 程序设计风格的一个基本原则：声明与定义不可混为一谈，用户没有必要、也不应该知道函数是否需要内联。</li>
-<li>一个好的编译器将会根据函数的定义体，自动地取消不值得的内联（这进一步说明了 inline 不应该出现在函数的声明中）。</li>
-</ul>
-</li>
+<li>高质量 C++/C
+程序设计风格的一个基本原则：声明与定义不可混为一谈，用户没有必要、也不应该知道函数是否需要内联。</li>
+<li>一个好的编译器将会根据函数的定义体，自动地取消不值得的内联（这进一步说明了
+inline 不应该出现在函数的声明中）。</li>
+</ul></li>
 </ul>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 头文件</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">A</span></span><br><span class="line">{</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Foo</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>;</span><br><span class="line">}</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 定义文件</span></span><br><span class="line"><span class="comment">// 关键字 inline 必须与函数定义体放在一起才能使函数成为内联，仅将 inline 放在函数声明前面不起任何作用。</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="type">void</span> <span class="title">A::Foo</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span>{}</span><br></pre></td></tr></tbody></table></figure>
 <!--
 
 [C++ 中的 inline 用法](https://www.runoob.com/w3cnote/cpp-inline-usage.html)
 -->
-<h2 id="Copy-Constructor-拷贝构造函数">Copy Constructor 拷贝构造函数</h2>
-<p>一个特殊的构造函数，一般只有一个参数，这个参数一般是用  const 修饰的，对自己类的一个引用 (reference)。</p>
+<h2 id="copy-constructor-拷贝构造函数">Copy Constructor
+拷贝构造函数</h2>
+<p>一个特殊的构造函数，一般只有一个参数，这个参数一般是用 const
+修饰的，对自己类的一个引用 (reference)。</p>
 <h3 id="浅拷贝和深拷贝">浅拷贝和深拷贝</h3>
 <p>浅拷贝：两个变量进行浅拷贝时，它们指向同一个地址，它们的值相同。这样会有问题，当其中的一个析构了那个地址，另外一个也没有了，有时候会发生错误，但浅拷贝比较廉价。</p>
 <p>深拷贝：两个变量进行深拷贝时，第二变量会重新申请一块区域来存放跟第一个变量指向地址的值。两个东西完全是独立的，只是值相同。消耗比较大，因为要重新申请空间。</p>
-<h1>Code Style</h1>
+<h1 id="code-style">Code Style</h1>
 <h2 id="class">class</h2>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Setter</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Accessors</span></span><br></pre></td></tr></tbody></table></figure>
-<h2 id="Friends">Friends</h2>
+<h2 id="friends">Friends</h2>
 <!--
 [](https://google.github.io/styleguide/cppguide.html#Friends)
 
@@ -567,29 +636,40 @@ c++ lambda表达式作为类模板参数
 ## 模板定义和实现不分开
 https://www.cnblogs.com/jingshikongming/p/9037881.html
 -->
-<h2 id="Initialization-and">Initialization: =, (), and {}</h2>
+<h2 id="initialization-and">Initialization: =, (), and</h2>
 <ul>
-<li>For uniform initialization syntax，大括号初始化 (Brace Initialization) 的潜在问题：
+<li>For uniform initialization syntax，大括号初始化 (Brace
+Initialization) 的潜在问题：
 <ul>
-<li>“uniform” is a stretch: there are cases where ambiguity still exists.</li>
-<li>This syntax is not exactly intuitive: no other common language uses something like it.
+<li>“uniform” is a stretch: there are cases where ambiguity still
+exists.</li>
+<li>This syntax is not exactly intuitive: no other common language uses
+something like it.
 <ul>
-<li>For uniform initialization syntax, we don’t believe in general that the benefits outweigh the drawbacks.</li>
+<li>For uniform initialization syntax, we don’t believe in general that
+the benefits outweigh the drawbacks.</li>
+</ul></li>
+</ul></li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="Best-Practices-for-Initialization">Best Practices for Initialization</h3>
+<h3 id="best-practices-for-initialization">Best Practices for
+Initialization</h3>
 <ul>
-<li>Use assignment syntax when initializing directly with the intended literal value (for example: int, float, or std::string values), with smart pointers such as std::shared_ptr, std::unique_ptr, with containers (std::vector, std::map, etc), when performing struct initialization, or doing copy construction.</li>
-<li>Use the traditional constructor syntax (with parentheses) when the initialization is performing some active logic, rather than simply composing values together.</li>
-<li>Use {} initialization without the = only if the above options don’t compile.</li>
+<li>Use assignment syntax when initializing directly with the intended
+literal value (for example: int, float, or std::string values), with
+smart pointers such as std::shared_ptr, std::unique_ptr, with containers
+(std::vector, std::map, etc), when performing struct initialization, or
+doing copy construction.</li>
+<li>Use the traditional constructor syntax (with parentheses) when the
+initialization is performing some active logic, rather than simply
+composing values together.</li>
+<li>Use {} initialization without the = only if the above options don’t
+compile.</li>
 <li>Never mix {}s and auto.
 <ul>
-<li>For the language lawyers: prefer copy-initialization over direct-initialization when available, and use parentheses over curly braces when resorting to direct-initialization.</li>
-</ul>
-</li>
+<li>For the language lawyers: prefer copy-initialization over
+direct-initialization when available, and use parentheses over curly
+braces when resorting to direct-initialization.</li>
+</ul></li>
 </ul>
 <!--
 - [三种初始化方式](https://abseil.io/tips/88)
