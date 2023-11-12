@@ -32,8 +32,8 @@
 <meta property="article:published_time" content="2020-02-02T14:15:10.000Z">
 <meta property="article:modified_time" content="2023-05-19T12:12:32.169Z">
 <meta property="article:author" content="Nobody">
-<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="Paper">
+<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="USV">
 <meta property="article:tag" content="Path Planning">
 <meta name="twitter:card" content="summary">
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#design-and-implementation"><span class="nav-number">2.</span> <span class="nav-text">Design and Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#others"><span class="nav-number">3.</span> <span class="nav-text">Others</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Design and Implementation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Others</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -328,84 +328,26 @@
     
     <div class="post-body" itemprop="articleBody"><!--2019-10-22 22:15:10-->
 <p>[toc]</p>
-<p>  Unmanned surface vehicles (USVs) are autonomous marine vessels that
-can execute multiple tasks in a variety of cluttered marine environments
-without human supervision. The future progress of USVs depends on the
-development of full autonomy, which would enable USVs to work in any
-unstructured or unpredictable environment without human
-intervention.<br>
-  One of the main challenges in enhancing USV autonomy is the
-simultaneous detection and avoidance of obstacles in either open or
-confined waters. Local obstacle avoidance for USVs is used to avoid
-static and dynamic obstacles by adopting a timely avoidance manoeuvre.
-Local obstacle avoidance algorithms are of two types: path
-searching-based local path planning, which can generate appropriate
-trajectories or waypoints followed by the vehicle, and the
-behaviour-based reactive obstacle avoidance method, which can generate
-the guidance angle and guidance velocity realized by the navigation
-controller in real time.<br>
-  A novel path searching-based algorithm called the local normal
-distribution-based trajectory (LNDT) is proposed in this paper to
-address the local obstacle avoidance problem of USVs in complicated
-encounter situations. The design and implementation of LNDT has been
-published in <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/journal/ocean-engineering">Ocean
-Engineering</a> with <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0029801818317475?via%3Dihub">reference
-link</a>. Besides, there is <a target="_blank" rel="noopener" href="https://www.yanlongwang.net/download/papers/A_COLREGs-based_obstacle_avoidance_approach_for_unmanned_surface_vehicles.pdf">a
-copy</a> only for personal research purpose.<br>
-  The following sections mainly discuss the implementation principle of
-the algorithm and provide some critical information to facilitate the
-following researchers. About the detailed information, you can refer my
-master thesis - <a target="_blank" rel="noopener" href="https://www.yanlongwang.net/download/papers/Research_on_the_Technology_of_Path_Planning_for_Unmanned_Surface_Vehicle.pdf">Research
-on the Technology of Path Planning for Unmanned Surface Vehicle</a>,
-while it is written in Chinese. The LNDS method is mainly extracted from
-my master thesis and polished in simulation.</p>
-<h1 id="abstract">Abstract</h1>
+<p>  Unmanned surface vehicles (USVs) are autonomous marine vessels that can execute multiple tasks in a variety of cluttered marine environments without human supervision. The future progress of USVs depends on the development of full autonomy, which would enable USVs to work in any unstructured or unpredictable environment without human intervention.<br>
+  One of the main challenges in enhancing USV autonomy is the simultaneous detection and avoidance of obstacles in either open or confined waters. Local obstacle avoidance for USVs is used to avoid static and dynamic obstacles by adopting a timely avoidance manoeuvre. Local obstacle avoidance algorithms are of two types: path searching-based local path planning, which can generate appropriate trajectories or waypoints followed by the vehicle, and the behaviour-based reactive obstacle avoidance method, which can generate the guidance angle and guidance velocity realized by the navigation controller in real time.<br>
+  A novel path searching-based algorithm called the local normal distribution-based trajectory (LNDT) is proposed in this paper to address the local obstacle avoidance problem of USVs in complicated encounter situations. The design and implementation of LNDT has been published in <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/journal/ocean-engineering">Ocean Engineering</a> with <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S0029801818317475?via%3Dihub">reference link</a>. Besides, there is <a target="_blank" rel="noopener" href="https://www.yanlongwang.net/download/papers/A_COLREGs-based_obstacle_avoidance_approach_for_unmanned_surface_vehicles.pdf">a copy</a> only for personal research purpose.<br>
+  The following sections mainly discuss the implementation principle of the algorithm and provide some critical information to facilitate the following researchers. About the detailed information, you can refer my master thesis - <a target="_blank" rel="noopener" href="https://www.yanlongwang.net/download/papers/Research_on_the_Technology_of_Path_Planning_for_Unmanned_Surface_Vehicle.pdf">Research on the Technology of Path Planning for Unmanned Surface Vehicle</a>, while it is written in Chinese. The LNDS method is mainly extracted from my master thesis and polished in simulation.</p>
+<h1>Abstract</h1>
 <p>英文在中文之后 / English follows Chinese<br>
   本文讲述了一种新型的、遵守 COLREGs 规则的无人水面艇 (USV) 自动避障方法的初步研究结果。这个方法本质上是一种基于路径搜索的算法，称为局部正态分布轨迹法，该算法可以在存在静态和动态障碍物的情况下规划出可行的避障轨迹。算法可以根据正态分布的钟形曲线生成符合 COLREGs 的次优轨迹，并提取航路点以供导航控制器安全操纵 USV。此外，我们讨论了构成钟形曲线的三个关键参数，并提出了一种轨迹重新规划策略，以提高该方法的安全性和灵活性。我们在实验中模拟了常见的超车、交叉和正面碰撞情况来验证算法，仿真表明该方法考虑了多个因素，可以规划出能够安全、平滑地避开障碍物的路径。此外，该方法还和另一种遵守 COLREGs 规则的反应式避障方法做了比较。<br>
-  This paper reports the preliminary research results of a novel
-automatic obstacle avoidance approach based on the COLREGs for unmanned
-surface vehicles (USVs). The approach presented is essentially a path
-searching-based algorithm called the local normal distribution-based
-trajectory, which plans viable avoidance trajectories in the presence of
-both static and dynamic obstacles. The proposed algorithm can generate a
-COLREGs-compliant suboptimal trajectory based on the bell-shaped curve
-of normal distribution and extract waypoints for the navigation
-controller to steer USVs safely. In addition, we discuss three key
-parameters and present a trajectory replanning strategy to improve the
-safety and flexibility of our approach. The common overtaking, crossing
-and head-on collision scenarios are each simulated in experiments. It is
-shown through simulations that the proposed approach considers multiple
-factors and can plan paths to avoid obstacles safely and smoothly. A
-comparison is also made with a reactive path planning algorithm which
-has been modified to follow the COLREGs.</p>
-<h1 id="design-and-implementation">Design and Implementation</h1>
-<p>  The overall scheme of obstacle avoidance is illustrated in
-following figure. The decision-making module in the dashed frame
-includes a two-layered distributed architecture of obstacle avoidance;
-we primarily study the COLREGs-based obstacle avoidance approach.</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/science/LNDT_Architecture.png"></p>
-<p>  The LNDT algorithm includes six processes, as shown below. We first
-integrates COLREGs rules into the obstacle avoidance approach of USVs.
-When there is a collision risk, it would determine three key parameters
-of the trajectory by a fixed procedure, and the primitive trajectory
-would be rotated and translated to adapt the real collision scenario.
-The USV then follows the planned trajectories. We would replan the
-trajectory once USVs can not follow the planned trajectory.</p>
-<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/LNDT_Architecture.png"></p>
-<p>  Besides, we propose a scalable and flexible obstacle avoidance
-architecture. And we proposes six evaluation indicators to establish a
-scientific and impartial obstacle avoidance behaviour assessment (OABA)
-method in this paper.</p>
-<h1 id="others">Others</h1>
-<p>  The LNDT algorithm is mainly implemented in 2018, and it has not
-been tested in complex sea trial, so there must be some drawbacks to
-improve.<br>
-  In order to put it into wide practice, I'm glad to discuss some topics
-with you via email and polish this method, even share part of the source
-code with you.</p>
+  This paper reports the preliminary research results of a novel automatic obstacle avoidance approach based on the COLREGs for unmanned surface vehicles (USVs). The approach presented is essentially a path searching-based algorithm called the local normal distribution-based trajectory, which plans viable avoidance trajectories in the presence of both static and dynamic obstacles. The proposed algorithm can generate a COLREGs-compliant suboptimal trajectory based on the bell-shaped curve of normal distribution and extract waypoints for the navigation controller to steer USVs safely. In addition, we discuss three key parameters and present a trajectory replanning strategy to improve the safety and flexibility of our approach. The common overtaking, crossing and head-on collision scenarios are each simulated in experiments. It is shown through simulations that the proposed approach considers multiple factors and can plan paths to avoid obstacles safely and smoothly. A comparison is also made with a reactive path planning algorithm which has been modified to follow the COLREGs.</p>
+<h1>Design and Implementation</h1>
+<p>  The overall scheme of obstacle avoidance is illustrated in following figure. The decision-making module in the dashed frame includes a two-layered distributed architecture of obstacle avoidance; we primarily study the COLREGs-based obstacle avoidance approach.</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/science/LNDT_Architecture.png" alt=""></p>
+<p>  The LNDT algorithm includes six processes, as shown below. We first integrates COLREGs rules into the obstacle avoidance approach of USVs. When there is a collision risk, it would determine three key parameters of the trajectory by a fixed procedure, and the primitive trajectory would be rotated and translated to adapt the real collision scenario. The USV then follows the planned trajectories. We would  replan the trajectory once USVs can not follow the planned trajectory.</p>
+<p><img data-src="https://www.yanlongwang.net/downloads/images/blog/LNDT_Architecture.png" alt=""></p>
+<p>  Besides, we propose a scalable and flexible obstacle avoidance architecture. And we proposes six evaluation indicators to establish a scientific and impartial obstacle avoidance behaviour assessment (OABA) method in this paper.</p>
+<h1>Others</h1>
+<p>  The LNDT algorithm is mainly implemented in 2018, and it has not been tested in complex sea trial, so there must be some drawbacks to improve.<br>
+  In order to put it into wide practice, I’m glad to discuss some topics with you via email and polish this method, even share part of the source code with you.</p>
 <!--
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[LNDT] -- &gt;B(Integrate COLREGs Rules)</span><br><span class="line">B -- &gt; C(Check Collision Risk)</span><br><span class="line">C -- &gt; D(Determine Key Parameters)</span><br><span class="line">D -- &gt; E(Trajectory Rotation &amp; Translation)</span><br><span class="line">E -- &gt; F(USV Follows Trajectory)</span><br><span class="line">F -- &gt; G(Replan Trajectory)</span><br></pre></td></tr></table></figure>
-<p>--&gt;</p>
+<p>–&gt;</p>
 -->
     </div>
 
@@ -415,8 +357,8 @@ code with you.</p>
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/Paper/" rel="tag"># Paper</a>
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/USV/" rel="tag"># USV</a>
               <a href="/tags/Path-Planning/" rel="tag"># Path Planning</a>
           </div>
