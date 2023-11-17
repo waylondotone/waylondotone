@@ -147,9 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#issue-and-objectives"><span class="nav-number">2.</span> <span class="nav-text">ISSUE AND OBJECTIVES</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#path-planning-for-hopping-mobility"><span class="nav-number">3.</span> <span class="nav-text">PATH PLANNING FOR HOPPING
-MOBILITY</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#selection-of-jumping-target-position"><span class="nav-number">3.1.</span> <span class="nav-text">Selection of Jumping
-Target Position</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%8E%AF%E5%A2%83%E5%BB%BA%E6%A8%A1"><span class="nav-number">3.1.1.</span> <span class="nav-text">如何环境建模</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#candidate-path-network"><span class="nav-number">3.2.</span> <span class="nav-text">Candidate Path Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#add-uncertainty"><span class="nav-number">3.3.</span> <span class="nav-text">Add Uncertainty</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#simulation-of-path-planning"><span class="nav-number">4.</span> <span class="nav-text">SIMULATION OF PATH PLANNING</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">5.</span> <span class="nav-text">CONCLUSION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-results-of-this-research"><span class="nav-number">5.1.</span> <span class="nav-text">The results of this research</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#works-to-do"><span class="nav-number">5.2.</span> <span class="nav-text">Works to do</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">ISSUE AND OBJECTIVES</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">PATH PLANNING FOR HOPPING MOBILITY</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Selection-of-Jumping-Target-Position"><span class="nav-number">3.1.</span> <span class="nav-text">Selection of Jumping Target Position</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%8E%AF%E5%A2%83%E5%BB%BA%E6%A8%A1"><span class="nav-number">3.1.1.</span> <span class="nav-text">如何环境建模</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Candidate-Path-Network"><span class="nav-number">3.2.</span> <span class="nav-text">Candidate Path Network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Uncertainty"><span class="nav-number">3.3.</span> <span class="nav-text">Add Uncertainty</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">SIMULATION OF PATH PLANNING</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">CONCLUSION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-results-of-this-research"><span class="nav-number">5.1.</span> <span class="nav-text">The results of this research</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Works-to-do"><span class="nav-number">5.2.</span> <span class="nav-text">Works to do</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -324,224 +322,139 @@ Target Position</span></a><ol class="nav-child"><li class="nav-item nav-level-3"
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p><a target="_blank" rel="noopener" href="https://robotics.estec.esa.int/i-SAIRAS/isairas2018/Papers/Session%204a/4_90kunii-90-113-Kunii-Yasuharu.pdf">文献下载地址</a></p>
-<p>本文运用星球跳跃漫游者 (hopping rover)
-的移动特性 (可以跳过而不是绕过障碍物)，提出了一种新的路径规划和导航方法，并且讨论了因为跳跃行为和测量误差带来的不确定性。</p>
+<p>本文运用星球跳跃漫游者 (hopping rover) 的移动特性 (可以跳过而不是绕过障碍物)，提出了一种新的路径规划和导航方法，并且讨论了因为跳跃行为和测量误差带来的不确定性。</p>
 <blockquote>
-<p>In this paper, a navigation method for a small size hopping rover
-with advantages on its mobility is discussed by considering with some
-uncertainties caused by jumping behavior and measurement error.</p>
+<p>In this paper, a navigation method for a small size hopping rover with advantages on its mobility is discussed by considering with some uncertainties caused by jumping behavior and measurement error.</p>
 </blockquote>
-<p>和通常的路径规划一样，本文首先从环境数据中提取障碍物，构建三角形
-(triangular polygons) 的环境网格，然后使用 A star
-算法来规划安全的路径。其中，算法着重考虑了和障碍物的碰撞风险，复杂地形
-(roughness of terrain) 和失败的跳跃行为 (failures of hopping
-action)。</p>
+<p>和通常的路径规划一样，本文首先从环境数据中提取障碍物，构建三角形 (triangular polygons) 的环境网格，然后使用 A star 算法来规划安全的路径。其中，算法着重考虑了和障碍物的碰撞风险，复杂地形 (roughness of terrain) 和失败的跳跃行为 (failures of hopping action)。</p>
 <blockquote>
-<p>By extracting obstacles from environmental data and constructing
-triangular polygons it is possible to form paths. The algorithm
-considers with safety of collision with obstacles, roughness of terrain
-and failures of hopping action, and then could generate safer path based
-on A* algorithm.</p>
+<p>By extracting obstacles from environmental data and constructing triangular polygons it is possible to form paths. The algorithm considers with safety of collision with obstacles, roughness of terrain and failures of hopping action, and then could generate safer path based on A* algorithm.</p>
 </blockquote>
 <p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/hopping-mobility-rover/">个人网站</a>，请移步阅读最新内容。</p>
-<h1 id="introduction">INTRODUCTION</h1>
-<p>目前，月球等星球的表面探索主要是使用一个笨重的履带机器人 (heavy wheel
-rovers)，但是履带机器人开发周期长，发射时极少，对安全的需求要求更多的资源来保障，甚至进入了恶性循环。</p>
-<p>作者提出一种新的方法，使用多个轻量紧凑的探索机器智能体 (light and
-compact exploration robot agent) 来共同工作，构成一个大的智能体。</p>
+<h1>INTRODUCTION</h1>
+<p>目前，月球等星球的表面探索主要是使用一个笨重的履带机器人 (heavy wheel rovers)，但是履带机器人开发周期长，发射时极少，对安全的需求要求更多的资源来保障，甚至进入了恶性循环。</p>
+<p>作者提出一种新的方法，使用多个轻量紧凑的探索机器智能体 (light and compact exploration robot agent) 来共同工作，构成一个大的智能体。</p>
 <blockquote>
-<p>One possibility is the introduction of a light and compact
-exploration robot agent, and it is possible that multiple types of
-agents work together in one system. Various roles (functions) can be
-played on various kinds of equipment, and all of them can constitute one
-exploration system.</p>
+<p>One possibility is the introduction of a light and compact exploration robot agent, and it is possible that multiple types of agents work together in one system. Various roles (functions) can be played on various kinds of equipment, and all of them can constitute one exploration system.</p>
 </blockquote>
 <p>一个创意：通过将同样的功能分散到若干个智能体上，可以忽略一定程度的智能体功能失效，那么风险被分散到整个大系统上，有可能获得较高的效率。</p>
 <blockquote>
-<p>By allocating the same function (equipment) to some or many of them,
-it is possible to ignore some percentage of the agent's loss rate, so
-that risk can be distributed to the system and the mission and there is
-a high possibility of obtaining higher efficiency.</p>
+<p>By allocating the same function (equipment) to some or many of them, it is possible to ignore some percentage of the agent’s loss rate, so that risk can be distributed to the system and the mission and there is a high possibility of obtaining higher efficiency.</p>
 </blockquote>
-<figure>
-<img data-src="/downloads/images/blog/hopping_mobility_multi_exploration.png" alt="Multi Exploration">
-<figcaption aria-hidden="true">Multi Exploration</figcaption>
-</figure>
-<p>虽然小机器人 (A small size rover) 因为大小 (size) 和重量 (weight)
-有很多优势，但是其移动性 (traversability) 和测量能力 (measurement)
-却受到局限。</p>
+<p><img data-src="/downloads/images/blog/hopping_mobility_multi_exploration.png" alt="Multi Exploration"></p>
+<p>虽然小机器人 (A small size rover) 因为大小 (size) 和重量 (weight) 有很多优势，但是其移动性 (traversability) 和测量能力 (measurement) 却受到局限。</p>
 <blockquote>
-<p>However, its size causes problems on its traversability and
-measurement ability.</p>
+<p>However, its size causes problems on its traversability and measurement ability.</p>
 </blockquote>
-<p>所以，可以引入跳跃行为 (hopping mobility) 来获得更高的移动性能
-(higher traversability) 和更广的测量范围 (wider measurement range)。</p>
+<p>所以，可以引入跳跃行为 (hopping mobility) 来获得更高的移动性能 (higher traversability) 和更广的测量范围 (wider measurement range)。</p>
 <blockquote>
-<p>We have introduced hopping mobility to obtain higher traversability
-and wider measurement range.</p>
+<p>We have introduced hopping mobility to obtain higher traversability and wider measurement range.</p>
 </blockquote>
-<p>通过固定区域的地面机器人 (land-based agent)
-和跳跃机器人互相配合，来构成探测系统 (exploration system)。</p>
+<p>通过固定区域的地面机器人 (land-based agent) 和跳跃机器人互相配合，来构成探测系统 (exploration system)。</p>
 <blockquote>
-<p>Introduction of two types of rovers is being considered in the
-exploration system. One is a land-based agent and a stochastic existence
-region is given in the search region, contributing to the search of the
-ground surface. The other is hopping rover. the rover that makes path
-planning taking advantage of sensing from high places while moving the
-exploration area together with the ground moving rover plays an
-important role.</p>
+<p>Introduction of two types of rovers is being<br>
+considered in the exploration system. One is a land-based agent and a stochastic existence region is given in the search region, contributing to the search of the ground surface. The other is hopping rover. the rover that makes path planning taking advantage of sensing from high places while moving the exploration area together with the ground moving rover plays an important role.</p>
 </blockquote>
 <ul>
-<li>相比轮式机器人，在低重力环境下 (low gravitational
-environment)，可以通过跳跃的方式跳过障碍物，从而抄近路 (adopt a
-short-cut path)。</li>
+<li>相比轮式机器人，在低重力环境下 (low gravitational environment)，可以通过跳跃的方式跳过障碍物，从而抄近路 (adopt a short-cut path)。</li>
 </ul>
 <blockquote>
-<p>Especially under low gravitational environment such as other planet
-or satellite, it indicates higher performance, e.g.Thus, it can jump
-over a long distance upon terrains and obstacles, adopt a short-cut path
-without a detour of a wheeled type, and also measure an environment from
-higher position in the air of jumping trajectory.</p>
+<p>Especially under low gravitational environment such as other planet or satellite, it indicates higher performance, e.g.Thus, it can jump over a long distance upon terrains and obstacles, adopt a short-cut path without a detour of a wheeled type, and also measure an environment from higher position in the air of jumping trajectory.</p>
 </blockquote>
-<figure>
-<img data-src="/downloads/images/blog/Advantage_of_hopping_mobility_Jump.png" alt="Advantage of hopping mobility Jump">
-<figcaption aria-hidden="true">Advantage of hopping mobility
-Jump</figcaption>
-</figure>
-<h1 id="issue-and-objectives">ISSUE AND OBJECTIVES</h1>
+<p><img data-src="/downloads/images/blog/Advantage_of_hopping_mobility_Jump.png" alt="Advantage of hopping mobility Jump"></p>
+<h1>ISSUE AND OBJECTIVES</h1>
 <ul>
-<li>为什么导航问题需要研究：现有的导航研究，没有利用跳跃机器人的运动特性
-(文章发表于 2017)，所以需要进一步利用跳和远距离的优势来导航。</li>
+<li>为什么导航问题需要研究：现有的导航研究，没有利用跳跃机器人的运动特性 (文章发表于 2017)，所以需要进一步利用跳和远距离的优势来导航。</li>
 </ul>
 <blockquote>
-<p>For a hopping rover, though a lot of jumping hardware designs have
-been studied, its software e.g. navigation algorithms have been
-discussed hardly. So, the navigation method hasn't been established by
-taking advantage of <strong>hopping mobility such as jumping over
-obstacles</strong> or <strong>a long distance</strong> yet.</p>
+<p>For a hopping rover, though a lot of jumping hardware designs have been studied, its software e.g. navigation algorithms have been discussed hardly. So, the navigation method hasn’t been established by taking advantage of <strong>hopping mobility such as jumping over obstacles</strong> or <strong>a long distance</strong> yet.</p>
 </blockquote>
 <p>本文利用跳跃机器人的运动特性，基于对移动性和测量数据的风险考虑，提出一种导航方法 (主要是如何规划路径)。</p>
 <blockquote>
-<p>In this paper, a navigation method for a small size hopping rover
-with advantages on its mobility is discussed with some risk
-considerations on its mobility and measured data.</p>
+<p>In this paper, a navigation method for a small size hopping rover with advantages on its mobility is discussed with some risk considerations on its mobility and measured data.</p>
 </blockquote>
-<h1 id="path-planning-for-hopping-mobility">PATH PLANNING FOR HOPPING
-MOBILITY</h1>
-<h2 id="selection-of-jumping-target-position">Selection of Jumping
-Target Position</h2>
-<p>移动机器人跳跃行为 (jumping motion) 的不确定性包括初始速度变化
-(initial speed change)，跳跃距离 (jump distance)，跳跃方向 (jumping
-direction)，落地后的束缚 (bound after landing) 以及跳跃失败 (failure of
-leap)。</p>
+<h1>PATH PLANNING FOR HOPPING MOBILITY</h1>
+<h2 id="Selection-of-Jumping-Target-Position">Selection of Jumping Target Position</h2>
+<p>移动机器人跳跃行为 (jumping motion) 的不确定性包括初始速度变化 (initial speed change)，跳跃距离 (jump distance)，跳跃方向 (jumping direction)，落地后的束缚 (bound after landing) 以及跳跃失败 (failure of leap)。</p>
 <blockquote>
-<p>The uncertainty factor of hopping rover's jumping motion is the
-initial speed change, jump distance, jumping direction, bound after
-landing, failure of leap.</p>
+<p>The uncertainty factor of hopping rover’s jumping motion is the initial speed change, jump distance, jumping direction, bound after landing, failure of leap.</p>
 </blockquote>
 <p>因为跳跃行为的不确定性，所以需要选取目标落地点 (landing point)。</p>
 <h3 id="如何环境建模">如何环境建模</h3>
-<ol type="1">
+<ol>
 <li>连接被识别到的障碍物，构成不规则三角形的环境模型。</li>
 </ol>
 <blockquote>
-<p>Each obstacle captured by sensing is connected and the observation
-area is divided into triangles</p>
+<p>Each obstacle captured by sensing is connected and the observation area is divided into triangles</p>
 </blockquote>
-<ol start="2" type="1">
-<li>在观测到的障碍物上使用狄洛尼三角剖分 (Delaunay
-triangulation)，可以获得每三个点的外心 (outside
-heart)，即可能的落地点。</li>
+<ol start="2">
+<li>在观测到的障碍物上使用狄洛尼三角剖分 (Delaunay triangulation)，可以获得每三个点的外心 (outside heart)，即可能的落地点。</li>
 </ol>
 <blockquote>
-<p>By using Delaunay triangulation on the observed obstacles, we can set
-the landing point.</p>
+<p>By using Delaunay triangulation on the observed obstacles, we can set the landing point.</p>
 </blockquote>
 <!--MC: 什么是Delaunay triangulation？ [完美三角剖分](https://zhuanlan.zhihu.com/p/34158974)-->
-<pre><code>&gt; Delaunay三角剖分定义：平面上的点集P是一种三角剖分，使得P中没有点严格处于剖分后中任意一个三角形**外接圆**的**内部**(可以是圆上)。</code></pre>
-<figure>
-<img data-src="/downloads/images/blog/hopping_mobility_DT.jpg" alt="Delaunay triangulation demo">
-<figcaption aria-hidden="true">Delaunay triangulation demo</figcaption>
-</figure>
+<pre><code>&gt; Delaunay三角剖分定义：平面上的点集P是一种三角剖分，使得P中没有点严格处于剖分后中任意一个三角形**外接圆**的**内部**(可以是圆上)。
+</code></pre>
+<p><img data-src="/downloads/images/blog/hopping_mobility_DT.jpg" alt="Delaunay triangulation demo"></p>
 <p>外心安全设定：假设外心是落脚点，那么它到三个端点的距离是一致的，只要有一定的距离保障，就可以确保安全。</p>
 <blockquote>
-<p>Since the outer heart is equally distant from each vertex, it can be
-said that it is safe if a certain margin can be secured.</p>
+<p>Since the outer heart is equally distant from each vertex, it can be said that it is safe if a certain margin can be secured.</p>
 </blockquote>
 <blockquote>
-<p>Safety distance is secured by creating a circumscribed circle (其实是
-delaunay triangulation) so as not to include other obstacles in the
-circle</p>
+<p>Safety distance is secured by creating a circumscribed circle (其实是 delaunay triangulation) so as not to include other obstacles in the circle</p>
 </blockquote>
-<h2 id="candidate-path-network">Candidate Path Network</h2>
-<ol start="3" type="1">
+<h2 id="Candidate-Path-Network">Candidate Path Network</h2>
+<ol start="3">
 <li>通过连接外心，可以得到一个维诺图 (Voronoi diagram)。</li>
 </ol>
 <blockquote>
-<p>The Voronoi diagram is a method of dividing the region by joining the
-outer centers formed by Delaunay triangulation.</p>
+<p>The Voronoi diagram is a method of dividing the region by joining the outer centers formed by Delaunay triangulation.</p>
 </blockquote>
-<p>MC: 什么是 Voronoi diagram？ <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B3%B0%E6%A3%AE%E5%A4%9A%E8%BE%B9%E5%BD%A2/3428661?fromtitle=voronoi&amp;fromid=9089406">Voronoi
-diagram</a></p>
-<pre><code>&gt; 泰森多边形是对空间平面的一种剖分，其特点是多边形内的任何位置离该多边形的样点（如居民点）的距离最近，离相邻多边形内样点的距离远，且每个多边形内含且仅包含一个样点。</code></pre>
-<p>维诺图安全设定：维诺图包含障碍物，那么可以生成安全的节点 (safe
-nodes)。</p>
+<p>MC: 什么是 Voronoi diagram？ <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B3%B0%E6%A3%AE%E5%A4%9A%E8%BE%B9%E5%BD%A2/3428661?fromtitle=voronoi&amp;fromid=9089406">Voronoi diagram</a></p>
+<pre><code>&gt; 泰森多边形是对空间平面的一种剖分，其特点是多边形内的任何位置离该多边形的样点（如居民点）的距离最近，离相邻多边形内样点的距离远，且每个多边形内含且仅包含一个样点。
+</code></pre>
+<p>维诺图安全设定：维诺图包含障碍物，那么可以生成安全的节点 (safe nodes)。</p>
 <blockquote>
-<p>It can be confirmed that there are no obstacles on the sides of the
-Voronoi diagram enclosing the obstacles and safe nodes can be
-generated.</p>
+<p>It can be confirmed that there are no obstacles on the sides of the Voronoi diagram enclosing the obstacles and safe nodes can be generated.</p>
 </blockquote>
-<h2 id="add-uncertainty">Add Uncertainty</h2>
+<h2 id="Add-Uncertainty">Add Uncertainty</h2>
 <p>作者设定跳跃运动有一定的不确定度，误差通常是正态分布 (不清楚是否有理论依据)，取决于初始速度，跳的角度，方向角。</p>
 <blockquote>
-<p>The error is generally given in the form of a normal distribution,
-which rides on the initial speed, the jumping angle, and the direction
-angle, respectively.</p>
+<p>The error is generally given in the form of a normal distribution, which rides on the initial speed, the jumping angle, and the direction angle, respectively.</p>
 </blockquote>
-<p>基于上述假设，rover 在未来的位置误差会累加
-(accumulated)，可以使用一个误差椭圆 (error ellipse) 来表示。</p>
+<p>基于上述假设，rover 在未来的位置误差会累加 (accumulated)，可以使用一个误差椭圆 (error ellipse) 来表示。</p>
 <blockquote>
-<p>The position of the rover can be indicated as the existence
-probability, and generally takes a shape called an error ellipse.</p>
+<p>The position of the rover can be indicated as the existence probability, and generally takes a shape called an error ellipse.</p>
 </blockquote>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/hopping_mobility_error_ellipse.png" alt="Rover Position and Error Ellipse 4">
-<figcaption aria-hidden="true">Rover Position and Error Ellipse
-4</figcaption>
-</figure>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/hopping_mobility_error_ellipse.png" alt="Rover Position and Error Ellipse
+4"></p>
 <p>MC: 通过椭圆来表示误差和不确定性，算是一个新奇的做法。</p>
 <!--
 
 类似的文章有 [Robust Trajectory Planning for a Multirotor against Disturbance based on Hamilton-Jacobi Reachability Analysis](https://ieeexplore.ieee.org/abstract/document/8968126)。
 
 -->
-<h1 id="simulation-of-path-planning">SIMULATION OF PATH PLANNING</h1>
+<h1>SIMULATION OF PATH PLANNING</h1>
 <p>作者在一个很理想的环境下仿真，认为对于非质点的、大块的障碍物仍然可以规划出路径，但是没有讲清楚，如何实现？假设障碍物很高，那么跳跃机器人是否就无法跳跃过去呢？</p>
 <blockquote>
 <p>Even if the obstacle is the size of the black part of the figure.</p>
 </blockquote>
 <p>在虚拟的月球环境下仿真，比简单的理论仿真，更具有说服力。</p>
 <blockquote>
-<p>Simulation was also carried out in the virtual lunar environment
-created based on the rock distribution collected by “Surveyor 7” of
-NASA.</p>
+<p>Simulation was also carried out in the virtual lunar environment created based on the rock distribution collected by “Surveyor 7” of NASA.</p>
 </blockquote>
-<p>当在椭圆内的障碍物到达一定比例后，进行位置的自校正 (self-position
-estimation)。</p>
+<p>当在椭圆内的障碍物到达一定比例后，进行位置的自校正 (self-position estimation)。</p>
 <blockquote>
-<p>When the occupancy rate of the obstacle in the error ellipse exceeds
-the threshold value, the rover performs self-position estimation.</p>
+<p>When the occupancy rate of the obstacle in the error ellipse exceeds the threshold value, the rover performs self-position estimation.</p>
 </blockquote>
-<h1 id="conclusion">CONCLUSION</h1>
-<h2 id="the-results-of-this-research">The results of this research</h2>
+<h1>CONCLUSION</h1>
+<h2 id="The-results-of-this-research">The results of this research</h2>
 <ul>
-<li>In consideration of the uncertainty of the hopping rover, we were
-able to determine a safe landing point.</li>
-<li>By performing self-position estimation in the virtual lunar
-environment, it was possible to induce Rover while suppressing position
-error.</li>
+<li>In consideration of the uncertainty of the hopping rover, we were able to determine a safe landing point.</li>
+<li>By performing self-position estimation in the virtual lunar environment, it was possible to induce Rover while suppressing position error.</li>
 </ul>
-<h2 id="works-to-do">Works to do</h2>
+<h2 id="Works-to-do">Works to do</h2>
 <ul>
 <li>路径规划限于 2 维，缺乏对障碍物和跳跃高度的考虑。</li>
 <li>如何切分大的障碍物，而不仅仅是把障碍物作为质点考虑。</li>
