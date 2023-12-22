@@ -33,9 +33,9 @@
 <meta property="article:published_time" content="2020-02-01T08:33:21.000Z">
 <meta property="article:modified_time" content="2023-05-19T12:12:32.153Z">
 <meta property="article:author" content="Nobody">
+<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="Paper">
 <meta property="article:tag" content="USV">
-<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="Path Planning">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.waylon.one/downloads/images/blog/IJVAS_Struct.png">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">论文实现原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">实现程序</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%A8%8B%E5%BA%8F"><span class="nav-number">2.</span> <span class="nav-text">实现程序</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -315,27 +315,56 @@
     
     <div class="post-body" itemprop="articleBody"><!--2019-10-20 16:33:21-->
 <p>[toc]</p>
-<h1>背景</h1>
+<h1 id="背景">背景</h1>
 <p>  针对多任务点的全局路径规划，是指在存在静态障碍物的环境中，给定水面无人艇起始点、目标点以及多个任务点的情况下，设计从起始点出发，安全地遍历各个任务点，最终返回目标点的全局路径，要求行驶的航路代价总和最小。</p>
 <p>多平台维护不易，最新文章更新于 <a href="http://www.waylon.one/USV/IJVAS-USV-GlobalPathPlanning/">个人网站</a>，欢迎访问和留言。</p>
-<p>  本文主要解决水面无人艇在对多个任务点进行全局路径规划时的设计和实现算方法，相关研究和设计已在 <a target="_blank" rel="noopener" href="http://www.inderscience.com/jhome.php?jcode=ijvas">International Journal of Vehicle Autonomous Systems (IJVAS)</a> EI 期刊发表。附 InderScience Publiers - IJVAS 的官方文献下载链接 <a target="_blank" rel="noopener" href="http://www.inderscience.com/offer.php?id=93119">Design and Implementation of Global Path Planning System for Unmanned Surface Vehicle among Multiple Task Points</a>，以及 arXiv 的<a target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.08106">下载链接</a>。官方文献下载链接需要科学上网才可以打开。<br>
-  本文主要讨论论文的实现原理，并给出部分程序源代码，方便后来者研究和参考。</p>
-<h1>摘要</h1>
-<p>英文在中文之后 / English follows Chinese<br>
+<p>  本文主要解决水面无人艇在对多个任务点进行全局路径规划时的设计和实现算方法，相关研究和设计已在
+<a target="_blank" rel="noopener" href="http://www.inderscience.com/jhome.php?jcode=ijvas">International
+Journal of Vehicle Autonomous Systems (IJVAS)</a>
+EI 期刊发表。附 InderScience Publiers - IJVAS 的官方文献下载链接 <a target="_blank" rel="noopener" href="http://www.inderscience.com/offer.php?id=93119">Design and
+Implementation of Global Path Planning System for Unmanned Surface
+Vehicle among Multiple Task Points</a>，以及 arXiv 的<a target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.08106">下载链接</a>。官方文献下载链接需要科学上网才可以打开。<br>
+  本文主要讨论论文的实现原理，并给出部分程序源代码，方便后来者研究和参考。<br>
+# 摘要 英文在中文之后 / English follows Chinese<br>
   全局路径规划是水面无人艇设计的关键技术之一。本文基于电子海图和六边形网格建立全局环境模型，并且证明六边形网格在有效性，安全性和快速性方面优于传统的正方形网格。此外，本文引入 Cube 坐标系来简化六边形坐标运算。进一步地，我们提出了一种改进的 A * 算法来实现两点之间的路径规划。在此基础上，我们构建了多个任务点的全局路径规划模型，并提出了一种改进的蚁群优化算法来准确实现多任务点的全局路径规划。仿真结果表明，全局路径规划系统可以安全、快速地规划出多个任务点的最优路径，在安全性，快速性和路径长度方面均优于传统方法。此外，全局规划路径可直接用于 USV 的实际场景。<br>
-  Global path planning is the key technology in the design of unmanned surface vehicles. This paper establishes global environment modelling based on electronic charts and hexagonal grids which are proved to be better than square grids in validity, safety and rapidity. Besides, we introduce Cube coordinate system to simplify hexagonal algorithms. Furthermore, we propose an improved A* algorithm to realize the path planning between two points. Based on that, we build the global path planning modelling for multiple task points and present an improved ant colony optimization to realize it accurately. The simulation results show that the global path planning system can plan an optimal path to tour multiple task points safely and quickly, which is superior to traditional methods in safety, rapidity and path length. Besides, the planned path can directly apply to actual applications of USVs.</p>
-<h1>论文实现原理</h1>
-<p>  本文提出的多任务点全局路径规划算法主要分为电子海图解析、六边形网格化建模、两点间路径搜索、多任务点的路径规划四部分。</p>
-<img data-src="http://www.waylon.one/downloads/images/blog/IJVAS_Struct.png" width="600" height="120">
-<p>  其中，通过解析电子海图文件，提取其中的海域地理信息及碍航物等信息，利用六边形进行网格化，建立由可航行六边形网格和不可航行六边形网格组成的环境模型。相关资料可以参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/6506906.html">基于 8211lib 库对 s57 电子海图的解析和存储</a> 和  <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/7192315.html">正六边形网格化 (Hexagonal Grids) 原理与实现</a>。<br>
-  在实现环境建模后，两点间路径搜索算法优化的目标是在确保航行安全性的前提下，尽可能使规划的路径航行代价最小，最大程度地减小与最短路径、最小航行代价无关的计算量。本文设计综合多因素的航行代价，利用 Hart 提出的 A * 算法实现两点间的初步搜索，然后利用去除多余航点的曲线平滑算法，在保证安全的前提下减少路径中不必要的航点，使多段折线化为直线，增加路径的光滑度，规划的路径会更加符合起止点之间的期望路径，符合水面无人艇的运动学特性。相关资料可以参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/8443815.html">Research and Implementation of Global Path Planning for Unmanned Surface Vehicle Based on Electronic Chart</a> 论文。<br>
+  Global path planning is the key technology in the design of unmanned
+surface vehicles. This paper establishes global environment modelling
+based on electronic charts and hexagonal grids which are proved to be
+better than square grids in validity, safety and rapidity. Besides, we
+introduce Cube coordinate system to simplify hexagonal algorithms.
+Furthermore, we propose an improved A* algorithm to realize the path
+planning between two points. Based on that, we build the global path
+planning modelling for multiple task points and present an improved ant
+colony optimization to realize it accurately. The simulation results
+show that the global path planning system can plan an optimal path to
+tour multiple task points safely and quickly, which is superior to
+traditional methods in safety, rapidity and path length. Besides, the
+planned path can directly apply to actual applications of USVs. #
+论文实现原理
+  本文提出的多任务点全局路径规划算法主要分为电子海图解析、六边形网格化建模、两点间路径搜索、多任务点的路径规划四部分。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/IJVAS_Struct.png" width="600" height="120"></p>
+<p>  其中，通过解析电子海图文件，提取其中的海域地理信息及碍航物等信息，利用六边形进行网格化，建立由可航行六边形网格和不可航行六边形网格组成的环境模型。相关资料可以参考
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/6506906.html">基于 8211lib 库对 s57 电子海图的解析和存储</a>
+和 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/7192315.html">正六边形网格化 (Hexagonal
+Grids) 原理与实现</a>。<br>
+  在实现环境建模后，两点间路径搜索算法优化的目标是在确保航行安全性的前提下，尽可能使规划的路径航行代价最小，最大程度地减小与最短路径、最小航行代价无关的计算量。本文设计综合多因素的航行代价，利用 Hart 提出的 A * 算法实现两点间的初步搜索，然后利用去除多余航点的曲线平滑算法，在保证安全的前提下减少路径中不必要的航点，使多段折线化为直线，增加路径的光滑度，规划的路径会更加符合起止点之间的期望路径，符合水面无人艇的运动学特性。相关资料可以参考
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/8443815.html">Research and
+Implementation of Global Path Planning for Unmanned Surface Vehicle
+Based on Electronic Chart</a> 论文。<br>
   在多任务点设计中，本文分析了港口巡逻、水质采样、水文勘测等任务对于全局路径规划的具体要求，从中抽象出针对这些任务通用的路径规划需求：在存在障碍物的海洋环境中，在给定多个任务点坐标的情形下，要求水面无人艇从起始点出发，安全地巡行到各个任务点执行具体的任务，再返回到目标点，要求总体的航路代价和最小。如在水质采样中，航路任务要求水面无人艇从固定点出发，根据设定路线行驶到各个采样点，根据采样要求完成全自动采集水样后，返回到目标点进行下一步处理，该航路任务要求完全符合本文抽象出来的全局路径规划要求。<br>
-  在水面无人艇复杂任务应用场景下，多任务点的路径规划可以抽象为网络最短路径问题，该网络本质上是一个有权值的有向图。多任务点的全局路径规划抽象模型–网络最短路径问题，可以近似为旅行商问题 (Traveling Salesman Problem, TSP)，是非常典型的 NP (Nondeterministic Polynomial) 难问题。在应用蚁群算法解决多任务点的全局路径规划问题时，路径规划问题可以转化为在一个由节点和边组成的网络权重图（网络最短路径模型）中搜索最优闭环路径，如下图所示。相关资料可以参考 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/8478671.html">基于蚁群算法的机械臂打孔路径规划</a>。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/ant_graph.png" alt=""></p>
-<h1>实现程序</h1>
-<p>  因为程序实现于 2017 年，在性能和流程中仍然不够完善，欢迎邮件进行交流和给出建议。程序最新代码请参考本人的 GitHub <a target="_blank" rel="noopener" href="https://github.com/wylloong">wylloong</a>。<br>
+  在水面无人艇复杂任务应用场景下，多任务点的路径规划可以抽象为网络最短路径问题，该网络本质上是一个有权值的有向图。多任务点的全局路径规划抽象模型 -- 网络最短路径问题，可以近似为旅行商问题 (Traveling
+Salesman Problem, TSP)，是非常典型的 NP (Nondeterministic
+Polynomial) 难问题。在应用蚁群算法解决多任务点的全局路径规划问题时，路径规划问题可以转化为在一个由节点和边组成的网络权重图（网络最短路径模型）中搜索最优闭环路径，如下图所示。相关资料可以参考
+<a target="_blank" rel="noopener" href="https://www.cnblogs.com/DHUtoBUAA/p/8478671.html">基于蚁群算法的机械臂打孔路径规划</a>。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/ant_graph.png"></p>
+<h1 id="实现程序">实现程序</h1>
+<p>  因为程序实现于 2017 年，在性能和流程中仍然不够完善，欢迎邮件进行交流和给出建议。程序最新代码请参考本人的 GitHub
+<a target="_blank" rel="noopener" href="https://github.com/wylloong">wylloong</a>。<br>
   程序运行结果如下，其中黑点为任务点，红色线段为最后规划的全局路径。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/science/USV_Global_Path_Planning_Multiple_points.png" alt="程序运行结果"></p>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/science/USV_Global_Path_Planning_Multiple_points.png" alt="程序运行结果">
+<figcaption aria-hidden="true">程序运行结果</figcaption>
+</figure>
 
     </div>
 
@@ -345,9 +374,9 @@
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/Paper/" rel="tag"># Paper</a>
               <a href="/tags/USV/" rel="tag"># USV</a>
-              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/Path-Planning/" rel="tag"># Path Planning</a>
           </div>
 
