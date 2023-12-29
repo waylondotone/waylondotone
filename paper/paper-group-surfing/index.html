@@ -32,9 +32,9 @@
 <meta property="article:published_time" content="2019-09-18T04:13:39.000Z">
 <meta property="article:modified_time" content="2023-05-19T12:12:32.193Z">
 <meta property="article:author" content="Nobody">
+<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="Weekly Blogs">
 <meta property="article:tag" content="paper">
-<meta property="article:tag" content="Robotics">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.waylon.one/downloads/images/blog/Navigation_flow_diagram.jpg">
 
@@ -145,9 +145,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#system"><span class="nav-number">2.</span> <span class="nav-text">SYSTEM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#methods"><span class="nav-number">3.</span> <span class="nav-text">METHODS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#group-surfing"><span class="nav-number">3.1.</span> <span class="nav-text">Group Surfing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curb-following"><span class="nav-number">3.2.</span> <span class="nav-text">Curb Following</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#collision-avoidance"><span class="nav-number">3.3.</span> <span class="nav-text">Collision Avoidance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#simulation-demonstration-and-experiments-for"><span class="nav-number">4.</span> <span class="nav-text">SIMULATION
-DEMONSTRATION AND EXPERIMENTS For</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#simulation-demonstration"><span class="nav-number">4.1.</span> <span class="nav-text">Simulation Demonstration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#simulation-experiments-and-evaluation"><span class="nav-number">4.2.</span> <span class="nav-text">Simulation Experiments
-and Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hardware-demonstration"><span class="nav-number">5.</span> <span class="nav-text">HARDWARE DEMONSTRATION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hardware-setup"><span class="nav-number">5.1.</span> <span class="nav-text">Hardware Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#demonstration-and-discussion"><span class="nav-number">5.2.</span> <span class="nav-text">Demonstration and Discussion</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusions"><span class="nav-number">6.</span> <span class="nav-text">CONCLUSIONS</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">SYSTEM</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">METHODS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Group-Surfing"><span class="nav-number">3.1.</span> <span class="nav-text">Group Surfing</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Curb-Following"><span class="nav-number">3.2.</span> <span class="nav-text">Curb Following</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Collision-Avoidance"><span class="nav-number">3.3.</span> <span class="nav-text">Collision Avoidance</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">SIMULATION DEMONSTRATION AND EXPERIMENTS For</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Simulation-Demonstration"><span class="nav-number">4.1.</span> <span class="nav-text">Simulation Demonstration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Simulation-Experiments-and-Evaluation"><span class="nav-number">4.2.</span> <span class="nav-text">Simulation Experiments and Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">HARDWARE DEMONSTRATION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hardware-Setup"><span class="nav-number">5.1.</span> <span class="nav-text">Hardware Setup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Demonstration-and-Discussion"><span class="nav-number">5.2.</span> <span class="nav-text">Demonstration and Discussion</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">CONCLUSIONS</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -335,13 +333,7 @@ and Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a clas
 ![video_1](https://www.youtube.com/watch?v=fy7fKOADg_A)
 ![video_2](https://www.youtube.com/watch?v=PHhtYIkdxiw)
 -->
-<p>这篇论文主要研究如何在人行道上给机器人导航。论文根据人行横道上行人的多与少，来使用两种不同的算法为机器人导航。在行人密集 (pedestrian-rich)
-的环境下，使用 Group Surfing 方法，模仿前方的行人，以遵守规则
-(socially-compliant)
-的行为来避开行人和障碍物，并最后抵达目的地；在行人稀疏
-(pedestrian-sparse)
-的环境下，通过检测马路沿，沿着马路沿导航。在这两种算法下，底层的避障模块是有模仿人类倾向
-(human-aware)。最后，作者在仿真和实物上均验证了算法。</p>
+<p>这篇论文主要研究如何在人行道上给机器人导航。论文根据人行横道上行人的多与少，来使用两种不同的算法为机器人导航。在行人密集 (pedestrian-rich) 的环境下，使用 Group Surfing 方法，模仿前方的行人，以遵守规则 (socially-compliant) 的行为来避开行人和障碍物，并最后抵达目的地；在行人稀疏 (pedestrian-sparse) 的环境下，通过检测马路沿，沿着马路沿导航。在这两种算法下，底层的避障模块是有模仿人类倾向 (human-aware)。最后，作者在仿真和实物上均验证了算法。</p>
 <p>总体而言，这篇文章跟踪行人的思路比较好，算法实现细节清楚，在算法验证阶段有条理，总体质量比较高。</p>
 <p>多平台维护不易，内容实时更新于<a href="http://www.waylon.one/paper/paper-group-surfing/">个人网站</a>，请移步阅读最新内容。</p>
 
@@ -352,206 +344,140 @@ and Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a clas
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
 <iframe src="//player.bilibili.com/player.html?aid=412574140&amp;bvid=BV1aV411f7cx&amp;cid=172397637&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>
 
-<h1 id="introduction">INTRODUCTION</h1>
+<h1>INTRODUCTION</h1>
 <p>本文的一个侧重点是，人机交互，强调机器人尽量不影响行人的行为，或者以人的方式去交互。所以，研究目标不是一个简单的 (类似于最短路径) 求最优解的问题。</p>
 <p>首先，这篇文章的应用场景是人行道 (Sidewalk)，导航空间在路旁，行人的方向大概是两个线性的。</p>
 <blockquote>
-<p>Sidewalks present a unique yet challenging environment in that the
-navigable space combines elements of both roads and free indoor spaces.
-Often sidewalk motion is restricted to two linear directions and the
-resulting navigable space is limited, like on roads.</p>
+<p>Sidewalks present a unique yet challenging environment in that the navigable space combines elements of both roads and free indoor spaces. Often sidewalk motion is restricted to two linear directions and the resulting navigable space is limited, like on roads.</p>
 </blockquote>
 <p>问题的复杂性在于，行人的活动比较随机，可能聚团 (group) 一起走。</p>
 <blockquote>
-<p>However, pedestrians generally do not walk in perfect queues.
-Instead, people tend to walk in groups of variable sizes and speeds and
-move along with a general self-organizing crowd flow.</p>
+<p>However, pedestrians generally do not walk in perfect queues. Instead, people tend to walk in groups of variable sizes and speeds and move along with a general self-organizing crowd flow.</p>
 </blockquote>
-<p>人行道导航 (sidewalk
-navigation) 的特点是，必须考虑行人的随机行为，同时遵守一定的社会规则，比如行人的交互常识 (pedestrian
-conventions)，人际距离学 (appropriate
-proxemics)，即行走方向保持的距离比垂直方向的距离要远。</p>
+<p>人行道导航 (sidewalk navigation) 的特点是，必须考虑行人的随机行为，同时遵守一定的社会规则，比如行人的交互常识 (pedestrian conventions)，人际距离学 (appropriate proxemics)，即行走方向保持的距离比垂直方向的距离要远。</p>
 <blockquote>
-<p>Compared to autonomous road navigation, sidewalk navigation must also
-account for stochastic human movement that necessitates dynamic obstacle
-avoidance. Furthermore, certain social rules, such as walking in lanes
-or affording more space in the direction of walking than in the
-perpendicular direction, are rules that a robot should follow as
-well.</p>
+<p>Compared to autonomous road navigation, sidewalk navigation must also account for stochastic human movement that necessitates dynamic obstacle avoidance. Furthermore, certain social rules, such as walking in lanes or affording more space in the direction of walking than in the perpendicular direction, are rules that a robot should follow as well.</p>
 </blockquote>
-<p>已有的研究方法有推理 (reasoning) 和学习 (learning)，或者两者的结合。社会规则 (Social
-rules)，在推理方法中作为代价函数，或在学习方法中作为奖励函数。</p>
+<p>已有的研究方法有推理 (reasoning) 和学习 (learning)，或者两者的结合。社会规则 (Social rules)，在推理方法中作为代价函数，或在学习方法中作为奖励函数。</p>
 <blockquote>
-<p>In general, methods are based on either reasoning, learning, or a
-combination thereof.</p>
+<p>In general, methods are based on either reasoning, learning, or a combination thereof.</p>
 </blockquote>
-<p>已有方法的局限性在于，利用对行人意图的理解，通常适用于开放环境 (open
-environments)，而本文的研究问题是有限制的人行道环境，同时没有考虑人行横道的物理边界，机器人的运动会影响行人流等。</p>
+<p>已有方法的局限性在于，利用对行人意图的理解，通常适用于开放环境 (open environments)，而本文的研究问题是有限制的人行道环境，同时没有考虑人行横道的物理边界，机器人的运动会影响行人流等。</p>
 <blockquote>
-<p>Here, the aforementioned approaches may be less effective as they do
-not account for the physical sidewalk boundaries, or how robot movement
-will affect pedestrian flow.</p>
+<p>Here, the aforementioned approaches may be less effective as they do not account for the physical sidewalk boundaries, or how robot movement will affect pedestrian flow.</p>
 </blockquote>
 <p>所以，本文的主要研究问题是如何考虑附近行人的行为和行人流，机器人最终抵达终点。</p>
 <blockquote>
-<p>The key research question this paper considers is how mobile robots
-can utilize nearby pedestrian behaviours and flows to navigate towards a
-global goal.</p>
+<p>The key research question this paper considers is how mobile robots can utilize nearby pedestrian behaviours and flows to navigate towards a global goal.</p>
 </blockquote>
 <p>针对这个问题，作者给出的答案是，模仿行人的行为。当检测到有行人朝向机器人的终点时，会允许机器人模仿并从用行人的社交行为。</p>
 <blockquote>
-<p>When our navigation stack detects people moving towards the robot’s
-goal, a ‘group surfing’ behaviour is used. This allows the robot to
-imitate and participate in pedestrian social behaviours.</p>
+<p>When our navigation stack detects people moving towards the robot’s goal, a ‘group surfing’ behaviour is used. This allows the robot to imitate and participate in pedestrian social behaviours.</p>
 </blockquote>
-<p>在行人稀疏或者简单的人行道，距离人行道的路沿一段距离，沿着这个向目标走 (trajectory
-following)。</p>
+<p>在行人稀疏或者简单的人行道，距离人行道的路沿一段距离，沿着这个向目标走 (trajectory following)。</p>
 <blockquote>
-<p>In an unpopulated and simple sidewalk environment, the default
-behaviour is to follow a trajectory offset from the sidewalk curb
-towards the goal.</p>
+<p>In an unpopulated and simple sidewalk environment, the default behaviour is to follow a trajectory offset from the sidewalk curb towards the goal.</p>
 </blockquote>
-<h1 id="system">SYSTEM</h1>
+<h1>SYSTEM</h1>
 <p>系统的设计比较中规中矩，有新意的是，在航路点外，生成动态的子目标点 (subgoals)。</p>
-<figure>
-<img data-src="/downloads/images/blog/Navigation_flow_diagram.jpg" alt="示意图">
-<figcaption aria-hidden="true">示意图</figcaption>
-</figure>
-<ol type="1">
+<p><img data-src="/downloads/images/blog/Navigation_flow_diagram.jpg" alt="示意图"></p>
+<ol>
 <li>首先利用 Google Maps’ API 去生成高层次的航路点 (waypoint)；</li>
-<li>导航模块 (sidewalk navigation module) 根据附近是否有行人流 (nearby
-pedestrian flow) 来采用 group surfing 或者 sidewalk following
-方法。</li>
-<li>无论哪种方法，对外输出是子目标点
-(subgoals)，这是避障算法的输入，最后输出速度矢量 (velocity command)
-指令，控制机器人的运动。</li>
+<li>导航模块 (sidewalk navigation module) 根据附近是否有行人流 (nearby pedestrian flow) 来采用 group surfing 或者 sidewalk following 方法。</li>
+<li>无论哪种方法，对外输出是子目标点 (subgoals)，这是避障算法的输入，最后输出速度矢量 (velocity command) 指令，控制机器人的运动。</li>
 <li>周期轮训，是否抵达当前目标点。</li>
 </ol>
 <!--If the robot has reached the waypoint within a predefined tolerance, the module checks if there are more waypoints.-->
-<h1 id="methods">METHODS</h1>
-<h2 id="group-surfing">Group Surfing</h2>
-<p>核心思路和目标：模仿人类的自然行为，包括沿路行走 (walking in
-lanes)，避障 (avoiding collisions with other pedestrians or
-obstacles)，路口等待 (waiting at intersections to cross)，不走入交通中
-(not walking into
-traffic)。类似于仿生学，这次模仿的只不过是人类自己罢了。</p>
-<ol type="1">
+<h1>METHODS</h1>
+<h2 id="Group-Surfing">Group Surfing</h2>
+<p>核心思路和目标：模仿人类的自然行为，包括沿路行走 (walking in lanes)，避障 (avoiding collisions with other pedestrians or obstacles)，路口等待 (waiting at intersections to cross)，不走入交通中 (not walking into traffic)。类似于仿生学，这次模仿的只不过是人类自己罢了。</p>
+<ol>
 <li>Filter Candidate Groups</li>
 </ol>
 <ul>
-<li> 过滤那些远离航路点的行人组。 &gt; Filter out groups moving away from
-the waypoint.</li>
-<li> 重点解释下，<span class="math inline">\(\[v_{G_{i}}\cdot
-x_{I}\]\)</span>
-的意义。在我看来，这个并没有物理意义，作者只不过想利用向量点乘的正负来判断行人是否在远离航路点。ps.
-向量点乘的正负性取决于余弦角，只要两个向量的夹角小于 90 度 (向目标点靠近)，就是正值。
-&gt; If this value is non-positive, discard Gi as a subgoal
-candidate.</li>
-</ul>
-<figure>
-<img data-src="/downloads/images/blog/group_surfing_1.jpg" alt="示意图">
-<figcaption aria-hidden="true"> 示意图</figcaption>
-</figure>
-<ol start="2" type="1">
-<li> Smart Group Selection</li>
-</ol>
-<ul>
-<li> 方法核心思路和目标：从筛选后的行人组中，选择平均速度小于且最接近于机器人最大速度的作为最优跟踪组
-(the optimal group to
-follow)。选择该组中距离机器人最近行人的当前位置作为子目标点
-(subgoals)。</li>
+<li> 过滤那些远离航路点的行人组。</li>
 </ul>
 <blockquote>
-<p>Once we have filtered out unsuitable groups, the algorithm selects
-the optimal group to follow.</p>
+<p>Filter out groups moving away from the waypoint.</p>
+</blockquote>
+<ul>
+<li>重点解释下，$[v_{G_{i}}\cdot x_{I}]$ 的意义。在我看来，这个并没有物理意义，作者只不过想利用向量点乘的正负来判断行人是否在远离航路点。ps. 向量点乘的正负性取决于余弦角，只要两个向量的夹角小于 90 度 (向目标点靠近)，就是正值。</li>
+</ul>
+<blockquote>
+<p>If this value is non-positive, discard Gi as a subgoal candidate.</p>
+</blockquote>
+<p><img data-src="/downloads/images/blog/group_surfing_1.jpg" alt="示意图"></p>
+<ol start="2">
+<li>Smart Group Selection</li>
+</ol>
+<ul>
+<li> 方法核心思路和目标：从筛选后的行人组中，选择平均速度小于且最接近于机器人最大速度的作为最优跟踪组 (the optimal group to follow)。选择该组中距离机器人最近行人的当前位置作为子目标点 (subgoals)。</li>
+</ul>
+<blockquote>
+<p>Once we have filtered out unsuitable groups, the algorithm selects the optimal group to follow.</p>
 </blockquote>
 <ul>
 <li>那么，路径规划和避障的问题就是在机器人当前位置和最优跟踪组的最近行人之间，规划出一条无碰撞的路径。</li>
 </ul>
 <blockquote>
-<p>We intentionally select the closest person as a subgoal as attempting
-to reach the average group position could lead to path planning through
-pedestrians located between the average group position and the robot’s
-current position.</p>
+<p>We intentionally select the closest person as a subgoal as attempting to reach the average group position could lead to path planning through pedestrians located between the average group position and the robot’s current position.</p>
 </blockquote>
-<h2 id="curb-following">Curb Following</h2>
-<p>方法核心思路和目标：使用 3D laser sensor 采集点云，然后利用 Random
-Sample Consensus (RANSAC) 算法去识别马路沿。</p>
+<h2 id="Curb-Following">Curb Following</h2>
+<p>方法核心思路和目标：使用 3D laser sensor 采集点云，然后利用 Random Sample Consensus (RANSAC) 算法去识别马路沿。</p>
 <blockquote>
-<p>We make use of contextual knowledge; sidewalks are normally
-surrounded by streets and buildings or empty space. Our robot first
-acquires a surrounding point cloud using a 3D laser sensor and filters
-out points that are at the same height as or above the plane defined by
-the robot wheel contacts.</p>
+<p>We make use of contextual knowledge; sidewalks are normally surrounded by streets and buildings or empty space. Our robot first acquires a surrounding point cloud using a 3D laser sensor and filters out points that are at the same height as or above the plane defined by the robot wheel contacts.</p>
 </blockquote>
-<h2 id="collision-avoidance">Collision Avoidance</h2>
-<ol type="1">
+<h2 id="Collision-Avoidance">Collision Avoidance</h2>
+<ol>
 <li>Human-Aware Collision Avoidance</li>
 </ol>
 <ul>
-<li><p> 在 group surfing 和 curb following
-中，使用已有的学习方法，Socially-Aware Collision Avoidance with Deep
-Reinforcement Learning (SA-CADRL) 来作为避障算法。 &gt; Socially-Aware
-Collision Avoidance with Deep Reinforcement Learning (SA-CADRL), as the
-collision avoidance component of our navigation stack. The collision
-avoidance system navigates to a local subgoal generated by either the
-group surfing or the curb following approach.</p></li>
-<li><p> 其中，引入社交奖励函数来鼓励社会行为。 The reinforcement training
-process induces social awareness through social reward functions, which
-give higher values to actions that follow social rules.</p></li>
+<li> 在 group surfing 和 curb following 中，使用已有的学习方法，Socially-Aware Collision Avoidance with Deep Reinforcement Learning (SA-CADRL) 来作为避障算法。</li>
 </ul>
-<ol start="2" type="1">
+<blockquote>
+<p>Socially-Aware Collision Avoidance with Deep Reinforcement Learning (SA-CADRL), as the collision avoidance component of our navigation stack. The collision avoidance system navigates to a local subgoal generated by either the group surfing or the curb following approach.</p>
+</blockquote>
+<ul>
+<li>其中，引入社交奖励函数来鼓励社会行为。<br>
+The reinforcement training process induces social awareness through social reward functions, which give higher values to actions that follow social rules.</li>
+</ul>
+<ol start="2">
 <li>Static Obstacle Avoidance:</li>
 </ol>
 <ul>
-<li> 把静态障碍物作为静态的行人，仍然使用 SA-CADRL 算法来处理。 &gt; We
-also use SA-CADRL to avoid these static obstacles by adding “static
-pedestrians” to the state vector.</li>
+<li> 把静态障碍物作为静态的行人，仍然使用 SA-CADRL 算法来处理。</li>
 </ul>
-<h1 id="simulation-demonstration-and-experiments-for">SIMULATION
-DEMONSTRATION AND EXPERIMENTS For</h1>
-<p>仿真环境的构建：使用 ROS 和 Gazebo 仿真套件。 &gt; We use the Robot
-Operating System (ROS) and Gazebo simulator suite. To simulate
-pedestrians, we use the Pedsim ROS library, which relies on the social
-force model.</p>
-<h2 id="simulation-demonstration">Simulation Demonstration</h2>
-<p>在虚拟环境中，以 GPS
-校准，重新搭建了周围的环境，复制了机器人模型。</p>
+<blockquote>
+<p>We also use SA-CADRL to avoid these static obstacles by adding “static pedestrians” to the state vector.</p>
+</blockquote>
+<h1>SIMULATION DEMONSTRATION AND EXPERIMENTS For</h1>
+<p>仿真环境的构建：使用 ROS 和 Gazebo 仿真套件。</p>
+<blockquote>
+<p>We use the Robot Operating System (ROS) and Gazebo simulator suite. To simulate pedestrians, we use the Pedsim ROS library, which relies on the social force model.</p>
+</blockquote>
+<h2 id="Simulation-Demonstration">Simulation Demonstration</h2>
+<p>在虚拟环境中，以 GPS 校准，重新搭建了周围的环境，复制了机器人模型。</p>
 <!--
 ![video_1](https://www.youtube.com/watch?v=fy7fKOADg_A)
 -->
-<h2 id="simulation-experiments-and-evaluation">Simulation Experiments
-and Evaluation</h2>
-<p>目的：验证机器人可以沿着社会接受 (socially-acceptable)
-的行为，最后抵达终点，即机器人的路径和行人的路径是相似的。</p>
+<h2 id="Simulation-Experiments-and-Evaluation">Simulation Experiments and Evaluation</h2>
+<p>目的：验证机器人可以沿着社会接受 (socially-acceptable) 的行为，最后抵达终点，即机器人的路径和行人的路径是相似的。</p>
 <blockquote>
-<p>In evaluating our navigation system, our main goal was to show that
-the system successfully navigates the robot to its final goal through a
-socially-acceptable path. That is, the path that our robot takes to the
-goal is similar to what a pedestrian would take to the same goal.</p>
+<p>In evaluating our navigation system, our main goal was to show that the system successfully navigates the robot to its final goal through a socially-acceptable path. That is, the path that our robot takes to the goal is similar to what a pedestrian would take to the same goal.</p>
 </blockquote>
 <p>首先，在虚拟环境中，使用提出的算法抵达终点；然后，文中引入对比试验，使用最短路径的方法抵达终点。</p>
 <blockquote>
-<p>We tracked the path taken by the robot and the path taken by a
-simulated pedestrian. We also tracked the shortest path that the robot
-could take within the confines of the sidewalk.</p>
+<p>We tracked the path taken by the robot and the path taken by a simulated pedestrian. We also tracked the shortest path that the robot could take within the confines of the sidewalk.</p>
 </blockquote>
-<p>现在，有三组轨迹，行人的真实轨迹，现有算法轨迹，最短路径的轨迹。本文使用
-an independent samples t-test
-等数学方法，比较两个轨迹和人类实际轨迹的相似度，来证明现有的算法更加符合人类的行为。</p>
+<p>现在，有三组轨迹，行人的真实轨迹，现有算法轨迹，最短路径的轨迹。本文使用 an independent samples t-test 等数学方法，比较两个轨迹和人类实际轨迹的相似度，来证明现有的算法更加符合人类的行为。</p>
 <p>MC：赞一下，比较的有理有据。</p>
-<h1 id="hardware-demonstration">HARDWARE DEMONSTRATION</h1>
-<h2 id="hardware-setup">Hardware Setup</h2>
+<h1>HARDWARE DEMONSTRATION</h1>
+<h2 id="Hardware-Setup">Hardware Setup</h2>
 <p>机器人的配置如下：</p>
 <blockquote>
-<p>We use the PowerBot from Omron Adept Mobile Robots as our
-differential drive mobile base. The robot is equipped with multiple
-sensors: a Velodyne VLP-16 3D LiDAR sensor; a SICK LMS-200 2D laser
-sensor; a RealSense RGB-D sensor, and GPS and IMU sensors. Our
-PowerBot’s max speed is 0.8m/s. This limits its capacity of following
-faster pedestrian groups.</p>
+<p>We use the PowerBot from Omron Adept Mobile Robots as our differential drive mobile base. The robot is equipped with multiple sensors: a Velodyne VLP-16 3D LiDAR sensor; a SICK LMS-200 2D laser sensor; a RealSense RGB-D sensor, and GPS and IMU sensors. Our PowerBot’s max speed is 0.8m/s. This limits its capacity of following faster pedestrian groups.</p>
 </blockquote>
-<h2 id="demonstration-and-discussion">Demonstration and Discussion</h2>
+<h2 id="Demonstration-and-Discussion">Demonstration and Discussion</h2>
 <!--
 ![video_2](https://www.youtube.com/watch?v=PHhtYIkdxiw)
 -->
@@ -560,19 +486,19 @@ faster pedestrian groups.</p>
 <li>原打算使用 lidar 来识别行人的腿部，但是错误率太多，使用 SPENCER 提供的 RGB-D-based 的上身识别算法。</li>
 <li>对机器人局限的探讨，以及算法的不足之处，从工程的角度讨论。</li>
 </ul>
-<h1 id="conclusions">CONCLUSIONS</h1>
-<p>待提高的地方： - For the group surfing component, one main area for
-improvement is in the selection process of groups to imitate. -
-Criteria: group velocity; group trajectory; group size - External
-observers of the group surfing behaviour will be interviewed to gauge if
-the imitation behaviour is socially acceptable. - For collision
-avoidance, a more specialized technique would allow for more efficient
-navigation. - We hope to decouple static collision avoidance from
-dynamic collision avoidance. - For curb following, our approach only
-works for sidewalks that limit directly to the street, ignoring common
-tree belt, median, hellstrip, etc. Our future plan is to introduce
-detection and recognition of these non-transitable areas and incorporate
-them in our navigation module.</p>
+<h1>CONCLUSIONS</h1>
+<p>待提高的地方：</p>
+<ul>
+<li>For the group surfing component, one main area for improvement is in the selection process of groups to imitate.
+<ul>
+<li>Criteria: group velocity; group trajectory; group size</li>
+</ul>
+</li>
+<li>External observers of the group surfing behaviour will be interviewed to gauge if the imitation behaviour is socially acceptable.</li>
+<li>For collision avoidance, a more specialized technique would allow for more efficient navigation.</li>
+<li>We hope to decouple static collision avoidance from dynamic collision avoidance.</li>
+<li>For curb following, our approach only works for sidewalks that limit directly to the street, ignoring common tree belt, median, hellstrip, etc. Our future plan is to introduce detection and recognition of these non-transitable areas and incorporate them in our navigation module.</li>
+</ul>
 
     </div>
 
@@ -582,9 +508,9 @@ them in our navigation module.</p>
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
               <a href="/tags/paper/" rel="tag"># paper</a>
-              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
           </div>
 
         

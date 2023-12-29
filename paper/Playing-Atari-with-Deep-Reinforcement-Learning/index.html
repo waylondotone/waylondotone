@@ -35,9 +35,9 @@
 <meta property="article:published_time" content="2020-06-04T01:23:17.000Z">
 <meta property="article:modified_time" content="2023-05-19T12:12:32.161Z">
 <meta property="article:author" content="Nobody">
+<meta property="article:tag" content="Robotics">
 <meta property="article:tag" content="Weekly Blogs">
 <meta property="article:tag" content="paper">
-<meta property="article:tag" content="Robotics">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.waylon.one/downloads/images/blog/DQN_simplify_model.jpg">
 
@@ -148,9 +148,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.1.</span> <span class="nav-text">本文贡献</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#background"><span class="nav-number">3.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">任务描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8A%BD%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">问题抽象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#related-work"><span class="nav-number">4.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#timeline"><span class="nav-number">4.1.</span> <span class="nav-text">Timeline</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#deep-reinforcement-learning"><span class="nav-number">5.</span> <span class="nav-text">Deep Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#preprocessing-and-model-architecture"><span class="nav-number">5.1.</span> <span class="nav-text">Preprocessing and Model
-Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#experiments"><span class="nav-number">6.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#training-and-stability"><span class="nav-number">6.1.</span> <span class="nav-text">Training and Stability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#visualizing-the-value-function"><span class="nav-number">6.2.</span> <span class="nav-text">Visualizing the Value
-Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-evaluation"><span class="nav-number">6.3.</span> <span class="nav-text">Main Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">8.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.1.</span> <span class="nav-text">本文贡献</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Background</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E6%8F%8F%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">任务描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8A%BD%E8%B1%A1"><span class="nav-number">3.2.</span> <span class="nav-text">问题抽象</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Timeline"><span class="nav-number">4.1.</span> <span class="nav-text">Timeline</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Deep Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Preprocessing-and-Model-Architecture"><span class="nav-number">5.1.</span> <span class="nav-text">Preprocessing and Model Architecture</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">Experiments</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Training-and-Stability"><span class="nav-number">6.1.</span> <span class="nav-text">Training and Stability</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Visualizing-the-Value-Function"><span class="nav-number">6.2.</span> <span class="nav-text">Visualizing the Value Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Main-Evaluation"><span class="nav-number">6.3.</span> <span class="nav-text">Main Evaluation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -325,40 +323,36 @@ Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" hre
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p>Playing Atari with Deep Reinforcement Learning</p>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1312.5602v1.pdf">Paper download
-link</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1312.5602v1.pdf">Paper download link</a></p>
 <p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/Playing-Atari-with-Deep-Reinforcement-Learning/">个人网站</a>，请移步阅读最新内容。</p>
-<h1 id="abstract">Abstract</h1>
-<p>文章提出第一个深度学习模型，能够使用强化学习算法从高维的感知输入 (high-dimensional
-sensory input) 中学习到控制策略 (control
-policies)。这个模型是一个卷积神经网络 (convolutional neural
-network)，使用 Q-learning 的变种进行训练，可以直接输入像素，然后输出评估未来奖励的值函数 (a
-value function estimating future rewards)。</p>
+<h1>Abstract</h1>
+<p>文章提出第一个深度学习模型，能够使用强化学习算法从高维的感知输入 (high-dimensional sensory input) 中学习到控制策略 (control policies)。这个模型是一个卷积神经网络 (convolutional neural network)，使用 Q-learning 的变种进行训练，可以直接输入像素，然后输出评估未来奖励的值函数 (a value function estimating future rewards)。</p>
 <blockquote>
-<p>The deep learning model is a convolutional neural network, trained
-with a variant of Q-learning, whose input is raw pixels and whose output
-is a value function estimating future rewards.</p>
+<p>The deep learning model is a convolutional neural network, trained with a variant of Q-learning, whose input is raw pixels and whose output is a value function estimating future rewards.</p>
 </blockquote>
-<h1 id="introduction">Introduction</h1>
+<h1>Introduction</h1>
 <ul>
-<li><p>研究现状：很多 RL 应用依赖于人工制定的特征，其性能表现严重依赖特征表示的质量，不具备自学习能力。
-&gt; Most successful RL applica- tions that operate on these domains
-have relied on <strong>hand-crafted features combined with linear value
-functions or policy representations</strong>. Clearly, the performance
-of such systems heavily relies on the quality of the <strong>feature
-representation</strong>.</p></li>
-<li><p> 从深度学习 DL 在计算机视觉和语音识别上取得进步的现状，思考类似的方法能否应用到通过强化学习 RL 来控制智能体。
-&gt; Recent advances in deep learning have made it possible to
-<strong>extract high-level features from raw sensory data</strong>,
-leading to breakthroughs in computer vision and speech recognition.</p>
+<li>
+<p>研究现状：很多 RL 应用依赖于人工制定的特征，其性能表现严重依赖特征表示的质量，不具备自学习能力。</p>
+<blockquote>
+<p>Most successful RL applica- tions that operate on these domains have relied on <strong>hand-crafted features combined with linear value functions or policy representations</strong>. Clearly, the performance of such systems heavily relies on the quality of the <strong>feature representation</strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>从深度学习 DL 在计算机视觉和语音识别上取得进步的现状，思考类似的方法能否应用到通过强化学习 RL 来控制智能体。</p>
+<blockquote>
+<p>Recent advances in deep learning have made it possible to <strong>extract high-level features from raw sensory data</strong>, leading to breakthroughs in computer vision and speech recognition.</p>
+</blockquote>
 <ul>
 <li>DL --&gt; extract high-level features</li>
 </ul>
 <blockquote>
-<p>It seems natural to ask whether similar techniques could also be
-beneficial for RL with sensory data.</p>
-</blockquote></li>
-<li><p>从 DL 的视角，讨论 RL 面临的挑战。</p></li>
+<p>It seems natural to ask whether similar techniques could also be beneficial for RL with sensory data.</p>
+</blockquote>
+</li>
+<li>
+<p>从 DL 的视角，讨论 RL 面临的挑战。</p>
+</li>
 </ul>
 <!--
 阅读原始和权威论文后，对DL和RL的区别和联系，理解的更透彻，不再像是阅读公众号那样，浮于表面。
@@ -368,50 +362,44 @@ beneficial for RL with sensory data.</p>
 <li>比较 DL 和 RL
 <ul>
 <li>RL 有一些问题，DL 依然无法解决。</li>
-</ul></li>
+</ul>
+</li>
 </ul>
 <table>
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
 <thead>
-<tr class="header">
+<tr>
 <th></th>
 <th>Deep Learning</th>
 <th>Reinforcement Learning</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Data source</td>
 <td>required large amounts of hand-labelled training data</td>
-<td>learn from a scalar reward signal that is frequently sparse, noisy
-and delayed (actions and rewards)</td>
+<td>learn from a scalar reward signal that is frequently sparse, noisy and delayed (actions and rewards)</td>
 </tr>
-<tr class="even">
+<tr>
 <td> 数据来源</td>
 <td>从大量人工标注的数据中学习</td>
 <td>只能从稀少、噪声和延迟的奖励中学习</td>
 </tr>
-<tr class="odd">
+<tr>
 <td> Data features</td>
 <td>assume the data samples to be independent</td>
 <td>typically sequences of highly correlated states</td>
 </tr>
-<tr class="even">
+<tr>
 <td> 数据特点</td>
 <td>采样数据独立</td>
 <td>一系列高度关联的状态</td>
 </tr>
-<tr class="odd">
+<tr>
 <td> Data distribution</td>
 <td>a fixed underlying distribution</td>
-<td>data distribution changes as the algorithm learns new
-behaviours</td>
+<td>data distribution changes as the algorithm learns new behaviours</td>
 </tr>
-<tr class="even">
+<tr>
 <td> 数据分布</td>
 <td>固定的数据分布</td>
 <td>学习新行为后，数据分布会调整</td>
@@ -420,134 +408,167 @@ behaviours</td>
 </table>
 <h2 id="本文贡献">本文贡献</h2>
 <ul>
-<li><p>卷积神经网络可以在复杂的 RL 环境中从视频输入数据中学习控制策略。</p>
+<li>
+<p>卷积神经网络可以在复杂的 RL 环境中从视频输入数据中学习控制策略。</p>
 <blockquote>
-<p>This paper demonstrates that a convolutional neural network can
-overcome these challenges to learn successful control policies from raw
-video data in complex RL environments.</p>
+<p>This paper demonstrates that a convolutional neural network can overcome these challenges to learn successful control policies from raw video data in complex RL environments.</p>
 </blockquote>
 <ul>
 <li>使用 Q-learning 的变种训练
 <ul>
-<li>The network is trained with a variant of the Q-learning algorithm,
-with stochastic gradient descent to update the weights.</li>
-</ul></li>
-<li> 为了缓和关联数据和非平稳分布，使用经验回放机制 (an experience replay
-mechanism)，随机采样之前的转换，所以可以平滑过去行为的训练分布。
+<li>The network is trained with a variant of the Q-learning algorithm, with stochastic gradient descent to update the weights.</li>
+</ul>
+</li>
+<li> 为了缓和关联数据和非平稳分布，使用经验回放机制 (an experience replay mechanism)，随机采样之前的转换，所以可以平滑过去行为的训练分布。
 <ul>
-<li>To alleviate the problems of correlated data and non-stationary
-distributions, we use an experience replay mechanism which randomly
-samples previous transitions, and thereby smooths the training
-distribution over many past behaviors.</li>
-</ul></li>
-</ul></li>
+<li>To alleviate the problems of correlated data and non-stationary distributions, we use an experience replay mechanism which randomly samples previous transitions, and thereby smooths the training distribution over many past behaviors.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <!--
 自己的研究，是十年磨一剑，还是总是在模仿，从未在超越呢。
 -->
-<h1 id="background">Background</h1>
+<h1>Background</h1>
 <h2 id="任务描述">任务描述</h2>
 <ul>
-<li><p>环境 (environment) &gt; We consider tasks in which an agent
-interacts with an environment E, in this case the Atari emulator, in a
-sequence of actions, observations and rewards.</p></li>
-<li><p> 行动 (actions): 通过合法的行为来进一步改变模拟器的内部状态和游戏得分。
-&gt; At each time-step the agent selects an action at from the set of
-legal game actions, A = {1, . . . ,K}.</p>
+<li>
+<p>环境 (environment)</p>
 <blockquote>
-<p>The action is passed to the emulator and modifies its internal state
-and the game score.</p>
-</blockquote></li>
-<li><p>观察 (observations)：屏幕像素 &gt; The emulator’s internal state
-is not observed by the agent; instead it observes an image rom the
-emulator, which is a vector of raw pixel values representing the current
-screen.</p></li>
-<li><p> 奖励 (rewards)：游戏得分 &gt; In addition it receives a reward
-representing the change in game score.</p></li>
-<li><p> 交互特征</p>
+<p>We consider tasks in which an agent interacts with an environment E, in this case the Atari emulator, in a sequence of actions, observations and rewards.</p>
+</blockquote>
+</li>
+<li>
+<p>行动 (actions): 通过合法的行为来进一步改变模拟器的内部状态和游戏得分。</p>
+<blockquote>
+<p>At each time-step the agent selects an action at from the set of legal game actions, A = {1, . . . ,K}.</p>
+</blockquote>
+<blockquote>
+<p>The action is passed to the emulator and modifies its internal state and the game score.</p>
+</blockquote>
+</li>
+<li>
+<p>观察 (observations)：屏幕像素</p>
+<blockquote>
+<p>The emulator’s internal state is not observed by the agent; instead it observes an image rom the emulator, which is a vector of raw pixel values representing the current screen.</p>
+</blockquote>
+</li>
+<li>
+<p>奖励 (rewards)：游戏得分</p>
+<blockquote>
+<p>In addition it receives a reward representing the change in game score.</p>
+</blockquote>
+</li>
+<li>
+<p>交互特征</p>
 <ul>
-<li><p>行动和奖励的延时性 (feedback delay) &gt; Note that in general the
-game score may depend on the whole prior sequence of actions and
-observations; feedback about an action may only be received after many
-thousands of time-steps have elapsed.</p></li>
-<li><p> 智能体最大化得分 &gt; The goal of the agent is to interact with
-the emulator by selecting actions in a way that maximises future
-rewards.</p></li>
-</ul></li>
+<li>
+<p>行动和奖励的延时性 (feedback delay)</p>
+<blockquote>
+<p>Note that in general the game score may depend on the whole prior sequence of actions and observations; feedback about an action may only be received after many thousands of time-steps have elapsed.</p>
+</blockquote>
+</li>
+<li>
+<p>智能体最大化得分</p>
+<blockquote>
+<p>The goal of the agent is to interact with the emulator by selecting actions in a way that maximises future rewards.</p>
+</blockquote>
+</li>
+</ul>
+</li>
 </ul>
 <h2 id="问题抽象">问题抽象</h2>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/DQN_simplify_model.jpg"></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DQN_simplify_model.jpg" alt=""></p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">A[Question &amp; Model]--&gt;B(the optimal action-value function)</span><br><span class="line">A--&gt;I(learn game strategies from sequences of actions and observations)</span><br><span class="line">B--&gt;C(Intuition)</span><br><span class="line">B--&gt;J(the maximum expected reward achievable by following any strategy)</span><br><span class="line">C--&gt;D(Bellman equation)</span><br><span class="line">C--&gt;K(current reward plus the optimal value of the sequence at the next time-step)</span><br><span class="line">D--&gt;E(generalisation)</span><br><span class="line">D--&gt;L(estimate the action-value function by using the Bellman equation as an iterative update)</span><br><span class="line">E--&gt;M(the above action-value function is without any generalisation)</span><br><span class="line">E--&gt;N(function approximator)</span><br><span class="line">N--&gt;F(linear function approximator)</span><br><span class="line">N--&gt;G(non-linear function approximator)</span><br><span class="line">G--&gt;H(neural network)</span><br><span class="line">H--&gt;O(Q-network)</span><br></pre></td></tr></tbody></table></figure>
 <ul>
-<li>从一系列的行动和观察中学习 &gt; We therefore consider sequences of
-actions and observations, st = x1, a1, x2, ..., at−1, xt, and learn game
-strategies that depend upon these sequences.
+<li>
+<p>从一系列的行动和观察中学习</p>
+<blockquote>
+<p>We therefore consider sequences of actions and observations, st = x1, a1, x2, …, at−1, xt, and learn game strategies that depend upon these sequences.</p>
+</blockquote>
 <ul>
-<li>有效时间内终结 &gt; All sequences in the emulator are assumed to
-terminate in a finite number of time-steps.</li>
-<li> 转化为 MDP 问题 &gt; This formalism gives rise to a large but finite
-Markov decision process (MDP) in which each sequence is a distinct
-state.</li>
-<li> 使用强化学习来处理 MDPs 问题 &gt; We can apply standard
-reinforcement learning methods for MDPs, simply by using the complete
-sequence st as the state representation at time t.</li>
-</ul></li>
-<li>Optimal action-value function：在确定初始状态后 (st, at,
-pi) 后，在规定的迭代时间内，不同的 policy 值返回的奖励是不同的；选择序列中最大的奖励，那么对于的 policy 就是最优的。
-<img data-src="http://www.waylon.one/downloads/images/blog/Atari_problem_background.jpg" alt="Problem goal and model">
+<li>有效时间内终结
+<blockquote>
+<p>All sequences in the emulator are assumed to terminate in a finite number of time-steps.</p>
+</blockquote>
+</li>
+<li>转化为 MDP 问题
+<blockquote>
+<p>This formalism gives rise to a large but finite Markov decision process (MDP) in which each sequence is a distinct state.</p>
+</blockquote>
+</li>
+<li>使用强化学习来处理 MDPs 问题
+<blockquote>
+<p>We can apply standard reinforcement learning methods for MDPs, simply by using the complete sequence st as the state representation at time t.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Optimal action-value function：在确定初始状态后 (st, at, pi) 后，在规定的迭代时间内，不同的 policy 值返回的奖励是不同的；选择序列中最大的奖励，那么对于的 policy 就是最优的。<br>
+<img data-src="http://www.waylon.one/downloads/images/blog/Atari_problem_background.jpg" alt="Problem goal and model"></p>
 <ul>
-<li>We define the optimal action-value function Q∗(s, a) as the maximum
-expected return achievable by following any strategy, after seeing some
-sequence s and then taking some action a, Q∗(s, a) = maxπ E [Rt|st = s,
-at = a, π], where π is a policy mapping sequences to actions (or
-distributions over actions).</li>
-</ul></li>
-<li>Bellman equation
+<li>We define the optimal action-value function Q∗(s, a) as the maximum expected return achievable by following any strategy, after seeing some sequence s and then taking some action a, Q∗(s, a) = maxπ E [Rt|st = s, at = a, π], where π is a policy mapping sequences to actions (or distributions over actions).</li>
+</ul>
+</li>
+<li>
+<p>Bellman equation</p>
 <ul>
-<li>The optimal action-value function obeys an important identity known
-as the Bellman equation.</li>
-<li>Intuition : 转化问题为寻找当前最优 <img data-src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_1.jpg">
-<img data-src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_2.jpg"></li>
-<li>因为 the optimal value Q∗(s?, a?) of the sequence s? at the next
-time-step 不可知，所以进一步简化问题。 &gt; The basic idea behind many
-reinforcement learning algorithms is to estimate the action- value
-function, by using the Bellman equation as an iterative update, Qi+1 (s,
-a) = E [r + γ maxa?Qi (s?, a?)|s, a]. Such value
+<li>The optimal action-value function obeys an important identity known as the Bellman equation.</li>
+<li>Intuition : 转化问题为寻找当前最优<br>
+<img data-src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_1.jpg" alt=""><br>
+<img data-src="http://www.waylon.one/downloads/images/blog/Bellman_intuition_2.jpg" alt=""></li>
+<li>因为 the optimal value Q∗(s?, a?) of the sequence s? at the next time-step 不可知，所以进一步简化问题。
+<blockquote>
+<p>The basic idea behind many reinforcement learning algorithms is to estimate the action- value function, by using the Bellman equation as an iterative update, Qi+1(s, a) = E [r + γ maxa?Qi(s?, a?)|s, a]. Such value</p>
+</blockquote>
 <ul>
-<li>证明收敛性： &gt; Such value iteration algorithms converge to the
-optimal action-value function.</li>
-</ul></li>
-</ul></li>
-<li> 泛化能力
+<li>证明收敛性：
+<blockquote>
+<p>Such value iteration algorithms converge to the optimal action-value function.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>泛化能力</p>
 <ul>
-<li><p>实践中，原模型严重依赖当前的 s，缺乏泛化能力。 &gt; In practice,
-this basic approach is totally impractical, because the action-value
-function is estimated separately for each sequence, without any
-generalisation.</p></li>
-<li><p> 我们希望使用一个近似函数来估计行为 - 值函数 &gt; It is common to
-use a function approximator to estimate the action-value function.</p>
+<li>
+<p>实践中，原模型严重依赖当前的 s，缺乏泛化能力。</p>
+<blockquote>
+<p>In practice, this basic approach is totally impractical, because the action-value function is estimated separately for each sequence, without any generalisation.</p>
+</blockquote>
+</li>
+<li>
+<p>我们希望使用一个近似函数来估计行为 - 值函数</p>
+<blockquote>
+<p>It is common to use a function approximator to estimate the action-value function.</p>
+</blockquote>
 <ul>
-<li>近似函数可以使用线性函数，或者非线性函数，比如神经网络。 &gt; In the
-reinforcement learning community this is typically a linear function
-approximator, but sometimes a non-linear function approximator is used
-instead, such as a neural network.</li>
-</ul></li>
-<li><p> 问题转换：把一个复杂的数学模型，通过 Bellman equation 转换为
-Q-learning 的问题。</p></li>
-</ul></li>
-<li>Training -- Q-network
+<li>近似函数可以使用线性函数，或者非线性函数，比如神经网络。
+<blockquote>
+<p>In the reinforcement learning community this is typically a linear function approximator, but sometimes a non-linear function approximator is used instead, such as a neural network.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>问题转换：把一个复杂的数学模型，通过 Bellman equation 转换为 Q-learning 的问题。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Training – Q-network</p>
 <ul>
-<li>A Q-network can be trained by minimising a sequence of loss
-functions that changes at each iteration.</li>
-<li>Note that the targets depend on the network weights; this is in
-contrast with the targets used for supervised learning, which are fixed
-before learning begins.</li>
-<li>Differentiating the loss function with respect to the weights at the
-gradient.</li>
-<li>[又一次简化问题] Rather than computing the full expectations in the
-above gradient, it is often computationally expe- dient to optimise the
-loss function by stochastic gradient descent.</li>
-</ul></li>
+<li>A Q-network can be trained by minimising a sequence of loss functions that changes at each iteration.</li>
+<li>Note that the targets depend on the network weights; this is in contrast with the targets used for supervised learning, which are fixed before learning begins.</li>
+<li>Differentiating the loss function with respect to the weights at the gradient.</li>
+<li>[又一次简化问题] Rather than computing the full expectations in the above gradient, it is often computationally expe- dient to optimise the loss function by stochastic gradient descent.</li>
+</ul>
+</li>
 </ul>
 <!--
 - 把问题用数学的公式表达出来，但是如何实现又是一件事情；
@@ -558,18 +579,15 @@ loss function by stochastic gradient descent.</li>
 <ul>
 <li>Summary
 <ul>
-<li>model-free: it solves the reinforcement learning task directly using
-samples from the emulator E, without explicitly constructing an estimate
-of E.</li>
-<li>off-policy: it learns about the greedy strategy a = maxa Q(s, a; θ),
-while following a behaviour distribution that ensures adequate
-exploration of the state space.</li>
-</ul></li>
+<li>model-free: it solves the reinforcement learning task directly using samples from the emulator E, without explicitly constructing an estimate of E.</li>
+<li>off-policy: it learns about the greedy strategy a = maxa Q(s, a; θ), while following a behaviour distribution that ensures adequate exploration of the state space.</li>
+</ul>
+</li>
 </ul>
 <!--
 思考方法：把一个新问题，经过变换处理等，转换为已知且已解的问题，那么问题难度迎刃而解，
 -->
-<h1 id="related-work">Related Work</h1>
+<h1>Related Work</h1>
 <!--
  
  已有的研究现状，自己读起来有点费劲，看来作者读过的文章量还是不少的。没有足够的阅读和经历，研究可能会有局限。
@@ -577,257 +595,238 @@ exploration of the state space.</li>
 通过绘制研究发展的时间轴，自己可以理解项目的发展，对算法的演进脉络更清晰。
 
 -->
-<h2 id="timeline">Timeline</h2>
+<h2 id="Timeline">Timeline</h2>
 <ul>
-<li><p>1995: TD-gammon used a model-free reinforcement learning
-algorithm similar to Q-learning, and approximated the value function
-using <strong>a multi-layer perceptron with one hidden
-layer</strong>.</p>
+<li>
+<p>1995: TD-gammon used a model-free reinforcement learning algorithm similar to Q-learning, and approximated the value function using <strong>a multi-layer perceptron with one hidden layer</strong>.</p>
 <ul>
 <li>Early attempts to follow up on TD-gammon were less successful.</li>
-<li>1997: It was shown that combining model-free reinforcement learning
-algorithms such as Q-learning with <strong>non-linear function
-approximators</strong>, or indeed with off-policy learning could cause
-the Q-network to diverge.</li>
-</ul></li>
-<li><p>Subsequently, the majority of work in reinforcement learning
-focused on <strong>linear function approximators</strong> with better
-convergence guarantees.</p></li>
-<li><p>More recently, there has been a revival of interest in combining
-deep learning with reinforcement learning.</p>
+<li>1997: It was shown that combining model-free reinforcement learning algorithms such as Q-learning with <strong>non-linear function approximators</strong>, or indeed with off-policy learning could cause the Q-network to diverge.</li>
+</ul>
+</li>
+<li>
+<p>Subsequently, the majority of work in reinforcement learning focused on <strong>linear function approximators</strong> with better convergence guarantees.</p>
+</li>
+<li>
+<p>More recently, there has been a revival of interest in combining deep learning with reinforcement learning.</p>
 <ul>
-<li>Deep neural networks have been used to estimate the environment;
-restricted Boltzmann machines have been used to estimate the value
-function [2004]; or the policy [2012].</li>
-<li>The divergence issues with Q-learning have been partially addressed
-by gradient temporal-difference methods.</li>
+<li>Deep neural networks have been used to estimate the environment; restricted Boltzmann machines have been used to estimate the value function [2004]; or the policy [2012].</li>
+<li>The divergence issues with Q-learning have been partially addressed by gradient temporal-difference methods.</li>
 <li>Pros
 <ul>
-<li>These methods are proven to converge when evaluating a <strong>fixed
-policy</strong> with a nonlinear function approximator [2009]; or when
-learning a control policy with linear function approximation using a
-restricted variant of Q-learning [2010].</li>
-</ul></li>
-<li>Cons
-<ul>
-<li>However, these methods have not yet been extended to nonlinear
-control.</li>
-</ul></li>
-</ul></li>
-<li><p>2005: NFQ optimises the sequence of loss functions, using the
-RPROP algorithm to update the parameters of the Q-network.</p>
-<ul>
-<li>NFQ has also been successfully applied to simple real-world control
-tasks using purely visual input, by <strong>first using deep
-autoencoders to learn a low dimensional representation of the
-task</strong>, and then applying NFQ to this representation.
-<ul>
-<li>Our approach applies reinforcement learning
-<strong>end-to-end</strong>, directly from the visual inputs; as a
-result it may <strong>learn features</strong> that are directly relevant
-to discriminating.</li>
-</ul></li>
-<li>Cons
-<ul>
-<li>It uses a batch update that has a computational cost per iteration
-that is proportional to the size of the data set, whereas we consider
-stochastic gradient updates that have a low constant cost per iteration
-and scale to large data-sets.</li>
-</ul></li>
-</ul></li>
-<li><p>1993: Q-learning has also previously been combined with
-experience replay and a simple neural network.</p>
-<ul>
-<li>But again starting with <strong>a low-dimensional state</strong>
-rather than raw visual inputs.
-<!--+ 本文简化了问题，反而是创新。有本事简化问题，让复杂的问题不再复杂，为什么人不是一种本事呢？--></li>
-</ul></li>
-<li><p>2013: The use of the Atari 2600 emulator as a reinforcement
-learning platform, who applied standard reinforcement learning
-algorithms with linear function approximation and generic visual
-features.</p>
-<ul>
-<li>The HyperNEAT evolutionary architecture has also been applied to the
-Atari platform, where it was used to evolve (separately, for each
-distinct game) a neural network representing a strategy for that game.
-<!--* 本文发表于2013，感觉距离伟大理论的提出就是一步之遥。当然，提出的训练方法，还是帮助了伟大理论的提出。--></li>
-</ul></li>
+<li>These methods are proven to converge when evaluating a <strong>fixed policy</strong> with a nonlinear function approximator [2009]; or when learning a control policy with linear function approximation using a restricted variant of Q-learning [2010].</li>
 </ul>
-<h1 id="deep-reinforcement-learning">Deep Reinforcement Learning</h1>
+</li>
+<li>Cons
 <ul>
-<li><p>现有的基于深度学习在视觉和声音上的研究，激发作者的本文研究。 &gt;
-Recent breakthroughs in computer vision and speech recognition have
-relied on efficiently training deep neural networks on very large
-training sets. The most successful approaches are trained directly from
-the raw inputs, using lightweight updates based on <strong>stochastic
-gradient descent</strong>. By feeding sufficient data into deep neural
-networks, it is often possible to <strong>learn better representations
-than handcrafted features</strong>.</p></li>
-<li><p> 本文的研究目标，连接 RL 和 DNN。 &gt; Our goal is to connect a
-reinforcement learning algorithm to a deep neural network which operates
-directly on RGB images and efficiently process training data by using
-stochastic gradient updates.</p></li>
+<li>However, these methods have not yet been extended to nonlinear control.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>2005: NFQ optimises the sequence of loss functions, using the RPROP algorithm to update the parameters of the Q-network.</p>
+<ul>
+<li>NFQ has also been successfully applied to simple real-world control tasks using purely visual input, by <strong>first using deep autoencoders to learn a low dimensional representation of the task</strong>, and then applying NFQ to this representation.
+<ul>
+<li>Our approach applies reinforcement learning <strong>end-to-end</strong>, directly from the visual inputs; as a result it may <strong>learn features</strong> that are directly relevant to discriminating.</li>
+</ul>
+</li>
+<li>Cons
+<ul>
+<li>It uses a batch update that has a computational cost per iteration that is proportional to the size of the data set, whereas we consider stochastic gradient updates that have a low constant cost per iteration and scale to large data-sets.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>1993: Q-learning has also previously been combined with experience replay and a simple neural network.</p>
+<ul>
+<li>But again starting with <strong>a low-dimensional state</strong> rather than raw visual inputs.<!--+ 本文简化了问题，反而是创新。有本事简化问题，让复杂的问题不再复杂，为什么人不是一种本事呢？--> 
+</li>
+</ul>
+</li>
+<li>
+<p>2013: The use of the Atari 2600 emulator as a reinforcement learning platform, who applied standard reinforcement learning algorithms with linear function approximation and generic visual features.</p>
+<ul>
+<li>The HyperNEAT evolutionary architecture has also been applied to the Atari platform, where it was used to evolve (separately, for each distinct game) a neural network representing a strategy for that game.</li>
+</ul>
+<!--* 本文发表于2013，感觉距离伟大理论的提出就是一步之遥。当然，提出的训练方法，还是帮助了伟大理论的提出。-->
+</li>
+</ul>
+<h1>Deep Reinforcement Learning</h1>
+<ul>
+<li>
+<p>现有的基于深度学习在视觉和声音上的研究，激发作者的本文研究。</p>
+<blockquote>
+<p>Recent breakthroughs in computer vision and speech recognition have relied on efficiently training deep neural networks on very large training sets. The most successful approaches are trained directly from the raw inputs, using lightweight updates based on <strong>stochastic gradient descent</strong>. By feeding sufficient data into deep neural networks, it is often possible to <strong>learn better representations than handcrafted features</strong>.</p>
+</blockquote>
+</li>
+<li>
+<p>本文的研究目标，连接 RL 和 DNN。</p>
+<blockquote>
+<p>Our goal is to connect a reinforcement learning algorithm to a deep neural network which operates directly on RGB images and efficiently process training data by using stochastic gradient updates.</p>
+</blockquote>
+</li>
 </ul>
 <hr>
 <ul>
-<li><p>Deep Q-learning with Experience Replay</p>
-<ol type="1">
+<li>
+<p>Deep Q-learning with Experience Replay</p>
+<ol>
 <li>We store the agent’s experiences at each time-step.</li>
-<li>We apply Q-learning updates, or minibatch updates, to samples of
-experience, drawn at random from the pool of stored samples.</li>
-<li>After performing experience replay, the agent selects and executes
-an action according to an ?-greedy policy.</li>
-</ol></li>
+<li>We apply Q-learning updates, or minibatch updates, to samples of experience, drawn at random from the pool of stored samples.</li>
+<li>After performing experience replay, the agent selects and executes an action according to an ?-greedy policy.</li>
+</ol>
+</li>
 </ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/deep_Q_learning_algorithm.jpg"></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/deep_Q_learning_algorithm.jpg" alt=""></p>
 <ul>
 <li>DQN (off-policy) vs online Q-learning
 <ul>
-<li>Each step of experience is potentially used in many weight updates,
-which allows for greater data efficiency.</li>
-<li>Learning directly from consecutive samples is inefficient, due to
-the strong correlations between the samples; randomizing the samples
-breaks these correlations and therefore reduces the variance of the
-updates.</li>
-<li>When learning on-policy the current parameters determine the next
-data sample that the parameters are trained on.
+<li>Each step of experience is potentially used in many weight updates, which allows for greater data efficiency.</li>
+<li>Learning directly from consecutive samples is inefficient, due to the strong correlations between the samples; randomizing the samples breaks these correlations and therefore reduces the variance of the updates.</li>
+<li>When learning on-policy the current parameters determine the next data sample that the parameters are trained on.
 <ul>
-<li>It is easy to see how unwanted feedback loops may arise and the
-parameters could get stuck in a poor local minimum, or even diverge
-catastrophically.</li>
-<li>Note that when learning by experience replay, it is necessary to
-learn off-policy (because our current parameters are different to those
-used to generate the sample), which motivates the choice of
-Q-learning.</li>
-</ul></li>
-<li>By using experience replay the behavior distribution is averaged
-over many of its previous states, smoothing out learning and avoiding
-oscillations or divergence in the parameters.</li>
-<li>In practice, our algorithm only stores <strong>the last N experience
-tuples</strong> in the replay memory, and samples uniformly at random
-from D when performing updates.
+<li>It is easy to see how unwanted feedback loops may arise and the parameters could get stuck in a poor local minimum, or even diverge catastrophically.</li>
+<li>Note that when learning by experience replay, it is necessary to learn off-policy (because our current parameters are different to those used to generate the sample), which motivates the choice of Q-learning.</li>
+</ul>
+</li>
+<li>By using experience replay the behavior distribution is averaged over many of its previous states, smoothing out learning and avoiding oscillations or divergence in the parameters.</li>
+<li>In practice, our algorithm only stores <strong>the last N experience tuples</strong> in the replay memory, and samples uniformly at random from D when performing updates.
 <ul>
-<li>A more sophisticated sampling strategy might emphasize transitions
-from which we can learn the most, similar to prioritized sweeping.</li>
-</ul></li>
-</ul></li>
+<li>A more sophisticated sampling strategy might emphasize transitions from which we can learn the most, similar to prioritized sweeping.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <hr>
-<h2 id="preprocessing-and-model-architecture">Preprocessing and Model
-Architecture</h2>
+<h2 id="Preprocessing-and-Model-Architecture">Preprocessing and Model Architecture</h2>
 <ul>
-<li>降低输入数据的维度
+<li>
+<p>降低输入数据的维度</p>
 <ul>
 <li>Reduce the input dimensionality
 <ul>
-<li>[降采样和灰度化] The raw frames are preprocessed by first converting
-their RGB representation to gray-scale and down-sampling it to a 110×84
-image.</li>
-</ul></li>
-</ul></li>
-<li>How to parameterize Q using a neural network?
+<li>[降采样和灰度化] The raw frames are preprocessed by first converting their RGB representation to gray-scale and down-sampling it to a 110×84 image.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>How to parameterize Q using a neural network?</p>
 <ul>
-<li>We instead use an architecture in which there is <strong>a separate
-output uni</strong>t for each possible action, and only <strong>the
-state representation is an input to the neural network</strong>.
+<li>We instead use an architecture in which there is <strong>a separate output uni</strong>t for each possible action, and only <strong>the state representation is an input to the neural network</strong>.
 <ul>
-<li>The outputs correspond to the predicted Q-values of the individual
-action for the input state.</li>
-</ul></li>
-<li>The main advantage of this type of architecture is the ability to
-compute Q-values for all possible actions in a given state with only a
-single forward pass through the network.</li>
-</ul></li>
-<li>Deep Q-Networks
+<li>The outputs correspond to the predicted Q-values of the individual action for the input state.</li>
+</ul>
+</li>
+<li>The main advantage of this type of architecture is the ability to compute Q-values for all possible actions in a given state with only a single forward pass through the network.</li>
+</ul>
+</li>
+<li>
+<p>Deep Q-Networks</p>
 <ul>
-<li>Input: state representation &gt; The input to the neural network
-consists is an 84 × 84 × 4 image.</li>
+<li>Input: state representation
+<blockquote>
+<p>The input to the neural network consists is an 84 × 84 × 4 image.</p>
+</blockquote>
+</li>
 <li>Three hidden layers, followed by a rectifier nonlinearity.</li>
-<li>Output: Q-values for actions &gt; The output layer is a fully-
-connected linear layer with a single output for each valid action.</li>
-<li>We refer to convolutional networks trained with our approach as
-<strong>Deep Q-Networks</strong> (DQN).</li>
-</ul></li>
+<li>Output: Q-values for actions
+<blockquote>
+<p>The output layer is a fully- connected linear layer with a single output for each valid action.</p>
+</blockquote>
+</li>
+<li>We refer to convolutional networks trained with our approach as <strong>Deep Q-Networks</strong> (DQN).</li>
 </ul>
-<h1 id="experiments">Experiments</h1>
-<ul>
-<li><p>方法的通用性和鲁棒性：不需要根据游戏定制信息。 &gt; We use the
-same network architecture, learning algorithm and hyperparameters
-settings across all seven games, showing that our approach is robust
-enough to work on a variety of games without incorporating game-specific
-information.</p></li>
-<li><p> 适应游戏的做法</p>
-<ul>
-<li>[修改分数比值] Since the scale of scores varies greatly from game to
-game, we fixed all positive rewards to be 1 and all negative rewards to
-be −1, leaving 0 rewards unchanged.</li>
-<li>[frame-skipping technique] The agent sees and selects actions on
-every kth frame instead of every frame, and its last action is repeated
-on skipped frames.</li>
-</ul></li>
+</li>
 </ul>
-<h2 id="training-and-stability">Training and Stability</h2>
+<h1>Experiments</h1>
 <ul>
-<li>如何评估训练 &gt; Since our evaluation metric is the <strong>total
-reward</strong> the agent collects in an episode or game averaged over a
-number of games, we periodically compute it during training.
+<li>
+<p>方法的通用性和鲁棒性：不需要根据游戏定制信息。</p>
+<blockquote>
+<p>We use the same network architecture, learning algorithm and hyperparameters settings across all seven games, showing that our approach is robust enough to work on a variety of games without incorporating game-specific information.</p>
+</blockquote>
+</li>
+<li>
+<p>适应游戏的做法</p>
 <ul>
-<li>The <strong>average total reward</strong> evolves during training
-are indeed quite noisy, giving one the impression that the learning
-algorithm is not making steady progress.</li>
-<li>More stable, metric is the policy’s <strong>estimated action-value
-function Q</strong>, which provides an estimate of how much discounted
-reward the agent can obtain by following its policy from any given
-state.</li>
-<li> 收敛性缺乏理论依据保证 &gt; This suggests that, <strong>despite
-lacking any theoretical convergence guarantees</strong>, our method is
-able to train large neural networks using a reinforcement learning
-signal and stochastic gradient descent in a stable manner.
-<!-- - 问题使用不同的语言描述，显示的结果是不一样的。 这样子就证明了算法的收敛性吗？--></li>
-</ul></li>
+<li>[修改分数比值] Since the scale of scores varies greatly from game to game, we fixed all positive rewards to be 1 and all negative rewards to be −1, leaving 0 rewards unchanged.</li>
+<li>[frame-skipping technique] The agent sees and selects actions on every kth frame instead of every frame, and its last action is repeated on skipped frames.</li>
 </ul>
-<h2 id="visualizing-the-value-function">Visualizing the Value
-Function</h2>
-<ul>
-<li>尽管理论依据少，但通过 predicted value function
-和实际游戏界面的比较和关联，来证明算法的有效性。 &gt; Figure 3
-demonstrates that our method is able to learn how the value function
-evolves for a reasonably complex sequence of events.</li>
+</li>
 </ul>
-<h2 id="main-evaluation">Main Evaluation</h2>
+<h2 id="Training-and-Stability">Training and Stability</h2>
 <ul>
-<li><p>和现有的算法、做法比较（理论和实际） &gt; We compare our results
-with the best performing methods from the RL literature.</p>
+<li>如何评估训练
+<blockquote>
+<p>Since our evaluation metric is the <strong>total reward</strong> the agent collects in an episode or game averaged over a number of games, we periodically compute it during training.</p>
+</blockquote>
 <ul>
-<li>找出其他算法的缺陷，或者验证算法提高点。 &gt; Note that both of
-these methods <strong>incorporate significant prior knowledge</strong>
-about the visual problem by using background sub- traction and treating
-each of the 128 colors as a separate channel. In contrast, our agents
-only receive <strong>the raw RGB screenshots</strong> as input and must
-learn to detect objects on their own. &gt; Our approach (labeled DQN)
-outperforms the other learning methods by a substantial margin on all
-seven games despite incorporating almost no prior knowledge about the
-inputs.</li>
-</ul></li>
-<li><p> 人机比较 &gt; In addition to the learned agents, we also report
-scores for an expert human game player and a policy that selects actions
-uniformly at random.</p></li>
-<li><p> 和 evolutionary policy search 比较 &gt; We also include a
-comparison to the evolutionary policy search approach from [8] in the
-last three rows of table.</p></li>
+<li>The <strong>average total reward</strong> evolves during training are indeed quite noisy, giving one the impression that the learning algorithm is not making steady progress.</li>
+<li>More stable, metric is the policy’s <strong>estimated action-value function Q</strong>, which provides an estimate of how much discounted reward the agent can obtain by following its policy from any given state.</li>
+<li> 收敛性缺乏理论依据保证
+<blockquote>
+<p>This suggests that, <strong>despite lacking any theoretical convergence guarantees</strong>, our method is able to train large neural networks using a reinforcement learning signal and stochastic gradient descent in a stable manner.</p>
+</blockquote>
+</li>
+</ul>
+<!-- - 问题使用不同的语言描述，显示的结果是不一样的。 这样子就证明了算法的收敛性吗？-->
+</li>
+</ul>
+<h2 id="Visualizing-the-Value-Function">Visualizing the Value Function</h2>
+<ul>
+<li>尽管理论依据少，但通过 predicted value function 和实际游戏界面的比较和关联，来证明算法的有效性。
+<blockquote>
+<p>Figure 3 demonstrates that our method is able to learn how the value function evolves for a reasonably complex sequence of events.</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Main-Evaluation">Main Evaluation</h2>
+<ul>
+<li>
+<p>和现有的算法、做法比较（理论和实际）</p>
+<blockquote>
+<p>We compare our results with the best performing methods from the RL literature.</p>
+</blockquote>
+<ul>
+<li>找出其他算法的缺陷，或者验证算法提高点。
+<blockquote>
+<p>Note that both of these methods <strong>incorporate significant prior knowledge</strong> about the visual problem by using background sub- traction and treating each of the 128 colors as a separate channel. In contrast, our agents only receive <strong>the raw RGB screenshots</strong> as input and must learn to detect objects on their own.</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>Our approach (labeled DQN) outperforms the other learning methods by a substantial margin on all seven games despite incorporating almost no prior knowledge about the inputs.</p>
+</blockquote>
+</li>
+<li>
+<p>人机比较</p>
+<blockquote>
+<p>In addition to the learned agents, we also report scores for an expert human game player and a policy that selects actions uniformly at random.</p>
+</blockquote>
+</li>
+<li>
+<p>和 evolutionary policy search 比较</p>
+<blockquote>
+<p>We also include a comparison to the evolutionary policy search approach from [8] in the last three rows of table.</p>
+</blockquote>
+</li>
 </ul>
 <!-- 如果算法在某方面表现不好，找出相关的理由，最好和算法无关，或者可以避免 -->
-<h1 id="conclusion">Conclusion</h1>
+<h1>Conclusion</h1>
 <ul>
-<li>贡献 &gt; This paper introduced a new deep learning model for
-reinforcement learning, and demonstrated its ability to master difficult
-control policies for Atari 2600 computer games, using only raw pixels as
-input.<br>
-&gt; We also presented a variant of online Q-learning that combines
-stochastic minibatch up- dates with experience replay memory to ease the
-training of deep networks for RL.</li>
+<li>贡献
+<blockquote>
+<p>This paper introduced a new deep learning model for reinforcement learning, and demonstrated its ability to master difficult control policies for Atari 2600 computer games, using only raw pixels as input.<br>
+We also presented a variant of online Q-learning that combines stochastic minibatch up- dates with experience replay memory to ease the training of deep networks for RL.</p>
+</blockquote>
+</li>
 </ul>
-<h1 id="references">References</h1>
+<h1>References</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/caozixuan98724/article/details/99219462">其他人的解读</a></li>
 </ul>
@@ -840,9 +839,9 @@ training of deep networks for RL.</li>
 
     <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
               <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
               <a href="/tags/paper/" rel="tag"># paper</a>
-              <a href="/tags/Robotics/" rel="tag"># Robotics</a>
           </div>
 
         
