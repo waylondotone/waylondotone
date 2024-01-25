@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="[toc]  git command  git add 1git add -h  查看更详细的帮助内容  1git add .   不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。  1git add -u .  -u  &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括新增加的文件。  1git add -A">
+    <meta name="description" content="[toc]   git 原理图  git command   git 命令大集合  git add 1git add -h  查看更详细的帮助内容 1git add .    不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。 1git add -u .   -u &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git 高阶命令">
 <meta property="og:url" content="http://www.waylon.one/Linux/advanced-git/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="[toc]  git command  git add 1git add -h  查看更详细的帮助内容  1git add .   不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。  1git add -u .  -u  &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括新增加的文件。  1git add -A">
+<meta property="og:description" content="[toc]   git 原理图  git command   git 命令大集合  git add 1git add -h  查看更详细的帮助内容 1git add .    不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。 1git add -u .   -u &#x3D;&#x3D; --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/git_command_architecture.png">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/git.png">
@@ -145,7 +145,9 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">git command</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-add"><span class="nav-number">1.1.</span> <span class="nav-text">git add</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash-local-changes"><span class="nav-number">1.2.</span> <span class="nav-text">stash local changes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-pull"><span class="nav-number">1.3.</span> <span class="nav-text">git pull</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-brach"><span class="nav-number">1.4.</span> <span class="nav-text">git brach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-log"><span class="nav-number">1.5.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-cherry-pick"><span class="nav-number">1.6.</span> <span class="nav-text">git cherry-pick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-shortlog"><span class="nav-number">1.7.</span> <span class="nav-text">git shortlog</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE-commit-description-%E5%8C%85%E5%90%AB%E6%9F%90%E4%BA%9B%E5%AD%97%E7%AC%A6%E7%9A%84-log-%E6%97%A5%E5%BF%97"><span class="nav-number">1.7.1.</span> <span class="nav-text">查找 commit description 包含某些字符的 log 日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-commit"><span class="nav-number">1.8.</span> <span class="nav-text">git commit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-commit-%E4%BF%A1%E6%81%AF"><span class="nav-number">1.8.1.</span> <span class="nav-text">修改 commit 信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E6%8C%87%E5%AE%9A-diff"><span class="nav-number">1.9.</span> <span class="nav-text">恢复指定 diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%A4%9A%E4%B8%AA%E6%9C%AC%E5%9C%B0-branches"><span class="nav-number">1.10.</span> <span class="nav-text">删除多个本地 branches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%8A%8A%E5%88%86%E6%94%AF%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E8%BE%93%E5%85%A5%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="nav-number">1.10.1.</span> <span class="nav-text">如何把分支比较结果输入到指定文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-patch"><span class="nav-number">1.11.</span> <span class="nav-text">git patch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-format-patch"><span class="nav-number">1.11.1.</span> <span class="nav-text">git format-patch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply-patch"><span class="nav-number">1.11.2.</span> <span class="nav-text">apply patch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-submodule"><span class="nav-number">1.12.</span> <span class="nav-text">git submodule</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#git-command"><span class="nav-number">1.</span> <span class="nav-text">git command</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#git-add"><span class="nav-number">1.1.</span> <span class="nav-text">git add</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stash-local-changes"><span class="nav-number">1.2.</span> <span class="nav-text">stash local changes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-pull"><span class="nav-number">1.3.</span> <span class="nav-text">git pull</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-brach"><span class="nav-number">1.4.</span> <span class="nav-text">git brach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-log"><span class="nav-number">1.5.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-cherry-pick"><span class="nav-number">1.6.</span> <span class="nav-text">git cherry-pick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-shortlog"><span class="nav-number">1.7.</span> <span class="nav-text">git shortlog</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BE-commit-description-%E5%8C%85%E5%90%AB%E6%9F%90%E4%BA%9B%E5%AD%97%E7%AC%A6%E7%9A%84-log-%E6%97%A5%E5%BF%97"><span class="nav-number">1.7.1.</span> <span class="nav-text">查找 commit
+description 包含某些字符的 log 日志</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-commit"><span class="nav-number">1.8.</span> <span class="nav-text">git commit</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-commit-%E4%BF%A1%E6%81%AF"><span class="nav-number">1.8.1.</span> <span class="nav-text">修改
+commit 信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E6%8C%87%E5%AE%9A-diff"><span class="nav-number">1.9.</span> <span class="nav-text">恢复指定 diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E5%A4%9A%E4%B8%AA%E6%9C%AC%E5%9C%B0-branches"><span class="nav-number">1.10.</span> <span class="nav-text">删除多个本地 branches</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%8A%8A%E5%88%86%E6%94%AF%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E8%BE%93%E5%85%A5%E5%88%B0%E6%8C%87%E5%AE%9A%E6%96%87%E4%BB%B6"><span class="nav-number">1.10.1.</span> <span class="nav-text">如何把分支比较结果输入到指定文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-patch"><span class="nav-number">1.11.</span> <span class="nav-text">git patch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-format-patch"><span class="nav-number">1.11.1.</span> <span class="nav-text">git format-patch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#apply-patch"><span class="nav-number">1.11.2.</span> <span class="nav-text">apply patch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#git-submodule"><span class="nav-number">1.12.</span> <span class="nav-text">git submodule</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">2.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -281,45 +283,53 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
-<p><img data-src="/downloads/images/blog/git_command_architecture.png" alt="git 原理图"></p>
-<h1>git command</h1>
-<p><img data-src="/downloads/images/blog/git.png" alt="git 命令大集合"></p>
+<figure>
+<img data-src="/downloads/images/blog/git_command_architecture.png" alt="git 原理图">
+<figcaption aria-hidden="true">git 原理图</figcaption>
+</figure>
+<h1 id="git-command">git command</h1>
+<figure>
+<img data-src="/downloads/images/blog/git.png" alt="git 命令大集合">
+<figcaption aria-hidden="true">git 命令大集合</figcaption>
+</figure>
 <h2 id="git-add">git add</h2>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -h</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>查看更详细的帮助内容</p>
+<p>查看更详细的帮助内容 </p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></tbody></table></figure><p></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add . </span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。</p>
+<p>不加参数默认为将修改操作的文件和未跟踪新添加的文件添加到 git 系统的暂存区，注意不包括删除文件。
+</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -u .</span><br></pre></td></tr></tbody></table></figure><p></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -u .</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>-u  == --update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括新增加的文件。</p>
+<p>-u ==
+--update，表示将已跟踪文件中的修改和删除的文件添加到暂存区，注意不包括新增加的文件。
+</p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A .</span><br></pre></td></tr></tbody></table></figure><p></p>
 </blockquote>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add -A .</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>-A == --all，表示将所有的已跟踪的文件的修改与删除和新增的未跟踪的文件都添加到暂存区。</p>
+<p>-A ==
+--all，表示将所有的已跟踪的文件的修改与删除和新增的未跟踪的文件都添加到暂存区。</p>
 </blockquote>
 <h2 id="stash-local-changes">stash local changes</h2>
 <ul>
-<li>If you want remove all local changes from your working copy, simply stash them.</li>
+<li><p>If you want remove all local changes from your working copy,
+simply stash them. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash save --keep-index  </span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>If you don't need them anymore, you now can drop that stash.
+</p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop</span><br></pre></td></tr></tbody></table></figure><p></p></li>
 </ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash save --keep-index  </span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>If you don’t need them anymore, you now can drop that stash.</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="git-pull">git pull</h2>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull origin target_branch_name</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
 <p>下载指定分支代码合并到当前分支：相当于指定分支的代码与当前分支的代码合并到了一起)。</p>
 </blockquote>
 <blockquote>
-<p>每次使用该命令前，需要保证本地工作区是没有任何修改代码的，也就是说需要将本地工作区编辑过的文件添加到暂存区 (git add .)，或提交到本地仓库中 (git commit)，才可以使用该命令拉取指定分支的代码合并到当前分支中。</p>
+<p>每次使用该命令前，需要保证本地工作区是没有任何修改代码的，也就是说需要将本地工作区编辑过的文件添加到暂存区 (git
+add .)，或提交到本地仓库中 (git
+commit)，才可以使用该命令拉取指定分支的代码合并到当前分支中。</p>
 </blockquote>
 <blockquote>
-<p>建议：每次在操作完 git commit 命令后，必须拉取一下 master 分支代码，保持本地正在开发功能逻辑的代码分支代码是最新的，避免后续在提交时冲突过多或覆盖掉其他人的代码的问题出现。</p>
+<p>建议：每次在操作完 git commit 命令后，必须拉取一下 master
+分支代码，保持本地正在开发功能逻辑的代码分支代码是最新的，避免后续在提交时冲突过多或覆盖掉其他人的代码的问题出现。</p>
 </blockquote>
 <h2 id="git-brach">git brach</h2>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a</span><br></pre></td></tr></tbody></table></figure>
@@ -349,16 +359,23 @@
 <h2 id="git-cherry-pick">git <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-cherry-pick">cherry-pick</a></h2>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nothing to commit, working directory clean</span><br><span class="line">The previous cherry-pick is now empty, possibly due to conflict resolution.</span><br><span class="line">If you wish to commit it anyway, use:</span><br><span class="line"></span><br><span class="line">git commit –allow-empty</span><br></pre></td></tr></tbody></table></figure>
 <blockquote>
-<p>It’s exactly what it says: the changes you’re trying to cherry-pick are already wholly already integrated/cherry-picked in the branch you’re on. I.e. the result of the cherry-pick is no changes. You can create an empty commit with the --allow-empty flag to indicate that you attempted to cherry-pick, but there were no changes to pull in.</p>
+<p>It’s exactly what it says: the changes you’re trying to cherry-pick
+are already wholly already integrated/cherry-picked in the branch you’re
+on. I.e. the result of the cherry-pick is no changes. You can create an
+empty commit with the --allow-empty flag to indicate that you attempted
+to cherry-pick, but there were no changes to pull in.</p>
 </blockquote>
 <!-- [why is git-cherrypick saying nothing to commit](https://config9.com/apps/git/why-is-git-cherrypick-saying-nothing-to-commit/) -->
 <h2 id="git-shortlog">git <a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-shortlog">shortlog</a></h2>
-<h3 id="查找-commit-description-包含某些字符的-log-日志">查找 commit description 包含某些字符的 log 日志</h3>
+<h3 id="查找-commit-description-包含某些字符的-log-日志">查找 commit
+description 包含某些字符的 log 日志</h3>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git shortlog --format='%H|%cn|%s' | grep 'your_search_info'</span><br><span class="line"></span><br><span class="line">%H: commit hash</span><br><span class="line">%cn: committer name</span><br><span class="line">%s: subject</span><br></pre></td></tr></tbody></table></figure>
 <!-- [git log查找特定commit](https://blog.csdn.net/zhezhebie/article/details/94546790)  -->
 <h2 id="git-commit">git commit</h2>
-<h3 id="修改-commit-信息"><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---amend">修改 commit 信息</a></h3>
-<p>用一条新的 commit 信息修订现有的 commit，这会覆盖原始 commit。请勿在已推送的 commit 中使用它。</p>
+<h3 id="修改-commit-信息"><a target="_blank" rel="noopener" href="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---amend">修改
+commit 信息</a></h3>
+<p>用一条新的 commit 信息修订现有的 commit，这会覆盖原始
+commit。请勿在已推送的 commit 中使用它。</p>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend -m "&lt;new commit message&gt;"</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="恢复指定-diff">恢复指定 diff</h2>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// You can specifically apply an out-of-date diff or a diff which was never attached to a revision by using this flag.</span><br><span class="line">arc patch --diff diff_id --nobranch</span><br></pre></td></tr></tbody></table></figure>
@@ -369,36 +386,31 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 执行前需要切换到master分支执行</span><br><span class="line">git branch | grep -v "master" | xargs git branch -D</span><br></pre></td></tr></tbody></table></figure>
 <!--
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash &amp;&amp; git checkout master &amp;&amp; git branch | grep -v &quot;master&quot; | xargs git branch -D</span><br></pre></td></tr></table></figure>
-<p>–&gt;</p>
-<h2 id="比较两个branch的区别-差集">比较两个branch的区别(差集)</h2>
-<p>假设我们有2个分支：master 和 dev，现在想查看这两个 branch 的区别，有以下几种方式。</p>
-<ul>
-<li>查看 dev 有，而 master 中没有</li>
-</ul>
+<p>--&gt;</p>
+<h2 id="比较两个branch的区别差集">比较两个branch的区别(差集)</h2>
+<p>假设我们有2个分支：master 和 dev，现在想查看这两个 branch
+的区别，有以下几种方式。 - 查看 dev 有，而 master 中没有</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log dev ^master </span><br></pre></td></tr></table></figure>
 <ul>
 <li>查看 dev 中比 master 中多提交了哪些内容</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log master..dev</span><br></pre></td></tr></table></figure>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection">Double Dot</a></p>
-<blockquote>
-<p>The most common range specification is the double-dot syntax. This basically asks Git to resolve a range of commits that are reachable from one commit but aren’t reachable from another.</p>
-</blockquote>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection">Triple Dot</a></p>
+<li><a
+target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection">Double
+Dot</a> &gt; The most common range specification is the double-dot
+syntax. This basically asks Git to resolve a range of commits that are
+reachable from one commit but aren’t reachable from another.</li>
+<li><a
+target="_blank" rel="noopener" href="https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection">Triple
+Dot</a>
 <ul>
-<li>此命令可以查看全差(并集与交集的差集)</li>
-</ul>
-<blockquote>
-<p>The last major range-selection syntax is the triple-dot syntax, which specifies all the commits that are reachable by either of two references but not by both of them.</p>
-</blockquote>
-</li>
-<li>
-<p>所以，以下三个命令的功能是一致的，查看refB有而refA没有的。</p>
-</li>
+<li>此命令可以查看全差(并集与交集的差集) &gt; The last major
+range-selection syntax is the triple-dot syntax, which specifies all the
+commits that are reachable by either of two references but not by both
+of them.</li>
+</ul></li>
+<li>所以，以下三个命令的功能是一致的，查看refB有而refA没有的。</li>
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git log refA..refB</span><br><span class="line">$ git log ^refA refB</span><br><span class="line">$ git log refB --not refA</span><br></pre></td></tr></table></figure>
 <!--
@@ -420,47 +432,40 @@
 <!--
 [diff 和 patch 使用详解](https://blog.csdn.net/gdutxiaoxu/article/details/89606676?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param)
 -->
-<p>有时候，我们需要进行代码迁移，比如把 A 开发机上的代码迁移到 B 开发机上，这时候就可以使用补丁。</p>
-<p>git 提供两种补丁方案：</p>
-<ul>
-<li>通过 git diff 生成 .diff 文件。
-<ul>
-<li>可以指定文件生成 .diff 文件，也可以指定单个或多个 commit 生成。</li>
-<li>生成的文件不含有 commit 信息。</li>
-</ul>
-</li>
-<li>通过 git format-patch 生成 .patch 文件。
-<ul>
-<li>一个 commit 对应一个 patch 文件。</li>
-<li>生成的文件含有 commmit 信息。</li>
-</ul>
-</li>
-</ul>
+<p>有时候，我们需要进行代码迁移，比如把 A 开发机上的代码迁移到 B
+开发机上，这时候就可以使用补丁。</p>
+<p>git 提供两种补丁方案： - 通过 git diff 生成 .diff 文件。 *
+可以指定文件生成 .diff 文件，也可以指定单个或多个 commit 生成。 *
+生成的文件不含有 commit 信息。 - 通过 git format-patch 生成 .patch
+文件。 * 一个 commit 对应一个 patch 文件。 * 生成的文件含有 commmit
+信息。</p>
 <h3 id="git-format-patch">git format-patch</h3>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 当前分支所有超前 master 的提交</span><br><span class="line">git format-patch -M master</span><br><span class="line"></span><br><span class="line"># 某次提交以后的所有 patch。[commit id] 指的是 commit name，可以通过 git log 查看。</span><br><span class="line">git format-patch [commit id]</span><br><span class="line"></span><br><span class="line"># 某两次提交之间的所有patch:</span><br><span class="line">git format-patch [commit sha1 id..[commit sha2 id]</span><br></pre></td></tr></tbody></table></figure>
-<p>git format-patch 命令中，一个 commit 对应一个 patch 文件，所以生成的补丁文件默认从 1 开始顺序编号，并使用对应提交信息中的第一行作为文件名。</p>
+<p>git format-patch 命令中，一个 commit 对应一个 patch
+文件，所以生成的补丁文件默认从 1
+开始顺序编号，并使用对应提交信息中的第一行作为文件名。</p>
 <h3 id="apply-patch">apply patch</h3>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 先检查 patch 文件</span><br><span class="line">git apply --stat   xxx.patch</span><br><span class="line"></span><br><span class="line"># 检查能否应用成功</span><br><span class="line">git apply --check xxx.patch</span><br><span class="line"></span><br><span class="line"># 打补丁。使用 -s 或 –-signoff 选项，可以 commit 信息中加入 signed-off-by 信息。</span><br><span class="line">git am --signoff &lt; xxx.patch</span><br></pre></td></tr></tbody></table></figure>
 <ul>
 <li>branch 中修改文件所在目录，git 是可以跟踪这个变化的。</li>
 </ul>
 <h2 id="git-submodule">git submodule</h2>
-<p>有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。 也许是第三方库，或者你独立开发的，用于多个父项目的库。 现在问题来了：你想要把它们当做两个独立的项目，同时又想在一个项目中使用另一个。</p>
-<p>Git 通过子模块来解决这个问题。 子模块允许你将一个 Git 仓库作为另一个 Git 仓库的子目录。 它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。</p>
-<p>在配置网站的 gitHun Actions 中，主题 Next 是一个 submodule。我将 Next submodule 转化为普通文件夹，步骤如下所示。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p><a target="_blank" rel="noopener" href="https://www.littlezhang.com/2020/01/%E5%A6%82%E4%BD%95%E6%8A%8A-git-submodule-%E5%8F%98%E6%88%90%E6%99%AE%E9%80%9A%E6%96%87%E4%BB%B6%E5%A4%B9/">如何把 Git Submodule 变成普通文件夹</a></p>
-<h1>References</h1>
+<p>有种情况我们经常会遇到：某个工作中的项目需要包含并使用另一个项目。
+也许是第三方库，或者你独立开发的，用于多个父项目的库。
+现在问题来了：你想要把它们当做两个独立的项目，同时又想在一个项目中使用另一个。</p>
+<p>Git 通过子模块来解决这个问题。 子模块允许你将一个 Git 仓库作为另一个
+Git 仓库的子目录。
+它能让你将另一个仓库克隆到自己的项目中，同时还保持提交的独立。</p>
+<p>在配置网站的 gitHun Actions 中，主题 Next 是一个 submodule。我将 Next
+submodule 转化为普通文件夹，步骤如下所示。 </p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><a target="_blank" rel="noopener" href="https://www.littlezhang.com/2020/01/%E5%A6%82%E4%BD%95%E6%8A%8A-git-submodule-%E5%8F%98%E6%88%90%E6%99%AE%E9%80%9A%E6%96%87%E4%BB%B6%E5%A4%B9/">如何把
+Git Submodule 变成普通文件夹</a></p>
+<h1 id="references">References</h1>
 <ul>
-<li>
-<p><a target="_blank" rel="noopener" href="http://way.xiaojukeji.com/article/9850?from=mail">Git 学习笔记</a></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&amp;mid=2652061065&amp;idx=4&amp;sn=d5b14894b191ee3bfc1d1cdfa3f5b022&amp;chksm=f1204978c657c06e3fb9be73283effe256e8ba2d194115a77c010026cd85b972d4abd951e5a0&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1577523609386&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">Git 内部原理揭秘</a> <!--解释从文件更改到代码储存，Git究竟是怎么实现的 --></p>
-</li>
-<li>
-<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;mid=2651024610&amp;idx=4&amp;sn=fedf2d0fb61d6b6a2b9ce3759fb980b5&amp;chksm=bdbe94b18ac91da70ca978004222310c9052316610941a8515eb1915aeebc4eda8943f9cef1d&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1583164743137&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">10 个节省时间和改善工作流的 Git 技巧</a></p>
-</li>
+<li><p><a target="_blank" rel="noopener" href="http://way.xiaojukeji.com/article/9850?from=mail">Git 学习笔记</a></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI3MTA0MTk1MA==&amp;mid=2652061065&amp;idx=4&amp;sn=d5b14894b191ee3bfc1d1cdfa3f5b022&amp;chksm=f1204978c657c06e3fb9be73283effe256e8ba2d194115a77c010026cd85b972d4abd951e5a0&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1577523609386&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">Git 内部原理揭秘</a>
+<!--解释从文件更改到代码储存，Git究竟是怎么实现的 --></p></li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5MDE0Mjc4MA==&amp;mid=2651024610&amp;idx=4&amp;sn=fedf2d0fb61d6b6a2b9ce3759fb980b5&amp;chksm=bdbe94b18ac91da70ca978004222310c9052316610941a8515eb1915aeebc4eda8943f9cef1d&amp;mpshare=1&amp;scene=1&amp;srcid=&amp;sharer_sharetime=1583164743137&amp;sharer_shareid=243305afe8bf4fded3a4c505959e2eb3#rd">10 个节省时间和改善工作流的 Git 技巧</a></p></li>
 </ul>
 
     </div>
