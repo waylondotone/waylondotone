@@ -41,8 +41,8 @@
 <meta property="article:published_time" content="2020-02-08T08:49:10.000Z">
 <meta property="article:modified_time" content="2023-05-19T12:12:32.161Z">
 <meta property="article:author" content="Nobody">
-<meta property="article:tag" content="Programming">
 <meta property="article:tag" content="USV">
+<meta property="article:tag" content="Programming">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.waylon.one/downloads/images/blog/Mercator_1.png">
 
@@ -153,7 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A2%A8%E5%8D%A1%E6%89%98%E6%8A%95%E5%BD%B1%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">墨卡托投影坐标系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A2%A8%E5%8D%A1%E6%89%98%E6%8A%95%E5%BD%B1%E6%80%A7%E8%B4%A8"><span class="nav-number">3.</span> <span class="nav-text">墨卡托投影性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A2%A8%E5%8D%A1%E6%89%98%E6%8A%95%E5%BD%B1%E6%96%B9%E7%A8%8B%E5%BC%8F"><span class="nav-number">4.</span> <span class="nav-text">墨卡托投影方程式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%AE%9E%E7%8E%B0"><span class="nav-number">5.</span> <span class="nav-text">程序实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">墨卡托投影坐标系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">墨卡托投影性质</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">墨卡托投影方程式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">程序实现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -289,54 +289,50 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
-<h1 id="前言">前言</h1>
-<p>FYI 本博客初稿完成于 2017 年，内容更新于 <a href="http://www.waylon.one/USV/Mercator-projection/">个人网站 -
-简明版墨卡托投影坐标系</a>，请移步阅读最新内容。</p>
+<h1>前言</h1>
+<p>FYI 本博客初稿完成于 2017 年，内容更新于 <a href="http://www.waylon.one/USV/Mercator-projection/">个人网站 - 简明版墨卡托投影坐标系</a>，请移步阅读最新内容。</p>
 <p>本文讲述了墨卡托投影坐标系的基本原理和实现，但是因为地球非标准椭圆，经纬度和米坐标的转换复杂，本文提供的算法存在较大误差，仅适用于初步验证。</p>
-<h1 id="墨卡托投影坐标系">墨卡托投影坐标系</h1>
-<p>墨卡托投影 (Mercator
-Projection) 是一种 “等角正切圆柱投影”，荷兰地图学家墨卡托 (Mercator) 在 1569 年拟定：假设地球被围在一个中空的圆柱里，其赤道与圆柱相接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅标准纬线为零度（即赤道）的 “墨卡托投影” 绘制出的世界地图。<br>
+<h1>墨卡托投影坐标系</h1>
+<p>墨卡托投影 (Mercator Projection) 是一种 “等角正切圆柱投影”，荷兰地图学家墨卡托 (Mercator) 在 1569 年拟定：假设地球被围在一个中空的圆柱里，其赤道与圆柱相接触，然后再假想地球中心有一盏灯，把球面上的图形投影到圆柱体上，再把圆柱体展开，这就是一幅标准纬线为零度（即赤道）的 “墨卡托投影” 绘制出的世界地图。<br>
 墨卡托投影在今天对于航海事业起着极为重要的作用，目前世界各国绘制海洋地图时仍广泛使用墨卡托投影，国际水路局 (IHB) 规定：“除特殊情况外，各国都要用墨卡托投影绘制海图”。国际水路局发行的《大洋水深总图》是把全世界分成 24 幅编辑的，在南北纬 72 度之间就是使用墨卡托投影绘成的。</p>
-<h1 id="墨卡托投影性质">墨卡托投影性质</h1>
+<h1>墨卡托投影性质</h1>
 <p>由于墨卡托投影的经纬线离开赤道逐渐以相同倍数伸长，所以又称为渐长投影，由于它是具有等角性质的圆筒投影，所以也叫做等角圆筒投影。<strong>注意：这种投影不适合高纬地区，通常纬度 60 度以上区域，不用此投影</strong>。</p>
-<p><img data-src="/downloads/images/blog/Mercator_1.png"></p>
-<p><img data-src="/downloads/images/blog/Mercator_2.png"></p>
-<p>墨卡托投影有一个特别的特性：所有罗盘等角线，或称斜航线（就是与所经过的所有经线形成相同角度的航线，也称恒向航线）在墨卡托投影下都是直线。这使得在航海领域这个投影非常重要。
+<p><img data-src="/downloads/images/blog/Mercator_1.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/Mercator_2.png" alt=""></p>
+<p>墨卡托投影有一个特别的特性：所有罗盘等角线，或称斜航线（就是与所经过的所有经线形成相同角度的航线，也称恒向航线）在墨卡托投影下都是直线。这使得在航海领域这个投影非常重要。<br>
 注意：经纬线的伸长与纬线的正割成比例变化，随纬度增高极具拉伸，到极点成为无穷大；面积的扩大更为明显，在 60 度的地方面积要扩大四倍。如下图所示，地理上等半径圆在高纬度面积明显扩大。</p>
-<p><img data-src="/downloads/images/blog/Mercator_3.png"></p>
-<p>墨卡托投影是按等角条件修改透视圆筒投影而得到的投影，等角（也称为保形）
-是指当地图上任何一点的各方向具有相同的比例，称为局部保形，透视圆筒投影如图 1 所示。从墨卡托投影图上可以看出，经线间隔的经度如果相等，则经线是等距平行的直线，
-纬线也是平行的直线，而且经纬线是相互垂直的。墨卡托投影对透视圆筒投影改造点：要使圆筒投影称为等角的性质，必须使由赤道向两极经线逐渐伸长的倍数与经线上各点相应的纬度扩大的倍数相同。</p>
-<p><img data-src="/downloads/images/blog/Mercator_4.png"></p>
-<p><img data-src="/downloads/images/blog/Mercator_5.png"></p>
+<p><img data-src="/downloads/images/blog/Mercator_3.png" alt=""></p>
+<p>墨卡托投影是按等角条件修改透视圆筒投影而得到的投影，等角（也称为保形） 是指当地图上任何一点的各方向具有相同的比例，称为局部保形，透视圆筒投影如图 1 所示。从墨卡托投影图上可以看出，经线间隔的经度如果相等，则经线是等距平行的直线， 纬线也是平行的直线，而且经纬线是相互垂直的。墨卡托投影对透视圆筒投影改造点：要使圆筒投影称为等角的性质，必须使由赤道向两极经线逐渐伸长的倍数与经线上各点相应的纬度扩大的倍数相同。</p>
+<p><img data-src="/downloads/images/blog/Mercator_4.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/Mercator_5.png" alt=""></p>
 <p>透视圆筒投影</p>
-<p><img data-src="/downloads/images/blog/Mercator_6.png"></p>
-<h1 id="墨卡托投影方程式">墨卡托投影方程式</h1>
+<p><img data-src="/downloads/images/blog/Mercator_6.png" alt=""></p>
+<h1>墨卡托投影方程式</h1>
 <p>墨卡托投影以整个世界范围，赤道作为标准纬线，本初子午线作为中央经线，两者交点为坐标原点，向东向北为正，向西向南为负。南北极在地图的正下、上方，而东西方向处于地图的正右、左。由于墨卡托投影在两极附近是趋于无限值，因此它并没完整展现了整个世界，地图上最高纬度是 85.05 度（通过纬度取值范围 ys 反解计算可得到纬度值为 85.05112877980659）。为了简化计算，我们采用球形映射，而不是椭球体形状。</p>
 <p>公式推导具体见文献 <a target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
-<p><img data-src="/downloads/images/blog/Mercator_7.png"> <img data-src="/downloads/images/blog/Mercator_8.png"></p>
-<p>利用等角条件 m=n 来讨论具体公式，具体分为三步： 1.
-根据 m=n 得到地球表面投影到平面上的微积线段的关系式。<br>
-2. 把地球视为球体：
-设地球表面 A 点经纬坐标为（λ，Φ），对应的投影坐标为（x,y）, 基准纬线设置为赤道，则 R 为地球半径；</p>
+<p><img data-src="/downloads/images/blog/Mercator_7.png" alt=""><br>
+<img data-src="/downloads/images/blog/Mercator_8.png" alt=""></p>
+<p>利用等角条件 m=n 来讨论具体公式，具体分为三步：</p>
+<ol>
+<li>根据 m=n 得到地球表面投影到平面上的微积线段的关系式。</li>
+<li>把地球视为球体：<br>
+设地球表面 A 点经纬坐标为（λ，Φ），对应的投影坐标为（x,y）, 基准纬线设置为赤道，则 R 为地球半径；</li>
+</ol>
 <p>墨卡托投影方程式为：</p>
-<p><img data-src="/downloads/images/blog/Mercator_9.png"></p>
-<ol start="3" type="1">
+<p><img data-src="/downloads/images/blog/Mercator_9.png" alt=""></p>
+<ol start="3">
 <li>把地球视为旋转椭球体</li>
 </ol>
 <p>墨卡托投影正反解公式：</p>
-<p><img data-src="/downloads/images/blog/Mercator_10.png"></p>
-<p><img data-src="/downloads/images/blog/Mercator_11.png"></p>
+<p><img data-src="/downloads/images/blog/Mercator_10.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/Mercator_11.png" alt=""></p>
 <p>公式推导具体见文献 <a target="_blank" rel="noopener" href="http://new.oversea.cnki.net/kcms/detail/detail.aspx?filename=LNSZ198001001&amp;dbcode=CJFQ&amp;dbname=CJFD1980&amp;v=">墨卡托投影与大圆投影的构成及其在定航线计算航程与航向方面的应用_程光举</a>。</p>
-<h1 id="程序实现">程序实现</h1>
-<p>最新版见 <a target="_blank" rel="noopener" href="https://github.com/wylloong/-GeographyCoordinateTransform/blob/master/Mercator">Geography
-Coordinate Transform Lite/Mercator</a></p>
+<h1>程序实现</h1>
+<p>最新版见 <a target="_blank" rel="noopener" href="https://github.com/wylloong/-GeographyCoordinateTransform/blob/master/Mercator">Geography Coordinate Transform Lite/Mercator</a></p>
 <figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Lite版，仅适用于初步验证</span></span><br><span class="line"><span class="comment">//把地球视为球体实现经纬度和墨卡托投影的函数</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">{</span></span><br><span class="line">	<span class="type">double</span> x;</span><br><span class="line">	<span class="type">double</span> y;</span><br><span class="line">}WayPoint;</span><br><span class="line"></span><br><span class="line"><span class="comment">//经纬度转墨卡托</span></span><br><span class="line">WayPoint <span class="title function_">lonLat2Mercator</span><span class="params">(WayPoint lonLat)</span></span><br><span class="line">{</span><br><span class="line">	WayPoint mercator;</span><br><span class="line">	<span class="type">double</span> x = lonLat.x * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = <span class="built_in">log</span>(<span class="built_in">tan</span>((<span class="number">90</span> + lonLat.y) * Pi / <span class="number">360</span>))/(Pi / <span class="number">180</span>);  </span><br><span class="line">	y = y * <span class="number">20037508.34</span> / <span class="number">180</span>;</span><br><span class="line">	mercator.x = x;</span><br><span class="line">	mercator.y = y;</span><br><span class="line">	<span class="keyword">return</span> mercator;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//墨卡托转经纬度</span></span><br><span class="line">WayPoint <span class="title function_">Mercator2lonLat</span><span class="params">(WayPoint mercator)</span></span><br><span class="line">{</span><br><span class="line">	WayPoint lonLat;</span><br><span class="line">	<span class="type">double</span> x = mercator.x / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	<span class="type">double</span> y = mercator.y / <span class="number">20037508.34</span> * <span class="number">180</span>;</span><br><span class="line">	y = <span class="number">180</span> / Pi * (<span class="number">2</span> * <span class="built_in">atan</span>(<span class="built_in">exp</span>(y * Pi / <span class="number">180</span>)) - Pi / <span class="number">2</span>);</span><br><span class="line">	lonLat.x = x;</span><br><span class="line">	lonLat.y = y;</span><br><span class="line">	<span class="keyword">return</span> lonLat;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="reference">Reference</h1>
+<h1>Reference</h1>
 <ul>
-<li>程光举.
-墨卡托投影与大圆投影的构成及其在确定航线、计算航程与航向方面的应用 [J].
-辽宁师院学报 (自然科学版),1980 (01):13-28. </li>
+<li>程光举。墨卡托投影与大圆投影的构成及其在确定航线、计算航程与航向方面的应用 [J]. 辽宁师院学报 (自然科学版),1980 (01):13-28. </li>
 <li><a target="_blank" rel="noopener" href="http://download.csdn.net/detail/wylloong/9813502">墨卡托投影与经纬度转换源代码及原理文献</a></li>
 </ul>
 
@@ -348,8 +344,8 @@ Coordinate Transform Lite/Mercator</a></p>
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Programming/" rel="tag"># Programming</a>
               <a href="/tags/USV/" rel="tag"># USV</a>
+              <a href="/tags/Programming/" rel="tag"># Programming</a>
           </div>
 
         
