@@ -143,10 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-snap"><span class="nav-number">1.</span> <span class="nav-text">什么是 Snap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#install-shutter-screenshot-tool"><span class="nav-number">2.</span> <span class="nav-text">Install Shutter Screenshot
-Tool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#installing-shutter-on-ubuntu-20.04-18.04"><span class="nav-number">2.1.</span> <span class="nav-text">Installing Shutter on
-Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2-python-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">切换 Python 环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8-aptitude-%E4%BB%A3%E6%9B%BF-apt-get-%E5%A4%84%E7%90%86%E4%BE%9D%E8%B5%96%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">用 aptitude 代替
-apt-get 处理依赖性问题</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-Snap"><span class="nav-number">1.</span> <span class="nav-text">什么是 Snap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Install-Shutter-Screenshot-Tool"><span class="nav-number">2.</span> <span class="nav-text">Install Shutter Screenshot Tool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Installing-Shutter-on-Ubuntu-20-04-18-04"><span class="nav-number">2.1.</span> <span class="nav-text">Installing Shutter on Ubuntu 20.04 &amp; 18.04</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%87%E6%8D%A2-Python-%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">切换 Python 环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%A8-aptitude-%E4%BB%A3%E6%9B%BF-apt-get-%E5%A4%84%E7%90%86%E4%BE%9D%E8%B5%96%E6%80%A7%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">用 aptitude 代替 apt-get 处理依赖性问题</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -317,33 +314,21 @@ apt-get 处理依赖性问题</span></a></li></ol></div>
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="什么是-snap">什么是 Snap</h2>
+    <div class="post-body" itemprop="articleBody"><h2 id="什么是-Snap">什么是 Snap</h2>
 <p>Snap 包是 Ubuntu 16.04 LTS 发布时引入的新应用格式包。</p>
-<blockquote><p>当你在安装完 snap 后，你会发现在在根目录下会出现如
-/dev/loop0、/dev/loop1 等挂载点，这些挂载点正是 snap 软件包的目录。Snap
-使用了 squashFS 文件系统，一种开源的压缩，只读文件系统，基于 GPL
-协议发行。一旦 snap
-被安装后，其就有一个只读的文件系统和一个可写入的区域。应用自身的执行文件、库、依赖包都被放在这个只读目录，意味着该目录不能被随意篡改和写入。</p>
+<blockquote><p>当你在安装完 snap 后，你会发现在在根目录下会出现如 /dev/loop0、/dev/loop1 等挂载点，这些挂载点正是 snap 软件包的目录。Snap 使用了 squashFS 文件系统，一种开源的压缩，只读文件系统，基于 GPL 协议发行。一旦 snap 被安装后，其就有一个只读的文件系统和一个可写入的区域。应用自身的执行文件、库、依赖包都被放在这个只读目录，意味着该目录不能被随意篡改和写入。</p>
 <footer><strong>Canonical </strong><cite><a target="_blank" rel="noopener" href="https://cn.ubuntu.com/blog/what-is-snap-application">什么是 Snap 应用？</a></cite></footer></blockquote>
 <img data-src="/downloads/images/snap_loop.png" class="" title="/dev/loopX是 snap 的目录">
-<p>较传统 Linux 的 rpm，deb 软件包，snap 引入 squashFS 文件系统，使得
-snap 的安全性要优于传统的 Linux 软件包。同时，每个 snap
-默认都被严格限制（confined），即限制系统权限和资源访问。但是，可通过授予权限策略来获得对系统资源的访问。</p>
-<p>使用 snap
-包的另一好处就是它类似一个容器拥有一个应用程序所有的文件和库，各个应用程序之间完全独立；解决了应用程序之间的依赖问题，使应用程序之间更容易管理，但是由此带来的问题就是它占用更多的磁盘空间。</p>
-<h2 id="install-shutter-screenshot-tool">Install Shutter Screenshot
-Tool</h2>
-<h3 id="installing-shutter-on-ubuntu-20.04-18.04">Installing Shutter on
-Ubuntu 20.04 &amp; 18.04</h3>
+<p>较传统 Linux 的 rpm，deb 软件包，snap 引入 squashFS 文件系统，使得 snap 的安全性要优于传统的 Linux 软件包。同时，每个 snap 默认都被严格限制（confined），即限制系统权限和资源访问。但是，可通过授予权限策略来获得对系统资源的访问。</p>
+<p>使用 snap 包的另一好处就是它类似一个容器拥有一个应用程序所有的文件和库，各个应用程序之间完全独立；解决了应用程序之间的依赖问题，使应用程序之间更容易管理，但是由此带来的问题就是它占用更多的磁盘空间。</p>
+<h2 id="Install-Shutter-Screenshot-Tool">Install Shutter Screenshot Tool</h2>
+<h3 id="Installing-Shutter-on-Ubuntu-20-04-18-04">Installing Shutter on Ubuntu 20.04 &amp; 18.04</h3>
 <figure class="highlight shell"><figcaption><span>https://itsfoss.com/install-shutter-ubuntu/ Installing Shutter on Ubuntu 20.04 &amp; 18.04</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Shutter is not available in Ubuntu 20.04.</span><br><span class="line">sudo add-apt-repository ppa:linuxuprising/shutter</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="切换-python-环境">切换 Python 环境</h2>
+<h2 id="切换-Python-环境">切换 Python 环境</h2>
 <figure class="highlight shell"><figcaption><span>https://www.cnblogs.com/liuzhenbo/p/13176869.html ubuntu 切换 python 版本 </span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 查看你系统中有哪些Python的二进制文件可供使用</span><br><span class="line">ls /usr/bin/python*</span><br><span class="line">// 查看python替换版本信息</span><br><span class="line">update-alternatives --list python</span><br><span class="line">// 使用以下命令随时在列出的python替换版本中任意切换</span><br><span class="line">sudo update-alternatives --config python</span><br><span class="line">// 再查一下默认Python版本</span><br><span class="line">python --version</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="用-aptitude-代替-apt-get-处理依赖性问题">用 aptitude 代替
-apt-get 处理依赖性问题</h2>
+<h2 id="用-aptitude-代替-apt-get-处理依赖性问题">用 aptitude 代替 apt-get 处理依赖性问题</h2>
 <ul>
-<li>aptitude 与 apt-get 一样，是 Debian
-及其衍生系统中功能极其强大的包管理工具。与 apt-get 不同的是，aptitude
-在处理依赖问题上更佳一些。举例来说，aptitude 在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。</li>
+<li>aptitude 与 apt-get 一样，是 Debian 及其衍生系统中功能极其强大的包管理工具。与 apt-get 不同的是，aptitude 在处理依赖问题上更佳一些。举例来说，aptitude 在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。</li>
 <li>注意事项</li>
 <li>为什么可以这么做</li>
 </ul>
