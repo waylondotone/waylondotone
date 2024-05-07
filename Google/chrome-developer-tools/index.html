@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">打开命令菜单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Chrome 屏幕截图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%8A%E6%89%80%E6%9C%89%E5%86%85%E5%AE%B9%E7%9A%84%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7"><span class="nav-number">2.1.</span> <span class="nav-text">截取网页上所有内容的屏幕快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B2%BE%E7%A1%AE%E6%8D%95%E8%8E%B7-DOM-%E5%85%83%E7%B4%A0%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">2.2.</span> <span class="nav-text">精确捕获 DOM 元素的内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">监控页面加载状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Trace Viewer</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%93%E5%BC%80%E5%91%BD%E4%BB%A4%E8%8F%9C%E5%8D%95"><span class="nav-number">1.</span> <span class="nav-text">打开命令菜单</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#chrome-%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE"><span class="nav-number">2.</span> <span class="nav-text">Chrome 屏幕截图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%AA%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%8A%E6%89%80%E6%9C%89%E5%86%85%E5%AE%B9%E7%9A%84%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7"><span class="nav-number">2.1.</span> <span class="nav-text">截取网页上所有内容的屏幕快照</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B2%BE%E7%A1%AE%E6%8D%95%E8%8E%B7-dom-%E5%85%83%E7%B4%A0%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">2.2.</span> <span class="nav-text">精确捕获 DOM 元素的内容</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%91%E6%8E%A7%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E7%8A%B6%E6%80%81"><span class="nav-number">3.</span> <span class="nav-text">监控页面加载状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#trace-viewer"><span class="nav-number">4.</span> <span class="nav-text">Trace Viewer</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -297,38 +297,44 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
-<p>在开始之前，我想介绍一下 Chrome 的命令菜单。命令菜单之于 Chrome，就像 Shell 之于 Linux 一样。你可以在键盘敲入相应命令来操作 Chrome。</p>
-<h1>打开命令菜单</h1>
-<ol>
+<p>在开始之前，我想介绍一下 Chrome 的命令菜单。命令菜单之于 Chrome，就像
+Shell 之于 Linux 一样。你可以在键盘敲入相应命令来操作 Chrome。</p>
+<h1 id="打开命令菜单">打开命令菜单</h1>
+<ol type="1">
 <li>打开 Chrome 开发者工具</li>
 <li>使用以下快捷键打开命令菜单：</li>
 </ol>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">windows：Ctrl + Shift + P</span><br><span class="line">macOS：Cmd + Shift + P</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/chrome_cmds.gif" alt=""></p>
-<h1>Chrome 屏幕截图</h1>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/chrome_cmds.gif"></p>
+<h1 id="chrome-屏幕截图">Chrome 屏幕截图</h1>
 <p>捕获屏幕内容是一个常见的功能需求，你当前的计算机上已经有了非常方便的截图工具了。但是，你可以完成以下任务吗？</p>
-<ol>
+<ol type="1">
 <li>截取网页上所有内容的屏幕快照，包括可视窗口中未显示的所有内容。</li>
 <li>精确捕获 DOM 元素的内容</li>
 </ol>
 <blockquote>
-<p>HTML DOM 是 HTML Document Object Model (文档对象模型) 的缩写，HTML DOM 则是专门适用于 HTML/XHTML 的文档对象模型。熟悉软件开发的人员可以将 HTML DOM 理解为网页的 API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。</p>
+<p>HTML DOM 是 HTML Document Object Model (文档对象模型) 的缩写，HTML DOM
+则是专门适用于 HTML/XHTML 的文档对象模型。熟悉软件开发的人员可以将 HTML
+DOM 理解为网页的
+API。它将网页中的各个元素都看作一个个对象，从而使网页中的元素也可以被计算机语言获取或者编辑。</p>
 </blockquote>
-<p>这是两个很普通的要求，但是使用操作系统随附的屏幕截图工具不太容易解决。这个时候，我们可以在 Chrome 使用相关命令来帮助我们完成此要求。</p>
+<p>这是两个很普通的要求，但是使用操作系统随附的屏幕截图工具不太容易解决。这个时候，我们可以在
+Chrome 使用相关命令来帮助我们完成此要求。</p>
 <h2 id="截取网页上所有内容的屏幕快照">截取网页上所有内容的屏幕快照</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Screenshot Capture full size screenshot</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="精确捕获-DOM-元素的内容">精确捕获 DOM 元素的内容</h2>
+<h2 id="精确捕获-dom-元素的内容">精确捕获 DOM 元素的内容</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Screenshot Capture node screenshot</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/chrome_cmds_capture.gif" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/chrome_cmds_capture.gif"></p>
 <!--
 ![](https://mmbiz.qpic.cn/mmbiz_gif/XIibZ0YbvibkWhLNU78h5gmN3j6h6VXfuWlIiavPIDY9gWzMymQicQUreeU0jFZIbbdloZBYwe1pRkeBMbNH5M97GA/640?wx_fmt=gif&tp=webp&wxfrom=5&wx_lazy=1)
 
 -->
-<h1>监控页面加载状态</h1>
+<h1 id="监控页面加载状态">监控页面加载状态</h1>
 <p>从开始到完全加载页面可能需要十秒钟以上的时间。我们有时需要监控页面在不同的时间点相关资源的加载行为。</p>
-<p>在 Chrome 开发者工具中，我们可以使用 “网络” 面板下的 Capture Screenshots 功能来捕获页面加载时的屏幕截图。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/chrome_cmds_loading.gif" alt=""></p>
-<h1>Trace Viewer</h1>
+<p>在 Chrome 开发者工具中，我们可以使用 “网络” 面板下的 Capture
+Screenshots 功能来捕获页面加载时的屏幕截图。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/chrome_cmds_loading.gif"></p>
+<h1 id="trace-viewer">Trace Viewer</h1>
 <!--
 [了解](chrome://tracing/)
 -->
