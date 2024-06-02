@@ -1180,200 +1180,6 @@ braces when resorting to direct-initialization.</li>
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Linux/advanced-vim-operations/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Nobody">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-      <meta itemprop="description" content="sharing daily progress and life">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | One's Way">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/Linux/advanced-vim-operations/" class="post-title-link" itemprop="url">Vim 高级操作</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2019-12-06 22:36:21" itemprop="dateCreated datePublished" datetime="2019-12-06T22:36:21+08:00">2019-12-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>890</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>3 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>[toc]</p>
-<h1 id="commands">Commands</h1>
-<ul>
-<li>命令行终端输入: vimtutor。
-这是史上最简单、最全面的 vim 基础教程，至今无人超越。<br>
-</li>
-<li>tree<br>
-<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-tree.html">tree</a>
-命令用于以树状图列出目录的内容，它会列出指定目录下的所有文件，包括子目录里的文件。</li>
-</ul>
-<h1 id="功能扩展">功能扩展</h1>
-<h2 id="文本整体的处理">文本整体的处理</h2>
-<ul>
-<li>gu：切换为小写</li>
-<li> gU：切换为大写</li>
-<li> ~：切换光标所在位置的字符的大小写形式，大写转换为小写，小写转换为大写。</li>
-<li>3~：将光标位置开始的 3 个字母改变其大小写</li>
-</ul>
-<h2 id="如何删除一个单词">如何删除一个单词</h2>
-<ul>
-<li>dw
-<ul>
-<li>从光标当前的位置开始删除，直到单词最后。</li>
-</ul></li>
-<li>daw
-<ul>
-<li>删除光标所在的单词，简记 delete a word。</li>
-</ul></li>
-<li>bdw
-<ul>
-<li>复合命令，b
-可以让光标回退到单词开头的位置，而 dw 则是从头开始删除单词。</li>
-</ul></li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># de 删除至当前单词末尾，包括当前字符</span><br><span class="line"># d$ 删除至当前行尾</span><br><span class="line"># 2dd 删除两行</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="移动光标">移动光标</h1>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># hjkl</span><br><span class="line"># 2w 向前移动两个单词</span><br><span class="line"># 3e 向前移动到第 3 个单词的末尾</span><br><span class="line"># 0 移动到行首</span><br><span class="line"># &lt;ctrl&gt;+o 跳转回之前的位置</span><br><span class="line"># &lt;ctrl&gt;+i 返回跳转之前的位置</span><br></pre></td></tr></tbody></table></figure>
-<p>修改</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># A 当前行末尾添加</span><br></pre></td></tr></tbody></table></figure>
-<p>撤销</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># u 撤销</span><br><span class="line"># &lt;ctrl&gt;+r 取消撤销</span><br></pre></td></tr></tbody></table></figure>
-<p>状态</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &lt;ctrl&gt;+g 显示当前行以及文件信息</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="查找">查找</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># / 正向查找（n：继续查找，N：相反方向继续查找）</span><br><span class="line"># ？ 逆向查找</span><br><span class="line"># :set ic 忽略大小写</span><br><span class="line"># :set noic 取消忽略大小写</span><br><span class="line"># :set hls 匹配项高亮显示</span><br><span class="line"># :set is 显示部分匹配</span><br></pre></td></tr></tbody></table></figure>
-<p>替换</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># :s/old/new 替换该行第一个匹配串</span><br><span class="line"># :s/old/new/g 替换全行的匹配串</span><br><span class="line"># :%s/old/new/g 替换整个文件的匹配串</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="搜索">搜索</h2>
-<ul>
-<li>匹配末尾 </li>
-</ul>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/关键字\&gt;</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>匹配开头 </li>
-</ul>
-<figure class="highlight jsx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/\&lt;关键字</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>排序 </li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!sort</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="复制到剪贴板">复制到剪贴板</h2>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxiao93/article/details/53677764">vim 在系统剪切板的复制与粘贴</a></li>
-</ul>
-<ol type="1">
-<li>查看 vim 版本是否支持 clipboard <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim --version | grep "clipboard"</span><br></pre></td></tr></tbody></table></figure></li>
-<li>clipboard 前面如果有一个减号，说明不支持，需要 安装图形化界面的 vim。
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim-gnome</span><br></pre></td></tr></tbody></table></figure></li>
-<li>打开 vim 输入 :reg 查看 vim 的寄存器，当支持 clipboard
-之后，会多出 "+ 寄存器，表示系统剪切板。在 vim 中进入 visual 视图后，使用
-"Ny
-(N 表示特定寄存器编号)，可以将内容复制到特定的剪切板，那么我们的目的是要复制到系统剪切板则需要选中内容后输入命令：
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+y</span><br></pre></td></tr></tbody></table></figure></li>
-<li>同理，"+p 将系统剪切板的内容拷贝到 vim 中（非编辑模式下）。
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+p</span><br></pre></td></tr></tbody></table></figure></li>
-</ol>
-<h2 id="多窗口调整窗口大小">多窗口调整窗口大小</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 命令行模式下 </span><br><span class="line">// 纵向调整 []输入可选，可以输入也可以不输入，num 指代一个数字</span><br><span class="line">:res[ize]  num		// 指定当前窗口为num列num行</span><br><span class="line">:res[ize] +num		// 把当前窗口高度增加num行 </span><br><span class="line">:res[ize] -num		// 把当前窗口高度减少num行 </span><br><span class="line">// 横向调整 </span><br><span class="line">:vert[ical] res[ize]  num		// 指定当前窗口为num列 </span><br><span class="line">:vert[ical] res[ize] +num		// 把当前窗口增加num列 </span><br><span class="line">:vert[ical] res[ize] -num		// 把当前窗口减少num列</span><br></pre></td></tr></tbody></table></figure>
-<p><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/qwaszx523/77750600">参考链接</a></p>
-<h2 id="显示行号"><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40855100/article/details/122943024">显示行号</a></h2>
-<p>命令行模式，输入 “set number” 或者 “set nu”。</p>
-<h2 id="替换文本">替换文本</h2>
-<ul>
-<li>对于替换命令 s 来说，如果要替换掉换行符，需使用
-作为搜索串；如果要替换字符串生成新行，请使用 为目标串。</li>
-</ul>
-<hr>
-<h1 id="references">References</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&amp;mid=2655439918&amp;idx=2&amp;sn=8b7d7fa6c170ae9698af8bbef0aa64e6&amp;chksm=bd7300598a04894fbc11b825485c53fe4a5be1be9707d24ab39e8b21ff88c5be073c16ec9312&amp;mpshare=1&amp;scene=1&amp;srcid=11050XVg00AZfUY8Hw7ww2z9#rd">如何让
-Vim 成为我们的神器</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/l5f1299fxOuMF9ZZ4wA17A?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=202001">git
-高级用法小抄</a>
-<!--内容包括新手入门，.vimrc的基本配置和插件配置(NerdTree)。--></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Online/online-gadgets/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1639,6 +1445,200 @@ VHF 自动、定时播发，在 VHF
 覆盖范围内（20 海里）装备 AIS 设备的船舶，可自动接收到这些信息。</li>
 </ul></li>
 <li><a target="_blank" rel="noopener" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">百度地图坐标拾取系统</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Linux/advanced-vim-operations/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/Linux/advanced-vim-operations/" class="post-title-link" itemprop="url">Vim 高级操作</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-12-06 22:36:21" itemprop="dateCreated datePublished" datetime="2019-12-06T22:36:21+08:00">2019-12-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>890</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>3 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>[toc]</p>
+<h1 id="commands">Commands</h1>
+<ul>
+<li>命令行终端输入: vimtutor。
+这是史上最简单、最全面的 vim 基础教程，至今无人超越。<br>
+</li>
+<li>tree<br>
+<a target="_blank" rel="noopener" href="https://www.runoob.com/linux/linux-comm-tree.html">tree</a>
+命令用于以树状图列出目录的内容，它会列出指定目录下的所有文件，包括子目录里的文件。</li>
+</ul>
+<h1 id="功能扩展">功能扩展</h1>
+<h2 id="文本整体的处理">文本整体的处理</h2>
+<ul>
+<li>gu：切换为小写</li>
+<li> gU：切换为大写</li>
+<li> ~：切换光标所在位置的字符的大小写形式，大写转换为小写，小写转换为大写。</li>
+<li>3~：将光标位置开始的 3 个字母改变其大小写</li>
+</ul>
+<h2 id="如何删除一个单词">如何删除一个单词</h2>
+<ul>
+<li>dw
+<ul>
+<li>从光标当前的位置开始删除，直到单词最后。</li>
+</ul></li>
+<li>daw
+<ul>
+<li>删除光标所在的单词，简记 delete a word。</li>
+</ul></li>
+<li>bdw
+<ul>
+<li>复合命令，b
+可以让光标回退到单词开头的位置，而 dw 则是从头开始删除单词。</li>
+</ul></li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># de 删除至当前单词末尾，包括当前字符</span><br><span class="line"># d$ 删除至当前行尾</span><br><span class="line"># 2dd 删除两行</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="移动光标">移动光标</h1>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># hjkl</span><br><span class="line"># 2w 向前移动两个单词</span><br><span class="line"># 3e 向前移动到第 3 个单词的末尾</span><br><span class="line"># 0 移动到行首</span><br><span class="line"># &lt;ctrl&gt;+o 跳转回之前的位置</span><br><span class="line"># &lt;ctrl&gt;+i 返回跳转之前的位置</span><br></pre></td></tr></tbody></table></figure>
+<p>修改</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># A 当前行末尾添加</span><br></pre></td></tr></tbody></table></figure>
+<p>撤销</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># u 撤销</span><br><span class="line"># &lt;ctrl&gt;+r 取消撤销</span><br></pre></td></tr></tbody></table></figure>
+<p>状态</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># &lt;ctrl&gt;+g 显示当前行以及文件信息</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="查找">查找</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># / 正向查找（n：继续查找，N：相反方向继续查找）</span><br><span class="line"># ？ 逆向查找</span><br><span class="line"># :set ic 忽略大小写</span><br><span class="line"># :set noic 取消忽略大小写</span><br><span class="line"># :set hls 匹配项高亮显示</span><br><span class="line"># :set is 显示部分匹配</span><br></pre></td></tr></tbody></table></figure>
+<p>替换</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># :s/old/new 替换该行第一个匹配串</span><br><span class="line"># :s/old/new/g 替换全行的匹配串</span><br><span class="line"># :%s/old/new/g 替换整个文件的匹配串</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="搜索">搜索</h2>
+<ul>
+<li>匹配末尾 </li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/关键字\&gt;</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>匹配开头 </li>
+</ul>
+<figure class="highlight jsx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/\&lt;关键字</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>排序 </li>
+</ul>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!sort</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="复制到剪贴板">复制到剪贴板</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhangxiao93/article/details/53677764">vim 在系统剪切板的复制与粘贴</a></li>
+</ul>
+<ol type="1">
+<li>查看 vim 版本是否支持 clipboard <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim --version | grep "clipboard"</span><br></pre></td></tr></tbody></table></figure></li>
+<li>clipboard 前面如果有一个减号，说明不支持，需要 安装图形化界面的 vim。
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install vim-gnome</span><br></pre></td></tr></tbody></table></figure></li>
+<li>打开 vim 输入 :reg 查看 vim 的寄存器，当支持 clipboard
+之后，会多出 "+ 寄存器，表示系统剪切板。在 vim 中进入 visual 视图后，使用
+"Ny
+(N 表示特定寄存器编号)，可以将内容复制到特定的剪切板，那么我们的目的是要复制到系统剪切板则需要选中内容后输入命令：
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+y</span><br></pre></td></tr></tbody></table></figure></li>
+<li>同理，"+p 将系统剪切板的内容拷贝到 vim 中（非编辑模式下）。
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">"+p</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h2 id="多窗口调整窗口大小">多窗口调整窗口大小</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 命令行模式下 </span><br><span class="line">// 纵向调整 []输入可选，可以输入也可以不输入，num 指代一个数字</span><br><span class="line">:res[ize]  num		// 指定当前窗口为num列num行</span><br><span class="line">:res[ize] +num		// 把当前窗口高度增加num行 </span><br><span class="line">:res[ize] -num		// 把当前窗口高度减少num行 </span><br><span class="line">// 横向调整 </span><br><span class="line">:vert[ical] res[ize]  num		// 指定当前窗口为num列 </span><br><span class="line">:vert[ical] res[ize] +num		// 把当前窗口增加num列 </span><br><span class="line">:vert[ical] res[ize] -num		// 把当前窗口减少num列</span><br></pre></td></tr></tbody></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.cxyzjd.com/article/qwaszx523/77750600">参考链接</a></p>
+<h2 id="显示行号"><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40855100/article/details/122943024">显示行号</a></h2>
+<p>命令行模式，输入 “set number” 或者 “set nu”。</p>
+<h2 id="替换文本">替换文本</h2>
+<ul>
+<li>对于替换命令 s 来说，如果要替换掉换行符，需使用
+作为搜索串；如果要替换字符串生成新行，请使用 为目标串。</li>
+</ul>
+<hr>
+<h1 id="references">References</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&amp;mid=2655439918&amp;idx=2&amp;sn=8b7d7fa6c170ae9698af8bbef0aa64e6&amp;chksm=bd7300598a04894fbc11b825485c53fe4a5be1be9707d24ab39e8b21ff88c5be073c16ec9312&amp;mpshare=1&amp;scene=1&amp;srcid=11050XVg00AZfUY8Hw7ww2z9#rd">如何让
+Vim 成为我们的神器</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/l5f1299fxOuMF9ZZ4wA17A?utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=202001">git
+高级用法小抄</a>
+<!--内容包括新手入门，.vimrc的基本配置和插件配置(NerdTree)。--></li>
 </ul>
 
       
