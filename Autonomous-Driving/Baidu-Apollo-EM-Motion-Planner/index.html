@@ -42,9 +42,9 @@
 <meta property="article:published_time" content="2021-02-22T22:46:52.000Z">
 <meta property="article:modified_time" content="2023-05-19T12:12:32.153Z">
 <meta property="article:author" content="Nobody">
-<meta property="article:tag" content="Autonomous Driving">
 <meta property="article:tag" content="Weekly Blogs">
 <meta property="article:tag" content="Robotics">
+<meta property="article:tag" content="Autonomous Driving">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg">
 
@@ -155,7 +155,13 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">ABSTRACT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Multilane-Strategy"><span class="nav-number">2.1.</span> <span class="nav-text">Multilane Strategy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Path-Speed Iterative Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Path-speed-decoupled-framework"><span class="nav-number">3.1.</span> <span class="nav-text">Path-speed decoupled framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decisions-and-Traffic-Regulations"><span class="nav-number">3.2.</span> <span class="nav-text">Decisions and Traffic Regulations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">EM PLANNER FRAMEWORK WITH MULTILANE STRATEGY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">EM PLANNER AT LANE LEVEL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%8A%8A%E9%9D%9E%E5%87%B8%E9%97%AE%E9%A2%98%E8%BD%AC%E5%8F%98%E4%B8%BA%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="nav-number">5.0.1.</span> <span class="nav-text">如何把非凸问题转变为凸优化问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SL-and-ST-Mapping-E-step"><span class="nav-number">5.0.2.</span> <span class="nav-text">SL and ST Mapping (E-step)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-Step-DP-Path"><span class="nav-number">5.0.3.</span> <span class="nav-text">M-Step DP Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#M-Step-Spline-QP-Path"><span class="nav-number">5.0.4.</span> <span class="nav-text">M-Step Spline QP Path</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E7%BB%84%E6%88%90"><span class="nav-number">5.0.4.1.</span> <span class="nav-text">目标函数组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%E7%BB%84%E6%88%90"><span class="nav-number">5.0.4.2.</span> <span class="nav-text">约束组成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#M-Step-DP-Speed-Optimizer"><span class="nav-number">5.1.</span> <span class="nav-text">M-Step DP Speed Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#DP-speed-%E6%A1%86%E6%9E%B6"><span class="nav-number">5.1.1.</span> <span class="nav-text">DP speed 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#M-Step-QP-Speed-Optimizer"><span class="nav-number">5.2.</span> <span class="nav-text">M-Step QP Speed Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Spline-QP-Speed-%E6%A1%86%E6%9E%B6"><span class="nav-number">5.2.1.</span> <span class="nav-text">Spline QP Speed 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Notes-on-Solving-Quadratic-Programming-Problems"><span class="nav-number">5.3.</span> <span class="nav-text">Notes on Solving Quadratic Programming Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E4%BB%BB%E5%8A%A1%E9%87%8F"><span class="nav-number">5.3.1.</span> <span class="nav-text">优化任务量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Notes-on-Non-convex-Optimization-With-DP-and-QP"><span class="nav-number">5.4.</span> <span class="nav-text">Notes on Non-convex Optimization With DP and QP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">CASE STUDY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">COMPUTATIONAL PERFORMANCE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">CONCLUSION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">References</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">表达学习</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#abstract"><span class="nav-number">1.</span> <span class="nav-text">ABSTRACT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">INTRODUCTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#multilane-strategy"><span class="nav-number">2.1.</span> <span class="nav-text">Multilane Strategy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#path-speed-iterative-algorithm"><span class="nav-number">3.</span> <span class="nav-text">Path-Speed Iterative
+Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#path-speed-decoupled-framework"><span class="nav-number">3.1.</span> <span class="nav-text">Path-speed decoupled
+framework</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#decisions-and-traffic-regulations"><span class="nav-number">3.2.</span> <span class="nav-text">Decisions and Traffic
+Regulations</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#em-planner-framework-with-multilane-strategy"><span class="nav-number">4.</span> <span class="nav-text">EM PLANNER
+FRAMEWORK WITH MULTILANE STRATEGY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#em-planner-at-lane-level"><span class="nav-number">5.</span> <span class="nav-text">EM PLANNER AT LANE LEVEL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%8A%8A%E9%9D%9E%E5%87%B8%E9%97%AE%E9%A2%98%E8%BD%AC%E5%8F%98%E4%B8%BA%E5%87%B8%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98"><span class="nav-number">5.0.1.</span> <span class="nav-text">如何把非凸问题转变为凸优化问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sl-and-st-mapping-e-step"><span class="nav-number">5.0.2.</span> <span class="nav-text">SL and ST Mapping (E-step)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#m-step-dp-path"><span class="nav-number">5.0.3.</span> <span class="nav-text">M-Step DP Path</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#m-step-spline-qp-path"><span class="nav-number">5.0.4.</span> <span class="nav-text">M-Step Spline QP Path</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%87%BD%E6%95%B0%E7%BB%84%E6%88%90"><span class="nav-number">5.0.4.1.</span> <span class="nav-text">目标函数组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%A6%E6%9D%9F%E7%BB%84%E6%88%90"><span class="nav-number">5.0.4.2.</span> <span class="nav-text">约束组成</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#m-step-dp-speed-optimizer"><span class="nav-number">5.1.</span> <span class="nav-text">M-Step DP Speed Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dp-speed-%E6%A1%86%E6%9E%B6"><span class="nav-number">5.1.1.</span> <span class="nav-text">DP speed 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#m-step-qp-speed-optimizer"><span class="nav-number">5.2.</span> <span class="nav-text">M-Step QP Speed Optimizer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#spline-qp-speed-%E6%A1%86%E6%9E%B6"><span class="nav-number">5.2.1.</span> <span class="nav-text">Spline QP Speed 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notes-on-solving-quadratic-programming-problems"><span class="nav-number">5.3.</span> <span class="nav-text">Notes on
+Solving Quadratic Programming Problems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E4%BB%BB%E5%8A%A1%E9%87%8F"><span class="nav-number">5.3.1.</span> <span class="nav-text">优化任务量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#notes-on-non-convex-optimization-with-dp-and-qp"><span class="nav-number">5.4.</span> <span class="nav-text">Notes on
+Non-convex Optimization With DP and QP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#case-study"><span class="nav-number">6.</span> <span class="nav-text">CASE STUDY</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#computational-performance"><span class="nav-number">7.</span> <span class="nav-text">COMPUTATIONAL PERFORMANCE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusion"><span class="nav-number">8.</span> <span class="nav-text">CONCLUSION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">9.</span> <span class="nav-text">References</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%AD%A6%E4%B9%A0"><span class="nav-number">10.</span> <span class="nav-text">表达学习</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -317,41 +323,57 @@
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p><strong>解读 Baidu Apollo EM Motion Planner</strong></p>
 <p>论文由百度 Apollo 的 PNC 工程师撰写，于 2018 年发布在 arxiv 上 <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1807.08048">文章链接</a>。</p>
-<p>现在看来 (2021 年)，这篇论文属于 Apollo 系统<strong>规划与决策模块</strong>的白皮书，文章介绍的方法和思想，在现阶段 L4 级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。</p>
-<p>我目前就职于某国内某自动驾驶创业公司，主要研究规划与决策领域的行为决策 (behavior/maneuver decision)，以下 ABC 代指目前所在公司的化名。</p>
+<p>现在看来 (2021 年)，这篇论文属于 Apollo
+系统<strong>规划与决策模块</strong>的白皮书，文章介绍的方法和思想，在现阶段
+L4
+级别自动驾驶开发中仍然具有广泛的适用性，对自动驾驶技术的普及和应用起到了积极推进作用。</p>
+<p>我目前就职于某国内某自动驾驶创业公司，主要研究规划与决策领域的行为决策
+(behavior/maneuver decision)，以下 ABC 代指目前所在公司的化名。</p>
 <p>我在研读论文多次的基础上，基于目前的工作经验和设计实践，对文章的设计做一些个人的粗浅解读和评价，行家轻拍。欢迎大家在文章下留言赐教。</p>
-<p>对于新手，建议在读论文前，先阅读 Case Study 这一章，了解文章在解决什么问题，以及大概是如何解决这个问题，这对文章的整体理解有帮助。</p>
+<p>对于新手，建议在读论文前，先阅读 Case Study
+这一章，了解文章在解决什么问题，以及大概是如何解决这个问题，这对文章的整体理解有帮助。</p>
 <hr>
-<h1>ABSTRACT</h1>
-<p>Apollo 系统目标：工业级的 L4 自动驾驶系统，注重安全性、舒适度和可扩展性。</p>
+<h1 id="abstract">ABSTRACT</h1>
+<p>Apollo 系统目标：工业级的 L4
+自动驾驶系统，注重安全性、舒适度和可扩展性。</p>
 <blockquote>
-<p>The developed system aims to address the industrial level-4 motion planning problem while considering safety, comfort and scalability.</p>
+<p>The developed system aims to address the industrial level-4 motion
+planning problem while considering safety, comfort and scalability.</p>
 </blockquote>
-<p>Apollo 开源代码地址：<a target="_blank" rel="noopener" href="https://github.com/ApolloAuto/apollo">Apollo open source autonomous driving platform</a>。</p>
-<p>注意：Apollo 是一个 “伪开源”，公布出来的代码逻辑简单，更像是一个自动驾驶系统的空架子，和官方实际路测的代码是不一样的。</p>
-<h1>INTRODUCTION</h1>
-<p>The system covers multilane and single-lane autonomous driving in a hierarchical manner:</p>
-<ul>
-<li>第一级：变道选择。The <strong>top layer</strong> of the system is a <strong>multilane strategy</strong> that handles lane-change scenarios by <strong>comparing lane-level trajectories</strong> computed in parallel.</li>
-</ul>
+<p>Apollo 开源代码地址：<a target="_blank" rel="noopener" href="https://github.com/ApolloAuto/apollo">Apollo open source
+autonomous driving platform</a>。</p>
+<p>注意：Apollo
+是一个 “伪开源”，公布出来的代码逻辑简单，更像是一个自动驾驶系统的空架子，和官方实际路测的代码是不一样的。</p>
+<h1 id="introduction">INTRODUCTION</h1>
+<p>The system covers multilane and single-lane autonomous driving in a
+hierarchical manner: - 第一级：变道选择。The <strong>top layer</strong>
+of the system is a <strong>multilane strategy</strong> that handles
+lane-change scenarios by <strong>comparing lane-level
+trajectories</strong> computed in parallel.</p>
 <!--
   * 类比于 ABC公司的 maneuver select/arbitrator 
 -->
 <ul>
-<li> 第二级：车道内的轨迹优化和速度优化。Inside the lane-level trajectory generator, it iteratively solves path and speed optimization based on a Frenet frame.
+<li>第二级：车道内的轨迹优化和速度优化。Inside the lane-level trajectory
+generator, it iteratively solves path and speed optimization based on a
+Frenet frame.
 <ul>
-<li>For path and speed optimization, a combination of dynamic programming and spline-based quadratic programming is proposed to construct a scalable and easy-to-tune framework to handle traffic rules, obstacle decisions and smoothness simultaneously.</li>
-</ul>
-</li>
+<li>For path and speed optimization, a combination of dynamic
+programming and spline-based quadratic programming is proposed to
+construct a scalable and easy-to-tune framework to handle traffic rules,
+obstacle decisions and smoothness simultaneously.</li>
+</ul></li>
 </ul>
 <hr>
 <p>补充知识点：什么是 Frenet frame？</p>
-<p>Frenet 坐标系通常使用道路的中心线作为参考线，使用参考线的<strong>切线向量</strong>和<strong>法线向量</strong>建立坐标系。</p>
-<p>如下图所示，这个 S-D 坐标系即为 Frenet 坐标系，它以车辆自身为原点，坐标轴相互垂直，分为：<br>
-纵向 S：沿着参考线的方向；<br>
-横向 D：参考线的法向。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg" alt=""></p>
-<p>相比于笛卡尔坐标系，Frenet 坐标系可明显地简化问题。因为车辆在行驶中，自车基于参考线 (道路中心线) 的位置，就可以使用纵向距离和横向距离来描述，同时纵向和横向的速度、加速度、加加速度等信息直接和道路相关；在车道保持和换道过程中都具有很强的实用性。</p>
+<p>Frenet
+坐标系通常使用道路的中心线作为参考线，使用参考线的<strong>切线向量</strong>和<strong>法线向量</strong>建立坐标系。</p>
+<p>如下图所示，这个 S-D 坐标系即为 Frenet
+坐标系，它以车辆自身为原点，坐标轴相互垂直，分为： 纵向
+S：沿着参考线的方向； 横向 D：参考线的法向。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Frenet_coordination.jpg"></p>
+<p>相比于笛卡尔坐标系，Frenet
+坐标系可明显地简化问题。因为车辆在行驶中，自车基于参考线 (道路中心线) 的位置，就可以使用纵向距离和横向距离来描述，同时纵向和横向的速度、加速度、加加速度等信息直接和道路相关；在车道保持和换道过程中都具有很强的实用性。</p>
 <!--
 From http://blog.sina.com.cn/s/blog_86186c970102yhrh.html
 -->
@@ -359,25 +381,40 @@ From http://blog.sina.com.cn/s/blog_86186c970102yhrh.html
 <!--
 ![系统架构设计](WEBRESOURCE53447e28972063eb3a12a0cf9e17d4e1)
 -->
-<p><img data-src="http://www.waylon.one/downloads/images/blog/onboard_module_of_Apollo.JPG" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/onboard_module_of_Apollo.JPG"></p>
 <blockquote>
-<p>In the figure, the HD map module provides a high-definition map that can be accessed by every on-line module. Perception and localization modules provide the necessary dynamic environment information, which can be further used to predict future environment status in the prediction module. The motion planning module considers all information to generate a safe and smooth trajectory to feed into the vehicle control module.</p>
+<p>In the figure, the HD map module provides a high-definition map that
+can be accessed by every on-line module. Perception and localization
+modules provide the necessary dynamic environment information, which can
+be further used to predict future environment status in the prediction
+module. The motion planning module considers all information to generate
+a safe and smooth trajectory to feed into the vehicle control
+module.</p>
 </blockquote>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">A[safety]--&gt;B(traffic regulations)</span><br><span class="line">A--&gt;C(range coverage)</span><br><span class="line">A--&gt;D(cycle time efficiency)</span><br><span class="line">A--&gt;E(emergency safety)</span><br><span class="line">C--&gt;F(we aim to provide a trajectory with at least an eight second or two hundred meter motion planning trajectory)</span><br></pre></td></tr></tbody></table></figure>
-<p><img data-src="" alt=""></p>
-<p>在运动规划中，最重要的两个指标是安全 (safety) 和乘坐体验 (ride experience)。</p>
-<p>关于安全性，主要从交通规则 (traffic regulations)，场景覆盖范围 (range coverage)，周期规划效率 (cycle time efficiency) 和紧急安全 (emergency safety) 四个方面考虑。</p>
+<p><img data-src=""></p>
+<p>在运动规划中，最重要的两个指标是安全 (safety) 和乘坐体验 (ride
+experience)。</p>
+<p>关于安全性，主要从交通规则 (traffic regulations)，场景覆盖范围 (range
+coverage)，周期规划效率 (cycle time efficiency) 和紧急安全 (emergency
+safety) 四个方面考虑。</p>
 <blockquote>
-<p>In motion planner, safety is always the top priority. We consider autonomous driving safety in, but not limited to, the following aspects: traffic regulations, range coverage, cycle time efficiency and emergency safety.</p>
+<p>In motion planner, safety is always the top priority. We consider
+autonomous driving safety in, but not limited to, the following aspects:
+traffic regulations, range coverage, cycle time efficiency and emergency
+safety.</p>
 </blockquote>
 <!--
 在紧急模式下，自动驾驶系统可以在 100 ms 内就反应，而正常驾驶员需要至少 300ms 的反应时间。
 
 > In the case of an emergency, the system could react within 100 ms, compared with a 300 ms reaction time for a normal human driver.
 -->
-<p>关于乘坐体验，主要从场景覆盖 (scenario coverage)，交通规则 (traffic regulation) 和舒适度 (comfort，比如自车加速度和 Jerk) 三方面着手。</p>
+<p>关于乘坐体验，主要从场景覆盖 (scenario coverage)，交通规则 (traffic
+regulation) 和舒适度 (comfort，比如自车加速度和 Jerk) 三方面着手。</p>
 <blockquote>
-<p>In addition to safety, passengers’ ride experience is also important. The measurement of ride experience includes, but is not limited to, scenario coverage, traffic regulation and comfort.</p>
+<p>In addition to safety, passengers’ ride experience is also important.
+The measurement of ride experience includes, but is not limited to,
+scenario coverage, traffic regulation and comfort.</p>
 </blockquote>
 <!--
 
@@ -387,198 +424,260 @@ First, the search space is expanded across multiple lanes, which causes the algo
 it is not easy to apply traffic regulations under the same frame.
 
 -->
-<h2 id="Multilane-Strategy">Multilane Strategy</h2>
+<h2 id="multilane-strategy">Multilane Strategy</h2>
 <p>运动规划的注意点之一：自车的决策应该尽量稳定，以方便其他交通参与者预测自车的意图。如果自车在正常行驶过程中，和其他车辆交互决策不稳定 (如障碍物误感) 带来的急刹车，容易造成后方车辆制动不及时而发生追尾。</p>
 <!--
 ABC 公司的设计中，曾发生自车急刹，被后方车辆追尾的情况。
 -->
 <blockquote>
-<p>It is important to follow consistent on- road driving behavior to inform other drivers of the intention of the autonomous driving vehicle.</p>
+<p>It is important to follow consistent on- road driving behavior to
+inform other drivers of the intention of the autonomous driving
+vehicle.</p>
 </blockquote>
-<p>变道策略需要能处理主动变道 (routing 规划) 和被动变道 (道路前方被堵塞) 两种情况，通常变道成功率 (success rate) 会作为变道质量的一个重要衡量指标。</p>
+<p>变道策略需要能处理主动变道 ( routing
+规划) 和被动变道 (道路前方被堵塞) 两种情况，通常变道成功率 (success rate)
+会作为变道质量的一个重要衡量指标。</p>
 <blockquote>
-<p>Typically, a multilane strategy should cover both nonpassive and passive lane-change scenarios.</p>
+<p>Typically, a multilane strategy should cover both nonpassive and
+passive lane-change scenarios. * In EM planner, a nonpassive lane-change
+is a request triggered by the routing module for the purpose of reaching
+the final destination. * A passive lane change is defined as an ego car
+maneuver when the default lane is blocked by the dynamic
+environment.</p>
 </blockquote>
-<ul>
-<li>In EM planner, a nonpassive lane-change is a request triggered by the routing module for the purpose of reaching the final destination.</li>
-<li>A passive lane change is defined as an ego car maneuver when the default lane is blocked by the dynamic environment.</li>
-</ul>
-<p>文中提到的做法是对主动变道和被动变道进行并行计算 (parallel framework)。</p>
-<ul>
-<li>对所有的候选车道，以车道级别 (lane-level) 进行交通规则、车道内障碍物的分析，那么每个车道都会生成一个最可行的轨迹 (best-possible trajectory)。最后，一个 cross-lane trajectory decider 会基于安全性和代价函数两方面来选择车道。</li>
-</ul>
+<p>文中提到的做法是对主动变道和被动变道进行并行计算 (parallel
+framework)。 * 对所有的候选车道，以车道级别 (lane-level)
+进行交通规则、车道内障碍物的分析，那么每个车道都会生成一个最可行的轨迹
+(best-possible trajectory)。最后，一个 cross-lane trajectory decider
+会基于安全性和代价函数两方面来选择车道。</p>
 <blockquote>
-<p>We propose a parallel framework to handle both passive and nonpassive lane changes. For candidate lanes, all obstacles and environment information are projected on lane-based Frenet frames. Then, the traffic regulations are bound with the given lane-level strategy. Under this framework, each candidate lane will generate a best-possible trajectory based on the lane-level optimizer. Finally, a cross-lane trajectory decider will determine which lane to choose based on both the cost functional and safety rules.</p>
+<p>We propose a parallel framework to handle both passive and nonpassive
+lane changes. For candidate lanes, all obstacles and environment
+information are projected on lane-based Frenet frames. Then, the traffic
+regulations are bound with the given lane-level strategy. Under this
+framework, each candidate lane will generate a best-possible trajectory
+based on the lane-level optimizer. Finally, a cross-lane trajectory
+decider will determine which lane to choose based on both the cost
+functional and safety rules.</p>
 </blockquote>
 <!--
 类比于 ABC 公司的 lane sequence。
 -->
-<h1>Path-Speed Iterative Algorithm</h1>
-<p>大多数自动驾驶软件运动规划的做法是，沿着车道参考线 (reference line，通常是从高精度地图中得到车道中心线) 把单车道问题转化为 Frenet frames with time (SLT) 问题。其中，S 指 Frenet 坐标系下的纵向，L 指横向，T 指代时间。</p>
+<h1 id="path-speed-iterative-algorithm">Path-Speed Iterative
+Algorithm</h1>
+<p>大多数自动驾驶软件运动规划的做法是，沿着车道参考线 (reference
+line，通常是从高精度地图中得到车道中心线) 把单车道问题转化为 Frenet
+frames with time (SLT) 问题。其中，S 指 Frenet 坐标系下的纵向，L
+指横向，T 指代时间。</p>
 <blockquote>
-<p>Many autonomous driving motion planning algorithms are developed in Frenet frames with time (SLT) to reduce the planning dimension with the help of a reference line.</p>
+<p>Many autonomous driving motion planning algorithms are developed in
+Frenet frames with time (SLT) to reduce the planning dimension with the
+help of a reference line.</p>
 </blockquote>
-<p>如何在 Frenet 中找到最优轨迹是一个 3D (S+L+T) 约束优化问题，文章中提到两种做法的路线之争。在我看来，现在工业界主流前沿的做法是第二种，第一种正在被逐渐淘汰。</p>
+<p>如何在 Frenet 中找到最优轨迹是一个 3D (S+L+T)
+约束优化问题，文章中提到两种做法的路线之争。在我看来，现在工业界主流前沿的做法是第二种，第一种正在被逐渐淘汰。</p>
 <blockquote>
-<p>Finding the optimal trajectory in a Frenet frame is essentially a 3D constrained optimization problem. There are typically two types of approaches: direct 3D optimization methods and the path-speed decoupled method.</p>
+<p>Finding the optimal trajectory in a Frenet frame is essentially a 3D
+constrained optimization problem. There are typically two types of
+approaches: direct 3D optimization methods and the path-speed decoupled
+method. * [方法一：无脑优化采样] Direct methods attempt to find the
+optimal trajectory within SLT using either trajectory sampling or
+lattice search. + These approaches are limited by their search
+complexity, which increases as both the <strong>spatial</strong> and
+<strong>temporal</strong> search resolutions increase. To qualify the
+time consumption requirement, one has to compromise with increasing the
+search grid size or sampling resolution. Thus, the generated trajectory
+is suboptimal.</p>
 </blockquote>
-<ul>
-<li>[方法一：无脑优化采样] Direct methods attempt to find the optimal trajectory within SLT using either trajectory sampling or lattice search.
-<ul>
-<li>These approaches are limited by their search complexity, which increases as both the <strong>spatial</strong> and <strong>temporal</strong> search resolutions increase. To qualify the time consumption requirement, one has to compromise with increasing the search grid size or sampling resolution. Thus, the generated trajectory is suboptimal.</li>
-</ul>
-</li>
-</ul>
- <!--
+<p><!--
     + ABC之前的做法是这样子的，但是后面逐渐被替换掉。
--->
+--></p>
 <ul>
-<li>[方法二：path-speed 解耦，先求 path，再解 speed] The path-speed decoupled approach <strong>optimizes path and speed separately</strong>. Path optimization typically considers static obstacles. Then, the speed profile is created based on the generated path. <strong>It is possible that the path-speed approach is not optimal with the appearance of dynamic obstacles</strong>. However, since the path and speed are decoupled, this approach achieves more flexibility in both path and speed optimization.
+<li>[方法二：path-speed 解耦，先求 path，再解 speed] The path-speed
+decoupled approach <strong>optimizes path and speed separately</strong>.
+Path optimization typically considers static obstacles. Then, the speed
+profile is created based on the generated path. <strong>It is possible
+that the path-speed approach is not optimal with the appearance of
+dynamic obstacles</strong>. However, since the path and speed are
+decoupled, this approach achieves more flexibility in both path and
+speed optimization.
 <ul>
 <li>一个负责问题，如果一旦可以分为几个小问题，或者之前已经解决的问题，那么问题整体难度就会降低下来。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Path-speed-decoupled-framework">Path-speed decoupled framework</h2>
+<h2 id="path-speed-decoupled-framework">Path-speed decoupled
+framework</h2>
 <ul>
-<li>EM planner 分别迭代优化 path 和 speed。在 path 优化中，利用上一帧的速度 (speed profile from the last cycle) 来预估和低速对象障碍物的交互，然后基于生成的 path 来优化速度。
+<li>EM planner 分别迭代优化 path 和 speed。在 path
+优化中，利用上一帧的速度 (speed profile from the last cycle)
+来预估和低速对象障碍物的交互，然后基于生成的 path 来优化速度。
 <ul>
 <li>注意，实践中要减少对上一次规划轨迹的依赖。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
 <blockquote>
-<p>EM planner optimizes path and speed iteratively. The speed profile from the last cycle is used to estimate interactions with <strong>oncoming</strong> and <strong>low-speed dynamic obstacles</strong> in the path optimizer. Then, the generated path is sent to the speed optimizer to evaluate an optimal speed profile.</p>
+<p>EM planner optimizes path and speed iteratively. The speed profile
+from the last cycle is used to estimate interactions with
+<strong>oncoming</strong> and <strong>low-speed dynamic
+obstacles</strong> in the path optimizer. Then, the generated path is
+sent to the speed optimizer to evaluate an optimal speed profile.</p>
 </blockquote>
-<p>这里补充一下，Path-speed decoupled 的方法对高速物体的 nudge 行为处理不友好；这里通过变道代替 nudge 来灵巧地避开这个缺陷问题，但是会引来频繁变道的风险。比如，一辆快速自行车和自车同行，自行车距离自车比较近，自车难道要变道来超过 (overtake) 这个自行车吗？</p>
+<p>这里补充一下，Path-speed decoupled 的方法对高速物体的 nudge
+行为处理不友好；这里通过变道代替 nudge
+来灵巧地避开这个缺陷问题，但是会引来频繁变道的风险。比如，一辆快速自行车和自车同行，自行车距离自车比较近，自车难道要变道来超过
+(overtake) 这个自行车吗？</p>
 <blockquote>
-<p>For high-speed dynamic dynamic obstacles, EM planner prefers a lane-change maneuver rather than nudging for safety reasons.</p>
+<p>For high-speed dynamic dynamic obstacles, EM planner prefers a
+lane-change maneuver rather than nudging for safety reasons.</p>
 </blockquote>
-<h2 id="Decisions-and-Traffic-Regulations">Decisions and Traffic Regulations</h2>
-<p>EM planner 先做出决策 (make decisions)，再规划轨迹。决策可以输出清晰的自车意图，把非凸问题约束为凸问题，不仅减少寻找最优轨迹的搜索空间，而且允许使用凸优化问题的优化方法。</p>
+<h2 id="decisions-and-traffic-regulations">Decisions and Traffic
+Regulations</h2>
+<p>EM planner 先做出决策 (make
+decisions)，再规划轨迹。决策可以输出清晰的自车意图，把非凸问题约束为凸问题，不仅减少寻找最优轨迹的搜索空间，而且允许使用凸优化问题的优化方法。</p>
 <blockquote>
-<p>In Apollo EM planner, we make decisions prior to providing a smooth trajectory. The decision process is designed to make on-road intentions clear and reduce the search space for finding the optimal trajectory.</p>
+<p>In Apollo EM planner, we make decisions prior to providing a smooth
+trajectory. The decision process is designed to make on-road intentions
+clear and reduce the search space for finding the optimal
+trajectory.</p>
 </blockquote>
 <p>决策的路线之争。</p>
 <blockquote>
-<p>Many decision-included planners attempt to generate vehicle states as the ego car decision. These approaches can be further divided into hand-tuning decisions and model-based decisions.</p>
+<p>Many decision-included planners attempt to generate vehicle states as
+the ego car decision. These approaches can be further divided into
+hand-tuning decisions and model-based decisions. *
+[方法一：手写规则，扩展性差] The advantage of hand-tuning decision is
+its tunability. However, scalability is its limitation. In some cases,
+scenarios can go beyond the hand-tuning decision rule’s description. +
+When considering dozens of obstacles, the decision behavior is difficult
+to be accurately described by a finite set of ego car states.</p>
 </blockquote>
-<ul>
-<li>[方法一：手写规则，扩展性差] The advantage of hand-tuning decision is its tunability. However, scalability is its limitation. In some cases, scenarios can go beyond the hand-tuning decision rule’s description.
-<ul>
-<li>When considering dozens of obstacles, the decision behavior is difficult to be accurately described by a finite set of ego car states.</li>
-</ul>
-</li>
-</ul>
 <!--
 这也是值得 reasoner 考虑的问题，如何避免负责的规则呢？比如机器学习反馈 risk 的程度。
 -->
 <ul>
-<li>[方法二：基于模型的决策] The model-based decision approaches generally discretize the ego car <strong>status</strong> into finite driving statuses and use data-driven methods to tune the model.</li>
+<li>[方法二：基于模型的决策] The model-based decision approaches
+generally discretize the ego car <strong>status</strong> into finite
+driving statuses and use data-driven methods to tune the model.</li>
 </ul>
 <!--
 # 多物体交互。按照 GJ 的说法，其他车可以利用自车的模型来预测轨迹。
 The consideration of multi- agent interactions will benefit both prediction and decision-making processes.
 -->
-<p>Targeting level-4 autonomous driving, a decision<br>
-module shall include both <strong>scalability</strong> and <strong>feasibility</strong>.</p>
-<ul>
-<li>Scalability is the scenario expression ability (i.e., the autonomous driving cases that can be explained).
-<ul>
-<li>不要过拟合 (over-fit) 一个 issue，适用性差。</li>
-</ul>
-</li>
-<li>For feasibility, we mean that the generated decision shall include a feasible region in which the ego car can maneuver <strong>within dynamic limitations</strong>.
-<ul>
-<li>Both hand-tuning and model-based decisions do not generate a collision-free trajectory to verify the feasibility.
-<ul>
-<li>同意，decision 层并不会考虑是否能够生成轨迹，所以有些决策是无效的。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p>划重点：EM planner 的做法是先生成初略的轨迹来表示交互意图 (不受限于障碍物数量)；然后，生成一个有约束的凸走廊 (a convex feasible space)，用<strong>凸优化</strong>的方法来求解优化轨迹。</p>
-<ul>
-<li>目前，ABC 是先生成决策，然后决策作为约束，在 ST planner 中搜索粗略的轨迹，和 EM 的做法不一致。</li>
-</ul>
+<p>Targeting level-4 autonomous driving, a decision module shall include
+both <strong>scalability</strong> and
+<strong>feasibility</strong>.<br>
+* Scalability is the scenario expression ability (i.e., the autonomous
+driving cases that can be explained). + 不要过拟合 (over-fit) 一个
+issue，适用性差。 * For feasibility, we mean that the generated decision
+shall include a feasible region in which the ego car can maneuver
+<strong>within dynamic limitations</strong>. + Both hand-tuning and
+model-based decisions do not generate a collision-free trajectory to
+verify the feasibility. * 同意，decision
+层并不会考虑是否能够生成轨迹，所以有些决策是无效的。</p>
+<p>划重点：EM planner
+的做法是先生成初略的轨迹来表示交互意图 (不受限于障碍物数量)；然后，生成一个有约束的凸走廊
+(a convex feasible
+space)，用<strong>凸优化</strong>的方法来求解优化轨迹。 * 目前，ABC
+是先生成决策，然后决策作为约束，在 ST planner 中搜索粗略的轨迹，和 EM
+的做法不一致。</p>
 <blockquote>
-<p>In EM planner’s decision step, we describe the behavior differently.</p>
+<p>In EM planner’s decision step, we describe the behavior differently.
+* First, <strong>the ego car moving intention is described by a rough
+and feasible trajectory</strong>. Then, the interactions between
+obstacles are measured with this trajectory. + This feasible
+trajectory-based decision is scalable even when scenarios become more
+complicated. * Second, the planner will also generate a <strong>convex
+feasible space</strong> for <strong>smoothing spline parameters</strong>
+based on the trajectory. + A quadratic-programming-based smoothing
+spline solver could be used to generate smoother path and speed profiles
+that follow the decision. This guarantees a feasible and smooth
+solution.</p>
 </blockquote>
-<ul>
-<li>First, <strong>the ego car moving intention is described by a rough and feasible trajectory</strong>. Then, the interactions between obstacles are measured with this trajectory.
-<ul>
-<li>This feasible trajectory-based decision is scalable even when scenarios become more complicated.</li>
-</ul>
-</li>
-<li>Second, the planner will also generate a <strong>convex feasible space</strong> for <strong>smoothing spline parameters</strong> based on the trajectory.
-<ul>
-<li>A quadratic-programming-based smoothing spline solver could be used to generate smoother path and speed profiles that follow the decision. This guarantees a feasible and smooth solution.</li>
-</ul>
-</li>
-</ul>
-<h1>EM PLANNER FRAMEWORK WITH MULTILANE STRATEGY</h1>
-<p>除了 lane-level motion planning 的具体实现方法不同，这章节数据流和 ABC 的实现非常类似，设计架构在工业界领先，可以重点参考。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_framework.JPG" alt=""></p>
-<ol>
-<li>在 Data Center 接受并同步数据。</li>
+<h1 id="em-planner-framework-with-multilane-strategy">EM PLANNER
+FRAMEWORK WITH MULTILANE STRATEGY</h1>
+<p>除了 lane-level motion planning 的具体实现方法不同，这章节数据流和
+ABC 的实现非常类似，设计架构在工业界领先，可以重点参考。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_framework.JPG"></p>
+<ol type="1">
+<li><p>在 Data Center 接受并同步数据。 &gt; all sources of information
+are collected and synced at the <strong>data center
+module</strong>.</p></li>
+<li><p> 基于道路中心线，选择几条可行
+lane，然后生成基于其中心线的障碍物投影信息 (SL 坐标描述)。</p></li>
 </ol>
 <blockquote>
-<p>all sources of information are collected and synced at the <strong>data center module</strong>.</p>
+<p>The reference line generator will produce some candidate lane-level
+reference lines along with information about traffic regulations and
+obstacles.</p>
 </blockquote>
-<ol start="2">
-<li>基于道路中心线，选择几条可行 lane，然后生成基于其中心线的障碍物投影信息 (SL 坐标描述)。</li>
-</ol>
-<blockquote>
-<p>The reference line generator will produce some candidate lane-level reference lines along with information about traffic regulations and obstacles.</p>
-</blockquote>
-<ol start="3">
+<ol start="3" type="1">
 <li>lane-level optimizer module</li>
 </ol>
-<h1>EM PLANNER AT LANE LEVEL</h1>
-<p>The iteration includes two E-steps and two M-steps <strong>in one planning cycle</strong>. The trajectory information will iterate between planning cycles.</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_Iteration.JPG" alt=""></p>
-<p>在两个 M-steps 中，通过 DP 和 QP 来生成 path 和 speed profiles。请注意，在一个规划间隔内，planning 规划出一条可行的轨迹，需要迭代多次 EM planner，也就是运行多次 E-steps 和 M-steps.</p>
+<h1 id="em-planner-at-lane-level">EM PLANNER AT LANE LEVEL</h1>
+<p>The iteration includes two E-steps and two M-steps <strong>in one
+planning cycle</strong>. The trajectory information will iterate between
+planning cycles.</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/EM_Iteration.JPG"></p>
+<p>在两个 M-steps 中，通过 DP 和 QP 来生成 path 和 speed
+profiles。请注意，在一个规划间隔内，planning
+规划出一条可行的轨迹，需要迭代多次 EM planner，也就是运行多次 E-steps 和
+M-steps.</p>
 <blockquote>
-<p>In two M-steps, path and speed profiles are generated by a combination of dynamic programming and quadratic programming.</p>
+<p>In two M-steps, path and speed profiles are generated by a
+combination of dynamic programming and quadratic programming.</p>
 </blockquote>
 <hr>
-<p>在第一步 E-step 中，静态和动态障碍物投影到车道的 Frenet frame，准备进行 SL 的 path 规划。</p>
+<p>在第一步 E-step 中，静态和动态障碍物投影到车道的 Frenet
+frame，准备进行 SL 的 path 规划。</p>
 <blockquote>
-<p>In the first E-step, obstacles are projected on <strong>the lane Frenet frame</strong>. This projection includes both static obstacle projection and dynamic obstacle projection.</p>
+<p>In the first E-step, obstacles are projected on <strong>the lane
+Frenet frame</strong>. This projection includes both static obstacle
+projection and dynamic obstacle projection. *
+静态障碍物的投影：<strong>Static obstacles</strong> will be projected
+directly based on a Cartesian-Frenet frame transformation. *
+动态障碍物的投影 (负责)：Considering the previous cycle planning
+trajectory, we can evaluate the estimated dynamic obstacle and ego car
+positions <strong>at each time point</strong>. + The overlap of dynamic
+obstacles and the ego car at each time point will be mapped in the
+Frenet frame.</p>
 </blockquote>
-<ul>
-<li>静态障碍物的投影：<strong>Static obstacles</strong> will be projected directly based on a Cartesian-Frenet frame transformation.</li>
-<li> 动态障碍物的投影 (负责)：Considering the previous cycle planning trajectory, we can evaluate the estimated dynamic obstacle and ego car positions <strong>at each time point</strong>.
-<ul>
-<li>The overlap of dynamic obstacles and the ego car at each time point will be mapped in the Frenet frame.</li>
-</ul>
-</li>
-</ul>
 <!--    
 在下一次规划中，使用了上一次的轨迹；这违背了自己对上次轨迹不能用到当前帧的信仰。下次可以和面试者讨论下。如果这一帧，自车的轨迹突变，怎么解决呢？这种依赖上一次的轨迹，可以解决吗？
 -->
-<p>出于安全考虑 (目前技术处理这类场景的安全性把握不大)，在 SL 投影中，只对低速 (low-speed traffic) 和对向 (oncoming) 动态障碍物使用；高速物体通过变道来解决。</p>
+<p>出于安全考虑 (目前技术处理这类场景的安全性把握不大)，在 SL
+投影中，只对低速 (low-speed traffic) 和对向 (oncoming)
+动态障碍物使用；高速物体通过变道来解决。</p>
 <blockquote>
-<p>For safety considerations, the SL projection of dynamic obstacles will only consider low-speed traffic and oncoming obstacles. For high-speed traffic, EM planner’s parallel lane-change strategy will cover the scenario.</p>
+<p>For safety considerations, the SL projection of dynamic obstacles
+will only consider low-speed traffic and oncoming obstacles. For
+high-speed traffic, EM planner’s parallel lane-change strategy will
+cover the scenario.</p>
 </blockquote>
-<h3 id="如何把非凸问题转变为凸优化问题？">如何把非凸问题转变为凸优化问题？</h3>
-<ol>
-<li>DP 可以在障碍物投影后的非凸空间 (SL) 中找到一个初略 path 解，然后从这个初略解中得到针对障碍物的决策，比如 nudge，yield 还是 overtake。</li>
+<h3 id="如何把非凸问题转变为凸优化问题">如何把非凸问题转变为凸优化问题？</h3>
+<ol type="1">
+<li>DP 可以在障碍物投影后的非凸空间 (SL) 中找到一个初略 path
+解，然后从这个初略解中得到针对障碍物的决策，比如 nudge，yield 还是
+overtake。</li>
 </ol>
 <blockquote>
-<p>Although we projected obstacles on SL and ST frames, the optimal path and speed solution still lies in a non-convex space. Thus, we use dynamic programming to first obtain a rough solution; meanwhile, <strong>this solution can provide obstacle decisions such as nudge, yield and overtake</strong>.</p>
+<p>Although we projected obstacles on SL and ST frames, the optimal path
+and speed solution still lies in a non-convex space. Thus, we use
+dynamic programming to first obtain a rough solution; meanwhile,
+<strong>this solution can provide obstacle decisions such as nudge,
+yield and overtake</strong>.</p>
 </blockquote>
 <!--
 决策是在 path 的 DP 中决策的吗？
 -->
-<ol start="2">
-<li>基于针对障碍物的决策，生成一个凸区域 (convex hull，凸包)，可供 QP 算法求解。</li>
+<ol start="2" type="1">
+<li>基于针对障碍物的决策，生成一个凸区域 (convex hull，凸包)，可供 QP
+算法求解。</li>
 </ol>
 <blockquote>
-<p>We use the rough decision to determine a convex hull for the quadratic-programming-based spline optimizer.</p>
+<p>We use the rough decision to determine a convex hull for the
+quadratic-programming-based spline optimizer.</p>
 </blockquote>
-<ol start="3">
+<ol start="3" type="1">
 <li>通过优化器在凸空间内求解。</li>
 </ol>
 <blockquote>
@@ -586,285 +685,415 @@ module shall include both <strong>scalability</strong> and <strong>feasibility</
 </blockquote>
 <hr>
 <p>待补充知识点：什么是非凸优化问题呢？</p>
-<p>如何把一个非凸问题转变为可解问题呢？此处引用 Pony 的一篇技术分析文章 – <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a> 。</p>
+<p>如何把一个非凸问题转变为可解问题呢？此处引用 Pony 的一篇技术分析文章
+-- <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a>
+。</p>
 <hr>
-<h3 id="SL-and-ST-Mapping-E-step">SL and ST Mapping (E-step)</h3>
+<h3 id="sl-and-st-mapping-e-step">SL and ST Mapping (E-step)</h3>
 <!--
 待补充知识点：ST 和 SL 投影是什么呢？
 -->
-<p>对于单车道而言，SL 投影是基于车道中心线；对于变道而言，中间涉及到至少两条单车道，两条车道的连接使用的是 G2 算法。</p>
-<p>The SL projection is based on a G2 (continuous curvature derivative) smooth reference line.</p>
+<p>对于单车道而言，SL
+投影是基于车道中心线；对于变道而言，中间涉及到至少两条单车道，两条车道的连接使用的是
+G2 算法。</p>
+<p>The SL projection is based on a G2 (continuous curvature derivative)
+smooth reference line.</p>
 <p>如何把动态障碍物转化到 SL 中？</p>
-<p>参考上一次的自车规划轨迹 (last cycle trajectory)，可以得到自车在指定时间上位于 S 方向上的位置，来预估和障碍物预测轨迹的相交处 (interactions)。</p>
+<p>参考上一次的自车规划轨迹 (last cycle
+trajectory)，可以得到自车在指定时间上位于 S
+方向上的位置，来预估和障碍物预测轨迹的相交处 (interactions)。 &gt; For
+dynamic obstacles, we mapped the obstacles with the help of the last
+cycle trajectory of the ego car. The last cycle’s moving trajectory is
+projected on the Frenet frame to extract the station direction speed
+profile. This will provide an estimate of the ego car’s station
+coordinates <strong>given a specific time</strong>. The estimated ego
+car station coordinates will help to evaluate the dynamic obstacle
+interactions. + Once an ego car’s station coordinates have interacted
+with an obstacle trajectory point with the same time, a shaded area on
+the SL map will be marked as the estimated interaction with the dynamic
+obstacle.</p>
+<p>ST 投影帮助我们评估自车的速度轮廓 (speed profile)。因为在 ST
+图中抠除障碍物占据的空间 (shaded
+area)，剩余的空间其实是速度可行区间。</p>
 <blockquote>
-<p>For dynamic obstacles, we mapped the obstacles with the help of the last cycle trajectory of the ego car. The last cycle’s moving trajectory is projected on the Frenet frame to extract the station direction speed profile. This will provide an estimate of the ego car’s station coordinates <strong>given a specific time</strong>. The estimated ego car station coordinates will help to evaluate the dynamic obstacle interactions.<br>
-+ Once an ego car’s station coordinates have interacted with an obstacle trajectory point with the same time, a shaded area on the SL map will be marked as the estimated interaction with the dynamic obstacle.</p>
+<p>ST projection helps us evaluate the ego car’s speed profile. The
+remaining region is the speed profile feasible region.</p>
 </blockquote>
-<p>ST 投影帮助我们评估自车的速度轮廓 (speed profile)。因为在 ST 图中抠除障碍物占据的空间 (shaded area)，剩余的空间其实是速度可行区间。</p>
+<h3 id="m-step-dp-path">M-Step DP Path</h3>
+<p>M-step path 的目标是找到优化的 path 轮廓，分为基于 DP 的决策和 QP
+的路线规划，i.e. DP 得到决策，QP 进行轨迹规划。</p>
 <blockquote>
-<p>ST projection helps us evaluate the ego car’s speed profile. The remaining region is the speed profile feasible region.</p>
+<p>The M-step path optimizer optimizes the path profile in the Frenet
+frame. * This is represented as finding an optimal function of lateral
+coordinate w.r.t. station coordinate in nonconvex SL space (e.g.,
+nudging from left and right might be two local optima). * The path
+optimizer includes two steps: <strong>dynamic-programming-based path
+decision</strong> and <strong>spline-based path planning</strong>.</p>
 </blockquote>
-<h3 id="M-Step-DP-Path">M-Step DP Path</h3>
-<p>M-step path 的目标是找到优化的 path 轮廓，分为基于 DP 的决策和 QP 的路线规划，i.e. DP 得到决策，QP 进行轨迹规划。</p>
-<blockquote>
-<p>The M-step path optimizer optimizes the path profile in the Frenet frame.</p>
-</blockquote>
-<ul>
-<li>This is represented as finding an optimal function of lateral coordinate w.r.t. station coordinate in nonconvex SL space (e.g., nudging from left and right might be two local optima).</li>
-<li>The path optimizer includes two steps: <strong>dynamic-programming-based path decision</strong> and <strong>spline-based path planning</strong>.</li>
-</ul>
-<p>Path 动态规划提供了一个粗糙的 path 轮廓，包括可行的通道和障碍物的 nudge 决策。注意，生成的 path 轮廓是采样点连接起来的，不够精细。</p>
+<p>Path 动态规划提供了一个粗糙的 path 轮廓，包括可行的通道和障碍物的
+nudge 决策。注意，生成的 path 轮廓是采样点连接起来的，不够精细。</p>
 <!--
 在path生成中决定是否 nudge
 -->
 <blockquote>
-<p>The dynamic programming path step provides a rough path profile with <strong>feasible tunnels</strong> and <strong>obstacle nudge decisions</strong>.</p>
+<p>The dynamic programming path step provides a rough path profile with
+<strong>feasible tunnels</strong> and <strong>obstacle nudge
+decisions</strong>.</p>
 </blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_structure_Fig_6.JPG" alt=""></p>
-<p>The step includes a lattice sampler, cost function and dynamic programming search.</p>
-<ul>
-<li>Lattice Sampler: The <strong>lattice sampler</strong> is based on a Frenet frame. Multiple rows of points are first sampled ahead of the ego vehicle. Points between different rows are smoothly connected by quintic polynomial edges.
-<ul>
-<li>撒点的做法来搜索粗略路线，使用五次多项式来拟合平滑路线。</li>
-</ul>
-</li>
-<li>Cost Function: <strong>Each graph edge</strong> is evaluated by the summation of cost functionals. We use information from the SL projection, traffic regulations and vehicle dynamics to construct the functional.
-<ul>
-<li>从障碍物，交通规则和车辆动力学三方面来计算每个连接边 (两个 lattice point 的连接线) 的代价。此处略过 cost 函数的设计。</li>
-</ul>
-</li>
-<li>Dynamic Programming Search: Edge costs are used to select a candidate path with the <strong>lowest cost</strong> through a dynamic programming search. The candidate path will also <strong>determine the obstacle decisions</strong>.</li>
-</ul>
-<h3 id="M-Step-Spline-QP-Path">M-Step Spline QP Path</h3>
-<p>Spline QP path 是上面 dynamic programming path 的进一步优化 (refinement)。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Path.JPG" alt=""></p>
-<p>在 dynamic programming path 中，基于选择路线的可行通道 (feasible tunnel) 被确定下来就是一个凸优化问题，spline QP path 是在可行通道中产生一条平滑的路线。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_structure_Fig_6.JPG"></p>
+<p>The step includes a lattice sampler, cost function and dynamic
+programming search. + Lattice Sampler: The <strong>lattice
+sampler</strong> is based on a Frenet frame. Multiple rows of points are
+first sampled ahead of the ego vehicle. Points between different rows
+are smoothly connected by quintic polynomial edges. +
+撒点的做法来搜索粗略路线，使用五次多项式来拟合平滑路线。 + Cost
+Function: <strong>Each graph edge</strong> is evaluated by the summation
+of cost functionals. We use information from the SL projection, traffic
+regulations and vehicle dynamics to construct the functional. +
+从障碍物，交通规则和车辆动力学三方面来计算每个连接边 (两个 lattice point
+的连接线) 的代价。此处略过 cost 函数的设计。 + Dynamic Programming
+Search: Edge costs are used to select a candidate path with the
+<strong>lowest cost</strong> through a dynamic programming search. The
+candidate path will also <strong>determine the obstacle
+decisions</strong>.</p>
+<h3 id="m-step-spline-qp-path">M-Step Spline QP Path</h3>
+<p>Spline QP path 是上面 dynamic programming path 的进一步优化
+(refinement)。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Path.JPG"></p>
+<p>在 dynamic programming path 中，基于选择路线的可行通道 (feasible
+tunnel) 被确定下来就是一个凸优化问题，spline QP path
+是在可行通道中产生一条平滑的路线。</p>
 <blockquote>
-<p>The spline QP path step is a refinement of the dynamic programming path step. In a dynamic programming path, a feasible tunnel is generated based on the selected path. Then, the spline-based QP step will generate a smooth path within this feasible tunnel.</p>
+<p>The spline QP path step is a refinement of the dynamic programming
+path step. In a dynamic programming path, a feasible tunnel is generated
+based on the selected path. Then, the spline-based QP step will generate
+a smooth path within this feasible tunnel.</p>
 </blockquote>
-<p>在线性化的约束 (linearized constraint) 中，利用 QP spline solver 来求解优化目标函数 (objective function)，从而生成生成 spline QP path。</p>
+<p>在线性化的约束 (linearized constraint) 中，利用 QP spline solver
+来求解优化目标函数 (objective function)，从而生成生成 spline QP
+path。</p>
 <blockquote>
-<p>The spline QP path is generated by optimizing<br>
-an objective function with a linearized constraint through the QP spline solver.</p>
+<p>The spline QP path is generated by optimizing an objective function
+with a linearized constraint through the QP spline solver.</p>
 </blockquote>
 <h4 id="目标函数组成">目标函数组成</h4>
-<p>目标函数由平滑代价和引导线代价组成，其中引导线是上一步的 DP path。</p>
+<p>目标函数由平滑代价和引导线代价组成，其中引导线是上一步的 DP
+path。</p>
 <blockquote>
-<p>The objective function of the QP path is a <strong>linear combination</strong> of smoothness costs and guidance line cost.</p>
+<p>The objective function of the QP path is a <strong>linear
+combination</strong> of smoothness costs and guidance line cost. * The
+guidance line in this step is the DP path. <strong>The guidance line
+provides an estimate of the obstacle nudging distance</strong>.</p>
 </blockquote>
-<ul>
-<li>The guidance line in this step is the DP path. <strong>The guidance line provides an estimate of the obstacle nudging distance</strong>.</li>
-</ul>
 <!--
 ![QP_path_objective_function](E3D91C46ED8648009D9B758630BC1510)
 -->
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Path_QP_cost_function.JPG" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Path_QP_cost_function.JPG"></p>
 <p>上述目标函数在 nudge 障碍物的距离和平滑性中做了平衡和取舍。</p>
 <blockquote>
-<p>The objective function describes the balance between nudging obstacles and smoothness.</p>
+<p>The objective function describes the balance between nudging
+obstacles and smoothness.</p>
 </blockquote>
 <h4 id="约束组成">约束组成</h4>
-<p>约束由可行边界约束 (boundary constraints) 和自车动态性能约束 (dynamic feasibility) 组成。</p>
+<p>约束由可行边界约束 (boundary constraints) 和自车动态性能约束 (dynamic
+feasibility) 组成。</p>
 <blockquote>
-<p>The constraints in the QP path include boundary constraints and dynamic feasibility. These constraints are applied on f(s), f’(s) and f’’(s) at <strong>a sequence of station coordinates</strong> s0, s1, …, sn.</p>
+<p>The constraints in the QP path include boundary constraints and
+dynamic feasibility. These constraints are applied on f(s), f’(s) and
+f’’(s) at <strong>a sequence of station coordinates</strong> s0, s1,
+..., sn.</p>
 </blockquote>
-<p>在 EM planner 中，使用自行车模型 (bicycle model) 来考虑自车的动力学特性；在规划阶段，把车辆模型简化为自行车模型，是一种比较通用的做法。</p>
+<p>在 EM planner 中，使用自行车模型 (bicycle model)
+来考虑自车的动力学特性；在规划阶段，把车辆模型简化为自行车模型，是一种比较通用的做法。</p>
 <blockquote>
-<p>In EM planner, the ego vehicle is considered under the bicycle model.</p>
+<p>In EM planner, the ego vehicle is considered under the bicycle
+model.</p>
 </blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/left_corner.jpg" alt="左上角约束推导图"></p>
-<p>上面的操作和近似转换是做什么呢？在横向 (lateral direction) 约束求解中，l = f (s)，因为 sin 不是线性的函数，所以使用 f (s) 的导数来替代 sin 函数。在允许一定误差的情况下，把一个非线性函数，转化为线性约束 (linear constraints) 问题。</p>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/left_corner.jpg" alt="左上角约束推导图">
+<figcaption aria-hidden="true">左上角约束推导图</figcaption>
+</figure>
+<p>上面的操作和近似转换是做什么呢？在横向 (lateral direction)
+约束求解中，l = f (s)，因为 sin 不是线性的函数，所以使用 f (s)
+的导数来替代 sin
+函数。在允许一定误差的情况下，把一个非线性函数，转化为线性约束 (linear
+constraints) 问题。</p>
 <blockquote>
-<p>To keep the boundary constraint convex and linear, we add two half circles on the front and rear ends of the ego car.</p>
+<p>To keep the boundary constraint convex and linear, we add two half
+circles on the front and rear ends of the ego car.</p>
 </blockquote>
-<p>那么，现在已经把所有的约束化简为线性约束，问题就可以使用 quadratic programming solver 来快速求解这个问题，效率更高。这就是<strong>数学的魅力啊</strong>！</p>
+<p>那么，现在已经把所有的约束化简为线性约束，问题就可以使用 quadratic
+programming solver
+来快速求解这个问题，效率更高。这就是<strong>数学的魅力啊</strong>！</p>
 <blockquote>
-<p>Since all constraints are linear with respect to spline parameters, a quadratic programming solver can be used to solve the problem very fast.</p>
+<p>Since all constraints are linear with respect to spline parameters, a
+quadratic programming solver can be used to solve the problem very fast.
+* In addition to the boundary constraint, the generated path shall match
+the ego car’s initial lateral position and derivatives. +
+实现细节注意点：考虑车辆的初始状态。</p>
 </blockquote>
-<ul>
-<li>In addition to the boundary constraint, the generated path shall match the ego car’s initial lateral position and derivatives.
-<ul>
-<li>实现细节注意点：考虑车辆的初始状态。</li>
-</ul>
-</li>
-</ul>
-<h2 id="M-Step-DP-Speed-Optimizer">M-Step DP Speed Optimizer</h2>
+<h2 id="m-step-dp-speed-optimizer">M-Step DP Speed Optimizer</h2>
 <!--
 (和 ABC 的 ST planner 比较通用)
 -->
-<p>在 ST 图中，使用 DP 算法生成一个速度轮廓 (speed profile)，即 v = S (t)。</p>
+<p>在 ST 图中，使用 DP 算法生成一个速度轮廓 (speed profile)，即 v =
+S (t)。</p>
 <blockquote>
-<p>The speed optimizer generates a speed profile in the ST graph, which is represented as a station function with respect to time S(t).</p>
+<p>The speed optimizer generates a speed profile in the ST graph, which
+is represented as a station function with respect to time S(t).</p>
 </blockquote>
-<p>在 ST graph 中找最优 speed profile 是一个复杂的非凸问题。我们使用 dynamic programming 和 spline quadratic programming 在 ST 图中寻找一个平滑的速度轮廓 (非最优)。</p>
-<p>同 Path planner，我们先利用 DP 算法搜索一个粗略的 speed profile，把问题从非凸问题化简为凸问题；然后在有约束的情况下，沿着 speed profile (guidance line)，使用 QP 算法来求解最优的速度解。</p>
+<p>在 ST graph 中找最优 speed profile 是一个复杂的非凸问题。我们使用
+dynamic programming 和 spline quadratic programming 在 ST
+图中寻找一个平滑的速度轮廓 (非最优)。</p>
+<p>同 Path planner，我们先利用 DP 算法搜索一个粗略的 speed
+profile，把问题从非凸问题化简为凸问题；然后在有约束的情况下，沿着 speed
+profile (guidance line)，使用 QP 算法来求解最优的速度解。</p>
 <blockquote>
-<p>We use dynamic programming combined with spline quadratic programming to find a smooth speed profile on the ST graph.</p>
+<p>We use dynamic programming combined with spline quadratic programming
+to find a smooth speed profile on the ST graph.</p>
 </blockquote>
-<h3 id="DP-speed-框架">DP speed 框架</h3>
-<p>The DP speed step includes a cost functional, ST graph grids and dynamic programming search. The generated result includes a <strong>piecewise</strong> linear speed profile, a feasible tunnel and <strong>obstacle speed decisions</strong>.</p>
+<h3 id="dp-speed-框架">DP speed 框架</h3>
+<p>The DP speed step includes a cost functional, ST graph grids and
+dynamic programming search. The generated result includes a
+<strong>piecewise</strong> linear speed profile, a feasible tunnel and
+<strong>obstacle speed decisions</strong>.</p>
 <p>待补充，obstacle speed decisions 是什么形式的决策呢？</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_Speed_Optimizer.JPG" alt=""></p>
-<p>首先，对整个 ST 图进行网格化处理，包括对障碍物进行网格化分割。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/DP_Speed_Optimizer.JPG"></p>
+<p>首先，对整个 ST 图进行网格化处理，包括对障碍物进行网格化分割。 &gt;
+obstacle information is first discretized into grids on the ST
+graph.</p>
+<p>类似于从网格中按时间递增顺序，搜索带约束的可行解，速度可以在网格上表示为
+(s0, s1, ..., sn)，形状是锯齿形的。</p>
 <blockquote>
-<p>obstacle information is first discretized into grids on the ST graph.</p>
+<p>A piecewise linear speed profile function is represented as S = (s0,
+s1, ..., sn) on the grids.</p>
 </blockquote>
-<p>类似于从网格中按时间递增顺序，搜索带约束的可行解，速度可以在网格上表示为 (s0, s1, …, sn)，形状是锯齿形的。</p>
+<p>Cost function 由三部分组成： - Velocity keeping cost: * This term
+indicates that the vehicle shall follow the designated speed when there
+are no obstacles or traffic light restrictions present. V^ref describes
+the reference speed, which is determined by the road speed limits,
+curvature and other traffic regulations. - Smoothness cost: * The
+acceleration and jerk square integral describes the smoothness of the
+speed profile. - Total obstacle cost: * The <strong>distances</strong>
+of the ego car to all obstacles are evaluated to determine the total
+obstacle costs.</p>
+<p>DP 搜索时要注意车辆动力学限制；同时，可以根据运动学约束做剪枝
+(pruning) 操作。</p>
 <blockquote>
-<p>A piecewise linear speed profile function is represented as S = (s0, s1, …, sn) on the grids.</p>
+<p>The dynamic constraints include <strong>acceleration, jerk limits and
+a monotonicity constraint</strong> since we require that the generated
+trajectories do not perform backing maneuvers when driving on the road.
+* Some necessary pruning based on vehicle dynamic constraints is also
+applied to accelerate the process.</p>
 </blockquote>
-<p>Cost function 由三部分组成：</p>
-<ul>
-<li>Velocity keeping cost:
-<ul>
-<li>This term indicates that the vehicle shall follow the designated speed when there are no obstacles or traffic light restrictions present. V^ref describes the reference speed, which is determined by the road speed limits, curvature and other traffic regulations.</li>
-</ul>
-</li>
-<li>Smoothness cost:
-<ul>
-<li>The acceleration and jerk square integral describes the smoothness of the speed profile.</li>
-</ul>
-</li>
-<li>Total obstacle cost:
-<ul>
-<li>The <strong>distances</strong> of the ego car to all obstacles are evaluated to determine the total obstacle costs.</li>
-</ul>
-</li>
-</ul>
-<p>DP 搜索时要注意车辆动力学限制；同时，可以根据运动学约束做剪枝 (pruning) 操作。</p>
-<blockquote>
-<p>The dynamic constraints include <strong>acceleration, jerk limits and a monotonicity constraint</strong> since we require that the generated trajectories do not perform backing maneuvers when driving on the road.</p>
-</blockquote>
-<ul>
-<li>Some necessary pruning based on vehicle dynamic constraints is also applied to accelerate the process.</li>
-</ul>
 <hr>
 <p>知识点，如何把导数问题简化为有限差分问题。</p>
 <p>ai = ((si-si-1)/dt - (si-1 - si-2)/dt)/dt。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/finite_difference_method.JPG" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/finite_difference_method.JPG"></p>
 <hr>
-<h2 id="M-Step-QP-Speed-Optimizer">M-Step QP Speed Optimizer</h2>
-<p>因为锯齿形的线性速度轮廓不能满足运动学特性，所以使用 spline QP step 去填补这个空缺 (fill this gap)。</p>
+<h2 id="m-step-qp-speed-optimizer">M-Step QP Speed Optimizer</h2>
+<p>因为锯齿形的线性速度轮廓不能满足运动学特性，所以使用 spline QP step
+去填补这个空缺 (fill this gap)。</p>
 <blockquote>
-<p>Since the piecewise linear speed profile cannot satisfy dynamic requirements, the spline QP step is needed to fill this gap.</p>
+<p>Since the piecewise linear speed profile cannot satisfy dynamic
+requirements, the spline QP step is needed to fill this gap.</p>
 </blockquote>
-<h3 id="Spline-QP-Speed-框架">Spline QP Speed 框架</h3>
-<p>如下图所示，spline QP speed 是在满足路径单调性 (monotonicity evaluated at designated points，不倒车), 交通规则 (traffic regulations, 可行通道) 和车辆运动学约束 (vehicle dynamic constraints) 的线性约束情况下，通过 cost 的方式获取最优的速度，同时考虑了速度平滑性和参考速度。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Speed_Optimizer.JPG" alt="Fig. 13"></p>
-<p>The spline QP speed step includes three parts: cost functional, linearized constraint and spline QP solver.</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Speed_QP_cost.jpg" alt="cost function"></p>
-<p>The objective function is a balance between following the guidance line and smoothness. The spline optimization is within the linearized constraint.</p>
-<p>After wrapping up the cost objective and constraints, the spline solver will generate a smooth feasible speed profile.</p>
+<h3 id="spline-qp-speed-框架">Spline QP Speed 框架</h3>
+<p>如下图所示，spline QP speed 是在满足路径单调性 (monotonicity
+evaluated at designated points，不倒车), 交通规则 (traffic regulations,
+可行通道) 和车辆运动学约束 (vehicle dynamic constraints)
+的线性约束情况下，通过 cost
+的方式获取最优的速度，同时考虑了速度平滑性和参考速度。</p>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/Spline_QP_Speed_Optimizer.JPG" alt="Fig. 13">
+<figcaption aria-hidden="true">Fig. 13</figcaption>
+</figure>
+<p>The spline QP speed step includes three parts: cost functional,
+linearized constraint and spline QP solver.</p>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/Speed_QP_cost.jpg" alt="cost function">
+<figcaption aria-hidden="true">cost function</figcaption>
+</figure>
+<p>The objective function is a balance between following the guidance
+line and smoothness. The spline optimization is within the linearized
+constraint.</p>
+<p>After wrapping up the cost objective and constraints, the spline
+solver will generate a smooth feasible speed profile.</p>
 <!--
 
 注意，重要的求解步骤，就是这么一笔带过了。如何进行 QP 的求解，是自己感兴趣的内容。
 
 -->
-<h2 id="Notes-on-Solving-Quadratic-Programming-Problems">Notes on Solving Quadratic Programming Problems</h2>
+<h2 id="notes-on-solving-quadratic-programming-problems">Notes on
+Solving Quadratic Programming Problems</h2>
 <h3 id="优化任务量">优化任务量</h3>
 <p>一次优化过程中大概有一百个采样点，那么约束就多于 600 个。</p>
 <blockquote>
-<p>For safety considerations, we evaluate the path and speed at approximately one-hundred different locations or time points.</p>
+<p>For safety considerations, we evaluate the path and speed at
+approximately one-hundred different locations or time points.</p>
 </blockquote>
-<p>path 和 speed 的优化问题，由一个五项式表达出来，但是约束条件有 30 个之多；然后，使用 QP solver 来求解。</p>
+<p>path 和 speed 的优化问题，由一个五项式表达出来，但是约束条件有 30
+个之多；然后，使用 QP solver 来求解。</p>
 <blockquote>
-<p>For both the path and speed optimizers, we find that piecewise quintic polynomials are good enough. The spline generally contains 3 to 5 polynomials with approximately 30 parameters. Thus, <strong>the quadratic programming problem has a relatively small objective function but large number of constraints</strong>.</p>
+<p>For both the path and speed optimizers, we find that piecewise
+quintic polynomials are good enough. The spline generally contains 3 to
+5 polynomials with approximately 30 parameters. Thus, <strong>the
+quadratic programming problem has a relatively small objective function
+but large number of constraints</strong>.</p>
 </blockquote>
-<p>In addition to accelerating the quadratic programming, <strong>we use the result calculated in the last cycle as a hot start</strong>.</p>
-<ul>
-<li>注意，在 EM 文章中，优先使用上一次的规划轨迹，不仅可以提高求解效率，同时容易和上一次的决策保持一致。</li>
-</ul>
+<p>In addition to accelerating the quadratic programming, <strong>we use
+the result calculated in the last cycle as a hot start</strong>. *
+注意，在 EM
+文章中，优先使用上一次的规划轨迹，不仅可以提高求解效率，同时容易和上一次的决策保持一致。</p>
 <p>因为使用上一次的规划轨迹来求解，QP 问题可以平均在 3ms 内求解。</p>
 <blockquote>
-<p>The QP problem can be solved within 3 ms on average, which satisfies our time consumption requirement.</p>
+<p>The QP problem can be solved within 3 ms on average, which satisfies
+our time consumption requirement.</p>
 </blockquote>
-<p>此处补充一下，QP 求解是轨迹规划耗时的重点，平均 3ms 不代表求解性能一定好，更需要关注耗时最差的情况，或者中位数的情况。</p>
-<ul>
-<li>举个例子，假设在 100 次求解中，如果 99 次求解耗时均是 2 ms，只有一次耗时 102 ms，那么最坏的这次求解，会导致自车反应延迟，足以影响自动驾驶安全，但是平均时间是 3ms。这就是统计学描述的精妙。</li>
-</ul>
-<h2 id="Notes-on-Non-convex-Optimization-With-DP-and-QP">Notes on Non-convex Optimization With DP and QP</h2>
+<p>此处补充一下，QP 求解是轨迹规划耗时的重点，平均 3ms
+不代表求解性能一定好，更需要关注耗时最差的情况，或者中位数的情况。 *
+举个例子，假设在 100 次求解中，如果 99 次求解耗时均是 2 ms，只有一次耗时
+102
+ms，那么最坏的这次求解，会导致自车反应延迟，足以影响自动驾驶安全，但是平均时间是
+3ms。这就是统计学描述的精妙。</p>
+<h2 id="notes-on-non-convex-optimization-with-dp-and-qp">Notes on
+Non-convex Optimization With DP and QP</h2>
 <p>DP 和 QP 各有局限，结合起来一起解决非凸优化问题。</p>
 <blockquote>
-<p>DP and QP alone both have their limitations in the non-convex domain. A combination of DP and QP will take advantage of the two and reach an ideal solution.</p>
+<p>DP and QP alone both have their limitations in the non-convex domain.
+A combination of DP and QP will take advantage of the two and reach an
+ideal solution.</p>
 </blockquote>
 <ul>
-<li>
-<p>DP: As described earlier in this manuscript, the <strong>DP algorithm depends on a sampling step to generate candidate solutions</strong>. Because of the restriction of processing time, <strong>the number of sampled candidates is limited by the sampling grid</strong>. Optimization within a finite grid yields a <strong>rough DP solution</strong>. In other words, DP does not necessarily, and in almost all cases would not, <strong>deliver</strong> the optimal solution.</p>
+<li>DP: As described earlier in this manuscript, the <strong>DP
+algorithm depends on a sampling step to generate candidate
+solutions</strong>. Because of the restriction of processing time,
+<strong>the number of sampled candidates is limited by the sampling
+grid</strong>. Optimization within a finite grid yields a <strong>rough
+DP solution</strong>. In other words, DP does not necessarily, and in
+almost all cases would not, <strong>deliver</strong> the optimal
+solution.
 <ul>
-<li>For example, DP could select a path that nudges the obstacle from the left but not nudge with the best distance.</li>
+<li>For example, DP could select a path that nudges the obstacle from
+the left but not nudge with the best distance.</li>
 <li>DP 方法受限于采样精度 (求解性能约束)，不能找出最优的结果。</li>
-</ul>
-</li>
-<li>
-<p>QP: Conversely, QP generates a solution based on the <strong>convex domain</strong>. It is not available without the help of the DP step.</p>
+</ul></li>
+<li>QP: Conversely, QP generates a solution based on the <strong>convex
+domain</strong>. It is not available without the help of the DP step.
 <ul>
-<li>For example, if an obstacle is in front of the master vehicle, QP requires a decision, such as nudge from the left, nudge from the right, follow, or overtake, to generate its constraint. <strong>A random or rule-based decision will make QP susceptible to failure or fall into a local minimal</strong>.</li>
+<li>For example, if an obstacle is in front of the master vehicle, QP
+requires a decision, such as nudge from the left, nudge from the right,
+follow, or overtake, to generate its constraint. <strong>A random or
+rule-based decision will make QP susceptible to failure or fall into a
+local minimal</strong>.</li>
 <li>QP 主要是解决凸优化问题，需要 DP 把非凸问题简化为凸优化问题。</li>
-<li>目前，ABC’s 的 stopping constraints，并不是输出一个决策，而是输出一个约束到 ST 中，在 ST 中进行决策的优化。从而，决策上的约束，可以把一个非凸问题化简为凸优化问题。</li>
-</ul>
-</li>
-<li>
-<p>DP + QP: A DP plus QP algorithm will minimize the limitations of both: (1) The EM planner first uses DP to search within a grid to reach a rough resolution. (2) <strong>The DP results are used to generate a convex domain and guide QP</strong>. (3) QP is used to search for the optimal solution in the convex region that most likely contains global optima.</p>
+<li>目前，ABC's 的 stopping
+constraints，并不是输出一个决策，而是输出一个约束到 ST 中，在 ST
+中进行决策的优化。从而，决策上的约束，可以把一个非凸问题化简为凸优化问题。</li>
+</ul></li>
+<li>DP + QP: A DP plus QP algorithm will minimize the limitations of
+both: (1) The EM planner first uses DP to search within a grid to reach
+a rough resolution. (2) <strong>The DP results are used to generate a
+convex domain and guide QP</strong>. (3) QP is used to search for the
+optimal solution in the convex region that most likely contains global
+optima.
 <ul>
-<li>ABC 目前使用 reasoner 把一个非凸问题转化为凸优化问题，reasoner 的输出就是凸问题的约束。</li>
-</ul>
-</li>
+<li>ABC 目前使用 reasoner 把一个非凸问题转化为凸优化问题，reasoner
+的输出就是凸问题的约束。</li>
+</ul></li>
 </ul>
 <p>各家公司的做法，千差万别，本质上都是在求解一个优化问题，把非凸的问题转化为凸问题，最后优化求解。</p>
-<h1>CASE STUDY</h1>
+<h1 id="case-study">CASE STUDY</h1>
 <p>EM planner 是一个轻量级决策 (light-decision) 的规划器。</p>
-<p>Although most state-of-the-art planning algorithms are based on <strong>heavy decisions</strong>, <strong>EM planner is a light-decision-based planner</strong>. It is true that a heavy-decision-based algorithm, or heavily rule-based algorithm, is easily understood and explained. The disadvantages are also clear: it may be trapped in corner cases (while its frequency is closely related to the complexity and magnitude of the number of rules) and not always be optimal.</p>
-<ul>
-<li>和 EM planner 相比，目前 ABC 做法的缺陷，在行为决策部分 (reasoner)，规则的痕迹太重了。那么，能否引入比较智能的算法或者架构，来解决这类约束呢？这也是自己下一步的努力方向。</li>
-<li>自动驾驶不能通过重规则 (heavy-decision-based algorithm) 来实现，最好的做法还是通过优化来实现。</li>
-</ul>
+<p>Although most state-of-the-art planning algorithms are based on
+<strong>heavy decisions</strong>, <strong>EM planner is a
+light-decision-based planner</strong>. It is true that a
+heavy-decision-based algorithm, or heavily rule-based algorithm, is
+easily understood and explained. The disadvantages are also clear: it
+may be trapped in corner cases (while its frequency is closely related
+to the complexity and magnitude of the number of rules) and not always
+be optimal. * 和 EM planner 相比，目前 ABC 做法的缺陷，在行为决策部分
+(reasoner)，规则的痕迹太重了。那么，能否引入比较智能的算法或者架构，来解决这类约束呢？这也是自己下一步的努力方向。
+* 自动驾驶不能通过重规则 (heavy-decision-based algorithm)
+来实现，最好的做法还是通过优化来实现。</p>
 <!--
 These cases were exposed during the intense daily test routines in Baidu’s heavy-decision planning modules and solved by the latest light-decision planning module.
 
 我推测，百度曾经也有一套规则痕迹偏重的做法，但是可能后期被抛弃。
 -->
-<p>这个示例中，进行了两次迭代 (两轮 EM 迭代)。通常，环境越复杂，计算迭代时间越复杂，所以优化问题是一个没有时间收敛上限的问题。</p>
+<p>这个示例中，进行了两次迭代 (两轮 EM
+迭代)。通常，环境越复杂，计算迭代时间越复杂，所以优化问题是一个没有时间收敛上限的问题。</p>
 <blockquote>
-<p>In general, the more complicated the environment is, the the more steps that may be required.</p>
+<p>In general, the more complicated the environment is, the the more
+steps that may be required.</p>
 </blockquote>
-<p>建议在读论文前，先阅读 Case Study 这一章，了解文章在解决什么问题，以及如何解决这个问题，对文章的实现有初步了解。</p>
-<h1>COMPUTATIONAL PERFORMANCE</h1>
-<p>这篇文章把三维 (station-lateral-speed) 的问题，化简为两个二维问题 (station-lateral problem and station-speed problem)，那么大大简化了计算复杂度。也就是，问题复杂度降维了。</p>
+<p>建议在读论文前，先阅读 Case Study
+这一章，了解文章在解决什么问题，以及如何解决这个问题，对文章的实现有初步了解。</p>
+<h1 id="computational-performance">COMPUTATIONAL PERFORMANCE</h1>
+<p>这篇文章把三维 (station-lateral-speed) 的问题，化简为两个二维问题
+(station-lateral problem and station-speed
+problem)，那么大大简化了计算复杂度。也就是，问题复杂度降维了。</p>
 <blockquote>
-<p>Because the three-dimensional station-lateral-speed problem has been split into two two-dimensional problems, i.e., <strong>station-lateral problem and station-speed problem</strong>, the computational complexity of EM planner has been significantly decreased, and thus, this planner is very efficient. <strong>It takes less than 100 ms on average</strong>.</p>
+<p>Because the three-dimensional station-lateral-speed problem has been
+split into two two-dimensional problems, i.e., <strong>station-lateral
+problem and station-speed problem</strong>, the computational complexity
+of EM planner has been significantly decreased, and thus, this planner
+is very efficient. <strong>It takes less than 100 ms on
+average</strong>.</p>
 </blockquote>
-<p>从问题复杂度 O (n (M+N)) 来分析求解效率，可以应用到论文中，具有学术的感觉。但是，为什么是 M (后续车道) + N (障碍物数量) 呢？</p>
+<p>从问题复杂度 O (n (M+N))
+来分析求解效率，可以应用到论文中，具有学术的感觉。但是，为什么是 M
+(后续车道) + N (障碍物数量) 呢？</p>
 <blockquote>
-<p>Assuming that we have n obstacles with M candidate path profiles and N candidate speed profiles, the computational complexity of this algorithm is <strong>O(n(M+N))</strong>.</p>
+<p>Assuming that we have n obstacles with M candidate path profiles and
+N candidate speed profiles, the computational complexity of this
+algorithm is <strong>O(n(M+N))</strong>.</p>
 </blockquote>
-<h1>CONCLUSION</h1>
-<p>在自动驾驶中，安全性 (safety) 和通行能力 (passability) 是关键问题 (critical issue)。如果规则太过严格，那么通过率必然会下降。</p>
+<h1 id="conclusion">CONCLUSION</h1>
+<p>在自动驾驶中，安全性 (safety) 和通行能力 (passability) 是关键问题
+(critical issue)。如果规则太过严格，那么通过率必然会下降。</p>
 <blockquote>
-<p>One critical issue in autonomous driving vehicles is the challenge of safety vs. passability. A strict rule increases the safety of the vehicle but lowers the passability, and vice versa.</p>
+<p>One critical issue in autonomous driving vehicles is the challenge of
+safety vs. passability. A strict rule increases the safety of the
+vehicle but lowers the passability, and vice versa.</p>
 </blockquote>
-<p>EM planner described in this manuscript is also designed to solve the <strong>inconsistency</strong> of potential decisions and planning, while it also improves the passability of autonomous driving vehicles.</p>
-<ul>
-<li>通过复用上一次的决策 (hot start)，如果环境不发生大的变化，决策容易和上一次的决策保持一致。</li>
-<li>决策不稳定，也是目前 ABC 遇到的常见问题之一。</li>
-</ul>
-<p>EM planner 把一个 3D 问题化简为 2 个 2D 问题，化繁为简，降低了问题难度，提高了求解效率。</p>
+<p>EM planner described in this manuscript is also designed to solve the
+<strong>inconsistency</strong> of potential decisions and planning,
+while it also improves the passability of autonomous driving vehicles. *
+通过复用上一次的决策 (hot
+start)，如果环境不发生大的变化，决策容易和上一次的决策保持一致。 *
+决策不稳定，也是目前 ABC 遇到的常见问题之一。</p>
+<p>EM planner 把一个 3D 问题化简为 2 个 2D
+问题，化繁为简，降低了问题难度，提高了求解效率。</p>
 <blockquote>
-<p>EM planner significantly reduces computational complexity by transforming a three-dimensional station-lateral-speed problem into two twodimensional station-lateral/station-speed problems. It could significantly reduce the processing time and therefore increase the interaction ability of the whole system.</p>
+<p>EM planner significantly reduces computational complexity by
+transforming a three-dimensional station-lateral-speed problem into two
+twodimensional station-lateral/station-speed problems. It could
+significantly reduce the processing time and therefore increase the
+interaction ability of the whole system.</p>
 </blockquote>
 <hr>
-<p>最后，APPENDIX 2 中的 CONSTRAINED SMOOTHING SPLINE AND QUADRATIC PROGRAMMING 一节，应用到了复杂的再生核希尔伯特空间 (Reproducing kernel Hilbert space，RKHS)，复杂的证明过程已经超出了我的理解范围，等应用时再详细研究下。</p>
+<p>最后，APPENDIX 2 中的 CONSTRAINED SMOOTHING SPLINE AND QUADRATIC
+PROGRAMMING 一节，应用到了复杂的再生核希尔伯特空间 ( Reproducing kernel
+Hilbert
+space，RKHS)，复杂的证明过程已经超出了我的理解范围，等应用时再详细研究下。</p>
 <blockquote>
-<p>The spline QP path and speed optimizer uses the same constrained smoothing spline framework. In this section, we formalize the smoothing spline problem within the quadratic programming framework and linearized constraints. Optimization with a quadratic convex objective and linearized constraints can be rapidly and stably solved.</p>
+<p>The spline QP path and speed optimizer uses the same constrained
+smoothing spline framework. In this section, we formalize the smoothing
+spline problem within the quadratic programming framework and linearized
+constraints. Optimization with a quadratic convex objective and
+linearized constraints can be rapidly and stably solved.</p>
 </blockquote>
-<h1>References</h1>
+<h1 id="references">References</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzI5NTg2NDg3MA==&amp;mid=2247484857&amp;idx=1&amp;sn=e844f224f81a6a804e9daf0fd5f61f7e">应对复杂路况，自动驾驶如何规划它的下一步</a></li>
 </ul>
-<h1>表达学习</h1>
+<h1 id="表达学习">表达学习</h1>
 <ul>
 <li>Further safety design is beyond this manuscript’s scope.</li>
-<li>Figure 15 is a hands-on example of how EM<br>
-planner iterates <strong>within and between planning cycles</strong> to achieve the optimal trajectory.</li>
+<li>Figure 15 is a hands-on example of how EM planner iterates
+<strong>within and between planning cycles</strong> to achieve the
+optimal trajectory.</li>
 </ul>
 
     </div>
@@ -875,9 +1104,9 @@ planner iterates <strong>within and between planning cycles</strong> to achieve 
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Autonomous-Driving/" rel="tag"># Autonomous Driving</a>
               <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
               <a href="/tags/Robotics/" rel="tag"># Robotics</a>
+              <a href="/tags/Autonomous-Driving/" rel="tag"># Autonomous Driving</a>
           </div>
 
         
