@@ -192,6 +192,133 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/uncategorized/protocol-buffers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Nobody">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="One's Way">
+      <meta itemprop="description" content="sharing daily progress and life">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | One's Way">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/uncategorized/protocol-buffers/" class="post-title-link" itemprop="url">protocol buffers</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-08 11:23:00" itemprop="dateCreated datePublished" datetime="2024-08-08T11:23:00+08:00">2024-08-08</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>240</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="package"><a target="_blank" rel="noopener" href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
+<ul>
+<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to
+a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol
+message types.</li>
+<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a
+C++ namespace.
+<ul>
+<li>即 package 指定的路径，会被转换为 namespace，来避免命名冲突。</li>
+</ul></li>
+</ul>
+<h2 id="arena-allocation"><a target="_blank" rel="noopener" href="https://protobuf.dev/reference/cpp/arenas/#why">Arena
+Allocation</a></h2>
+<ul>
+<li> 功能：Arena allocation is a C++-only feature that helps you optimize
+your memory usage and improve performance when working with protocol
+buffers.</li>
+<li> 原因：By default, protocol buffers performs heap allocations for
+each message object, each of its subobjects, and several field types,
+such as strings. These allocations occur in bulk when parsing a message
+and when building new messages in memory, and associated deallocations
+happen when messages and their subobject trees are freed.
+<ul>
+<li>Message
+的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
+</ul></li>
+</ul>
+<h2 id="查看-version">查看 version</h2>
+<p>protoc --version</p>
+<h1 id="python">Python</h1>
+<h2 id="enum">Enum</h2>
+<h3 id="could-not-serialize-object-typeerror-cant-pickle-google.protobuf.pyext._message.enumdescriptor-objects">Could
+not serialize object: TypeError: can't pickle
+google.protobuf.pyext._message.EnumDescriptor objects</h3>
+<p>我在实际 spark 上处理数据时，报错 "Could not serialize object:
+TypeError: can't pickle google.protobuf.pyext._message.EnumDescriptor
+objects", 通过报错信息，很明确这是在实际 python 代码中引用 enum
+导致的问题.</p>
+<figure class="highlight plaintext"><figcaption><span>enum_test.proto</span><a href="/downloads/code/enum_test.proto">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Add code later</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="参考教程">参考教程</h1>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand
+Protobuf enum in python</a></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://www.waylon.one/Programming/vector-reverse/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -539,131 +666,6 @@ vector 清空元素的三种方法</a></li>
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://www.waylon.one/uncategorized/protocol-buffers/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Nobody">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="One's Way">
-      <meta itemprop="description" content="sharing daily progress and life">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | One's Way">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/uncategorized/protocol-buffers/" class="post-title-link" itemprop="url">protocol buffers</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2023-07-10 22:33:03" itemprop="dateCreated datePublished" datetime="2023-07-10T22:33:03+08:00">2023-07-10</time>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>235</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="package"><a target="_blank" rel="noopener" href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
-<ul>
-<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to
-a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol
-message types.</li>
-<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a
-C++ namespace.
-<ul>
-<li>即 package 指定的路径，会被转换为 namespace，来避免命名冲突。</li>
-</ul></li>
-</ul>
-<h2 id="arena-allocation"><a target="_blank" rel="noopener" href="https://protobuf.dev/reference/cpp/arenas/#why">Arena
-Allocation</a></h2>
-<ul>
-<li> 功能：Arena allocation is a C++-only feature that helps you optimize
-your memory usage and improve performance when working with protocol
-buffers.</li>
-<li> 原因：By default, protocol buffers performs heap allocations for
-each message object, each of its subobjects, and several field types,
-such as strings. These allocations occur in bulk when parsing a message
-and when building new messages in memory, and associated deallocations
-happen when messages and their subobject trees are freed.
-<ul>
-<li>Message
-的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
-</ul></li>
-</ul>
-<h1 id="python">Python</h1>
-<h2 id="enum">Enum</h2>
-<h3 id="could-not-serialize-object-typeerror-cant-pickle-google.protobuf.pyext._message.enumdescriptor-objects">Could
-not serialize object: TypeError: can't pickle
-google.protobuf.pyext._message.EnumDescriptor objects</h3>
-<p>我在实际 spark 上处理数据时，报错 "Could not serialize object:
-TypeError: can't pickle google.protobuf.pyext._message.EnumDescriptor
-objects", 通过报错信息，很明确这是在实际 python 代码中引用 enum
-导致的问题.</p>
-<figure class="highlight plaintext"><figcaption><span>enum_test.proto</span><a href="/downloads/code/enum_test.proto">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Add code later</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="参考教程">参考教程</h1>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand
-Protobuf enum in python</a></li>
-</ul>
-
       
     </div>
 
