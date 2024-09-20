@@ -249,34 +249,49 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1><a target="_blank" rel="noopener" href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
+          <h1 id="package"><a target="_blank" rel="noopener" href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
 <ul>
-<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol message types.</li>
-<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a C++ namespace.
+<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to
+a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol
+message types.</li>
+<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a
+C++ namespace.
 <ul>
 <li>即 package 指定的路径，会被转换为 namespace，来避免命名冲突。</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h2 id="Arena-Allocation"><a target="_blank" rel="noopener" href="https://protobuf.dev/reference/cpp/arenas/#why">Arena Allocation</a></h2>
+<h2 id="arena-allocation"><a target="_blank" rel="noopener" href="https://protobuf.dev/reference/cpp/arenas/#why">Arena
+Allocation</a></h2>
 <ul>
-<li> 功能：Arena allocation is a C+±only feature that helps you optimize your memory usage and improve performance when working with protocol buffers.</li>
-<li> 原因：By default, protocol buffers performs heap allocations for each message object, each of its subobjects, and several field types, such as strings. These allocations occur in bulk when parsing a message and when building new messages in memory, and associated deallocations happen when messages and their subobject trees are freed.
+<li> 功能：Arena allocation is a C++-only feature that helps you optimize
+your memory usage and improve performance when working with protocol
+buffers.</li>
+<li> 原因：By default, protocol buffers performs heap allocations for
+each message object, each of its subobjects, and several field types,
+such as strings. These allocations occur in bulk when parsing a message
+and when building new messages in memory, and associated deallocations
+happen when messages and their subobject trees are freed.
 <ul>
-<li>Message 的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
-</ul>
-</li>
+<li>Message
+的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
+</ul></li>
 </ul>
 <h2 id="查看-version">查看 version</h2>
 <p>protoc --version</p>
-<h1>Python</h1>
-<h2 id="Enum">Enum</h2>
-<h3 id="Could-not-serialize-object-TypeError-can’t-pickle-google-protobuf-pyext-message-EnumDescriptor-objects">Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects</h3>
-<p>我在实际 spark 上处理数据时，报错 “Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects”, 通过报错信息，很明确这是在实际 python 代码中引用 enum 导致的问题.</p>
+<h1 id="python">Python</h1>
+<h2 id="enum">Enum</h2>
+<h3 id="could-not-serialize-object-typeerror-cant-pickle-google.protobuf.pyext._message.enumdescriptor-objects">Could
+not serialize object: TypeError: can't pickle
+google.protobuf.pyext._message.EnumDescriptor objects</h3>
+<p>我在实际 spark 上处理数据时，报错 "Could not serialize object:
+TypeError: can't pickle google.protobuf.pyext._message.EnumDescriptor
+objects", 通过报错信息，很明确这是在实际 python 代码中引用 enum
+导致的问题.</p>
 <figure class="highlight plaintext"><figcaption><span>enum_test.proto</span><a href="/downloads/code/enum_test.proto">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># Add code later</span><br></pre></td></tr></tbody></table></figure>
-<h1>参考教程</h1>
+<h1 id="参考教程">参考教程</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand Protobuf enum in python</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand
+Protobuf enum in python</a></li>
 </ul>
 
       
@@ -378,14 +393,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h2 id="std-reverse"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/algorithm/reverse/">std::reverse</a></h2>
+<h2 id="stdreverse"><a target="_blank" rel="noopener" href="https://cplusplus.com/reference/algorithm/reverse/">std::reverse</a></h2>
 <ul>
 <li>Reverses the order of the elements in the range [first,last).</li>
 </ul>
-<h3 id="Demo">Demo</h3>
+<h3 id="demo">Demo</h3>
 <figure class="highlight c"><figcaption><span>全部反转_demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method2_erase</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight c"><figcaption><span>部分反转_demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br></pre></td></tr></tbody></table></figure>
-<h1>源码</h1>
+<h1 id="源码">源码</h1>
 <h2 id="源码下载">源码下载</h2>
 <p><a href="http://www.waylon.one/downloads/code/vector_reverse.cpp">源码下载</a></p>
 <h2 id="编译">编译</h2>
@@ -492,7 +507,8 @@
           <p>[toc]</p>
 <h2 id="clear">clear</h2>
 <ul>
-<li>A reallocation is not guaranteed to happen, and the vector capacity is not guaranteed to change due to calling this function.</li>
+<li>A reallocation is not guaranteed to happen, and the vector capacity
+is not guaranteed to change due to calling this function.</li>
 </ul>
 <h3 id="测试">测试</h3>
 <figure class="highlight c"><figcaption><span>clear demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method1_clear</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br><span class="line">  <span class="comment">// 打印 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"original: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  data.clear();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -500,43 +516,47 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Method 1</span><br><span class="line">original: size = 5 ; capacity = 5</span><br><span class="line">new: size = 0 ; capacity = 5</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="erase">erase</h2>
 <ul>
-<li>
-<p>Removes from the vector either a single element (position) or a range of elements ([first,last)).</p>
-</li>
-<li>
-<p>An iterator pointing to the new location of the element that followed the last element erased by the function call.</p>
-</li>
+<li><p>Removes from the vector either a single element (position) or a
+range of elements ([first,last)).</p></li>
+<li><p>An iterator pointing to the new location of the element that
+followed the last element erased by the function call.</p></li>
 </ul>
-<h3 id="测试-2">测试</h3>
+<h3 id="测试-1">测试</h3>
 <figure class="highlight c"><figcaption><span>erase demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method2_erase</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br><span class="line">  <span class="comment">// 打印 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"original: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> iter = data.begin(); iter != data.end();) {</span><br><span class="line">    iter = data.erase(iter);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data1 = ConstructVector();</span><br><span class="line">  data1.erase(data1.begin(), data1.begin() + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data1.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data1.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="输出-2">输出</h3>
+<h3 id="输出-1">输出</h3>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Method 2</span><br><span class="line">original: size = 5 ; capacity = 5</span><br><span class="line">new: size = 0 ; capacity = 5</span><br><span class="line">new: size = 3 ; capacity = 5</span><br></pre></td></tr></tbody></table></figure>
 <h2 id="swap">swap</h2>
 <ul>
-<li>
-<p>Exchanges the content of the container by the content of x, which is another vector object of the same type. Sizes may differ.</p>
-</li>
-<li>
-<p>After the call to this member function, the elements in this container are those which were in x before the call, and the elements of x are those which were in this. All iterators, references and pointers remain valid for the swapped objects.</p>
-</li>
+<li><p>Exchanges the content of the container by the content of x, which
+is another vector object of the same type. Sizes may differ.</p></li>
+<li><p>After the call to this member function, the elements in this
+container are those which were in x before the call, and the elements of
+x are those which were in this. All iterators, references and pointers
+remain valid for the swapped objects.</p></li>
 </ul>
-<h3 id="测试-3">测试</h3>
+<h3 id="测试-2">测试</h3>
 <figure class="highlight c"><figcaption><span>erase demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method3_swap</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br><span class="line">  <span class="comment">// 打印 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"original: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt;().swap(data);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"new: size = "</span> &lt;&lt; data.size()</span><br><span class="line">            &lt;&lt; <span class="string">" ; capacity = "</span> &lt;&lt; data.capacity() &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h3 id="输出-3">输出</h3>
+<h3 id="输出-2">输出</h3>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Method 3</span><br><span class="line">original: size = 5 ; capacity = 5</span><br><span class="line">new: size = 0 ; capacity = 0</span><br></pre></td></tr></tbody></table></figure>
-<h1>区别</h1>
+<h1 id="区别">区别</h1>
 <ul>
-<li>vector 内存占用空间只会增长，不会减小。比如你首先分配了 10,000 个字节，然后 erase 掉后面 9,999 个，则虽然有效元素只有一个，但是内存占用仍为 10,000 个。所有空间在 vector 析构时回收。</li>
-<li>如果想清空原来数据占用的空间，我们可以通过交换技术 swap, 就是通过交换函数 swap ()，使得 vector 离开其自身的作用域，从而强制释放 vector 所占的内存空间.</li>
+<li>vector 内存占用空间只会增长，不会减小。比如你首先分配了 10,000
+个字节，然后 erase 掉后面 9,999
+个，则虽然有效元素只有一个，但是内存占用仍为 10,000 个。所有空间在
+vector 析构时回收。</li>
+<li>如果想清空原来数据占用的空间，我们可以通过交换技术
+swap, 就是通过交换函数 swap ()，使得 vector
+离开其自身的作用域，从而强制释放 vector 所占的内存空间.</li>
 </ul>
-<h1>源码</h1>
+<h1 id="源码">源码</h1>
 <h2 id="源码下载">源码下载</h2>
 <p><a href="http://www.waylon.one/downloads/code/vector_clear.cpp">源码下载</a></p>
 <h2 id="编译">编译</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 文件下载目录</span><br><span class="line">g++ vector_clear.cpp -o test --std=c++14</span><br></pre></td></tr></tbody></table></figure>
-<h1>Reference</h1>
+<h1 id="reference">Reference</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhanggaofeng/p/9338681.html">C++ vector 清空元素的三种方法</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhanggaofeng/p/9338681.html">C++
+vector 清空元素的三种方法</a></li>
 </ul>
 
       
@@ -748,86 +768,122 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备 (公网) 很难直接连接到主机以获取所需的资料。</p>
+          <p>在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备
+(公网) 很难直接连接到主机以获取所需的资料。</p>
 <p>本文将介绍一种通过内网穿透软件来搭建内网服务的方法，使得外部用户能够方便地访问和使用内网中的服务和资源。在这个过程中，将会涉及到内网穿透和反向代理的核心技术。</p>
 <p>通过调研不同的 <a target="_blank" rel="noopener" href="https://juejin.cn/post/7240288077868286010">内网穿透工具</a>，目前主要分为两种类型：</p>
 <ul>
-<li>
-<p>一种是通过销售硬件设备和流量的方式实现，比如快解析、花生壳、神卓互联、NAT123 等。这些工具拥有自主研发的核心技术，可以在淘宝等平台直接购买和配置。然而，这种方式的缺点是需要付费购买硬件设备，并且免费流量有限制，适合一些专业用户或氪金用户。</p>
-</li>
-<li>
-<p>一种是使用免费开源软件（如 frp 和 nps）来搭建内网穿透，不需要额外购买硬件设备，但需要具备公网 IP 的条件。这种方式的优点在于可以根据自己的需求进行定制化配置，后续扩展性强，但对于新手来说入门门槛较高。</p>
-</li>
+<li><p>一种是通过销售硬件设备和流量的方式实现，比如快解析、花生壳、神卓互联、NAT123 等。这些工具拥有自主研发的核心技术，可以在淘宝等平台直接购买和配置。然而，这种方式的缺点是需要付费购买硬件设备，并且免费流量有限制，适合一些专业用户或氪金用户。</p></li>
+<li><p>一种是使用免费开源软件（如 frp 和 nps）来搭建内网穿透，不需要额外购买硬件设备，但需要具备公网
+IP
+的条件。这种方式的优点在于可以根据自己的需求进行定制化配置，后续扩展性强，
+但对于新手来说入门门槛较高。</p></li>
 </ul>
-<p>考虑到使用开源软件的优点，我的本地主机没有敏感信息，流量不设限制，所以我选择了免费开源软件 – frp 来搭建内网穿透服务。请注意，虽然 frp 目前使用广泛，但是本身逻辑设计有先天性缺陷，网络安全性差，非常容易造成网络堵塞，不能长时间连接使用，技术不够成熟.</p>
-<h1>我的应用场景</h1>
+<p>考虑到使用开源软件的优点，我的本地主机没有敏感信息，流量不设限制，
+所以我选择了免费开源软件 -- frp 来搭建内网穿透服务。请注意，虽然 frp
+目前使用广泛，但是本身逻辑设计有先天性缺陷，网络安全性差，
+非常容易造成网络堵塞，不能长时间连接使用，技术不够成熟.</p>
+<h1 id="我的应用场景">我的应用场景</h1>
 <ul>
 <li>在办公室或外出办公时，能够通过远程 ssh 控制家中的另一台电脑；</li>
-<li>家中电脑上运行了一个 web 服务，希望能够让非局域网的用户访问到这个服务。</li>
+<li>家中电脑上运行了一个 web
+服务，希望能够让非局域网的用户访问到这个服务。</li>
 </ul>
-<h1>工具和材料</h1>
+<h1 id="工具和材料">工具和材料</h1>
 <ul>
 <li>一个云服务器（包含公网 IP）；</li>
 <li>本地电脑需要联网；</li>
 <li>一个域名（用于多个 web 服务，如果只有 ssh 访问则不需要）。</li>
 </ul>
 <p>请注意，以下的教程适合具备一定计算机基础的开发者，对于新手来说可能存在一定的配置难度。</p>
-<h1>我的网络配置示意图</h1>
-<p>我进行了如下的网络配置，以实现通过 frp 在远程访问家中的主机和使用 web 服务的目标。比如，在 ipad 上就可以通过网页连接内网服务上的 stable diffusion 生成图片。具体示意图如下：</p>
+<h1 id="我的网络配置示意图">我的网络配置示意图</h1>
+<p>我进行了如下的网络配置，以实现通过 frp 在远程访问家中的主机和使用 web
+服务的目标。比如，在 ipad 上就可以通过网页连接内网服务上的 stable
+diffusion 生成图片。具体示意图如下：</p>
 <img data-src="/downloads/images/frp_struct.jpg" class="" title="frp 配置示意图">
-<h1>frp 是什么？</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp</a> 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议，且支持 P2P 通信。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。</p>
+<h1 id="frp-是什么">frp 是什么？</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp</a>
+是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS
+等多种协议，且支持 P2P
+通信。可以将内网服务以安全、便捷的方式通过具有公网 IP
+节点的中转暴露到公网。</p>
 <h2 id="内网穿透是什么">内网穿透是什么？</h2>
-<p>内网穿透，即 NAT（Network Address Translator）穿透，是指计算机在内网（局域网）内使用私有 IP 地址，在连接外网（互联网）时使用全局 IP 地址的技术。简而言之，内网穿透可以将内网中的服务暴露到公网，使得这些服务可以通过公网访问。</p>
+<p>内网穿透，即 NAT（Network Address
+Translator）穿透，是指计算机在内网（局域网）内使用私有 IP 地址，在连接外网（互联网）时使用全局 IP 地址的技术。简而言之，内网穿透可以将内网中的服务暴露到公网，使得这些服务可以通过公网访问。</p>
 <h2 id="反向代理是什么">反向代理是什么？</h2>
-<p>反向代理（reverse proxy）是指以代理服务器来接受 internet 上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给 internet 上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。</p>
-<h1>frp 安装</h1>
-<p>你可以参考 <a target="_blank" rel="noopener" href="https://gofrp.org/docs/setup/">安装教程</a> 中的详细步骤来下载、部署和配置 frp。该教程提供了安装和开机自启动的指导，具有很好的实用性。</p>
+<p>反向代理（reverse proxy）是指以代理服务器来接受 internet
+上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给
+internet
+上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。</p>
+<h1 id="frp-安装">frp 安装</h1>
+<p>你可以参考 <a target="_blank" rel="noopener" href="https://gofrp.org/docs/setup/">安装教程</a>
+中的详细步骤来下载、部署和配置
+frp。该教程提供了安装和开机自启动的指导，具有很好的实用性。</p>
 <h2 id="我的配置环境">我的配置环境</h2>
-<h3 id="frp-服务端：">frp 服务端：</h3>
+<h3 id="frp-服务端">frp 服务端：</h3>
 <p>操作系统：Ubuntu 20.04</p>
-<h3 id="frp-客户端设备-1：">frp 客户端设备 #1：</h3>
+<h3 id="frp-客户端设备-1">frp 客户端设备 #1：</h3>
 <p>操作系统：Ubuntu 20.04</p>
-<h3 id="frp-客户端设备-2：">frp 客户端设备 #2：</h3>
+<h3 id="frp-客户端设备-2">frp 客户端设备 #2：</h3>
 <p>操作系统：Ubuntu 22.04</p>
-<h2 id="如何设置-frp-支持多个本地网页终端">如何设置 frp 支持多个本地网页终端</h2>
-<p>在我本地的开发机器 #2 ，部署了 stable diffusion 和 Jupyter Notebook 两个 web 应用，它们通过指定的本地端口提供服务，例如通过 <code>127.0.0.1:8080</code> 可以访问 jupyter。由于这些应用都部署在本地，无法直接从公网访问，因此 #2 主机需要配置 frpc 服务来支持公网访问。</p>
+<h2 id="如何设置-frp-支持多个本地网页终端">如何设置 frp
+支持多个本地网页终端</h2>
+<p>在我本地的开发机器 #2 ，部署了 stable diffusion 和 Jupyter Notebook
+两个 web 应用，它们通过指定的本地端口提供服务，例如通过
+<code>127.0.0.1:8080</code> 可以访问
+jupyter。由于这些应用都部署在本地，无法直接从公网访问，因此 #2
+主机需要配置 frpc 服务来支持公网访问。</p>
 <h3 id="多-web-服务主机配置">多 web 服务主机配置</h3>
 <p>在 #2 的 frp 的配置文件（frpc.ini）添加下面的内容</p>
 <figure class="highlight plaintext"><figcaption><span>[frpc.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 1.2.3.4     # 替换成公网 IP</span><br><span class="line">server_port = 1234        # 替换成开放的 Port</span><br><span class="line"># 此处省去 token 等配置</span><br><span class="line"></span><br><span class="line">[web1]   # 此处配置用于远程访问内网电脑上的 A 服务</span><br><span class="line">type = http</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = port1</span><br><span class="line">custom_domains = a.my_domain.com</span><br><span class="line"></span><br><span class="line">[web2]   # 此处配置用于远程访问内网电脑上的 B 服务</span><br><span class="line">type = http</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = port2</span><br><span class="line">custom_domains = b.my_domain.com</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>在上述配置中，我们使用不同的 <code>custom_domains</code>（例如 <code>a.my_domain.com</code> 和 <code>b.my_domain.com</code>）以及不同的 <code>local_port</code>（例如 <code>8888</code> 和 <code>9999</code>）来区分两个本地网页终端。在实际应用中，通过 custom_domains:vhost_http_port 就可以访问内网的 web 项目.</p>
-<h3 id="VPS-服务器配置">VPS 服务器配置</h3>
-<p>在 frp 服务器上配置相应的转发规则，将请求转发到本地网页终端。你可以在 frps.ini 配置文件中进行设置。</p>
+<p>在上述配置中，我们使用不同的 <code>custom_domains</code>（例如
+<code>a.my_domain.com</code> 和 <code>b.my_domain.com</code>）以及不同的
+<code>local_port</code>（例如 <code>8888</code> 和
+<code>9999</code>）来区分两个本地网页终端。在实际应用中，通过
+custom_domains:vhost_http_port 就可以访问内网的 web 项目.</p>
+<h3 id="vps-服务器配置">VPS 服务器配置</h3>
+<p>在 frp 服务器上配置相应的转发规则，将请求转发到本地网页终端。你可以在
+frps.ini 配置文件中进行设置。</p>
 <figure class="highlight plaintext"><figcaption><span>[frps.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 1234</span><br><span class="line">token = xxxx</span><br><span class="line">vhost_http_port = 8888</span><br><span class="line">dashboard_port = xxxx</span><br><span class="line">dashboard_user = xxxx</span><br><span class="line">dashboard_pwd = xxxx</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>通过以上配置，你可以通过 <code>a.my_domain.com:8888</code> 访问第一个本地网页终端，通过 <code>b.my_domain.com:8888</code> 访问第二个本地网页终端。</p>
+<p>通过以上配置，你可以通过 <code>a.my_domain.com:8888</code>
+访问第一个本地网页终端，通过 <code>b.my_domain.com:8888</code>
+访问第二个本地网页终端。</p>
 <h2 id="frp-如何支持多个服务端">frp 如何支持多个服务端</h2>
-<p>如果你想要支持多个服务端，需要在每个客户端安装一个 frpc 服务，并根据每个设备的差异进行配置，确保每个设备的 <code>remote_port</code> 不重复即可。</p>
-<p>上文提到，本地有两台主机，如果想让两台主机都可以远程访问，需要在每个客户端安装一个 frpc 服务.</p>
+<p>如果你想要支持多个服务端，需要在每个客户端安装一个 frpc
+服务，并根据每个设备的差异进行配置，确保每个设备的
+<code>remote_port</code> 不重复即可。</p>
+<p>上文提到，本地有两台主机，如果想让两台主机都可以远程访问，
+需要在每个客户端安装一个 frpc 服务.</p>
 <h3 id="设备-1">设备 #1</h3>
 <figure class="highlight plaintext"><figcaption><span>[frpc.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 1.2.3.4     # 替换成公网 IP</span><br><span class="line">server_port = 1234        # 替换成开放的 Port</span><br><span class="line"># 此处省去 token 等配置</span><br><span class="line"></span><br><span class="line">[ssh1] # 若有多个客户端，名称不要重复。</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 2345 # 远程连接端口不要重复</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <h3 id="设备-2">设备 #2</h3>
 <figure class="highlight plaintext"><figcaption><span>[frpc.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 1.2.3.4     # 替换成公网 IP</span><br><span class="line">server_port = 1234        # 替换成开放的 Port</span><br><span class="line"># 此处省去 token 等配置</span><br><span class="line"></span><br><span class="line">[ssh2] # 若有多个客户端，名称不要重复。</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 3456 # 远程连接端口不要重复</span><br><span class="line"></span><br><span class="line"># 此处省去 web 等配置</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="VPS-服务器配置-2">VPS 服务器配置</h3>
+<h3 id="vps-服务器配置-1">VPS 服务器配置</h3>
 <figure class="highlight plaintext"><figcaption><span>[frps.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 1234</span><br><span class="line">token = xxxx</span><br><span class="line">vhost_http_port = 8080</span><br><span class="line">dashboard_port = xxxx</span><br><span class="line">dashboard_user = xxxx</span><br><span class="line">dashboard_pwd = xxxx</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>根据提供的示例，两台机器都绑定服务器的 1234 端口，但是远程连接的端口不同，第一台机器的远程连接端口为 <code>2345</code>，第二台机器的远程连接端口为 <code>3456</code>。假设 #1 用户名为 test1, #2 用户名为 test2, 那么</p>
+<p>根据提供的示例，两台机器都绑定服务器的 1234
+端口，但是远程连接的端口不同，第一台机器的远程连接端口为
+<code>2345</code>，第二台机器的远程连接端口为 <code>3456</code>。假设 #1
+用户名为 test1, #2 用户名为 test2, 那么</p>
 <figure class="highlight plaintext"><figcaption><span>[#1 机器连接]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh  -oPort=2345 test1@1.2.3.4</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight plaintext"><figcaption><span>[#2 机器连接]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh  -oPort=3456 test2@1.2.3.4</span><br></pre></td></tr></tbody></table></figure>
-<h1>安全性</h1>
-<h1>参考资料</h1>
+<h1 id="安全性">安全性</h1>
+<h1 id="参考资料">参考资料</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://gofrp.org">frp 文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp github</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/TianyuSu/p/11961994.html">frp 配置多个 web 项目，无需购买域名</a>
+<li><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp
+github</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/TianyuSu/p/11961994.html">frp
+配置多个 web 项目，无需购买域名</a>
 <ul>
-<li>参考 frpc.ini 配置，但是 custom_domains 使用自己的域名，没有通过配置本地 host 文件来使用虚假域名.</li>
-</ul>
-</li>
+<li>参考 frpc.ini 配置，但是 custom_domains 使用自己的域名，
+没有通过配置本地 host 文件来使用虚假域名.</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangyuyu/p/14312431.html">frp 用一个服务器进程 frps 连接多个客户端 frpc</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/370476621">frp 内网穿透，实现局域网网页，外网访问</a>
 <ul>
-<li>对单个 web 应用，custom_domains 也可以设置为服务器 IP 地址，不用域名 (亲测可行) ; 多个 web 端不可行.</li>
-</ul>
-</li>
+<li>对单个 web 应用，custom_domains 也可以设置为服务器 IP 地址，不用域名
+(亲测可行) ; 多个 web 端不可行.</li>
+</ul></li>
 </ul>
 
       
@@ -929,15 +985,16 @@
     
     <div class="post-body" itemprop="articleBody">
           <h2 id="比较两个-vector-是否相等">比较两个 vector 是否相等</h2>
-<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/vector/operator_cmp">bool operator==( const std::vector&lt;T, Alloc&gt;&amp; lhs, const std::vector&lt;T, Alloc&gt;&amp; rhs )</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/vector/operator_cmp">bool
+operator==( const std::vector&lt;T, Alloc&gt;&amp; lhs, const
+std::vector&lt;T, Alloc&gt;&amp; rhs )</a></p>
 <ul>
-<li>Checks if the contents of lhs and rhs are equal, that is, they have the same number of elements and each element in lhs compares equal with the element in rhs at the same position. </li>
+<li>Checks if the contents of lhs and rhs are equal, that is, they have
+the same number of elements and each element in lhs compares equal with
+the element in rhs at the same position. </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://www.techiedelight.com/zh/check-two-vectors-equal-cpp/">其他方法</a></p>
-<ul>
-<li> std::equal</li>
-<li>std::mismatch</li>
-</ul>
+<p><a target="_blank" rel="noopener" href="https://www.techiedelight.com/zh/check-two-vectors-equal-cpp/">其他方法</a>
+- std::equal - std::mismatch</p>
 
       
     </div>
@@ -1028,21 +1085,33 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="什么是-Snap">什么是 Snap</h2>
+          <h2 id="什么是-snap">什么是 Snap</h2>
 <p>Snap 包是 Ubuntu 16.04 LTS 发布时引入的新应用格式包。</p>
-<blockquote><p>当你在安装完 snap 后，你会发现在在根目录下会出现如 /dev/loop0、/dev/loop1 等挂载点，这些挂载点正是 snap 软件包的目录。Snap 使用了 squashFS 文件系统，一种开源的压缩，只读文件系统，基于 GPL 协议发行。一旦 snap 被安装后，其就有一个只读的文件系统和一个可写入的区域。应用自身的执行文件、库、依赖包都被放在这个只读目录，意味着该目录不能被随意篡改和写入。</p>
+<blockquote><p>当你在安装完 snap 后，你会发现在在根目录下会出现如
+/dev/loop0、/dev/loop1 等挂载点，这些挂载点正是 snap 软件包的目录。Snap
+使用了 squashFS 文件系统，一种开源的压缩，只读文件系统，基于 GPL
+协议发行。一旦 snap
+被安装后，其就有一个只读的文件系统和一个可写入的区域。应用自身的执行文件、库、依赖包都被放在这个只读目录，意味着该目录不能被随意篡改和写入。</p>
 <footer><strong>Canonical </strong><cite><a target="_blank" rel="noopener" href="https://cn.ubuntu.com/blog/what-is-snap-application">什么是 Snap 应用？</a></cite></footer></blockquote>
 <img data-src="/downloads/images/snap_loop.png" class="" title="/dev/loopX是 snap 的目录">
-<p>较传统 Linux 的 rpm，deb 软件包，snap 引入 squashFS 文件系统，使得 snap 的安全性要优于传统的 Linux 软件包。同时，每个 snap 默认都被严格限制（confined），即限制系统权限和资源访问。但是，可通过授予权限策略来获得对系统资源的访问。</p>
-<p>使用 snap 包的另一好处就是它类似一个容器拥有一个应用程序所有的文件和库，各个应用程序之间完全独立；解决了应用程序之间的依赖问题，使应用程序之间更容易管理，但是由此带来的问题就是它占用更多的磁盘空间。</p>
-<h2 id="Install-Shutter-Screenshot-Tool">Install Shutter Screenshot Tool</h2>
-<h3 id="Installing-Shutter-on-Ubuntu-20-04-18-04">Installing Shutter on Ubuntu 20.04 &amp; 18.04</h3>
+<p>较传统 Linux 的 rpm，deb 软件包，snap 引入 squashFS 文件系统，使得
+snap 的安全性要优于传统的 Linux 软件包。同时，每个 snap
+默认都被严格限制（confined），即限制系统权限和资源访问。但是，可通过授予权限策略来获得对系统资源的访问。</p>
+<p>使用 snap
+包的另一好处就是它类似一个容器拥有一个应用程序所有的文件和库，各个应用程序之间完全独立；解决了应用程序之间的依赖问题，使应用程序之间更容易管理，但是由此带来的问题就是它占用更多的磁盘空间。</p>
+<h2 id="install-shutter-screenshot-tool">Install Shutter Screenshot
+Tool</h2>
+<h3 id="installing-shutter-on-ubuntu-20.04-18.04">Installing Shutter on
+Ubuntu 20.04 &amp; 18.04</h3>
 <figure class="highlight shell"><figcaption><span>https://itsfoss.com/install-shutter-ubuntu/ Installing Shutter on Ubuntu 20.04 &amp; 18.04</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Shutter is not available in Ubuntu 20.04.</span><br><span class="line">sudo add-apt-repository ppa:linuxuprising/shutter</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="切换-Python-环境">切换 Python 环境</h2>
+<h2 id="切换-python-环境">切换 Python 环境</h2>
 <figure class="highlight shell"><figcaption><span>https://www.cnblogs.com/liuzhenbo/p/13176869.html ubuntu 切换 python 版本 </span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 查看你系统中有哪些Python的二进制文件可供使用</span><br><span class="line">ls /usr/bin/python*</span><br><span class="line">// 查看python替换版本信息</span><br><span class="line">update-alternatives --list python</span><br><span class="line">// 使用以下命令随时在列出的python替换版本中任意切换</span><br><span class="line">sudo update-alternatives --config python</span><br><span class="line">// 再查一下默认Python版本</span><br><span class="line">python --version</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="用-aptitude-代替-apt-get-处理依赖性问题">用 aptitude 代替 apt-get 处理依赖性问题</h2>
+<h2 id="用-aptitude-代替-apt-get-处理依赖性问题">用 aptitude 代替
+apt-get 处理依赖性问题</h2>
 <ul>
-<li>aptitude 与 apt-get 一样，是 Debian 及其衍生系统中功能极其强大的包管理工具。与 apt-get 不同的是，aptitude 在处理依赖问题上更佳一些。举例来说，aptitude 在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。</li>
+<li>aptitude 与 apt-get 一样，是 Debian
+及其衍生系统中功能极其强大的包管理工具。与 apt-get 不同的是，aptitude
+在处理依赖问题上更佳一些。举例来说，aptitude 在删除一个包时，会同时删除本身所依赖的包。这样，系统中不会残留无用的包，整个系统更为干净。</li>
 <li>注意事项</li>
 <li>为什么可以这么做</li>
 </ul>
@@ -1150,7 +1219,9 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<p>目前手上有一台国外 VPS，我在 19 年开始在 VPS 上部署个人网站。之前利用这个 VPS 部署本地编译好的静态网页，流程大概是</p>
+<p>目前手上有一台国外 VPS，我在 19 年开始在 VPS
+上部署个人网站。之前利用这个 VPS
+部署本地编译好的静态网页，流程大概是</p>
 <ul>
 <li>本地电脑配置 hexo 环境，在本地编辑并生成静态网页；</li>
 <li>通过 git hook 等方式把本地生成的静态网页同步到远端服务器上；</li>
@@ -1158,15 +1229,20 @@
 </ul>
 <p>这种部署方式对多终端用户不友好，比如</p>
 <ul>
-<li>有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo 环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。</li>
-<li>如果有多台电脑，只能在配备有 hexo 环境的电脑上编辑；即使多台电脑配备有 hexo 内容，也容易有数据不同步的问题。</li>
+<li>有时候想在手机或者其他终端上简单修改网站内容，但是配置 hexo
+环境的电脑不在手边，往往需要把想更新的内容记下来，找个专门时间更新下内容，这样子容易导致自己忘记，做事情不连贯。</li>
+<li>如果有多台电脑，只能在配备有 hexo
+环境的电脑上编辑；即使多台电脑配备有 hexo
+内容，也容易有数据不同步的问题。</li>
 </ul>
 <p>本文介绍一种方式，</p>
 <img data-src="/downloads/images/website_scheme.png" class="" title="网站架构设计">
 <ul>
 <li>网站原始数据保存在 github，支持多终端访问和数据管理。</li>
 <li>远程 VPS 上部署整套 hexo 环境，支持生成静态网页结果。</li>
-<li>VPS 上获取网站数据 (通常是 source 下面的数据)，生成博客内容，启动 hexo 内置的 web 服务器（或使用 nginx 指向生成的 public 目录），对外提供访问。</li>
+<li>VPS 上获取网站数据 (通常是 source 下面的数据)，生成博客内容，启动
+hexo 内置的 web 服务器（或使用 nginx 指向生成的 public
+目录），对外提供访问。</li>
 <li>对于生成好的内容，部署到 Github （用作备份）上</li>
 </ul>
 <p>这种方法可以在多终端实时更新网站内容，摆脱对单一终端的依赖，能够支持</p>
@@ -1282,22 +1358,27 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>红黑树</h1>
+<h1 id="红黑树">红黑树</h1>
 <h2 id="什么是红黑树">什么是红黑树</h2>
-<h1>set/multiset 实现最大堆</h1>
+<h1 id="setmultiset-实现最大堆">set/multiset 实现最大堆</h1>
 <p>在 STL 中，set 和 multiset 是基于红黑树实现的。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/set">Sets</a> are usually implemented as <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Red%E2%80%93black_tree">red-black trees</a>.</li>
-<li>Sorting is done using the key comparison function <em><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/Compare">Compare</a></em>. Search, removal, and insertion operations have logarithmic complexity.</li>
+<li><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/container/set">Sets</a>
+are usually implemented as <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Red–black_tree">red-black
+trees</a>.</li>
+<li>Sorting is done using the key comparison function <em><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/named_req/Compare">Compare</a></em>.
+Search, removal, and insertion operations have logarithmic
+complexity.</li>
 </ul>
-<h2 id="Code-Example">Code Example</h2>
+<h2 id="code-example">Code Example</h2>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;ostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;set&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="comment">// Initialize a set.</span></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::less&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>&gt; min_s;</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  min_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of set container is "</span> &lt;&lt; *min_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of set container is "</span> &lt;&lt; *min_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Compare parameter is default to std::greater&lt;Key&gt;.</span></span><br><span class="line">  std::set&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_s;</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_s.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of set container is "</span> &lt;&lt; *max_s.<span class="built_in">begin</span>() &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of set container is "</span> &lt;&lt; *max_s.<span class="built_in">rbegin</span>() &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Initialize a multiset.</span></span><br><span class="line">  std::multiset&lt;<span class="type">int</span>, std::greater&lt;<span class="type">int</span>&gt;&gt; max_ms;</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">1</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">3</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">2</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">5</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">4</span>);</span><br><span class="line">  max_ms.<span class="built_in">insert</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">  std::cout &lt;&lt; <span class="string">"max value of multiset container is "</span> &lt;&lt; *max_ms.<span class="built_in">begin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">"min value of multiset container is "</span> &lt;&lt; *max_ms.<span class="built_in">rbegin</span>()</span><br><span class="line">            &lt;&lt; std::endl;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <p>输出结果如下</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">min value of set container is -1</span><br><span class="line">max value of set container is 5</span><br><span class="line">max value of set container is 5</span><br><span class="line">min value of set container is -1</span><br><span class="line">max value of multiset container is 5</span><br><span class="line">min value of multiset container is -1</span><br></pre></td></tr></tbody></table></figure>
 <p>参考 &lt;剑指 offer&gt; 面试题 40 — 最小的 k 个数</p>
-<h1>基于 STL 的函数 push_heap、pop_heap 和 vector 实现堆</h1>
+<h1 id="基于-stl-的函数-push_heappop_heap-和-vector-实现堆">基于 STL
+的函数 push_heap、pop_heap 和 vector 实现堆</h1>
 <p>参考 &lt;剑指 offer&gt; 面试题 41 — 数据流中的中位数</p>
-<h1>更改记录</h1>
+<h1 id="更改记录">更改记录</h1>
 <p>2023.04.02 搭建架子，写出 set 版本。</p>
 
       
@@ -1400,11 +1481,11 @@
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html">The Python Standard Library</a>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html">The Python
+Standard Library</a>
 <ul>
 <li><em>keep this under your pillow</em></li>
-</ul>
-</li>
+</ul></li>
 </ul>
 
       
