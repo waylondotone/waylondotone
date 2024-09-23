@@ -144,9 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#system-description"><span class="nav-number">2.</span> <span class="nav-text">SYSTEM DESCRIPTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-hopping-mechanism"><span class="nav-number">2.1.</span> <span class="nav-text">The Hopping Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computer-and-sensor-electronics"><span class="nav-number">2.2.</span> <span class="nav-text">Computer and Sensor
-Electronics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static-and-dynamic-models"><span class="nav-number">3.</span> <span class="nav-text">STATIC AND DYNAMIC MODELS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#large-and-fine-motion-%E5%BE%AE%E8%BF%90%E5%8A%A8"><span class="nav-number">4.</span> <span class="nav-text">LARGE AND FINE MOTION
-(微运动)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#initial-tests"><span class="nav-number">5.</span> <span class="nav-text">INITIAL TESTS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusions"><span class="nav-number">6.</span> <span class="nav-text">CONCLUSIONS</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">SYSTEM DESCRIPTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Hopping-Mechanism"><span class="nav-number">2.1.</span> <span class="nav-text">The Hopping Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Computer-and-Sensor-Electronics"><span class="nav-number">2.2.</span> <span class="nav-text">Computer and Sensor Electronics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">STATIC AND DYNAMIC MODELS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">LARGE AND FINE MOTION (微运动)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">INITIAL TESTS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">CONCLUSIONS</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -159,7 +157,7 @@ Electronics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -321,105 +319,70 @@ Electronics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="
     
     <div class="post-body" itemprop="articleBody"><p>[toc]</p>
 <p>A Hopping Robot for Planetary Exploration</p>
-<p>本文提出一个行星探测跳跃机器人，可以通过跳跃来移动和滚动来拍照。一个突出的特点是机器人可以依靠单个马达
-(single motor) 朝指定方向跳跃。</p>
+<p>本文提出一个行星探测跳跃机器人，可以通过跳跃来移动和滚动来拍照。一个突出的特点是机器人可以依靠单个马达 (single motor) 朝指定方向跳跃。</p>
 <blockquote>
-<p>The goal of this project is to explore a different mobility paradigm
-which may present advantages over conventional wheel and leg
-locomotion.</p>
+<p>The goal of this project is to explore a different mobility paradigm which may present advantages over conventional wheel and leg locomotion.</p>
 </blockquote>
 <!-- 本文多次讲到系统的设计，比如机械设计的考虑点等，考虑的方向值得参考。-->
-<h1 id="introduction">INTRODUCTION</h1>
-<figure>
-<img data-src="http://www.waylon.one/downloads/images/blog/Hopping_NASS_JPL_CAD.png" alt="CAD rendering of the hopping robot">
-<figcaption aria-hidden="true">CAD rendering of the hopping
-robot</figcaption>
-</figure>
+<h1>INTRODUCTION</h1>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/Hopping_NASS_JPL_CAD.png" alt="CAD rendering of the hopping robot"></p>
 <p>除了轮式和足式机器人，爬行、旋转和跳跃也是可能的前进方式。</p>
 <blockquote>
-<p>Laboratory experiments have demonstrated the feasibility of
-<strong>slithering, rolling and hopping</strong> as alternate propulsion
-methods, thus paving the way to a more comprehensive approach to
-mobility than is currently considered.</p>
+<p>Laboratory experiments have demonstrated the feasibility of <strong>slithering, rolling and hopping</strong> as alternate propulsion methods, thus paving the way to a more comprehensive approach to mobility than is currently considered.</p>
 </blockquote>
 <p>跳跃是在低重力环境下的一种有效移动方式。</p>
 <blockquote>
-<p>It shows that hopping is an efficient form of transportation in a
-low-gravity environment.</p>
+<p>It shows that hopping is an efficient form of transportation in a low-gravity environment.</p>
 </blockquote>
-<p>常见的二足式跳跃机器人的运动是离散的，因为在跳跃中会有重定向
-(reorientation) 和推力机制蓄能 (recharge of the thrust mechanism)
-的间隔。</p>
+<p>常见的二足式跳跃机器人的运动是离散的，因为在跳跃中会有重定向 (reorientation) 和推力机制蓄能 (recharge of the thrust mechanism) 的间隔。</p>
 <blockquote>
-<p>The common characteristic of these two hopping systems is motion
-discontinuity, since a pause for reorientation and recharge of the
-thrust mechanism is inserted between jumps.</p>
+<p>The common characteristic of these two hopping systems is motion discontinuity, since a pause for reorientation and recharge of the thrust mechanism is inserted between jumps.</p>
 </blockquote>
-<h1 id="system-description">SYSTEM DESCRIPTION</h1>
+<h1>SYSTEM DESCRIPTION</h1>
 <p>系统设计目标：最小化驱动器、大小和重量。</p>
 <blockquote>
-<p>The design is driven by the desire of minimizing the number of
-actuators, and the overall size and weight, while achieving useful
-scientific capabilities.</p>
+<p>The design is driven by the desire of minimizing the number of actuators, and the overall size and weight, while achieving useful scientific capabilities.</p>
 </blockquote>
 <p>系统的缺陷：软地面不能自纠正；爬山坡不可行。</p>
 <blockquote>
-<p>A possible drawback of this design is limited mobility on soft
-terrain, since the ground will conform to the shape of the robot and
-prevent it from self-righting.</p>
+<p>A possible drawback of this design is limited mobility on soft terrain, since the ground will conform to the shape of the robot and prevent it from self-righting.</p>
 </blockquote>
-<h2 id="the-hopping-mechanism">The Hopping Mechanism</h2>
+<h2 id="The-Hopping-Mechanism">The Hopping Mechanism</h2>
 <p>蛋型 + 自纠正能力</p>
 <blockquote>
-<p>The chosen mechanism is a robust egg-shaped body with self-righting
-capability.</p>
+<p>The chosen mechanism is a robust egg-shaped body with self-righting capability.</p>
 </blockquote>
-<h2 id="computer-and-sensor-electronics">Computer and Sensor
-Electronics</h2>
+<h2 id="Computer-and-Sensor-Electronics">Computer and Sensor Electronics</h2>
 <p>具体的芯片设计和能耗管理，比如掉电功能、通信协议等等。</p>
-<h1 id="static-and-dynamic-models">STATIC AND DYNAMIC MODELS</h1>
+<h1>STATIC AND DYNAMIC MODELS</h1>
 <p>再一次验证了那句话，好的模型可以为系统的最优设计提供参考。</p>
 <blockquote>
-<p>The critical design constraint required to achieve maximum hopping
-distance.</p>
+<p>The critical design constraint required to achieve maximum hopping distance.</p>
 </blockquote>
-<h1 id="large-and-fine-motion-微运动">LARGE AND FINE MOTION
-(微运动)</h1>
+<h1>LARGE AND FINE MOTION (微运动)</h1>
 <p>地表状况会对轨迹的计算造成影响。Soil mechanics 土壤力学</p>
 <blockquote>
-<p>Furthermore, the uncertainty of the terrain condition and of the
-lift-off angle will prevent the advanced calculation of the trajectory
-parameters.</p>
+<p>Furthermore, the uncertainty of the terrain condition and of the lift-off angle will prevent the advanced calculation of the trajectory parameters.</p>
 </blockquote>
 <!-- 我的想法，如果观测地表推断结论不靠谱，那么就要依据跳跃的情况来推断地表的土壤情况，为下一次的跳跃提供参考。 -->
 <p>如何精确地跳跃短距离，然后抵达目标点呢？</p>
 <blockquote>
-<p>To cover short distances and to approach the desired target, we are
-planning to develop and test two new methods for fine motion control of
-the hopping robot.</p>
+<p>To cover short distances and to approach the desired target, we are planning to develop and test two new methods for fine motion control of the hopping robot.</p>
 </blockquote>
 <p>这应该属于路径规划的一个考虑点吧，毕竟在月球上一次跳跃的距离很长呢。</p>
-<h1 id="initial-tests">INITIAL TESTS</h1>
+<h1>INITIAL TESTS</h1>
 <p>以数学为基准去驱动设计和实现。</p>
-<h1 id="conclusions">CONCLUSIONS</h1>
+<h1>CONCLUSIONS</h1>
 <p>新奇的机械设计：蛋型 + 单驱动</p>
 <blockquote>
-<p>The robot consists of an egg-shaped shell enclosing a thrust
-mechanism, power storage devices and control and sensing
-electronics.</p>
+<p>The robot consists of an egg-shaped shell enclosing a thrust mechanism, power storage devices and control and sensing electronics.</p>
 </blockquote>
 <p>旋转重定向是依靠传感器提供的偏心力实现的，依赖必要的设备来实现其他功能。</p>
 <blockquote>
-<p>Hopping is powered by a spring released under computer control,
-whereas orientation is achieved by rotating an off-axis mass, consisting
-of the video camera and its transmitter, about the robot vertical
-axis.</p>
+<p>Hopping is powered by a spring released under computer control, whereas orientation is achieved by rotating an off-axis mass, consisting of the video camera and its transmitter, about the robot vertical axis.</p>
 </blockquote>
 <blockquote>
-<p>Future Work: In the future, we plan to carry out extensive
-simulations and experiments with the prototype to test its mobility
-capabilities and fully develop a new method of fine motion control based
-on hopping and rolling.</p>
+<p>Future Work: In the future, we plan to carry out extensive simulations and experiments with the prototype to test its mobility capabilities and fully develop a new method of fine motion control based on hopping and rolling.</p>
 </blockquote>
 
     </div>
@@ -485,7 +448,7 @@ on hopping and rolling.</p>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">16:08</span>
+    <span title="Reading time total">16:09</span>
   </span>
 </div>
 <div class="busuanzi-count">

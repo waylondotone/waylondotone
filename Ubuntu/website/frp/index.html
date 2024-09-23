@@ -20,12 +20,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备 (公网) 很难直接连接到主机以获取所需的资料。 本文将介绍一种通过内网穿透软件来搭建内网服务的方法，使得外部用户能够方便地访问和使用内网中的服务和资源。在这个过程中，将会涉及到内网穿透和反向代理的核心技术。 通过调研不同的 内网穿透工具，目前主要分为两种类型：  一种是通过销售硬件设备和流量的方式实现，比如快">
+    <meta name="description" content="在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备 (公网) 很难直接连接到主机以获取所需的资料。 本文将介绍一种通过内网穿透软件来搭建内网服务的方法，使得外部用户能够方便地访问和使用内网中的服务和资源。在这个过程中，将会涉及到内网穿透和反向代理的核心技术。 通过调研不同的 内网穿透工具，目前主要分为两种类型：   一种是通过销售硬件设备和流量的方式实现，比如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用 frp 实现内网穿透搭建内网服务">
 <meta property="og:url" content="http://www.waylon.one/Ubuntu/website/frp/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备 (公网) 很难直接连接到主机以获取所需的资料。 本文将介绍一种通过内网穿透软件来搭建内网服务的方法，使得外部用户能够方便地访问和使用内网中的服务和资源。在这个过程中，将会涉及到内网穿透和反向代理的核心技术。 通过调研不同的 内网穿透工具，目前主要分为两种类型：  一种是通过销售硬件设备和流量的方式实现，比如快">
+<meta property="og:description" content="在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备 (公网) 很难直接连接到主机以获取所需的资料。 本文将介绍一种通过内网穿透软件来搭建内网服务的方法，使得外部用户能够方便地访问和使用内网中的服务和资源。在这个过程中，将会涉及到内网穿透和反向代理的核心技术。 通过调研不同的 内网穿透工具，目前主要分为两种类型：   一种是通过销售硬件设备和流量的方式实现，比如">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/frp_struct.jpg">
 <meta property="article:published_time" content="2023-07-09T08:29:51.000Z">
@@ -142,8 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">我的应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%92%8C%E6%9D%90%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">工具和材料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="nav-number">3.</span> <span class="nav-text">我的网络配置示意图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frp-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.</span> <span class="nav-text">frp 是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.1.</span> <span class="nav-text">内网穿透是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.2.</span> <span class="nav-text">反向代理是什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#frp-%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">frp 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">5.1.</span> <span class="nav-text">我的配置环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#frp-%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">5.1.1.</span> <span class="nav-text">frp 服务端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frp-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BE%E5%A4%87-1"><span class="nav-number">5.1.2.</span> <span class="nav-text">frp 客户端设备 #1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frp-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BE%E5%A4%87-2"><span class="nav-number">5.1.3.</span> <span class="nav-text">frp 客户端设备 #2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE-frp-%E6%94%AF%E6%8C%81%E5%A4%9A%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BD%91%E9%A1%B5%E7%BB%88%E7%AB%AF"><span class="nav-number">5.2.</span> <span class="nav-text">如何设置 frp
-支持多个本地网页终端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A-web-%E6%9C%8D%E5%8A%A1%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.1.</span> <span class="nav-text">多 web 服务主机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vps-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.2.</span> <span class="nav-text">VPS 服务器配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frp-%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E5%A4%9A%E4%B8%AA%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">5.3.</span> <span class="nav-text">frp 如何支持多个服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87-1"><span class="nav-number">5.3.1.</span> <span class="nav-text">设备 #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">设备 #2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vps-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-1"><span class="nav-number">5.3.3.</span> <span class="nav-text">VPS 服务器配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">6.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">我的应用场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">工具和材料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">我的网络配置示意图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">frp 是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.1.</span> <span class="nav-text">内网穿透是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.2.</span> <span class="nav-text">反向代理是什么？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">frp 安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">5.1.</span> <span class="nav-text">我的配置环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#frp-%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%9A"><span class="nav-number">5.1.1.</span> <span class="nav-text">frp 服务端：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frp-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BE%E5%A4%87-1%EF%BC%9A"><span class="nav-number">5.1.2.</span> <span class="nav-text">frp 客户端设备 #1：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#frp-%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AE%BE%E5%A4%87-2%EF%BC%9A"><span class="nav-number">5.1.3.</span> <span class="nav-text">frp 客户端设备 #2：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE-frp-%E6%94%AF%E6%8C%81%E5%A4%9A%E4%B8%AA%E6%9C%AC%E5%9C%B0%E7%BD%91%E9%A1%B5%E7%BB%88%E7%AB%AF"><span class="nav-number">5.2.</span> <span class="nav-text">如何设置 frp 支持多个本地网页终端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A-web-%E6%9C%8D%E5%8A%A1%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.1.</span> <span class="nav-text">多 web 服务主机配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VPS-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE"><span class="nav-number">5.2.2.</span> <span class="nav-text">VPS 服务器配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frp-%E5%A6%82%E4%BD%95%E6%94%AF%E6%8C%81%E5%A4%9A%E4%B8%AA%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-number">5.3.</span> <span class="nav-text">frp 如何支持多个服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87-1"><span class="nav-number">5.3.1.</span> <span class="nav-text">设备 #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87-2"><span class="nav-number">5.3.2.</span> <span class="nav-text">设备 #2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VPS-%E6%9C%8D%E5%8A%A1%E5%99%A8%E9%85%8D%E7%BD%AE-2"><span class="nav-number">5.3.3.</span> <span class="nav-text">VPS 服务器配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,7 +155,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -313,122 +312,86 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备
-(公网) 很难直接连接到主机以获取所需的资料。</p>
+    <div class="post-body" itemprop="articleBody"><p>在工作和生活中，我们经常需要在外部访问我们家中的主机。然而，由于主机处于内网中，外部设备 (公网) 很难直接连接到主机以获取所需的资料。</p>
 <p>本文将介绍一种通过内网穿透软件来搭建内网服务的方法，使得外部用户能够方便地访问和使用内网中的服务和资源。在这个过程中，将会涉及到内网穿透和反向代理的核心技术。</p>
 <p>通过调研不同的 <a target="_blank" rel="noopener" href="https://juejin.cn/post/7240288077868286010">内网穿透工具</a>，目前主要分为两种类型：</p>
 <ul>
-<li><p>一种是通过销售硬件设备和流量的方式实现，比如快解析、花生壳、神卓互联、NAT123 等。这些工具拥有自主研发的核心技术，可以在淘宝等平台直接购买和配置。然而，这种方式的缺点是需要付费购买硬件设备，并且免费流量有限制，适合一些专业用户或氪金用户。</p></li>
-<li><p>一种是使用免费开源软件（如 frp 和 nps）来搭建内网穿透，不需要额外购买硬件设备，但需要具备公网
-IP
-的条件。这种方式的优点在于可以根据自己的需求进行定制化配置，后续扩展性强，
-但对于新手来说入门门槛较高。</p></li>
+<li>
+<p>一种是通过销售硬件设备和流量的方式实现，比如快解析、花生壳、神卓互联、NAT123 等。这些工具拥有自主研发的核心技术，可以在淘宝等平台直接购买和配置。然而，这种方式的缺点是需要付费购买硬件设备，并且免费流量有限制，适合一些专业用户或氪金用户。</p>
+</li>
+<li>
+<p>一种是使用免费开源软件（如 frp 和 nps）来搭建内网穿透，不需要额外购买硬件设备，但需要具备公网 IP 的条件。这种方式的优点在于可以根据自己的需求进行定制化配置，后续扩展性强，但对于新手来说入门门槛较高。</p>
+</li>
 </ul>
-<p>考虑到使用开源软件的优点，我的本地主机没有敏感信息，流量不设限制，
-所以我选择了免费开源软件 -- frp 来搭建内网穿透服务。请注意，虽然 frp
-目前使用广泛，但是本身逻辑设计有先天性缺陷，网络安全性差，
-非常容易造成网络堵塞，不能长时间连接使用，技术不够成熟.</p>
-<h1 id="我的应用场景">我的应用场景</h1>
+<p>考虑到使用开源软件的优点，我的本地主机没有敏感信息，流量不设限制，所以我选择了免费开源软件 – frp 来搭建内网穿透服务。请注意，虽然 frp 目前使用广泛，但是本身逻辑设计有先天性缺陷，网络安全性差，非常容易造成网络堵塞，不能长时间连接使用，技术不够成熟.</p>
+<h1>我的应用场景</h1>
 <ul>
 <li>在办公室或外出办公时，能够通过远程 ssh 控制家中的另一台电脑；</li>
-<li>家中电脑上运行了一个 web
-服务，希望能够让非局域网的用户访问到这个服务。</li>
+<li>家中电脑上运行了一个 web 服务，希望能够让非局域网的用户访问到这个服务。</li>
 </ul>
-<h1 id="工具和材料">工具和材料</h1>
+<h1>工具和材料</h1>
 <ul>
 <li>一个云服务器（包含公网 IP）；</li>
 <li>本地电脑需要联网；</li>
 <li>一个域名（用于多个 web 服务，如果只有 ssh 访问则不需要）。</li>
 </ul>
 <p>请注意，以下的教程适合具备一定计算机基础的开发者，对于新手来说可能存在一定的配置难度。</p>
-<h1 id="我的网络配置示意图">我的网络配置示意图</h1>
-<p>我进行了如下的网络配置，以实现通过 frp 在远程访问家中的主机和使用 web
-服务的目标。比如，在 ipad 上就可以通过网页连接内网服务上的 stable
-diffusion 生成图片。具体示意图如下：</p>
+<h1>我的网络配置示意图</h1>
+<p>我进行了如下的网络配置，以实现通过 frp 在远程访问家中的主机和使用 web 服务的目标。比如，在 ipad 上就可以通过网页连接内网服务上的 stable diffusion 生成图片。具体示意图如下：</p>
 <img data-src="/downloads/images/frp_struct.jpg" class="" title="frp 配置示意图">
-<h1 id="frp-是什么">frp 是什么？</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp</a>
-是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS
-等多种协议，且支持 P2P
-通信。可以将内网服务以安全、便捷的方式通过具有公网 IP
-节点的中转暴露到公网。</p>
+<h1>frp 是什么？</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp</a> 是一个专注于内网穿透的高性能的反向代理应用，支持 TCP、UDP、HTTP、HTTPS 等多种协议，且支持 P2P 通信。可以将内网服务以安全、便捷的方式通过具有公网 IP 节点的中转暴露到公网。</p>
 <h2 id="内网穿透是什么">内网穿透是什么？</h2>
-<p>内网穿透，即 NAT（Network Address
-Translator）穿透，是指计算机在内网（局域网）内使用私有 IP 地址，在连接外网（互联网）时使用全局 IP 地址的技术。简而言之，内网穿透可以将内网中的服务暴露到公网，使得这些服务可以通过公网访问。</p>
+<p>内网穿透，即 NAT（Network Address Translator）穿透，是指计算机在内网（局域网）内使用私有 IP 地址，在连接外网（互联网）时使用全局 IP 地址的技术。简而言之，内网穿透可以将内网中的服务暴露到公网，使得这些服务可以通过公网访问。</p>
 <h2 id="反向代理是什么">反向代理是什么？</h2>
-<p>反向代理（reverse proxy）是指以代理服务器来接受 internet
-上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给
-internet
-上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。</p>
-<h1 id="frp-安装">frp 安装</h1>
-<p>你可以参考 <a target="_blank" rel="noopener" href="https://gofrp.org/docs/setup/">安装教程</a>
-中的详细步骤来下载、部署和配置
-frp。该教程提供了安装和开机自启动的指导，具有很好的实用性。</p>
+<p>反向代理（reverse proxy）是指以代理服务器来接受 internet 上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给 internet 上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。</p>
+<h1>frp 安装</h1>
+<p>你可以参考 <a target="_blank" rel="noopener" href="https://gofrp.org/docs/setup/">安装教程</a> 中的详细步骤来下载、部署和配置 frp。该教程提供了安装和开机自启动的指导，具有很好的实用性。</p>
 <h2 id="我的配置环境">我的配置环境</h2>
-<h3 id="frp-服务端">frp 服务端：</h3>
+<h3 id="frp-服务端：">frp 服务端：</h3>
 <p>操作系统：Ubuntu 20.04</p>
-<h3 id="frp-客户端设备-1">frp 客户端设备 #1：</h3>
+<h3 id="frp-客户端设备-1：">frp 客户端设备 #1：</h3>
 <p>操作系统：Ubuntu 20.04</p>
-<h3 id="frp-客户端设备-2">frp 客户端设备 #2：</h3>
+<h3 id="frp-客户端设备-2：">frp 客户端设备 #2：</h3>
 <p>操作系统：Ubuntu 22.04</p>
-<h2 id="如何设置-frp-支持多个本地网页终端">如何设置 frp
-支持多个本地网页终端</h2>
-<p>在我本地的开发机器 #2 ，部署了 stable diffusion 和 Jupyter Notebook
-两个 web 应用，它们通过指定的本地端口提供服务，例如通过
-<code>127.0.0.1:8080</code> 可以访问
-jupyter。由于这些应用都部署在本地，无法直接从公网访问，因此 #2
-主机需要配置 frpc 服务来支持公网访问。</p>
+<h2 id="如何设置-frp-支持多个本地网页终端">如何设置 frp 支持多个本地网页终端</h2>
+<p>在我本地的开发机器 #2 ，部署了 stable diffusion 和 Jupyter Notebook 两个 web 应用，它们通过指定的本地端口提供服务，例如通过 <code>127.0.0.1:8080</code> 可以访问 jupyter。由于这些应用都部署在本地，无法直接从公网访问，因此 #2 主机需要配置 frpc 服务来支持公网访问。</p>
 <h3 id="多-web-服务主机配置">多 web 服务主机配置</h3>
 <p>在 #2 的 frp 的配置文件（frpc.ini）添加下面的内容</p>
 <figure class="highlight plaintext"><figcaption><span>[frpc.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 1.2.3.4     # 替换成公网 IP</span><br><span class="line">server_port = 1234        # 替换成开放的 Port</span><br><span class="line"># 此处省去 token 等配置</span><br><span class="line"></span><br><span class="line">[web1]   # 此处配置用于远程访问内网电脑上的 A 服务</span><br><span class="line">type = http</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = port1</span><br><span class="line">custom_domains = a.my_domain.com</span><br><span class="line"></span><br><span class="line">[web2]   # 此处配置用于远程访问内网电脑上的 B 服务</span><br><span class="line">type = http</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = port2</span><br><span class="line">custom_domains = b.my_domain.com</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>在上述配置中，我们使用不同的 <code>custom_domains</code>（例如
-<code>a.my_domain.com</code> 和 <code>b.my_domain.com</code>）以及不同的
-<code>local_port</code>（例如 <code>8888</code> 和
-<code>9999</code>）来区分两个本地网页终端。在实际应用中，通过
-custom_domains:vhost_http_port 就可以访问内网的 web 项目.</p>
-<h3 id="vps-服务器配置">VPS 服务器配置</h3>
-<p>在 frp 服务器上配置相应的转发规则，将请求转发到本地网页终端。你可以在
-frps.ini 配置文件中进行设置。</p>
+<p>在上述配置中，我们使用不同的 <code>custom_domains</code>（例如 <code>a.my_domain.com</code> 和 <code>b.my_domain.com</code>）以及不同的 <code>local_port</code>（例如 <code>8888</code> 和 <code>9999</code>）来区分两个本地网页终端。在实际应用中，通过 custom_domains:vhost_http_port 就可以访问内网的 web 项目.</p>
+<h3 id="VPS-服务器配置">VPS 服务器配置</h3>
+<p>在 frp 服务器上配置相应的转发规则，将请求转发到本地网页终端。你可以在 frps.ini 配置文件中进行设置。</p>
 <figure class="highlight plaintext"><figcaption><span>[frps.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 1234</span><br><span class="line">token = xxxx</span><br><span class="line">vhost_http_port = 8888</span><br><span class="line">dashboard_port = xxxx</span><br><span class="line">dashboard_user = xxxx</span><br><span class="line">dashboard_pwd = xxxx</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>通过以上配置，你可以通过 <code>a.my_domain.com:8888</code>
-访问第一个本地网页终端，通过 <code>b.my_domain.com:8888</code>
-访问第二个本地网页终端。</p>
+<p>通过以上配置，你可以通过 <code>a.my_domain.com:8888</code> 访问第一个本地网页终端，通过 <code>b.my_domain.com:8888</code> 访问第二个本地网页终端。</p>
 <h2 id="frp-如何支持多个服务端">frp 如何支持多个服务端</h2>
-<p>如果你想要支持多个服务端，需要在每个客户端安装一个 frpc
-服务，并根据每个设备的差异进行配置，确保每个设备的
-<code>remote_port</code> 不重复即可。</p>
-<p>上文提到，本地有两台主机，如果想让两台主机都可以远程访问，
-需要在每个客户端安装一个 frpc 服务.</p>
+<p>如果你想要支持多个服务端，需要在每个客户端安装一个 frpc 服务，并根据每个设备的差异进行配置，确保每个设备的 <code>remote_port</code> 不重复即可。</p>
+<p>上文提到，本地有两台主机，如果想让两台主机都可以远程访问，需要在每个客户端安装一个 frpc 服务.</p>
 <h3 id="设备-1">设备 #1</h3>
 <figure class="highlight plaintext"><figcaption><span>[frpc.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 1.2.3.4     # 替换成公网 IP</span><br><span class="line">server_port = 1234        # 替换成开放的 Port</span><br><span class="line"># 此处省去 token 等配置</span><br><span class="line"></span><br><span class="line">[ssh1] # 若有多个客户端，名称不要重复。</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 2345 # 远程连接端口不要重复</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 <h3 id="设备-2">设备 #2</h3>
 <figure class="highlight plaintext"><figcaption><span>[frpc.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">[common]</span><br><span class="line">server_addr = 1.2.3.4     # 替换成公网 IP</span><br><span class="line">server_port = 1234        # 替换成开放的 Port</span><br><span class="line"># 此处省去 token 等配置</span><br><span class="line"></span><br><span class="line">[ssh2] # 若有多个客户端，名称不要重复。</span><br><span class="line">type = tcp</span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 3456 # 远程连接端口不要重复</span><br><span class="line"></span><br><span class="line"># 此处省去 web 等配置</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<h3 id="vps-服务器配置-1">VPS 服务器配置</h3>
+<h3 id="VPS-服务器配置-2">VPS 服务器配置</h3>
 <figure class="highlight plaintext"><figcaption><span>[frps.ini]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 1234</span><br><span class="line">token = xxxx</span><br><span class="line">vhost_http_port = 8080</span><br><span class="line">dashboard_port = xxxx</span><br><span class="line">dashboard_user = xxxx</span><br><span class="line">dashboard_pwd = xxxx</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>根据提供的示例，两台机器都绑定服务器的 1234
-端口，但是远程连接的端口不同，第一台机器的远程连接端口为
-<code>2345</code>，第二台机器的远程连接端口为 <code>3456</code>。假设 #1
-用户名为 test1, #2 用户名为 test2, 那么</p>
+<p>根据提供的示例，两台机器都绑定服务器的 1234 端口，但是远程连接的端口不同，第一台机器的远程连接端口为 <code>2345</code>，第二台机器的远程连接端口为 <code>3456</code>。假设 #1 用户名为 test1, #2 用户名为 test2, 那么</p>
 <figure class="highlight plaintext"><figcaption><span>[#1 机器连接]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh  -oPort=2345 test1@1.2.3.4</span><br></pre></td></tr></tbody></table></figure>
 <figure class="highlight plaintext"><figcaption><span>[#2 机器连接]</span></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh  -oPort=3456 test2@1.2.3.4</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="安全性">安全性</h1>
-<h1 id="参考资料">参考资料</h1>
+<h1>安全性</h1>
+<h1>参考资料</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://gofrp.org">frp 文档</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp
-github</a></li>
-<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/TianyuSu/p/11961994.html">frp
-配置多个 web 项目，无需购买域名</a>
+<li><a target="_blank" rel="noopener" href="https://github.com/fatedier/frp/tree/dev">frp github</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/TianyuSu/p/11961994.html">frp 配置多个 web 项目，无需购买域名</a>
 <ul>
-<li>参考 frpc.ini 配置，但是 custom_domains 使用自己的域名，
-没有通过配置本地 host 文件来使用虚假域名.</li>
-</ul></li>
+<li>参考 frpc.ini 配置，但是 custom_domains 使用自己的域名，没有通过配置本地 host 文件来使用虚假域名.</li>
+</ul>
+</li>
 <li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/wangyuyu/p/14312431.html">frp 用一个服务器进程 frps 连接多个客户端 frpc</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/370476621">frp 内网穿透，实现局域网网页，外网访问</a>
 <ul>
-<li>对单个 web 应用，custom_domains 也可以设置为服务器 IP 地址，不用域名
-(亲测可行) ; 多个 web 端不可行.</li>
-</ul></li>
+<li>对单个 web 应用，custom_domains 也可以设置为服务器 IP 地址，不用域名 (亲测可行) ; 多个 web 端不可行.</li>
+</ul>
+</li>
 </ul>
 
     </div>
@@ -492,7 +455,7 @@ github</a></li>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">16:08</span>
+    <span title="Reading time total">16:09</span>
   </span>
 </div>
 <div class="busuanzi-count">
