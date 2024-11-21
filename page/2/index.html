@@ -267,11 +267,11 @@
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html">The Python
-Standard Library</a>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/library/index.html">The Python Standard Library</a>
 <ul>
 <li><em>keep this under your pillow</em></li>
-</ul></li>
+</ul>
+</li>
 </ul>
 
       
@@ -482,9 +482,8 @@ Standard Library</a>
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<p>2022 年 11
-月末，北京疫情变得严重起来，我开始居家办公。这段时间省下来数个小时的通勤时间，使得自己能够利用晚上的时间，捧起《如何阅读一本书》。我的初步想法是希望阅读这本书可以教会自己如何更加高效读书，如何更好地理解和整理一本书，以及纠正自己阅读的一些坏习惯。</p>
-<p><img data-src="/downloads/images/how_to_read_a_book_front_cover.jpeg"></p>
+<p>2022 年 11 月末，北京疫情变得严重起来，我开始居家办公。这段时间省下来数个小时的通勤时间，使得自己能够利用晚上的时间，捧起《如何阅读一本书》。我的初步想法是希望阅读这本书可以教会自己如何更加高效读书，如何更好地理解和整理一本书，以及纠正自己阅读的一些坏习惯。</p>
+<p><img data-src="/downloads/images/how_to_read_a_book_front_cover.jpeg" alt=""></p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Reading/how-to-read-a-book-summary/#more" rel="contents">
@@ -592,14 +591,9 @@ Standard Library</a>
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h2 id="etf-简介">ETF 简介</h2>
-<h3 id="什么是-etf">什么是 ETF ？</h3>
-<p>ETF 是英文 “Exchange Traded Funds”
-的简称，常被译为 “<strong>交易所交易基金</strong>”。ETF
-是一种在<strong>交易所上市交易</strong>的、<strong>基金份额可变</strong>的基金。ETF
-结合了封闭式基金与开放式基金的运作特点，一方面，基金份额可以像封闭式基金一样在交易所二级市场进行买卖；另一方面，可以像开放式基金一样申购、赎回。
-ETF
-通常是以某一选定的指数所包含的成分证券为投资对象，依据构成指数的证券种类和比例，采用<strong>完全复制</strong>或抽样复制的方法进行被动投资的指数型基金。</p>
+<h2 id="ETF-简介">ETF 简介</h2>
+<h3 id="什么是-ETF-？">什么是 ETF ？</h3>
+<p>ETF 是英文 “Exchange Traded Funds” 的简称，常被译为 “<strong>交易所交易基金</strong>”。ETF 是一种在<strong>交易所上市交易</strong>的、<strong>基金份额可变</strong>的基金。ETF 结合了封闭式基金与开放式基金的运作特点，一方面，基金份额可以像封闭式基金一样在交易所二级市场进行买卖；另一方面，可以像开放式基金一样申购、赎回。 ETF 通常是以某一选定的指数所包含的成分证券为投资对象，依据构成指数的证券种类和比例，采用<strong>完全复制</strong>或抽样复制的方法进行被动投资的指数型基金。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Finance/exchange-otc-etf/#more" rel="contents">
@@ -921,11 +915,10 @@ ETF
     
     <div class="post-body" itemprop="articleBody">
           <!-- compiler_killed_swap -->
-<h1 id="背景">背景</h1>
+<h1>背景</h1>
 <p>在 Linux 系统上编译大型程序时，可能遇到如下编译错误：</p>
 <figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">c++: internal compiler error: <span class="built_in">Killed</span> (program cc1plus)</span><br><span class="line">Please submit a full bug report</span><br></pre></td></tr></tbody></table></figure>
-<p>经过查资料，大概率是编译时内存不够导致的，除了增加物理内存外
-(花银子)，短期可以通过增加交换分区 swap 来解决 (时间换空间)。</p>
+<p>经过查资料，大概率是编译时内存不够导致的，除了增加物理内存外 (花银子)，短期可以通过增加交换分区 swap 来解决 (时间换空间)。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/Linux/compiler-killed-swap/#more" rel="contents">
@@ -1034,19 +1027,14 @@ ETF
     <div class="post-body" itemprop="articleBody">
           <!--linux_mount_disk-->
 <p>[toc]</p>
-<h1 id="挂载点与设备的关系">挂载点与设备的关系</h1>
-<p>linux 下面所有的文件、目录、设备都有一个路径，这个路径永远以 /
-开头，用 / 分隔。</p>
-<p>通过 mount，可以设置当前的路径与设备的对应关系。每个设备会设置一个挂载点，挂载点是一个空目录。一般来说必须有一个设备挂载在
-/ 这个根路径下面，叫做 rootfs。其他挂载点可以是 /tmp，/boot，/dev
-等等，通过在 rootfs 上面创建一个空目录，然后用 mount
-命令就可以将设备挂载到这个目录上。挂载之后，这个目录下的子路径，就会映射到被挂载的设备里面。同一个设备可以有多个挂载点，同一个挂载点同时只能加载一个设备。</p>
+<h1>挂载点与设备的关系</h1>
+<p>linux 下面所有的文件、目录、设备都有一个路径，这个路径永远以 / 开头，用 / 分隔。</p>
+<p>通过 mount，可以设置当前的路径与设备的对应关系。每个设备会设置一个挂载点，挂载点是一个空目录。一般来说必须有一个设备挂载在 / 这个根路径下面，叫做 rootfs。其他挂载点可以是 /tmp，/boot，/dev 等等，通过在 rootfs 上面创建一个空目录，然后用 mount 命令就可以将设备挂载到这个目录上。挂载之后，这个目录下的子路径，就会映射到被挂载的设备里面。同一个设备可以有多个挂载点，同一个挂载点同时只能加载一个设备。</p>
 <p>文件系统挂载时有覆盖（/ 遮盖）关系，如果你所要挂载的挂载点（/ 目录）下面有文件或已挂载的文件系统，那么新挂载的文件系统会遮盖其下面的内容。这也就是挂载点为什么必须是空目录的原因了。</p>
-<h1 id="设备挂载">设备挂载</h1>
+<h1>设备挂载</h1>
 <figure class="highlight jsx"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"># 查询磁盘信息</span><br><span class="line"># <span class="attr">fdisk</span>: <span class="title class_">Display</span> or manipulate a disk partition table</span><br><span class="line">sudo fdisk -l</span><br><span class="line"># 创建挂载点</span><br><span class="line">cd /home/用户名</span><br><span class="line">mkdir 文件夹名称</span><br><span class="line"># 查询挂载硬盘(以 /dev/sda 为例，后面的 /dev/sda 均指想挂载的硬盘)的 <span class="variable constant_">UUID</span>、type 等信息</span><br><span class="line">sudo blkid /dev/sda</span><br><span class="line">  # 通常返回如下格式</span><br><span class="line">    /dev/<span class="attr">sda</span>: <span class="variable constant_">UUID</span>=<span class="string">"8e33e89c-xxx-7a3f08ed0db6"</span> <span class="variable constant_">TYPE</span>=<span class="string">"ext4"</span></span><br><span class="line">  # 如果在使用 blkid 没有返回结果，或者未显示 <span class="variable constant_">TYPE</span>=<span class="string">"ext4"</span>，表示这个硬盘还没有分区或者没有格式化</span><br><span class="line"># 如果未格式化需要先格式化分区（使用ext4文件系统，mkfs.<span class="property">exe4</span> 的命令对分区进行格式化）</span><br><span class="line">sudo mkfs.<span class="property">ext4</span> /dev/sda</span><br><span class="line"># 修改开机挂载硬盘文件</span><br><span class="line">sudo vi /etc/fstab</span><br><span class="line"># 在 /etc/fstab 文件最后新增：</span><br><span class="line"># 第一列为 <span class="variable constant_">UUID</span>, 第二列为挂载目录（该目录必须为一个空白目录），第三列为文件系统类型，第四列为参数，第五列<span class="number">0</span>表示不备份，最后一列必须为２或<span class="number">0</span>(除非引导分区为<span class="number">1</span>)</span><br><span class="line"><span class="variable constant_">UUID</span>=<span class="string">"f652d9d2e-02"</span>（上面查询的<span class="variable constant_">UUID</span>） /home/用户名/文件夹名称(上面创建的挂载点) ext4 defaults <span class="number">0</span> <span class="number">2</span></span><br><span class="line"># 执行命令进行挂载</span><br><span class="line">sudo mount -a</span><br><span class="line"># 查看硬盘是否正常挂载。</span><br><span class="line">df -h</span><br></pre></td></tr></tbody></table></figure>
-<h1 id="异常情况">异常情况</h1>
-<p>如果挂载硬盘后，重启系统后异常，比如在登录界面循环登录，无法进入可视化界面；这可能是
-/etc/fstab 文件配置错误，删除刚才添加的内容可以恢复正常。</p>
+<h1>异常情况</h1>
+<p>如果挂载硬盘后，重启系统后异常，比如在登录界面循环登录，无法进入可视化界面；这可能是 /etc/fstab 文件配置错误，删除刚才添加的内容可以恢复正常。</p>
 <ul>
 <li>shift+alt+F2 可以进入 tty2 命令行界面，通过命令行方式操作。</li>
 </ul>
@@ -1151,13 +1139,10 @@ ETF
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<p>本文是香港科技大学的研究结果，发表于 <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9197302">ICRA
-2020</a>。</p>
+<p>本文是香港科技大学的研究结果，发表于 <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9197302">ICRA 2020</a>。</p>
 <p>作为一个自动驾驶的研发人员，通篇读下来认为这篇论文研究在实际工程应用中价值比较低。如果非学术原因，不建议深度研究。</p>
-<p>其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是
-spatial-temporal planner 方案；</p>
-<p>其二，原本吸引我的 POMDP 和
-多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到自车未来行为决策影响的，所以存在一定的不确定性，如何评估这部分不确定性，如何判断对方车是否有合作意图，这部分难点问题也没有深入研究。</p>
+<p>其一，文章的亮点是自车策略选择，现在比较成熟的技术路线是 spatial-temporal planner 方案；</p>
+<p>其二，原本吸引我的 POMDP 和 多物体交互，在文章中却被略写，没有深度。周围车辆的意图是受到自车未来行为决策影响的，所以存在一定的不确定性，如何评估这部分不确定性，如何判断对方车是否有合作意图，这部分难点问题也没有深入研究。</p>
 <p>因为后续的精力有限，自己不会再对阅读的论文进行整理，但是我会逐渐整理并分享一个自动驾驶进阶学习资料。</p>
           <!--noindex-->
             <div class="post-button">
@@ -1267,39 +1252,34 @@ spatial-temporal planner 方案；</p>
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <p><strong>文章观点仅代表作者本人看法，存在个人的认知局限性。若内容涉及投资建议，仅供参考勿作为投资依据。投资有风险，入市需谨慎</strong>。</p>
-<p>今年第二次中签可转债 — 锦浪发债。之前被公众号安利打新债赚钱容易，但是赚钱的具体原因却不晓得，趁着这次中签新债的机会，以
-<strong>锦浪发债</strong> 为例，扒一扒打新债赚钱的原理。</p>
-<p><img data-src="/downloads/images/jinlangfazhai.jpg" alt="锦浪发债中签" style="zoom:33%;"></p>
-<h1 id="什么是可转债">什么是可转债</h1>
-<p>可转债全称 <strong>可转换公司债券 (Convertible
-bond)，</strong>属于公司债券的一种形式。可转换公司债券是指发行人依照法定程序发行、在一定期限内依据约定的条件可以转换成股份的公司债券。公司发行可转换债券的<strong>主要动因是为了增强证券对投资者的吸引力，能以较低的成本筹集到所需要的资金</strong>。</p>
+<p>今年第二次中签可转债 — 锦浪发债。之前被公众号安利打新债赚钱容易，但是赚钱的具体原因却不晓得，趁着这次中签新债的机会，以 <strong>锦浪发债</strong> 为例，扒一扒打新债赚钱的原理。</p>
+<img data-src="/downloads/images/jinlangfazhai.jpg" alt="锦浪发债中签" style="zoom:33%;">
+<h1>什么是可转债</h1>
+<p>可转债全称 <strong>可转换公司债券 (Convertible bond)，<strong>属于公司债券的一种形式。可转换公司债券是指发行人依照法定程序发行、在一定期限内依据约定的条件可以转换成股份的公司债券。公司发行可转换债券的</strong>主要动因是为了增强证券对投资者的吸引力，能以较低的成本筹集到所需要的资金</strong>。</p>
 <blockquote>
 <p>这种债券附加转股选择权，在转换前是公司债券形式，转换后相当于增发了股票。因此，可转换公司债券兼有债权投资和股权投资的双重优势。</p>
 <p>可转换公司债券与一般的债券一样，在转换前投资者可以定期得到利息收人，但此时不具有股东的权利；当发行公司的经营业绩取得显著增长时，可转换公司债券的持有人可以在约定期限内，按预定的转换价格转换成公司的股份，以分享公司业绩增长带来的收益。可转换债券一旦转换成普通股票，能使公司将原来筹集的期限有限的资金转化成长期稳定的股本，扩大了股本规模。</p>
 </blockquote>
 <p>可转债本质上是公司借钱的一张 “欠条”，相当于我们把钱借给了上市公司，到期可以拿回本金 + 利息。借钱期限到了，公司是要返还我们本金还有利息的，这是 “债” 的部分。同时，它还可以转化为股票。如果股价上涨，我们不想做公司的债主，还可以做公司的股东，这就是 “可转” 的含义。正因为可转债具备「股债」双重特性，所以又被认为是「下有保底，上不封顶」的投资品。</p>
-<p>注意，可转换债券通常包含 <strong>赎回条款</strong> 和
-<strong>回售条款</strong>，一般可以分为可赎回债券和可回售债券。</p>
+<p>注意，可转换债券通常包含 <strong>赎回条款</strong> 和 <strong>回售条款</strong>，一般可以分为可赎回债券和可回售债券。</p>
 <ul>
 <li>可赎回债券，是指可转换公司债券发行人拥有是否实施赎回条款选择权的债券。当公司股票价格在一段时间内连续高于转换价格达到一定幅度时，公司可以按照事先约定的赎回价格买回发行在外尚未转股的可转换债券。</li>
 <li>可回售债券，是指可转换公司债券的持有人是否实施回售条款选择权的债券。当公司的股票价格在一段时间内连续低于转换价格达到一定幅度时，可转换公司债券持有人有权按事先约定的价格将所持可转债卖给发行人。</li>
 </ul>
 <p>可转换公司债券一般要经股东大会或董事会的决议通过才能发行，而且在发行时，应在发行条款中规定转换期限和转换价格。</p>
 <hr>
-<p>本文以 <strong>锦浪发债</strong>
-为例，看看公告中是如何规定利息、转债、赎回和回售条款。本节以下截图均来自
-<a target="_blank" rel="noopener" href="https://pdf.dfcfw.com/pdf/H2_AN202202071545531483_1.pdf?1644265927000.pdf">锦浪科技股份有限公司向不特定对象发行可转换公司债券发行公告</a>。</p>
+<p>本文以 <strong>锦浪发债</strong> 为例，看看公告中是如何规定利息、转债、赎回和回售条款。本节以下截图均来自 <a target="_blank" rel="noopener" href="https://pdf.dfcfw.com/pdf/H2_AN202202071545531483_1.pdf?1644265927000.pdf">锦浪科技股份有限公司向不特定对象发行可转换公司债券发行公告</a>。</p>
 <h2 id="利息">利息</h2>
-<p><img data-src="/downloads/images/nianxian-5331745.png" alt="债务存续期限" style="zoom: 33%;"></p>
-<p><img data-src="/downloads/images/fuxi.png" alt="利息" style="zoom: 33%;"></p>
+<img data-src="/downloads/images/nianxian-5331745.png" alt="债务存续期限" style="zoom: 33%;">
+<img data-src="/downloads/images/fuxi.png" alt="利息" style="zoom: 33%;">
 <h2 id="转股">转股</h2>
-<p><img data-src="/downloads/images/zhuangu.png" alt="转股" style="zoom: 33%;"></p>
+<img data-src="/downloads/images/zhuangu.png" alt="转股" style="zoom: 33%;">
 <h2 id="有条件赎回条款">有条件赎回条款</h2>
-<p><img data-src="/downloads/images/suhui.png" alt="赎回条款" style="zoom: 33%;"></p>
+<img data-src="/downloads/images/suhui.png" alt="赎回条款" style="zoom: 33%;">
 <h2 id="有条件回售条款">有条件回售条款</h2>
-<p><img data-src="/downloads/images/huishou.png" alt="回售条款" style="zoom: 33%;"></p>
-<p><img data-src="/downloads/images/gujiahuishou.jpeg" alt="股价下跌，回售政策" style="zoom:100%;"></p>
-<h1 id="可转债打新为什么能赚钱">可转债打新为什么能赚钱</h1>
+<img data-src="/downloads/images/huishou.png" alt="回售条款" style="zoom: 33%;">
+<img data-src="/downloads/images/gujiahuishou.jpeg" alt="股价下跌，回售政策" style="zoom:100%;">
+<h1>可转债打新为什么能赚钱</h1>
 <p>要理解可转债打新赚钱的原理，我们必须要弄清楚一件事 — 溢价率，我们打新收益大部分都源自于溢价率，然后小部分是股价上涨所致。</p>
 <!--
 
@@ -1312,9 +1292,9 @@ bond)，</strong>属于公司债券的一种形式。可转换公司债券是指
 </ul>
 <h2 id="溢价率">溢价率</h2>
 <p>溢价率怎么查？通过集思录的<a target="_blank" rel="noopener" href="https://www.jisilu.cn/web/data/cb/list">可转债筛选功能</a>，我们可以查看锦浪溢价率。因为未上市交易，溢价率为负，这里仅是示例。</p>
-<p><img data-src="/downloads/images/jinlangyijialv.png" alt="锦浪溢价率" style="zoom:67%;"></p>
+<img data-src="/downloads/images/jinlangyijialv.png" alt="锦浪溢价率" style="zoom:67%;">
 <h3 id="溢价率通常大于0">溢价率通常大于 0</h3>
-<p><img data-src="/downloads/images/yijialv.jpg" alt="溢价率计算" style="zoom:50%;"></p>
+<img data-src="/downloads/images/yijialv.jpg" alt="溢价率计算" style="zoom:50%;">
 <h2 id="转股价格">转股价格</h2>
 <h3 id="初始转股价格">初始转股价格</h3>
 <p>公告中的初始转股价格不得低于</p>
@@ -1324,55 +1304,55 @@ bond)，</strong>属于公司债券的一种形式。可转换公司债券是指
 </ul>
 <p>所以，一般在发行前，溢价率小于 0，发行后溢价率为正。</p>
 <h3 id="转股价格向下修正">转股价格向下修正</h3>
-<p><img data-src="/downloads/images/xiangxiaxiuzheng.png" alt="股价下跌，向下修正" style="zoom:33%;"></p>
-<h1 id="交易机制">交易机制</h1>
-<h2 id="申购t日">申购 (T 日)</h2>
+<img data-src="/downloads/images/xiangxiaxiuzheng.png" alt="股价下跌，向下修正" style="zoom:33%;">
+<h1>交易机制</h1>
+<h2 id="申购-T日">申购 (T 日)</h2>
 <ul>
-<li>T
-日，投资者网上有效申购数量与原股东优先配售后余额部分 (含原股东放弃优先配售部分)，即网上发行总量确定后，发行人与保荐机构 (主承销商) 按照以下原则配售可转债:
+<li>
+<p>T 日，投资者网上有效申购数量与原股东优先配售后余额部分 (含原股东放弃优先配售部分)，即网上发行总量确定后，发行人与保荐机构 (主承销商) 按照以下原则配售可转债:</p>
 <ul>
 <li>当有效申购总量小于或等于网上发行总量时，投资者按照其有效申购量认购；</li>
 <li>当网上申购总量大于网上发行总量时，按投资者摇号中签结果确定配售数量。</li>
-</ul></li>
-<li>原 A
-股股东除可参加优先配售外，还可参加优先配售后余额的网上申购。</li>
-<li>每个证券账户的 最低申购数量为 10 张 (1,000 元)，每 10
-张为一个申购单位，超过 10 张的必须 是 10 张的整数倍，每个账户申购上限是
-1 万张 (100 万元)，超出部分为无效申购。</li>
-<li>投资者参与可转债网上申购只能使用一个证券账户。同一投资者使用多个证券账户参与同一只可转债申购的，或投资者使用同一证券账户多次参与同一只可转债申购的，以该投资者的第一笔申购为有效申购，其余申购均为无效申购。</li>
 </ul>
-<h2 id="中签t2日">中签 (T+2 日)</h2>
+</li>
+<li>
+<p>原 A 股股东除可参加优先配售外，还可参加优先配售后余额的网上申购。</p>
+</li>
+<li>
+<p>每个证券账户的 最低申购数量为 10 张 (1,000 元)，每 10 张为一个申购单位，超过 10 张的必须 是 10 张的整数倍，每个账户申购上限是 1 万张 (100 万元)，超出部分为无效申购。</p>
+</li>
+<li>
+<p>投资者参与可转债网上申购只能使用一个证券账户。同一投资者使用多个证券账户参与同一只可转债申购的，或投资者使用同一证券账户多次参与同一只可转债申购的，以该投资者的第一笔申购为有效申购，其余申购均为无效申购。</p>
+</li>
+</ul>
+<h2 id="中签-T-2日">中签 (T+2 日)</h2>
 <ul>
-<li>新债中签号公布之后，当天下午 16
-点之前必须认购成功，否则就是弃购，一般是半个月左右上市，上市之后注意卖出时机。
+<li>新债中签号公布之后，当天下午 16 点之前必须认购成功，否则就是弃购，一般是半个月左右上市，上市之后注意卖出时机。
 <ul>
-<li>若是持续在 130
-元的价位，是可能被强制赎回的，强制性赎回会折损持有者的利润，因为强赎的价格是很低的。</li>
-</ul></li>
+<li>若是持续在 130 元的价位，是可能被强制赎回的，强制性赎回会折损持有者的利润，因为强赎的价格是很低的。</li>
+</ul>
+</li>
 </ul>
 <h2 id="发行">发行</h2>
 <ul>
-<li>可转债实行 T+0 交易，按照市场实时价格进行成交，没有涨跌幅限制
-(设有临时停牌机制)。</li>
+<li>可转债实行 T+0 交易，按照市场实时价格进行成交，没有涨跌幅限制 (设有临时停牌机制)。</li>
 </ul>
-<p><img data-src="/downloads/images/jiaoyixianzhi.png" alt="交易限制" style="zoom: 33%;"></p>
+<img data-src="/downloads/images/jiaoyixianzhi.png" alt="交易限制" style="zoom: 33%;">
 <ul>
 <li>对投资者不收取佣金、过户费和印花税等费用。</li>
 </ul>
-<h1 id="债券信用评级">债券信用评级</h1>
+<h1>债券信用评级</h1>
 <blockquote>
 <p>债券信用评级是以企业或经济主体发行的有价债券为对象进行的信用评级。债券信用评级大多是企业债券信用评级，是对具有独立法人资格企业所发行某特定债券、按期还本付息的可靠程度进行客观公正的评估，并标示其信用程度的等级。这种信用评级，是为投资者购买债券和证券市场债券的流通转让活动提供信息服务。</p>
 </blockquote>
-<p>锦浪转债的信息评级是 AA-。“AA”
-表示偿还债务的能力很强，受不利经济环境的影响不大，违约风险很低；“-”
-符合进行微调，表示略低于本等级。</p>
-<p><img data-src="/downloads/images/zhaiquanpingji.png" alt="债券评级" style="zoom: 33%;"></p>
-<h1 id="风险">风险</h1>
+<p>锦浪转债的信息评级是 AA-。“AA” 表示偿还债务的能力很强，受不利经济环境的影响不大，违约风险很低；“-” 符合进行微调，表示略低于本等级。</p>
+<img data-src="/downloads/images/zhaiquanpingji.png" alt="债券评级" style="zoom: 33%;">
+<h1>风险</h1>
 <ul>
 <li>发行可转换公司债券一般不提供担保。公司本次发行可转换公司债券未提供担保措施，那么如果可转债存续期间出现对公司经营管理和偿债能力有重大负面影响的事件，本次可转债可能因未提供担保而增加兑付风险。</li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/BpijeelIkfzA8ft_nbKg9w">溢价过高，强制赎回风险</a>。可转债背后的上市公司在满足一定条件后，有权用很低的价格，强行从你手中把可转债买回来。</li>
 </ul>
-<h1 id="参考">参考</h1>
+<h1>参考</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://finance.sina.com.cn/money/fund/fundzmt/2020-03-08/doc-iimxxstf7435098.shtml">深度揭秘：可转债打新为什么能赚钱？赚了谁的钱？</a></li>
 <li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/97993034">可转债打新为什么能赚钱</a></li>
