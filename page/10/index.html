@@ -266,82 +266,84 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>ps. 本文实时更新于<a href="http://www.waylon.one/Ubuntu/how-to-create-gif/">个人网站</a>，请移步阅读。</p>
-<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/GIF/217778?fr=aladdin">Gif</a> 是当下较为流行的一种交流方式，其文件比视频小，而且比 jpg 图片生动形象，所以不仅在微薄、QQ 等社交中尤为常见，而且适用于产品和功能的展示。同时，Gif 文件大小一般是普通 MP4 格式的数倍。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/GIF/217778?fr=aladdin">Gif</a>
+是当下较为流行的一种交流方式，其文件比视频小，而且比 jpg
+图片生动形象，所以不仅在微薄、QQ
+等社交中尤为常见，而且适用于产品和功能的展示。同时，Gif
+文件大小一般是普通 MP4 格式的数倍。</p>
 <blockquote>
-<p>GIFs are an average of 5-10 times larger than an efficiently encoded MP4 video. This difference in size means that GIFs waste a large amount of bandwidth and also load at a slower rate leading to a bad user experience.</p>
+<p>GIFs are an average of 5-10 times larger than an efficiently encoded
+MP4 video. This difference in size means that GIFs waste a large amount
+of bandwidth and also load at a slower rate leading to a bad user
+experience.</p>
 </blockquote>
-<p>下文主要分享下如何在 Ubuntu 18 上录制 gif 动画以及处理 gif 文件，不必动用到 Windows 中像 Photoshop 这样的神器。</p>
-<h1>软件需求</h1>
+<p>下文主要分享下如何在 Ubuntu 18 上录制 gif 动画以及处理 gif
+文件，不必动用到 Windows 中像 Photoshop 这样的神器。</p>
+<h1 id="软件需求">软件需求</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuxiabing150/article/details/45872783">ImageMagick</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuxiabing150/article/details/45872783">ImageMagick</a>
+&gt; ImageMagick 是一款用于创建、编辑和合并位图图像的一款开源软件。</li>
+<li><a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2017-12/149744.htm">byzanz</a> &gt;
+byzanz 是通过输入命令方式来录制文件小、清晰的 GIF 动态效果图。</li>
 </ul>
-<blockquote>
-<p>ImageMagick 是一款用于创建、编辑和合并位图图像的一款开源软件。</p>
-</blockquote>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2017-12/149744.htm">byzanz</a></li>
-</ul>
-<blockquote>
-<p>byzanz 是通过输入命令方式来录制文件小、清晰的 GIF 动态效果图。</p>
-</blockquote>
-<h1>Gif 录制</h1>
+<h1 id="gif-录制">Gif 录制</h1>
 <p>本文使用 byzanz 来录制 Gif，其主要的参数选项有：</p>
 <table>
 <thead>
-<tr>
+<tr class="header">
 <th>参数</th>
 <th>单位</th>
 <th>含义</th>
 </tr>
 </thead>
 <tbody>
-<tr>
+<tr class="odd">
 <td> -d, --duration</td>
 <td>SECS</td>
 <td> 动画的时间 (默认：10 秒)</td>
 </tr>
-<tr>
-<td>–delay</td>
+<tr class="even">
+<td>--delay</td>
 <td>SECS</td>
 <td> 开始之前的延时 (默认：1 秒)</td>
 </tr>
-<tr>
+<tr class="odd">
 <td>-c, --cursor</td>
 <td></td>
 <td> 录制鼠标光标</td>
 </tr>
-<tr>
+<tr class="even">
 <td> -a, --audio</td>
 <td></td>
 <td> 录音</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> -x, --x</td>
 <td> 像素</td>
 <td>要录制矩形的 X 坐标</td>
 </tr>
-<tr>
+<tr class="even">
 <td> -y, --y</td>
 <td> 像素</td>
 <td>要录制矩形的 Y 坐标</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> -w, --width</td>
 <td> 像素</td>
 <td>录制矩形的宽度</td>
 </tr>
-<tr>
+<tr class="even">
 <td> -h, --height</td>
 <td> 像素</td>
 <td>录制矩形的高度</td>
 </tr>
-<tr>
+<tr class="odd">
 <td> -v, --verbose</td>
 <td></td>
 <td> 详细</td>
 </tr>
-<tr>
-<td>–display</td>
+<tr class="even">
+<td> --display</td>
 <td></td>
 <td> 要使用的 X 显示</td>
 </tr>
@@ -350,13 +352,15 @@
 <h2 id="例子">例子</h2>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">byzanz-record -d 10 --delay=5 -x 0 -y 0 -w 1440 -h 900 out.gif  </span><br></pre></td></tr></tbody></table></figure>
 <p>上面的命令是录制屏幕坐标 (0,0) 处宽度 1440 像素、高度 900 像素的矩形区域 (指定的坐标为矩形左上角)，延时 5 秒开始录制，录制时间 10s，输出文件 out.gif。</p>
-<h1>Gif 合并</h1>
+<h1 id="gif-合并">Gif 合并</h1>
 <p>如果想将录制的多个 Gif 合并成一个文件，只需将要合并的文件存到同一文件夹当中，再执行如下命令即可，不需要安装其他软件，Ubuntu 比 Windows 强大之处。</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert -delay 120 -loop 0 *.gif output.gif</span><br></pre></td></tr></tbody></table></figure>
 <p>其中，"-delay 120" 表示 Gif 动画速度，"-loop 0" 表示无限循环。</p>
-<h1>参考文献</h1>
-<p><a target="_blank" rel="noopener" href="https://www.maketecheasier.com/record-screen-as-animated-gif-ubuntu/">Record Screen as Animated GIF in Ubuntu with Byzanz</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.trellis.co/blog/gifs-vs-animated-videos-which-should-you-use">Gifs vs animated videos - which should you use</a></p>
+<h1 id="参考文献">参考文献</h1>
+<p><a target="_blank" rel="noopener" href="https://www.maketecheasier.com/record-screen-as-animated-gif-ubuntu/">Record
+Screen as Animated GIF in Ubuntu with Byzanz</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.trellis.co/blog/gifs-vs-animated-videos-which-should-you-use">Gifs
+vs animated videos - which should you use</a></p>
 
       
     </div>
@@ -483,22 +487,35 @@ A key to resolving this problem is to account for cooperation, that is, to model
 
 -->
 <p>Socially Aware Motion Planning with Deep Reinforcement Learning</p>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.08862.pdf">Paper download link</a></p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1703.08862.pdf">Paper download
+link</a></p>
 <hr>
-<p>简评：之前的方法使用特征匹配 (feature-matching techniques) 的做法来描述和模仿行人的轨迹，但是人和人之间的特征是有差异的 (vary from person to person)，所以生成的行人轨迹并不理想。这篇文献指出，尽管导航时指明机器人什么应该和人类交互做是比较困难的 (精确的行人导航机制)，但是却可以简单地指明，什么是不应该做的 (违反社交规范)。尤其是，本文使用深度强化学习，提出一种时间高效 (time-efficient) 的遵守社会规范的导航策略。</p>
+<p>简评：之前的方法使用特征匹配 (feature-matching techniques)
+的做法来描述和模仿行人的轨迹，但是人和人之间的特征是有差异的 (vary from
+person to
+person)，所以生成的行人轨迹并不理想。这篇文献指出，尽管导航时指明机器人什么应该和人类交互做是比较困难的 (精确的行人导航机制)，但是却可以简单地指明，什么是不应该做的 (违反社交规范)。尤其是，本文使用深度强化学习，提出一种时间高效
+(time-efficient) 的遵守社会规范的导航策略。</p>
 <blockquote>
-<p>This work notes that while it is challenging to directly specify the details of what to do (precise mechanisms of human navigation), it is straightforward to specify what not to do (violations of social norms). Specifically, using deep reinforcement learning, this work develops a time-efficient navigation policy that respects common social norms.</p>
+<p>This work notes that while it is challenging to directly specify the
+details of what to do (precise mechanisms of human navigation), it is
+straightforward to specify what not to do (violations of social norms).
+Specifically, using deep reinforcement learning, this work develops a
+time-efficient navigation policy that respects common social norms.</p>
 </blockquote>
-<p>此外，本文是在作者基于深度强化学习的多智能体避障的研究基础上，在多智能体系统中引入具有社交意识的行为，本文的主要贡献是如何在 CADRL 中引入和融合社交行为。所以，可以简单认为，SA-CADRL = SA (socially aware) + CADRL (collision avoidance with deep reinforcement learning)。</p>
+<p>此外，本文是在作者基于深度强化学习的多智能体避障的研究基础上，在多智能体系统中引入具有社交意识的行为，本文的主要贡献是如何在 CADRL 中引入和融合社交行为。所以，可以简单认为，SA-CADRL
+= SA (socially aware) + CADRL (collision avoidance with deep
+reinforcement learning)。</p>
 <blockquote>
-<p>This work extends the collision avoidance with deep reinforcement learning framework (CADRL) to characterize and induce socially aware behaviors in multiagent systems.</p>
+<p>This work extends the collision avoidance with deep reinforcement
+learning framework (CADRL) to characterize and induce socially aware
+behaviors in multiagent systems.</p>
 </blockquote>
 <p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/paper-MIT-SACADRL/">个人网站</a>，请移步阅读最新内容。</p>
 
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
 <iframe src="//player.bilibili.com/player.html?aid=327568946&amp;bvid=BV1DA41187qB&amp;cid=172392972&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>
 
-<h1>INTRODUCTION</h1>
+<h1 id="introduction">INTRODUCTION</h1>
 <!--
 provide personal mobility services and luggage carrying support
 airports and shopping malls
@@ -506,126 +523,169 @@ airports and shopping malls
 require the robots to be capable of navigating efficiently and safely in close proximity of people
 -->
 <h2 id="人机交互方法演进">人机交互方法演进</h2>
-<ol>
-<li>
-<p>将行人视为具有简单动力学的动态障碍物，执行特定的反应式避障行为。</p>
+<ol type="1">
+<li><p>将行人视为具有简单动力学的动态障碍物，执行特定的反应式避障行为。</p>
 <blockquote>
-<p>A common approach treats pedestrians as dynamic obstacles with simple kinematics, and employs specific reactive rules for avoiding collision.</p>
+<p>A common approach treats pedestrians as dynamic obstacles with simple
+kinematics, and employs specific reactive rules for avoiding
+collision.</p>
 </blockquote>
 <ul>
 <li>缺陷：这种方法没有观察人类的行为，会产生不安全、不自然的行为，尤其当机器人的速度和人类行走速度比较靠近时。</li>
 </ul>
 <blockquote>
-<p>Since these methods do not capture human behaviors, they sometimes generate unsafe/unnatural movements, particularly when the robot operates near human walking speed.</p>
-</blockquote>
-</li>
-<li>
-<p>使用更精致的运动模型来推理附近行人的运动意图 (hidden intents)，产生一系列预测轨迹。然后，使用传统的路径规划算法为机器人生成无碰撞 (collision-free) 的路径。</p>
+<p>Since these methods do not capture human behaviors, they sometimes
+generate unsafe/unnatural movements, particularly when the robot
+operates near human walking speed.</p>
+</blockquote></li>
+<li><p>使用更精致的运动模型来推理附近行人的运动意图 (hidden
+intents)，产生一系列预测轨迹。然后，使用传统的路径规划算法为机器人生成无碰撞 (collision-free) 的路径。</p>
 <blockquote>
-<p>More sophisticated motion models have been proposed, which would reason about the nearby pedestrians’ hidden intents to generate a set of predicted paths. Subsequently, classical path planning algorithms would be employed to generate a collision-free path for the robot.</p>
+<p>More sophisticated motion models have been proposed, which would
+reason about the nearby pedestrians’ hidden intents to generate a set of
+predicted paths. Subsequently, classical path planning algorithms would
+be employed to generate a collision-free path for the robot.</p>
 </blockquote>
 <ul>
-<li>缺陷：导航问题分割为不关联的预测和路径规划，可能导致机器人冻结问题 (the freezing robot problem)，机器人无法找到任何可行的行为，因为预测的轨迹让大部分的空间不可通行。</li>
+<li>缺陷：导航问题分割为不关联的预测和路径规划，可能导致机器人冻结问题 (the
+freezing robot
+problem)，机器人无法找到任何可行的行为，因为预测的轨迹让大部分的空间不可通行。</li>
 </ul>
 <blockquote>
-<p>Separating the navigation problem into disjoint prediction and planning steps can lead to the freezing robot problem, in which the robot fails to find any feasible action because the predicted paths could mark a large portion of the space untraversable.</p>
-</blockquote>
-</li>
+<p>Separating the navigation problem into disjoint prediction and
+planning steps can lead to the freezing robot problem, in which the
+robot fails to find any feasible action because the predicted paths
+could mark a large portion of the space untraversable.</p>
+</blockquote></li>
 </ol>
 <ul>
-<li>My comment (MC): 虽然作者认为这种做法不合理，但是这是在目前工业界比较流行的做法。导航问题分割为多个层次模块，上下游之间透明，容易迁移和调试。</li>
+<li>My comment
+(MC): 虽然作者认为这种做法不合理，但是这是在目前工业界比较流行的做法。导航问题分割为多个层次模块，上下游之间透明，容易迁移和调试。</li>
 </ul>
-<ol start="3">
+<ol start="3" type="1">
 <li>合作 (cooperation)</li>
 </ol>
 <p>基于上述研究的问题，作者提出一种做法，合作 (cooperation)，建模 (model)/ 预测 (anticipate) 机器人对周围行人的影响。</p>
 <blockquote>
-<p>A key to resolving this problem is to account for cooperation, that is, to model/anticipate the impact of the robot’s motion on the nearby pedestrians.</p>
+<p>A key to resolving this problem is to account for cooperation, that
+is, to model/anticipate the impact of the robot’s motion on the nearby
+pedestrians.</p>
 </blockquote>
 <ul>
-<li>
-<p>现阶段，基于合作的社交导航研究，主要分为基于模型 (model-based) 的做法和基于学习 (learning-based) 的做法。</p>
+<li><p>现阶段，基于合作的社交导航研究，主要分为基于模型 (model-based) 的做法和基于学习 (learning-based) 的做法。</p>
 <blockquote>
-<p>Existing work on cooperative, socially compliant navigation can be broadly classified into two categories, namely model-based and learning-based.</p>
+<p>Existing work on cooperative, socially compliant navigation can be
+broadly classified into two categories, namely model-based and
+learning-based.</p>
 </blockquote>
 <ul>
-<li>基于模型的做法，是一种典型的多智能体避障 (multiagent collision avoidance algorithm) 的扩展，通过增加参数来引入对社交交互行为的考虑。</li>
+<li>基于模型的做法，是一种典型的多智能体避障 (multiagent collision
+avoidance
+algorithm) 的扩展，通过增加参数来引入对社交交互行为的考虑。</li>
 </ul>
 <blockquote>
-<p>Model-based approaches are typically extensions of multiagent collision avoidance algorithms, with additional parameters introduced to account for social interactions.</p>
+<p>Model-based approaches are typically extensions of multiagent
+collision avoidance algorithms, with additional parameters introduced to
+account for social interactions.</p>
 </blockquote>
 <p>模型方法的缺陷：不确定行人是否会遵循预设的几何模型；势力场需要针对不同的行人，调节参数；可能导致规划轨迹震荡 (oscillatory)。</p>
 <ul>
 <li>基于学习的做法，旨在通过匹配特征统计来开发一种策略。</li>
 </ul>
 <blockquote>
-<p>Learning-based approaches aim to develop a policy that emulates human behaviors by matching feature statistics.<br>
-In particular, Inverse Reinforcement Learning (IRL) has been applied to learn a cost function from human demonstration (teleoperation), and a probability distribution over the set of joint trajectories with nearby pedestrians.</p>
+<p>Learning-based approaches aim to develop a policy that emulates human
+behaviors by matching feature statistics. In particular, Inverse
+Reinforcement Learning (IRL) has been applied to learn a cost function
+from human demonstration (teleoperation), and a probability distribution
+over the set of joint trajectories with nearby pedestrians.</p>
 </blockquote>
-<p>学习方法比模型方法更贴近人类的行为，但是同时需要更高的计算代价 (computational cost)。同时，特征统计在人和人之间变化明显 (vary significantl)，也引起其在不同场景下的泛化能力的担忧。</p>
-</li>
+<p>学习方法比模型方法更贴近人类的行为，但是同时需要更高的计算代价 (computational
+cost)。同时，特征统计在人和人之间变化明显 (vary
+significantl)，也引起其在不同场景下的泛化能力的担忧。</p></li>
 </ul>
-<p>简而言之，存在的方法试图建模或复制详细的社交行为机制 (mechanisms of social compliance)，因为行人行为的随机性 (stochasticity)，仍然很难去量化 (quantify)。</p>
+<p>简而言之，存在的方法试图建模或复制详细的社交行为机制 (mechanisms of
+social
+compliance)，因为行人行为的随机性 (stochasticity)，仍然很难去量化 (quantify)。</p>
 <blockquote>
-<p>In short, existing works are mostly focused on modeling<br>
-and replicating the detailed mechanisms of social compliance, which remains difficult to quantify due to the stochasticity in people’s behaviors.</p>
+<p>In short, existing works are mostly focused on modeling and
+replicating the detailed mechanisms of social compliance, which remains
+difficult to quantify due to the stochasticity in people’s
+behaviors.</p>
 </blockquote>
-<p>作者认为人类会遵循一系列简单的社交规范，比如从右侧通过 (passing on the right)。所以在强化学习框架中描述 (characterize) 这些行为的特征，发现通过解决合作避障的问题可以生成 (emerge) 类人的导航惯例。</p>
+<p>作者认为人类会遵循一系列简单的社交规范，比如从右侧通过 (passing on the
+right)。所以在强化学习框架中描述 (characterize) 这些行为的特征，发现通过解决合作避障的问题可以生成 (emerge) 类人的导航惯例。</p>
 <blockquote>
-<p>Building on a recent paper, we characterize these properties in a reinforcement learning framework, and show that human-like navigation conventions emerge from solving a cooperative collision avoidance problem.</p>
+<p>Building on a recent paper, we characterize these properties in a
+reinforcement learning framework, and show that human-like navigation
+conventions emerge from solving a cooperative collision avoidance
+problem.</p>
 </blockquote>
-<p><img data-src="/downloads/images/blog/SACADRL_1.jpg" alt="Symmetries in multiagent collision avoidance"></p>
+<figure>
+<img data-src="/downloads/images/blog/SACADRL_1.jpg" alt="Symmetries in multiagent collision avoidance">
+<figcaption aria-hidden="true">Symmetries in multiagent collision
+avoidance</figcaption>
+</figure>
 <!--
 - Respects a set of simple social norms:
   * passing on the right
   * human navigation conventions are not unique, as the strength (e.g., separation distance) and passing direction vary in different countries
   -->
-<h1>BACKGROUND</h1>
-<h2 id="Collision-Avoidance-with-Deep-Reinforcement-Learning">Collision Avoidance with Deep Reinforcement Learning</h2>
-<p>首先，多智能体的避障，可以表述为在强化学习下的一系列行为决策 (a sequential decision making) 问题。</p>
+<h1 id="background">BACKGROUND</h1>
+<h2 id="collision-avoidance-with-deep-reinforcement-learning">Collision
+Avoidance with Deep Reinforcement Learning</h2>
+<p>首先，多智能体的避障，可以表述为在强化学习下的一系列行为决策 (a
+sequential decision making) 问题。</p>
 <blockquote>
-<p>A multiagent collision avoidance problem can be formulated as a sequential decision making problem in a reinforcement learning framework.</p>
+<p>A multiagent collision avoidance problem can be formulated as a
+sequential decision making problem in a reinforcement learning
+framework.</p>
 </blockquote>
 <ul>
 <li>强化学习问题建模</li>
 </ul>
 <p>这部分理论分析非常精彩，建议多阅读几次，理解深意。</p>
-<ol>
-<li>
-<p>为了刻画附近行人意图的不确定性 (uncertainty)，将状态矢量分为可观察部分 (observable) 和不可观察部分 (unobservable)。其中，可观察部分包括行人的速度，位置和大小；不可观察部分，包括行人的目标位置，偏好速度和方向。</p>
-</li>
-<li>
-<p>所以，模型的目标是开发一种策略，在避开和附近行人碰撞的基础上，最小化抵达目标的时间。</p>
-</li>
-<li>
-<p>在此模型基础上，这个问题可以在强化学习框架下表述为和邻近行人的关联配置 (joint configuration)。另外，引入奖励函数，奖励那些抵达目标的智能体，惩罚那些发生碰撞的智能体。</p>
+<ol type="1">
+<li><p>为了刻画附近行人意图的不确定性 (uncertainty)，将状态矢量分为可观察部分 (observable) 和不可观察部分 (unobservable)。其中，可观察部分包括行人的速度，位置和大小；不可观察部分，包括行人的目标位置，偏好速度和方向。</p></li>
+<li><p>所以，模型的目标是开发一种策略，在避开和附近行人碰撞的基础上，最小化抵达目标的时间。</p></li>
+<li><p>在此模型基础上，这个问题可以在强化学习框架下表述为和邻近行人的关联配置 (joint
+configuration)。另外，引入奖励函数，奖励那些抵达目标的智能体，惩罚那些发生碰撞的智能体。</p>
 <blockquote>
-<p>In particular, a reward function can be specified to reward the agent for reaching its goal and penalize the agent for colliding with others.</p>
-</blockquote>
-</li>
+<p>In particular, a reward function can be specified to reward the agent
+for reaching its goal and penalize the agent for colliding with
+others.</p>
+</blockquote></li>
 </ol>
 <ul>
-<li>
-<p><strong>状态转移函数模型，因为考虑了其他智能体的隐藏意图 (hidden intents)，所以也简介考虑了其他智能体的行为不确定性</strong>。</p>
+<li><p><strong>状态转移函数模型，因为考虑了其他智能体的隐藏意图 (hidden
+intents)，所以也简介考虑了其他智能体的行为不确定性</strong>。</p>
 <blockquote>
-<p>The unknown state-transition model takes into account the uncertainty in the other agent’s motion due to its hidden intents.</p>
-</blockquote>
-</li>
+<p>The unknown state-transition model takes into account the uncertainty
+in the other agent’s motion due to its hidden intents.</p>
+</blockquote></li>
 </ul>
-<ol start="4">
-<li>随后，解决这个 RL 问题就是找到表达到达目标点的预估时间的最优值函数 (the optimal value function)，然后可以由值函数回溯得到最优策略 (optimal policy)。</li>
+<ol start="4" type="1">
+<li>随后，解决这个 RL 问题就是找到表达到达目标点的预估时间的最优值函数 (the
+optimal value function)，然后可以由值函数回溯得到最优策略 (optimal
+policy)。</li>
 </ol>
 <blockquote>
-<p>Solving the RL problem amounts to finding the optimal value function that encodes an estimate of the expected time to goal.</p>
+<p>Solving the RL problem amounts to finding the optimal value function
+that encodes an estimate of the expected time to goal.</p>
 </blockquote>
 <p>然后，找到最优值函数的主要的挑战是，关联状态是连续的、高维的矢量，使得离散化和枚举状态空间不可行。</p>
 <blockquote>
-<p>A major challenge in finding the optimal value function<br>
-is that the joint state sjn is a continuous, high-dimensional vector, making it impractical to discretize and enumerate the state space.</p>
+<p>A major challenge in finding the optimal value function is that the
+joint state sjn is a continuous, high-dimensional vector, making it
+impractical to discretize and enumerate the state space.</p>
 </blockquote>
-<p>最近，可以使用深度神经网络来解决这个强化学习的问题，去表示高维空间的值函数，并且具有人类水平的表现。<br>
-Recent advances in reinforcement learning address this issue by using deep neural networks to represent value functions in high-dimensional spaces, and have demonstrated human-level performance on various complex tasks.</p>
-<p>MC: 到目前为止，作者是在介绍自己已有的研究，the collision avoidance with deep reinforcement learning framework (CADRL)，接下来会在这个基础上，引入多智能体间具有社交意识的行为。</p>
+<p>最近，可以使用深度神经网络来解决这个强化学习的问题，去表示高维空间的值函数，并且具有人类水平的表现。
+Recent advances in reinforcement learning address this issue by using
+deep neural networks to represent value functions in high-dimensional
+spaces, and have demonstrated human-level performance on various complex
+tasks.</p>
+<p>MC: 到目前为止，作者是在介绍自己已有的研究，the collision avoidance
+with deep reinforcement learning framework
+(CADRL)，接下来会在这个基础上，引入多智能体间具有社交意识的行为。</p>
 <p>最后，作者公开的实现代码 <a target="_blank" rel="noopener" href="https://github.com/mit-acl/cadrl_ros">mit-acl/cadrl_ros</a> 。</p>
 <!--
 In contrast, this work extends  [14] to characterize and induce socially aware behaviors in multiagent systems.
@@ -633,133 +693,188 @@ B.
 
 > 主要讲述之前的研究成果，CADRL的模型，以及目前在行人交互中的缺陷，引出下文
 -->
-<h2 id="Characterization-of-Social-Norms">Characterization of Social Norms</h2>
-<p>与其直接去量化人类行为，本文认为复杂的规范行为模式，是由一系列简单的局部交互组成的。MC: 我赞同这个观点，可以把复杂的问题拆分为小问题，容易解决。</p>
+<h2 id="characterization-of-social-norms">Characterization of Social
+Norms</h2>
+<p>与其直接去量化人类行为，本文认为复杂的规范行为模式，是由一系列简单的局部交互组成的。MC:
+我赞同这个观点，可以把复杂的问题拆分为小问题，容易解决。</p>
 <blockquote>
-<p>Rather than trying to quantify human behaviors directly, this work notes that the complex normative motion patterns can be a consequence of simple local interactions.</p>
+<p>Rather than trying to quantify human behaviors directly, this work
+notes that the complex normative motion patterns can be a consequence of
+simple local interactions.</p>
 </blockquote>
-<p>因此，本文进一步猜想，相比于一系列精确定义的规则 (a set of precisely defined procedural rules)，社交规范是从相互避免碰撞的机制中新生的。</p>
+<p>因此，本文进一步猜想，相比于一系列精确定义的规则 (a set of precisely
+defined procedural rules)，社交规范是从相互避免碰撞的机制中新生的。</p>
 <blockquote>
-<p>Thus, we conjecture that rather than a set of precisely defined procedural rules, <strong>social norms are the emergent behaviors from a time-efficient, reciprocal collision avoidance mechanism</strong>.</p>
+<p>Thus, we conjecture that rather than a set of precisely defined
+procedural rules, <strong>social norms are the emergent behaviors from a
+time-efficient, reciprocal collision avoidance mechanism</strong>.</p>
 </blockquote>
 <blockquote>
-<p>Reciprocity implicitly encodes a model of the other agents’ behavior, which is the key for enabling cooperation without explicit communication.</p>
+<p>Reciprocity implicitly encodes a model of the other agents’ behavior,
+which is the key for enabling cooperation without explicit
+communication.</p>
 </blockquote>
-<p>有点哲学感：局部避免碰撞中的互惠原则，衍生出来了所谓的社交行为规范。作者进一步实验表明，无规则的 CADRL 也可以展示出一定的导航规范。(可以作为 research hypothesis)</p>
+<p>有点哲学感:
+局部避免碰撞中的互惠原则，衍生出来了所谓的社交行为规范。作者进一步实验表明，无规则的 CADRL 也可以展示出一定的导航规范。(可以作为 research
+hypothesis)</p>
 <blockquote>
-<p>Reciprocity implicitly encodes a model of the other agents’ behavior, which is the key for enabling cooperation without explicit communication. While no behavioral rules were imposed in the problem formulation, CADRL policy exhibits certain navigation conventions.</p>
+<p>Reciprocity implicitly encodes a model of the other agents’ behavior,
+which is the key for enabling cooperation without explicit
+communication. While no behavioral rules were imposed in the problem
+formulation, CADRL policy exhibits certain navigation conventions.</p>
 </blockquote>
 <p>所以，作者在这个基础上认为，通过多智能体的避碰学习，可以习得人类现在的行为规范。</p>
 <p>已有的文献报道，人类导航趋向于合作和时间最优。所以，作者在 CADRL 基础上，通过引入最小时间奖励函数和互惠假设 (学习到的最优行为，智能体基本都会采用)。</p>
 <blockquote>
-<p>Existing works have reported that human navigation (or teleoperation of a robot) tends to be cooperative and time- efficient. This work notes that these two properties are encoded in the CADRL formulation through using the min-time reward function and the reciprocity assumption.</p>
+<p>Existing works have reported that human navigation (or teleoperation
+of a robot) tends to be cooperative and time- efficient. This work notes
+that these two properties are encoded in the CADRL formulation through
+using the min-time reward function and the reciprocity assumption.</p>
 </blockquote>
-<p>同时，作者指出，从 CADRL 衍生的合作行为，和人类现有的理解是不同的。所以，作者会进一步解决这个问题。</p>
+<p>同时，作者指出，从 CADRL
+衍生的合作行为，和人类现有的理解是不同的。所以，作者会进一步解决这个问题。</p>
 <blockquote>
-<p>However, the cooperative behaviors emerging from a<br>
-CADRL solution are not consistent with human interpretation. The next section will address this issue and present a method to induce behaviors that respect human social norms.</p>
+<p>However, the cooperative behaviors emerging from a CADRL solution are
+not consistent with human interpretation. The next section will address
+this issue and present a method to induce behaviors that respect human
+social norms.</p>
 </blockquote>
-<h1>APPROACH</h1>
+<h1 id="approach">APPROACH</h1>
 <blockquote>
 <p>本章首先描述两个智能体如何在 RL 框架中塑造规范行为，然后将这一方法推广到多智能体场景。</p>
 </blockquote>
-<p>We first describe a strategy for shaping normative behaviors for a two-agent system in the RL framework, and then generalize the method to multiagent scenarios.</p>
-<h2 id="Inducing-Social-Norms">Inducing Social Norms</h2>
+<p>We first describe a strategy for shaping normative behaviors for a
+two-agent system in the RL framework, and then generalize the method to
+multiagent scenarios.</p>
+<h2 id="inducing-social-norms">Inducing Social Norms</h2>
 <blockquote>
 <p>和自己的解法基本是一致的，只不过没有使用神经网络罢了</p>
 </blockquote>
 <p>现有的社交行为是众多解决对称避障的方法之一。为了引入一个特定的行为，就需要向 RL 中引入一点偏爱 (bias)，更偏向于一组行为。</p>
 <blockquote>
-<p>This work notes that social norms are one of the many<br>
-ways to resolve a symmetrical collision avoidance scenario. To induce a particular norm, a small bias can be introduced in the RL training process in favor of one set of behaviors over others.</p>
+<p>This work notes that social norms are one of the many ways to resolve
+a symmetrical collision avoidance scenario. To induce a particular norm,
+a small bias can be introduced in the RL training process in favor of
+one set of behaviors over others.</p>
 </blockquote>
 <p>如作者所说，这一方法的优点在于，违背特定性为的做法一般容易被识别，并且这一规范不需要精确。这是因为新增的惩罚打破了避碰的平衡和对称，所以会偏向于遵守社会规则的行为。</p>
 <blockquote>
-<p>The advantage of this approach is that violations of a particular social norm are usually easy to specify; and this specification need not be precise. This is because the addition of a penalty breaks the symmetry in the collision avoidance problem, thereby favoring behaviors respecting the desired social norm.</p>
+<p>The advantage of this approach is that violations of a particular
+social norm are usually easy to specify; and this specification need not
+be precise. This is because the addition of a penalty breaks the
+symmetry in the collision avoidance problem, thereby favoring behaviors
+respecting the desired social norm.</p>
 </blockquote>
 <!--
 Also note that training is performed on randomly generated test cases, and not on the validation test cases.
 B.
 -->
 <!-- 作者自信满满，不愧是MIT出品方 -->
-<p>最后，训练的结果表明学到了和人类行为类似的策略，比如 left-handed and right-handed norms。</p>
+<p>最后，训练的结果表明学到了和人类行为类似的策略，比如 left-handed and
+right-handed norms。</p>
 <blockquote>
-<p>As long as training converges, the penalty sets’ size does not have a major effect on the learned policy. This is expected because the desired behaviors are not in the penalty set.</p>
+<p>As long as training converges, the penalty sets’ size does not have a
+major effect on the learned policy. This is expected because the desired
+behaviors are not in the penalty set.</p>
 </blockquote>
-<h2 id="Training-a-Multiagent-Value-Network">Training a Multiagent Value Network</h2>
+<h2 id="training-a-multiagent-value-network">Training a Multiagent Value
+Network</h2>
 <p>因为上文的训练只是在两个智能体之间，所以很难引入到更高阶的行为，比如多智能体环境。这部分主要讲述如何训练多智能体。</p>
 <blockquote>
-<p>Since training was solely performed on a two-agent system, it was difficult to encode/induce higher order behaviors, such as accounting for the relations between nearby agents. This work addresses this problem by developing a method that allows for training on multiagent scenarios directly.</p>
+<p>Since training was solely performed on a two-agent system, it was
+difficult to encode/induce higher order behaviors, such as accounting
+for the relations between nearby agents. This work addresses this
+problem by developing a method that allows for training on multiagent
+scenarios directly.</p>
 </blockquote>
-<p>为了刻画多智能体对称的特性，本文使用了权重共享 (weight-sharing) 和最大池 (max-pooling layers) 的神经网络。该网络涉及 4 个智能体，其中附近三个智能体的状态可以互换而不影响训练结果。</p>
+<p>为了刻画多智能体对称的特性，本文使用了权重共享 (weight-sharing) 和最大池 (max-pooling
+layers) 的神经网络。该网络涉及 4 个智能体，其中附近三个智能体的状态可以互换而不影响训练结果。</p>
 <p>网络结构的详细设计，可以阅读原文。</p>
 <blockquote>
-<p>To capture the multiagent system’s symmetrical structure,<br>
-a neural network with weight-sharing and max-pooling layers is employed,</p>
+<p>To capture the multiagent system’s symmetrical structure, a neural
+network with weight-sharing and max-pooling layers is employed,</p>
 </blockquote>
-<p><img data-src="/downloads/images/blog/SACADRL_2.jpg" alt="Network structure for multiagent scenarios"></p>
-<p>在训练中，会先生成轨迹，然后将轨迹转化为经验集。</p>
+<figure>
+<img data-src="/downloads/images/blog/SACADRL_2.jpg" alt="Network structure for multiagent scenarios">
+<figcaption aria-hidden="true">Network structure for multiagent
+scenarios</figcaption>
+</figure>
+<p>在训练中，会先生成轨迹，然后将轨迹转化为经验集。
 <!--这和自己的研究计划类似，轨迹转化为经验值，只不过自己属于模仿学习的范畴，从行人已有的轨迹中提取策略-->
+&gt; The trajectories are then turned into state-value pairs and
+assimilated into the experience sets.</p>
+<p>CADRL 和 SA-CADRL 的训练区别 - Two experience sets are used to
+distinguish between trajectories that reached the goals and those that
+ended in a collision. - During the training process, trajectories
+generated by SA-CADRL are reflected in the x-axis with probability. *
+This procedure exploits symmetry in the problem to explore different
+topologies more efficiently.</p>
+<p>作者在网络训练时已经设置开关 (a binary flag indicating whether the
+other agent is real or virtual (details)，所以 n - 智能体的网络也可以用于 p
+(p&lt;=n) 个智能体的场景。</p>
 <blockquote>
-<p>The trajectories are then turned into state-value pairs and assimilated into the experience sets.</p>
+<p>An n-agent network can be used to generate trajectories for scenarios
+with fewer agents.</p>
 </blockquote>
-<p>CADRL 和 SA-CADRL 的训练区别</p>
-<ul>
-<li>Two experience sets are used to distinguish between trajectories that reached the goals and those that ended in a collision.</li>
-<li>During the training process, trajectories generated by SA-CADRL are reflected in the x-axis with probability.
-<ul>
-<li>This procedure exploits symmetry in the problem to explore different topologies more efficiently.</li>
-</ul>
-</li>
-</ul>
-<p>作者在网络训练时已经设置开关 (a binary flag indicating whether the other agent is real or virtual (details)，所以 n - 智能体的网络也可以用于 p (p&lt;=n) 个智能体的场景。</p>
+<h1 id="results">RESULTS</h1>
+<h2 id="computational-details-online-performance-and-offline-training">Computational
+Details (online performance and offline training)</h2>
+<p>模型具有比较优秀的实时和收敛 (convergence and
+time-efficient) 表现。</p>
 <blockquote>
-<p>An n-agent network can be used to generate trajectories for scenarios with fewer agents.</p>
-</blockquote>
-<h1>RESULTS</h1>
-<h2 id="Computational-Details-online-performance-and-offline-training">Computational Details (online performance and offline training)</h2>
-<p>模型具有比较优秀的实时和收敛 (convergence and time-efficient) 表现。</p>
-<blockquote>
-<p>The size and connections in the multiagent network are tuned to obtain good performance (ensure<br>
-convergence and produce time-efficient paths) while achieving real-time performance.</p>
+<p>The size and connections in the multiagent network are tuned to
+obtain good performance (ensure convergence and produce time-efficient
+paths) while achieving real-time performance.</p>
 </blockquote>
 <!--
 没有探讨agent扩多后，训练效率的问题，担心会指数级增加
 -->
-<h2 id="Simulation-Results">Simulation Results</h2>
+<h2 id="simulation-results">Simulation Results</h2>
 <p>三组对比试验：一组没有社交行为奖励函数，另外两组是偏向左和右的行为奖励函数。</p>
 <blockquote>
-<p>Three copies of four-agent SA-CADRL policies were<br>
-trained, one without the norm inducing reward, one with the left-handed, and the other with the right-handed.</p>
+<p>Three copies of four-agent SA-CADRL policies were trained, one
+without the norm inducing reward, one with the left-handed, and the
+other with the right-handed.</p>
 </blockquote>
-<h2 id="Hardware-Experiment">Hardware Experiment</h2>
+<h2 id="hardware-experiment">Hardware Experiment</h2>
 <p>硬件设备</p>
 <ul>
-<li>The differential-drive vehicle is outfitted with a Lidar for localization, three Intel Realsenses for free space detection, and four webcams for pedestrian detection.</li>
+<li>The differential-drive vehicle is outfitted with a Lidar for
+localization, three Intel Realsenses for free space detection, and four
+webcams for pedestrian detection.</li>
 </ul>
 <p>A hardware demonstration video can be found at <a target="_blank" rel="noopener" href="https://youtu.be/CK1szio7PyA">here</a>.</p>
 <!--
 navigate fully autonomously in a dynamic indoor environment
 -->
-<h1>CONCLUSION</h1>
-<h3 id="Contribution">Contribution</h3>
+<h1 id="conclusion">CONCLUSION</h1>
+<h3 id="contribution">Contribution</h3>
 <ul>
-<li>In a reinforcement learning framework, a pair of simulated agents navigate around each other to learn a policy that respect human navigation norms, such as passing on the right and overtaking on the left in a right-handed system.</li>
-<li>This approach is further generalized to multiagent (n &gt; 2) scenarios through the use of a symmetrical neural network structure.</li>
-<li>Moreover, SA-CADRL is implemented on robotic hardware, which enabled fully autonomous navigation at human walking speed in a dynamic environment with many pedestrians.</li>
+<li>In a reinforcement learning framework, a pair of simulated agents
+navigate around each other to learn a policy that respect human
+navigation norms, such as passing on the right and overtaking on the
+left in a right-handed system.</li>
+<li>This approach is further generalized to multiagent (n &gt; 2)
+scenarios through the use of a symmetrical neural network
+structure.</li>
+<li>Moreover, SA-CADRL is implemented on robotic hardware, which enabled
+fully autonomous navigation at human walking speed in a dynamic
+environment with many pedestrians.</li>
 </ul>
-<h3 id="Future-work">Future work</h3>
+<h3 id="future-work">Future work</h3>
 <ul>
-<li>Consider the relationships between nearby pedestrians, such as a group of people who walk together.
+<li>Consider the relationships between nearby pedestrians, such as a
+group of people who walk together.
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.yanlongwang.net/Paper/paper-group-surfing/">Group surfing</a></li>
-</ul>
-</li>
+<li><a target="_blank" rel="noopener" href="https://www.yanlongwang.net/Paper/paper-group-surfing/">Group
+surfing</a></li>
+</ul></li>
 <li>MC: 可以迁移到其他具有规则学习的场景，比如水面无人艇中 COLREGS 规则和人类的行为类似。
 <ul>
-<li><a target="_blank" rel="noopener" href="https://www.yanlongwang.net/USV/colregs-paper/">A COLREGs-based obstacle avoidance approach for unmanned surface vehicles</a></li>
-</ul>
-</li>
+<li><a target="_blank" rel="noopener" href="https://www.yanlongwang.net/USV/colregs-paper/">A
+COLREGs-based obstacle avoidance approach for unmanned surface
+vehicles</a></li>
+</ul></li>
 <li> 网络模型训练的效率，文章只是训练 4 个智能体，如果场景复杂，进一步扩展呢？</li>
 </ul>
 
@@ -869,7 +984,13 @@ navigate fully autonomously in a dynamic indoor environment
 ![video_1](https://www.youtube.com/watch?v=fy7fKOADg_A)
 ![video_2](https://www.youtube.com/watch?v=PHhtYIkdxiw)
 -->
-<p>这篇论文主要研究如何在人行道上给机器人导航。论文根据人行横道上行人的多与少，来使用两种不同的算法为机器人导航。在行人密集 (pedestrian-rich) 的环境下，使用 Group Surfing 方法，模仿前方的行人，以遵守规则 (socially-compliant) 的行为来避开行人和障碍物，并最后抵达目的地；在行人稀疏 (pedestrian-sparse) 的环境下，通过检测马路沿，沿着马路沿导航。在这两种算法下，底层的避障模块是有模仿人类倾向 (human-aware)。最后，作者在仿真和实物上均验证了算法。</p>
+<p>这篇论文主要研究如何在人行道上给机器人导航。论文根据人行横道上行人的多与少，来使用两种不同的算法为机器人导航。在行人密集 (pedestrian-rich)
+的环境下，使用 Group Surfing 方法，模仿前方的行人，以遵守规则
+(socially-compliant)
+的行为来避开行人和障碍物，并最后抵达目的地；在行人稀疏
+(pedestrian-sparse)
+的环境下，通过检测马路沿，沿着马路沿导航。在这两种算法下，底层的避障模块是有模仿人类倾向
+(human-aware)。最后，作者在仿真和实物上均验证了算法。</p>
 <p>总体而言，这篇文章跟踪行人的思路比较好，算法实现细节清楚，在算法验证阶段有条理，总体质量比较高。</p>
 <p>多平台维护不易，内容实时更新于<a href="http://www.waylon.one/paper/paper-group-surfing/">个人网站</a>，请移步阅读最新内容。</p>
 
@@ -880,140 +1001,206 @@ navigate fully autonomously in a dynamic indoor environment
 <div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
 <iframe src="//player.bilibili.com/player.html?aid=412574140&amp;bvid=BV1aV411f7cx&amp;cid=172397637&amp;page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;"></iframe></div>
 
-<h1>INTRODUCTION</h1>
+<h1 id="introduction">INTRODUCTION</h1>
 <p>本文的一个侧重点是，人机交互，强调机器人尽量不影响行人的行为，或者以人的方式去交互。所以，研究目标不是一个简单的 (类似于最短路径) 求最优解的问题。</p>
 <p>首先，这篇文章的应用场景是人行道 (Sidewalk)，导航空间在路旁，行人的方向大概是两个线性的。</p>
 <blockquote>
-<p>Sidewalks present a unique yet challenging environment in that the navigable space combines elements of both roads and free indoor spaces. Often sidewalk motion is restricted to two linear directions and the resulting navigable space is limited, like on roads.</p>
+<p>Sidewalks present a unique yet challenging environment in that the
+navigable space combines elements of both roads and free indoor spaces.
+Often sidewalk motion is restricted to two linear directions and the
+resulting navigable space is limited, like on roads.</p>
 </blockquote>
 <p>问题的复杂性在于，行人的活动比较随机，可能聚团 (group) 一起走。</p>
 <blockquote>
-<p>However, pedestrians generally do not walk in perfect queues. Instead, people tend to walk in groups of variable sizes and speeds and move along with a general self-organizing crowd flow.</p>
+<p>However, pedestrians generally do not walk in perfect queues.
+Instead, people tend to walk in groups of variable sizes and speeds and
+move along with a general self-organizing crowd flow.</p>
 </blockquote>
-<p>人行道导航 (sidewalk navigation) 的特点是，必须考虑行人的随机行为，同时遵守一定的社会规则，比如行人的交互常识 (pedestrian conventions)，人际距离学 (appropriate proxemics)，即行走方向保持的距离比垂直方向的距离要远。</p>
+<p>人行道导航 (sidewalk
+navigation) 的特点是，必须考虑行人的随机行为，同时遵守一定的社会规则，比如行人的交互常识 (pedestrian
+conventions)，人际距离学 (appropriate
+proxemics)，即行走方向保持的距离比垂直方向的距离要远。</p>
 <blockquote>
-<p>Compared to autonomous road navigation, sidewalk navigation must also account for stochastic human movement that necessitates dynamic obstacle avoidance. Furthermore, certain social rules, such as walking in lanes or affording more space in the direction of walking than in the perpendicular direction, are rules that a robot should follow as well.</p>
+<p>Compared to autonomous road navigation, sidewalk navigation must also
+account for stochastic human movement that necessitates dynamic obstacle
+avoidance. Furthermore, certain social rules, such as walking in lanes
+or affording more space in the direction of walking than in the
+perpendicular direction, are rules that a robot should follow as
+well.</p>
 </blockquote>
-<p>已有的研究方法有推理 (reasoning) 和学习 (learning)，或者两者的结合。社会规则 (Social rules)，在推理方法中作为代价函数，或在学习方法中作为奖励函数。</p>
+<p>已有的研究方法有推理 (reasoning) 和学习 (learning)，或者两者的结合。社会规则 (Social
+rules)，在推理方法中作为代价函数，或在学习方法中作为奖励函数。</p>
 <blockquote>
-<p>In general, methods are based on either reasoning, learning, or a combination thereof.</p>
+<p>In general, methods are based on either reasoning, learning, or a
+combination thereof.</p>
 </blockquote>
-<p>已有方法的局限性在于，利用对行人意图的理解，通常适用于开放环境 (open environments)，而本文的研究问题是有限制的人行道环境，同时没有考虑人行横道的物理边界，机器人的运动会影响行人流等。</p>
+<p>已有方法的局限性在于，利用对行人意图的理解，通常适用于开放环境 (open
+environments)，而本文的研究问题是有限制的人行道环境，同时没有考虑人行横道的物理边界，机器人的运动会影响行人流等。</p>
 <blockquote>
-<p>Here, the aforementioned approaches may be less effective as they do not account for the physical sidewalk boundaries, or how robot movement will affect pedestrian flow.</p>
+<p>Here, the aforementioned approaches may be less effective as they do
+not account for the physical sidewalk boundaries, or how robot movement
+will affect pedestrian flow.</p>
 </blockquote>
 <p>所以，本文的主要研究问题是如何考虑附近行人的行为和行人流，机器人最终抵达终点。</p>
 <blockquote>
-<p>The key research question this paper considers is how mobile robots can utilize nearby pedestrian behaviours and flows to navigate towards a global goal.</p>
+<p>The key research question this paper considers is how mobile robots
+can utilize nearby pedestrian behaviours and flows to navigate towards a
+global goal.</p>
 </blockquote>
 <p>针对这个问题，作者给出的答案是，模仿行人的行为。当检测到有行人朝向机器人的终点时，会允许机器人模仿并从用行人的社交行为。</p>
 <blockquote>
-<p>When our navigation stack detects people moving towards the robot’s goal, a ‘group surfing’ behaviour is used. This allows the robot to imitate and participate in pedestrian social behaviours.</p>
+<p>When our navigation stack detects people moving towards the robot’s
+goal, a ‘group surfing’ behaviour is used. This allows the robot to
+imitate and participate in pedestrian social behaviours.</p>
 </blockquote>
-<p>在行人稀疏或者简单的人行道，距离人行道的路沿一段距离，沿着这个向目标走 (trajectory following)。</p>
+<p>在行人稀疏或者简单的人行道，距离人行道的路沿一段距离，沿着这个向目标走 (trajectory
+following)。</p>
 <blockquote>
-<p>In an unpopulated and simple sidewalk environment, the default behaviour is to follow a trajectory offset from the sidewalk curb towards the goal.</p>
+<p>In an unpopulated and simple sidewalk environment, the default
+behaviour is to follow a trajectory offset from the sidewalk curb
+towards the goal.</p>
 </blockquote>
-<h1>SYSTEM</h1>
+<h1 id="system">SYSTEM</h1>
 <p>系统的设计比较中规中矩，有新意的是，在航路点外，生成动态的子目标点 (subgoals)。</p>
-<p><img data-src="/downloads/images/blog/Navigation_flow_diagram.jpg" alt="示意图"></p>
-<ol>
+<figure>
+<img data-src="/downloads/images/blog/Navigation_flow_diagram.jpg" alt="示意图">
+<figcaption aria-hidden="true">示意图</figcaption>
+</figure>
+<ol type="1">
 <li>首先利用 Google Maps’ API 去生成高层次的航路点 (waypoint)；</li>
-<li>导航模块 (sidewalk navigation module) 根据附近是否有行人流 (nearby pedestrian flow) 来采用 group surfing 或者 sidewalk following 方法。</li>
-<li>无论哪种方法，对外输出是子目标点 (subgoals)，这是避障算法的输入，最后输出速度矢量 (velocity command) 指令，控制机器人的运动。</li>
+<li>导航模块 (sidewalk navigation module) 根据附近是否有行人流 (nearby
+pedestrian flow) 来采用 group surfing 或者 sidewalk following
+方法。</li>
+<li>无论哪种方法，对外输出是子目标点
+(subgoals)，这是避障算法的输入，最后输出速度矢量 (velocity command)
+指令，控制机器人的运动。</li>
 <li>周期轮训，是否抵达当前目标点。</li>
 </ol>
 <!--If the robot has reached the waypoint within a predefined tolerance, the module checks if there are more waypoints.-->
-<h1>METHODS</h1>
-<h2 id="Group-Surfing">Group Surfing</h2>
-<p>核心思路和目标：模仿人类的自然行为，包括沿路行走 (walking in lanes)，避障 (avoiding collisions with other pedestrians or obstacles)，路口等待 (waiting at intersections to cross)，不走入交通中 (not walking into traffic)。类似于仿生学，这次模仿的只不过是人类自己罢了。</p>
-<ol>
+<h1 id="methods">METHODS</h1>
+<h2 id="group-surfing">Group Surfing</h2>
+<p>核心思路和目标：模仿人类的自然行为，包括沿路行走 (walking in
+lanes)，避障 (avoiding collisions with other pedestrians or
+obstacles)，路口等待 (waiting at intersections to cross)，不走入交通中
+(not walking into
+traffic)。类似于仿生学，这次模仿的只不过是人类自己罢了。</p>
+<ol type="1">
 <li>Filter Candidate Groups</li>
 </ol>
 <ul>
-<li> 过滤那些远离航路点的行人组。</li>
+<li> 过滤那些远离航路点的行人组。 &gt; Filter out groups moving away from
+the waypoint.</li>
+<li> 重点解释下，<span class="math inline">\(\[v_{G_{i}}\cdot
+x_{I}\]\)</span>
+的意义。在我看来，这个并没有物理意义，作者只不过想利用向量点乘的正负来判断行人是否在远离航路点。ps.
+向量点乘的正负性取决于余弦角，只要两个向量的夹角小于 90 度 (向目标点靠近)，就是正值。
+&gt; If this value is non-positive, discard Gi as a subgoal
+candidate.</li>
 </ul>
-<blockquote>
-<p>Filter out groups moving away from the waypoint.</p>
-</blockquote>
-<ul>
-<li>重点解释下，$[v_{G_{i}}\cdot x_{I}]$ 的意义。在我看来，这个并没有物理意义，作者只不过想利用向量点乘的正负来判断行人是否在远离航路点。ps. 向量点乘的正负性取决于余弦角，只要两个向量的夹角小于 90 度 (向目标点靠近)，就是正值。</li>
-</ul>
-<blockquote>
-<p>If this value is non-positive, discard Gi as a subgoal candidate.</p>
-</blockquote>
-<p><img data-src="/downloads/images/blog/group_surfing_1.jpg" alt="示意图"></p>
-<ol start="2">
-<li>Smart Group Selection</li>
+<figure>
+<img data-src="/downloads/images/blog/group_surfing_1.jpg" alt="示意图">
+<figcaption aria-hidden="true"> 示意图</figcaption>
+</figure>
+<ol start="2" type="1">
+<li> Smart Group Selection</li>
 </ol>
 <ul>
-<li> 方法核心思路和目标：从筛选后的行人组中，选择平均速度小于且最接近于机器人最大速度的作为最优跟踪组 (the optimal group to follow)。选择该组中距离机器人最近行人的当前位置作为子目标点 (subgoals)。</li>
+<li> 方法核心思路和目标：从筛选后的行人组中，选择平均速度小于且最接近于机器人最大速度的作为最优跟踪组
+(the optimal group to
+follow)。选择该组中距离机器人最近行人的当前位置作为子目标点
+(subgoals)。</li>
 </ul>
 <blockquote>
-<p>Once we have filtered out unsuitable groups, the algorithm selects the optimal group to follow.</p>
+<p>Once we have filtered out unsuitable groups, the algorithm selects
+the optimal group to follow.</p>
 </blockquote>
 <ul>
 <li>那么，路径规划和避障的问题就是在机器人当前位置和最优跟踪组的最近行人之间，规划出一条无碰撞的路径。</li>
 </ul>
 <blockquote>
-<p>We intentionally select the closest person as a subgoal as attempting to reach the average group position could lead to path planning through pedestrians located between the average group position and the robot’s current position.</p>
+<p>We intentionally select the closest person as a subgoal as attempting
+to reach the average group position could lead to path planning through
+pedestrians located between the average group position and the robot’s
+current position.</p>
 </blockquote>
-<h2 id="Curb-Following">Curb Following</h2>
-<p>方法核心思路和目标：使用 3D laser sensor 采集点云，然后利用 Random Sample Consensus (RANSAC) 算法去识别马路沿。</p>
+<h2 id="curb-following">Curb Following</h2>
+<p>方法核心思路和目标：使用 3D laser sensor 采集点云，然后利用 Random
+Sample Consensus (RANSAC) 算法去识别马路沿。</p>
 <blockquote>
-<p>We make use of contextual knowledge; sidewalks are normally surrounded by streets and buildings or empty space. Our robot first acquires a surrounding point cloud using a 3D laser sensor and filters out points that are at the same height as or above the plane defined by the robot wheel contacts.</p>
+<p>We make use of contextual knowledge; sidewalks are normally
+surrounded by streets and buildings or empty space. Our robot first
+acquires a surrounding point cloud using a 3D laser sensor and filters
+out points that are at the same height as or above the plane defined by
+the robot wheel contacts.</p>
 </blockquote>
-<h2 id="Collision-Avoidance">Collision Avoidance</h2>
-<ol>
+<h2 id="collision-avoidance">Collision Avoidance</h2>
+<ol type="1">
 <li>Human-Aware Collision Avoidance</li>
 </ol>
 <ul>
-<li> 在 group surfing 和 curb following 中，使用已有的学习方法，Socially-Aware Collision Avoidance with Deep Reinforcement Learning (SA-CADRL) 来作为避障算法。</li>
+<li><p> 在 group surfing 和 curb following
+中，使用已有的学习方法，Socially-Aware Collision Avoidance with Deep
+Reinforcement Learning (SA-CADRL) 来作为避障算法。 &gt; Socially-Aware
+Collision Avoidance with Deep Reinforcement Learning (SA-CADRL), as the
+collision avoidance component of our navigation stack. The collision
+avoidance system navigates to a local subgoal generated by either the
+group surfing or the curb following approach.</p></li>
+<li><p> 其中，引入社交奖励函数来鼓励社会行为。 The reinforcement training
+process induces social awareness through social reward functions, which
+give higher values to actions that follow social rules.</p></li>
 </ul>
-<blockquote>
-<p>Socially-Aware Collision Avoidance with Deep Reinforcement Learning (SA-CADRL), as the collision avoidance component of our navigation stack. The collision avoidance system navigates to a local subgoal generated by either the group surfing or the curb following approach.</p>
-</blockquote>
-<ul>
-<li>其中，引入社交奖励函数来鼓励社会行为。<br>
-The reinforcement training process induces social awareness through social reward functions, which give higher values to actions that follow social rules.</li>
-</ul>
-<ol start="2">
+<ol start="2" type="1">
 <li>Static Obstacle Avoidance:</li>
 </ol>
 <ul>
-<li> 把静态障碍物作为静态的行人，仍然使用 SA-CADRL 算法来处理。</li>
+<li> 把静态障碍物作为静态的行人，仍然使用 SA-CADRL 算法来处理。 &gt; We
+also use SA-CADRL to avoid these static obstacles by adding “static
+pedestrians” to the state vector.</li>
 </ul>
-<blockquote>
-<p>We also use SA-CADRL to avoid these static obstacles by adding “static pedestrians” to the state vector.</p>
-</blockquote>
-<h1>SIMULATION DEMONSTRATION AND EXPERIMENTS For</h1>
-<p>仿真环境的构建：使用 ROS 和 Gazebo 仿真套件。</p>
-<blockquote>
-<p>We use the Robot Operating System (ROS) and Gazebo simulator suite. To simulate pedestrians, we use the Pedsim ROS library, which relies on the social force model.</p>
-</blockquote>
-<h2 id="Simulation-Demonstration">Simulation Demonstration</h2>
-<p>在虚拟环境中，以 GPS 校准，重新搭建了周围的环境，复制了机器人模型。</p>
+<h1 id="simulation-demonstration-and-experiments-for">SIMULATION
+DEMONSTRATION AND EXPERIMENTS For</h1>
+<p>仿真环境的构建：使用 ROS 和 Gazebo 仿真套件。 &gt; We use the Robot
+Operating System (ROS) and Gazebo simulator suite. To simulate
+pedestrians, we use the Pedsim ROS library, which relies on the social
+force model.</p>
+<h2 id="simulation-demonstration">Simulation Demonstration</h2>
+<p>在虚拟环境中，以 GPS
+校准，重新搭建了周围的环境，复制了机器人模型。</p>
 <!--
 ![video_1](https://www.youtube.com/watch?v=fy7fKOADg_A)
 -->
-<h2 id="Simulation-Experiments-and-Evaluation">Simulation Experiments and Evaluation</h2>
-<p>目的：验证机器人可以沿着社会接受 (socially-acceptable) 的行为，最后抵达终点，即机器人的路径和行人的路径是相似的。</p>
+<h2 id="simulation-experiments-and-evaluation">Simulation Experiments
+and Evaluation</h2>
+<p>目的：验证机器人可以沿着社会接受 (socially-acceptable)
+的行为，最后抵达终点，即机器人的路径和行人的路径是相似的。</p>
 <blockquote>
-<p>In evaluating our navigation system, our main goal was to show that the system successfully navigates the robot to its final goal through a socially-acceptable path. That is, the path that our robot takes to the goal is similar to what a pedestrian would take to the same goal.</p>
+<p>In evaluating our navigation system, our main goal was to show that
+the system successfully navigates the robot to its final goal through a
+socially-acceptable path. That is, the path that our robot takes to the
+goal is similar to what a pedestrian would take to the same goal.</p>
 </blockquote>
 <p>首先，在虚拟环境中，使用提出的算法抵达终点；然后，文中引入对比试验，使用最短路径的方法抵达终点。</p>
 <blockquote>
-<p>We tracked the path taken by the robot and the path taken by a simulated pedestrian. We also tracked the shortest path that the robot could take within the confines of the sidewalk.</p>
+<p>We tracked the path taken by the robot and the path taken by a
+simulated pedestrian. We also tracked the shortest path that the robot
+could take within the confines of the sidewalk.</p>
 </blockquote>
-<p>现在，有三组轨迹，行人的真实轨迹，现有算法轨迹，最短路径的轨迹。本文使用 an independent samples t-test 等数学方法，比较两个轨迹和人类实际轨迹的相似度，来证明现有的算法更加符合人类的行为。</p>
+<p>现在，有三组轨迹，行人的真实轨迹，现有算法轨迹，最短路径的轨迹。本文使用
+an independent samples t-test
+等数学方法，比较两个轨迹和人类实际轨迹的相似度，来证明现有的算法更加符合人类的行为。</p>
 <p>MC：赞一下，比较的有理有据。</p>
-<h1>HARDWARE DEMONSTRATION</h1>
-<h2 id="Hardware-Setup">Hardware Setup</h2>
+<h1 id="hardware-demonstration">HARDWARE DEMONSTRATION</h1>
+<h2 id="hardware-setup">Hardware Setup</h2>
 <p>机器人的配置如下：</p>
 <blockquote>
-<p>We use the PowerBot from Omron Adept Mobile Robots as our differential drive mobile base. The robot is equipped with multiple sensors: a Velodyne VLP-16 3D LiDAR sensor; a SICK LMS-200 2D laser sensor; a RealSense RGB-D sensor, and GPS and IMU sensors. Our PowerBot’s max speed is 0.8m/s. This limits its capacity of following faster pedestrian groups.</p>
+<p>We use the PowerBot from Omron Adept Mobile Robots as our
+differential drive mobile base. The robot is equipped with multiple
+sensors: a Velodyne VLP-16 3D LiDAR sensor; a SICK LMS-200 2D laser
+sensor; a RealSense RGB-D sensor, and GPS and IMU sensors. Our
+PowerBot’s max speed is 0.8m/s. This limits its capacity of following
+faster pedestrian groups.</p>
 </blockquote>
-<h2 id="Demonstration-and-Discussion">Demonstration and Discussion</h2>
+<h2 id="demonstration-and-discussion">Demonstration and Discussion</h2>
 <!--
 ![video_2](https://www.youtube.com/watch?v=PHhtYIkdxiw)
 -->
@@ -1022,19 +1209,19 @@ The reinforcement training process induces social awareness through social rewar
 <li>原打算使用 lidar 来识别行人的腿部，但是错误率太多，使用 SPENCER 提供的 RGB-D-based 的上身识别算法。</li>
 <li>对机器人局限的探讨，以及算法的不足之处，从工程的角度讨论。</li>
 </ul>
-<h1>CONCLUSIONS</h1>
-<p>待提高的地方：</p>
-<ul>
-<li>For the group surfing component, one main area for improvement is in the selection process of groups to imitate.
-<ul>
-<li>Criteria: group velocity; group trajectory; group size</li>
-</ul>
-</li>
-<li>External observers of the group surfing behaviour will be interviewed to gauge if the imitation behaviour is socially acceptable.</li>
-<li>For collision avoidance, a more specialized technique would allow for more efficient navigation.</li>
-<li>We hope to decouple static collision avoidance from dynamic collision avoidance.</li>
-<li>For curb following, our approach only works for sidewalks that limit directly to the street, ignoring common tree belt, median, hellstrip, etc. Our future plan is to introduce detection and recognition of these non-transitable areas and incorporate them in our navigation module.</li>
-</ul>
+<h1 id="conclusions">CONCLUSIONS</h1>
+<p>待提高的地方： - For the group surfing component, one main area for
+improvement is in the selection process of groups to imitate. -
+Criteria: group velocity; group trajectory; group size - External
+observers of the group surfing behaviour will be interviewed to gauge if
+the imitation behaviour is socially acceptable. - For collision
+avoidance, a more specialized technique would allow for more efficient
+navigation. - We hope to decouple static collision avoidance from
+dynamic collision avoidance. - For curb following, our approach only
+works for sidewalks that limit directly to the street, ignoring common
+tree belt, median, hellstrip, etc. Our future plan is to introduce
+detection and recognition of these non-transitable areas and incorporate
+them in our navigation module.</p>
 
       
     </div>
@@ -1135,50 +1322,85 @@ The reinforcement training process induces social awareness through social rewar
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>Background</h1>
-<p>Recently, I updated my Ubuntu version from 16.04 to 18.04, and I’d like to share my experience on how to build a work or study environment for yourself.</p>
-<p>This blog mainly introduces how to install Sogou pinyin in non-Chinese versions of Ubuntu.</p>
-<p><img data-src="/downloads/images/Chinese_characters.png" alt=""></p>
-<h1>How to install Sogou pinyin</h1>
-<p><strong>Firstly</strong>, you should install fcitx, a lightweight input method framework aimed at providing environment independent language support for Linux.</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx-bin</span><br><span class="line">sudo apt install fcitx-table</span><br></pre></td></tr></tbody></table></figure>
-<p>You can also uninstall ibus, an input-method framework for Unix-like computer operating-systems.</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt purge ibus</span><br><span class="line">sudo apt autoremove</span><br></pre></td></tr></tbody></table></figure>
-<!--
+<h1 id="background">Background</h1>
+<p>Recently, I updated my Ubuntu version from 16.04 to 18.04, and I'd
+like to share my experience on how to build a work or study environment
+for yourself.</p>
+<p>This blog mainly introduces how to install Sogou pinyin in
+non-Chinese versions of Ubuntu.</p>
+<p><img data-src="/downloads/images/Chinese_characters.png"></p>
+<h1 id="how-to-install-sogou-pinyin">How to install Sogou pinyin</h1>
+<p><strong>Firstly</strong>, you should install fcitx, a lightweight
+input method framework aimed at providing environment independent
+language support for Linux. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx-bin</span><br><span class="line">sudo apt install fcitx-table</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p>You can also uninstall ibus, an input-method framework for Unix-like
+computer operating-systems. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt purge ibus</span><br><span class="line">sudo apt autoremove</span><br></pre></td></tr></tbody></table></figure> <!--
 [Another method to install pinyin](https://www.pinyinjoe.com/linux/ubuntu-18-gnome-chinese-setup.htm)
--->
-<p>BTW, you can read <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/260601/understanding-setting-up-different-input-methods">Understanding &amp; setting up different input methods</a> if you are interested in the difference between fcitx and ibus.</p>
-<p>Recall that:</p>
+--><p></p>
+<p>BTW, you can read <a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/260601/understanding-setting-up-different-input-methods">Understanding
+&amp; setting up different input methods</a> if you are interested in
+the difference between fcitx and ibus.</p>
+<p>Recall that: &gt; remove - remove is identical to install except that
+packages are removed instead of installed. Note that removing a package
+leaves its configuration files on the system. If a plus sign is appended
+to the package name (with no intervening space), the identified package
+will be installed instead of removed.</p>
 <blockquote>
-<p>remove - remove is identical to install except that packages are removed instead of installed. Note that removing a package leaves its configuration files on the system. If a plus sign is appended to the package name (with no intervening space), the identified package will be installed instead of removed.</p>
+<p>purge - purge is identical to remove except that packages are removed
+and purged (any configuration files are deleted too). This of course,
+does not apply to packages that hold configuration files inside the
+user's home folder.</p>
 </blockquote>
 <blockquote>
-<p>purge - purge is identical to remove except that packages are removed and purged (any configuration files are deleted too). This of course, does not apply to packages that hold configuration files inside the user’s home folder.</p>
+<p>what sudo apt autoremove actually does? Whenever you install an
+application (using apt-get), the system will also install the software
+that this application depends on. It is common in Ubuntu/Linux that
+applications share the same libraries. When you remove the appplication
+the dependency will stay on your system. So apt-get autoremove will
+remove those dependencies that were installed with applications and that
+are no longer used by anything else on the system.</p>
 </blockquote>
-<blockquote>
-<p>what sudo apt autoremove actually does?   Whenever you install an application (using apt-get), the system will also install the software that this application depends on. It is common in Ubuntu/Linux that applications share the same libraries. When you remove the appplication the dependency will stay on your system. So apt-get autoremove will remove those dependencies that were installed with applications and that are no longer used by anything else on the system.</p>
-</blockquote>
-<p>You can subsequently open <strong>Language Suppor</strong> to double-check that <strong>Key board input method system</strong> has change from ibus to fcitx, and you can change it manuallyif not. You can ignore it and click the “Remind Me later” button if you are reminded that “The language support is not installed completely”.</p>
-<p><img data-src="/downloads/images/language_support_linux.png" alt=""></p>
-<p>Importantly, you must <font color="red"> <strong>reboot</strong></font> your system after that.</p>
-<p>After that, you can download the deb package from the official website, <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux/?r=pinyin">搜狗输入法 for Linux</a>, or here (also official links) directly.</p>
+<p>You can subsequently open <strong>Language Suppor</strong> to
+double-check that <strong>Key board input method system</strong> has
+change from ibus to fcitx, and you can change it manuallyif not. You can
+ignore it and click the "Remind Me later" button if you are reminded
+that "The language support is not installed completely".</p>
+<p><img data-src="/downloads/images/language_support_linux.png"></p>
+<p>Importantly, you must <font color="red">
+<strong>reboot</strong></font> your system after that.</p>
+<p>After that, you can download the deb package from the official
+website, <a target="_blank" rel="noopener" href="https://pinyin.sogou.com/linux/?r=pinyin">搜狗输入法
+for Linux</a>, or here (also official links) directly.</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="http://cdn2.ime.sogou.com/dl/index/1524572032/sogoupinyin_2.2.0.0108_i386.deb?st=g_AXK19LEkZ7zsl2oOV3hQ&amp;e=1582358642&amp;fn=sogoupinyin_2.2.0.0108_i386.deb">32bit - sogoupinyin_2.2.0.0108_i386.deb</a></li>
-<li><a target="_blank" rel="noopener" href="http://cdn2.ime.sogou.com/dl/index/1571302197/sogoupinyin_2.3.1.0112_amd64.deb?st=EIacqcesOuHgsaQY0n9bjQ&amp;e=1582358642&amp;fn=sogoupinyin_2.3.1.0112_amd64.deb">64bit - sogoupinyin_2.3.1.0112_amd64.deb</a></li>
+<li><a target="_blank" rel="noopener" href="http://cdn2.ime.sogou.com/dl/index/1524572032/sogoupinyin_2.2.0.0108_i386.deb?st=g_AXK19LEkZ7zsl2oOV3hQ&amp;e=1582358642&amp;fn=sogoupinyin_2.2.0.0108_i386.deb">32bit
+- sogoupinyin_2.2.0.0108_i386.deb</a></li>
+<li><a target="_blank" rel="noopener" href="http://cdn2.ime.sogou.com/dl/index/1571302197/sogoupinyin_2.3.1.0112_amd64.deb?st=EIacqcesOuHgsaQY0n9bjQ&amp;e=1582358642&amp;fn=sogoupinyin_2.3.1.0112_amd64.deb">64bit
+- sogoupinyin_2.3.1.0112_amd64.deb</a></li>
 </ul>
-<p>You can install it in <strong>Ubuntu Software</strong> by double-clicking, shown as below.</p>
-<p><img data-src="/downloads/images/sogou_deb_installed.png" alt=""></p>
-<p>Importantly, you must <font color="red"> <strong>reboot</strong></font> your system again.</p>
-<p>You can open fcitx config tool after rebooting, as you can see below. You should also see Sogou Pinyin in the lists. Unfortunately, if not, you can add it by clicking the + mark, choose Sogou Pinyin and reboot the system again.</p>
-<p><img data-src="/downloads/images/fcitx_config.png" alt=""></p>
-<p>Now, you should input Chinese characters at the same time. In other words, you can use it as convenient in Windows system, like the Shuangpin input method. Yeah, you can learn more detail about Shuangpin in <a target="_blank" rel="noopener" href="https://www.yanlongwang.net/monthly-skills/monthlyskills-shuangpin/">双拼学习</a>.</p>
+<p>You can install it in <strong>Ubuntu Software</strong> by
+double-clicking, shown as below.</p>
+<p><img data-src="/downloads/images/sogou_deb_installed.png"></p>
+<p>Importantly, you must <font color="red">
+<strong>reboot</strong></font> your system again.</p>
+<p>You can open fcitx config tool after rebooting, as you can see below.
+You should also see Sogou Pinyin in the lists. Unfortunately, if not,
+you can add it by clicking the + mark, choose Sogou Pinyin and reboot
+the system again.</p>
+<p><img data-src="/downloads/images/fcitx_config.png"></p>
+<p>Now, you should input Chinese characters at the same time. In other
+words, you can use it as convenient in Windows system, like the
+Shuangpin input method. Yeah, you can learn more detail about Shuangpin
+in <a target="_blank" rel="noopener" href="https://www.yanlongwang.net/monthly-skills/monthlyskills-shuangpin/">双拼学习</a>.</p>
 <p>Just enjoy Ubuntu 18.04.</p>
-<h1>References</h1>
-<p><a target="_blank" rel="noopener" href="https://www.pinyinjoe.com/linux/ubuntu-18-gnome-chinese-setup.htm">Ubuntu Chinese Setup</a><br>
-<a target="_blank" rel="noopener" href="https://xunyunliu.github.io/post/install_sogou/">How to install Sogou input on Ubuntu 16.04</a></p>
+<h1 id="references">References</h1>
+<p><a target="_blank" rel="noopener" href="https://www.pinyinjoe.com/linux/ubuntu-18-gnome-chinese-setup.htm">Ubuntu
+Chinese Setup</a><br>
+<a target="_blank" rel="noopener" href="https://xunyunliu.github.io/post/install_sogou/">How to install
+Sogou input on Ubuntu 16.04</a></p>
 <!--
 [Reference link](https://blog.csdn.net/f_c_g_/article/details/81265589)
 -->
+
       
     </div>
 
@@ -1277,23 +1499,38 @@ The reinforcement training process induces social awareness through social rewar
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1>How to install rtags for vim in Ubuntu 18.04 / 如何在 Ubuntu 18.04 vim 上安装 rtags 插件</h1>
-<p>This blog introduces how to install the best cross-reference tool, <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a>, that I have ever used in vim, step by step. I hope it helps.</p>
-<h1>What’s rtags</h1>
-<p><a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">Rtags</a> is a client/server application that indexes C/C++ code and keeps a persistent file-based database of references, declarations, definitions, symbolnames etc. It allows you to find symbols by name (including nested class and namespace scope). Most importantly, it gives you proper follow-symbol and find-references support.</p>
-<p>Rtags comes with emacs support but there are projects supporting other IDEs: <a target="_blank" rel="noopener" href="https://github.com/lyuts/vim-rtags">vim-rtags</a> and <a target="_blank" rel="noopener" href="https://github.com/rampage644/sublime-rtags">sublime-rtags</a>.</p>
+          <h1 id="how-to-install-rtags-for-vim-in-ubuntu-18.04-如何在ubuntu-18.04-vim上安装rtags插件">How
+to install rtags for vim in Ubuntu 18.04 / 如何在 Ubuntu 18.04
+vim 上安装 rtags 插件</h1>
+<p>This blog introduces how to install the best cross-reference tool, <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a>, that I have ever
+used in vim, step by step. I hope it helps.</p>
+<h1 id="whats-rtags">What's rtags</h1>
+<p><a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">Rtags</a> is a
+client/server application that indexes C/C++ code and keeps a persistent
+file-based database of references, declarations, definitions,
+symbolnames etc. It allows you to find symbols by name (including nested
+class and namespace scope). Most importantly, it gives you proper
+follow-symbol and find-references support.</p>
+<p>Rtags comes with emacs support but there are projects supporting
+other IDEs: <a target="_blank" rel="noopener" href="https://github.com/lyuts/vim-rtags">vim-rtags</a>
+and <a target="_blank" rel="noopener" href="https://github.com/rampage644/sublime-rtags">sublime-rtags</a>.</p>
 <p>In this blog, We would install vim-rtags later.</p>
-<h1>How to install rtags</h1>
-<p><strong>First</strong>, you need clang, which is a compiler front end for the C, C++, Objective-C and so on. It uses the LLVM compiler infrastructure as its back end and has been part of the LLVM release cycle since LLVM 2.6.</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">// sudo apt install clang-5.0 lld-5.0  </span><br><span class="line">// sudo apt install libclang-5.0-dev  </span><br><span class="line">sudo apt install llvm-7-dev libclang-7-dev</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="how-to-install-rtags">How to install rtags</h1>
+<p><strong>First</strong>, you need clang, which is a compiler front end
+for the C, C++, Objective-C and so on. It uses the LLVM compiler
+infrastructure as its back end and has been part of the LLVM release
+cycle since LLVM 2.6. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">// sudo apt install clang-5.0 lld-5.0  </span><br><span class="line">// sudo apt install libclang-5.0-dev  </span><br><span class="line">sudo apt install llvm-7-dev libclang-7-dev</span><br></pre></td></tr></tbody></table></figure><p></p>
 <!--And then add the bin binary to your path.-->
-<p><strong>Secondly</strong>, make and install <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a> as follows.</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">git clone --recursive https://github.com/Andersbakken/rtags.git</span><br><span class="line">cd rtags &lt;-- in rtags directory</span><br><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .</span><br><span class="line">make</span><br><span class="line">sudo make install </span><br></pre></td></tr></tbody></table></figure>
-<p><strong>Thirdly</strong>, you should install vim-rtags in <a target="_blank" rel="noopener" href="https://github.com/VundleVim/Vundle.vim">Vundle.vim</a>. I think it’s the easiest way to install rtags plugin in vim.<br>
-You need to add the following line to .vimrc if you have installed Vundle, and then run :PluginInstall in vim.</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plugin 'lyuts/vim-rtags' &lt;-- install in vim</span><br></pre></td></tr></tbody></table></figure>
-<p><strong>Finally</strong>, the last but essential step is that forcing cmake to output compile_commands.json (like <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/v3.5/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html">DCMAKE_EXPORT_COMPILE_COMMANDS</a>) and link it with rtags according to your project.</p>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 [***] your_src_path</span><br><span class="line">rc -J your_build_folder_path  &lt;-- use compile_commands.json in your build folder</span><br><span class="line">rdm &amp; &lt;-- launch the rtags server</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>Secondly</strong>, make and install <a target="_blank" rel="noopener" href="https://github.com/Andersbakken/rtags">rtags</a> as follows.
+</p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Commands in Ubuntu terminal</span><br><span class="line">git clone --recursive https://github.com/Andersbakken/rtags.git</span><br><span class="line">cd rtags &lt;-- in rtags directory</span><br><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 .</span><br><span class="line">make</span><br><span class="line">sudo make install </span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><strong>Thirdly</strong>, you should install vim-rtags in <a target="_blank" rel="noopener" href="https://github.com/VundleVim/Vundle.vim">Vundle.vim</a>. I think
+it's the easiest way to install rtags plugin in vim. You need to add the
+following line to .vimrc if you have installed Vundle, and then run
+:PluginInstall in vim. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Plugin 'lyuts/vim-rtags' &lt;-- install in vim</span><br></pre></td></tr></tbody></table></figure><p></p>
+<p><strong>Finally</strong>, the last but essential step is that forcing
+cmake to output compile_commands.json (like <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/v3.5/variable/CMAKE_EXPORT_COMPILE_COMMANDS.html">DCMAKE_EXPORT_COMPILE_COMMANDS</a>)
+and link it with rtags according to your project. </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 [***] your_src_path</span><br><span class="line">rc -J your_build_folder_path  &lt;-- use compile_commands.json in your build folder</span><br><span class="line">rdm &amp; &lt;-- launch the rtags server</span><br></pre></td></tr></tbody></table></figure><p></p>
+
       
     </div>
 
@@ -1393,42 +1630,48 @@ You need to add the following line to .vimrc if you have installed Vundle, and t
     
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
-<h1>前言</h1>
-<p>在 <a href="http://www.waylon.one/website/Website-FAQ/">Website FAQ</a>，实现了使用 "卜算子" 来统计网站访问人数，但是 "卜算子" 仅可以提供访问人数的统计，进一步的信息却无法提供。那么，如果想知道过往访客来自哪些国家和地区，显示网站访问实时动态的信息，应该怎么做呢？</p>
+<h1 id="前言">前言</h1>
+<p>在 <a href="http://www.waylon.one/website/Website-FAQ/">Website
+FAQ</a>，实现了使用 "卜算子" 来统计网站访问人数，但是 "卜算子" 仅可以提供访问人数的统计，进一步的信息却无法提供。那么，如果想知道过往访客来自哪些国家和地区，显示网站访问实时动态的信息，应该怎么做呢？</p>
 <p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/statistics-visitor-traffic/">个人网站</a>，请移步阅读最新内容。</p>
-<h1>clustermaps 是什么</h1>
-<p><a target="_blank" rel="noopener" href="https://clustrmaps.com">clustrmaps.com</a> 是美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。</p>
+<h1 id="clustermaps-是什么">clustermaps 是什么</h1>
+<p><a target="_blank" rel="noopener" href="https://clustrmaps.com">clustrmaps.com</a>
+是美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。</p>
 <blockquote>
-<p>Add the ClustrMaps hit tracker to your site or blog and see a real-time map of your visitors from around the world! Proudly show and grow your hidden community of interest.</p>
+<p>Add the ClustrMaps hit tracker to your site or blog and see a
+real-time map of your visitors from around the world! Proudly show and
+grow your hidden community of interest.</p>
 </blockquote>
 <p>网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是<strong>免费</strong>的，能够满足个人网站的需求，如下图所示。</p>
-<p><img data-src="/downloads/images/blog/visitor_traffic_demo.png" alt=""></p>
-<h1>配置 clustrmaps</h1>
+<p><img data-src="/downloads/images/blog/visitor_traffic_demo.png"></p>
+<h1 id="配置-clustrmaps">配置 clustrmaps</h1>
 <ul>
-<li>网站注册后，访问 <a target="_blank" rel="noopener" href="https://clustrmaps.com/add">Enter your website address</a> 添加自己的网站地址，选择免费的服务。</li>
+<li>网站注册后，访问 <a target="_blank" rel="noopener" href="https://clustrmaps.com/add">Enter your
+website address</a> 添加自己的网站地址，选择免费的服务。</li>
 </ul>
-<p><img data-src="/downloads/images/blog/input_url.png" alt=""></p>
-<p><img data-src="/downloads/images/blog/choose_plan.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/input_url.png"></p>
+<p><img data-src="/downloads/images/blog/choose_plan.png"></p>
 <ul>
-<li>选择自己喜欢的插件格式，现在 Hexo 的 Next 两种主题都是支持的，但是自己比较喜欢 Map widget 的主题。</li>
+<li>选择自己喜欢的插件格式，现在 Hexo 的 Next
+两种主题都是支持的，但是自己比较喜欢 Map widget 的主题。</li>
 </ul>
-<p><img data-src="/downloads/images/blog/map_widget.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/map_widget.png"></p>
 <ul>
-<li>点击选择后，拷贝网站出现的脚本 javascript 代码，粘贴到 Next 主题下某个位置。博主测试过如下两个位置，挑选一个配置即可以。推荐位置二，自定义程度高。
+<li>点击选择后，拷贝网站出现的脚本
+javascript 代码，粘贴到 Next 主题下某个位置。博主测试过如下两个位置，挑选一个配置即可以。推荐位置二，自定义程度高。
 <ul>
-<li>位置一：将代码插入到 themes\next\layout\_partials\header.swig 的最后。</li>
+<li><p>位置一：将代码插入到 themes\_partials.swig 的最后。
+</p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  {% endif %}</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert clustrmaps.com --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">id</span>=<span class="string">'clustrmaps'</span> <span class="attr">src</span>=<span class="string">'//cdn.clustrmaps.com/map_v2.js?XXX'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% include '../_custom/header.swig' %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+<li><p>位置二：将代码插入到 \_macro.swig 文件的</p>
+<div class="”sidebar-inner”">
+
+</div>
+<p>图层。 </p><figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-inner"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- set display_toc = page.toc.enable and display_toc %}</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Begin Insert clustrmaps.com --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">id</span>=<span class="string">"clustrmaps"</span> <span class="attr">src</span>=<span class="string">"//clustrmaps.com/map_v2.js?d=iBmc9XXXXXX=a"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- End Insert clustrmaps.com --&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- if display_toc %}</span><br><span class="line">      {%- set toc = toc(page.content, { class: "nav", list_number: page.toc.number, max_depth: page.toc.max_depth }) %}</span><br></pre></td></tr></tbody></table></figure><p></p></li>
+</ul></li>
+<li>重新部署网站，就可以在首页看到实时访客来源图，如我的网站首页所示。另外，点击地图，可以看到更详细的信息，包括访客的地图、浏览设备以及
+IP。</li>
 </ul>
-</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  {% endif %}</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert clustrmaps.com --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">id</span>=<span class="string">'clustrmaps'</span> <span class="attr">src</span>=<span class="string">'//cdn.clustrmaps.com/map_v2.js?XXX'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% include '../_custom/header.swig' %}</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>位置二：将代码插入到 \themes\next\layout\_macro\sidebar.swig 文件的<div class="”sidebar-inner”"> </div>图层。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-inner"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- set display_toc = page.toc.enable and display_toc %}</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Begin Insert clustrmaps.com --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">id</span>=<span class="string">"clustrmaps"</span> <span class="attr">src</span>=<span class="string">"//clustrmaps.com/map_v2.js?d=iBmc9XXXXXX=a"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- End Insert clustrmaps.com --&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- if display_toc %}</span><br><span class="line">      {%- set toc = toc(page.content, { class: "nav", list_number: page.toc.number, max_depth: page.toc.max_depth }) %}</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>重新部署网站，就可以在首页看到实时访客来源图，如我的网站首页所示。另外，点击地图，可以看到更详细的信息，包括访客的地图、浏览设备以及 IP。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/detaile_IP.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/detaile_IP.png"></p>
 
       
     </div>
@@ -1529,7 +1772,7 @@ You need to add the following line to .vimrc if you have installed Vundle, and t
     
     <div class="post-body" itemprop="articleBody">
           <p>《莫斯科绅士》讲述的是在沙皇被推翻之后，一个沙皇伯爵回到俄国，被软禁在莫斯科大都会酒店度过一生的故事。作者通过伯爵的回忆，简单描述了沙皇时期贵族的一些生活场景，又以伯爵的视角，通过描绘大都会酒店的变化，侧面反映了俄国的政治、社会变化。</p>
-<p><img data-src="/downloads/images/blog/A-Gentleman-in-Moscow-Cover.jpg" alt=""></p>
+<p><img data-src="/downloads/images/blog/A-Gentleman-in-Moscow-Cover.jpg"></p>
 <p>读完故事简介时，我以为这本书会很无趣，但是最后发现我自己陷入到里故事中去，一个月的时间就读完了此书。</p>
 <p>我看书的时候一般不关注作者，但是在看这本书的过程中，我一直在不断地推测作者跟伯爵的关系。我想这会不会有点类似于传记的小说，作者就是伯爵本人或者他听过伯爵讲这些故事？毕竟他在对贵族场景和绅士遵守的规则时那么熟悉，毕竟他对伯爵心理活动的描述那么精确，我笔记中收藏了好几处他对伯爵心理活动的描写。退一步讲，如果他不是伯爵本人，那么至少他是一个地地道道的俄国人，一生中经历过沙皇倒台、十月革命、苏维埃政权建立以及斯大林时代结束。然而最终阅读完毕去查阅作者时，我才知到作者是一个美国人，不禁要感叹一声，此人何以如此厉害，居然可以如此了解那个时代的苏联，了解俄国人的特点和俄国的特色。</p>
 <p>沙皇被推翻后，伯爵旧时的象征尊贵的身份此时却是一种罪。他被软禁在已经居住了许多年的大都会酒店中，只不过之前，他住的是能看到红场和大剧院的视野最好的大套房，如今却被安置到 6 楼的一个小房间。因为新房间过矮，身材高大的伯爵无法直起身子，而且因为房间变小，他的很多东西都只能舍弃。当时他从老家庄园搬到大都会酒店时就迫不得已丢弃了许多物品，此次剩下的便更少了。多么像人生的一辈子，就是在不断地舍弃，不断地舍弃。</p>
@@ -1644,61 +1887,65 @@ You need to add the following line to .vimrc if you have installed Vundle, and t
 </blockquote>
 <p>在新的一年，保持学习的状态，每个月学习一项新技能，持续输入。</p>
 <p><strong>2019 年 2 月，新的技能选择学习小众的「双拼」输入法</strong>。</p>
-<h1>什么是双拼</h1>
+<h1 id="什么是双拼">什么是双拼</h1>
 <blockquote>
 <p>双拼是一种建立在拼音输入法基础上的输入方法，是汉语拼音输入法的一种编码方案，可视为全拼的一种改进。它通过将汉语拼音中每个含多个字母的声母或韵母各自映射到某个按键上，使得每个音都可以用两个按键打出，一个代表声母的字母，一个代表韵母的字母，极大地提高了拼音输入法的输入速度。</p>
 </blockquote>
-<p>目前<font color="green"> Windows、Android、macOS、iOS 平台 </font>上都有输入法支持双拼，包括 <strong>iOS 系统自带输入法</strong>、 QQ 输入法、百度输入法、搜狗输入法、谷歌输入法和微软必应输入法等。</p>
-<p><img data-src="/downloads/images/blog/xnheulpb.png" alt="小鹤双拼"></p>
-<h1>放弃全拼，学习双拼的理由</h1>
-<p>目前，市面上最为主流的拼音输入法方案是「全拼」，它确实有着简单、易上手化、兼容性高的优势。事实上，「全拼」有着一个非常明显的缺点：多击键次数，即在键盘打字，大部分文字需要点击多个按键。也许你会反驳称「全拼」有智能联想、模糊音等快捷输入，但是「双拼」也有着类似的快捷输入。<br>
+<p>目前<font color="green"> Windows、Android、macOS、iOS 平台
+</font>上都有输入法支持双拼，包括 <strong>iOS 系统自带输入法</strong>、
+QQ 输入法、百度输入法、搜狗输入法、谷歌输入法和微软必应输入法等。</p>
+<figure>
+<img data-src="/downloads/images/blog/xnheulpb.png" alt="小鹤双拼">
+<figcaption aria-hidden="true">小鹤双拼</figcaption>
+</figure>
+<h1 id="放弃全拼学习双拼的理由">放弃全拼，学习双拼的理由</h1>
+<p>目前，市面上最为主流的拼音输入法方案是「全拼」，它确实有着简单、易上手化、兼容性高的优势。事实上，「全拼」有着一个非常明显的缺点：多击键次数，即在键盘打字，大部分文字需要点击多个按键。也许你会反驳称「全拼」有智能联想、模糊音等快捷输入，但是「双拼」也有着类似的快捷输入。
 对比「全拼」，「双拼」主要有以下优势：</p>
-<h2 id="「双拼」按键效率高">「双拼」按键效率高</h2>
-<p>汉语拼音多由「声母」+「韵母」组成，除了「啊 - a」「哦 - o」「额 - e」这类极少的单韵母，每个拼音的全拼输入至少需要两次，而对于所有拼音，双拼输入只需要两次。这样看来，双拼的按键效率远远高于全拼。</p>
-<p><img data-src="/downloads/images/blog/ugmuyymu.png" alt="声母和韵母"></p>
-<p>以 “双拼” 为例，全拼方案需要输入「shuangpin」；若用小鹤双拼方案 (上图)，只需要输入「ulpb」：</p>
-<ul>
-<li>点击按键「u」「l」, 就能输入 sh、uang.</li>
-<li> 点击按键「p」「b」, 就能输入 p、in.</li>
-</ul>
+<h2 id="双拼按键效率高">「双拼」按键效率高</h2>
+<p>汉语拼音多由「声母」+「韵母」组成，除了「啊 - a」「哦 - o」「额 -
+e」这类极少的单韵母，每个拼音的全拼输入至少需要两次，而对于所有拼音，双拼输入只需要两次。这样看来，双拼的按键效率远远高于全拼。</p>
+<figure>
+<img data-src="/downloads/images/blog/ugmuyymu.png" alt="声母和韵母">
+<figcaption aria-hidden="true">声母和韵母</figcaption>
+</figure>
+<p>以 “双拼” 为例，全拼方案需要输入「shuangpin」；若用小鹤双拼方案 (上图)，只需要输入「ulpb」：
+- 点击按键「u」「l」, 就能输入 sh、uang. -
+点击按键「p」「b」, 就能输入 p、in.</p>
 <p>你可以发现，即使是 2 个字，双拼比全拼减少了 5 次按键。这对文字工作者而言，长篇的文章写下来，可节省了许多功夫啊。</p>
-<h2 id="「双拼」符合人的拼音思维">「双拼」符合人的拼音思维</h2>
-<p>虽然目前没有研究数据支持，但是可以肯定「双拼」其实很符合人的拼音思维。<br>
+<h2 id="双拼符合人的拼音思维">「双拼」符合人的拼音思维</h2>
+<p>虽然目前没有研究数据支持，但是可以肯定「双拼」其实很符合人的拼音思维。
 还是以 “双拼” 为例，你第一时间想到的一定是「sh、uang、p、in」这样的声母和韵母搭配，而不是散落、毫无逻辑的「s、h、u、a、n、g、p、i」。</p>
 <h2 id="酷酷的感觉">酷酷的感觉</h2>
-<p>双拼的优势除了 “击键次数少、更符合拼音思维、文字输入效率高” 外，「双拼」方案对拼音的打乱，会给外行人神秘的感觉，甚至可以用于简单加密。</p>
+<p>双拼的优势除了
+“击键次数少、更符合拼音思维、文字输入效率高” 外，「双拼」方案对拼音的打乱，会给外行人神秘的感觉，甚至可以用于简单加密。</p>
 <!--试想，许多年以后，来到一个陌生的电脑前，看见他们激烈地在键盘前忙碌地来回敲打，不时还对你冲莞尔：「我打字快不？」，这时你只需报之神秘的一笑，让笑意消散在风中。-->
 <p>总而言之，作为更出色的拼音输入方案，刚接触「双拼」时，我们难免需要花费一定的时间去学习、去了解，但绝对不能站在接触「全拼」多年的角度去全盘否定它。</p>
-<h1>如何学习双拼</h1>
+<h1 id="如何学习双拼">如何学习双拼</h1>
 <p>目前，「双拼」输入法有着多种方案，比如常见的<strong>小鹤双拼、搜狗双拼、微软拼音 2003、智能 ABC</strong> 等等，甚至还允许用户自定义方案。</p>
 <h2 id="哪个双拼方案更好用">哪个双拼方案更好用</h2>
 <p>现在的双拼方案层出不穷，常见的双拼方案有自然码方案以及相近的微软和搜狗，以及自然码方案基础上改动键位的小鹤。其中，微软双拼的方案非常普及，小鹤双拼则主打畅快高效，强调节奏感，尤其是加了鹤形之后，基本可以消除重码，实现「非智能输入」。各方案之间并无明显的优劣之分，需要根据不同人的需求，根据自己的喜好自由选择。</p>
-<p>我个人<font color="red"> <strong>推荐「小鹤双拼」</strong></font>，相比其他方案，小鹤的键位布置比较合理，左右手能够比较均衡的负担输入任务，边角位置的减少使用也能让小拇指轻松一点。而关键是，小鹤双拼中鹤形的加入能极大地消除重码，轻松实现候选字直接上屏，大大的加快输入。当然，如果懒得记鹤形，仅用双拼也已经比全拼方便很多了，毕竟现在都是词组整句的智能输入了。</p>
+<p>我个人<font color="red">
+<strong>推荐「小鹤双拼」</strong></font>，相比其他方案，小鹤的键位布置比较合理，左右手能够比较均衡的负担输入任务，边角位置的减少使用也能让小拇指轻松一点。而关键是，小鹤双拼中鹤形的加入能极大地消除重码，轻松实现候选字直接上屏，大大的加快输入。当然，如果懒得记鹤形，仅用双拼也已经比全拼方便很多了，毕竟现在都是词组整句的智能输入了。</p>
 <p>目前，<font color="red"><strong>各个主流输入法均支持「小鹤双拼」方案</strong></font>，甚至 ios 自带输入法也提供支持。所以，「小鹤双拼」方案可以满足跨平台、跨输入法的需求。</p>
 <h2 id="小鹤双拼学习">小鹤双拼学习</h2>
-<p>目前<font color="green"> Windows、Android、macOS、iOS 平台 </font>上都有输入法支持双拼，建议学习双拼时采用 “赶鸭子上架” 式学习法：</p>
-<ol>
-<li>读规则，仔细读两遍；</li>
-</ol>
-<ul>
-<li>附上小鹤双拼官网学习教程：<a target="_blank" rel="noopener" href="https://www.flypy.com/pin.html">让您的输入更舒适</a> 。</li>
-</ul>
-<ol start="2">
-<li>按照规则试着打几句话几个字；</li>
-<li>背诵口诀；<br>
-<img data-src="/downloads/images/blog/kzjt.png" alt="小鹤双拼口诀"></li>
-<li>把需要记忆和背诵的键位打印出来，放显示器旁边，然后关掉输入法的双拼同时使用全拼，开心去聊吧；</li>
-</ol>
-<ul>
-<li>生命短暂，时间宝贵，强烈建议直接上手，不要把时间浪费在「双拼」练字上。</li>
-</ul>
+<p>目前<font color="green"> Windows、Android、macOS、iOS 平台
+</font>上都有输入法支持双拼，建议学习双拼时采用 “赶鸭子上架” 式学习法： 1.
+读规则，仔细读两遍； - 附上小鹤双拼官网学习教程：<a target="_blank" rel="noopener" href="https://www.flypy.com/pin.html">让您的输入更舒适</a> 。 2.
+按照规则试着打几句话几个字； 3. 背诵口诀；<br>
+<img data-src="/downloads/images/blog/kzjt.png" alt="小鹤双拼口诀"> 4.
+把需要记忆和背诵的键位打印出来，放显示器旁边，然后关掉输入法的双拼同时使用全拼，开心去聊吧；
+-
+生命短暂，时间宝贵，强烈建议直接上手，不要把时间浪费在「双拼」练字上。</p>
 <p>为了快速学习和方便记忆，附上小鹤双拼键盘映射和口诀表，可以直接打印。</p>
-<h2 id="小鹤双拼键盘映射和口诀（图片可下载打印）">小鹤双拼键盘映射和口诀（图片可下载打印）</h2>
-<p><img data-src="/downloads/images/blog/xnheulpbkzjt.jpg" alt="小鹤双拼键盘映射和口诀"></p>
+<h2 id="小鹤双拼键盘映射和口诀图片可下载打印">小鹤双拼键盘映射和口诀（图片可下载打印）</h2>
+<figure>
+<img data-src="/downloads/images/blog/xnheulpbkzjt.jpg" alt="小鹤双拼键盘映射和口诀">
+<figcaption aria-hidden="true">小鹤双拼键盘映射和口诀</figcaption>
+</figure>
 <h2 id="友情链接">友情链接</h2>
 <p><a target="_blank" rel="noopener" href="https://www.zybuluo.com/jianshu/note/370049">作业部落 - 双拼输入法学习经验</a></p>
 <!--
-- &emsp;Qiu Wei Ruan T_ue_ve Yun U_shu I_chi &emsp;Song	_iong Dai Fen Geng Hang J_an  
+- &emsp;Qiu Wei Ruan T_ue_ve Yun U_shu I_chi &emsp;Song _iong Dai Fen Geng Hang J_an  
 &emsp;秋&emsp;闱&emsp;&emsp;软&emsp;&emsp;月&emsp;&emsp;云&emsp;&emsp;梳&emsp;&emsp;翅&emsp;&emsp;松&emsp;&emsp;拥&emsp;&emsp;黛&emsp;粉&emsp;更&emsp;&emsp;航&emsp;安  
  &emsp;uai _ing Liang _uang Zou Xia _ua  &emsp;Pie Cao V_zhui _v Bin Niao Mian  
  &emsp;快&emsp;莺&emsp;&emsp;两&emsp;&emsp;望&emsp;奏&emsp;夏&emsp;蛙&emsp;&emsp;撇&emsp;草&emsp;&emsp;追&emsp;鱼&emsp;滨&emsp;鸟&emsp;眠)
@@ -1809,10 +2056,14 @@ You need to add the following line to .vimrc if you have installed Vundle, and t
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/Website-FAQ/">个人网站</a>，请移步阅读最新内容。</p>
-<h1>Hexo 配置</h1>
+<h1 id="hexo-配置">Hexo 配置</h1>
 <ul>
-<li>Q: 如何修改 <strong>hexo d</strong> 命令的端口</li>
-<li> A: 如果服务器 / VPS 的 SSH 端口不是默认的<font color="green"> 22</font>，那么需要对本地 <font color="green">_config.yml</font> 文件的 <font color="green">deploy</font> 字段，做如下修改：</li>
+<li>Q: 如何修改 <strong>hexo d</strong> 命令的端口<br>
+</li>
+<li>A:
+如果服务器 / VPS 的 SSH 端口不是默认的<font color="green"> 22</font>，那么需要对本地
+<font color="green">_config.yml</font> 文件的
+<font color="green">deploy</font> 字段，做如下修改：</li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy: </span><br><span class="line">  type: git</span><br><span class="line">  message: update</span><br><span class="line">  repo: ssh://username@ip:<span class="tag">&lt;<span class="name">your-port</span>&gt;</span>/path_to_remote_git</span><br><span class="line">  branch: master</span><br></pre></td></tr></tbody></table></figure>
 <!--
@@ -1820,50 +2071,55 @@ You need to add the following line to .vimrc if you have installed Vundle, and t
 -->
 <ul>
 <li>Q: Next 主题 busuanzi_count 访客统计失效</li>
-<li> A: <a target="_blank" rel="noopener" href="http://ibruce.info/2015/04/04/busuanzi/">卜算子官网</a> 提示，“因七牛强制过期『<a target="_blank" rel="noopener" href="http://dn-lbstatics.qbox.me">dn-lbstatics.qbox.me</a>』域名，与客服沟通无果，只能更换域名到『<a target="_blank" rel="noopener" href="http://busuanzi.ibruce.info">busuanzi.ibruce.info</a>』”，所以需要修改卜算子在 next 主题插件里面的域名。<br>
-其中，hexo-theme-next 主题中使用了 dn-lbstatics.qbox.me 域名的文件位置为：hexo\themes\next\layout\_third-party\analytics\busuanzi-counter.swig.</li>
+<li> A: <a target="_blank" rel="noopener" href="http://ibruce.info/2015/04/04/busuanzi/">卜算子官网</a>
+提示，"因七牛强制过期『dn-lbstatics.qbox.me』域名，与客服沟通无果，只能更换域名到『busuanzi.ibruce.info』"，所以需要修改卜算子在 next 主题插件里面的域名。<br>
+其中，hexo-theme-next 主题中使用了 dn-lbstatics.qbox.me 域名的文件位置为：hexo\_third-party-counter.swig.</li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 把以下代码</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"># 替换成</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">async</span> <span class="attr">src</span>=<span class="string">"https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
 <p>然后重新生成和部署博客，即可看到卜算子功能修复，可以参考本人网站下方统计数据，如下图所示。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/bu_suan_zi_demo.jpg" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/bu_suan_zi_demo.jpg"></p>
 <!--
 [解决hexo博客的Next主题busuanzi_count失效方法](https://ywandy.github.io/%E8%A7%A3%E5%86%B3hexo%E5%8D%9A%E5%AE%A2%E7%9A%84Next%E4%B8%BB%E9%A2%98busuanzi-count%E5%A4%B1%E6%95%88%E6%96%B9%E6%B3%95.html)
 
 -->
-<h1>NextCloud 配置</h1>
+<h1 id="nextcloud-配置">NextCloud 配置</h1>
 <ul>
-<li>Q: 浏览器只能上传到<font color="red"> <strong> nextcloud</strong></font> 服务器 1M 小容量文件</li>
-<li> A: 上传文件大小限制，主要由 nginx 配置文件中的 client_max_body_size 的值决定，其默认值为 1M，我们根据需求调整其大小。</li>
+<li>Q: 浏览器只能上传到<font color="red">
+<strong> nextcloud</strong></font> 服务器 1M 小容量文件<br>
+</li>
+<li>A: 上传文件大小限制，主要由 nginx
+配置文件中的 client_max_body_size 的值决定，其默认值为
+1M，我们根据需求调整其大小。</li>
 </ul>
-<ol>
-<li>修改 nginx 配置文件目录下的 nginx.conf 文件 (一般路径是 /etc/nginx/nginx.conf)，增加如下图所示红色内容。</li>
+<ol type="1">
+<li>修改 nginx 配置文件目录下的 nginx.conf 文件
+(一般路径是 /etc/nginx/nginx.conf)，增加如下图所示红色内容。</li>
 </ol>
-<p><img data-src="/downloads/images/blog/expand_nextcloud_size.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/expand_nextcloud_size.png"></p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server_names_hash_bucket_size 128;</span><br><span class="line">client_header_buffer_size 32k;</span><br><span class="line">large_client_header_buffers 4 32k;</span><br><span class="line">client_max_body_size 8000m;</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2">
-<li>重启 nginx</li>
+<ol start="2" type="1">
+<li>重启 nginx <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure></li>
+<li>检查 nginx 配置状态 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></tbody></table></figure></li>
 </ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure>
-<ol start="3">
-<li>检查 nginx 配置状态 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></tbody></table></figure>
 <!--
 [Docker搭建私有云Nextcloud](https://www.pbeta.me/docker-nextcloud-ssl/)
 -->
 <hr>
-<h1>邮件服务器配置</h1>
+<h1 id="邮件服务器配置">邮件服务器配置</h1>
 <ul>
 <li>Q: 免费邮件服务器配置</li>
-<li> A: Yandex，一家来自俄罗斯的域名邮箱提供商，可以搭建免费的域名邮局，免费账户支持 POP、SMTP，还支持 API。唯一的缺点是海外商家，官网速度比较慢，科学上网。</li>
+<li> A:
+Yandex，一家来自俄罗斯的域名邮箱提供商，可以搭建免费的域名邮局，免费账户支持 POP、SMTP，还支持 API。唯一的缺点是海外商家，官网速度比较慢，科学上网。</li>
 </ul>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POP3：pop.yandex.com 开启SSL 端口 995  </span><br><span class="line">SMTP：smtp.yandex.com 开启SSL 端口 465  </span><br><span class="line">IMAP：imap.yandex.com 开启SSL 端口 993  </span><br></pre></td></tr></tbody></table></figure>
 <p>以<strong>网易邮箱大师</strong>为例，配置图示如下：<br>
-<img data-src="/downloads/images/blog/yandex_config.png" alt=""></p>
+<img data-src="/downloads/images/blog/yandex_config.png"></p>
 <hr>
-<h1>更新<font color="red"> <strong> letsencrypt</strong></font> 证书</h1>
+<h1 id="更新-letsencrypt-证书">更新<font color="red">
+<strong> letsencrypt</strong></font> 证书</h1>
 <ul>
-<li>Q: letsencrypt 的 https 证书期限是 3 个月，到期后如何重新更新证书呢？</li>
+<li>Q:
+letsencrypt 的 https 证书期限是 3 个月，到期后如何重新更新证书呢？</li>
 <li>A: certbot renew<br>
 // 上面的指令不成功，换成下面的指令，重新申请证书，不需要改配置<br>
 // sudo certbot --force-renew</li>
@@ -1882,30 +2138,25 @@ You need to add the following line to .vimrc if you have installed Vundle, and t
    your certificates, run "certbot renew"
    -->
 <ul>
-<li>
-<p>Q: 在 Centos 7 上如何更新 letsencrypt ?</p>
-</li>
-<li>
-<p>A: /root/certbot-auto renew<br>
+<li><p>Q: 在 Centos 7 上如何更新 letsencrypt ?</p></li>
+<li><p>A: /root/certbot-auto renew<br>
 // 上面的指令不成功，换成下面的指令，重新申请证书，不需要改配置<br>
 // sudo /root/certbot-auto --force-renew</p>
 <blockquote>
-<p>You should test your configuration at:<br>
-<a target="_blank" rel="noopener" href="https://www.ssllabs.com/ssltest/analyze.html?d=your.site">https://www.ssllabs.com/ssltest/analyze.html?d=your.site</a></p>
-</blockquote>
-</li>
-<li>
-<p>Q: Renew 失败，报错信息如下：</p>
-<blockquote>
-<p>Attempting to renew cert (<a target="_blank" rel="noopener" href="http://www.xx.net">www.xx.net</a>) from /etc/letsencrypt/renewal/www.xx.net.conf produced an unexpected error: ‘ascii’ codec can’t decode byte 0xe8 in position 57: ordinal not in range(128). Skipping.</p>
-</blockquote>
+<p>You should test your configuration at:
+https://www.ssllabs.com/ssltest/analyze.html?d=your.site</p>
+</blockquote></li>
+<li><p>Q: Renew 失败，报错信息如下： &gt; Attempting to renew cert
+(www.xx.net) from /etc/letsencrypt/renewal/www.xx.net.conf produced an
+unexpected error: 'ascii' codec can't decode byte 0xe8 in position 57:
+ordinal not in range (128). Skipping.</p>
 <blockquote>
 <p>All renewal attempts failed.</p>
-</blockquote>
-</li>
-<li>
-<p>A: 解决方法：可能 nginx 配置文件中有中文注释，删掉之后即可 renew 成功。可参考  <a target="_blank" rel="noopener" href="https://github.com/certbot/certbot/issues/5509">UnicodeDecodeError: ‘ascii’ codec can’t decode byte 0xe7 in position 2: ordinal not in range(128)</a> 。</p>
-</li>
+</blockquote></li>
+<li><p>A: 解决方法：可能 nginx 配置文件中有中文注释，删掉之后即可 renew
+成功。可参考 <a target="_blank" rel="noopener" href="https://github.com/certbot/certbot/issues/5509">UnicodeDecodeError:
+'ascii' codec can't decode byte 0xe7 in position 2: ordinal not in
+range(128)</a> 。</p></li>
 </ul>
 <!--
 [免费SSL证书Let's Encrypt(certbot)安装使用教程](https://www.vpser.net/build/letsencrypt-certbot.html)
@@ -1973,20 +2224,25 @@ server {
 
 -->
 <hr>
-<h1>Hexo 提示 “TypeError [ERR_INVALID_ARG_TYPE]: The “path” argument must be of type string ” 解决办法</h1>
+<h1 id="hexo-提示-typeerrorerr_invalid_arg_type-the-path-argument-must-be-of-type-string-解决办法">Hexo
+提示 “TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of
+type string ” 解决办法</h1>
 <ul>
-<li>
-<p>Q：在网站部署过程中，Mac 系统中 “hexo d” 会提示 TypeError [ERR_INVALID_ARG_TYPE]: The “path” argument must be of type string。</p>
-</li>
-<li>
-<p>A：这是因为安装的 node 版本过高导致的。Hexo 官网对 node 的版本要求是不低于 10.13，推荐 12.0 或更高版本。</p>
+<li><p>Q：在网站部署过程中，Mac 系统中 “hexo d” 会提示
+TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type
+string。</p></li>
+<li><p>A：这是因为安装的 node 版本过高导致的。Hexo 官网对 node
+的版本要求是不低于 10.13，推荐 12.0 或更高版本。</p>
 <blockquote>
-<p><a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> (Should be at least Node.js 10.13, recommends 12.0 or higher)</p>
+<p><a target="_blank" rel="noopener" href="http://nodejs.org/">Node.js</a> (Should be at least Node.js
+10.13, recommends 12.0 or higher)</p>
 </blockquote>
-<p>截止在 2021 年 9 月，实践发现 LTS 14.17 版本并不适配最新版的 hexo，所以对 hexo 升级是解决不了这个报错问题。变通的方法是对 node 版本降低，安装 12.0 版本可以解决问题。</p>
-<p>在 mac 上如何降级 node 版本，如下。详细可参见 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5c298486dbd">homebrew 安装指定版本 node</a> 。</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 如果之前使用`brew install node`安装过 node,需要先执行<span class="string">'解绑'</span>node</span><br><span class="line">brew unlink <span class="title function_">node</span> <span class="params">(不一定需要运行)</span></span><br><span class="line"># 查找可用的node版本 </span><br><span class="line">brew search node</span><br><span class="line"># 安装你需要的版本，建议 node@12</span><br><span class="line">brew install node@12</span><br><span class="line"># 绑定，node@12 需要和你的安装版本一致</span><br><span class="line">brew link node@12</span><br><span class="line"># 上一步如果报错, 按照提示执行命令，比如</span><br><span class="line">brew link --overwrite --force node@12</span><br><span class="line"># 检查安装版本</span><br><span class="line">node -v</span><br></pre></td></tr></tbody></table></figure>
-</li>
+<p>截止在 2021 年 9 月，实践发现 LTS 14.17 版本并不适配最新版的
+hexo，所以对 hexo 升级是解决不了这个报错问题。变通的方法是对 node
+版本降低，安装 12.0 版本可以解决问题。</p>
+<p>在 mac 上如何降级 node 版本，如下。详细可参见 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/c5c298486dbd">homebrew
+安装指定版本 node</a> 。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 如果之前使用`brew install node`安装过 node,需要先执行<span class="string">'解绑'</span>node</span><br><span class="line">brew unlink <span class="title function_">node</span> <span class="params">(不一定需要运行)</span></span><br><span class="line"># 查找可用的node版本 </span><br><span class="line">brew search node</span><br><span class="line"># 安装你需要的版本，建议 node@12</span><br><span class="line">brew install node@12</span><br><span class="line"># 绑定，node@12 需要和你的安装版本一致</span><br><span class="line">brew link node@12</span><br><span class="line"># 上一步如果报错, 按照提示执行命令，比如</span><br><span class="line">brew link --overwrite --force node@12</span><br><span class="line"># 检查安装版本</span><br><span class="line">node -v</span><br></pre></td></tr></tbody></table></figure></li>
 </ul>
 <hr>
 
@@ -2090,139 +2346,224 @@ server {
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <p><a target="_blank" rel="noopener" href="https://robotics.estec.esa.int/i-SAIRAS/isairas2018/Papers/Session%204a/4_90kunii-90-113-Kunii-Yasuharu.pdf">文献下载地址</a></p>
-<p>本文运用星球跳跃漫游者 (hopping rover) 的移动特性 (可以跳过而不是绕过障碍物)，提出了一种新的路径规划和导航方法，并且讨论了因为跳跃行为和测量误差带来的不确定性。</p>
+<p>本文运用星球跳跃漫游者 (hopping rover)
+的移动特性 (可以跳过而不是绕过障碍物)，提出了一种新的路径规划和导航方法，并且讨论了因为跳跃行为和测量误差带来的不确定性。</p>
 <blockquote>
-<p>In this paper, a navigation method for a small size hopping rover with advantages on its mobility is discussed by considering with some uncertainties caused by jumping behavior and measurement error.</p>
+<p>In this paper, a navigation method for a small size hopping rover
+with advantages on its mobility is discussed by considering with some
+uncertainties caused by jumping behavior and measurement error.</p>
 </blockquote>
-<p>和通常的路径规划一样，本文首先从环境数据中提取障碍物，构建三角形 (triangular polygons) 的环境网格，然后使用 A star 算法来规划安全的路径。其中，算法着重考虑了和障碍物的碰撞风险，复杂地形 (roughness of terrain) 和失败的跳跃行为 (failures of hopping action)。</p>
+<p>和通常的路径规划一样，本文首先从环境数据中提取障碍物，构建三角形
+(triangular polygons) 的环境网格，然后使用 A star
+算法来规划安全的路径。其中，算法着重考虑了和障碍物的碰撞风险，复杂地形
+(roughness of terrain) 和失败的跳跃行为 (failures of hopping
+action)。</p>
 <blockquote>
-<p>By extracting obstacles from environmental data and constructing triangular polygons it is possible to form paths. The algorithm considers with safety of collision with obstacles, roughness of terrain and failures of hopping action, and then could generate safer path based on A* algorithm.</p>
+<p>By extracting obstacles from environmental data and constructing
+triangular polygons it is possible to form paths. The algorithm
+considers with safety of collision with obstacles, roughness of terrain
+and failures of hopping action, and then could generate safer path based
+on A* algorithm.</p>
 </blockquote>
 <p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/hopping-mobility-rover/">个人网站</a>，请移步阅读最新内容。</p>
-<h1>INTRODUCTION</h1>
-<p>目前，月球等星球的表面探索主要是使用一个笨重的履带机器人 (heavy wheel rovers)，但是履带机器人开发周期长，发射时极少，对安全的需求要求更多的资源来保障，甚至进入了恶性循环。</p>
-<p>作者提出一种新的方法，使用多个轻量紧凑的探索机器智能体 (light and compact exploration robot agent) 来共同工作，构成一个大的智能体。</p>
+<h1 id="introduction">INTRODUCTION</h1>
+<p>目前，月球等星球的表面探索主要是使用一个笨重的履带机器人 (heavy wheel
+rovers)，但是履带机器人开发周期长，发射时极少，对安全的需求要求更多的资源来保障，甚至进入了恶性循环。</p>
+<p>作者提出一种新的方法，使用多个轻量紧凑的探索机器智能体 (light and
+compact exploration robot agent) 来共同工作，构成一个大的智能体。</p>
 <blockquote>
-<p>One possibility is the introduction of a light and compact exploration robot agent, and it is possible that multiple types of agents work together in one system. Various roles (functions) can be played on various kinds of equipment, and all of them can constitute one exploration system.</p>
+<p>One possibility is the introduction of a light and compact
+exploration robot agent, and it is possible that multiple types of
+agents work together in one system. Various roles (functions) can be
+played on various kinds of equipment, and all of them can constitute one
+exploration system.</p>
 </blockquote>
 <p>一个创意：通过将同样的功能分散到若干个智能体上，可以忽略一定程度的智能体功能失效，那么风险被分散到整个大系统上，有可能获得较高的效率。</p>
 <blockquote>
-<p>By allocating the same function (equipment) to some or many of them, it is possible to ignore some percentage of the agent’s loss rate, so that risk can be distributed to the system and the mission and there is a high possibility of obtaining higher efficiency.</p>
+<p>By allocating the same function (equipment) to some or many of them,
+it is possible to ignore some percentage of the agent's loss rate, so
+that risk can be distributed to the system and the mission and there is
+a high possibility of obtaining higher efficiency.</p>
 </blockquote>
-<p><img data-src="/downloads/images/blog/hopping_mobility_multi_exploration.png" alt="Multi Exploration"></p>
-<p>虽然小机器人 (A small size rover) 因为大小 (size) 和重量 (weight) 有很多优势，但是其移动性 (traversability) 和测量能力 (measurement) 却受到局限。</p>
+<figure>
+<img data-src="/downloads/images/blog/hopping_mobility_multi_exploration.png" alt="Multi Exploration">
+<figcaption aria-hidden="true">Multi Exploration</figcaption>
+</figure>
+<p>虽然小机器人 (A small size rover) 因为大小 (size) 和重量 (weight)
+有很多优势，但是其移动性 (traversability) 和测量能力 (measurement)
+却受到局限。</p>
 <blockquote>
-<p>However, its size causes problems on its traversability and measurement ability.</p>
+<p>However, its size causes problems on its traversability and
+measurement ability.</p>
 </blockquote>
-<p>所以，可以引入跳跃行为 (hopping mobility) 来获得更高的移动性能 (higher traversability) 和更广的测量范围 (wider measurement range)。</p>
+<p>所以，可以引入跳跃行为 (hopping mobility) 来获得更高的移动性能
+(higher traversability) 和更广的测量范围 (wider measurement range)。</p>
 <blockquote>
-<p>We have introduced hopping mobility to obtain higher traversability and wider measurement range.</p>
+<p>We have introduced hopping mobility to obtain higher traversability
+and wider measurement range.</p>
 </blockquote>
-<p>通过固定区域的地面机器人 (land-based agent) 和跳跃机器人互相配合，来构成探测系统 (exploration system)。</p>
+<p>通过固定区域的地面机器人 (land-based agent)
+和跳跃机器人互相配合，来构成探测系统 (exploration system)。</p>
 <blockquote>
-<p>Introduction of two types of rovers is being<br>
-considered in the exploration system. One is a land-based agent and a stochastic existence region is given in the search region, contributing to the search of the ground surface. The other is hopping rover. the rover that makes path planning taking advantage of sensing from high places while moving the exploration area together with the ground moving rover plays an important role.</p>
+<p>Introduction of two types of rovers is being considered in the
+exploration system. One is a land-based agent and a stochastic existence
+region is given in the search region, contributing to the search of the
+ground surface. The other is hopping rover. the rover that makes path
+planning taking advantage of sensing from high places while moving the
+exploration area together with the ground moving rover plays an
+important role.</p>
 </blockquote>
 <ul>
-<li>相比轮式机器人，在低重力环境下 (low gravitational environment)，可以通过跳跃的方式跳过障碍物，从而抄近路 (adopt a short-cut path)。</li>
+<li>相比轮式机器人，在低重力环境下 (low gravitational
+environment)，可以通过跳跃的方式跳过障碍物，从而抄近路 (adopt a
+short-cut path)。</li>
 </ul>
 <blockquote>
-<p>Especially under low gravitational environment such as other planet or satellite, it indicates higher performance, e.g.Thus, it can jump over a long distance upon terrains and obstacles, adopt a short-cut path without a detour of a wheeled type, and also measure an environment from higher position in the air of jumping trajectory.</p>
+<p>Especially under low gravitational environment such as other planet
+or satellite, it indicates higher performance, e.g.Thus, it can jump
+over a long distance upon terrains and obstacles, adopt a short-cut path
+without a detour of a wheeled type, and also measure an environment from
+higher position in the air of jumping trajectory.</p>
 </blockquote>
-<p><img data-src="/downloads/images/blog/Advantage_of_hopping_mobility_Jump.png" alt="Advantage of hopping mobility Jump"></p>
-<h1>ISSUE AND OBJECTIVES</h1>
+<figure>
+<img data-src="/downloads/images/blog/Advantage_of_hopping_mobility_Jump.png" alt="Advantage of hopping mobility Jump">
+<figcaption aria-hidden="true">Advantage of hopping mobility
+Jump</figcaption>
+</figure>
+<h1 id="issue-and-objectives">ISSUE AND OBJECTIVES</h1>
 <ul>
-<li>为什么导航问题需要研究：现有的导航研究，没有利用跳跃机器人的运动特性 (文章发表于 2017)，所以需要进一步利用跳和远距离的优势来导航。</li>
+<li>为什么导航问题需要研究：现有的导航研究，没有利用跳跃机器人的运动特性
+(文章发表于 2017)，所以需要进一步利用跳和远距离的优势来导航。</li>
 </ul>
 <blockquote>
-<p>For a hopping rover, though a lot of jumping hardware designs have been studied, its software e.g. navigation algorithms have been discussed hardly. So, the navigation method hasn’t been established by taking advantage of <strong>hopping mobility such as jumping over obstacles</strong> or <strong>a long distance</strong> yet.</p>
+<p>For a hopping rover, though a lot of jumping hardware designs have
+been studied, its software e.g. navigation algorithms have been
+discussed hardly. So, the navigation method hasn't been established by
+taking advantage of <strong>hopping mobility such as jumping over
+obstacles</strong> or <strong>a long distance</strong> yet.</p>
 </blockquote>
 <p>本文利用跳跃机器人的运动特性，基于对移动性和测量数据的风险考虑，提出一种导航方法 (主要是如何规划路径)。</p>
 <blockquote>
-<p>In this paper, a navigation method for a small size hopping rover with advantages on its mobility is discussed with some risk considerations on its mobility and measured data.</p>
+<p>In this paper, a navigation method for a small size hopping rover
+with advantages on its mobility is discussed with some risk
+considerations on its mobility and measured data.</p>
 </blockquote>
-<h1>PATH PLANNING FOR HOPPING MOBILITY</h1>
-<h2 id="Selection-of-Jumping-Target-Position">Selection of Jumping Target Position</h2>
-<p>移动机器人跳跃行为 (jumping motion) 的不确定性包括初始速度变化 (initial speed change)，跳跃距离 (jump distance)，跳跃方向 (jumping direction)，落地后的束缚 (bound after landing) 以及跳跃失败 (failure of leap)。</p>
+<h1 id="path-planning-for-hopping-mobility">PATH PLANNING FOR HOPPING
+MOBILITY</h1>
+<h2 id="selection-of-jumping-target-position">Selection of Jumping
+Target Position</h2>
+<p>移动机器人跳跃行为 (jumping motion) 的不确定性包括初始速度变化
+(initial speed change)，跳跃距离 (jump distance)，跳跃方向 (jumping
+direction)，落地后的束缚 (bound after landing) 以及跳跃失败 (failure of
+leap)。</p>
 <blockquote>
-<p>The uncertainty factor of hopping rover’s jumping motion is the initial speed change, jump distance, jumping direction, bound after landing, failure of leap.</p>
+<p>The uncertainty factor of hopping rover's jumping motion is the
+initial speed change, jump distance, jumping direction, bound after
+landing, failure of leap.</p>
 </blockquote>
 <p>因为跳跃行为的不确定性，所以需要选取目标落地点 (landing point)。</p>
 <h3 id="如何环境建模">如何环境建模</h3>
-<ol>
+<ol type="1">
 <li>连接被识别到的障碍物，构成不规则三角形的环境模型。</li>
 </ol>
 <blockquote>
-<p>Each obstacle captured by sensing is connected and the observation area is divided into triangles</p>
+<p>Each obstacle captured by sensing is connected and the observation
+area is divided into triangles</p>
 </blockquote>
-<ol start="2">
-<li>在观测到的障碍物上使用狄洛尼三角剖分 (Delaunay triangulation)，可以获得每三个点的外心 (outside heart)，即可能的落地点。</li>
+<ol start="2" type="1">
+<li>在观测到的障碍物上使用狄洛尼三角剖分 (Delaunay
+triangulation)，可以获得每三个点的外心 (outside
+heart)，即可能的落地点。</li>
 </ol>
 <blockquote>
-<p>By using Delaunay triangulation on the observed obstacles, we can set the landing point.</p>
+<p>By using Delaunay triangulation on the observed obstacles, we can set
+the landing point.</p>
 </blockquote>
 <!--MC: 什么是Delaunay triangulation？ [完美三角剖分](https://zhuanlan.zhihu.com/p/34158974)-->
-<pre><code>&gt; Delaunay三角剖分定义：平面上的点集P是一种三角剖分，使得P中没有点严格处于剖分后中任意一个三角形**外接圆**的**内部**(可以是圆上)。
-</code></pre>
-<p><img data-src="/downloads/images/blog/hopping_mobility_DT.jpg" alt="Delaunay triangulation demo"></p>
+<pre><code>&gt; Delaunay三角剖分定义：平面上的点集P是一种三角剖分，使得P中没有点严格处于剖分后中任意一个三角形**外接圆**的**内部**(可以是圆上)。</code></pre>
+<figure>
+<img data-src="/downloads/images/blog/hopping_mobility_DT.jpg" alt="Delaunay triangulation demo">
+<figcaption aria-hidden="true">Delaunay triangulation demo</figcaption>
+</figure>
 <p>外心安全设定：假设外心是落脚点，那么它到三个端点的距离是一致的，只要有一定的距离保障，就可以确保安全。</p>
 <blockquote>
-<p>Since the outer heart is equally distant from each vertex, it can be said that it is safe if a certain margin can be secured.</p>
+<p>Since the outer heart is equally distant from each vertex, it can be
+said that it is safe if a certain margin can be secured.</p>
 </blockquote>
 <blockquote>
-<p>Safety distance is secured by creating a circumscribed circle (其实是 delaunay triangulation) so as not to include other obstacles in the circle</p>
+<p>Safety distance is secured by creating a circumscribed circle (其实是
+delaunay triangulation) so as not to include other obstacles in the
+circle</p>
 </blockquote>
-<h2 id="Candidate-Path-Network">Candidate Path Network</h2>
-<ol start="3">
+<h2 id="candidate-path-network">Candidate Path Network</h2>
+<ol start="3" type="1">
 <li>通过连接外心，可以得到一个维诺图 (Voronoi diagram)。</li>
 </ol>
 <blockquote>
-<p>The Voronoi diagram is a method of dividing the region by joining the outer centers formed by Delaunay triangulation.</p>
+<p>The Voronoi diagram is a method of dividing the region by joining the
+outer centers formed by Delaunay triangulation.</p>
 </blockquote>
-<p>MC: 什么是 Voronoi diagram？ <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B3%B0%E6%A3%AE%E5%A4%9A%E8%BE%B9%E5%BD%A2/3428661?fromtitle=voronoi&amp;fromid=9089406">Voronoi diagram</a></p>
-<pre><code>&gt; 泰森多边形是对空间平面的一种剖分，其特点是多边形内的任何位置离该多边形的样点（如居民点）的距离最近，离相邻多边形内样点的距离远，且每个多边形内含且仅包含一个样点。
-</code></pre>
-<p>维诺图安全设定：维诺图包含障碍物，那么可以生成安全的节点 (safe nodes)。</p>
+<p>MC: 什么是 Voronoi diagram？ <a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%B3%B0%E6%A3%AE%E5%A4%9A%E8%BE%B9%E5%BD%A2/3428661?fromtitle=voronoi&amp;fromid=9089406">Voronoi
+diagram</a></p>
+<pre><code>&gt; 泰森多边形是对空间平面的一种剖分，其特点是多边形内的任何位置离该多边形的样点（如居民点）的距离最近，离相邻多边形内样点的距离远，且每个多边形内含且仅包含一个样点。</code></pre>
+<p>维诺图安全设定：维诺图包含障碍物，那么可以生成安全的节点 (safe
+nodes)。</p>
 <blockquote>
-<p>It can be confirmed that there are no obstacles on the sides of the Voronoi diagram enclosing the obstacles and safe nodes can be generated.</p>
+<p>It can be confirmed that there are no obstacles on the sides of the
+Voronoi diagram enclosing the obstacles and safe nodes can be
+generated.</p>
 </blockquote>
-<h2 id="Add-Uncertainty">Add Uncertainty</h2>
+<h2 id="add-uncertainty">Add Uncertainty</h2>
 <p>作者设定跳跃运动有一定的不确定度，误差通常是正态分布 (不清楚是否有理论依据)，取决于初始速度，跳的角度，方向角。</p>
 <blockquote>
-<p>The error is generally given in the form of a normal distribution, which rides on the initial speed, the jumping angle, and the direction angle, respectively.</p>
+<p>The error is generally given in the form of a normal distribution,
+which rides on the initial speed, the jumping angle, and the direction
+angle, respectively.</p>
 </blockquote>
-<p>基于上述假设，rover 在未来的位置误差会累加 (accumulated)，可以使用一个误差椭圆 (error ellipse) 来表示。</p>
+<p>基于上述假设，rover 在未来的位置误差会累加
+(accumulated)，可以使用一个误差椭圆 (error ellipse) 来表示。</p>
 <blockquote>
-<p>The position of the rover can be indicated as the existence probability, and generally takes a shape called an error ellipse.</p>
+<p>The position of the rover can be indicated as the existence
+probability, and generally takes a shape called an error ellipse.</p>
 </blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/hopping_mobility_error_ellipse.png" alt="Rover Position and Error Ellipse
-4"></p>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/hopping_mobility_error_ellipse.png" alt="Rover Position and Error Ellipse 4">
+<figcaption aria-hidden="true">Rover Position and Error Ellipse
+4</figcaption>
+</figure>
 <p>MC: 通过椭圆来表示误差和不确定性，算是一个新奇的做法。</p>
 <!--
 
 类似的文章有 [Robust Trajectory Planning for a Multirotor against Disturbance based on Hamilton-Jacobi Reachability Analysis](https://ieeexplore.ieee.org/abstract/document/8968126)。
 
 -->
-<h1>SIMULATION OF PATH PLANNING</h1>
+<h1 id="simulation-of-path-planning">SIMULATION OF PATH PLANNING</h1>
 <p>作者在一个很理想的环境下仿真，认为对于非质点的、大块的障碍物仍然可以规划出路径，但是没有讲清楚，如何实现？假设障碍物很高，那么跳跃机器人是否就无法跳跃过去呢？</p>
 <blockquote>
 <p>Even if the obstacle is the size of the black part of the figure.</p>
 </blockquote>
 <p>在虚拟的月球环境下仿真，比简单的理论仿真，更具有说服力。</p>
 <blockquote>
-<p>Simulation was also carried out in the virtual lunar environment created based on the rock distribution collected by “Surveyor 7” of NASA.</p>
+<p>Simulation was also carried out in the virtual lunar environment
+created based on the rock distribution collected by “Surveyor 7” of
+NASA.</p>
 </blockquote>
-<p>当在椭圆内的障碍物到达一定比例后，进行位置的自校正 (self-position estimation)。</p>
+<p>当在椭圆内的障碍物到达一定比例后，进行位置的自校正 (self-position
+estimation)。</p>
 <blockquote>
-<p>When the occupancy rate of the obstacle in the error ellipse exceeds the threshold value, the rover performs self-position estimation.</p>
+<p>When the occupancy rate of the obstacle in the error ellipse exceeds
+the threshold value, the rover performs self-position estimation.</p>
 </blockquote>
-<h1>CONCLUSION</h1>
-<h2 id="The-results-of-this-research">The results of this research</h2>
+<h1 id="conclusion">CONCLUSION</h1>
+<h2 id="the-results-of-this-research">The results of this research</h2>
 <ul>
-<li>In consideration of the uncertainty of the hopping rover, we were able to determine a safe landing point.</li>
-<li>By performing self-position estimation in the virtual lunar environment, it was possible to induce Rover while suppressing position error.</li>
+<li>In consideration of the uncertainty of the hopping rover, we were
+able to determine a safe landing point.</li>
+<li>By performing self-position estimation in the virtual lunar
+environment, it was possible to induce Rover while suppressing position
+error.</li>
 </ul>
-<h2 id="Works-to-do">Works to do</h2>
+<h2 id="works-to-do">Works to do</h2>
 <ul>
 <li>路径规划限于 2 维，缺乏对障碍物和跳跃高度的考虑。</li>
 <li>如何切分大的障碍物，而不仅仅是把障碍物作为质点考虑。</li>
