@@ -141,7 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82"><span class="nav-number">1.</span> <span class="nav-text">软件需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gif-%E5%BD%95%E5%88%B6"><span class="nav-number">2.</span> <span class="nav-text">Gif 录制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">2.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gif-%E5%90%88%E5%B9%B6"><span class="nav-number">3.</span> <span class="nav-text">Gif 合并</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">软件需求</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Gif 录制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">2.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Gif 合并</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -294,84 +294,82 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>ps. 本文实时更新于<a href="http://www.waylon.one/Ubuntu/how-to-create-gif/">个人网站</a>，请移步阅读。</p>
-<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/GIF/217778?fr=aladdin">Gif</a>
-是当下较为流行的一种交流方式，其文件比视频小，而且比 jpg
-图片生动形象，所以不仅在微薄、QQ
-等社交中尤为常见，而且适用于产品和功能的展示。同时，Gif
-文件大小一般是普通 MP4 格式的数倍。</p>
+<p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/GIF/217778?fr=aladdin">Gif</a> 是当下较为流行的一种交流方式，其文件比视频小，而且比 jpg 图片生动形象，所以不仅在微薄、QQ 等社交中尤为常见，而且适用于产品和功能的展示。同时，Gif 文件大小一般是普通 MP4 格式的数倍。</p>
 <blockquote>
-<p>GIFs are an average of 5-10 times larger than an efficiently encoded
-MP4 video. This difference in size means that GIFs waste a large amount
-of bandwidth and also load at a slower rate leading to a bad user
-experience.</p>
+<p>GIFs are an average of 5-10 times larger than an efficiently encoded MP4 video. This difference in size means that GIFs waste a large amount of bandwidth and also load at a slower rate leading to a bad user experience.</p>
 </blockquote>
-<p>下文主要分享下如何在 Ubuntu 18 上录制 gif 动画以及处理 gif
-文件，不必动用到 Windows 中像 Photoshop 这样的神器。</p>
-<h1 id="软件需求">软件需求</h1>
+<p>下文主要分享下如何在 Ubuntu 18 上录制 gif 动画以及处理 gif 文件，不必动用到 Windows 中像 Photoshop 这样的神器。</p>
+<h1>软件需求</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuxiabing150/article/details/45872783">ImageMagick</a>
-&gt; ImageMagick 是一款用于创建、编辑和合并位图图像的一款开源软件。</li>
-<li><a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2017-12/149744.htm">byzanz</a> &gt;
-byzanz 是通过输入命令方式来录制文件小、清晰的 GIF 动态效果图。</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuxiabing150/article/details/45872783">ImageMagick</a></li>
 </ul>
-<h1 id="gif-录制">Gif 录制</h1>
+<blockquote>
+<p>ImageMagick 是一款用于创建、编辑和合并位图图像的一款开源软件。</p>
+</blockquote>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.linuxidc.com/Linux/2017-12/149744.htm">byzanz</a></li>
+</ul>
+<blockquote>
+<p>byzanz 是通过输入命令方式来录制文件小、清晰的 GIF 动态效果图。</p>
+</blockquote>
+<h1>Gif 录制</h1>
 <p>本文使用 byzanz 来录制 Gif，其主要的参数选项有：</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>参数</th>
 <th>单位</th>
 <th>含义</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td> -d, --duration</td>
 <td>SECS</td>
 <td> 动画的时间 (默认：10 秒)</td>
 </tr>
-<tr class="even">
-<td>--delay</td>
+<tr>
+<td>–delay</td>
 <td>SECS</td>
 <td> 开始之前的延时 (默认：1 秒)</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>-c, --cursor</td>
 <td></td>
 <td> 录制鼠标光标</td>
 </tr>
-<tr class="even">
+<tr>
 <td> -a, --audio</td>
 <td></td>
 <td> 录音</td>
 </tr>
-<tr class="odd">
+<tr>
 <td> -x, --x</td>
 <td> 像素</td>
 <td>要录制矩形的 X 坐标</td>
 </tr>
-<tr class="even">
+<tr>
 <td> -y, --y</td>
 <td> 像素</td>
 <td>要录制矩形的 Y 坐标</td>
 </tr>
-<tr class="odd">
+<tr>
 <td> -w, --width</td>
 <td> 像素</td>
 <td>录制矩形的宽度</td>
 </tr>
-<tr class="even">
+<tr>
 <td> -h, --height</td>
 <td> 像素</td>
 <td>录制矩形的高度</td>
 </tr>
-<tr class="odd">
+<tr>
 <td> -v, --verbose</td>
 <td></td>
 <td> 详细</td>
 </tr>
-<tr class="even">
-<td> --display</td>
+<tr>
+<td>–display</td>
 <td></td>
 <td> 要使用的 X 显示</td>
 </tr>
@@ -380,15 +378,13 @@ byzanz 是通过输入命令方式来录制文件小、清晰的 GIF 动态效�
 <h2 id="例子">例子</h2>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">byzanz-record -d 10 --delay=5 -x 0 -y 0 -w 1440 -h 900 out.gif  </span><br></pre></td></tr></tbody></table></figure>
 <p>上面的命令是录制屏幕坐标 (0,0) 处宽度 1440 像素、高度 900 像素的矩形区域 (指定的坐标为矩形左上角)，延时 5 秒开始录制，录制时间 10s，输出文件 out.gif。</p>
-<h1 id="gif-合并">Gif 合并</h1>
+<h1>Gif 合并</h1>
 <p>如果想将录制的多个 Gif 合并成一个文件，只需将要合并的文件存到同一文件夹当中，再执行如下命令即可，不需要安装其他软件，Ubuntu 比 Windows 强大之处。</p>
 <figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">convert -delay 120 -loop 0 *.gif output.gif</span><br></pre></td></tr></tbody></table></figure>
 <p>其中，"-delay 120" 表示 Gif 动画速度，"-loop 0" 表示无限循环。</p>
-<h1 id="参考文献">参考文献</h1>
-<p><a target="_blank" rel="noopener" href="https://www.maketecheasier.com/record-screen-as-animated-gif-ubuntu/">Record
-Screen as Animated GIF in Ubuntu with Byzanz</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.trellis.co/blog/gifs-vs-animated-videos-which-should-you-use">Gifs
-vs animated videos - which should you use</a></p>
+<h1>参考文献</h1>
+<p><a target="_blank" rel="noopener" href="https://www.maketecheasier.com/record-screen-as-animated-gif-ubuntu/">Record Screen as Animated GIF in Ubuntu with Byzanz</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.trellis.co/blog/gifs-vs-animated-videos-which-should-you-use">Gifs vs animated videos - which should you use</a></p>
 
     </div>
 
@@ -435,7 +431,7 @@ vs animated videos - which should you use</a></p>
 
 <div class="copyright">
   &copy; 
-  <span itemprop="copyrightYear">2024</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
