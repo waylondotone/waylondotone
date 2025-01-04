@@ -2280,174 +2280,6 @@ ISO 8211lib 是 C++ 编写的开源库，专门用于读取符合 ISO 8211 封�
       </tags>
   </entry>
   <entry>
-    <title>使用 Docker 在 Linux 上安装 NextCloud 私有云盘</title>
-    <url>/Linux/Install-nextcloud-in-docker/</url>
-    <content><![CDATA[<!--
-[Nextcloud 搭建私人云服务教程](https://blog.itswincer.com/posts/bf0413ac/)
-[使用Docker快速安装NextCloud个人私有云盘](https://www.moerats.com/archives/420/)
-[docker容器开机自启](https://www.cnblogs.com/gcgc/p/10494615.html)
--->
-<p>ps. 本文实时更新于 <a href="http://www.waylon.one/Linux/Install-nextcloud-in-docker/">个人网站</a>，请移步阅读。</p>
-<p>国内的网盘虽然免费，但总让人对隐私不太放心，毕竟 “免费的永远是最贵的”。</p>
-<p>自己之前购买了一个 VPS，搭建自己的网站后，感觉没有充分利用 VPS 的流量和性能，于是琢磨搭建一个私人的云服务，随后就发现了 Nextcloud 这一开源云服务。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/Baidu_to_private.JPG" alt=""></p>
-<blockquote>
-<p>通过 <a href="https://bandwagonhost.com/aff.php?aff=60653">链接</a> 注册并购买搬瓦工 VPS，就可以按下面的教程安装 NextCloud 私人云盘啦，我也可以得到新客注册的返现。</p>
-</blockquote>
-<h1>About NextCloud</h1>
-<blockquote>
-<p><a href="https://nextcloud.com/">Nextcloud</a> is the <strong>open source file sync and share software</strong> for everyone from individuals to large enterprises and service providers. Nextcloud provides a safe, secure and compliant file sync and share solution on servers you control.<br>
-With Nextcloud you can share one or more folders on your PC, and sync them with your Nextcloud server. <strong>Place files in your local shared directories, and those files are immediately synced to the server, and then to other PCs via the desktop client.</strong> Not near a desktop client? No problem, simply log in with the web client and manage your files there. <strong>The Android and iOS mobile apps allow you to browse, download and upload photos and videos.</strong><br>
-Whether using a mobile device, a workstation, or a web client, Nextcloud provides the ability to put the right files in the right hands at the right time on any device in one simple-to-use, secure, private and controlled solution.</p>
-</blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/Nextcloud.png" alt=""></p>
-<p>简而言之，Nextcloud 是一个自由及开放源代码的私有云网盘，每个人都可以在私人服务器上安装并运行它，能够快速同步你的文件到你的私有服务器，方便你跨平台 (现在支持 PC、Android 和 iOS) 同步和分享文件，功能和百度云不差多少，优点是隐私好，同步下载速度取决于服务器带宽。</p>
-<p>与 Dropbox 等专有服务相比，Nextcloud 的开放架构让用户可以利用应用程序的方式在服务器上新增额外的功能，并让用户可以完全掌控自己的数据。同时，Nextcloud 可与在 Windows、macOS 或是多种 Linux 发布版上运行的客户端同步。</p>
-<p>Nextcloud 用户可以管理日历、联系人、计划工作与流媒体。此外，用户也可以在 Nextcloud 上使用基于浏览器的文本编辑器、书签服务、缩略网址服务、相册、RSS 阅读器与文件查看器。因为有良好的扩展性，Nextcloud 可以透过鼠标点一下即可完成安装的应用程序强化其功能，并可连线至 Dropbox、Google 云端硬盘与 Amazon S3 等产品。</p>
-<h1>安装简介</h1>
-<p>Nextcloud 虽然这么好用，但是安装依赖却非常复杂，需要安装 LNMP 集成环境 (i.e. Linux + Nginx + MySql + PHP)，在搭建过程中或多或少都会出点问题。</p>
-<p>本文推荐一个很方便的安装方法 <a href="https://github.com/chrootLogin/docker-nextcloud">docker-nextcloud</a>，使用纯命令形式在 Docker 上安装 NextCloud (Docker file 会帮你把负责的依赖都配置好)，并探讨如何配置反向代理，适合尝鲜的新手。</p>
-<p>安装 Docker 后，需要安装两个容器：mysql 和 nextcloud。其中，mysql 用于存储用户的数据，nextcloud 通过向 mysql 容器读写数据，从而实现数据的存储和访问。</p>
-<h1>安装 Docker</h1>
-<blockquote>
-<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux 或 Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
-</blockquote>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># CentOS 7、Debian、Ubuntu</span><br><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="复习知识点">复习知识点</h2>
-<ul>
-<li>curl 是一个工具，用于传输来自服务器或者到服务器的数据。</li>
-<li>systemctl 是一个系统管理守护进程、工具和库的集合，用于取代 system V、service 和 chkconfig 命令，初始进程主要负责控制 systemd 系统和服务管理器。</li>
-<li>systemctl start 启动服务</li>
-<li> systemctl enable 激活服务并在开机时启用</li>
-</ul>
-<!--
-[Centos7中systemctl命令详解](https://www.cnblogs.com/zhming26/p/6155201.html)
--->
-<h1>安装 Nextcloud 服务器</h1>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># 拉取 Mysql 镜像和 Nextcloud 镜像</span><br><span class="line">docker pull rootlogin/nextcloud &amp;&amp; docker pull mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 mysql 容器，注意修改数据库信息</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 nextcloud 容器，添加链接到 mysql 容器；ip 是浏览器访问云盘的端口号。使用镜像 rootlogin/nextcloud，以后台模式启动一个容器, 容器命名为 nextcloud，将容器的 80 端口映射到主机的 3000 端口,主机的目录 /var/nextcloud/data 映射到容器的 /data，并添加链接到上述的 nextcloud_db 容器。</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br></pre></td></tr></tbody></table></figure>
-<!--
-密码 supersecretpassword
--->
-<!--
-docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10
--->
-<!--
-docker run -d --name nextcloud --restart=always --link nextcloud_db:nextcloud_db -v /var/nextcloud/data:/data -p 3000:80 rootlogin/nextcloud
--->
-<blockquote>
-<p>MariaDB 和 MySQL 的关系：<strong>MariaDB 数据库管理系统是 MySQL 的一个分支</strong>。开发这个分支的原因之一是：甲骨文公司收购了 MySQL 后，有将 MySQL 闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br>
-MariaDB 的目的是完全兼容 MySQL，包括 API 和命令行，使之能轻松成为 MySQL 的代替品。</p>
-</blockquote>
-<p>&nbsp;<br>
-<img data-src="http://www.waylon.one/downloads/images/next_cloud_container.png" alt=""></p>
-<p>恭喜你，现在初级版的云服务器已经搭建成功。访问地址为 http://your_ip:3000。<br>
-启动命令里的 3000 端口可自行替换，不过后面有关端口的命令都可自行修改，/var/nextcloud/data 为网盘的数据库，可以自行修改。</p>
-<h2 id="复习知识点-2">复习知识点</h2>
-<ul>
-<li>docker pull 是从镜像仓库拉取镜像。</li>
-<li><a href="https://www.runoob.com/docker/docker-run-command.html">docker run</a> 是创建一个新的容器并运行一个命令。</li>
-<li>–restart=always，设置开机重启</li>
-</ul>
-<h1>防火墙开启端口</h1>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">#CentOS 7</span><br><span class="line">firewall-cmd --zone=public --add-port=3000/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></tbody></table></figure>
-<h1>初始设置</h1>
-<ul>
-<li>访问 http://your_ip:3000。</li>
-<li>创建管理员帐号和密码</li>
-<li>数据库选择 MySQL/MariaDB，如果配置不成功，可以选择 SQLite (性能差点，但是可以满足个人基本的需求)。</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>值</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>用户名</td>
-<td> test</td>
-</tr>
-<tr>
-<td> 密码</td>
-<td> test</td>
-</tr>
-<tr>
-<td> 数据库名</td>
-<td> test</td>
-</tr>
-<tr>
-<td> 地址</td>
-<td> nextcloud_db:3306</td>
-</tr>
-</tbody>
-</table>
-<blockquote>
-<p>mysql 数据库默认端口是 3306。</p>
-</blockquote>
-<p><img data-src="http://www.waylon.one/downloads/images/nextcloud_initialize.png" alt=""></p>
-<ul>
-<li>恭喜你，进入自己的网盘界面。</li>
-</ul>
-<p><img data-src="/downloads/images/nextcloud_web.png" alt=""></p>
-<h1>域名访问</h1>
-<p>IP 访问会直接把云盘的 IP 和端口暴露出来，感觉不太妥。如果要<!--像上面示例 [点击访问](http://drive.waylon.one/)，-->通过域名访问自己的网盘，就需要反代了。</p>
-<p>反代可以用 Nginx、Apache、Caddy，本文讲述如何使用 Nginx。</p>
-<blockquote>
-<p>Nginx 是一款轻量级的 Web 服务器 / 反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在 BSD-like 协议下发行。其特点是占有内存少，并发能力强，</p>
-</blockquote>
-<p>默认用户已经完成购买域名、安装 Nginx 的前序步骤，鼓励折腾一下，有问题欢迎下面留言交流。</p>
-<h2 id="certbot-生成-https-证书">certbot 生成 https 证书</h2>
-<p>Let’s Encrypt 是很火的一个免费 SSL 证书发行项目，自动化发行证书，证书有 90 天的有效期。适合个人使用或者临时使用，不用再忍受自签发证书不受浏览器信赖的提示。<br>
-附上 CentOS 7.2 的 <a href="https://www.vpser.net/build/letsencrypt-certbot.html">免费 SSL 证书 Let’s Encrypt</a> 流程。</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">./certbot-auto certonly --email your_mail --agree-tos --no-eff-email --webroot -w /var/nextcloud -d drive.example.com</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="配置-Nginx-配置文件">配置 Nginx 配置文件</h2>
-<p>在 /etc/nginx/conf.d/ 下的配置文件里添加如下配置。</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">server {</span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line">    # enforce https</span><br><span class="line">    return 301 https://$server_name$request_uri;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">server {</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    listen [::]:443 ssl http2;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate  /etc/letsencrypt/live/drive.example.com/fullchain.pem;</span><br><span class="line">    ssl_certificate_key  /etc/letsencrypt/live/drive.example.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";</span><br><span class="line"></span><br><span class="line">    location / {</span><br><span class="line">     proxy_pass http://your_ip:3000;</span><br><span class="line">     proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>最后，重启 nginx，就可以通过网址访问自己的云盘啦！</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure>
-<h1>安装中可能遇到的问题 FQA</h1>
-<ul>
-<li>Q: 初始化时，提示 “看起来您正在尝试重新安装您的 Nextcloud。但您的 config 文件夹中没有 CAN_INSTALL 文件。请在您的 config 文件夹中创建 CAN_INSTALL 文件以继续。”</li>
-<li>A: 运行如下命令。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">cd /var/nextcloud/data/config &amp;&amp; touch CAN_INSTALL</span><br></pre></td></tr></tbody></table></figure>
-<p>其中，/var/nextcloud/data 为网盘的数据库，请自行修改。</p>
-<hr>
-<ul>
-<li>Q: 反向代理后，网址无法直接访问，比如提示 403。</li>
-<li>A：请先定位问题，可以在 /var/log/nginx/error.log 查看代理错误。</li>
-</ul>
-<hr>
-<ul>
-<li>Q: 关机重启后，原来配置好的网盘无法访问。</li>
-<li>A: 在使用 docker run 启动容器时，已经使用–restart 参数来设置容器开机自启。如果发现服务器重启后，无法访问网盘，可以尝试 update 命令设置 --restart=always。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">docker update --restart=always 容器名称</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>Docker 提供了 restart policy 机制，可以在容器退出或者 Docker 重启时控制容器能够自启动。这种 Restart policy 可以保证相关容器按照正确顺序启动。</p>
-</blockquote>
-<hr>
-<ul>
-<li>Q: 通过 IP 方式 登录时，没有出现登录界面，显示 “HTTP ERROR 500”.</li>
-<li>A: 根据 <a href="https://help.nextcloud.com/t/solved-nextcloud-12-http-error-500/21577">Nextcloud 12 HTTP Error 500</a> 提供的方法，更新 PHP 模块可以解决问题。
-<ul>
-<li>我使用 apt-get upgrade 升级了所有软件的版本，然后问题得到修复。</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>HTTP 500 错误，全称为 HTTP 500 Internal Server Error，即 HTTP 500 内部服务器错误。<strong>HTTP 500 内部服务器错误表示服务器遇到意外情况，导致其无法履行请求</strong>，但它无法说明具体错误或发生错误的根本原因。当发生错误时，访问的网站会显示发生错误。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>VPS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>How to bring in google AdSense to Hexo website / Hexo 网站承接 google AdSense 广告</title>
     <url>/website/Introduce-AdSense-to-website/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -9542,6 +9374,62 @@ You need to add the following line to .vimrc if you have installed Vundle, and t
       </tags>
   </entry>
   <entry>
+    <title>使用 iptables 阻止特定地区和国家的 IP 访问</title>
+    <url>/Linux/iptables/</url>
+    <content><![CDATA[<p>[toc]</p>
+<!--
+网站屏蔽和阻止特定地区和国家的IP访问
+-->
+<h1>前言</h1>
+<p>无论是出于什么原因，屏蔽和阻止特定地区和国家的 IP 访问都是我们日常建站中经常要用到的。</p>
+<!--因为自己之前在网站的about页面展露太多消息，被美研同事发现我的踪迹，网站经常被访问，所以决定封掉某IP段，避免被访问-->
+<p>如果网站是 Nginx，则可以直接使用 Nginx-ngx_http_geoip_module 模块，该模块可以精确到国家、省、市等一级的 IP，并且全部由 Nginx 执行识别和阻止访问，所以相对于 PHP 来说比较省资源，但是 Nginx 编译起来比较费事。</p>
+<p>如果网站是搭建在 VPS 或者独立服务器上，那么可以直接使用 Linux 防火墙，利用 iptables 规则来阻止特定国家和省份的 IP 访问。</p>
+<h1>iptables 规则来阻止特定 IP 访问</h1>
+<ol>
+<li>安装 iptables 防火墙 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># CentOS</span><br><span class="line">yum install iptables</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>清除已有 iptables 规则 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></tbody></table></figure>
+<ol start="3">
+<li>屏蔽指定 IP</li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">#屏蔽单个IP的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP</span><br><span class="line">#封IP段即从123.45.6.1到123.45.6.254的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP</span><br></pre></td></tr></tbody></table></figure>
+<!--66.249.90.xx-->
+<!--66.249.90.184-->
+<ol start="4">
+<li>查看已添加的 iptables 规则 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">iptables -L -n</span><br><span class="line">v：显示详细信息，包括每条规则的匹配包数量和匹配字节数</span><br><span class="line">x：在 v 的基础上，禁止自动单位换算（K、M）</span><br><span class="line">n：只显示IP地址和端口号，不将ip解析为域名</span><br></pre></td></tr></tbody></table></figure>
+<ol start="5">
+<li>iptables 的开机启动及规则保存 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">chkconfig –level 345 iptables on</span><br><span class="line">systemctl enable iptables.service</span><br><span class="line"># 如果配置文件里面设置了开机启动，systemctl enable命令相当于激活开机启动。</span><br><span class="line"># CentOS</span><br><span class="line">service iptables save &lt;--保存规则</span><br></pre></td></tr></tbody></table></figure>
+<ol start="6">
+<li>重启后生效 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">开启：chkconfig iptables on</span><br><span class="line">关闭：chkconfig iptables off</span><br></pre></td></tr></tbody></table></figure>
+<ol start="7">
+<li>即时生效，重启后失效 </li>
+</ol>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">开启：service iptables start</span><br><span class="line">关闭：service iptables stop</span><br></pre></td></tr></tbody></table></figure>
+<!--
+# References
+- [网站屏蔽和阻止特定地区和国家的IP访问设置方法-PHP代码/Nginx/WordPress设置](https://wzfou.com/zuzhi-ip/)
+- [centos服务器 屏蔽ip](https://blog.csdn.net/u013939884/article/details/55803118)
+-->]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>Website</tag>
+        <tag>Linux</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>生活问答</title>
     <url>/life/life-experience/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -10262,6 +10150,137 @@ N = 1.</p>
       </tags>
   </entry>
   <entry>
+    <title>小人物的 2020 理财总结</title>
+    <url>/Finance/nobody-s-2020-finance-summary/</url>
+    <content><![CDATA[<p>[toc]</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_2021.jpg" alt="辞鼠迎牛"></p>
+<p>嘻嘻，终于有空在春节写点东西，总结和反思下自己在 2020 年的理财得失，以及自己在 2021 年的理财规划。</p>
+<p>因为我不是专业的投资者，投资经验只有 5 年，观点可能经不起推敲，请大家谨慎阅读。</p>
+<p>首先，先开诚布公地跟大家分享下自己的投资风格和投资目标。如果 我 和 你 的投资风格和目标相差甚多，那么你就可以不必浪费时间阅读下面的内容了，以免给你造成困扰。</p>
+<p>首先，我是一个 995 的打工人，不是一个专业的投资者，也没有相关的金融背景。自己的理财经验和感悟，是最近几年在金融市场里摸爬滚打，用真金白银换来的，以及在阅读一些投资理财书籍中获得的。</p>
+<!--
+我自认为自己思考和归纳总结的能力还不错，所以在这篇文章中记录下来。
+-->
+<p>其次，我主要投资基金理财，不需要耗费大量时间看个股和盯盘，看好盈利趋势干就行了。自己是打工人，不可能长时间盯着屏幕炒股票，对市场消息有滞后性。同时，自己没有太多时间了解过多个股，不喜欢和散户凑热闹，炒热点，钟情于价值投资，希望陪伴 TA 慢慢成长。</p>
+<!--
+选来选取，还是基金适合自己，不需要耗费大量时间看个股和盯盘，看好盈利趋势干就行了。
+-->
+<p>最后，我的投资风格是偏理性的激进，不属于 “赢了会所嫩模，输了下地干活” 的激进风。目前，希望经过自己的精细打理，<strong>收益能够跑赢通货膨胀</strong>，让自己用时间换来的财富 (精神损失费) 不贬值。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/gamble.jpg" alt="赌博式投资"></p>
+<h1>基金</h1>
+<p>2020 年，自己的投资风格基本成型，“主题定投，波段赎回”；在市场大环境不错的情况下，收益可观。以支付宝为例，2020 年的盈利大概是 30%，超过了大多数股市投资者，但是自己盘子小，总体收益也只有一万多元。</p>
+<p>基金定投就像整流器一样，可以抚平市场的短期波动，持有时间越长，基金均价越贴近于实际价值。理想情况下，基金投资者，只要选择好的方向和主题，开启长期的定投，最后在一个价位高时卖出基金即可盈利；那么，<strong>买什么和何时卖出，才是基金理财的关键</strong>，没有人能够简单告诉你答案，需要自己边实践，边感悟。</p>
+<p>什么是 “主题定投，波段赎回” 策略呢？</p>
+<p>基金类型和数量非常庞大，“主题定投” 的核心是 确定你长 / 短期看好的投资方向 (比如当前火热的消费，医药和科技)，然后选择该方向上表现好的基金开启定投。</p>
+<!--
+基金类型比较多，我定投宽基，是确保大盘子获得长期稳健增长；买了许多行业基金，争取一些行业增长的机会。现在我加大买入主动基金，是为了让那些牛人，替我做出更多更聪明的判断。
+-->
+<p>举个例子，2020 年中期，我认为银行股被严重低估，短期应该能看到银行股的上升潜力 (投资方向以及赢利点)。然后，我从众多银行类基金中选择好的基金 (考虑基金经理，基金类型，基金回撤，基金盈利等因素)，然后开启定投。现在看起来，我当时的分析和选择是正确的，短短半年就有了真金白银的回报。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_bank_fund.JPEG" alt="某银行基金定投"></p>
+<p>除了买什么，基金定投的另一点是 “什么时候卖出比较好”？“波段赎回” 策略就是等待多个高波段，逐步赎回，落袋为安。我通常的做法是，如果收益超过 15%~20%，自己会卖出去三分之一；如果收益超过 30%，自己会再卖出去三分之一。这样的操作，简单粗暴，优势是让自己的收益陆陆续续落袋为安，你不需要分析市场的走势，估计也很难预测准确；劣势是你前期的赎回，可能错过基金持续上涨带来的收益，把一只大基腿吃成了小鸡腿。</p>
+<p>比如，下图的赎回操作，中间波段高点赎回去一部分，后面的基金上涨和我就无缘了。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_medi_fund.JPEG" alt="某医药基金定投"></p>
+<p>因为定投不择时，卖出不择时，今年自己在股市中做到了 “任尔东西南北风，咬定青山不放松”。在 2020 年疫情爆发，股市低点时 (A 股 2700+ 点) 依然坚持定投，在股市翻过 3000 点门槛时，也没有慌慌张张地清仓下车，而是卖出去一部分落袋为安，最后在年底 3600 点 的时候，依然持有和年初差不多的份额。</p>
+<p>基金如果想赚钱，广撒网，大水漫灌是不太适合的。你只有有所侧重，才可以收获理想的收益，否则自己广撒网，很可能你只是自己一番骚操作，自己手动配置了一个 XX 指数，或者重仓了一个市场不看好的板块。</p>
+<p><strong>基金类型比较多，我定投宽基，是确保大盘子获得长期稳健增长；买了许多行业基金，是为了争取一些行业增长的机会；我买入主动基金，是为了让那些牛人，替我做出更多更聪明的判断。</strong></p>
+<p>2020 年前，自己喜欢在支 * 宝上，购买平台推荐的基金，往往是这只基金买 10 块，那只基金每周定投 10 块钱等等小额操作，基金投资特别零散。这些零散小额基金就像杂音一样，浪费了自己的精力，自己不清楚自己的投资分布是什么，布局重点是什么，赚钱收益怎么样。</p>
+<p>自己在 2020 年花几天的时间，整理了自己的所有基金，按照基金优劣，清理掉部分小额基金和自己不看好的方向，最后剩下来一部分表现良好的基金，大约有 30 只左右，开启定投。经过上述清洗后，现在每月只需要花 3 个小时左右，回顾这些基金的涨势是否符合预期，是否需要做出调整，就可以清晰地理清楚自己的投资重点和收益情况。</p>
+<!--
+![我的基金投资表格]()
+-->
+<h1>比特币</h1>
+<p>虽然前期有点像 48 年入国军，今年夏天在比特币涨起到 14k 美金后，自己小额买入了一部分比特币，自己的本意是收藏一些比特币。无论 BTC 涨势如何，已持有的 BTC 数量不会波动，自己打算购买并存入钱包，不参与市场交易。</p>
+<p>我投资陌生的领域，喜欢<strong>小额买入，快步学习</strong>，花费一小部分的钱进场，然后用真金白银吸引自己去学习和了解这个领域。自己第一次花 100 元买入比特币，尝试了数字货币买入和卖出，转存和转出到钱包，这个流程下来因为手续费折掉了 40 多块钱，但是自己对数字货币的交易流程和特点基本摸清楚了，于是开始 k 级别的投资。</p>
+<p>如果你想了解比特币是如何产生和运作的，可以参考我的 BTC 白皮书阅读笔记 – <a href="http://waylon.one/BTC/A-Peer-to-Peer-Electronic-Cash-System/">解读 A Peer-to-Peer Electronic Cash System</a>；<br>
+关于新手购买比特币的教程，以及自己学习到的知识点总结，可以参见我的文章 <a href="http://waylon.one/monthly-skills/buy-one-bitcoin/">第一次购买比特币并转到钱包收藏</a>。</p>
+<p>对于比特币，我虽然是抱着<strong>收藏</strong>的目的购买的，没有想到购买后没多长时间，BTC 就开始快速增长，从购买之处的 14k 美金，飙升到了 46k 美金，自己当时投资 1000 元人民币买入的 BTC，现在的价值也有 3000+ 元，收藏的想法已经开始动摇了。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_btc.PNG" alt=""></p>
+<!--
+“快速试错，小步快跑”
+-->
+<p>注意，我不是在鼓励大家购买数字货币，而是希望告诉大家，数字货币类似于黄金，也是分散理财风险的一种措施。最后，<strong>别碰杠杆，别碰期货</strong>。</p>
+<p>现在，我每周拿出来 100 元人民币购买比特币，这 400 元 / 月对我生活影响不大。如果碰巧数字货币赚到了，我会非常开心并在适当时候卖出变现；如果数字货币暴跌，我会把购买的数字货币转到钱包里长期存储，我的生活基本可以不受影响地继续下去；即使交易平台倒闭，数字货币血本无归，我的生活也基本不受影响。</p>
+<h1>保险</h1>
+<p>财产投资到不同平台和门类，一个目的是为了规避单一风险，那么保险也是一种以规避风险为主要目标的投资。消费型保险看起来，只有支出，没有盈利，但是这是生活的安全垫，缓冲了家庭变故带来的风险。</p>
+<p>购买保险是一门大学问，没有网络或公众号上说的那么简单，有些人或者平台煽动你购买保险，很大目的是为了销售提成，你购买后便对你不理不睬，把所有的后续责任都推给你自己解决。你需要在购买前保持清醒的大脑和认识，不要购买时糊里糊涂一时爽，买后无人给你答疑，理赔时自己扛下一堆麻烦。<strong>普通人最好有专业的人员指导 (不是指保险销售人员)，或者充分了解后再购买，以免有不必要的麻烦。</strong></p>
+<p>分享一篇自己的踩坑经历 <a href="http://waylon.one/Insurrance/insurrance-issue/">记一次光大永明人寿保险的坑</a>。</p>
+<p>注意，尽管保险坑比较多，我还是鼓励大家根据自己的收入和年龄，购买一定的保险，早买早安心。</p>
+<p>分享一篇 <a href="http://www.minxueyu.com/2019/06/12/%E5%AE%B6%E5%BA%AD%E9%85%8D%E7%BD%AE%E4%BF%9D%E9%99%A9%E7%AD%96%E7%95%A5/">家庭配置保险策略</a>，希望读者能够了解保险，不被忽悠，理性购买适合自己的保险。</p>
+<h1>股票</h1>
+<p>我在 2020 年也同样购买了股票，但是和基金收益相比，两者收益完全是冰火两重天：基金是蒸蒸日上，股票是一泻千里。</p>
+<p>和基金相比，股票投资的是个股，需要你不仅懂宏观，还要对个股深入了解；基金着重于看大局，大趋势，股票还要求你看微观 (单家公司)；微观操作中，自己理财知识和经验的复用度有限，你需要一家家公司了解，占用时间成本比较大，甚至会侵占你个人成长的时间，得不偿失。另外，我个人性格是<strong>比较喜欢看大局，看宏观，而不喜欢微观的操作</strong>。</p>
+<p>正因为上述原因，我不打算把大量的时间和资金花费在股票投资上，我后期的投资会减少股票占比，加大基金的投资比重，选择长期表现好，回撤控制好，风格更均衡的基金长期定投。</p>
+<p>可能是自己没有时间了解个股，或者前面一两年没有经验，根据自己的空头逻辑判断，自己购买了大量的垃圾股，多次高位接盘，比如因为中美贸易战，分析信息安全可能会火，接盘 “360”，一次次踏空。因为不清楚为什么涨，好多入手的股票，也是稍微涨一点就赶紧卖出，本来是一条大鱼，结果自己只啃到点肉末。</p>
+<p>我现阶段不会完全放弃股票投资，打算选定几家好公司，开始投资。资本市场最不缺的就是机会，所以捂好自己的现金，选择好的公司再下手。</p>
+<p>注意，以下不是投资推广，莫要模仿。</p>
+<p>我打算在今年加大对以下股票的持仓。</p>
+<h2 id="中国核能-601985">中国核能 (601985)</h2>
+<p>为什么我打算今年重金买入呢？</p>
+<p>在中国做投资，无论是买房也好，还是买股票、信托也好，或者是创业也好，在中国做任何事情的前提就是需要关注中国的政策方向和趋势。我们购买股票需要看国家风向以及预期，毕竟大家炒股炒的就是预期嘛！</p>
+<!--
+2015年，当时的“牛市”戛然而止，主要是流动性突然減少(俗称“水少了”)，市场没有钱，股市从5000多点一直跌到2000多。
+
+时间到了2018年，中央出台资管新规，推行整个中国经济去杠杆，换句话来说，就是整体市场没有钱了，当年的股市也相当凄惨。
+
+任何市场，充裕的资金是上涨的必要条件，如果没有这个前提，难以出现大型牛市。
+
+我投资主要看两个方面：第个是现在市场里流动性是否充沛(即有没有钱)；第二个是国家监管机构的监管口径这件事情实际上决定了中国整个资本市场的走势，尤其事关股市到底是牛市还是熊市等问题。
+
+从目前的资金面来看, 2020年，央行释放了大量流动性，甚至通胀压力已经凸显2021年央行适度回收货币，保证合理供应是主基调。
+
+-->
+<p>首先，在宏观上，中美贸易，国内主打内循环，这就意味着中国大宗商品，煤炭石油等进口受限；其次，中国在积极发展核电，核电是清洁能源，在未来碳排放交易规则下，核电的占比越高，碳规则下优势越大。最后，现在的高压传输技术组建成熟，可以实现西电东送，在西部地区建立核电站，缓解了核电危险。</p>
+<p>目前，我没有对中国核电这家企业了解太多，但是我后期会认真分析这家公司。</p>
+<p>在这里立一个 flag，在明年回顾时，看看自己的断言是否准确。</p>
+<!--
+# 黄金
+
+自己对黄金的投资很少，现在是每天 10 元的定投，自己的目标是保值而不是盈利。
+-->
+<hr>
+<p>上面内容和理财直接相关，下面分享下自己这一年的理财间接成长。</p>
+<h1>好的习惯</h1>
+<h3 id="每月整理自己的基金">每月整理自己的基金</h3>
+<p>自己原来胡乱地买入基金，对手头持有的基金数量和收益情况不清楚。现在自己会每月定期比较和复盘持有基金，做到心中有数，优胜劣汰，逐步买入和卖出。</p>
+<!--
+- 每三个月一次的财务体检
+
+每三个月，我会把自己的所有财富做一次整理，查漏补缺，做到心中有数。
+-->
+<h3 id="出售闲置下来的物品">出售闲置下来的物品</h3>
+<p>因为自己经常会乱买东西，家中有很多不常用或者不好用的物品，今年开始在二手交易 (如闲 * 鱼) 平台上出售，大概折现了几百块钱。现在自己有点一发不可收拾，家中但凡有点闲置物品，就想卖出去换钱。</p>
+<p>出售闲置物品是一个好习惯，一方面没有浪费资源，东西在别人那里活过来了；另一方面，赚回来一部分本金，节约了自己的时间。</p>
+<p>分享我喜欢的二手交易平台：</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/66798566">把二手书店搬到网上的多抓鱼</a>
+<ul>
+<li>当你想卖掉家里囤积的旧书，只需要打开「多抓鱼」，扫描 ISBN 码后，等待顺丰快递员上门收书即可，经过多抓鱼经过审核后，你就能得到卖书钱了。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="租赁电子产品">租赁电子产品</h3>
+<p>生活中，有些东西可能只是偶尔用一下，那么可以选择租赁而不是购买这些物品；一方面节约了维护成本，一方面剩下的钱可以用于投资。</p>
+<p>试想一下，当你准备一场说走就走的旅行，原本需要在这个期间动辄上万去使用相机或者无人机记录精彩瞬间时，现在仅需动动手机花上几百块的租金就能用上好几天，这难道不就正是科技社会进步所带来的美好吗？</p>
+<p>分享我体验过的租赁平台：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/48288982">探物租赁</a></li>
+</ul>
+<hr>
+<h3 id="阅读财报">阅读财报</h3>
+<p>目前，我定投的基金数目不多，我每月会强迫自己关心买入的基金具体情况。通过阅读基金报告，看看基金经理的看法，以及下一步的投资倾向，是否和自己匹配，做到知己知彼。</p>
+<!--
+- 读书
+
+很遗憾，自己今年本来打算读完《穷查理宝典》，但是因为事情多，再加上这本书实操性差，自己只是读到了一般就束之高阁，希望今年继续读完。-->]]></content>
+      <categories>
+        <category>Finance</category>
+      </categories>
+      <tags>
+        <tag>Weekly Blogs</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>俗世奇人 读后感</title>
     <url>/Reading/mundane-world-phenom/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -10605,137 +10624,6 @@ N = 1.</p>
       </tags>
   </entry>
   <entry>
-    <title>小人物的 2020 理财总结</title>
-    <url>/Finance/nobody-s-2020-finance-summary/</url>
-    <content><![CDATA[<p>[toc]</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_2021.jpg" alt="辞鼠迎牛"></p>
-<p>嘻嘻，终于有空在春节写点东西，总结和反思下自己在 2020 年的理财得失，以及自己在 2021 年的理财规划。</p>
-<p>因为我不是专业的投资者，投资经验只有 5 年，观点可能经不起推敲，请大家谨慎阅读。</p>
-<p>首先，先开诚布公地跟大家分享下自己的投资风格和投资目标。如果 我 和 你 的投资风格和目标相差甚多，那么你就可以不必浪费时间阅读下面的内容了，以免给你造成困扰。</p>
-<p>首先，我是一个 995 的打工人，不是一个专业的投资者，也没有相关的金融背景。自己的理财经验和感悟，是最近几年在金融市场里摸爬滚打，用真金白银换来的，以及在阅读一些投资理财书籍中获得的。</p>
-<!--
-我自认为自己思考和归纳总结的能力还不错，所以在这篇文章中记录下来。
--->
-<p>其次，我主要投资基金理财，不需要耗费大量时间看个股和盯盘，看好盈利趋势干就行了。自己是打工人，不可能长时间盯着屏幕炒股票，对市场消息有滞后性。同时，自己没有太多时间了解过多个股，不喜欢和散户凑热闹，炒热点，钟情于价值投资，希望陪伴 TA 慢慢成长。</p>
-<!--
-选来选取，还是基金适合自己，不需要耗费大量时间看个股和盯盘，看好盈利趋势干就行了。
--->
-<p>最后，我的投资风格是偏理性的激进，不属于 “赢了会所嫩模，输了下地干活” 的激进风。目前，希望经过自己的精细打理，<strong>收益能够跑赢通货膨胀</strong>，让自己用时间换来的财富 (精神损失费) 不贬值。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/gamble.jpg" alt="赌博式投资"></p>
-<h1>基金</h1>
-<p>2020 年，自己的投资风格基本成型，“主题定投，波段赎回”；在市场大环境不错的情况下，收益可观。以支付宝为例，2020 年的盈利大概是 30%，超过了大多数股市投资者，但是自己盘子小，总体收益也只有一万多元。</p>
-<p>基金定投就像整流器一样，可以抚平市场的短期波动，持有时间越长，基金均价越贴近于实际价值。理想情况下，基金投资者，只要选择好的方向和主题，开启长期的定投，最后在一个价位高时卖出基金即可盈利；那么，<strong>买什么和何时卖出，才是基金理财的关键</strong>，没有人能够简单告诉你答案，需要自己边实践，边感悟。</p>
-<p>什么是 “主题定投，波段赎回” 策略呢？</p>
-<p>基金类型和数量非常庞大，“主题定投” 的核心是 确定你长 / 短期看好的投资方向 (比如当前火热的消费，医药和科技)，然后选择该方向上表现好的基金开启定投。</p>
-<!--
-基金类型比较多，我定投宽基，是确保大盘子获得长期稳健增长；买了许多行业基金，争取一些行业增长的机会。现在我加大买入主动基金，是为了让那些牛人，替我做出更多更聪明的判断。
--->
-<p>举个例子，2020 年中期，我认为银行股被严重低估，短期应该能看到银行股的上升潜力 (投资方向以及赢利点)。然后，我从众多银行类基金中选择好的基金 (考虑基金经理，基金类型，基金回撤，基金盈利等因素)，然后开启定投。现在看起来，我当时的分析和选择是正确的，短短半年就有了真金白银的回报。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_bank_fund.JPEG" alt="某银行基金定投"></p>
-<p>除了买什么，基金定投的另一点是 “什么时候卖出比较好”？“波段赎回” 策略就是等待多个高波段，逐步赎回，落袋为安。我通常的做法是，如果收益超过 15%~20%，自己会卖出去三分之一；如果收益超过 30%，自己会再卖出去三分之一。这样的操作，简单粗暴，优势是让自己的收益陆陆续续落袋为安，你不需要分析市场的走势，估计也很难预测准确；劣势是你前期的赎回，可能错过基金持续上涨带来的收益，把一只大基腿吃成了小鸡腿。</p>
-<p>比如，下图的赎回操作，中间波段高点赎回去一部分，后面的基金上涨和我就无缘了。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_medi_fund.JPEG" alt="某医药基金定投"></p>
-<p>因为定投不择时，卖出不择时，今年自己在股市中做到了 “任尔东西南北风，咬定青山不放松”。在 2020 年疫情爆发，股市低点时 (A 股 2700+ 点) 依然坚持定投，在股市翻过 3000 点门槛时，也没有慌慌张张地清仓下车，而是卖出去一部分落袋为安，最后在年底 3600 点 的时候，依然持有和年初差不多的份额。</p>
-<p>基金如果想赚钱，广撒网，大水漫灌是不太适合的。你只有有所侧重，才可以收获理想的收益，否则自己广撒网，很可能你只是自己一番骚操作，自己手动配置了一个 XX 指数，或者重仓了一个市场不看好的板块。</p>
-<p><strong>基金类型比较多，我定投宽基，是确保大盘子获得长期稳健增长；买了许多行业基金，是为了争取一些行业增长的机会；我买入主动基金，是为了让那些牛人，替我做出更多更聪明的判断。</strong></p>
-<p>2020 年前，自己喜欢在支 * 宝上，购买平台推荐的基金，往往是这只基金买 10 块，那只基金每周定投 10 块钱等等小额操作，基金投资特别零散。这些零散小额基金就像杂音一样，浪费了自己的精力，自己不清楚自己的投资分布是什么，布局重点是什么，赚钱收益怎么样。</p>
-<p>自己在 2020 年花几天的时间，整理了自己的所有基金，按照基金优劣，清理掉部分小额基金和自己不看好的方向，最后剩下来一部分表现良好的基金，大约有 30 只左右，开启定投。经过上述清洗后，现在每月只需要花 3 个小时左右，回顾这些基金的涨势是否符合预期，是否需要做出调整，就可以清晰地理清楚自己的投资重点和收益情况。</p>
-<!--
-![我的基金投资表格]()
--->
-<h1>比特币</h1>
-<p>虽然前期有点像 48 年入国军，今年夏天在比特币涨起到 14k 美金后，自己小额买入了一部分比特币，自己的本意是收藏一些比特币。无论 BTC 涨势如何，已持有的 BTC 数量不会波动，自己打算购买并存入钱包，不参与市场交易。</p>
-<p>我投资陌生的领域，喜欢<strong>小额买入，快步学习</strong>，花费一小部分的钱进场，然后用真金白银吸引自己去学习和了解这个领域。自己第一次花 100 元买入比特币，尝试了数字货币买入和卖出，转存和转出到钱包，这个流程下来因为手续费折掉了 40 多块钱，但是自己对数字货币的交易流程和特点基本摸清楚了，于是开始 k 级别的投资。</p>
-<p>如果你想了解比特币是如何产生和运作的，可以参考我的 BTC 白皮书阅读笔记 – <a href="http://waylon.one/BTC/A-Peer-to-Peer-Electronic-Cash-System/">解读 A Peer-to-Peer Electronic Cash System</a>；<br>
-关于新手购买比特币的教程，以及自己学习到的知识点总结，可以参见我的文章 <a href="http://waylon.one/monthly-skills/buy-one-bitcoin/">第一次购买比特币并转到钱包收藏</a>。</p>
-<p>对于比特币，我虽然是抱着<strong>收藏</strong>的目的购买的，没有想到购买后没多长时间，BTC 就开始快速增长，从购买之处的 14k 美金，飙升到了 46k 美金，自己当时投资 1000 元人民币买入的 BTC，现在的价值也有 3000+ 元，收藏的想法已经开始动摇了。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/2020_btc.PNG" alt=""></p>
-<!--
-“快速试错，小步快跑”
--->
-<p>注意，我不是在鼓励大家购买数字货币，而是希望告诉大家，数字货币类似于黄金，也是分散理财风险的一种措施。最后，<strong>别碰杠杆，别碰期货</strong>。</p>
-<p>现在，我每周拿出来 100 元人民币购买比特币，这 400 元 / 月对我生活影响不大。如果碰巧数字货币赚到了，我会非常开心并在适当时候卖出变现；如果数字货币暴跌，我会把购买的数字货币转到钱包里长期存储，我的生活基本可以不受影响地继续下去；即使交易平台倒闭，数字货币血本无归，我的生活也基本不受影响。</p>
-<h1>保险</h1>
-<p>财产投资到不同平台和门类，一个目的是为了规避单一风险，那么保险也是一种以规避风险为主要目标的投资。消费型保险看起来，只有支出，没有盈利，但是这是生活的安全垫，缓冲了家庭变故带来的风险。</p>
-<p>购买保险是一门大学问，没有网络或公众号上说的那么简单，有些人或者平台煽动你购买保险，很大目的是为了销售提成，你购买后便对你不理不睬，把所有的后续责任都推给你自己解决。你需要在购买前保持清醒的大脑和认识，不要购买时糊里糊涂一时爽，买后无人给你答疑，理赔时自己扛下一堆麻烦。<strong>普通人最好有专业的人员指导 (不是指保险销售人员)，或者充分了解后再购买，以免有不必要的麻烦。</strong></p>
-<p>分享一篇自己的踩坑经历 <a href="http://waylon.one/Insurrance/insurrance-issue/">记一次光大永明人寿保险的坑</a>。</p>
-<p>注意，尽管保险坑比较多，我还是鼓励大家根据自己的收入和年龄，购买一定的保险，早买早安心。</p>
-<p>分享一篇 <a href="http://www.minxueyu.com/2019/06/12/%E5%AE%B6%E5%BA%AD%E9%85%8D%E7%BD%AE%E4%BF%9D%E9%99%A9%E7%AD%96%E7%95%A5/">家庭配置保险策略</a>，希望读者能够了解保险，不被忽悠，理性购买适合自己的保险。</p>
-<h1>股票</h1>
-<p>我在 2020 年也同样购买了股票，但是和基金收益相比，两者收益完全是冰火两重天：基金是蒸蒸日上，股票是一泻千里。</p>
-<p>和基金相比，股票投资的是个股，需要你不仅懂宏观，还要对个股深入了解；基金着重于看大局，大趋势，股票还要求你看微观 (单家公司)；微观操作中，自己理财知识和经验的复用度有限，你需要一家家公司了解，占用时间成本比较大，甚至会侵占你个人成长的时间，得不偿失。另外，我个人性格是<strong>比较喜欢看大局，看宏观，而不喜欢微观的操作</strong>。</p>
-<p>正因为上述原因，我不打算把大量的时间和资金花费在股票投资上，我后期的投资会减少股票占比，加大基金的投资比重，选择长期表现好，回撤控制好，风格更均衡的基金长期定投。</p>
-<p>可能是自己没有时间了解个股，或者前面一两年没有经验，根据自己的空头逻辑判断，自己购买了大量的垃圾股，多次高位接盘，比如因为中美贸易战，分析信息安全可能会火，接盘 “360”，一次次踏空。因为不清楚为什么涨，好多入手的股票，也是稍微涨一点就赶紧卖出，本来是一条大鱼，结果自己只啃到点肉末。</p>
-<p>我现阶段不会完全放弃股票投资，打算选定几家好公司，开始投资。资本市场最不缺的就是机会，所以捂好自己的现金，选择好的公司再下手。</p>
-<p>注意，以下不是投资推广，莫要模仿。</p>
-<p>我打算在今年加大对以下股票的持仓。</p>
-<h2 id="中国核能-601985">中国核能 (601985)</h2>
-<p>为什么我打算今年重金买入呢？</p>
-<p>在中国做投资，无论是买房也好，还是买股票、信托也好，或者是创业也好，在中国做任何事情的前提就是需要关注中国的政策方向和趋势。我们购买股票需要看国家风向以及预期，毕竟大家炒股炒的就是预期嘛！</p>
-<!--
-2015年，当时的“牛市”戛然而止，主要是流动性突然減少(俗称“水少了”)，市场没有钱，股市从5000多点一直跌到2000多。
-
-时间到了2018年，中央出台资管新规，推行整个中国经济去杠杆，换句话来说，就是整体市场没有钱了，当年的股市也相当凄惨。
-
-任何市场，充裕的资金是上涨的必要条件，如果没有这个前提，难以出现大型牛市。
-
-我投资主要看两个方面：第个是现在市场里流动性是否充沛(即有没有钱)；第二个是国家监管机构的监管口径这件事情实际上决定了中国整个资本市场的走势，尤其事关股市到底是牛市还是熊市等问题。
-
-从目前的资金面来看, 2020年，央行释放了大量流动性，甚至通胀压力已经凸显2021年央行适度回收货币，保证合理供应是主基调。
-
--->
-<p>首先，在宏观上，中美贸易，国内主打内循环，这就意味着中国大宗商品，煤炭石油等进口受限；其次，中国在积极发展核电，核电是清洁能源，在未来碳排放交易规则下，核电的占比越高，碳规则下优势越大。最后，现在的高压传输技术组建成熟，可以实现西电东送，在西部地区建立核电站，缓解了核电危险。</p>
-<p>目前，我没有对中国核电这家企业了解太多，但是我后期会认真分析这家公司。</p>
-<p>在这里立一个 flag，在明年回顾时，看看自己的断言是否准确。</p>
-<!--
-# 黄金
-
-自己对黄金的投资很少，现在是每天 10 元的定投，自己的目标是保值而不是盈利。
--->
-<hr>
-<p>上面内容和理财直接相关，下面分享下自己这一年的理财间接成长。</p>
-<h1>好的习惯</h1>
-<h3 id="每月整理自己的基金">每月整理自己的基金</h3>
-<p>自己原来胡乱地买入基金，对手头持有的基金数量和收益情况不清楚。现在自己会每月定期比较和复盘持有基金，做到心中有数，优胜劣汰，逐步买入和卖出。</p>
-<!--
-- 每三个月一次的财务体检
-
-每三个月，我会把自己的所有财富做一次整理，查漏补缺，做到心中有数。
--->
-<h3 id="出售闲置下来的物品">出售闲置下来的物品</h3>
-<p>因为自己经常会乱买东西，家中有很多不常用或者不好用的物品，今年开始在二手交易 (如闲 * 鱼) 平台上出售，大概折现了几百块钱。现在自己有点一发不可收拾，家中但凡有点闲置物品，就想卖出去换钱。</p>
-<p>出售闲置物品是一个好习惯，一方面没有浪费资源，东西在别人那里活过来了；另一方面，赚回来一部分本金，节约了自己的时间。</p>
-<p>分享我喜欢的二手交易平台：</p>
-<ul>
-<li><a href="https://www.zhihu.com/question/66798566">把二手书店搬到网上的多抓鱼</a>
-<ul>
-<li>当你想卖掉家里囤积的旧书，只需要打开「多抓鱼」，扫描 ISBN 码后，等待顺丰快递员上门收书即可，经过多抓鱼经过审核后，你就能得到卖书钱了。</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="租赁电子产品">租赁电子产品</h3>
-<p>生活中，有些东西可能只是偶尔用一下，那么可以选择租赁而不是购买这些物品；一方面节约了维护成本，一方面剩下的钱可以用于投资。</p>
-<p>试想一下，当你准备一场说走就走的旅行，原本需要在这个期间动辄上万去使用相机或者无人机记录精彩瞬间时，现在仅需动动手机花上几百块的租金就能用上好几天，这难道不就正是科技社会进步所带来的美好吗？</p>
-<p>分享我体验过的租赁平台：</p>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/48288982">探物租赁</a></li>
-</ul>
-<hr>
-<h3 id="阅读财报">阅读财报</h3>
-<p>目前，我定投的基金数目不多，我每月会强迫自己关心买入的基金具体情况。通过阅读基金报告，看看基金经理的看法，以及下一步的投资倾向，是否和自己匹配，做到知己知彼。</p>
-<!--
-- 读书
-
-很遗憾，自己今年本来打算读完《穷查理宝典》，但是因为事情多，再加上这本书实操性差，自己只是读到了一般就束之高阁，希望今年继续读完。-->]]></content>
-      <categories>
-        <category>Finance</category>
-      </categories>
-      <tags>
-        <tag>Weekly Blogs</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>nslookup 工具学习</title>
     <url>/website/nslookup/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -10991,44 +10879,6 @@ N = 1.</p>
       </tags>
   </entry>
   <entry>
-    <title>临时变量赋值给常引用安全吗 / Is it safe to make a const reference member to a temporary variable?</title>
-    <url>/Programming/oom-const-reference/</url>
-    <content><![CDATA[<h1>临时变量的生命周期</h1>
-<p>C++ 中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类：</p>
-<ul>
-<li>函数的返回值</li>
-<li>类型转换时的中间变量</li>
-</ul>
-<p>一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁 / The temporary will be destroyed after the full expression.</p>
-<p>The lifetime of the temporary bound to a const reference extends till the lifetime of const.</p>
-<h3 id="Demo">Demo</h3>
-<figure class="highlight c"><figcaption><span>Segmentation_fault_demo++</span><a href="/downloads/code/oom_reference.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> {</span></span><br><span class="line">   public:</span><br><span class="line">    A(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp; const_v_in, <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt; v_in)</span><br><span class="line">        : const_set_values_(const_v_in), set_values_(v_in) {}</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">has_const_value</span><span class="params">(<span class="type">int</span> ix)</span> <span class="type">const</span> {</span><br><span class="line">        <span class="keyword">return</span> const_set_values_.find(ix) == const_set_values_.end();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">has_value</span><span class="params">(<span class="type">int</span> ix)</span> <span class="type">const</span> {</span><br><span class="line">        <span class="keyword">return</span> set_values_.find(ix) == set_values_.end();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">   private:</span><br><span class="line">    <span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp; const_set_values_;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt; set_values_;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    A <span class="title function_">a</span><span class="params">({<span class="number">0</span>}, {<span class="number">0</span>})</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" whether A instance has value "</span> &lt;&lt; a.has_value(<span class="number">0</span>)</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" whether A instance has const value "</span> &lt;&lt; a.has_const_value(<span class="number">0</span>)</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1>源码</h1>
-<h2 id="源码下载">源码下载</h2>
-<p><a href="http://www.waylon.one/downloads/code/oom_reference.cpp">源码下载</a></p>
-<h2 id="编译">编译</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">cd 文件下载目录</span><br><span class="line">g++ oom_reference.cpp -o test --std=c++14</span><br></pre></td></tr></tbody></table></figure>
-<p>注意：因为编译器优化等原因 (我的版本是 g++ 7.5)，你在本地验证时不一定会崩溃，但是这即使不崩溃，也是一个 <strong>undefined bahvior</strong> 问题，不安全。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">// 查看 g++ 版本</span><br><span class="line">g++ --version</span><br></pre></td></tr></tbody></table></figure>
-<h1>One more thing</h1>
-<h2 id="编程实践">编程实践</h2>
-<p>// When one stores the reference one should also forbid rvalues: A(const std::unordered_set<int>&amp;&amp;)=delete;</int></p>
-<figure class="highlight c"><figcaption><span>禁止移动构造_demo++</span><a href="/downloads/code/oom_reference_rvalue.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line">A(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp;&amp;) = delete;</span><br></pre></td></tr></tbody></table></figure>
-<h1>参考链接</h1>
-<ul>
-<li><a href="https://stackoverflow.com/questions/45385433/is-it-safe-to-make-a-const-reference-member-to-a-temporary-variable">Is it safe to make a const reference member to a temporary variable</a></li>
-</ul>
-]]></content>
-      <categories>
-        <category>Programming</category>
-      </categories>
-      <tags>
-        <tag>Weekly Blogs</tag>
-        <tag>C Plus Plus</tag>
-        <tag>Programming</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Outlook 绑定 163 邮箱</title>
     <url>/life/outlook-link-163/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -11065,6 +10915,44 @@ IMAP/SMTP 服务。</li>
       <tags>
         <tag>email</tag>
         <tag>outlook</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>临时变量赋值给常引用安全吗 / Is it safe to make a const reference member to a temporary variable?</title>
+    <url>/Programming/oom-const-reference/</url>
+    <content><![CDATA[<h1>临时变量的生命周期</h1>
+<p>C++ 中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类：</p>
+<ul>
+<li>函数的返回值</li>
+<li>类型转换时的中间变量</li>
+</ul>
+<p>一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁 / The temporary will be destroyed after the full expression.</p>
+<p>The lifetime of the temporary bound to a const reference extends till the lifetime of const.</p>
+<h3 id="Demo">Demo</h3>
+<figure class="highlight c"><figcaption><span>Segmentation_fault_demo++</span><a href="/downloads/code/oom_reference.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> {</span></span><br><span class="line">   public:</span><br><span class="line">    A(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp; const_v_in, <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt; v_in)</span><br><span class="line">        : const_set_values_(const_v_in), set_values_(v_in) {}</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">has_const_value</span><span class="params">(<span class="type">int</span> ix)</span> <span class="type">const</span> {</span><br><span class="line">        <span class="keyword">return</span> const_set_values_.find(ix) == const_set_values_.end();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">has_value</span><span class="params">(<span class="type">int</span> ix)</span> <span class="type">const</span> {</span><br><span class="line">        <span class="keyword">return</span> set_values_.find(ix) == set_values_.end();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">   private:</span><br><span class="line">    <span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp; const_set_values_;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt; set_values_;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    A <span class="title function_">a</span><span class="params">({<span class="number">0</span>}, {<span class="number">0</span>})</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" whether A instance has value "</span> &lt;&lt; a.has_value(<span class="number">0</span>)</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" whether A instance has const value "</span> &lt;&lt; a.has_const_value(<span class="number">0</span>)</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<h1>源码</h1>
+<h2 id="源码下载">源码下载</h2>
+<p><a href="http://www.waylon.one/downloads/code/oom_reference.cpp">源码下载</a></p>
+<h2 id="编译">编译</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">cd 文件下载目录</span><br><span class="line">g++ oom_reference.cpp -o test --std=c++14</span><br></pre></td></tr></tbody></table></figure>
+<p>注意：因为编译器优化等原因 (我的版本是 g++ 7.5)，你在本地验证时不一定会崩溃，但是这即使不崩溃，也是一个 <strong>undefined bahvior</strong> 问题，不安全。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">// 查看 g++ 版本</span><br><span class="line">g++ --version</span><br></pre></td></tr></tbody></table></figure>
+<h1>One more thing</h1>
+<h2 id="编程实践">编程实践</h2>
+<p>// When one stores the reference one should also forbid rvalues: A(const std::unordered_set<int>&amp;&amp;)=delete;</int></p>
+<figure class="highlight c"><figcaption><span>禁止移动构造_demo++</span><a href="/downloads/code/oom_reference_rvalue.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line">A(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp;&amp;) = delete;</span><br></pre></td></tr></tbody></table></figure>
+<h1>参考链接</h1>
+<ul>
+<li><a href="https://stackoverflow.com/questions/45385433/is-it-safe-to-make-a-const-reference-member-to-a-temporary-variable">Is it safe to make a const reference member to a temporary variable</a></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>Weekly Blogs</tag>
+        <tag>C Plus Plus</tag>
+        <tag>Programming</tag>
       </tags>
   </entry>
   <entry>
@@ -11387,6 +11275,40 @@ navigate fully autonomously in a dynamic indoor environment
       </tags>
   </entry>
   <entry>
+    <title>protocol buffers</title>
+    <url>/uncategorized/protocol-buffers/</url>
+    <content><![CDATA[<h1><a href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
+<ul>
+<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol message types.</li>
+<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a C++ namespace.
+<ul>
+<li>即 package 指定的路径，会被转换为 namespace，来避免命名冲突。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Arena-Allocation"><a href="https://protobuf.dev/reference/cpp/arenas/#why">Arena Allocation</a></h2>
+<ul>
+<li> 功能：Arena allocation is a C+±only feature that helps you optimize your memory usage and improve performance when working with protocol buffers.</li>
+<li> 原因：By default, protocol buffers performs heap allocations for each message object, each of its subobjects, and several field types, such as strings. These allocations occur in bulk when parsing a message and when building new messages in memory, and associated deallocations happen when messages and their subobject trees are freed.
+<ul>
+<li>Message 的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
+</ul>
+</li>
+</ul>
+<h2 id="查看-version">查看 version</h2>
+<p>protoc --version</p>
+<h1>Python</h1>
+<h2 id="Enum">Enum</h2>
+<h3 id="Could-not-serialize-object-TypeError-can’t-pickle-google-protobuf-pyext-message-EnumDescriptor-objects">Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects</h3>
+<p>我在实际 spark 上处理数据时，报错 “Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects”, 通过报错信息，很明确这是在实际 python 代码中引用 enum 导致的问题.</p>
+<figure class="highlight plaintext"><figcaption><span>enum_test.proto</span><a href="/downloads/code/enum_test.proto">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"># Add code later</span><br></pre></td></tr></tbody></table></figure>
+<h1>参考教程</h1>
+<ul>
+<li><a href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand Protobuf enum in python</a></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
     <title>Group Surfing A Pedestrian-based Approach to Sidewalk Robot Navigation / 解读 Group Surfing paper</title>
     <url>/paper/paper-group-surfing/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -11572,40 +11494,6 @@ The reinforcement training process induces social awareness through social rewar
         <tag>paper</tag>
         <tag>Robotics</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>protocol buffers</title>
-    <url>/uncategorized/protocol-buffers/</url>
-    <content><![CDATA[<h1><a href="https://protobuf.dev/programming-guides/proto3/#packages">Package</a></h1>
-<ul>
-<li>You can add an optional&nbsp;<code>package</code>&nbsp;specifier to a&nbsp;<code>.proto</code>&nbsp;file to prevent name clashes between protocol message types.</li>
-<li>In&nbsp;<strong>C++</strong>&nbsp;the generated classes are wrapped inside a C++ namespace.
-<ul>
-<li>即 package 指定的路径，会被转换为 namespace，来避免命名冲突。</li>
-</ul>
-</li>
-</ul>
-<h2 id="Arena-Allocation"><a href="https://protobuf.dev/reference/cpp/arenas/#why">Arena Allocation</a></h2>
-<ul>
-<li> 功能：Arena allocation is a C+±only feature that helps you optimize your memory usage and improve performance when working with protocol buffers.</li>
-<li> 原因：By default, protocol buffers performs heap allocations for each message object, each of its subobjects, and several field types, such as strings. These allocations occur in bulk when parsing a message and when building new messages in memory, and associated deallocations happen when messages and their subobject trees are freed.
-<ul>
-<li>Message 的构造和释放在堆栈上进行，涉及到动态内存的生成和释放，这一步骤非常昂贵。</li>
-</ul>
-</li>
-</ul>
-<h2 id="查看-version">查看 version</h2>
-<p>protoc --version</p>
-<h1>Python</h1>
-<h2 id="Enum">Enum</h2>
-<h3 id="Could-not-serialize-object-TypeError-can’t-pickle-google-protobuf-pyext-message-EnumDescriptor-objects">Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects</h3>
-<p>我在实际 spark 上处理数据时，报错 “Could not serialize object: TypeError: can’t pickle google.protobuf.pyext._message.EnumDescriptor objects”, 通过报错信息，很明确这是在实际 python 代码中引用 enum 导致的问题.</p>
-<figure class="highlight plaintext"><figcaption><span>enum_test.proto</span><a href="/downloads/code/enum_test.proto">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"># Add code later</span><br></pre></td></tr></tbody></table></figure>
-<h1>参考教程</h1>
-<ul>
-<li><a href="https://www.vipmind.me/programing/python/understand-protobuf-enum-in-python.html">Understand Protobuf enum in python</a></li>
-</ul>
-]]></content>
   </entry>
   <entry>
     <title>基于 interactive mode 实现 matplotlib 动态更新图片 (交互式绘图)</title>
@@ -11913,70 +11801,8 @@ The reinforcement training process induces social awareness through social rewar
         <category>hexo</category>
       </categories>
       <tags>
-        <tag>VPS</tag>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>转载 - 小狗钱钱读后感 - 不只是理财</title>
-    <url>/Reading/reprinte-impression-of-Ein-Hund-namens-Money/</url>
-    <content><![CDATA[<p>挺喜欢这篇文章的几个非理财观点，文章转载于 <a href="http://minxueyu.com/2020/03/10/%E3%80%8A%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F-%E5%AE%9E%E7%94%A8%E7%9A%84%E5%BB%BA%E8%AE%AE/">实用的建议</a>。</p>
-<p>通过阅读《小狗钱钱》这本书，我们除了可以收获很多金钱、理财相关的观念和知识外，还可以获得很多实用的建议，我认为将这些实践应用于日常生活中，可以帮助我们进步、达成自己的目标。</p>
-<p>本书关于金钱、理财的观点和建议，大家可以看我的另一篇读后感<a href="http://minxueyu.com/2020/03/10/%E3%80%8A%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F-%E5%85%B3%E4%BA%8E%E9%87%91%E9%92%B1/">《小狗钱钱》读后感 - 关于金钱</a>。</p>
-<div align="center">
-  <img width="200" data-src="http://minxueyu.com/img/financing/小狗钱钱.jpg">
-</div>
-<h1>实用的建议</h1>
-<h2 id="你只有两个选择：做与不做，没有试试看">你只有两个选择：做与不做，没有试试看</h2>
-<p>本书关于做一件事情的理念：你只有两个选择：做与不做，没有试试看。</p>
-<p>当小狗钱钱给吉娅提出梦想储钱罐和梦想相册时，吉娅说自己会试试看，小狗钱钱对吉娅说：</p>
-<blockquote>
-<p>你只有两个选择：做或不做，不能是我试一下”</p>
-</blockquote>
-<blockquote>
-<p>如果你只是抱着试试看的心态，那么你只会以失败告终，你会一事无成。尝试纯粹是一种借口，你还没有做，就已经给自己想好了退路。</p>
-</blockquote>
-<p>反思一下我们自己，在做一件事情时，我们是不是要么犹豫半天后选择不做，要么是不是会说 “我尝试一下吧”，其实那时候内心已经允许自己完不成了，甚至已经接受了失败这个结局。为了避免这样的事情发生，我们可以像吉娅一样，虽然没有监督自己的狗狗，但是可以自己监督自己，一旦说 “尝试一下” 就在本子上记录一次，最后争取只留下 “做” 与 “不做” 两个选项。</p>
-<h2 id="多想实现目标后的美好，少想事情做不好的原因">多想实现目标后的美好，少想事情做不好的原因</h2>
-<p>钱钱给吉娅提出她看待问题的一个错误思维：首先考虑的总是事情做不成的原因，而不是去想象达成目标后的美好。</p>
-<blockquote>
-<p>你必须设想你已经拥有了这些东西，这样捏的一个小愿望才会变成一种强烈的愿望，你想象的越多，你的愿望就越强烈，那么你就会开始寻找机会来实现自己的梦想。</p>
-</blockquote>
-<p>基于此，钱钱给她提出的可实践性建议是建立梦想相册，让她把梦想 “去美国交流”、“笔记本电脑” 相关的图片保存到相册中，时常拿出来看，加强自己的渴望。</p>
-<p>关于梦想储钱罐和梦想相册，我自己也进行了实践了一下，我找出本子罗列自己十个需要金钱来实现的愿望，挑选出了三个，并设定了各自的资金来源，刚好咕咕机到手了，所以打算把与愿望相关的图片都打印出来，而且还要把梦想写的更详细一点，等我达成某个梦想时，再来与大家分享。</p>
-<h2 id="自信决定了是否可以成功">自信决定了是否可以成功</h2>
-<p>本书还强调了自信的重要性，而且认为过于自信比不够自信要好得多。</p>
-<blockquote>
-<p>你的自信程度决定了你是否相信自己的能力，是否相信你自己，如果你根本不相信你能做到的话，那么你就根本不会动手去做，而假如你不开始去做，那么你就什么也得不到。</p>
-</blockquote>
-<p>这段话我深感理解，我是一个自卑的人，任何时候都不自信，而且由于没有信心做成功，自然也不会付出相应的努力，所以很多事情不出所料地都失败了，而这些事情的失败像是地上的雪花，自卑这个雪球经过一片片雪花逐渐变的越来越大，之后又更容易沾上雪花。自卑、不为之努力、失败形成了一个完美的循环，自己无法逃脱。</p>
-<p>关于如何建立自信，钱钱给吉娅的建议是：设立自己的 “成功日记”，每天记录至少 5 件个人成果，任何小事都可以，而且不用纠结有些事情是否属于成果，可以给予自己肯定的答复。这个建议之前也有在别的地方听到过，但是都没有付诸实践，这次我计划开始写 “成功日记”，到目前为止已经坚持了 17 天，未有过间断，我发现自己喜欢上了这项活动。虽然里面记录的大部分搜是很小的事情，现在我每天晚上睡觉前拿出我的小本本回想今天的个人成果，感觉很开心，这对自己至少是一种积极的暗示，而且我发现开始更愿意完成自己每天的任务计划，不知道是不是有它的功劳呢。</p>
-<h2 id="把精力集中在你知道的、能做的和拥有的东西上">把精力集中在你知道的、能做的和拥有的东西上</h2>
-<p>当吉娅决定要开始赚钱，但是不知道如何下手时，钱钱给她讲了个故事，借故事提出两个建议：</p>
-<blockquote>
-<ol>
-<li>为别人解决一个难题，那么你就能赚到很多钱；</li>
-<li>把精力集中在你知道的、能做的和拥有的东西上。</li>
-</ol>
-</blockquote>
-<p>如果你也有 “开源” 的打算，我感觉这两个建议非常好，考虑下别人需要什么和自己有什么。而第二个建议可能不仅限于赚钱，自己的事业或工作也一样，人的精力是有限的，专注于自己知道、能做和拥有的东西上，不要跟随潮流看大家干嘛自己也干嘛，最终可能什么都不精，找到自己会的，把某一方面做的很精通，可能整体带来的收益更大。</p>
-<h2 id="重要的事情要坚持做">重要的事情要坚持做</h2>
-<p>由于小狗钱钱是吉娅捡到的，当吉娅找到狗主人时，由于害怕失去钱钱而十分害怕和烦恼，因此停止了成功日记的记录和梦想相册的整理。钱钱因此非常生气，它说：</p>
-<blockquote>
-<p>困难总是在不断地出现。尽管如此，你每天还是要不间断地去做对你地未来意义重大地事情，这件事情可能花费时间不多，但就是这段时间会让一切变得不同。</p>
-</blockquote>
-<p>这个有点观点比较像四现象法则中提出的对待 “重要不紧急” 事件的态度，这些事情可能不是十分紧急的，但是这些事情的重要性却很高，无论如何都应该坚持，那么有什么好的建议吗？钱钱给的建议是，应该在固定的时间里，有规律地做这些事情，这样可以防止由于其他紧急事情、或者心情等原因导致的中断。</p>
-<h2 id="72小时规定">72 小时规定</h2>
-<p>钱钱告诉吉娅在想做什么事情时，在 72 小时内去完成，不要拖太久时间，否则这件事情你可能永远不会再做了。</p>
-<p>这个规定很适合于我们平常一些灵感和想法的实施，这些事情完全属于自主自愿，更多的是靠一时的冲动和兴趣，如果开始的太晚，或者持续时间太久，很容易中途放弃，最终就不了了之。</p>
-<h1>写在最后</h1>
-<p>关于实用的建议，我大概就梳理出了这么几个，希望大家可以找到适合自己的建议并进行实践，我实践一段时间后，也会和大家分享我的成长和收获。</p>
-]]></content>
-      <categories>
-        <category>Reading</category>
-      </categories>
-      <tags>
-        <tag>Finance</tag>
+        <tag>VPS</tag>
       </tags>
   </entry>
   <entry>
@@ -12357,6 +12183,236 @@ https://github.com/ivgiuliani/ant 和万老板的实现类似，有working memor
       </tags>
   </entry>
   <entry>
+    <title>转载 - 小狗钱钱读后感 - 不只是理财</title>
+    <url>/Reading/reprinte-impression-of-Ein-Hund-namens-Money/</url>
+    <content><![CDATA[<p>挺喜欢这篇文章的几个非理财观点，文章转载于 <a href="http://minxueyu.com/2020/03/10/%E3%80%8A%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F-%E5%AE%9E%E7%94%A8%E7%9A%84%E5%BB%BA%E8%AE%AE/">实用的建议</a>。</p>
+<p>通过阅读《小狗钱钱》这本书，我们除了可以收获很多金钱、理财相关的观念和知识外，还可以获得很多实用的建议，我认为将这些实践应用于日常生活中，可以帮助我们进步、达成自己的目标。</p>
+<p>本书关于金钱、理财的观点和建议，大家可以看我的另一篇读后感<a href="http://minxueyu.com/2020/03/10/%E3%80%8A%E5%B0%8F%E7%8B%97%E9%92%B1%E9%92%B1%E3%80%8B%E8%AF%BB%E5%90%8E%E6%84%9F-%E5%85%B3%E4%BA%8E%E9%87%91%E9%92%B1/">《小狗钱钱》读后感 - 关于金钱</a>。</p>
+<div align="center">
+  <img width="200" data-src="http://minxueyu.com/img/financing/小狗钱钱.jpg">
+</div>
+<h1>实用的建议</h1>
+<h2 id="你只有两个选择：做与不做，没有试试看">你只有两个选择：做与不做，没有试试看</h2>
+<p>本书关于做一件事情的理念：你只有两个选择：做与不做，没有试试看。</p>
+<p>当小狗钱钱给吉娅提出梦想储钱罐和梦想相册时，吉娅说自己会试试看，小狗钱钱对吉娅说：</p>
+<blockquote>
+<p>你只有两个选择：做或不做，不能是我试一下”</p>
+</blockquote>
+<blockquote>
+<p>如果你只是抱着试试看的心态，那么你只会以失败告终，你会一事无成。尝试纯粹是一种借口，你还没有做，就已经给自己想好了退路。</p>
+</blockquote>
+<p>反思一下我们自己，在做一件事情时，我们是不是要么犹豫半天后选择不做，要么是不是会说 “我尝试一下吧”，其实那时候内心已经允许自己完不成了，甚至已经接受了失败这个结局。为了避免这样的事情发生，我们可以像吉娅一样，虽然没有监督自己的狗狗，但是可以自己监督自己，一旦说 “尝试一下” 就在本子上记录一次，最后争取只留下 “做” 与 “不做” 两个选项。</p>
+<h2 id="多想实现目标后的美好，少想事情做不好的原因">多想实现目标后的美好，少想事情做不好的原因</h2>
+<p>钱钱给吉娅提出她看待问题的一个错误思维：首先考虑的总是事情做不成的原因，而不是去想象达成目标后的美好。</p>
+<blockquote>
+<p>你必须设想你已经拥有了这些东西，这样捏的一个小愿望才会变成一种强烈的愿望，你想象的越多，你的愿望就越强烈，那么你就会开始寻找机会来实现自己的梦想。</p>
+</blockquote>
+<p>基于此，钱钱给她提出的可实践性建议是建立梦想相册，让她把梦想 “去美国交流”、“笔记本电脑” 相关的图片保存到相册中，时常拿出来看，加强自己的渴望。</p>
+<p>关于梦想储钱罐和梦想相册，我自己也进行了实践了一下，我找出本子罗列自己十个需要金钱来实现的愿望，挑选出了三个，并设定了各自的资金来源，刚好咕咕机到手了，所以打算把与愿望相关的图片都打印出来，而且还要把梦想写的更详细一点，等我达成某个梦想时，再来与大家分享。</p>
+<h2 id="自信决定了是否可以成功">自信决定了是否可以成功</h2>
+<p>本书还强调了自信的重要性，而且认为过于自信比不够自信要好得多。</p>
+<blockquote>
+<p>你的自信程度决定了你是否相信自己的能力，是否相信你自己，如果你根本不相信你能做到的话，那么你就根本不会动手去做，而假如你不开始去做，那么你就什么也得不到。</p>
+</blockquote>
+<p>这段话我深感理解，我是一个自卑的人，任何时候都不自信，而且由于没有信心做成功，自然也不会付出相应的努力，所以很多事情不出所料地都失败了，而这些事情的失败像是地上的雪花，自卑这个雪球经过一片片雪花逐渐变的越来越大，之后又更容易沾上雪花。自卑、不为之努力、失败形成了一个完美的循环，自己无法逃脱。</p>
+<p>关于如何建立自信，钱钱给吉娅的建议是：设立自己的 “成功日记”，每天记录至少 5 件个人成果，任何小事都可以，而且不用纠结有些事情是否属于成果，可以给予自己肯定的答复。这个建议之前也有在别的地方听到过，但是都没有付诸实践，这次我计划开始写 “成功日记”，到目前为止已经坚持了 17 天，未有过间断，我发现自己喜欢上了这项活动。虽然里面记录的大部分搜是很小的事情，现在我每天晚上睡觉前拿出我的小本本回想今天的个人成果，感觉很开心，这对自己至少是一种积极的暗示，而且我发现开始更愿意完成自己每天的任务计划，不知道是不是有它的功劳呢。</p>
+<h2 id="把精力集中在你知道的、能做的和拥有的东西上">把精力集中在你知道的、能做的和拥有的东西上</h2>
+<p>当吉娅决定要开始赚钱，但是不知道如何下手时，钱钱给她讲了个故事，借故事提出两个建议：</p>
+<blockquote>
+<ol>
+<li>为别人解决一个难题，那么你就能赚到很多钱；</li>
+<li>把精力集中在你知道的、能做的和拥有的东西上。</li>
+</ol>
+</blockquote>
+<p>如果你也有 “开源” 的打算，我感觉这两个建议非常好，考虑下别人需要什么和自己有什么。而第二个建议可能不仅限于赚钱，自己的事业或工作也一样，人的精力是有限的，专注于自己知道、能做和拥有的东西上，不要跟随潮流看大家干嘛自己也干嘛，最终可能什么都不精，找到自己会的，把某一方面做的很精通，可能整体带来的收益更大。</p>
+<h2 id="重要的事情要坚持做">重要的事情要坚持做</h2>
+<p>由于小狗钱钱是吉娅捡到的，当吉娅找到狗主人时，由于害怕失去钱钱而十分害怕和烦恼，因此停止了成功日记的记录和梦想相册的整理。钱钱因此非常生气，它说：</p>
+<blockquote>
+<p>困难总是在不断地出现。尽管如此，你每天还是要不间断地去做对你地未来意义重大地事情，这件事情可能花费时间不多，但就是这段时间会让一切变得不同。</p>
+</blockquote>
+<p>这个有点观点比较像四现象法则中提出的对待 “重要不紧急” 事件的态度，这些事情可能不是十分紧急的，但是这些事情的重要性却很高，无论如何都应该坚持，那么有什么好的建议吗？钱钱给的建议是，应该在固定的时间里，有规律地做这些事情，这样可以防止由于其他紧急事情、或者心情等原因导致的中断。</p>
+<h2 id="72小时规定">72 小时规定</h2>
+<p>钱钱告诉吉娅在想做什么事情时，在 72 小时内去完成，不要拖太久时间，否则这件事情你可能永远不会再做了。</p>
+<p>这个规定很适合于我们平常一些灵感和想法的实施，这些事情完全属于自主自愿，更多的是靠一时的冲动和兴趣，如果开始的太晚，或者持续时间太久，很容易中途放弃，最终就不了了之。</p>
+<h1>写在最后</h1>
+<p>关于实用的建议，我大概就梳理出了这么几个，希望大家可以找到适合自己的建议并进行实践，我实践一段时间后，也会和大家分享我的成长和收获。</p>
+]]></content>
+      <categories>
+        <category>Reading</category>
+      </categories>
+      <tags>
+        <tag>Finance</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>使用 Docker 在 Linux 上安装 NextCloud 私有云盘</title>
+    <url>/Linux/Install-nextcloud-in-docker/</url>
+    <content><![CDATA[<!--
+[Nextcloud 搭建私人云服务教程](https://blog.itswincer.com/posts/bf0413ac/)
+[使用Docker快速安装NextCloud个人私有云盘](https://www.moerats.com/archives/420/)
+[docker容器开机自启](https://www.cnblogs.com/gcgc/p/10494615.html)
+-->
+<p>ps. 本文实时更新于 <a href="http://www.waylon.one/Linux/Install-nextcloud-in-docker/">个人网站</a>，请移步阅读。</p>
+<p>国内的网盘虽然免费，但总让人对隐私不太放心，毕竟 “免费的永远是最贵的”。</p>
+<p>自己之前购买了一个 VPS，搭建自己的网站后，感觉没有充分利用 VPS 的流量和性能，于是琢磨搭建一个私人的云服务，随后就发现了 Nextcloud 这一开源云服务。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/Baidu_to_private.JPG" alt=""></p>
+<blockquote>
+<p>通过 <a href="https://bandwagonhost.com/aff.php?aff=60653">链接</a> 注册并购买搬瓦工 VPS，就可以按下面的教程安装 NextCloud 私人云盘啦，我也可以得到新客注册的返现。</p>
+</blockquote>
+<h1>About NextCloud</h1>
+<blockquote>
+<p><a href="https://nextcloud.com/">Nextcloud</a> is the <strong>open source file sync and share software</strong> for everyone from individuals to large enterprises and service providers. Nextcloud provides a safe, secure and compliant file sync and share solution on servers you control.<br>
+With Nextcloud you can share one or more folders on your PC, and sync them with your Nextcloud server. <strong>Place files in your local shared directories, and those files are immediately synced to the server, and then to other PCs via the desktop client.</strong> Not near a desktop client? No problem, simply log in with the web client and manage your files there. <strong>The Android and iOS mobile apps allow you to browse, download and upload photos and videos.</strong><br>
+Whether using a mobile device, a workstation, or a web client, Nextcloud provides the ability to put the right files in the right hands at the right time on any device in one simple-to-use, secure, private and controlled solution.</p>
+</blockquote>
+<p><img data-src="http://www.waylon.one/downloads/images/Nextcloud.png" alt=""></p>
+<p>简而言之，Nextcloud 是一个自由及开放源代码的私有云网盘，每个人都可以在私人服务器上安装并运行它，能够快速同步你的文件到你的私有服务器，方便你跨平台 (现在支持 PC、Android 和 iOS) 同步和分享文件，功能和百度云不差多少，优点是隐私好，同步下载速度取决于服务器带宽。</p>
+<p>与 Dropbox 等专有服务相比，Nextcloud 的开放架构让用户可以利用应用程序的方式在服务器上新增额外的功能，并让用户可以完全掌控自己的数据。同时，Nextcloud 可与在 Windows、macOS 或是多种 Linux 发布版上运行的客户端同步。</p>
+<p>Nextcloud 用户可以管理日历、联系人、计划工作与流媒体。此外，用户也可以在 Nextcloud 上使用基于浏览器的文本编辑器、书签服务、缩略网址服务、相册、RSS 阅读器与文件查看器。因为有良好的扩展性，Nextcloud 可以透过鼠标点一下即可完成安装的应用程序强化其功能，并可连线至 Dropbox、Google 云端硬盘与 Amazon S3 等产品。</p>
+<h1>安装简介</h1>
+<p>Nextcloud 虽然这么好用，但是安装依赖却非常复杂，需要安装 LNMP 集成环境 (i.e. Linux + Nginx + MySql + PHP)，在搭建过程中或多或少都会出点问题。</p>
+<p>本文推荐一个很方便的安装方法 <a href="https://github.com/chrootLogin/docker-nextcloud">docker-nextcloud</a>，使用纯命令形式在 Docker 上安装 NextCloud (Docker file 会帮你把负责的依赖都配置好)，并探讨如何配置反向代理，适合尝鲜的新手。</p>
+<p>安装 Docker 后，需要安装两个容器：mysql 和 nextcloud。其中，mysql 用于存储用户的数据，nextcloud 通过向 mysql 容器读写数据，从而实现数据的存储和访问。</p>
+<h1>安装 Docker</h1>
+<blockquote>
+<p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux 或 Windows 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
+</blockquote>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># CentOS 7、Debian、Ubuntu</span><br><span class="line">curl -sSL https://get.docker.com/ | sh</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="复习知识点">复习知识点</h2>
+<ul>
+<li>curl 是一个工具，用于传输来自服务器或者到服务器的数据。</li>
+<li>systemctl 是一个系统管理守护进程、工具和库的集合，用于取代 system V、service 和 chkconfig 命令，初始进程主要负责控制 systemd 系统和服务管理器。</li>
+<li>systemctl start 启动服务</li>
+<li> systemctl enable 激活服务并在开机时启用</li>
+</ul>
+<!--
+[Centos7中systemctl命令详解](https://www.cnblogs.com/zhming26/p/6155201.html)
+-->
+<h1>安装 Nextcloud 服务器</h1>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># 拉取 Mysql 镜像和 Nextcloud 镜像</span><br><span class="line">docker pull rootlogin/nextcloud &amp;&amp; docker pull mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 mysql 容器，注意修改数据库信息</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br><span class="line"></span><br><span class="line"># 创建 nextcloud 容器，添加链接到 mysql 容器；ip 是浏览器访问云盘的端口号。使用镜像 rootlogin/nextcloud，以后台模式启动一个容器, 容器命名为 nextcloud，将容器的 80 端口映射到主机的 3000 端口,主机的目录 /var/nextcloud/data 映射到容器的 /data，并添加链接到上述的 nextcloud_db 容器。</span><br><span class="line">docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10</span><br></pre></td></tr></tbody></table></figure>
+<!--
+密码 supersecretpassword
+-->
+<!--
+docker run --name nextcloud_db -d --restart=always -e MYSQL_ROOT_PASSWORD=test -e MYSQL_DATABASE=test -e MYSQL_USER=test -e MYSQL_PASSWORD=test -v /var/nextcloud/mysql:/var/lib/mysql mariadb:10
+-->
+<!--
+docker run -d --name nextcloud --restart=always --link nextcloud_db:nextcloud_db -v /var/nextcloud/data:/data -p 3000:80 rootlogin/nextcloud
+-->
+<blockquote>
+<p>MariaDB 和 MySQL 的关系：<strong>MariaDB 数据库管理系统是 MySQL 的一个分支</strong>。开发这个分支的原因之一是：甲骨文公司收购了 MySQL 后，有将 MySQL 闭源的潜在风险，因此社区采用分支的方式来避开这个风险。<br>
+MariaDB 的目的是完全兼容 MySQL，包括 API 和命令行，使之能轻松成为 MySQL 的代替品。</p>
+</blockquote>
+<p>&nbsp;<br>
+<img data-src="http://www.waylon.one/downloads/images/next_cloud_container.png" alt=""></p>
+<p>恭喜你，现在初级版的云服务器已经搭建成功。访问地址为 http://your_ip:3000。<br>
+启动命令里的 3000 端口可自行替换，不过后面有关端口的命令都可自行修改，/var/nextcloud/data 为网盘的数据库，可以自行修改。</p>
+<h2 id="复习知识点-2">复习知识点</h2>
+<ul>
+<li>docker pull 是从镜像仓库拉取镜像。</li>
+<li><a href="https://www.runoob.com/docker/docker-run-command.html">docker run</a> 是创建一个新的容器并运行一个命令。</li>
+<li>–restart=always，设置开机重启</li>
+</ul>
+<h1>防火墙开启端口</h1>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">#CentOS 7</span><br><span class="line">firewall-cmd --zone=public --add-port=3000/tcp --permanent</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></tbody></table></figure>
+<h1>初始设置</h1>
+<ul>
+<li>访问 http://your_ip:3000。</li>
+<li>创建管理员帐号和密码</li>
+<li>数据库选择 MySQL/MariaDB，如果配置不成功，可以选择 SQLite (性能差点，但是可以满足个人基本的需求)。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>用户名</td>
+<td> test</td>
+</tr>
+<tr>
+<td> 密码</td>
+<td> test</td>
+</tr>
+<tr>
+<td> 数据库名</td>
+<td> test</td>
+</tr>
+<tr>
+<td> 地址</td>
+<td> nextcloud_db:3306</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>mysql 数据库默认端口是 3306。</p>
+</blockquote>
+<p><img data-src="http://www.waylon.one/downloads/images/nextcloud_initialize.png" alt=""></p>
+<ul>
+<li>恭喜你，进入自己的网盘界面。</li>
+</ul>
+<p><img data-src="/downloads/images/nextcloud_web.png" alt=""></p>
+<h1>域名访问</h1>
+<p>IP 访问会直接把云盘的 IP 和端口暴露出来，感觉不太妥。如果要<!--像上面示例 [点击访问](http://drive.waylon.one/)，-->通过域名访问自己的网盘，就需要反代了。</p>
+<p>反代可以用 Nginx、Apache、Caddy，本文讲述如何使用 Nginx。</p>
+<blockquote>
+<p>Nginx 是一款轻量级的 Web 服务器 / 反向代理服务器及电子邮件（IMAP/POP3）代理服务器，在 BSD-like 协议下发行。其特点是占有内存少，并发能力强，</p>
+</blockquote>
+<p>默认用户已经完成购买域名、安装 Nginx 的前序步骤，鼓励折腾一下，有问题欢迎下面留言交流。</p>
+<h2 id="certbot-生成-https-证书">certbot 生成 https 证书</h2>
+<p>Let’s Encrypt 是很火的一个免费 SSL 证书发行项目，自动化发行证书，证书有 90 天的有效期。适合个人使用或者临时使用，不用再忍受自签发证书不受浏览器信赖的提示。<br>
+附上 CentOS 7.2 的 <a href="https://www.vpser.net/build/letsencrypt-certbot.html">免费 SSL 证书 Let’s Encrypt</a> 流程。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">./certbot-auto certonly --email your_mail --agree-tos --no-eff-email --webroot -w /var/nextcloud -d drive.example.com</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="配置-Nginx-配置文件">配置 Nginx 配置文件</h2>
+<p>在 /etc/nginx/conf.d/ 下的配置文件里添加如下配置。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">server {</span><br><span class="line">    listen 80;</span><br><span class="line">    listen [::]:80;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line">    # enforce https</span><br><span class="line">    return 301 https://$server_name$request_uri;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">server {</span><br><span class="line">    listen 443 ssl http2;</span><br><span class="line">    listen [::]:443 ssl http2;</span><br><span class="line">    server_name drive.example.com;</span><br><span class="line"></span><br><span class="line">    ssl_certificate  /etc/letsencrypt/live/drive.example.com/fullchain.pem;</span><br><span class="line">    ssl_certificate_key  /etc/letsencrypt/live/drive.example.com/privkey.pem;</span><br><span class="line"></span><br><span class="line">    add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";</span><br><span class="line"></span><br><span class="line">    location / {</span><br><span class="line">     proxy_pass http://your_ip:3000;</span><br><span class="line">     proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>最后，重启 nginx，就可以通过网址访问自己的云盘啦！</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></tbody></table></figure>
+<h1>安装中可能遇到的问题 FQA</h1>
+<ul>
+<li>Q: 初始化时，提示 “看起来您正在尝试重新安装您的 Nextcloud。但您的 config 文件夹中没有 CAN_INSTALL 文件。请在您的 config 文件夹中创建 CAN_INSTALL 文件以继续。”</li>
+<li>A: 运行如下命令。</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">cd /var/nextcloud/data/config &amp;&amp; touch CAN_INSTALL</span><br></pre></td></tr></tbody></table></figure>
+<p>其中，/var/nextcloud/data 为网盘的数据库，请自行修改。</p>
+<hr>
+<ul>
+<li>Q: 反向代理后，网址无法直接访问，比如提示 403。</li>
+<li>A：请先定位问题，可以在 /var/log/nginx/error.log 查看代理错误。</li>
+</ul>
+<hr>
+<ul>
+<li>Q: 关机重启后，原来配置好的网盘无法访问。</li>
+<li>A: 在使用 docker run 启动容器时，已经使用–restart 参数来设置容器开机自启。如果发现服务器重启后，无法访问网盘，可以尝试 update 命令设置 --restart=always。</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">docker update --restart=always 容器名称</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>Docker 提供了 restart policy 机制，可以在容器退出或者 Docker 重启时控制容器能够自启动。这种 Restart policy 可以保证相关容器按照正确顺序启动。</p>
+</blockquote>
+<hr>
+<ul>
+<li>Q: 通过 IP 方式 登录时，没有出现登录界面，显示 “HTTP ERROR 500”.</li>
+<li>A: 根据 <a href="https://help.nextcloud.com/t/solved-nextcloud-12-http-error-500/21577">Nextcloud 12 HTTP Error 500</a> 提供的方法，更新 PHP 模块可以解决问题。
+<ul>
+<li>我使用 apt-get upgrade 升级了所有软件的版本，然后问题得到修复。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>HTTP 500 错误，全称为 HTTP 500 Internal Server Error，即 HTTP 500 内部服务器错误。<strong>HTTP 500 内部服务器错误表示服务器遇到意外情况，导致其无法履行请求</strong>，但它无法说明具体错误或发生错误的根本原因。当发生错误时，访问的网站会显示发生错误。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+      <tags>
+        <tag>VPS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第二次剑桥领思考试回忆</title>
     <url>/English/second-linguaskill/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -12511,6 +12567,54 @@ If the article helps you, please vote for me. If you have any questions, please 
       </tags>
   </entry>
   <entry>
+    <title>通过 clustermaps 统计 Hexo 网站的访问地区和 IP</title>
+    <url>/website/statistics-visitor-traffic/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1>前言</h1>
+<p>在 <a href="http://www.waylon.one/website/Website-FAQ/">Website FAQ</a>，实现了使用 "卜算子" 来统计网站访问人数，但是 "卜算子" 仅可以提供访问人数的统计，进一步的信息却无法提供。那么，如果想知道过往访客来自哪些国家和地区，显示网站访问实时动态的信息，应该怎么做呢？</p>
+<p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/statistics-visitor-traffic/">个人网站</a>，请移步阅读最新内容。</p>
+<h1>clustermaps 是什么</h1>
+<p><a href="https://clustrmaps.com">clustrmaps.com</a> 是美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。</p>
+<blockquote>
+<p>Add the ClustrMaps hit tracker to your site or blog and see a real-time map of your visitors from around the world! Proudly show and grow your hidden community of interest.</p>
+</blockquote>
+<p>网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是<strong>免费</strong>的，能够满足个人网站的需求，如下图所示。</p>
+<p><img data-src="/downloads/images/blog/visitor_traffic_demo.png" alt=""></p>
+<h1>配置 clustrmaps</h1>
+<ul>
+<li>网站注册后，访问 <a href="https://clustrmaps.com/add">Enter your website address</a> 添加自己的网站地址，选择免费的服务。</li>
+</ul>
+<p><img data-src="/downloads/images/blog/input_url.png" alt=""></p>
+<p><img data-src="/downloads/images/blog/choose_plan.png" alt=""></p>
+<ul>
+<li>选择自己喜欢的插件格式，现在 Hexo 的 Next 两种主题都是支持的，但是自己比较喜欢 Map widget 的主题。</li>
+</ul>
+<p><img data-src="/downloads/images/blog/map_widget.png" alt=""></p>
+<ul>
+<li>点击选择后，拷贝网站出现的脚本 javascript 代码，粘贴到 Next 主题下某个位置。博主测试过如下两个位置，挑选一个配置即可以。推荐位置二，自定义程度高。
+<ul>
+<li>位置一：将代码插入到 themes\next\layout\_partials\header.swig 的最后。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">  {% endif %}</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert clustrmaps.com --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">id</span>=<span class="string">'clustrmaps'</span> <span class="attr">src</span>=<span class="string">'//cdn.clustrmaps.com/map_v2.js?XXX'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% include '../_custom/header.swig' %}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>位置二：将代码插入到 \themes\next\layout\_macro\sidebar.swig 文件的<div class="”sidebar-inner”"> </div>图层。</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-inner"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- set display_toc = page.toc.enable and display_toc %}</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Begin Insert clustrmaps.com --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">id</span>=<span class="string">"clustrmaps"</span> <span class="attr">src</span>=<span class="string">"//clustrmaps.com/map_v2.js?d=iBmc9XXXXXX=a"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- End Insert clustrmaps.com --&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- if display_toc %}</span><br><span class="line">      {%- set toc = toc(page.content, { class: "nav", list_number: page.toc.number, max_depth: page.toc.max_depth }) %}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>重新部署网站，就可以在首页看到实时访客来源图，如我的网站首页所示。另外，点击地图，可以看到更详细的信息，包括访客的地图、浏览设备以及 IP。</li>
+</ul>
+<p><img data-src="/downloads/images/blog/detaile_IP.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>website</category>
+      </categories>
+      <tags>
+        <tag>Website</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>网站被谷歌和百度收录</title>
     <url>/website/site-indexed/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -12615,54 +12719,6 @@ If the article helps you, please vote for me. If you have any questions, please 
       </categories>
       <tags>
         <tag>website</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>通过 clustermaps 统计 Hexo 网站的访问地区和 IP</title>
-    <url>/website/statistics-visitor-traffic/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h1>前言</h1>
-<p>在 <a href="http://www.waylon.one/website/Website-FAQ/">Website FAQ</a>，实现了使用 "卜算子" 来统计网站访问人数，但是 "卜算子" 仅可以提供访问人数的统计，进一步的信息却无法提供。那么，如果想知道过往访客来自哪些国家和地区，显示网站访问实时动态的信息，应该怎么做呢？</p>
-<p>多平台维护不易，本博客实时更新于 <a href="http://www.waylon.one/website/statistics-visitor-traffic/">个人网站</a>，请移步阅读最新内容。</p>
-<h1>clustermaps 是什么</h1>
-<p><a href="https://clustrmaps.com">clustrmaps.com</a> 是美国的一家数据网站，能够汇总公共记录来分析美国城市的社会人口和商业环境。</p>
-<blockquote>
-<p>Add the ClustrMaps hit tracker to your site or blog and see a real-time map of your visitors from around the world! Proudly show and grow your hidden community of interest.</p>
-</blockquote>
-<p>网址提供了生成访问者地址分布图的代码，可以嵌入到网站或博客中，来显示来自世界各地访问者的实时地图，有助于发展您隐藏的兴趣社区。最重要的是，这个功能是<strong>免费</strong>的，能够满足个人网站的需求，如下图所示。</p>
-<p><img data-src="/downloads/images/blog/visitor_traffic_demo.png" alt=""></p>
-<h1>配置 clustrmaps</h1>
-<ul>
-<li>网站注册后，访问 <a href="https://clustrmaps.com/add">Enter your website address</a> 添加自己的网站地址，选择免费的服务。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/input_url.png" alt=""></p>
-<p><img data-src="/downloads/images/blog/choose_plan.png" alt=""></p>
-<ul>
-<li>选择自己喜欢的插件格式，现在 Hexo 的 Next 两种主题都是支持的，但是自己比较喜欢 Map widget 的主题。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/map_widget.png" alt=""></p>
-<ul>
-<li>点击选择后，拷贝网站出现的脚本 javascript 代码，粘贴到 Next 主题下某个位置。博主测试过如下两个位置，挑选一个配置即可以。推荐位置二，自定义程度高。
-<ul>
-<li>位置一：将代码插入到 themes\next\layout\_partials\header.swig 的最后。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">  {% endif %}</span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- Insert clustrmaps.com --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span> <span class="attr">id</span>=<span class="string">'clustrmaps'</span> <span class="attr">src</span>=<span class="string">'//cdn.clustrmaps.com/map_v2.js?XXX'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">{% include '../_custom/header.swig' %}</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>位置二：将代码插入到 \themes\next\layout\_macro\sidebar.swig 文件的<div class="”sidebar-inner”"> </div>图层。</li>
-</ul>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aside</span> <span class="attr">class</span>=<span class="string">"sidebar"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"sidebar-inner"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- set display_toc = page.toc.enable and display_toc %}</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- Begin Insert clustrmaps.com --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">id</span>=<span class="string">"clustrmaps"</span> <span class="attr">src</span>=<span class="string">"//clustrmaps.com/map_v2.js?d=iBmc9XXXXXX=a"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- End Insert clustrmaps.com --&gt;</span></span><br><span class="line"></span><br><span class="line">    {%- if display_toc %}</span><br><span class="line">      {%- set toc = toc(page.content, { class: "nav", list_number: page.toc.number, max_depth: page.toc.max_depth }) %}</span><br></pre></td></tr></tbody></table></figure>
-<ul>
-<li>重新部署网站，就可以在首页看到实时访客来源图，如我的网站首页所示。另外，点击地图，可以看到更详细的信息，包括访客的地图、浏览设备以及 IP。</li>
-</ul>
-<p><img data-src="/downloads/images/blog/detaile_IP.png" alt=""></p>
-]]></content>
-      <categories>
-        <category>website</category>
-      </categories>
-      <tags>
-        <tag>Website</tag>
       </tags>
   </entry>
   <entry>
@@ -13074,6 +13130,32 @@ If the article helps you, please vote for me. If you have any questions, please 
       </tags>
   </entry>
   <entry>
+    <title>如何反转 vector (有源码)</title>
+    <url>/Programming/vector-reverse/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h2 id="std-reverse"><a href="https://cplusplus.com/reference/algorithm/reverse/">std::reverse</a></h2>
+<ul>
+<li>Reverses the order of the elements in the range [first,last).</li>
+</ul>
+<h3 id="Demo">Demo</h3>
+<figure class="highlight c"><figcaption><span>全部反转_demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method2_erase</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight c"><figcaption><span>部分反转_demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br></pre></td></tr></tbody></table></figure>
+<h1>源码</h1>
+<h2 id="源码下载">源码下载</h2>
+<p><a href="http://www.waylon.one/downloads/code/vector_reverse.cpp">源码下载</a></p>
+<h2 id="编译">编译</h2>
+<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">cd 文件下载目录</span><br><span class="line">g++ vector_reverse.cpp -o test --std=c++14</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>Programming</category>
+      </categories>
+      <tags>
+        <tag>Weekly Blogs</tag>
+        <tag>C Plus Plus</tag>
+        <tag>Programming</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++ vector 清空元素的三种方法 (有源码)</title>
     <url>/Programming/vector-clear/</url>
     <content><![CDATA[<p>[toc]</p>
@@ -13125,32 +13207,6 @@ If the article helps you, please vote for me. If you have any questions, please 
 <ul>
 <li><a href="https://www.cnblogs.com/zhanggaofeng/p/9338681.html">C++ vector 清空元素的三种方法</a></li>
 </ul>
-]]></content>
-      <categories>
-        <category>Programming</category>
-      </categories>
-      <tags>
-        <tag>Weekly Blogs</tag>
-        <tag>C Plus Plus</tag>
-        <tag>Programming</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何反转 vector (有源码)</title>
-    <url>/Programming/vector-reverse/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h2 id="std-reverse"><a href="https://cplusplus.com/reference/algorithm/reverse/">std::reverse</a></h2>
-<ul>
-<li>Reverses the order of the elements in the range [first,last).</li>
-</ul>
-<h3 id="Demo">Demo</h3>
-<figure class="highlight c"><figcaption><span>全部反转_demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">Method2_erase</span><span class="params">()</span> {</span><br><span class="line">  <span class="built_in">vector</span>&lt;<span class="type">int</span>&gt; data = ConstructVector();</span><br></pre></td></tr></tbody></table></figure>
-<figure class="highlight c"><figcaption><span>部分反转_demo++</span><a href="/downloads/code/vector_clear.cpp">view raw</a></figcaption><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 再次打印更新后 vector 容器的大小和容量</span></span><br></pre></td></tr></tbody></table></figure>
-<h1>源码</h1>
-<h2 id="源码下载">源码下载</h2>
-<p><a href="http://www.waylon.one/downloads/code/vector_reverse.cpp">源码下载</a></p>
-<h2 id="编译">编译</h2>
-<figure class="highlight plaintext"><table><tbody><tr><td class="code"><pre><span class="line">cd 文件下载目录</span><br><span class="line">g++ vector_reverse.cpp -o test --std=c++14</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
       <categories>
         <category>Programming</category>
@@ -14040,134 +14096,6 @@ The most significant long-term contributions of this paper will likely not be th
       </tags>
   </entry>
   <entry>
-    <title>Hexo 上 Next 主题配置文章投票功能 / How to add the voting function in next theme</title>
-    <url>/website/website-voting/</url>
-    <content><![CDATA[<p>[toc]</p>
-<h1>背景</h1>
-<p>大多数读者比较害羞，不喜欢留言，这样子就不方便自己从读者角度评价博客文章的质量，希望在网站增加投票的功能，方便读者留下评价和反馈。</p>
-<p>多平台维护不易，最新文章更新于 <a href="http://www.waylon.one/website/website-voting/">个人网站</a>，欢迎访问和留言。</p>
-<p>网站的 NexT 主题，已默认集成 <strong>WidgetPack</strong> 的 Rating widget，在主题文件夹下的 _config.yml 的 rating 字段就可见相关默认配置。</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># Star rating support to each article.</span><br><span class="line"># To get your ID visit https://widgetpack.com</span><br><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br><span class="line"># ---------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
-<p>总体而言，NexT 已经默认集成了 WidgetPack 的 Ratingwidget，要启用 Ratingwidget，只需要在 WidgetPack.com 注册后添加站点，获得 ID 后，修改 NexT 主题配置文件 rating 字段内容即可。目前，WidgetPack 对个人用户提供了部分免费功能，可以满足个人博客网站的需求。</p>
-<h1>什么是 WidgetPack</h1>
-<p><a href="https://widgetpack.com/">Widget Pack</a> makes it easy to add website widgets like comments, reviews, rating to your Blog, Online Shop or Website in minutes.</p>
-<blockquote>
-<p>While using this Site, you may need to feed-in personal information that can be used to contact or identify you (“Personal Information”). Personal Information may include, but is not limited to, some unique characteristics that disclose your personality, such as: name, email, photo, likes and dislikes.<br>
-WidgetPack web-servers automatically track and store Site usage data. This information is liable to include, but is not limited to, your computer’s IP. Along other sites, WidgetPack also uses “cookies” to collect such information. A cookie is an essential data file that is stored on your computer hard drive for record-keeping purposes allowing saving your registration ID and login password for prospective logins to WidgetPack Site; “session ID cookies” enable certain features of the Site providing authentication, identification of a user session, session contents and some other preferences.<br>
-You can tweak your browser by changing its options to stop accepting cookies or to prompt you before accepting a cookie from the websites you visit. If you do not accept cookies, however, you may not be able to use some of the Site’s features or all the functionalities of our services.</p>
-</blockquote>
-<p>简而言之，Widget Pack 会在得到授权的情况下，自动跟踪和存储你在某些网站上留下的个人信息 (邮箱、IP、cookies) 等，方便快捷地为一些博客、购物网站提供评价、留言和投票等小插件功能。</p>
-<p>目前，WidgetPack 对个人用户提供了部分免费功能，一个网址和一个 moderator，可以满足个人博客网站的需求。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_price_plan.jpg" alt=""></p>
-<h1>配置过程</h1>
-<h2 id="获取ID">获取 ID</h2>
-<ul>
-<li>点击 <a href="https://widgetpack.com/star-rating-widget">Widgetpack.com</a> 链接注册，可以获得获取用户 ID。</li>
-<li>在 “Add new site” 中，填入网站地址和名称，会生成 Rating Widget 安装代码，如下所示。</li>
-</ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/add_new_site.jpg" alt=""></p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wpac-rating"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">wpac_init = window.wpac_init || [];</span><br><span class="line">wpac_init.push({widget: 'Rating', id: your_id}); # your_id 为注册生成的ID</span><br><span class="line">(function() {</span><br><span class="line">    if ('WIDGETPACK_LOADED' in window) return;</span><br><span class="line">    WIDGETPACK_LOADED = true;</span><br><span class="line">    var mc = document.createElement('script');</span><br><span class="line">    mc.type = 'text/javascript';</span><br><span class="line">    mc.async = true;</span><br><span class="line">    mc.src = 'https://embed.widgetpack.com/widget.js';</span><br><span class="line">    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);</span><br><span class="line">})();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://widgetpack.com"</span> <span class="attr">class</span>=<span class="string">"wpac-cr"</span>&gt;</span>Star Rating WIDGET PACK<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
-<p>以上安装代码已默认集成到 /hexo/themes/next/layout/_third-party/rating.swig 文件中，所以除了确认下 <strong>ID</strong>，或者使用默认的 <strong><a href="http://theme.rating.id">theme.rating.id</a></strong>, 不需要其他操作。</p>
-<h2 id="设置投票方式">设置投票方式</h2>
-<p>在网站上，在侧边栏可以选择统计 Rating 的方式。</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/set_rating_display.jpg" alt=""></p>
-<p>目前网站有三种方式可选，目标读者是国内的话，建议采用 Device，我是选择 IP Address。</p>
-<ul>
-<li>Social</li>
-<li>IP Address</li>
-<li>Device(Cookie)</li>
-</ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/vota_setting.jpg" alt=""></p>
-<h2 id="Hexo-配置">Hexo 配置</h2>
-<p>NexT 主题配置文件 _config.yml 中 rating 的默认设置如下：</p>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br></pre></td></tr></tbody></table></figure>
-<p>仅需要将设置 enable 改为 true，把 #&lt;app_id&gt; 替换为 <a href="http://widgetpack.com">widgetpack.com</a> 上生成的 ID。</p>
-<h1>网站效果预览</h1>
-<ul>
-<li>
-<p>桌面浏览器效果<br>
-<img data-src="http://www.waylon.one/downloads/images/blog/voting_demo.jpg" alt=""></p>
-</li>
-<li>
-<p>手机浏览器效果<br>
-<img data-src="http://www.waylon.one/downloads/images/blog/rating_demo_phone.png" alt=""></p>
-</li>
-</ul>
-<h1>投票监控</h1>
-<p>登录你的网站后，可以监控投票反馈情况，以及对某些投票进行管理，示意如下:</p>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_monitor.jpg" alt=""></p>
-<h1>Reference</h1>
-<ul>
-<li><a href="https://www.jianshu.com/p/61d9d46935e3">Hexo 上 NexT 主题配置 WidgetPack 的 Rating widget 文章投票功能</a></li>
-</ul>
-<hr>
-<p>如果文章对你有帮助，请为我投票哦！如果有任何疑问，欢迎留言讨论。<br>
-If the article helps you, please vote for me. If you have any questions, please do not hesitate to discuss with me!</p>
-]]></content>
-      <categories>
-        <category>website</category>
-      </categories>
-      <tags>
-        <tag>Website</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>使用 iptables 阻止特定地区和国家的 IP 访问</title>
-    <url>/Linux/iptables/</url>
-    <content><![CDATA[<p>[toc]</p>
-<!--
-网站屏蔽和阻止特定地区和国家的IP访问
--->
-<h1>前言</h1>
-<p>无论是出于什么原因，屏蔽和阻止特定地区和国家的 IP 访问都是我们日常建站中经常要用到的。</p>
-<!--因为自己之前在网站的about页面展露太多消息，被美研同事发现我的踪迹，网站经常被访问，所以决定封掉某IP段，避免被访问-->
-<p>如果网站是 Nginx，则可以直接使用 Nginx-ngx_http_geoip_module 模块，该模块可以精确到国家、省、市等一级的 IP，并且全部由 Nginx 执行识别和阻止访问，所以相对于 PHP 来说比较省资源，但是 Nginx 编译起来比较费事。</p>
-<p>如果网站是搭建在 VPS 或者独立服务器上，那么可以直接使用 Linux 防火墙，利用 iptables 规则来阻止特定国家和省份的 IP 访问。</p>
-<h1>iptables 规则来阻止特定 IP 访问</h1>
-<ol>
-<li>安装 iptables 防火墙 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># CentOS</span><br><span class="line">yum install iptables</span><br></pre></td></tr></tbody></table></figure>
-<ol start="2">
-<li>清除已有 iptables 规则 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">iptables -F</span><br><span class="line">iptables -X</span><br><span class="line">iptables -Z</span><br></pre></td></tr></tbody></table></figure>
-<ol start="3">
-<li>屏蔽指定 IP</li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">#屏蔽单个IP的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.7 -j DROP</span><br><span class="line">#封IP段即从123.45.6.1到123.45.6.254的命令是</span><br><span class="line">iptables -I INPUT -s 123.45.6.0/24 -j DROP</span><br></pre></td></tr></tbody></table></figure>
-<!--66.249.90.xx-->
-<!--66.249.90.184-->
-<ol start="4">
-<li>查看已添加的 iptables 规则 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">iptables -L -n</span><br><span class="line">v：显示详细信息，包括每条规则的匹配包数量和匹配字节数</span><br><span class="line">x：在 v 的基础上，禁止自动单位换算（K、M）</span><br><span class="line">n：只显示IP地址和端口号，不将ip解析为域名</span><br></pre></td></tr></tbody></table></figure>
-<ol start="5">
-<li>iptables 的开机启动及规则保存 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">chkconfig –level 345 iptables on</span><br><span class="line">systemctl enable iptables.service</span><br><span class="line"># 如果配置文件里面设置了开机启动，systemctl enable命令相当于激活开机启动。</span><br><span class="line"># CentOS</span><br><span class="line">service iptables save &lt;--保存规则</span><br></pre></td></tr></tbody></table></figure>
-<ol start="6">
-<li>重启后生效 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">开启：chkconfig iptables on</span><br><span class="line">关闭：chkconfig iptables off</span><br></pre></td></tr></tbody></table></figure>
-<ol start="7">
-<li>即时生效，重启后失效 </li>
-</ol>
-<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">开启：service iptables start</span><br><span class="line">关闭：service iptables stop</span><br></pre></td></tr></tbody></table></figure>
-<!--
-# References
-- [网站屏蔽和阻止特定地区和国家的IP访问设置方法-PHP代码/Nginx/WordPress设置](https://wzfou.com/zuzhi-ip/)
-- [centos服务器 屏蔽ip](https://blog.csdn.net/u013939884/article/details/55803118)
--->]]></content>
-      <categories>
-        <category>Linux</category>
-      </categories>
-      <tags>
-        <tag>Website</tag>
-        <tag>Linux</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>《我想和这个世界不一样》摘录</title>
     <url>/Reading/wo-xiang-he-zhe-ge/</url>
     <content><![CDATA[<p>我想和这个世界不一样（在喜欢的城市醒过来）</p>
@@ -14613,6 +14541,78 @@ file name: xiamen_trip_2020
       </categories>
       <tags>
         <tag>Journey</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hexo 上 Next 主题配置文章投票功能 / How to add the voting function in next theme</title>
+    <url>/website/website-voting/</url>
+    <content><![CDATA[<p>[toc]</p>
+<h1>背景</h1>
+<p>大多数读者比较害羞，不喜欢留言，这样子就不方便自己从读者角度评价博客文章的质量，希望在网站增加投票的功能，方便读者留下评价和反馈。</p>
+<p>多平台维护不易，最新文章更新于 <a href="http://www.waylon.one/website/website-voting/">个人网站</a>，欢迎访问和留言。</p>
+<p>网站的 NexT 主题，已默认集成 <strong>WidgetPack</strong> 的 Rating widget，在主题文件夹下的 _config.yml 的 rating 字段就可见相关默认配置。</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"># Star rating support to each article.</span><br><span class="line"># To get your ID visit https://widgetpack.com</span><br><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br><span class="line"># ---------------------------------------------------------------</span><br></pre></td></tr></tbody></table></figure>
+<p>总体而言，NexT 已经默认集成了 WidgetPack 的 Ratingwidget，要启用 Ratingwidget，只需要在 WidgetPack.com 注册后添加站点，获得 ID 后，修改 NexT 主题配置文件 rating 字段内容即可。目前，WidgetPack 对个人用户提供了部分免费功能，可以满足个人博客网站的需求。</p>
+<h1>什么是 WidgetPack</h1>
+<p><a href="https://widgetpack.com/">Widget Pack</a> makes it easy to add website widgets like comments, reviews, rating to your Blog, Online Shop or Website in minutes.</p>
+<blockquote>
+<p>While using this Site, you may need to feed-in personal information that can be used to contact or identify you (“Personal Information”). Personal Information may include, but is not limited to, some unique characteristics that disclose your personality, such as: name, email, photo, likes and dislikes.<br>
+WidgetPack web-servers automatically track and store Site usage data. This information is liable to include, but is not limited to, your computer’s IP. Along other sites, WidgetPack also uses “cookies” to collect such information. A cookie is an essential data file that is stored on your computer hard drive for record-keeping purposes allowing saving your registration ID and login password for prospective logins to WidgetPack Site; “session ID cookies” enable certain features of the Site providing authentication, identification of a user session, session contents and some other preferences.<br>
+You can tweak your browser by changing its options to stop accepting cookies or to prompt you before accepting a cookie from the websites you visit. If you do not accept cookies, however, you may not be able to use some of the Site’s features or all the functionalities of our services.</p>
+</blockquote>
+<p>简而言之，Widget Pack 会在得到授权的情况下，自动跟踪和存储你在某些网站上留下的个人信息 (邮箱、IP、cookies) 等，方便快捷地为一些博客、购物网站提供评价、留言和投票等小插件功能。</p>
+<p>目前，WidgetPack 对个人用户提供了部分免费功能，一个网址和一个 moderator，可以满足个人博客网站的需求。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_price_plan.jpg" alt=""></p>
+<h1>配置过程</h1>
+<h2 id="获取ID">获取 ID</h2>
+<ul>
+<li>点击 <a href="https://widgetpack.com/star-rating-widget">Widgetpack.com</a> 链接注册，可以获得获取用户 ID。</li>
+<li>在 “Add new site” 中，填入网站地址和名称，会生成 Rating Widget 安装代码，如下所示。</li>
+</ul>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/add_new_site.jpg" alt=""></p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wpac-rating"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line">wpac_init = window.wpac_init || [];</span><br><span class="line">wpac_init.push({widget: 'Rating', id: your_id}); # your_id 为注册生成的ID</span><br><span class="line">(function() {</span><br><span class="line">    if ('WIDGETPACK_LOADED' in window) return;</span><br><span class="line">    WIDGETPACK_LOADED = true;</span><br><span class="line">    var mc = document.createElement('script');</span><br><span class="line">    mc.type = 'text/javascript';</span><br><span class="line">    mc.async = true;</span><br><span class="line">    mc.src = 'https://embed.widgetpack.com/widget.js';</span><br><span class="line">    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);</span><br><span class="line">})();</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://widgetpack.com"</span> <span class="attr">class</span>=<span class="string">"wpac-cr"</span>&gt;</span>Star Rating WIDGET PACK<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<p>以上安装代码已默认集成到 /hexo/themes/next/layout/_third-party/rating.swig 文件中，所以除了确认下 <strong>ID</strong>，或者使用默认的 <strong><a href="http://theme.rating.id">theme.rating.id</a></strong>, 不需要其他操作。</p>
+<h2 id="设置投票方式">设置投票方式</h2>
+<p>在网站上，在侧边栏可以选择统计 Rating 的方式。</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/set_rating_display.jpg" alt=""></p>
+<p>目前网站有三种方式可选，目标读者是国内的话，建议采用 Device，我是选择 IP Address。</p>
+<ul>
+<li>Social</li>
+<li>IP Address</li>
+<li>Device(Cookie)</li>
+</ul>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/vota_setting.jpg" alt=""></p>
+<h2 id="Hexo-配置">Hexo 配置</h2>
+<p>NexT 主题配置文件 _config.yml 中 rating 的默认设置如下：</p>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line">rating:</span><br><span class="line">  enable: false</span><br><span class="line">  id:     #<span class="tag">&lt;<span class="name">app_id</span>&gt;</span></span><br><span class="line">  color:  fc6423</span><br></pre></td></tr></tbody></table></figure>
+<p>仅需要将设置 enable 改为 true，把 #&lt;app_id&gt; 替换为 <a href="http://widgetpack.com">widgetpack.com</a> 上生成的 ID。</p>
+<h1>网站效果预览</h1>
+<ul>
+<li>
+<p>桌面浏览器效果<br>
+<img data-src="http://www.waylon.one/downloads/images/blog/voting_demo.jpg" alt=""></p>
+</li>
+<li>
+<p>手机浏览器效果<br>
+<img data-src="http://www.waylon.one/downloads/images/blog/rating_demo_phone.png" alt=""></p>
+</li>
+</ul>
+<h1>投票监控</h1>
+<p>登录你的网站后，可以监控投票反馈情况，以及对某些投票进行管理，示意如下:</p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/voting_monitor.jpg" alt=""></p>
+<h1>Reference</h1>
+<ul>
+<li><a href="https://www.jianshu.com/p/61d9d46935e3">Hexo 上 NexT 主题配置 WidgetPack 的 Rating widget 文章投票功能</a></li>
+</ul>
+<hr>
+<p>如果文章对你有帮助，请为我投票哦！如果有任何疑问，欢迎留言讨论。<br>
+If the article helps you, please vote for me. If you have any questions, please do not hesitate to discuss with me!</p>
+]]></content>
+      <categories>
+        <category>website</category>
+      </categories>
+      <tags>
+        <tag>Website</tag>
       </tags>
   </entry>
   <entry>
