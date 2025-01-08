@@ -20,19 +20,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"www.waylon.one","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":5,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="临时变量的生命周期 C++ 中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类：  函数的返回值 类型转换时的中间变量  一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁 &#x2F; The temporary will be destroyed after the full expression. The lifeti">
+    <meta name="description" content="临时变量的生命周期 C++ 中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类： - 函数的返回值 - 类型转换时的中间变量 一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁 &#x2F; The temporary will be destroyed after the full expression. The life">
 <meta property="og:type" content="article">
 <meta property="og:title" content="临时变量赋值给常引用安全吗 &#x2F; Is it safe to make a const reference member to a temporary variable?">
 <meta property="og:url" content="http://www.waylon.one/Programming/oom-const-reference/index.html">
 <meta property="og:site_name" content="One&#39;s Way">
-<meta property="og:description" content="临时变量的生命周期 C++ 中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类：  函数的返回值 类型转换时的中间变量  一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁 &#x2F; The temporary will be destroyed after the full expression. The lifeti">
+<meta property="og:description" content="临时变量的生命周期 C++ 中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类： - 函数的返回值 - 类型转换时的中间变量 一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁 &#x2F; The temporary will be destroyed after the full expression. The life">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-22T15:02:48.000Z">
 <meta property="article:modified_time" content="2024-09-23T12:46:38.028Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="Weekly Blogs">
-<meta property="article:tag" content="C Plus Plus">
 <meta property="article:tag" content="Programming">
+<meta property="article:tag" content="C Plus Plus">
 <meta name="twitter:card" content="summary">
 
 
@@ -142,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">临时变量的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">1.0.1.</span> <span class="nav-text">Demo</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.1.</span> <span class="nav-text">源码下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.</span> <span class="nav-text">编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">One more thing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.1.</span> <span class="nav-text">编程实践</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%B4%E6%97%B6%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">1.</span> <span class="nav-text">临时变量的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#demo"><span class="nav-number">1.0.1.</span> <span class="nav-text">Demo</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BA%90%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">源码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.1.</span> <span class="nav-text">源码下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91"><span class="nav-number">2.2.</span> <span class="nav-text">编译</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#one-more-thing"><span class="nav-number">3.</span> <span class="nav-text">One more thing</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.1.</span> <span class="nav-text">编程实践</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">4.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -308,30 +308,35 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1>临时变量的生命周期</h1>
-<p>C++ 中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类：</p>
-<ul>
-<li>函数的返回值</li>
-<li>类型转换时的中间变量</li>
-</ul>
-<p>一般来说，C++ 中的临时变量在表达式结束之后 (full expression) 就被会销毁 / The temporary will be destroyed after the full expression.</p>
-<p>The lifetime of the temporary bound to a const reference extends till the lifetime of const.</p>
-<h3 id="Demo">Demo</h3>
+    <div class="post-body" itemprop="articleBody"><h1 id="临时变量的生命周期">临时变量的生命周期</h1>
+<p>C++
+中的临时变量指的是那些由编译器根据需要在栈上产生的，没有名字的变量。其主要的用途主要有两类：
+- 函数的返回值 - 类型转换时的中间变量</p>
+<p>一般来说，C++ 中的临时变量在表达式结束之后 (full expression)
+就被会销毁 / The temporary will be destroyed after the full
+expression.</p>
+<p>The lifetime of the temporary bound to a const reference extends till
+the lifetime of const.</p>
+<h3 id="demo">Demo</h3>
 <figure class="highlight c"><figcaption><span>Segmentation_fault_demo++</span><a href="/downloads/code/oom_reference.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> {</span></span><br><span class="line">   public:</span><br><span class="line">    A(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp; const_v_in, <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt; v_in)</span><br><span class="line">        : const_set_values_(const_v_in), set_values_(v_in) {}</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">has_const_value</span><span class="params">(<span class="type">int</span> ix)</span> <span class="type">const</span> {</span><br><span class="line">        <span class="keyword">return</span> const_set_values_.find(ix) == const_set_values_.end();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> <span class="title function_">has_value</span><span class="params">(<span class="type">int</span> ix)</span> <span class="type">const</span> {</span><br><span class="line">        <span class="keyword">return</span> set_values_.find(ix) == set_values_.end();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">   private:</span><br><span class="line">    <span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp; const_set_values_;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt; set_values_;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> {</span><br><span class="line">    A <span class="title function_">a</span><span class="params">({<span class="number">0</span>}, {<span class="number">0</span>})</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" whether A instance has value "</span> &lt;&lt; a.has_value(<span class="number">0</span>)</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">" whether A instance has const value "</span> &lt;&lt; a.has_const_value(<span class="number">0</span>)</span><br><span class="line">              &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<h1>源码</h1>
+<h1 id="源码">源码</h1>
 <h2 id="源码下载">源码下载</h2>
 <p><a href="http://www.waylon.one/downloads/code/oom_reference.cpp">源码下载</a></p>
 <h2 id="编译">编译</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 文件下载目录</span><br><span class="line">g++ oom_reference.cpp -o test --std=c++14</span><br></pre></td></tr></tbody></table></figure>
-<p>注意：因为编译器优化等原因 (我的版本是 g++ 7.5)，你在本地验证时不一定会崩溃，但是这即使不崩溃，也是一个 <strong>undefined bahvior</strong> 问题，不安全。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查看 g++ 版本</span><br><span class="line">g++ --version</span><br></pre></td></tr></tbody></table></figure>
-<h1>One more thing</h1>
+<p>注意：因为编译器优化等原因 (我的版本是 g++
+7.5)，你在本地验证时不一定会崩溃，但是这即使不崩溃，也是一个
+<strong>undefined bahvior</strong> 问题，不安全。 </p><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 查看 g++ 版本</span><br><span class="line">g++ --version</span><br></pre></td></tr></tbody></table></figure><p></p>
+<h1 id="one-more-thing">One more thing</h1>
 <h2 id="编程实践">编程实践</h2>
-<p>// When one stores the reference one should also forbid rvalues: A(const std::unordered_set<int>&amp;&amp;)=delete;</int></p>
+<p>// When one stores the reference one should also forbid rvalues:
+A(const std::unordered_set<int>&amp;&amp;)=delete;</int></p>
 <figure class="highlight c"><figcaption><span>禁止移动构造_demo++</span><a href="/downloads/code/oom_reference_rvalue.cpp">view raw</a></figcaption><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">unordered_set</span>&lt;<span class="type">int</span>&gt;&amp;&amp;) = delete;</span><br></pre></td></tr></tbody></table></figure>
-<h1>参考链接</h1>
+<h1 id="参考链接">参考链接</h1>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45385433/is-it-safe-to-make-a-const-reference-member-to-a-temporary-variable">Is it safe to make a const reference member to a temporary variable</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/45385433/is-it-safe-to-make-a-const-reference-member-to-a-temporary-variable">Is
+it safe to make a const reference member to a temporary
+variable</a></li>
 </ul>
 
     </div>
@@ -343,8 +348,8 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Weekly-Blogs/" rel="tag"># Weekly Blogs</a>
-              <a href="/tags/C-Plus-Plus/" rel="tag"># C Plus Plus</a>
               <a href="/tags/Programming/" rel="tag"># Programming</a>
+              <a href="/tags/C-Plus-Plus/" rel="tag"># C Plus Plus</a>
           </div>
 
         
