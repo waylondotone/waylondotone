@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://note.youdao.com/src/WEBRESOURCE46298a0ddeb2a342957c6f2da3a270c0">
 <meta property="og:image" content="https://note.youdao.com/src/WEBRESOURCEc20ab959f47d05d994f3ad7065fd17aa">
 <meta property="article:published_time" content="2021-03-28T23:18:57.000Z">
-<meta property="article:modified_time" content="2023-05-19T12:12:32.157Z">
+<meta property="article:modified_time" content="2025-01-13T02:48:36.048Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="Weekly Blogs">
 <meta property="article:tag" content="Robotics">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">What is it?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">卡尔曼滤波的优点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">What can we do with a Kalman filter?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">How a Kalman filter sees your problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Describing the problem with matrices</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">External influence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">External uncertainty</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">Refining the estimate with measurements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">Combining Gaussians</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">Wrapping up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">10.</span> <span class="nav-text">References</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#what-is-it"><span class="nav-number">1.</span> <span class="nav-text">What is it?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2%E7%9A%84%E4%BC%98%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text">卡尔曼滤波的优点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#what-can-we-do-with-a-kalman-filter"><span class="nav-number">2.</span> <span class="nav-text">What can we do with a Kalman filter?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#how-a-kalman-filter-sees-your-problem"><span class="nav-number">3.</span> <span class="nav-text">How a Kalman filter sees your problem</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#describing-the-problem-with-matrices"><span class="nav-number">4.</span> <span class="nav-text">Describing the problem with matrices</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#external-influence"><span class="nav-number">5.</span> <span class="nav-text">External influence</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#external-uncertainty"><span class="nav-number">6.</span> <span class="nav-text">External uncertainty</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#refining-the-estimate-with-measurements"><span class="nav-number">7.</span> <span class="nav-text">Refining the estimate with measurements</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#combining-gaussians"><span class="nav-number">8.</span> <span class="nav-text">Combining Gaussians</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wrapping-up"><span class="nav-number">9.</span> <span class="nav-text">Wrapping up</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#references"><span class="nav-number">10.</span> <span class="nav-text">References</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -236,7 +236,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+      <time title="Modified: 2025-01-13 10:48:36" itemprop="dateModified" datetime="2025-01-13T10:48:36+08:00">2025-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -287,35 +287,41 @@
 <blockquote>
 <p>It is such a general and powerful tool for combining information in the presence of uncertainty.</p>
 </blockquote>
-<h1>What is it?</h1>
+<h1 id="what-is-it">What is it?</h1>
 <p>You can use a Kalman filter in any place where you have <strong>uncertain information</strong> about some dynamic system, and you can make an <strong>educated guess</strong> about what the system is going to do next.</p>
 <h2 id="卡尔曼滤波的优点">卡尔曼滤波的优点</h2>
 <p>卡尔曼滤波适用于连续变化 (continuously changing) 的系统，具有占用内存空间小（除了前一个状态量外，无需保留其他历史数据），处理速度快的特点，适合应用于实时问题和嵌入式系统。</p>
 <blockquote>
 <p>Kalman filters are ideal for systems which are continuously changing. They have the advantage that they are light on memory (they don’t need to keep any history other than the previous state), and they are very fast, making them well suited for real time problems and embedded systems.</p>
 </blockquote>
-<h1>What can we do with a Kalman filter?</h1>
+<h1 id="what-can-we-do-with-a-kalman-filter">What can we do with a Kalman filter?</h1>
 <p>卡尔曼的一个应用举例：测量坦克的油量，汽车引擎的温度，用户在触摸板上的手指位置，甚至所有你可以跟踪 (track) 的物体。概括的讲，只要用 “跟踪” 这个词来形容的算法，即 tracking、Tracker 等这种词描述的算法，基本都要用 kalman 滤波处理下数据。</p>
 <blockquote>
 <p>It could be data about the amount of fluid in a tank, the temperature of a car engine, the position of a user’s finger on a touchpad, or any number of things you need to keep track of.</p>
 </blockquote>
-<h1>How a Kalman filter sees your problem</h1>
+<h1 id="how-a-kalman-filter-sees-your-problem">How a Kalman filter sees your problem</h1>
 <p>The Kalman filter assumes that both variables are random and Gaussian distributed. Each variable has a mean value 𝜇, which is the center of the random distribution (and its most likely state), and a variance 𝜎2, which is the uncertainty.</p>
-<p><img data-src="https://note.youdao.com/src/WEBRESOURCE46298a0ddeb2a342957c6f2da3a270c0" alt="截屏2021-03-23 下午8.36.39.png"></p>
+<figure>
+<img data-src="https://note.youdao.com/src/WEBRESOURCE46298a0ddeb2a342957c6f2da3a270c0" alt="截屏2021-03-23 下午8.36.39.png"><figcaption aria-hidden="true">截屏 2021-03-23 下午 8.36.39.png</figcaption>
+</figure>
 <p>从参数之间的关联发掘更多信息：比如机器人的速度和位置，如果速度快，那么位置可能就比较远。</p>
 <p>This kind of relationship is really important to keep track of, because it gives us more information: <strong>One measurement tells us something about what the others could be</strong>. And that’s the goal of the Kalman filter, we want to squeeze as much information from our uncertain measurements as we possibly can!</p>
 <p>参数之间的相关性，可以用协方差矩阵 (covariance matrix) 来表示，即矩阵中的每个元素 ∑ij 表示第 i 个和第 j 个状态变量之间的相关度。注意，协方差矩阵是一个对称矩阵，这意味着可以任意交换 i 和 j。</p>
 <blockquote>
 <p>This correlation is captured by something called a covariance matrix.</p>
 </blockquote>
-<h1>Describing the problem with matrices</h1>
+<h1 id="describing-the-problem-with-matrices">Describing the problem with matrices</h1>
 <p>We need some way to look at the current state (at time k-1) and predict the next state at time k. We can represent this prediction step with a <strong>prediction matrix</strong>, Fk.</p>
 <p>请注意，预测矩阵要求严格反映运动的特征，要求预测准确，不能模糊。</p>
 <p>For <strong>prediction matrix</strong>, it takes every point in our original estimate and moves it to a new predicted location, which is <strong>where the system would move if that original estimate was the right one</strong>.</p>
-<p><img data-src="" alt="图片"></p>
+<figure>
+<img data-src="" alt="图片"><figcaption aria-hidden="true">图片</figcaption>
+</figure>
 <p>不太理解这个公示是如何推导出来的，数学的理论知识不够踏实。</p>
-<p><img data-src="https://note.youdao.com/src/WEBRESOURCEc20ab959f47d05d994f3ad7065fd17aa" alt="screen shot 2021-03-24 at 20.14.01.png"></p>
-<h1>External influence</h1>
+<figure>
+<img data-src="https://note.youdao.com/src/WEBRESOURCEc20ab959f47d05d994f3ad7065fd17aa" alt="screen shot 2021-03-24 at 20.14.01.png"><figcaption aria-hidden="true">screen shot 2021-03-24 at 20.14.01.png</figcaption>
+</figure>
+<h1 id="external-influence">External influence</h1>
 <p>外部系统的影响</p>
 <blockquote>
 <p>There might be some changes that aren’t related to the state itself — the outside world could be affecting the system.</p>
@@ -324,19 +330,16 @@
 <li>control matrix</li>
 <li>control vector</li>
 </ul>
-<h1>External uncertainty</h1>
+<h1 id="external-uncertainty">External uncertainty</h1>
 <p>Everything is fine if the state evolves based on its own properties. Everything is still fine if the state evolves based on external forces, so long as we know what those external forces are.</p>
 <p>如何应对外界的不确定性，比如四旋翼控制中的风影响。</p>
 <blockquote>
-<p>We can model the uncertainty associated with the “world” (i.e. things we aren’t keeping track of) by adding some new uncertainty after every prediction step</p>
+<p>We can model the uncertainty associated with the “world” (i.e. things we aren’t keeping track of) by adding some new uncertainty after every prediction step * Every state in our original estimate could have moved to a range of states.</p>
 </blockquote>
-<ul>
-<li>Every state in our original estimate could have moved to a range of states.</li>
-</ul>
 <p>图片讲解</p>
 <p>In other words, the new best estimate is a prediction made from previous best estimate, plus a correction for known external influences.</p>
 <p>And the new uncertainty is predicted from the old uncertainty, with some additional uncertainty from the environment.</p>
-<h1>Refining the estimate with measurements</h1>
+<h1 id="refining-the-estimate-with-measurements">Refining the estimate with measurements</h1>
 <p>We might have several sensors which give us information about the state of our system.</p>
 <p>Each sensor tells us something indirect about the state— in other words, the sensors operate on a state and produce a set of readings.</p>
 <p>The units and scale of the reading might not be the same as the units and scale of the state we’re keeping track of. You might be able to guess where this is going: We’ll model the sensors with a matrix.</p>
@@ -348,20 +351,21 @@
 <p>We must try to reconcile our guess about the readings we’d see based on the predicted state (pink) with a different guess based on our sensor readings (green) that we actually observed.</p>
 <p>If we have two probabilities and we want to know the chance that both are true, we just multiply them together.</p>
 <p>The mean of this distribution is the configuration for which <strong>both estimates are most likely</strong>, and is therefore the <strong>best guess</strong> of the true configuration given all the information we have.</p>
-<h1>Combining Gaussians</h1>
-<p><img data-src="" alt="Kalman Filter Information Flow"></p>
-<h1>Wrapping up</h1>
+<h1 id="combining-gaussians">Combining Gaussians</h1>
+<figure>
+<img data-src="" alt="Kalman Filter Information Flow"><figcaption aria-hidden="true">Kalman Filter Information Flow</figcaption>
+</figure>
+<h1 id="wrapping-up">Wrapping up</h1>
 <p>卡尔曼滤波用于线性系统，扩展卡尔曼滤波适用于非线性系统。</p>
 <blockquote>
 <p>This will allow you to model any <strong>linear system</strong> accurately. For nonlinear systems, we use the <strong>extended Kalman filter</strong>, which works by simply linearizing the predictions and measurements about their mean.</p>
 </blockquote>
-<h1>References</h1>
+<h1 id="references">References</h1>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/">How a Kalman filter works, in pictures</a>
 <ul>
 <li> 使用 chrome 打开有些公式显示是错误的，可以使用 safari 打开，公示显示正常。</li>
-</ul>
-</li>
+</ul></li>
 <li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/7XJvxPRCFhdUP15mo1b89A">一文详解卡尔曼滤波器的原理与应用</a></li>
 </ul>
 

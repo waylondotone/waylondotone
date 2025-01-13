@@ -29,7 +29,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://www.waylon.one/downloads/images/blog/Hopping_NASS_JPL_CAD.png">
 <meta property="article:published_time" content="2020-10-28T00:32:14.000Z">
-<meta property="article:modified_time" content="2023-05-19T12:12:32.149Z">
+<meta property="article:modified_time" content="2025-01-13T02:48:36.047Z">
 <meta property="article:author" content="Nobody">
 <meta property="article:tag" content="Weekly Blogs">
 <meta property="article:tag" content="paper">
@@ -144,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">SYSTEM DESCRIPTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#The-Hopping-Mechanism"><span class="nav-number">2.1.</span> <span class="nav-text">The Hopping Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Computer-and-Sensor-Electronics"><span class="nav-number">2.2.</span> <span class="nav-text">Computer and Sensor Electronics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">STATIC AND DYNAMIC MODELS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">LARGE AND FINE MOTION (微运动)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">INITIAL TESTS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">CONCLUSIONS</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction"><span class="nav-number">1.</span> <span class="nav-text">INTRODUCTION</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#system-description"><span class="nav-number">2.</span> <span class="nav-text">SYSTEM DESCRIPTION</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#the-hopping-mechanism"><span class="nav-number">2.1.</span> <span class="nav-text">The Hopping Mechanism</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#computer-and-sensor-electronics"><span class="nav-number">2.2.</span> <span class="nav-text">Computer and Sensor Electronics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#static-and-dynamic-models"><span class="nav-number">3.</span> <span class="nav-text">STATIC AND DYNAMIC MODELS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#large-and-fine-motion-%E5%BE%AE%E8%BF%90%E5%8A%A8"><span class="nav-number">4.</span> <span class="nav-text">LARGE AND FINE MOTION (微运动)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#initial-tests"><span class="nav-number">5.</span> <span class="nav-text">INITIAL TESTS</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#conclusions"><span class="nav-number">6.</span> <span class="nav-text">CONCLUSIONS</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -274,7 +274,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-05-19 20:12:32" itemprop="dateModified" datetime="2023-05-19T20:12:32+08:00">2023-05-19</time>
+      <time title="Modified: 2025-01-13 10:48:36" itemprop="dateModified" datetime="2025-01-13T10:48:36+08:00">2025-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -324,8 +324,10 @@
 <p>The goal of this project is to explore a different mobility paradigm which may present advantages over conventional wheel and leg locomotion.</p>
 </blockquote>
 <!-- 本文多次讲到系统的设计，比如机械设计的考虑点等，考虑的方向值得参考。-->
-<h1>INTRODUCTION</h1>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/Hopping_NASS_JPL_CAD.png" alt="CAD rendering of the hopping robot"></p>
+<h1 id="introduction">INTRODUCTION</h1>
+<figure>
+<img data-src="http://www.waylon.one/downloads/images/blog/Hopping_NASS_JPL_CAD.png" alt="CAD rendering of the hopping robot"><figcaption aria-hidden="true">CAD rendering of the hopping robot</figcaption>
+</figure>
 <p>除了轮式和足式机器人，爬行、旋转和跳跃也是可能的前进方式。</p>
 <blockquote>
 <p>Laboratory experiments have demonstrated the feasibility of <strong>slithering, rolling and hopping</strong> as alternate propulsion methods, thus paving the way to a more comprehensive approach to mobility than is currently considered.</p>
@@ -338,7 +340,7 @@
 <blockquote>
 <p>The common characteristic of these two hopping systems is motion discontinuity, since a pause for reorientation and recharge of the thrust mechanism is inserted between jumps.</p>
 </blockquote>
-<h1>SYSTEM DESCRIPTION</h1>
+<h1 id="system-description">SYSTEM DESCRIPTION</h1>
 <p>系统设计目标：最小化驱动器、大小和重量。</p>
 <blockquote>
 <p>The design is driven by the desire of minimizing the number of actuators, and the overall size and weight, while achieving useful scientific capabilities.</p>
@@ -347,19 +349,19 @@
 <blockquote>
 <p>A possible drawback of this design is limited mobility on soft terrain, since the ground will conform to the shape of the robot and prevent it from self-righting.</p>
 </blockquote>
-<h2 id="The-Hopping-Mechanism">The Hopping Mechanism</h2>
+<h2 id="the-hopping-mechanism">The Hopping Mechanism</h2>
 <p>蛋型 + 自纠正能力</p>
 <blockquote>
 <p>The chosen mechanism is a robust egg-shaped body with self-righting capability.</p>
 </blockquote>
-<h2 id="Computer-and-Sensor-Electronics">Computer and Sensor Electronics</h2>
+<h2 id="computer-and-sensor-electronics">Computer and Sensor Electronics</h2>
 <p>具体的芯片设计和能耗管理，比如掉电功能、通信协议等等。</p>
-<h1>STATIC AND DYNAMIC MODELS</h1>
+<h1 id="static-and-dynamic-models">STATIC AND DYNAMIC MODELS</h1>
 <p>再一次验证了那句话，好的模型可以为系统的最优设计提供参考。</p>
 <blockquote>
 <p>The critical design constraint required to achieve maximum hopping distance.</p>
 </blockquote>
-<h1>LARGE AND FINE MOTION (微运动)</h1>
+<h1 id="large-and-fine-motion-微运动">LARGE AND FINE MOTION (微运动)</h1>
 <p>地表状况会对轨迹的计算造成影响。Soil mechanics 土壤力学</p>
 <blockquote>
 <p>Furthermore, the uncertainty of the terrain condition and of the lift-off angle will prevent the advanced calculation of the trajectory parameters.</p>
@@ -370,9 +372,9 @@
 <p>To cover short distances and to approach the desired target, we are planning to develop and test two new methods for fine motion control of the hopping robot.</p>
 </blockquote>
 <p>这应该属于路径规划的一个考虑点吧，毕竟在月球上一次跳跃的距离很长呢。</p>
-<h1>INITIAL TESTS</h1>
+<h1 id="initial-tests">INITIAL TESTS</h1>
 <p>以数学为基准去驱动设计和实现。</p>
-<h1>CONCLUSIONS</h1>
+<h1 id="conclusions">CONCLUSIONS</h1>
 <p>新奇的机械设计：蛋型 + 单驱动</p>
 <blockquote>
 <p>The robot consists of an egg-shaped shell enclosing a thrust mechanism, power storage devices and control and sensing electronics.</p>
