@@ -267,150 +267,184 @@
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <!--Lift-off dynamics in a simple jumping robot-->
-<p>本文研究了一个垂直跳跃机器人 (a 1D mass-spring system with an actuated mass) 的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力 (马达) 的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率 (resonant frequency) $f_{0}$。其中，类似于蹲下来起跳 (squat maneuver) 的行为，最优跳跃的频率高于 $f_{0}$；类似于反向运动 (counter-movement)，最优跳跃的频率低于 $f_{0}$。</p>
+<p>本文研究了一个垂直跳跃机器人 (a 1D mass-spring system with an
+actuated mass)
+的动力特性，该机器人主要是由驱动马达、质心弹簧组成。文章通过改变驱动力 (马达) 的频率、幅值来寻找跳跃的最优表现。通过分析离地跳跃模型，发现最有跳跃不是发生在机器人的共振频率
+(resonant frequency) <span class="math inline">\(f_{0}\)</span>。其中，类似于蹲下来起跳 (squat
+maneuver) 的行为，最优跳跃的频率高于 <span class="math inline">\(f_{0}\)</span>；类似于反向运动 (counter-movement)，最优跳跃的频率低于<span class="math inline"> \(f_{0}\)</span>。</p>
 <blockquote>
-<p>Systematic variation of forcing parameters reveals complex dynamics which are sensitive to amplitude, phase and frequency.</p>
+<p>Systematic variation of forcing parameters reveals complex dynamics
+which are sensitive to amplitude, phase and frequency.</p>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1208.6289">文献地址</a></p>
 <p>多平台维护不易，内容实时更新于 <a href="http://www.waylon.one/paper/lift-off-simple-robot/">个人网站</a>，请移步阅读最新内容。</p>
 <!--
 共振（resonance）是物理学上的一个运用频率非常高的专业术语，是指一物理系统在特定频率下，比其他频率以更大的振幅做振动的情形；这些特定频率称之为共振频率。在共振频率下，很小的周期振动便可产生很大的振动，因为系统储存了动能。
 -->
-<h1>Introduction</h1>
+<h1 id="introduction">Introduction</h1>
 <ul>
 <li>本文分析简单运动模型的意义：为复杂设备的简单控制提供指导，揭露生物运动的原理。</li>
 </ul>
 <blockquote>
-<p>Simple models have the ability to be fully analyzed and can thus provide guidance for simplifying control of more complex devices, and even reveal principles of biological locomotion.</p>
+<p>Simple models have the ability to be fully analyzed and can thus
+provide guidance for simplifying control of more complex devices, and
+even reveal principles of biological locomotion.</p>
 </blockquote>
 <ul>
-<li>研究背景：在越过复杂地形时，生物启发的跳跃机器人是轮式机器人的一个替代。目前，跳跃的最优策略往往是基于经验来调试，瞬间行为 (如离地跳跃) 的动态系统分析 (dynamics of transient behaviors) 是相对少的。</li>
+<li>研究背景：在越过复杂地形时，生物启发的跳跃机器人是轮式机器人的一个替代。目前，跳跃的最优策略往往是基于经验来调试，瞬间行为 (如离地跳跃) 的动态系统分析 (dynamics
+of transient behaviors) 是相对少的。</li>
 </ul>
 <blockquote>
-<p>In robotics, biologically inspired legged jumping robots have been constructed as an alternative to wheeled robots to better traverse rough terrain.</p>
+<p>In robotics, biologically inspired legged jumping robots have been
+constructed as an alternative to wheeled robots to better traverse rough
+terrain.</p>
 </blockquote>
 <blockquote>
-<p>The initial movement strategies for optimal jumping are typically chosen by empirical tuning for steady state hopping or squat jumps. Systematic studies of the dynamics of transient behaviors, critical to issues of lift-off, are relatively scarce.</p>
+<p>The initial movement strategies for optimal jumping are typically
+chosen by empirical tuning for steady state hopping or squat jumps.
+Systematic studies of the dynamics of transient behaviors, critical to
+issues of lift-off, are relatively scarce.</p>
 </blockquote>
-<h1>Experiment and model</h1>
+<h1 id="experiment-and-model">Experiment and model</h1>
 <ul>
 <li>硬件设计：线性马达 + 弹簧 + 推力棒 + 空气轴承 (摩擦小)</li>
 </ul>
 <blockquote>
-<p>The robot consisted of a linear motor actuator with a series spring rigidly attached to the bottom end of the actuator’s lightweight thrust rod. The actuator was mounted to an air bearing which allowed for 1D, and nearly frictionless, motion.</p>
+<p>The robot consisted of a linear motor actuator with a series spring
+rigidly attached to the bottom end of the actuator’s lightweight thrust
+rod. The actuator was mounted to an air bearing which allowed for 1D,
+and nearly frictionless, motion.</p>
 </blockquote>
-<p><img data-src="/downloads/images/blog/lift_off_robot_schematic_diagram.jpg" alt=""></p>
+<p><img data-src="/downloads/images/blog/lift_off_robot_schematic_diagram.jpg"></p>
 <ul>
 <li>马达 (actuator) 相对轴承 (bearing) 的力量有限，所以通过倾斜来减少重力，但我不太理解这番话蕴含的物理意思，无法想象轴承和马达的位置关系是什么。</li>
 </ul>
 <blockquote>
-<p>Due to power limitations in the actuator, the bearing was inclined at 15 degree relative to the horizontal, reducing gravitational acceleration to 0.276g.</p>
+<p>Due to power limitations in the actuator, the bearing was inclined at
+15 degree relative to the horizontal, reducing gravitational
+acceleration to 0.276g.</p>
 </blockquote>
 <ul>
 <li>马达相对于驱动棒 (thrust rod) 底部的位置关系表达式，如下所示。</li>
 </ul>
-<p><img data-src="http://www.waylon.one/downloads/images/blog/lift_off_position.jpg" alt=""></p>
+<p><img data-src="http://www.waylon.one/downloads/images/blog/lift_off_position.jpg"></p>
 <ul>
-<li>设计巧妙处，利用电路 (open circuit) 做传感器，统计跳跃时间和高度，简单且精度高。</li>
+<li>设计巧妙处，利用电路 (open
+circuit) 做传感器，统计跳跃时间和高度，简单且精度高。</li>
 </ul>
 <blockquote>
-<p>To detect lift-off, a continuity sensor attached to the bottom of the metal spring measured an open circuit when the spring left the ground.</p>
+<p>To detect lift-off, a continuity sensor attached to the bottom of the
+metal spring measured an open circuit when the spring left the
+ground.</p>
 </blockquote>
 <p>结合理论和实验，作者提出一个机器人的动态模型，原理及推导过程，如下所示。</p>
-<p><img data-src="/downloads/images/blog/lift_off_dynamic_model.jpg" alt="公式推导"></p>
+<figure>
+<img data-src="/downloads/images/blog/lift_off_dynamic_model.jpg" alt="公式推导">
+<figcaption aria-hidden="true">公式推导</figcaption>
+</figure>
 <p>以及，和地面碰撞后的恢复系数。</p>
 <blockquote>
-<p>A constant coefficient of restitution of 0.8 (measured from experiment) modeled the collision of the spring with the ground.</p>
+<p>A constant coefficient of restitution of 0.8 (measured from
+experiment) modeled the collision of the spring with the ground.</p>
 </blockquote>
 <!--MC(my comment): 公式基于力学中的基本概念之一，使物体获得加速度或形变的外因，在动力学中它等于物体的质量与加速度的乘积。=> F = ma-->
-<h1>Lift off and jump height</h1>
+<h1 id="lift-off-and-jump-height">Lift off and jump height</h1>
 <ul>
 <li>只研究马达运行一次的跳跃表现。</li>
 </ul>
 <blockquote>
-<p>Since we were interested in rapid jumps from rest, actuator forcing was then restricted to only one cycle (N = 1). We systematically examined jumping height for<br>
-N = 1.</p>
+<p>Since we were interested in rapid jumps from rest, actuator forcing
+was then restricted to only one cycle (N = 1). We systematically
+examined jumping height for N = 1.</p>
 </blockquote>
 <h2 id="两种跳跃模式">两种跳跃模式</h2>
-<p>本节主要研究频率 (frequency) $f$ 和初始相位 (initial phase offset) $\phi$ 对跳跃高度的影响。从跳跃高度图发现，局部两个最大值，对应两种跳跃行为模式 (two distinct modes of jumping)。</p>
+<p>本节主要研究频率 (frequency) <span class="math inline">\(f\)</span>
+和初始相位 (initial phase offset) <span class="math inline">\(\phi\)</span>
+对跳跃高度的影响。从跳跃高度图发现，局部两个最大值，对应两种跳跃行为模式 (two
+distinct modes of jumping)。</p>
 <ul>
 <li>单次跳 (single jump)</li>
 </ul>
-<p>In the single jump mode, the robot compressed the spring and was propelled into the air.</p>
+<p>In the single jump mode, the robot compressed the spring and was
+propelled into the air.</p>
 <ul>
 <li>突突跳 (stutter jump)</li>
 </ul>
-<p>In the stutter jump mode, the robot performed a small initial jump followed by a larger second jump.</p>
+<p>In the stutter jump mode, the robot performed a small initial jump
+followed by a larger second jump.</p>
 <!--
 马达先下压，再大反弹。
 -->
-<p><img data-src="/downloads/images/blog/lift_off_jumping_modes.jpg" alt="两种跳跃模式示意图"></p>
-<p>重要结论：For large $\phi$ single jumps predominate while stutter jumps occurred at lower $f$ and $\phi$.</p>
-<h2 id="Single-jump-vs-Stutter-jump">Single jump vs Stutter jump</h2>
+<figure>
+<img data-src="/downloads/images/blog/lift_off_jumping_modes.jpg" alt="两种跳跃模式示意图">
+<figcaption aria-hidden="true">两种跳跃模式示意图</figcaption>
+</figure>
+<p>重要结论：For large <span class="math inline">\(\phi\)</span> single
+jumps predominate while stutter jumps occurred at lower <span class="math inline">\(f\)</span> and <span class="math inline">\(\phi\)</span>.</p>
+<h2 id="single-jump-vs-stutter-jump">Single jump vs Stutter jump</h2>
 <ul>
-<li>起跳时间：<strong>The time to lift-off was smaller for single jumps than stutter jumps</strong>.</li>
+<li>起跳时间：<strong>The time to lift-off was smaller for single jumps
+than stutter jumps</strong>.</li>
 </ul>
-<h1>Theory of transient mixing</h1>
+<h1 id="theory-of-transient-mixing">Theory of transient mixing</h1>
 <ul>
-<li>
-<p>看似简单的等式一，因为参数 $\alpha$ 的线性，更像是一个分段线性动态系统 (piecewise linear dynamical systems)，包含一系列复杂的行为。</p>
-</li>
-<li>
-<p>基于等式一，理论分析为什么最佳跳跃不是发生在谐振频率。</p>
-</li>
+<li><p>看似简单的等式一，因为参数 <span class="math inline">\(\alpha\)</span> 的线性，更像是一个分段线性动态系统
+(piecewise linear dynamical systems)，包含一系列复杂的行为。</p></li>
+<li><p>基于等式一，理论分析为什么最佳跳跃不是发生在谐振频率。</p></li>
 </ul>
 <blockquote>
-<p>We are particularly interested in why optimal jumps occur only off resonance.</p>
+<p>We are particularly interested in why optimal jumps occur only off
+resonance.</p>
 </blockquote>
-<h2 id="Single-jump">Single jump</h2>
+<h2 id="single-jump">Single jump</h2>
 <p>基于对等式一的变形，从模型中发现理论依据。</p>
-<p><img data-src="/downloads/images/blog/lift_off_single_jump_analyse.jpg" alt="理论分析"></p>
+<figure>
+<img data-src="/downloads/images/blog/lift_off_single_jump_analyse.jpg" alt="理论分析">
+<figcaption aria-hidden="true">理论分析</figcaption>
+</figure>
 <blockquote>
-<p>Moving off resonance, the prefactor favors higher f over lower, so the optimum f lies somewhat above $f_{0}$ (resonance). This argument holds regardless of A.</p>
+<p>Moving off resonance, the prefactor favors higher f over lower, so
+the optimum f lies somewhat above <span class="math inline">\(f_{0}\)</span> (resonance). This argument holds
+regardless of A.</p>
 </blockquote>
-<h2 id="Stutter-jump">Stutter jump</h2>
-<p>基于物理公式瞬时动能 (instantaneous power) P = 外界力 F (external force) 乘以 质心速度 V (the center-of-mass robot velocity)。</p>
-<h2 id="Single-jump-vs-Stutter-jump-2">Single jump vs Stutter jump</h2>
+<h2 id="stutter-jump">Stutter jump</h2>
+<p>基于物理公式瞬时动能 (instantaneous power) P = 外界力 F (external
+force) 乘以 质心速度 V (the center-of-mass robot velocity)。</p>
+<h2 id="single-jump-vs-stutter-jump-1">Single jump vs Stutter jump</h2>
 <ul>
-<li>最佳突突跳 (stutter jump) 的频率带宽 (narrow frequency bandwidth) 比较窄。
-<blockquote>
-<p>This sensitivity to proper timing explains the narrow frequency bandwidth required to achieve optimal jump heights using the stutter jump mode.</p>
-</blockquote>
-</li>
-<li>最佳突突跳的频率强依赖幅值，单次跳则没有明显依赖。
-<blockquote>
-<p>A further consequence is a strong dependence of optimal f with respect to A.</p>
-</blockquote>
-</li>
-<li>和单次跳跃相比，突突跳达到相同高度的消耗能量要少一个数量级。
-<blockquote>
-<p>Thus the stutter jump is energetically advantageous since it has a lower optimal f than the single jump. In fact, the stutter jump uses nearly <strong>an order of magnitude less</strong> power to achieve comparable jump height to the single jump.</p>
-</blockquote>
-</li>
+<li>最佳突突跳 (stutter jump) 的频率带宽 (narrow frequency
+bandwidth) 比较窄。 &gt; This sensitivity to proper timing explains the
+narrow frequency bandwidth required to achieve optimal jump heights
+using the stutter jump mode.</li>
+<li> 最佳突突跳的频率强依赖幅值，单次跳则没有明显依赖。 &gt; A further
+consequence is a strong dependence of optimal f with respect to A.</li>
+<li> 和单次跳跃相比，突突跳达到相同高度的消耗能量要少一个数量级。 &gt;
+Thus the stutter jump is energetically advantageous since it has a lower
+optimal f than the single jump. In fact, the stutter jump uses nearly
+<strong>an order of magnitude less</strong> power to achieve comparable
+jump height to the single jump.</li>
 </ul>
-<h1>Conclusion</h1>
-<h2 id="Works-have-done">Works have done</h2>
+<h1 id="conclusion">Conclusion</h1>
+<h2 id="works-have-done">Works have done</h2>
 <ul>
-<li>发现突突跳，使用的能量少，但是跳跃高度高，性价比高。
-<blockquote>
-<p>The system becomes hybrid for certain parameters as a stutter jump emerges. This mode achieves comparable jump height but uses less power.</p>
-</blockquote>
-</li>
-<li>研究成果和已有结论相符
-<blockquote>
-<p>Biologically, our model is in accord with a previous model of bipedal jumping which predicted that counter-movement achieves greater jump height than the squat jump. A quick single jump that resembles a squat jump is beneficial when a fast escape is essential, while a slower stutter jump similar to a counter-movement can achieve comparable jump height.</p>
-</blockquote>
-</li>
+<li>发现突突跳，使用的能量少，但是跳跃高度高，性价比高。 &gt; The system
+becomes hybrid for certain parameters as a stutter jump emerges. This
+mode achieves comparable jump height but uses less power.</li>
+<li> 研究成果和已有结论相符 &gt; Biologically, our model is in accord
+with a previous model of bipedal jumping which predicted that
+counter-movement achieves greater jump height than the squat jump. A
+quick single jump that resembles a squat jump is beneficial when a fast
+escape is essential, while a slower stutter jump similar to a
+counter-movement can achieve comparable jump height.</li>
 </ul>
-<h2 id="Works-to-do">Works to do</h2>
+<h2 id="works-to-do">Works to do</h2>
 <ul>
-<li>研究其他影响因素，如系统固有性质和环境的影响
-<blockquote>
-<p>how other factors, intrinsic and environmental, affect optimal performance</p>
-</blockquote>
-</li>
-<li>A non-sinusoidal actuation could improve jump height, take off time, or efficiency.</li>
-<li>Animals jump off compliant surfaces (like tree branches) and from deformable substrates (like sand).</li>
+<li>研究其他影响因素，如系统固有性质和环境的影响 &gt; how other factors,
+intrinsic and environmental, affect optimal performance</li>
+<li>A non-sinusoidal actuation could improve jump height, take off time,
+or efficiency.</li>
+<li>Animals jump off compliant surfaces (like tree branches) and from
+deformable substrates (like sand).</li>
 <li> 如何结合 Single jump 和 Stutter jump，取得更优的表现。</li>
 </ul>
 <!--Pri- mates like Galagos (bushbabies) have been documented to perform this double jump behavior to reach a higher platform [26].-->
@@ -419,6 +453,7 @@ N = 1.</p>
 - [Leg design and jumping technique for humans, other vertebrates and insects](https://royalsocietypublishing.org/doi/10.1098/rstb.1995.0024)
 - [The jump as a fast mode of locomotion in arboreal and terrestrial biotopes](https://www.jstor.org/stable/25757324?seq=1)
 -->
+
       
     </div>
 
@@ -519,84 +554,124 @@ N = 1.</p>
     <div class="post-body" itemprop="articleBody">
           <p>[toc]</p>
 <!--[公式编辑器](https://www.codecogs.com/latex/eqneditor.php?latex=d=%5Cfrac%7B%5Cleft&space;%7C&space;A%5Ctimes&space;x0+B%5Ctimes&space;y0+C&space;%5Cright&space;%7C%7D%7B%5Csqrt%7BA%5E%7B2%7D+B%5E%7B2%7D%7D%7D)-->
-<h1>背景</h1>
-<p>异常的轮胎气压可能会破坏汽车的稳定性并影响汽车的驾驶和制动，增加安全隐患，特别是在高速行驶过程中，由于轮胎气压、温度异常导致的轮胎故障是引起突发性交通事故的主要因素之一，胎压监测系统 (TPMS) 作为非常重要的主动安全部件，已经拥有越来越广阔的市场。</p>
+<h1 id="背景">背景</h1>
+<p>异常的轮胎气压可能会破坏汽车的稳定性并影响汽车的驾驶和制动，增加安全隐患，特别是在高速行驶过程中，由于轮胎气压、温度异常导致的轮胎故障是引起突发性交通事故的主要因素之一，胎压监测系统
+(TPMS) 作为非常重要的主动安全部件，已经拥有越来越广阔的市场。</p>
 <p>胎压监测系统由位于驾驶室的接收器和安装于各个轮胎端的发射器组成。胎压监测系统示意图如下，发射器对汽车各个轮胎的气压、温度适时地进行监测，并将监测数据传送给接收器。接收器接收并处理数据，当发现轮胎气压或温度异常时，告警以提醒驾驶员及时进行处理，可以有效地预防轮胎故障的发生。</p>
-<p><img data-src="/downloads/images/blog/TMPS_demo.jpg" alt=""></p>
-<p>当汽车轮胎损坏需要更换时，可以选择其他厂商性价比较高的替代件。由于目前国内外对 TPMS 的通信协议暂时没有统一规定，所以生产销售其它厂商替代件时需要破解其 TPMS 模块的通信协议。我实习所在的技术研发部主要使用频谱仪对 TPMS 模块的射频 RF 信息解调后进行人工分析。由于频谱仪显示屏幕较小，人工分析射频信息所需时间长并且对数据分析处理不方便，容易造成视觉疲劳。</p>
-<h1>目标和方法</h1>
-<p>在本科校外实习期间，我曾在 PC 端利用 Matlab 对频谱仪导出的 I/Q 数据进行分析，然后绘制出频谱信息，方便人工进行分析和研究。其中，ASK、FSK 解调流程如下：</p>
-<ol>
+<p><img data-src="/downloads/images/blog/TMPS_demo.jpg"></p>
+<p>当汽车轮胎损坏需要更换时，可以选择其他厂商性价比较高的替代件。由于目前国内外对
+TPMS 的通信协议暂时没有统一规定，所以生产销售其它厂商替代件时需要破解其
+TPMS 模块的通信协议。我实习所在的技术研发部主要使用频谱仪对 TPMS
+模块的射频 RF
+信息解调后进行人工分析。由于频谱仪显示屏幕较小，人工分析射频信息所需时间长并且对数据分析处理不方便，容易造成视觉疲劳。</p>
+<h1 id="目标和方法">目标和方法</h1>
+<p>在本科校外实习期间，我曾在 PC 端利用 Matlab 对频谱仪导出的 I/Q
+数据进行分析，然后绘制出频谱信息，方便人工进行分析和研究。其中，ASK、FSK
+解调流程如下：</p>
+<ol type="1">
 <li>从频谱仪中导出频谱仪 I/Q 数据；</li>
 <li>在 matlab 上编程实现基于 I/Q 数据的多帧 ASK 和 FSK 解调；</li>
 <li>Matlab 解调结果和频谱仪基本吻合，并实现解调自动化。</li>
 </ol>
-<h1>导入 I/Q 数据</h1>
+<h1 id="导入-iq-数据">导入 I/Q 数据</h1>
 <p>以某型号频谱仪为例，利用设备提供的 I/Q 解调功能采集数据，保存在后缀名为 “.mat” 的文件中进行脱机分析处理。</p>
-<p>用 MATLAB 代码 “LOAD EXAMPLE.MAT” 将数据导入。下图是利用 RSA3303A 采集数据后存储为 “.mat” 文件的内容。</p>
-<p><img data-src="/downloads/images/blog/IQ_data_format_in_matlab.png" alt=""></p>
+<p>用 MATLAB 代码 “LOAD EXAMPLE.MAT” 将数据导入。下图是利用 RSA3303A
+采集数据后存储为 “.mat” 文件的内容。</p>
+<p><img data-src="/downloads/images/blog/IQ_data_format_in_matlab.png"></p>
 <p>通过对频谱仪用户手册和文献资料的查阅，我了解到频谱仪导出数据的含义基本如下：</p>
 <ul>
-<li><strong>Y</strong> 是一个复变量，包含了采样数据点的同相 I 分量和正交 Q 分量。</li>
-<li><strong>InputCenter</strong> 显示了采样时的中心频率，据此可计算出实际频率分量。</li>
+<li><strong>Y</strong> 是一个复变量，包含了采样数据点的同相 I 分量和正交
+Q 分量。</li>
+<li><strong>InputCenter</strong>
+显示了采样时的中心频率，据此可计算出实际频率分量。</li>
 <li><strong>InputZoom</strong> 值为 1，表示采集数据已下变频到基带。</li>
-<li>**XDelta ** 为采样周期，由此可以计算出采样率 (fs=1/XDelta)。</li>
+<li><strong>XDelta </strong>为采样周期，由此可以计算出采样率
+(fs=1/XDelta)。</li>
 </ul>
-<h1>ASK、FSK 解调</h1>
-<h2 id="IQ-数据简介">IQ 数据简介</h2>
+<h1 id="askfsk-解调">ASK、FSK 解调</h1>
+<h2 id="iq-数据简介">IQ 数据简介</h2>
 <p>极坐标参量与 I/Q 直角坐标参量间的转换示意如下图。</p>
-<p>极坐标图表示的矢量的参数是幅值和瞬时相位，一般表示为 $A\angle \theta$ ，因为所有调制形式针对载波的改变都是幅值、相位以及可以由相位推导的频率，极坐标图是分析调制技术矢量参数的主要描述方式。</p>
-<p><img data-src="/downloads/images/blog/IQ_transform.jpg" alt=""></p>
-<p>I/Q 直角坐标图表示矢量的参数不是直接的幅值和瞬时相位，而是把它们投影在 I/Q 直角坐标轴上，采用 I 轴和 Q 轴的投影分量来确定矢量。</p>
+<p>极坐标图表示的矢量的参数是幅值和瞬时相位，一般表示为 <span class="math inline">\(A\angle \theta\)</span>
+，因为所有调制形式针对载波的改变都是幅值、相位以及可以由相位推导的频率，极坐标图是分析调制技术矢量参数的主要描述方式。</p>
+<p><img data-src="/downloads/images/blog/IQ_transform.jpg"></p>
+<p>I/Q
+直角坐标图表示矢量的参数不是直接的幅值和瞬时相位，而是把它们投影在 I/Q
+直角坐标轴上，采用 I 轴和 Q 轴的投影分量来确定矢量。</p>
 <h2 id="数据分析">数据分析</h2>
-<p>根据 “.mat” 文件中的每个采样时刻的 I/Q 采样数据 Y，可得到相应的 I 分量和 Q 分量，用 MATLAB 代码表示为：I=real (Y)，Q=imag (Y)。采集到的数据可用幅度分析、频率分析、相位分析以及小波分析等方法进行处理。</p>
+<p>根据 “.mat” 文件中的每个采样时刻的 I/Q 采样数据 Y，可得到相应的 I
+分量和 Q 分量，用 MATLAB
+代码表示为：I=real (Y)，Q=imag (Y)。采集到的数据可用幅度分析、频率分析、相位分析以及小波分析等方法进行处理。</p>
 <ul>
-<li>
-<p>输入信号的幅度 $Am$ 分析： $Am=\sqrt {I^{2}+Q^{2}}$ 。根据 I/Q 信号的每一个采样值，可以计算出对应采样时刻的幅度值。在测量时间内的所有幅度数值构成 I/Q 幅度数组，对应于 “射频功率－时间曲线”。</p>
-</li>
-<li>
-<p>输入信号的相对相位 $\Phi m$ 分析： $\Phi m=arctan (Q/I)$ 。根据 I/Q 信号的每一个采样值，可以计算出对应采样时刻的相对相位值。在测量时间内的所有 $\Phi m$  数值构成 I/Q 相对相位数组 $\Phi m$ 。</p>
-</li>
-<li>
-<p>输入信号的频率 $F m$ 计算：$F m = \frac {d (\Phi m)}{dt}$ 。在测量时间内的所有 $F m$ 数值构成 I/Q 频率数组 $F m$，对应于频率曲线。</p>
-</li>
-<li>
-<p>频谱计算：Spectrum = FFT (Y)。对 I/Q 数据 Y 进行傅里叶变换，即可计算出其频谱值。其中，Spectrum 为输入信号中频带宽内的频谱。</p>
-</li>
+<li><p>输入信号的幅度 <span class="math inline">\(Am\)</span> 分析：
+<span class="math inline">\(Am=\sqrt{I^{2}+Q^{2}}\)</span> 。根据 I/Q
+信号的每一个采样值，可以计算出对应采样时刻的幅度值。在测量时间内的所有幅度数值构成
+I/Q 幅度数组，对应于 “射频功率－时间曲线”。</p></li>
+<li><p>输入信号的相对相位 <span class="math inline">\(\Phi m\)</span>
+分析： <span class="math inline">\(\Phi m=arctan(Q/I)\)</span> 。根据
+I/Q
+信号的每一个采样值，可以计算出对应采样时刻的相对相位值。在测量时间内的所有
+<span class="math inline">\(\Phi m\)</span> 数值构成 I/Q 相对相位数组
+<span class="math inline">\(\Phi m\)</span> 。</p></li>
+<li><p>输入信号的频率 <span class="math inline">\(F m\)</span>
+计算：<span class="math inline">\(F m = \frac{d(\Phi m)}{dt}\)</span>
+。在测量时间内的所有 <span class="math inline">\(F m\)</span> 数值构成
+I/Q 频率数组 <span class="math inline">\(F
+m\)</span>，对应于频率曲线。</p></li>
+<li><p>频谱计算：Spectrum = FFT (Y)。对 I/Q 数据 Y
+进行傅里叶变换，即可计算出其频谱值。其中，Spectrum
+为输入信号中频带宽内的频谱。</p></li>
 </ul>
 <h2 id="解调实例分析">解调实例分析</h2>
-<h3 id="FSK-解调实现">FSK 解调实现</h3>
+<h3 id="fsk-解调实现">FSK 解调实现</h3>
 <p>FSK 就是用数字信号去调制载波的频率，FSK 解调一般采用两种方式：非相干解调和相干解调。</p>
 <p><strong>相干解调</strong>需要同步信号，适用于窄带调频信号解调；</p>
 <p><strong>非相干解调</strong>不需要同步信号，对于窄频带调频 (NBFM) 信号和宽频带调频 (WBFM) 信号均适用。</p>
-<p><strong>非相干解调</strong>，即不需提取载波信息（或不需恢复出相干载波）的一种解调方法，优点是可以较少的考虑信道估计甚至略去，处理复杂度降低，实现较为简单，但相比相干解调方法性能下降，从定量角度来看，普遍的结果是非相干解调性能上比相干解调差 3dB。</p>
-<p>我选用非相干解调方法进行解调，主要应用上述计算频率 $F m$ 的公式，将频谱仪导入的 I/Q 数据先计算瞬时相角，再微分计算出频率。</p>
-<p>Matlab 代码为：</p>
-<figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff(<span class="built_in">unwrap</span>(<span class="built_in">angle</span>(Y)))</span><br></pre></td></tr></tbody></table></figure>
-<p>其中，unwrap () 是解卷绕，经观察解调效果良好。</p>
-<p><img data-src="/downloads/images/blog/ASK_1.png" alt="Matlab解调结果"></p>
-<p><img data-src="/downloads/images/blog/ASK_2.png" alt="局部放大对比图"></p>
-<h3 id="ASK-解调实现">ASK 解调实现</h3>
-<p>ASK 是振幅键控方式，这种调制方式是根据信号的不同，调节正弦波的幅度。这里参考上述计算幅值  $Am$ 的公式，将频谱仪导入的 I/Q 数据计算瞬时幅值。</p>
-<p>Matlab 代码为：</p>
-<figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">magY=<span class="number">10</span>*<span class="built_in">log10</span>(<span class="built_in">real</span>(Y).^<span class="number">2</span>+<span class="built_in">imag</span>(Y).^<span class="number">2</span>)+GainOffset</span><br></pre></td></tr></tbody></table></figure>
-<p>其中，GainOffset 与仪器硬件相关，经观察解调效果良好。</p>
-<p><img data-src="/downloads/images/blog/FSK_1.png" alt="Matlab解调结果"></p>
-<p><img data-src="/downloads/images/blog/FSK_2.png" alt="局部放大对比图"></p>
-<p>综上，Matlab 解调结果与频谱仪图形对比可以看出，Matlab 解调结果和频谱仪所示基本吻合，并且可以随意放大和缩小，方便人工查看和分析，并实现解调自动化，可以方便人工分析。</p>
-<h1>源代码</h1>
-<h2 id="ASK-解调源代码">ASK 解调源代码</h2>
+<p><strong>非相干解调</strong>，即不需提取载波信息（或不需恢复出相干载波）的一种解调方法，优点是可以较少的考虑信道估计甚至略去，处理复杂度降低，实现较为简单，但相比相干解调方法性能下降，从定量角度来看，普遍的结果是非相干解调性能上比相干解调差
+3dB。</p>
+<p>我选用非相干解调方法进行解调，主要应用上述计算频率 <span class="math inline">\(F m\)</span> 的公式，将频谱仪导入的 I/Q
+数据先计算瞬时相角，再微分计算出频率。</p>
+<p>Matlab 代码为： </p><figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">diff(<span class="built_in">unwrap</span>(<span class="built_in">angle</span>(Y)))</span><br></pre></td></tr></tbody></table></figure>
+其中，unwrap()是解卷绕，经观察解调效果良好。<p></p>
+<figure>
+<img data-src="/downloads/images/blog/ASK_1.png" alt="Matlab解调结果">
+<figcaption aria-hidden="true">Matlab 解调结果</figcaption>
+</figure>
+<figure>
+<img data-src="/downloads/images/blog/ASK_2.png" alt="局部放大对比图">
+<figcaption aria-hidden="true">局部放大对比图</figcaption>
+</figure>
+<h3 id="ask-解调实现">ASK 解调实现</h3>
+<p>ASK
+是振幅键控方式，这种调制方式是根据信号的不同，调节正弦波的幅度。这里参考上述计算幅值
+<span class="math inline">\(Am\)</span> 的公式，将频谱仪导入的
+I/Q 数据计算瞬时幅值。</p>
+<p>Matlab 代码为： </p><figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">magY=<span class="number">10</span>*<span class="built_in">log10</span>(<span class="built_in">real</span>(Y).^<span class="number">2</span>+<span class="built_in">imag</span>(Y).^<span class="number">2</span>)+GainOffset</span><br></pre></td></tr></tbody></table></figure>
+其中，GainOffset与仪器硬件相关，经观察解调效果良好。<p></p>
+<figure>
+<img data-src="/downloads/images/blog/FSK_1.png" alt="Matlab解调结果">
+<figcaption aria-hidden="true">Matlab 解调结果</figcaption>
+</figure>
+<figure>
+<img data-src="/downloads/images/blog/FSK_2.png" alt="局部放大对比图">
+<figcaption aria-hidden="true">局部放大对比图</figcaption>
+</figure>
+<p>综上，Matlab 解调结果与频谱仪图形对比可以看出，Matlab
+解调结果和频谱仪所示基本吻合，并且可以随意放大和缩小，方便人工查看和分析，并实现解调自动化，可以方便人工分析。</p>
+<h1 id="源代码">源代码</h1>
+<h2 id="ask-解调源代码">ASK 解调源代码</h2>
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">%文件askshow.m</span><br><span class="line">%用途：ASK解调并matlab显示 </span><br><span class="line">%用法：输入导入数据向量、幅度截止和增益，元素之间用逗号分开</span><br><span class="line">function data=askshow(Y,cutoff,GainOffset)</span><br><span class="line">datalength=length(Y);%获取数据长度</span><br><span class="line">magY=10*log10(real(Y).^2+imag(Y).^2)+GainOffset;%对Y中每一个数据求绝对值，然后以10为底求对数</span><br><span class="line">%magY=20*log10(abs(Y))+GainOffset;</span><br><span class="line">y=zeros(datalength,1);%生成length(Y)行1列的零矩阵y，用于存储处理的数据</span><br><span class="line"> for i=1:datalength</span><br><span class="line">if magY(i)&lt;cutoff  %如果低于cutoff，则强制截止等于cutoff</span><br><span class="line"> y(i)=cutoff;</span><br><span class="line">else y(i)=magY(i);</span><br><span class="line">end</span><br><span class="line"> end</span><br><span class="line">n=0:1:datalength-1;%初值:增量：终值</span><br><span class="line">xspan=n;%生成x轴坐标值</span><br><span class="line">plot(xspan,y);%做出以数据(xspan(i),y(i))为结点的折线图</span><br><span class="line">title('ASK显示');%图形标题说明</span><br><span class="line">ylabel('10dBm');%坐标轴y轴说明</span><br><span class="line">axis([0,datalength-1,cutoff-0.1,-1]);%定制2维坐标轴范围</span><br><span class="line">grid on;%显示格栅</span><br></pre></td></tr></tbody></table></figure>
-<h2 id="FSK解调源代码">FSK 解调源代码</h2>
+<h2 id="fsk解调源代码">FSK 解调源代码</h2>
 <figure class="highlight matlab"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%文件 fskdemo().m</span></span><br><span class="line"><span class="comment">%用途：频谱仪导入I/Q数据进行FSK非相干解调，输出解调图像，可解调多峰值</span></span><br><span class="line"><span class="comment">%用法：输入导入数据向量，幅值截止值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fskdemoshow</span>=<span class="title">fskdemo</span><span class="params">(Y,cutoff)</span></span></span><br><span class="line">close all;<span class="comment">%关闭所有的图片窗口</span></span><br><span class="line">DataLength=<span class="built_in">length</span>(Y);<span class="comment">%获取.mat格式的数据长度</span></span><br><span class="line">magY=<span class="built_in">abs</span>(Y);<span class="comment">%求I/Q数据的幅值</span></span><br><span class="line">m=<span class="number">1</span>:DataLength;</span><br><span class="line"><span class="built_in">figure</span>(<span class="number">1</span>);</span><br><span class="line"><span class="built_in">plot</span>(m,magY);</span><br><span class="line">title(<span class="string">'幅度显示'</span>);<span class="comment">%图形标题说明</span></span><br><span class="line"><span class="comment">%获取高峰值数目PeakNumber</span></span><br><span class="line">TestEnd =<span class="number">1</span>;<span class="comment">%峰值检验初始起始点</span></span><br><span class="line">PeakNumber=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> time=<span class="number">1</span>:<span class="number">100</span><span class="comment">%预计极限峰值数</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>=TestEnd:DataLength <span class="comment">%检测峰值开始值</span></span><br><span class="line"><span class="keyword">if</span> magY(<span class="built_in">i</span>)&gt;cutoff</span><br><span class="line">TestBegin=<span class="built_in">i</span>;</span><br><span class="line">PeakNumber=PeakNumber+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>= TestBegin: DataLength <span class="comment">%检测峰值结束值</span></span><br><span class="line"><span class="keyword">if</span> magY(<span class="built_in">i</span>)&lt;cutoff</span><br><span class="line">TestEnd=<span class="built_in">i</span>;<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">TestEnd =<span class="number">1</span>;<span class="comment">%峰值检验初始起始点</span></span><br><span class="line"><span class="comment">%峰值数目大于等于100提示</span></span><br><span class="line"><span class="keyword">if</span>(PeakNumber&gt;=<span class="number">100</span>)</span><br><span class="line">    <span class="built_in">disp</span>(<span class="string">'峰值数超过100次，处理可能出错！'</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="comment">%峰值fsk解码处理显示</span></span><br><span class="line"><span class="keyword">for</span> time=<span class="number">1</span>:PeakNumber<span class="comment">%峰值数</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>= TestEnd: DataLength <span class="comment">%检测峰值开始值</span></span><br><span class="line"><span class="keyword">if</span> magY(<span class="built_in">i</span>)&gt;cutoff</span><br><span class="line">TestBegin=<span class="built_in">i</span>;<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span>= TestBegin: DataLength <span class="comment">%检测峰值结束值</span></span><br><span class="line"><span class="keyword">if</span> magY(<span class="built_in">i</span>)&lt;cutoff</span><br><span class="line">TestEnd=<span class="built_in">i</span>;<span class="keyword">break</span>;</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">ValueNumber= TestEnd- TestBegin;<span class="comment">%计算当前峰值总数</span></span><br><span class="line">y=Y.';<span class="comment">%矩阵倒置</span></span><br><span class="line">ValueData=y(<span class="number">1</span>,TestBegin:TestEnd<span class="number">-1</span>);</span><br><span class="line">PhaseDiff=diff(<span class="built_in">unwrap</span>(<span class="built_in">angle</span>(ValueData)));<span class="comment">%核心算法</span></span><br><span class="line">m=<span class="number">1</span>:ValueNumber<span class="number">-1</span>;</span><br><span class="line"><span class="built_in">figure</span>(time+<span class="number">1</span>);<span class="comment">%图片递增打开</span></span><br><span class="line"><span class="built_in">plot</span>(m, PhaseDiff);</span><br><span class="line">axis([<span class="number">1</span>,ValueNumber<span class="number">-1</span>,<span class="number">-2.5</span>,<span class="number">2.5</span>]);<span class="comment">%X,Y轴尺度要变化</span></span><br><span class="line">title(<span class="string">'FSK解调显示'</span>);<span class="comment">%图形标题说明</span></span><br><span class="line">grid on<span class="comment">%显示格栅</span></span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></tbody></table></figure>
-<h1>References</h1>
+<h1 id="references">References</h1>
 <ul>
-<li>关玉莲。正交解调在无线电信号分析中的应用。中国无线电. 2010 年第 11 期</li>
+<li>关玉莲。正交解调在无线电信号分析中的应用。中国无线电.
+2010 年第 11 期</li>
 <li>《RSA3408B 8 GHz Real-Time Spectrum Analyzer User Manual》</li>
 </ul>
 <!--
 - [在线编辑数学公式](https://www.codecogs.com/latex/eqneditor.php)
 -->
+
       
     </div>
 
